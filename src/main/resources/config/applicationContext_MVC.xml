@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <import resource="applicationContext_service.xml"></import>
+    <!--url和处理器进行匹配，处理器是注解式实例化  映射器能能解析注解式处理器-->
+    <!--url和处理器进行匹配，处理器是注解式实例化  适配器能解析注解式处理器-->
+    <!--注解式 映射器和适配器（处理 注解式的处理器）-->
+
+    <!--处理器注解，扫描注解的处理器-->
+    <context:component-scan base-package="meiHu.controller"/>
+
+
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件的最大尺寸为5MB -->
+        <property name="maxUploadSize">
+            <value>10000000</value>
+        </property>
+    </bean>
+
+</beans>

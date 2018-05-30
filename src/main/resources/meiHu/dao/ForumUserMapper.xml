@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.ForumUserMapper">
+    <resultMap id="selectUserByUidMap" type="ForumUser">
+        <id column="uid" property="uid" />
+        <result column="uname" property="uname" />
+        <result column="passwrod" property="passwrod" />
+        <result column="tel" property="tel" />
+        <result column="email" property="email" />
+        <result column="sex" property="sex" />
+        <result column="point" property="point" />
+        <result column="headpic" property="headpic" />
+        <result column="registertime" property="registertime" />
+
+        <association property="title" javaType="ForumTitle">
+            <id column="titleid" property="titleid"/>
+            <result column="title" property="title"/>
+        </association>
+
+    </resultMap>
+    <!--public ForumUser selectUserByUid(int uid) ;-->
+    <select id="selectUserByUid" resultMap="selectUserByUidMap">
+        SELECT u.uid,u.uname,u.password,u.tel,u.email,
+                u.sex,u.point,u.headpic,u.registertime,t.* FROM forum_user u,forum_title t WHERE u.title_id = t.titleid and uid = #{_parameter}
+    </select>
+</mapper>
