@@ -14,7 +14,7 @@
     <!--注解式 映射器和适配器（处理 注解式的处理器）-->
 
     <!--处理器注解，扫描注解的处理器-->
-    <context:component-scan base-package="meiHu.controller"/>
+    <context:component-scan base-package="meiHu.control"/>
 
 
     <!--视图解析器-->
