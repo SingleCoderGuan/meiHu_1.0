@@ -57,9 +57,7 @@
                         </ul>
 
                         <div id="content">
-                            <form class="demoform">
-                                <input type="text" value="" name="name" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！" />
-                            </form>
+
                             <form class="demoform" action="/loginWithAccount.action" method="post">
                                 <p id="one">
                                     <input style="position:relative;top: 20px;" type="text" placeholder="请输入用户名" />
