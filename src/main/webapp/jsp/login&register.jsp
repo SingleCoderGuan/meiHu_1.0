@@ -12,8 +12,8 @@
     <meta charset="UTF-8">
     <title>美乎登录&注册</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style_inner.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style_inner.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <script>
@@ -24,7 +24,7 @@
 
 <div class="cotn_principal">
     <div class="cont_centrar">
-        <img id="logo" src="image/logo.png" >
+        <img id="logo" src="images/logo.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
         <div class="cont_login">
             <div class="cont_info_log_sign_up">
@@ -65,9 +65,9 @@
                                     <div><a style="text-decoration:none;" href="#"><span id="forgotten">忘记密码？</span></a></div>
                                     <a id="extralogin" >第三方登录</a>
                                     <div id="elentrance">
-                                        <img class="extralogin" src="image/qqlogin.png" alt="">
-                                        <img class="extralogin" src="image/wechatlogin.png" alt="">
-                                        <img class="extralogin" src="image/weibologin.png" alt="">
+                                        <img class="extralogin" src="images/qqlogin.png" alt="">
+                                        <img class="extralogin" src="images/wechatlogin.png" alt="">
+                                        <img class="extralogin" src="images/weibologin.png" alt="">
                                     </div>
                                 </p>
                             </form>
@@ -97,11 +97,11 @@
     </div>
 </div>
 
-<script src="js/index.js"></script>
-<script src='js/jquery.min.js'></script>
-<script src="js/index_inner.js"></script>
-<script type="text/javascript" src="js/Validform_v5.3.2.js"></script>
-<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script src="../js/index.js"></script>
+<script src='../js/jquery.min.js'></script>
+<script src="../js/index_inner.js"></script>
+<script type="text/javascript" src="../js/Validform_v5.3.2.js"></script>
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
 </body>
 </html>
 
