@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gem.meihu.dao.mapper.ForumTitleMapper">
+<mapper namespace="ForumTitleMapper">
   <resultMap id="BaseResultMap" type="com.gem.meihu.entity.ForumTitle">
-    <id column="titleid" jdbcType="INTEGER" property="titleid" />
+    <com.gem.meihu.dao.mapper.id column="titleid" jdbcType="INTEGER" property="titleid" />
     <result column="title" jdbcType="VARCHAR" property="title" />
   </resultMap>
   <sql id="Example_Where_Clause">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gem.meihu.dao.mapper.ShopItemMapper">
+<mapper namespace="meiHu.dao.ShopItemMapper">
   <resultMap id="BaseResultMap" type="com.gem.meihu.entity.ShopItem">
     <id column="itemid" jdbcType="INTEGER" property="itemid" />
     <result column="orderid" jdbcType="INTEGER" property="orderid" />

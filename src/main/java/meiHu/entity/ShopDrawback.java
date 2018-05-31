@@ -2,7 +2,7 @@ package meiHu.entity;
 
 import java.util.Date;
 
-public class ShopDrawback extends ShopDrawbackKey {
+public class ShopDrawback {
     private Integer goodid;
 
     private Integer uid;

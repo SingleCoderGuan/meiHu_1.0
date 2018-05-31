@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gem.meihu.dao.mapper.ForumSignMapper">
+<mapper namespace="meiHu.dao.ForumSignMapper">
   <resultMap id="BaseResultMap" type="com.gem.meihu.entity.ForumSign">
     <id column="signid" jdbcType="INTEGER" property="signid" />
     <result column="user_uid" jdbcType="INTEGER" property="userUid" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gem.meihu.dao.mapper.ForumLikeMapper">
+<mapper namespace="meiHu.dao.ForumLikeMapper">
   <resultMap id="BaseResultMap" type="com.gem.meihu.entity.ForumLike">
     <id column="likeid" jdbcType="INTEGER" property="likeid" />
     <result column="post_cid" jdbcType="INTEGER" property="postCid" />
