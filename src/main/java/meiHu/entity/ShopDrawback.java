@@ -2,7 +2,8 @@ package meiHu.entity;
 
 import java.util.Date;
 
-public class ShopDrawback {
+public class ShopDrawback  {
+    private Integer drawbackid;
     private Integer goodid;
 
     private Integer uid;
@@ -11,6 +12,24 @@ public class ShopDrawback {
 
     private Date drawbacktime;
 
+
+    private String processstate;
+
+    public Integer getDrawbackid() {
+        return drawbackid;
+    }
+
+    public void setDrawbackid(Integer drawbackid) {
+        this.drawbackid = drawbackid;
+    }
+
+    public String getProcessstate() {
+        return processstate;
+    }
+
+    public void setProcessstate(String processstate) {
+        this.processstate = processstate == null ? null : processstate.trim();
+    }
     public Integer getGoodid() {
         return goodid;
     }
