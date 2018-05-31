@@ -21,14 +21,27 @@ public class luntanControl {
     @Autowired
     private LuntanService luntanService;
 
-    @RequestMapping(value = "/bankuai.action")
+    @RequestMapping(value = "/luntanshouye.action")
     public void showbankuai(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<ForumTopic> topicList = luntanService.getAllTopics();
         request.setAttribute("topicList",topicList);
 
         List<ForumPost> postList = luntanService.selectPostsByTid(1);
         request.setAttribute("postList",postList);
-        request.getRequestDispatcher("/jsp/luntan.jsp?topicid=1").forward(request,response);
+//        System.out.println("postd长度"+postList.size());
+        request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
+    }
+
+
+    @RequestMapping(value = "/tiezidetail.action",method = RequestMethod.GET)
+    public void tiezidetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pid = request.getParameter("pid");
+        System.out.println(pid);
+        int pid1 = Integer.parseInt(pid);
+        ForumPost forumPost = luntanService.selectPostByPid(pid1);
+        request.setAttribute("forumPost",forumPost);
+        System.out.println(forumPost.getPtitle());
+        request.getRequestDispatcher("/jsp/tiezidetail.jsp").forward(request,response);
     }
 
 

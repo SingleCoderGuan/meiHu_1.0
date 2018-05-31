@@ -6,6 +6,12 @@ import java.util.List;
 
 
 public interface ForumPostMapper {
+    /**
+     * 根据id查询帖子
+     * @param pid
+     * @return
+     */
+    public ForumPost selectPostByPid(int pid);
 
     /**
      * 查询所有帖子并按访问数量降序排序

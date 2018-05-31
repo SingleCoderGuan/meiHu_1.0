@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumPostMapper">
+    <resultMap id="getForumPost" type="ForumPost">
+      <!--  private Integer pid;
+        private ForumUser user;
+        private Date createtime;
+        private Integer hot;
+        private Integer visitcount ;
+        private Integer likeCount ;
+        private String ptitle;
+        public String pcontent;
+        private ForumTopic topic;-->
+        <id column="pid" property="pid"/>
+        <result column="createtime" property="createtime"/>
+        <result column="hot" property="hot"/>
+        <result column="visitcount" property="visitcount"/>
+        <result column="likecount" property="likecount"/>
+        <result column="ptitle" property="ptitle"/>
+        <result column="pcontent" property="pcontent"/>
+        <association property="user" javaType="ForumUser">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
+        </association>
+        <association property="topic" javaType="ForumTopic">
+            <id column="tid" property="tid"/>
+            <result column="tname" property="tname"/>
+        </association>
+
+    </resultMap>
     <!--public List<ForumPost> selectPostsByTid(int tid)-->
 
-    <select id="selectPostsByTid" parameterType="int" resultType="ForumPost">
-        SELECT * FROM forum_post WHERE  topic_tid=#{parameter}
+    <select id="selectPostsByTid" parameterType="int" resultMap="getForumPost">
+        SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
+        WHERE  topic_tid=#{parameter} AND p.user_uid = u.uid AND t.tid = p.topic_tid
+    </select>
+
+    <!--public ForumPost selectPostByPid(int pid);-->
+    <select id="selectPostByPid" parameterType="int" resultType="ForumPost">
+        SELECT * FROM forum_post WHERE pid=#{parameter}
     </select>
 </mapper>
