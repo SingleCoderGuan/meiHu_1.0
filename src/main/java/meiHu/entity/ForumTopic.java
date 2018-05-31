@@ -6,6 +6,15 @@ public class ForumTopic {
     private String tname;
 
     private Integer pnumber;
+    private String tpicname;
+
+    public String getTpicname() {
+        return tpicname;
+    }
+
+    public void setTpicname(String tpicname) {
+        this.tpicname = tpicname;
+    }
 
     public Integer getTid() {
         return tid;

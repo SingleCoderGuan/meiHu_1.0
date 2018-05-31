@@ -73,7 +73,7 @@
 
     <!--启动页面 项目名指向位置-->
     <welcome-file-list>
-        <welcome-file>postmain.action</welcome-file>
+        <welcome-file>zhuye.html</welcome-file>
     </welcome-file-list>
 
 </web-app>

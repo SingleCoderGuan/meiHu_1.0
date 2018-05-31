@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumPostMapper">
+    <!--public List<ForumPost> selectPostsByTid(int tid)-->
 
+    <select id="selectPostsByTid" parameterType="int" resultType="ForumPost">
+        SELECT * FROM forum_post WHERE  topic_tid=#{parameter}
+    </select>
 </mapper>
