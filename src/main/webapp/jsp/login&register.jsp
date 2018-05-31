@@ -24,7 +24,7 @@
 
 <div class="cotn_principal">
     <div class="cont_centrar">
-        <img id="logo" src="images/logo.png" >
+        <img id="logo" src="../images/LOGO.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
         <div class="cont_login">
             <div class="cont_info_log_sign_up">
@@ -68,9 +68,9 @@
                                     <div><a style="text-decoration:none;" href="#"><span id="forgotten">忘记密码？</span></a></div>
                                     <a id="extralogin" >第三方登录</a>
                                     <div id="elentrance">
-                                        <img class="extralogin" src="images/qqlogin.png" alt="">
-                                        <img class="extralogin" src="images/wechatlogin.png" alt="">
-                                        <img class="extralogin" src="images/weibologin.png" alt="">
+                                        <img class="extralogin" src="../images/qqlogin.png" alt="">
+                                        <img class="extralogin" src="../images/wechatlogin.png" alt="">
+                                        <img class="extralogin" src="../images/weibologin.png" alt="">
                                     </div>
                                 </p>
                             </form>

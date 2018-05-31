@@ -24,7 +24,7 @@
 
 <div class="cotn_principal container">
     <div class="cont_centrar">
-        <img id="logo" src="images/logo.png" >
+        <img id="logo" src="../images/logo.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
         <form class="form-horizontal forgottenform">
             <div class="form-group">

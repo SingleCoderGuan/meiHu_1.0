@@ -415,3 +415,12 @@ margin-left: 30px;
   top:150px ;
   left:480px ;
 }
+#register >input{
+  text-align: left;
+  padding: 15px 5px;
+  margin-left: 10px;
+  margin-top: 20px;
+  width: 260px;
+  border: none;
+  color: #757575;
+}
