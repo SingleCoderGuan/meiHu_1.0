@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <title>美乎登录&注册</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/stylelogin.css">
     <link rel="stylesheet" href="../css/style_inner.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
@@ -57,6 +57,9 @@
                         </ul>
 
                         <div id="content">
+                            <form class="demoform">
+                                <input type="text" value="" name="name" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！" />
+                            </form>
                             <form class="demoform" action="/loginWithAccount.action" method="post">
                                 <p id="one">
                                     <input style="position:relative;top: 20px;" type="text" placeholder="请输入用户名" />
@@ -97,8 +100,8 @@
     </div>
 </div>
 
-<script src="../js/index.js"></script>
-<script src='../js/jquery.min.js'></script>
+<script src="../js/indexlogin.js"></script>
+<script src="../js/jquery.min.js"></script>
 <script src="../js/index_inner.js"></script>
 <script type="text/javascript" src="../js/Validform_v5.3.2.js"></script>
 <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>

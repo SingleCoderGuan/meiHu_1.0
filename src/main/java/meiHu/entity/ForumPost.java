@@ -4,13 +4,34 @@ import java.util.Date;
 
 public class ForumPost {
     private Integer pid;
-    private int uid;
+
+    private ForumUser user ;
+
     private Date createtime;
+
     private Integer hot;
+
+    private ForumTopic topic ;
+
     private Integer visits ;
+
     private Integer likeCount ;
-    private String ptitle;
-    private Integer tid;
+
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public Integer getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Integer visits) {
+        this.visits = visits;
+    }
 
     public Integer getPid() {
         return pid;
@@ -20,12 +41,12 @@ public class ForumPost {
         this.pid = pid;
     }
 
-    public int getUid() {
-        return uid;
+    public ForumUser getUser() {
+        return user;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setUser(ForumUser user) {
+        this.user = user;
     }
 
     public Date getCreatetime() {
@@ -44,35 +65,11 @@ public class ForumPost {
         this.hot = hot;
     }
 
-    public Integer getVisits() {
-        return visits;
+    public ForumTopic getTopic() {
+        return topic;
     }
 
-    public void setVisits(Integer visits) {
-        this.visits = visits;
-    }
-
-    public Integer getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(Integer likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public String getPtitle() {
-        return ptitle;
-    }
-
-    public void setPtitle(String ptitle) {
-        this.ptitle = ptitle;
-    }
-
-    public Integer getTid() {
-        return tid;
-    }
-
-    public void setTid(Integer tid) {
-        this.tid = tid;
+    public void setTopic(ForumTopic topic) {
+        this.topic = topic;
     }
 }
