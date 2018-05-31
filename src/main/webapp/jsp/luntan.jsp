@@ -7,6 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
     <title>美论首页</title>
@@ -41,14 +46,14 @@
 
     </script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
+    <%--<script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108"
             type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/functions.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/aw_template.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/common.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/app.js?v=20171108" type="text/javascript"></script>
-    <script type="text/javascript" src="//img-cdn-qiniu.dcloud.net.cn/static/js/compatibility.js"></script>
+    <script type="text/javascript" src="//img-cdn-qiniu.dcloud.net.cn/static/js/compatibility.js"></script>--%>
     <!--[if lte IE 8]>
     <script type="text/javascript" src="//img-cdn-qiniu.dcloud.net.cn/static/js/respond.js"></script>
     <![endif]-->
@@ -176,7 +181,7 @@
             <div class="row category">
                 <div class="col-sm-12">
                     <c:forEach items="${topicList}" var="topicList">
-                        <a href="luntan.jsp?topic=tname">
+                        <a href="<%=basePath%>luntan/bankuai.action?">
                             <dl>
                                 <dt><img src="../images/${topicList.tpicname}"/></dt>
                                 <dd>
@@ -237,7 +242,7 @@
                         <li><a href="#">推荐</a></li>
                         <li><a href="#">最新</a></li>
 
-                        <h2 class="hidden-xs">香水区</h2>
+                        <h2 class="hidden-xs">${topicList[0].tname}区……菇凉请留步</h2>
                     </ul>
                     <!-- end tab切换 -->
                     <style type="text/css">
@@ -276,7 +281,7 @@
                                     <div class="aw-question-content">
                                         <h4>
                                             <%--帖子标题--%>
-                                            <a href="tiezidetail.html">${postList[0].topic.tname}</a>
+                                            <a href="<%=basePath%>/luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
                                         </h4>
                                         <p class="pull-right hidden-xs">
                                             <span>收藏:</span>
@@ -295,10 +300,12 @@
                                         <p>
 							<span class="aw-question-tags">
 					<i class="fa fa-caret-left"></i>
-					<a href="#">${postList[0].topic.tname}</a>
+					<a href="#">${postList.topic.tname}</a><%--标签--%>
 				</span> •
-                                            <a href="#" class="aw-user-name" data-id="788923">美乎小编</a>
-                                            <span class="aw-text-color-999"> 7 人关注 • 10 个回复 • 219 次浏览 • 2018-05-17 13:19		</span>
+                                            <a href="#" class="aw-user-name" data-id="788923">${postList.user.uname}</a>
+                                            <span class="aw-text-color-999" >${postList.likecount}次点赞 • 7 人关注 •
+                                                    ${postList.visitcount} 次浏览 •<fmt:formatDate value='${postList.createtime}'
+                                                                                                pattern='yyyy-MM-dd hh:mm:ss'/>"	</span>
                                         </p>
                                     </div>
                                 </div>

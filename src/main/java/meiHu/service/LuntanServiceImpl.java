@@ -23,4 +23,11 @@ public class LuntanServiceImpl implements LuntanService{
     public List<ForumPost> selectPostsByTid(int tid) {
         return forumPostMapper.selectPostsByTid(tid);
     }
+
+    @Override
+    public ForumPost selectPostByPid(int pid) {
+        return forumPostMapper.selectPostByPid(pid);
+    }
+
+
 }
