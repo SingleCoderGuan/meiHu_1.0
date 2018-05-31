@@ -14,9 +14,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>美乎重置密码</title>
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style_inner.css">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style_inner.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 </head>
@@ -24,7 +24,7 @@
 
 <div class="cotn_principal container">
     <div class="cont_centrar">
-        <img id="logo" src="image/logo.png" >
+        <img id="logo" src="images/logo.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
         <form class="form-horizontal resetpswform"action="#" method="post">
             <div class="form-group">
@@ -52,10 +52,10 @@
     </div>
 </div>
 
-<script src="js/index.js"></script>
-<script src='js/jquery.min.js'></script>
-<script src="js/index_inner.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/index.js"></script>
+<script src='../js/jquery.min.js'></script>
+<script src="../js/index_inner.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>
