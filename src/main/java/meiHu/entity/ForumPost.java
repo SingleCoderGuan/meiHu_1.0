@@ -4,36 +4,13 @@ import java.util.Date;
 
 public class ForumPost {
     private Integer pid;
-
-    private ForumUser user ;
-
+    private int uid;
     private Date createtime;
-
-    private Integer sendstate;
-
     private Integer hot;
-
-    private ForumTopic topic ;
-
     private Integer visits ;
-
     private Integer likeCount ;
-
-    public Integer getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(Integer likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public Integer getVisits() {
-        return visits;
-    }
-
-    public void setVisits(Integer visits) {
-        this.visits = visits;
-    }
+    private String ptitle;
+    private Integer tid;
 
     public Integer getPid() {
         return pid;
@@ -43,12 +20,12 @@ public class ForumPost {
         this.pid = pid;
     }
 
-    public ForumUser getUser() {
-        return user;
+    public int getUid() {
+        return uid;
     }
 
-    public void setUser(ForumUser user) {
-        this.user = user;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public Date getCreatetime() {
@@ -59,14 +36,6 @@ public class ForumPost {
         this.createtime = createtime;
     }
 
-    public Integer getSendstate() {
-        return sendstate;
-    }
-
-    public void setSendstate(Integer sendstate) {
-        this.sendstate = sendstate;
-    }
-
     public Integer getHot() {
         return hot;
     }
@@ -75,11 +44,35 @@ public class ForumPost {
         this.hot = hot;
     }
 
-    public ForumTopic getTopic() {
-        return topic;
+    public Integer getVisits() {
+        return visits;
     }
 
-    public void setTopic(ForumTopic topic) {
-        this.topic = topic;
+    public void setVisits(Integer visits) {
+        this.visits = visits;
+    }
+
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public String getPtitle() {
+        return ptitle;
+    }
+
+    public void setPtitle(String ptitle) {
+        this.ptitle = ptitle;
+    }
+
+    public Integer getTid() {
+        return tid;
+    }
+
+    public void setTid(Integer tid) {
+        this.tid = tid;
     }
 }

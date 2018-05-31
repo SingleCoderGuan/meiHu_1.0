@@ -276,7 +276,7 @@
                                     <div class="aw-question-content">
                                         <h4>
                                             <%--帖子标题--%>
-                                            <a href="tiezidetail.html">${postList[0].}</a>
+                                            <a href="tiezidetail.html">${postList[0].topic.tname}</a>
                                         </h4>
                                         <p class="pull-right hidden-xs">
                                             <span>收藏:</span>
@@ -295,7 +295,7 @@
                                         <p>
 							<span class="aw-question-tags">
 					<i class="fa fa-caret-left"></i>
-					<a href="#">口红</a>
+					<a href="#">${postList[0].topic.tname}</a>
 				</span> •
                                             <a href="#" class="aw-user-name" data-id="788923">美乎小编</a>
                                             <span class="aw-text-color-999"> 7 人关注 • 10 个回复 • 219 次浏览 • 2018-05-17 13:19		</span>
