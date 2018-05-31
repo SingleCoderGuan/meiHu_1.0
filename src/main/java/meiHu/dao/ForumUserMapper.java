@@ -20,6 +20,13 @@ public interface ForumUserMapper {
     public List<ForumUser> selectUsersByTitleId(int title_id) ;
 
     /**
+     * 根据title_id从forum_user表中查询该称号下所有用户
+     * @param uname 执行select的称号title_id
+     * @return  所有称号为title_id的用户
+     */
+    public ForumUser selectUsersByUname(String uname) ;
+
+    /**
      * 根据用户id查询所有关注该用户的用户 forum_user和forum_focus
      * @param focused_user_id   被关注的用户
      * @return  所有关注该用户的用户
