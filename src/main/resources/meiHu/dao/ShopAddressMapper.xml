@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.meihu.dao.mapper.ShopAddressMapper">
+  <resultMap id="BaseResultMap" type="com.gem.meihu.entity.ShopAddress">
+    <result column="addressid" jdbcType="INTEGER" property="addressid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="addressdetail" jdbcType="VARCHAR" property="addressdetail" />
+    <result column="recievename" jdbcType="VARCHAR" property="recievename" />
+    <result column="receivetel" jdbcType="VARCHAR" property="receivetel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    addressid, uid, address, addressdetail, recievename, receivetel
+  </sql>
+  <select id="selectByExample" parameterType="com.gem.meihu.entity.ShopAddressExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shop_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.gem.meihu.entity.ShopAddressExample">
+    delete from shop_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gem.meihu.entity.ShopAddress">
+    insert into shop_address (addressid, uid, address, 
+      addressdetail, recievename, receivetel
+      )
+    values (#{addressid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{addressdetail,jdbcType=VARCHAR}, #{recievename,jdbcType=VARCHAR}, #{receivetel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gem.meihu.entity.ShopAddress">
+    insert into shop_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addressid != null">
+        addressid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="addressdetail != null">
+        addressdetail,
+      </if>
+      <if test="recievename != null">
+        recievename,
+      </if>
+      <if test="receivetel != null">
+        receivetel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addressid != null">
+        #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressdetail != null">
+        #{addressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="recievename != null">
+        #{recievename,jdbcType=VARCHAR},
+      </if>
+      <if test="receivetel != null">
+        #{receivetel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gem.meihu.entity.ShopAddressExample" resultType="java.lang.Long">
+    select count(*) from shop_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shop_address
+    <set>
+      <if test="record.addressid != null">
+        addressid = #{record.addressid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressdetail != null">
+        addressdetail = #{record.addressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recievename != null">
+        recievename = #{record.recievename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivetel != null">
+        receivetel = #{record.receivetel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shop_address
+    set addressid = #{record.addressid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      addressdetail = #{record.addressdetail,jdbcType=VARCHAR},
+      recievename = #{record.recievename,jdbcType=VARCHAR},
+      receivetel = #{record.receivetel,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

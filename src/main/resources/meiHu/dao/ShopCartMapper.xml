@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.meihu.dao.mapper.ShopCartMapper">
+  <resultMap id="BaseResultMap" type="com.gem.meihu.entity.ShopCart">
+    <id column="cartid" jdbcType="INTEGER" property="cartid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="goodid" jdbcType="INTEGER" property="goodid" />
+    <result column="cartcount" jdbcType="INTEGER" property="cartcount" />
+    <result column="cartdate" jdbcType="DATE" property="cartdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cartid, uid, goodid, cartcount, cartdate
+  </sql>
+  <select id="selectByExample" parameterType="com.gem.meihu.entity.ShopCartExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shop_cart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop_cart
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shop_cart
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gem.meihu.entity.ShopCartExample">
+    delete from shop_cart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gem.meihu.entity.ShopCart">
+    insert into shop_cart (cartid, uid, goodid, 
+      cartcount, cartdate)
+    values (#{cartid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{goodid,jdbcType=INTEGER}, 
+      #{cartcount,jdbcType=INTEGER}, #{cartdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gem.meihu.entity.ShopCart">
+    insert into shop_cart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cartid != null">
+        cartid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="goodid != null">
+        goodid,
+      </if>
+      <if test="cartcount != null">
+        cartcount,
+      </if>
+      <if test="cartdate != null">
+        cartdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cartid != null">
+        #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="goodid != null">
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="cartcount != null">
+        #{cartcount,jdbcType=INTEGER},
+      </if>
+      <if test="cartdate != null">
+        #{cartdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gem.meihu.entity.ShopCartExample" resultType="java.lang.Long">
+    select count(*) from shop_cart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shop_cart
+    <set>
+      <if test="record.cartid != null">
+        cartid = #{record.cartid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodid != null">
+        goodid = #{record.goodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cartcount != null">
+        cartcount = #{record.cartcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.cartdate != null">
+        cartdate = #{record.cartdate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shop_cart
+    set cartid = #{record.cartid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      goodid = #{record.goodid,jdbcType=INTEGER},
+      cartcount = #{record.cartcount,jdbcType=INTEGER},
+      cartdate = #{record.cartdate,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gem.meihu.entity.ShopCart">
+    update shop_cart
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="goodid != null">
+        goodid = #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="cartcount != null">
+        cartcount = #{cartcount,jdbcType=INTEGER},
+      </if>
+      <if test="cartdate != null">
+        cartdate = #{cartdate,jdbcType=DATE},
+      </if>
+    </set>
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gem.meihu.entity.ShopCart">
+    update shop_cart
+    set uid = #{uid,jdbcType=INTEGER},
+      goodid = #{goodid,jdbcType=INTEGER},
+      cartcount = #{cartcount,jdbcType=INTEGER},
+      cartdate = #{cartdate,jdbcType=DATE}
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </update>
+</mapper>

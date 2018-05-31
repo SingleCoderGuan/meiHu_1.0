@@ -5,12 +5,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 
 	<typeAliases>
-		<package name="shop.entity"/>
+		<package name="meiHu.entity"/>
 	</typeAliases>
 	
 	<!-- 加载 映射文件 -->
 	<mappers>
-		<package name="shop.dao"/>
+		<package name="meiHu.dao"/>
 	</mappers>
 	
 </configuration>

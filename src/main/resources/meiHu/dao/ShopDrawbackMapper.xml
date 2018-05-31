@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.meihu.dao.mapper.ShopDrawbackMapper">
+  <resultMap id="BaseResultMap" type="com.gem.meihu.entity.ShopDrawback">
+    <id column="drawbackid" jdbcType="INTEGER" property="drawbackid" />
+    <id column="processstate" jdbcType="VARCHAR" property="processstate" />
+    <result column="goodid" jdbcType="INTEGER" property="goodid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="drawbackreason" jdbcType="VARCHAR" property="drawbackreason" />
+    <result column="drawbacktime" jdbcType="DATE" property="drawbacktime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    drawbackid, processstate, goodid, uid, drawbackreason, drawbacktime
+  </sql>
+  <select id="selectByExample" parameterType="com.gem.meihu.entity.ShopDrawbackExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shop_drawback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.gem.meihu.entity.ShopDrawbackKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop_drawback
+    where drawbackid = #{drawbackid,jdbcType=INTEGER}
+      and processstate = #{processstate,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.gem.meihu.entity.ShopDrawbackKey">
+    delete from shop_drawback
+    where drawbackid = #{drawbackid,jdbcType=INTEGER}
+      and processstate = #{processstate,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gem.meihu.entity.ShopDrawbackExample">
+    delete from shop_drawback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gem.meihu.entity.ShopDrawback">
+    insert into shop_drawback (drawbackid, processstate, goodid, 
+      uid, drawbackreason, drawbacktime
+      )
+    values (#{drawbackid,jdbcType=INTEGER}, #{processstate,jdbcType=VARCHAR}, #{goodid,jdbcType=INTEGER}, 
+      #{uid,jdbcType=INTEGER}, #{drawbackreason,jdbcType=VARCHAR}, #{drawbacktime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gem.meihu.entity.ShopDrawback">
+    insert into shop_drawback
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="drawbackid != null">
+        drawbackid,
+      </if>
+      <if test="processstate != null">
+        processstate,
+      </if>
+      <if test="goodid != null">
+        goodid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="drawbackreason != null">
+        drawbackreason,
+      </if>
+      <if test="drawbacktime != null">
+        drawbacktime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="drawbackid != null">
+        #{drawbackid,jdbcType=INTEGER},
+      </if>
+      <if test="processstate != null">
+        #{processstate,jdbcType=VARCHAR},
+      </if>
+      <if test="goodid != null">
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="drawbackreason != null">
+        #{drawbackreason,jdbcType=VARCHAR},
+      </if>
+      <if test="drawbacktime != null">
+        #{drawbacktime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gem.meihu.entity.ShopDrawbackExample" resultType="java.lang.Long">
+    select count(*) from shop_drawback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shop_drawback
+    <set>
+      <if test="record.drawbackid != null">
+        drawbackid = #{record.drawbackid,jdbcType=INTEGER},
+      </if>
+      <if test="record.processstate != null">
+        processstate = #{record.processstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodid != null">
+        goodid = #{record.goodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.drawbackreason != null">
+        drawbackreason = #{record.drawbackreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drawbacktime != null">
+        drawbacktime = #{record.drawbacktime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shop_drawback
+    set drawbackid = #{record.drawbackid,jdbcType=INTEGER},
+      processstate = #{record.processstate,jdbcType=VARCHAR},
+      goodid = #{record.goodid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      drawbackreason = #{record.drawbackreason,jdbcType=VARCHAR},
+      drawbacktime = #{record.drawbacktime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gem.meihu.entity.ShopDrawback">
+    update shop_drawback
+    <set>
+      <if test="goodid != null">
+        goodid = #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="drawbackreason != null">
+        drawbackreason = #{drawbackreason,jdbcType=VARCHAR},
+      </if>
+      <if test="drawbacktime != null">
+        drawbacktime = #{drawbacktime,jdbcType=DATE},
+      </if>
+    </set>
+    where drawbackid = #{drawbackid,jdbcType=INTEGER}
+      and processstate = #{processstate,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gem.meihu.entity.ShopDrawback">
+    update shop_drawback
+    set goodid = #{goodid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      drawbackreason = #{drawbackreason,jdbcType=VARCHAR},
+      drawbacktime = #{drawbacktime,jdbcType=DATE}
+    where drawbackid = #{drawbackid,jdbcType=INTEGER}
+      and processstate = #{processstate,jdbcType=VARCHAR}
+  </update>
+</mapper>

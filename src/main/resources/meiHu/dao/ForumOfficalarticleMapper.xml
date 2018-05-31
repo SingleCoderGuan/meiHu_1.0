@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gem.meihu.dao.mapper.ForumOfficalarticleMapper">
+  <resultMap id="BaseResultMap" type="com.gem.meihu.entity.ForumOfficalarticle">
+    <id column="oaid" jdbcType="INTEGER" property="oaid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gem.meihu.entity.ForumOfficalarticle">
+    <result column="oatitle" jdbcType="LONGVARCHAR" property="oatitle" />
+    <result column="oacontent" jdbcType="LONGVARCHAR" property="oacontent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    oaid
+  </sql>
+  <sql id="Blob_Column_List">
+    oatitle, oacontent
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.gem.meihu.entity.ForumOfficalarticleExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from forum_officalarticle
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.gem.meihu.entity.ForumOfficalarticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from forum_officalarticle
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from forum_officalarticle
+    where oaid = #{oaid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from forum_officalarticle
+    where oaid = #{oaid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gem.meihu.entity.ForumOfficalarticleExample">
+    delete from forum_officalarticle
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gem.meihu.entity.ForumOfficalarticle">
+    insert into forum_officalarticle (oaid, oatitle, oacontent
+      )
+    values (#{oaid,jdbcType=INTEGER}, #{oatitle,jdbcType=LONGVARCHAR}, #{oacontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gem.meihu.entity.ForumOfficalarticle">
+    insert into forum_officalarticle
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oaid != null">
+        oaid,
+      </if>
+      <if test="oatitle != null">
+        oatitle,
+      </if>
+      <if test="oacontent != null">
+        oacontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oaid != null">
+        #{oaid,jdbcType=INTEGER},
+      </if>
+      <if test="oatitle != null">
+        #{oatitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="oacontent != null">
+        #{oacontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gem.meihu.entity.ForumOfficalarticleExample" resultType="java.lang.Long">
+    select count(*) from forum_officalarticle
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update forum_officalarticle
+    <set>
+      <if test="record.oaid != null">
+        oaid = #{record.oaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.oatitle != null">
+        oatitle = #{record.oatitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.oacontent != null">
+        oacontent = #{record.oacontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update forum_officalarticle
+    set oaid = #{record.oaid,jdbcType=INTEGER},
+      oatitle = #{record.oatitle,jdbcType=LONGVARCHAR},
+      oacontent = #{record.oacontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update forum_officalarticle
+    set oaid = #{record.oaid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gem.meihu.entity.ForumOfficalarticle">
+    update forum_officalarticle
+    <set>
+      <if test="oatitle != null">
+        oatitle = #{oatitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="oacontent != null">
+        oacontent = #{oacontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where oaid = #{oaid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gem.meihu.entity.ForumOfficalarticle">
+    update forum_officalarticle
+    set oatitle = #{oatitle,jdbcType=LONGVARCHAR},
+      oacontent = #{oacontent,jdbcType=LONGVARCHAR}
+    where oaid = #{oaid,jdbcType=INTEGER}
+  </update>
+</mapper>
