@@ -13,4 +13,8 @@ public class UserServiceImpl implements UserService {
     public ForumUser findUserByUname(String uname) {
         return forumUserMapper.selectUsersByUname(uname);
     }
+
+    public boolean insertUser(String uname,String password,String tel){
+        return forumUserMapper.insertUser(uname,password,tel);
+    }
 }
