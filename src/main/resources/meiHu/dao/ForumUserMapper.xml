@@ -33,4 +33,9 @@
     <insert id="insertUser" >
         INSERT INTO forum_user (uname,password,tel,title_id) VALUES (#{uname},#{password},#{tel},1)
     </insert>
+
+    <!--public ForumUser selectUserByTel(String tel);-->
+    <select id="selectUserByTel" parameterType="String" resultMap="selectUserMap">
+        SELECT u.*,t.* FROM forum_user u ,forum_title WHERE u.title_id = t.titleid AND u.tel=#{_parameter}
+    </select>
 </mapper>

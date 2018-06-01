@@ -15,11 +15,13 @@
 <html >
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>美乎登录&注册</title>
 
     <link rel="stylesheet" href="<%=basePath%>css/stylelogin.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>css/style_inner.css" type="text/css">
-
+    <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link href="<%=basePath%>css/demo.css" type="text/css" rel="stylesheet" />
@@ -56,7 +58,6 @@
                 </div>
             </div>
             <div class="cont_back_info">
-
             </div>
             <div class="cont_forms" >
 
@@ -64,12 +65,12 @@
 
                     <div class="wrap">
                         <ul class="tabs group">
-                            <li><a class="active" href="#/one">用户名密码登录</a></li>
-                            <li><a href="#/two">手机短信登录</a></li>
+                            <li><a style="height: 60px;" class="active" href="#/one">用户名密码登录</a></li>
+                            <li><a style="height: 60px;" href="#/two">手机短信登录</a></li>
                         </ul>
 
                         <div id="content">
-                            <form class="demoform" id="accountlogin" action="${pageContext.request.contextPath}/loginWithAccount.action" method="post">
+                            <form id="accountlogin" action="${pageContext.request.contextPath}/loginWithAccount.action" method="post">
                             <p id="one">
 
                                 <input style="position:relative;top: 20px;" type="text" name="uname" placeholder="请输入用户名"  <c:if test="${param.rslt}=='1'"><span style="color: red;">用户名不存在</span></c:if> />
@@ -86,12 +87,12 @@
                             </p>
                             </form>
 
-                            <form id="textlogin" class="demoform" action="/loginWithTel.acion" method="post">
+                            <form id="textlogin" class="demoform" >
                                 <p class="ex" id="two" hidden>
-                                    <input style="position:relative;top: 20px;"  type="text" placeholder="请输入手机号码" />
-                                    <button class="btn_my_send" onClick="sendtext()">发送验证码</button>
+                                    <input style="position:relative;top: 20px;" id="tel" type="text" placeholder="请输入手机号码" />
+                                    <button class="btn_my_send" id="vcode" onClick="sendtext()">发送验证码</button>
                                     <input style="position:relative;top: 20px;" type="password" placeholder="请输入验证码" />
-                                    <button class="btn_my_login" type="submit" onClick="cambiar_sign_up()">登录</button>
+                                    <button class="btn_my_login" type="submit" id="tellogin">登录</button>
                                 </p>
                             </form>
                         </div>
@@ -100,33 +101,137 @@
                 <div class="cont_form_sign_up">
                     <h2>注册</h2>
                     <form class="registerform" >
-                        <li style="position: relative;top: 30px;">
-                            <label class="label"><span class="need">*</span> 密码：</label>
-                            <input type="password" value="" name="userpassword" class="inputxt" />
+                        <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
+                            <label class="label" style="position: relative;font-size: 14px;top: 10px;">用户名：</label>
+                            <input style="position: relative;padding: 15px 5px;
+margin-left: 10px;
+margin-top: 20px;
+  width: 180px;
+border: none;
+text-align: left;
+  color: #757575;background-color: #fff" type="text" datatype="*6-20" name="username" class="inputxt" />
                         </li>
-                        <li style="position: relative;top: -10px;">
-                            <label class="label"><span class="need">*</span> 确认密码：</label>
-                            <input type="password" datatype="m|e                                                                                                                                                                                        " errormsg="账号可以是手机或邮箱地址！" value="" name="userpassword2" class="inputxt" />
+                        <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
+                            <label class="label" style="position: relative;left: 7px;top: 10px;font-size: 14px">密  码：</label>
+                            <input style="position: relative;padding: 15px 5px;
+margin-left: 10px;
+margin-top: 20px;
+  width: 180px;
+border: none;
+text-align: left;
+  color: #757575;background-color: #fff" type="password"  value="" name="userpassword" class="inputxt" />
                         </li>
-                        <div class="action">
-                            <input type="submit" value="提 交" /> <input type="reset" value="重 置" />
+                        <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
+                            <label class="label" style="position: relative;left: -6px;top: 10px;font-size: 14px;width: 80px;">确认密码：</label>
+                            <input style="position: relative;left: -5px;padding: 15px 5px;
+margin-left: 10px;
+margin-top: 20px;
+  width: 180px;
+border: none;
+text-align: left;
+  color: #757575;background-color: #fff" type="password" value="" name="verificationpsw" class="inputxt"/>
+                        </li>
+                        <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
+                            <label class="label" style="position: relative;left: -6px;top: 10px;font-size: 14px;width: 80px;">手机号码：</label>
+                            <input style="position: relative;left: -5px;padding: 15px 5px;
+margin-left: 10px;
+margin-top: 20px;
+  width: 180px;
+border: none;
+text-align: left;
+  color: #757575;background-color: #fff" type="text" value="" name="phone" class="inputxt"/>
+                        </li>
+                        <li style="position: relative;top: 20px;left:-45px;list-style-type:none; ">
+                            <input class="btn_my_login" style="position: relative;top: -7px;" type="button" value="发送手机短信验证码"/>
+                        </li>
+                        <li style="position: relative;top: -5px;left:-65px;list-style-type:none; ">
+                            <label class="label" style="font-size: 14px;position: relative;top: 10px;">验证码：</label>
+                            <input style="position: relative;padding: 15px 5px;
+                                margin-left: 10px;
+                                margin-top: 20px;
+                                  width: 180px;
+                                border: none;
+                                text-align: left;
+                                  color: #757575;background-color: #fff" type="text" value="" name="text" class="inputxt"/>
+                        </li>
+                        <div class="action" style="position: relative;top: 20px;left:-90px ">
+                            <input type="submit" style="position: relative;top: -20px;width: 90px;left: -72px;" class="btn_my_login" value="提 交" />
+                            <input type="reset" style="position: relative;top: -20px;width: 90px; left: 40px;" class="btn_my_login" value="重 置" />
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="width: 460px;">
+                    <div class="modal-header" style="background-color: #F0DAD2">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">请完善您的信息</h4>
+                    </div>
+                    <div class="modal-body" style="background-color: #F0DAD2">
+                        <form class="registerform" >
+                            <li style="position: relative;top: 20px;left:-20px;list-style-type:none; ">
+                                <label class="label" style="position: relative;left: -23px;font-size: 15px;top: 10px;">用户名：</label>
+                                <input style="position: relative;left: -45px;padding: 15px 5px;
+margin-left: 10px;
+margin-top: 20px;
+  width: 180px;
+border: none;
+text-align: left;
+  color: #757575;background-color: #fff" type="text" datatype="*6-20" name="username" class="inputxt" />
+                            </li>
+                            <li style="position: relative;top: 20px;left:-20px;list-style-type:none; ">
+                                <label class="label" style="position: relative;left: -12px;top: 10px;font-size: 14px">密  码：</label>
+                                <input style="position: relative;left: -45px;padding: 15px 5px;
+margin-left: 10px;
+margin-top: 20px;
+  width: 180px;
+border: none;
+text-align: left;
+  color: #757575;background-color: #fff" type="password"  value="" name="userpassword" class="inputxt" />
+                            </li>
+                            <li style="position: relative;top: 20px;left:-20px;list-style-type:none; ">
+                                <label class="label" style="position: relative;left: -28px;top: 10px;font-size: 14px;width: 80px;">确认密码：</label>
+                                <input style="position: relative;left: -50px;padding: 15px 5px;
+margin-left: 10px;
+margin-top: 20px;
+  width: 180px;
+border: none;
+text-align: left;
+  color: #757575;background-color: #fff" type="password" value="" name="verificationpsw" class="inputxt"/>
+                            </li>
+                            <img src="<%=basePath%>images/LOGO.png"    style="position: relative; left: -20px;top: 20px;width: 190px;height: 50px;"/>
+                            <li style="position: relative;top: 20px;left:-20px;list-style-type:none; ">
+                                <label class="label" style="font-size: 14px;position: relative;left: -20px;top: 10px;">验证码：</label>
+                                <input style="position: relative;left: -45px;padding: 15px 5px;
+                                margin-left: 10px;
+                                margin-top: 20px;
+                                  width: 180px;
+                                border: none;
+                                text-align: left;
+                                  color: #757575;background-color: #fff" type="text" value="" name="text" class="inputxt"/>
+                            </li>
+                            <div class="action" style="position: relative;top: 20px;left:-20px">
+                                <input type="submit" value="提 交" /> <input type="reset" value="重 置" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-
 <script src="<%=basePath%>js/indexlogin.js"></script>
 <script src="<%=basePath%>js/jquery.min.js"></script>
 <script src="<%=basePath%>js/index_inner.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/Validform_v5.3.2.js"></script>
+<script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+
     $(function(){
         //$(".registerform").Validform();  //就这一行代码！;
 
@@ -146,7 +251,7 @@
 
         demo.addRule([{
             ele:".inputxt:eq(0)",
-            datatype:"zh2-4"
+            datatype:"s6-18"
         },
             {
                 ele:".inputxt:eq(1)",
@@ -158,18 +263,29 @@
                 recheck:"userpassword"
             },
             {
-                ele:"select",
-                datatype:"*"
+                ele:".inputxt:eq(3)",
+                datatype:"m",
             },
             {
-                ele:":radio:first",
-                datatype:"*"
-            },
-            {
-                ele:":checkbox:first",
-                datatype:"*"
+                ele:".inputxt:eq(4)",
+                datatype:"s6-20"
             }]);
 
+    })
+</script>
+<script>
+    $("#tellogin").click(function () {
+        $.ajax({
+            type:"get",
+            url:"${pageContext.request.contextPath}/loginWithTel.action",
+            data:"tel="+$("#tel").val()+"&vcode="+$("#vcode").val(),
+            success:function (message) {
+                if(message=="1"){
+                    $('#myModal').modal({
+                    })
+                }
+            }
+        })
     })
 </script>
 </body>

@@ -12,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 
 @Controller
 public class UserController {
@@ -36,7 +38,7 @@ public class UserController {
         }
 
     }
-    @RequestMapping("/register.action")
+    @RequestMapping(value = "/register.action",method = RequestMethod.POST)
     public String register(String id ,String password ,String tel,HttpServletRequest request ,HttpServletResponse response ){
         if(id.equals("3")){
             return "账号注册成功";
@@ -44,8 +46,24 @@ public class UserController {
             return "账号注册失败" ;
         }
     }
-
-    public ForumUser findUser(String uname,HttpServletRequest request,HttpServletResponse response){
-        return userService.findUserByUname(uname) ;
+    @RequestMapping(value = "/loginWithTel.action",method = RequestMethod.GET)
+    public void findUser(String tel,String vcode,HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+        PrintWriter out = response.getWriter() ;
+        //验证短信验证码
+//        boolean f = true ;
+       /* //验证码正确
+        if (f){
+            ForumUser user = userService.findUserByTel(tel) ;
+            if (user!=null){
+                request.setAttribute("user",user);
+                request.getRequestDispatcher("#").forward(request,response);
+            }else{
+                //该用户是新用户，ajax刷新完善信息
+                out.print("1");
+            }
+        }else {
+            out.print("0");
+        }*/
+        out.print("1");
     }
 }

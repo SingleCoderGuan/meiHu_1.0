@@ -80,7 +80,8 @@ transition: all 0.5s;
 
 .cont_forms_active_sign_up {
 box-shadow: 1px 10px 30px -10px rgba(0,0,0,0.5);
-  height: 420px;
+  height: 680px;
+  width:380px;
 top:20px;
 left:320px;
 -webkit-transition: all 0.5s;
@@ -334,7 +335,7 @@ z-index: 2;
 
 .cont_form_sign_up {
   position: absolute;
-  width: 320px;
+  width: 500px;
 float: left;
   opacity: 0;
 display: none;
@@ -357,6 +358,8 @@ border: none;
 }
 
 .cont_form_sign_up > h2 {
+  position: relative;
+  left: -58px;
 margin-top: 50px;
 font-weight: 400;
   color: #757575;
@@ -425,6 +428,9 @@ margin-left: 30px;
   color: #757575;
 }
 .Validform_checktip{
+  position: absolute;
+  top: 72px;
+  left: 200px;
   margin-left:8px;
   line-height:20px;
   height:20px;
@@ -456,3 +462,9 @@ margin-left: 30px;
 #Validform_msg a.Validform_close:link,#Validform_msg a.Validform_close:visited{line-height:22px; position:absolute; right:8px; top:0px; color:#fff; text-decoration:none;}
 #Validform_msg a.Validform_close:hover{color:#cc0;}
 #Validform_msg .Validform_info{padding:8px;border:1px solid #000; border-top:none; text-align:left;}
+.registerform {
+  width:380px;
+}
+.registerform li label {
+  color: #000;
+}

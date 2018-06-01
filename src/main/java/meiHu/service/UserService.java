@@ -18,4 +18,11 @@ public interface UserService {
      * @return
      */
     public boolean insertUser(String uname,String password,String tel);
+
+    /**
+     * 根据电话号码查询该电话号码是否已被注册
+     * @param tel   执行select的电话号码
+     * @return  该tel对应的用户
+     */
+    public ForumUser findUserByTel(String tel) ;
 }

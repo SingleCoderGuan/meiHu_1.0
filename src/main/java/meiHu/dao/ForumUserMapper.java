@@ -14,6 +14,13 @@ public interface ForumUserMapper {
     public ForumUser selectUserByUid(int uid) ;
 
     /**
+     * 根据电话号码查询用户
+     * @param tel   执行select的电话号码
+     * @return  该tek对应的用户
+     */
+    public ForumUser selectUserByTel(String tel);
+
+    /**
      * 根据title_id从forum_user表中查询该称号下所有用户
      * @param title_id 执行select的称号title_id
      * @return  所有称号为title_id的用户
