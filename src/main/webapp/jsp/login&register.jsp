@@ -109,7 +109,8 @@ margin-top: 20px;
   width: 180px;
 border: none;
 text-align: left;
-  color: #757575;background-color: #fff" type="text" datatype="*6-20" name="username" class="inputxt" />
+  color: #757575;background-color: #fff" type="text" id="reguname"  name="username" class="inputxt"/>
+                            <span style="position: absolute;left: 200px;top: 80px;" id="unametip"></span>
                         </li>
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
                             <label class="label" style="position: relative;left: 7px;top: 10px;font-size: 14px">密  码：</label>
@@ -155,8 +156,7 @@ text-align: left;
                                   color: #757575;background-color: #fff" type="text" value="" name="text" class="inputxt"/>
                         </li>
                         <div class="action" style="position: relative;top: 20px;left:-90px ">
-                            <input type="submit" style="position: relative;top: -20px;width: 90px;left: -72px;" class="btn_my_login" value="提 交" />
-                            <input type="reset" style="position: relative;top: -20px;width: 90px; left: 40px;" class="btn_my_login" value="重 置" />
+                            <input type="submit" style="position: relative;top: -28px;" class="btn_my_login" value="提 交" />
                         </div>
                     </form>
                 </div>
@@ -171,7 +171,7 @@ text-align: left;
                     </div>
                     <div class="modal-body" style="background-color: #F0DAD2">
                         <form class="registerform" >
-                            <li style="position: relative;top: 20px;left:-20px;list-style-type:none; ">
+                            <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
                                 <label class="label" style="position: relative;left: -23px;font-size: 15px;top: 10px;">用户名：</label>
                                 <input style="position: relative;left: -45px;padding: 15px 5px;
 margin-left: 10px;
@@ -179,9 +179,10 @@ margin-top: 20px;
   width: 180px;
 border: none;
 text-align: left;
-  color: #757575;background-color: #fff" type="text" datatype="*6-20" name="username" class="inputxt" />
+  color: #757575;background-color: #fff" type="text" id="perfectuname" name="username" class="inputxt" />
+                                <span style="position: absolute;left: 200px;top: 80px;" id="perunametip"></span>
                             </li>
-                            <li style="position: relative;top: 20px;left:-20px;list-style-type:none; ">
+                            <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
                                 <label class="label" style="position: relative;left: -12px;top: 10px;font-size: 14px">密  码：</label>
                                 <input style="position: relative;left: -45px;padding: 15px 5px;
 margin-left: 10px;
@@ -191,7 +192,7 @@ border: none;
 text-align: left;
   color: #757575;background-color: #fff" type="password"  value="" name="userpassword" class="inputxt" />
                             </li>
-                            <li style="position: relative;top: 20px;left:-20px;list-style-type:none; ">
+                            <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
                                 <label class="label" style="position: relative;left: -28px;top: 10px;font-size: 14px;width: 80px;">确认密码：</label>
                                 <input style="position: relative;left: -50px;padding: 15px 5px;
 margin-left: 10px;
@@ -202,7 +203,7 @@ text-align: left;
   color: #757575;background-color: #fff" type="password" value="" name="verificationpsw" class="inputxt"/>
                             </li>
                             <img src="<%=basePath%>images/LOGO.png"    style="position: relative; left: -20px;top: 20px;width: 190px;height: 50px;"/>
-                            <li style="position: relative;top: 20px;left:-20px;list-style-type:none; ">
+                            <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
                                 <label class="label" style="font-size: 14px;position: relative;left: -20px;top: 10px;">验证码：</label>
                                 <input style="position: relative;left: -45px;padding: 15px 5px;
                                 margin-left: 10px;
@@ -213,7 +214,8 @@ text-align: left;
                                   color: #757575;background-color: #fff" type="text" value="" name="text" class="inputxt"/>
                             </li>
                             <div class="action" style="position: relative;top: 20px;left:-20px">
-                                <input type="submit" value="提 交" /> <input type="reset" value="重 置" />
+                                <input type="submit" style="position: relative;top: -20px;width: 90px;left: -72px;" class="btn_my_login" value="提 交" />
+                                <input type="reset" style="position: relative;top: -20px;width: 90px; left: 40px;" class="btn_my_login" value="重 置" />
                             </div>
                         </form>
                     </div>
@@ -223,9 +225,9 @@ text-align: left;
     </div>
 </div>
 
-<script src="<%=basePath%>js/indexlogin.js"></script>
-<script src="<%=basePath%>js/jquery.min.js"></script>
-<script src="<%=basePath%>js/index_inner.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/indexlogin.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/index_inner.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/Validform_v5.3.2.js"></script>
 <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
@@ -249,10 +251,7 @@ text-align: left;
         //$.Tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
         demo.tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
 
-        demo.addRule([{
-            ele:".inputxt:eq(0)",
-            datatype:"s6-18"
-        },
+        demo.addRule([
             {
                 ele:".inputxt:eq(1)",
                 datatype:"*6-20"
@@ -265,11 +264,8 @@ text-align: left;
             {
                 ele:".inputxt:eq(3)",
                 datatype:"m",
-            },
-            {
-                ele:".inputxt:eq(4)",
-                datatype:"s6-20"
-            }]);
+            }
+            ]);
 
     })
 </script>
@@ -286,6 +282,62 @@ text-align: left;
                 }
             }
         })
+    })
+</script>
+<script>
+    $("#reguname").blur(function () {
+        var content = $("#reguname").val();
+        if(content.length<5||content.length>20){
+            $("#unametip").html("")
+            $("#unametip").removeClass()
+            $("#unametip").addClass("wrong")
+            $("#unametip").html("用户名必须是5到20位字符")
+        }else{
+            $.ajax({
+                type:"get",
+                url:"${pageContext.request.contextPath}/namecheck.action",
+                data:"uname="+content,
+                success:function (message) {
+                    if(message=="0"){
+                        $("#unametip").html("用户名已被占用")
+                        $("#unametip").removeClass()
+                        $("#unametip").addClass("wrong")
+                    }else {
+                        $("#unametip").html("ok")
+                        $("#unametip").removeClass()
+                        $("#unametip").addClass("right")
+                    }
+                }
+            })
+        }
+    })
+</script>
+<script>
+    $("#perfectuname").blur(function () {
+        var content = $("#perfectuname").val();
+        if(content.length<5||content.length>20){
+            $("#perunametip").html("")
+            $("#perunametip").removeClass()
+            $("#perunametip").addClass("wrong")
+            $("#perunametip").html("用户名必须是5到20位字符")
+        }else{
+            $.ajax({
+                type:"get",
+                url:"${pageContext.request.contextPath}/namecheck.action",
+                data:"uname="+content,
+                success:function (message) {
+                    if(message=="0"){
+                        $("#perunametip").html("用户名已被占用")
+                        $("#perunametip").removeClass()
+                        $("#perunametip").addClass("wrong")
+                    }else {
+                        $("#perunametip").html("ok")
+                        $("#perunametip").removeClass()
+                        $("#perunametip").addClass("right")
+                    }
+                }
+            })
+        }
     })
 </script>
 </body>

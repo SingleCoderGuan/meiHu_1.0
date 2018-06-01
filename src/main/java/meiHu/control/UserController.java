@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
-@Controller
+@RestController
 public class UserController {
     @Autowired
     private UserService userService ;
@@ -65,5 +66,15 @@ public class UserController {
             out.print("0");
         }*/
         out.print("1");
+    }
+
+    @RequestMapping(value = "/namecheck.action",method = RequestMethod.GET)
+    public String checkUname(String uname,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        ForumUser user = userService.findUserByUname(uname);
+        if(user!=null){
+            return "0" ;
+        }else{
+            return "1" ;
+        }
     }
 }

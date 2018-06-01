@@ -438,10 +438,23 @@ margin-left: 30px;
   color:#999;
   font-size:12px;
 }
+.right {
+  color:#71b83d;
+  padding-left:20px;
+  background:url(../images/right.png) no-repeat left center;
+  font-size:12px;
+}
 .Validform_right{
   color:#71b83d;
   padding-left:20px;
   background:url(../images/right.png) no-repeat left center;
+}
+.wrong {
+  color:red;
+  padding-left:20px;
+  white-space:nowrap;
+  background:url(../images/error.png) no-repeat left center;
+  font-size:12px;
 }
 .Validform_wrong{
   color:red;
