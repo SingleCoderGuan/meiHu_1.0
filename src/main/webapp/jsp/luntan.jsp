@@ -11,6 +11,7 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+   // String tid = request.getParameter("tid");
 %>
 <html>
 <head>
@@ -146,13 +147,25 @@
                 <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
                     <ul class="nav navbar-nav">
 
-                        <li class="nav-current" role="presentation"><a href="luntanshouyetest.html">美论首页</a></li>
-                        <li><a href="index.html">美乎</a></li>
-                        <li><a href="#">美购</a></li>
-                        <li><a href="#">美商城</a></li>
-                        <li><a href="#">活动</a></li>
+                        <li class="nav-current" role="presentation">
+                            <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
+                        </li>
+                        <li>
+                            <a href="jsp/zhuye.jsp">美乎</a>
+                        </li>
 
-                        <li><a href="#">关于</a></li>
+                        <li>
+                            <a href="#">美淘</a>
+                        </li>
+                        <li>
+                            <a href="#">精彩活动</a>
+                        </li>
+
+                        <li>
+                            <a href="#">发帖</a>
+                        </li>
+
+
 
                     </ul>
                 </nav>
@@ -180,8 +193,9 @@
         <div class="container">
             <div class="row category">
                 <div class="col-sm-12">
+
                     <c:forEach items="${topicList}" var="topicList">
-                        <a href="<%=basePath%>luntan/bankuai.action?">
+                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList.tid}">
                             <dl>
                                 <dt><img src="../images/${topicList.tpicname}"/></dt>
                                 <dd>
@@ -232,69 +246,72 @@
             }
         </style>
         <!--可能需要父级套一个div来调整在不同容器下的整体宽度-->
-        <br/>
+
+
+        <br />
         <div class="container">
             <div class="row aw-content-wrap">
                 <div class="col-sm-12 col-md-9 aw-main-content aw-all-question">
                     <!-- tab切换 -->
                     <ul class="nav nav-tabs aw-reset-nav-tabs hidden-xs">
 
-                        <li><a href="#">推荐</a></li>
-                        <li><a href="#">最新</a></li>
+                        <li>
+                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=tuijian&tid=<%=request.getParameter("tid")%>" >推荐</a>
+                        </li>
+                        <li>
+                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=zuixin&tid=<%=request.getParameter("tid")%>" >最新</a>
+                        </li>
 
-                        <h2 class="hidden-xs">${topicList[0].tname}区……菇凉请留步</h2>
+                        <h2 class="hidden-xs"> ……姑娘清留步</h2>
                     </ul>
                     <!-- end tab切换 -->
-                    <style type="text/css">
-                        .aw-user-name .sponsor-level {
-                            width: 25px;
-                            height: 25px;
-                            position: absolute;
-                            left: 38px;
-                            top: -5px;
-                        }
 
-                        .aw-question-box-mod .aw-item {
-                            padding-left: 80px;
-                        }
-
-                        .aw-user-name .sponsor-count {
-                            width: 16px;
-                            height: 14px;
-                            position: absolute;
-                            left: 43px;
-                            top: 0px;
-                        }
-                    </style>
-                <%--一条帖子开始--%>
-                    <c:forEach var="postList" items="${postList}">
                     <div class="aw-mod aw-question-box-mod">
                         <div class="aw-mod-body">
                             <div class="aw-question-list">
 
+                                <style type="text/css">
+                                    .aw-user-name .sponsor-level {
+                                        width: 25px;
+                                        height: 25px;
+                                        position: absolute;
+                                        left: 38px;
+                                        top: -5px;
+                                    }
+
+                                    .aw-question-box-mod .aw-item {
+                                        padding-left: 80px;
+                                    }
+
+                                    .aw-user-name .sponsor-count {
+                                        width: 16px;
+                                        height: 14px;
+                                        position: absolute;
+                                        left: 43px;
+                                        top: 0px;
+                                    }
+                                </style>
+                                <c:forEach var="postList" items="${postList}">
                                 <div class="aw-item ">
-                                    <a class="aw-user-name hidden-xs" data-id="804712"
-                                       href="#" rel="nofollow">
-                                        <img src="../images/touxiang1.png" alt=""/> <%--用户头像--%>
+                                    <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
+                                        <img src="../images/touxiang1.png" alt="" />
                                     </a>
 
                                     <div class="aw-question-content">
                                         <h4>
-                                            <%--帖子标题--%>
                                             <a href="<%=basePath%>/luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
                                         </h4>
-                                        <p class="pull-right hidden-xs">
-                                            <span>收藏:</span>
 
-                                            <a class="aw-user-name" href="" rel="nofollow"><img
-                                                    src="../images/shoucang.png" alt=""/></a>
-                                            <span>举报:</span>
-                                            <a class="aw-user-name" href="" rel="nofollow"><img
-                                                    src="../images/jubao.png" alt=""/></a>
-                                            <span>点赞:</span>
-                                            <a class="aw-user-name" href="" rel="nofollow"><img
-                                                    src="../images/dianzan.png" alt=""/></a>
-                                        </p>
+                                            <p class="pull-right hidden-xs">
+                                                <span>收藏:</span>
+
+                                                <a class="aw-user-name"  href="" rel="nofollow"><img src="../images/shoucang.png" alt="" /></a>
+                                                <span>举报:</span>
+                                                <a class="aw-user-name"  href="" rel="nofollow"><img src="../images/jubao.png" alt="" /></a>
+                                                <span>点赞:</span>
+                                                <a class="aw-user-name"  href="" rel="nofollow"><img src="../images/dianzan.png" alt="" /></a>
+                                            </p>
+
 
 
                                         <p>
@@ -302,20 +319,55 @@
 					<i class="fa fa-caret-left"></i>
 					<a href="#">${postList.topic.tname}</a><%--标签--%>
 				</span> •
-                                            <a href="#" class="aw-user-name" data-id="788923">${postList.user.uname}</a>
+                                            <a href="#" class="aw-user-name" >${postList.user.uname}</a>
                                             <span class="aw-text-color-999" >${postList.likecount}次点赞 • 7 人关注 •
                                                     ${postList.visitcount} 次浏览 •<fmt:formatDate value='${postList.createtime}'
                                                                                                 pattern='yyyy-MM-dd hh:mm:ss'/>"	</span>
                                         </p>
+
                                     </div>
                                 </div>
+                                </c:forEach>
+
+
+                                <!--底部Google 信息流广告-->
+
                             </div>
                         </div>
-                        </c:forEach>
-                        <%--一条帖子结束--%>
+                    </div>
+
+                    <div class="page-control clearfix">
+                        <ul class="pagination pull-right">
+                            <li>
+                                <a href="#">&lt;&lt;</a>
+                            </li>
+                            <li>
+                                <a href="#">&lt;</a>
+                            </li>
+                            <li><a>当前第1页，共10页</a></li>
+                            <li>
+                                <a href="#">&gt;</a>
+                            </li>
+                            <li>
+                                <a href="#">&gt;&gt;</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <!-- 侧边栏 -->
                 <div class="col-sm-12 col-md-3 aw-side-bar aw-index-side-bar hidden-xs hidden-sm">
@@ -390,22 +442,22 @@
                             <ul>
                                 <li><i class="feature_icon"><img src="../images/bankuai1.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
-                                        href="#">口红</a></li>
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=1">口红</a></li>
                                 <li><i class="feature_icon"><img src="../images/bankuai6.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
-                                        href="#">眼霜</a></li>
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=6">眼霜</a></li>
                                 <li><i class="feature_icon"><img src="../images/bankuai4.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
-                                        href="#">水乳</a></li>
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=2">水乳</a></li>
                                 <li><i class="feature_icon"><img src="../images/bankuai5.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
-                                        href="#">防晒</a></li>
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=4">防晒</a></li>
                                 <li><i class="feature_icon"><img src="../images/bankuai2.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
-                                        href="#">洗面奶</a></li>
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=5">洗面奶</a></li>
                                 <li><i class="feature_icon"><img src="../images/bankuai3.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
-                                        href="#">香水</a></li>
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=3">香水</a></li>
 
                             </ul>
                         </div>
@@ -499,31 +551,7 @@
 </div>
 
 <div class="aw-footer-wrap">
-    <!--底部广告-->
-    <div class="aw-footer aw-wecenter">
-        <div class="ad-item">
-            <div class="close" data-type="ad_bottom" data-level="">
-                <a href="javascript:;" title="停止推广广告">X</a>
-            </div>
-            <p class="guide">赞助DCloud可免广告，<a href="//dev.dcloud.net.cn/sponsor/">点此前往赞助页面</a></p>
 
-            <!-- 底部广告位 -->
-            <script>
-                (function () {
-                    var s = "_" + Math.random().toString(36).slice(2);
-                    document.write('<div id="' + s + '"></div>');
-                    (window.slotbydup = window.slotbydup || []).push({
-                        id: '5513626',
-                        container: s,
-                        size: '960,90',
-                        display: 'inlay-fix'
-                    });
-                })();
-            </script>
-            <script src="http://dup.baidustatic.com/js/os.js"></script>
-        </div>
-    </div>
-    <!--end 底部广告-->
 
     <div class="aw-footer aw-wecenter">
 

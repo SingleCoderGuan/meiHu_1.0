@@ -17,13 +17,13 @@ public interface ForumPostMapper {
      * 查询所有帖子并按访问数量降序排序
      * @return  按访问数降序排序的帖子
      */
-    public List<ForumPost> selectAllPostsOrderByVisits() ;
+    public List<ForumPost> selectAllPostsOrderByVisits(int tid) ;
 
     /**
      * 查询所有帖子并按发布时间降序排序
      * @return  按发布时间降序排序的帖子
      */
-    public List<ForumPost> selectAllPostsOrderByCreatetime() ;
+    public List<ForumPost> selectAllPostsOrderByCreatetime(int tid) ;
 
     /**
      * 查询所有帖子并按发布时间降序排序 forum_post和forum_like
