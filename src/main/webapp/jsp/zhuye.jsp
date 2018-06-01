@@ -1,42 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: 上官龙超
+  Date: 2018/5/31/031
+  Time: 18:27
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>美乎首页</title>
+    <title>美乎</title>
 
-    <!-- custom-theme -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Beauty Style Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+
+        <!-- custom-theme -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Beauty Style Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript">
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
+        <script type="application/x-javascript">
+            addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
 
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
+        </script>
 
-    <link rel="stylesheet" type="text/css" href="css/slicebox.css" />
-    <!-- for banner-->
-    <!-- font-awesome-icons -->
+        <link rel="stylesheet" type="text/css" href="css/slicebox.css" />
+        <!-- for banner-->
+        <!-- font-awesome-icons -->
 
-    <link rel="stylesheet" href="css/font-awesome.min.css" />
-    <!-- //font-awesome-icons -->
-    <!-- //custom-theme files-->
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- //custom-theme files-->
-    <!-- fonts -->
-    <link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext,vietnamese"
-          rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
-          rel="stylesheet">
-    <!-- //fonts -->
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
+        <!-- //font-awesome-icons -->
+        <!-- //custom-theme files-->
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/shouyestyle.css" rel="stylesheet" type="text/css" media="all" />
+        <!-- //custom-theme files-->
+        <!-- fonts -->
+        <link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext,vietnamese"
+              rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
+              rel="stylesheet">
+        <!-- //fonts -->
 
-</head>
+    </head>
 
 <body>
 
@@ -59,11 +70,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav link-effect">
                     <li class="active">
-                        <a href="index.html">美乎</a>
+                        <a href="shouye.html">美乎</a>
                     </li>
 
                     <li>
-                        <a href="luntanshouyetest.html" class="scroll">美论</a>
+                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=1" class="scroll">美论</a>
                     </li>
                     <li>
                         <a href="#" class="scroll">美购</a>
@@ -876,9 +887,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //banner slider js -->
 
 <!-- //here starts scrolling icon -->
-<script src="js/SmoothScroll.min.js"></script>
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script src="../js/SmoothScroll.min.js"></script>
+<script type="text/javascript" src="../js/move-top.js"></script>
+<script type="text/javascript" src="../js/easing.js"></script>
 <!-- here stars scrolling script -->
 <script type="text/javascript">
     $(document).ready(function () {

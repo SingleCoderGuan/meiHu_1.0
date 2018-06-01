@@ -302,16 +302,6 @@
                                             <a href="<%=basePath%>/luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
                                         </h4>
 
-                                            <p class="pull-right hidden-xs">
-                                                <span>收藏:</span>
-
-                                                <a class="aw-user-name"  href="" rel="nofollow"><img src="../images/shoucang.png" alt="" /></a>
-                                                <span>举报:</span>
-                                                <a class="aw-user-name"  href="" rel="nofollow"><img src="../images/jubao.png" alt="" /></a>
-                                                <span>点赞:</span>
-                                                <a class="aw-user-name"  href="" rel="nofollow"><img src="../images/dianzan.png" alt="" /></a>
-                                            </p>
-
 
 
                                         <p>

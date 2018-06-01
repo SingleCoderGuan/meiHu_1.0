@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumLikeMapper">
+    <!--public void addLikeByUidAndPid(int uid,int pid);-->
+    <insert id="addLikeByUidAndPid" parameterType="int" >
+        INSERT  into forum_like(user_uid,post_pid) VALUES (#{param1},#{param2})
+    </insert>
 
+    <delete id="deleteLikeByUidAndPid" parameterType="int">
+        DELETE  FROM forum_like WHERE user_uid =#{param1} AND post_pid=#{param2}
+    </delete>
 </mapper>
