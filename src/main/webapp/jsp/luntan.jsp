@@ -11,6 +11,7 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+   // String tid = request.getParameter("tid");
 %>
 <html>
 <head>
@@ -192,6 +193,7 @@
         <div class="container">
             <div class="row category">
                 <div class="col-sm-12">
+
                     <c:forEach items="${topicList}" var="topicList">
                         <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList.tid}">
                             <dl>
@@ -244,6 +246,8 @@
             }
         </style>
         <!--可能需要父级套一个div来调整在不同容器下的整体宽度-->
+
+
         <br />
         <div class="container">
             <div class="row aw-content-wrap">
@@ -252,13 +256,13 @@
                     <ul class="nav nav-tabs aw-reset-nav-tabs hidden-xs">
 
                         <li>
-                            <a href="#">推荐</a>
+                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=tuijian&tid=<%=request.getParameter("tid")%>" >推荐</a>
                         </li>
                         <li>
-                            <a href="#">最新</a>
+                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=zuixin&tid=<%=request.getParameter("tid")%>" >最新</a>
                         </li>
 
-                        <h2 class="hidden-xs">${topicList[0].tname} 区……姑娘清留步</h2>
+                        <h2 class="hidden-xs"> ……姑娘清留步</h2>
                     </ul>
                     <!-- end tab切换 -->
 

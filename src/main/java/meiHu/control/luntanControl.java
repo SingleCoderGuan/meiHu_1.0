@@ -23,26 +23,15 @@ public class luntanControl {
 
     @RequestMapping(value = "/luntanshouye.action")
     public void luntanshouye(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String tid = request.getParameter("tid");
         int tid1 = Integer.parseInt(tid);
-        if(tid1==1){
-            List<ForumTopic> topicList = luntanService.getAllTopics();
-            List<ForumPost> postList = luntanService.selectPostsByTid(1);
-            request.setAttribute("topicList",topicList);
-            request.setAttribute("postList",postList);
-//        System.out.println("postd长度"+postList.size());
-            request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
-        }
-        else{
-            List<ForumPost> postList = luntanService.selectPostsByTid(tid1);
-            List<ForumTopic> topicList = luntanService.getAllTopics();
-            request.setAttribute("topicList",topicList);
-            request.setAttribute("postList",postList);
-            request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
-
-        }
-
-
+        List<ForumTopic> topicList=luntanService.getAllTopics();
+        List<ForumPost> postList=luntanService.selectPostsByTid(tid1);
+        request.setAttribute("topicList",topicList);
+        request.setAttribute("postList",postList);
+        request.setAttribute("tid1",tid1);
+        request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
 
 
     }
@@ -60,12 +49,32 @@ public class luntanControl {
     }
 
 
-   /* @RequestMapping(value = "/bankuai.action")
-    public void bankuai(HttpServletRequest request, HttpServletResponse response){
-        String tid = request.getParameter("tid");
-        int tid1 = Integer.parseInt(tid);
 
-    }*/
+
+   @RequestMapping("/tiaojian.action")
+   public void tiaojian(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       String tiaojian = request.getParameter("tiaojian");
+       System.out.println(tiaojian);
+       String tid = request.getParameter("tid");
+       System.out.println(tid);
+       int tid1 = Integer.parseInt(tid);
+        if("tuijian".equals(tiaojian)){
+            List<ForumTopic> topicList= luntanService.getAllTopics();
+            List<ForumPost> postList= luntanService.selectAllPostsOrderByVisits(tid1);
+           request.setAttribute("topicList",topicList);
+           request.setAttribute("postList",postList);
+            request.setAttribute("tid1",tid1);
+           request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
+       }else if("zuixin".equals(tiaojian)){
+
+            List<ForumTopic> topicList= luntanService.getAllTopics();
+            List<ForumPost> postList= luntanService.selectAllPostsOrderByCreatetime(tid1);
+           request.setAttribute("topicList",topicList);
+           request.setAttribute("postList",postList);
+            request.setAttribute("tid1",tid1);
+           request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
+       }
+   }
 
 
 }
