@@ -22,8 +22,8 @@
 
 
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/font-awesome.css"/>
-    <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/aw-font.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aw-font.css"/>
 
     <link href="../css/common.css" rel="stylesheet" type="text/css"/>
     <link href="../css/link.css" rel="stylesheet" type="text/css"/>
@@ -291,10 +291,11 @@
                                         top: 0px;
                                     }
                                 </style>
-                                <c:forEach var="postList" items="${postList}">
+                                <c:forEach var="postList" items="${postList}"  varStatus="status">
                                 <div class="aw-item ">
                                     <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
-                                        <img src="../images/touxiang1.png" alt="" />
+                                       <%-- <img src="../images/touxiang1.png" alt="" />--%>
+                                        <span style="font-size: 40px "><strong>${status.index+1}</strong></span>
                                     </a>
 
                                     <div class="aw-question-content">

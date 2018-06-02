@@ -16,4 +16,8 @@ public interface ForumCommentMapper {
      */
     public ForumComment selectCommentBypid(int pid) ;
 
+
+
+//    用户进行评论
+    public int addForumComment(ForumComment forumComment);
 }

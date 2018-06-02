@@ -3,9 +3,9 @@ package meiHu.entity;
 public class ForumPostreport {
     private Integer reportid;
 
-    private ForumUser user ;
+    private Integer uid ;
 
-    private ForumPost post ;
+    private Integer pid ;
 
     private String reportreason;
 
@@ -17,20 +17,20 @@ public class ForumPostreport {
         this.reportid = reportid;
     }
 
-    public ForumUser getUser() {
-        return user;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setUser(ForumUser user) {
-        this.user = user;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
-    public ForumPost getPost() {
-        return post;
+    public Integer getPid() {
+        return pid;
     }
 
-    public void setPost(ForumPost post) {
-        this.post = post;
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
     public String getReportreason() {
@@ -38,6 +38,12 @@ public class ForumPostreport {
     }
 
     public void setReportreason(String reportreason) {
-        this.reportreason = reportreason == null ? null : reportreason.trim();
+        this.reportreason = reportreason;
+    }
+
+    public ForumPostreport(Integer uid, Integer pid, String reportreason) {
+        this.uid = uid;
+        this.pid = pid;
+        this.reportreason = reportreason;
     }
 }

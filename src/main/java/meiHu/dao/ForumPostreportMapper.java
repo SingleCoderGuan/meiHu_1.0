@@ -10,4 +10,7 @@ public interface ForumPostreportMapper {
      * @return  所有帖子举报表中的内容
      */
     public List<ForumPostreport> getAll() ;
+
+//    用户举报帖子
+    public int addPostReport(ForumPostreport forumPostreport);
 }

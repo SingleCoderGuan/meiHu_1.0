@@ -405,27 +405,59 @@
                                             发表评论</a>
                                         <div class="collapse" id="collapseExample">
                                             <div class="well">
-                                                <form action="" method="post">
-                                                    <input type="text" class="form-control"/>
+
+                                                    <input type="text" class="form-control" id="postcomment"/>
                                                     <br/>
-                                                    <input type="submit" class="btn btn-info"
-                                                           style="width: 300px"></input>
-                                                </form>
+                                                    <input type="button" class="btn btn-info"
+                                                           style="width: 300px"
+                                                    onclick="pinglun(${uid},${forumPost.pid},$('#postcomment').val()"></input>
+                                                <script>
+                                                    function pinglun(uidd,pidd,text) {
+
+                                                        $.ajax({
+                                                            type: "post",
+                                                            url: "${pageContext.request.contextPath}/luntan/postreport.action",
+                                                            data: "uid=" + uidd + "&pid=" + pidd+"&postcomment="+text,
+                                                            success:function (result) {
+                                                                if(result==1){
+                                                                    alert("评论成功！！");
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                </script>
 
                                             </div>
                                         </div>
                                         <div class="collapse" id="jubao">
                                             <div class="well">
-                                                <form action="" method="post">
-                                                    <select class="form-control">
-                                                        <option>色情</option>
-                                                        <option>暴力</option>
-                                                        <option>违反国家政治</option>
+                                                <%--<form action="luntan/postreport.action?uid=${uid}&pid=${forumPost.pid}&reportseason=${"#postreport"}.val()" method="post">--%>
+                                                    <select id="postreport" class="form-control">
+                                                        <option selected>请选择举报类型</option>
+                                                        <option value="色情">色情</option>
+                                                        <option value="暴力">暴力</option>
+                                                        <option value="违反国家政治">违反国家政治</option>
                                                     </select>
+
                                                     <br/>
-                                                    <input type="submit" class="btn btn-info" value="举报"
-                                                           style="width: 300px"></input>
-                                                </form>
+                                                    <input type="button" class="btn btn-info" value="举报"
+                                                           onclick="jubao(${uid},${forumPost.pid},$('#postreport').val())"  style="width: 300px"></input>
+
+                                                <script>
+                                                    function jubao(uidd,pidd,reason) {
+
+                                                        $.ajax({
+                                                            type: "post",
+                                                            url: "${pageContext.request.contextPath}/luntan/postreport.action",
+                                                            data: "uid=" + uidd + "&pid=" + pidd+"&reportreason="+reason,
+                                                            success:function (result) {
+                                                                if(result==1){
+                                                                    alert("举报成功,我们会尽快处理。净化网络感谢有你");
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                </script>
 
                                             </div>
                                         </div>

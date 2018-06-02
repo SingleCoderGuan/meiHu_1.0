@@ -1,6 +1,7 @@
 package meiHu.service;
 
 import meiHu.entity.ForumPost;
+import meiHu.entity.ForumPostreport;
 import meiHu.entity.ForumTopic;
 
 import java.util.List;
@@ -24,4 +25,6 @@ public interface LuntanService {
     public boolean deleteLikeByUidAndPid(int uid,int pid);
 
     public boolean deleteCollectionByUidAndPid(int uid,int pid);
+
+    public boolean addPostReport(ForumPostreport forumPostreport);
 }

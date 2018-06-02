@@ -2,6 +2,7 @@ package meiHu.control;
 
 
 import meiHu.entity.ForumPost;
+import meiHu.entity.ForumPostreport;
 import meiHu.entity.ForumTopic;
 import meiHu.service.LuntanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,6 +145,25 @@ public class luntanControl {
             out.print(0);
 
         }
+    }
+
+
+    @RequestMapping("/postreport.action")
+    public void postreport(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String uid =request.getParameter("uid");
+        String pid =request.getParameter("pid");
+        String reportreason = request.getParameter("reportreason");
+        int uidd = Integer.parseInt(uid);
+        int pidd = Integer.parseInt(pid);
+        ForumPostreport forumPostreport = new ForumPostreport(uidd,pidd,reportreason);
+        PrintWriter out = response.getWriter();
+        if(luntanService.addPostReport(forumPostreport)){
+            out.print(1);
+        }else{
+            out.print(0);
+
+        }
+
     }
 
 

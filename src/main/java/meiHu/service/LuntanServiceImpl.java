@@ -1,10 +1,8 @@
 package meiHu.service;
 
-import meiHu.dao.ForumCollectionMapper;
-import meiHu.dao.ForumLikeMapper;
-import meiHu.dao.ForumPostMapper;
-import meiHu.dao.ForumTopicMapper;
+import meiHu.dao.*;
 import meiHu.entity.ForumPost;
+import meiHu.entity.ForumPostreport;
 import meiHu.entity.ForumTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,8 @@ public class LuntanServiceImpl implements LuntanService{
     private ForumCollectionMapper forumCollectionMapper;
     @Autowired
     private ForumLikeMapper forumLikeMapper;
+    @Autowired
+    private ForumPostreportMapper forumPostreportMapper;
 
     @Override
     public List<ForumTopic> getAllTopics() {
@@ -80,6 +80,16 @@ public class LuntanServiceImpl implements LuntanService{
     @Override
     public boolean deleteCollectionByUidAndPid(int uid, int pid) {
         int a = forumCollectionMapper.deleteCollectionByUidAndPid(uid,pid);
+        if(a==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addPostReport(ForumPostreport forumPostreport) {
+        int a= forumPostreportMapper.addPostReport(forumPostreport);
         if(a==1){
             return true;
         }else{
