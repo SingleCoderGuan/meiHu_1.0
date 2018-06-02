@@ -6,18 +6,24 @@ import java.util.List;
 
 
 public interface ForumPostMapper {
+    /**
+     * 根据id查询帖子
+     * @param pid
+     * @return
+     */
+    public ForumPost selectPostByPid(int pid);
 
     /**
      * 查询所有帖子并按访问数量降序排序
      * @return  按访问数降序排序的帖子
      */
-    public List<ForumPost> selectAllPostsOrderByVisits() ;
+    public List<ForumPost> selectAllPostsOrderByVisits(int tid) ;
 
     /**
      * 查询所有帖子并按发布时间降序排序
      * @return  按发布时间降序排序的帖子
      */
-    public List<ForumPost> selectAllPostsOrderByCreatetime() ;
+    public List<ForumPost> selectAllPostsOrderByCreatetime(int tid) ;
 
     /**
      * 查询所有帖子并按发布时间降序排序 forum_post和forum_like
