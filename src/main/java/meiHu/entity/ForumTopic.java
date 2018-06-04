@@ -5,6 +5,15 @@ public class ForumTopic {
 
     private String tname;
 
+    public String getTpicname() {
+        return tpicname;
+    }
+
+    public void setTpicname(String tpicname) {
+        this.tpicname = tpicname;
+    }
+
+    private String tpicname ;
     public Integer getTid() {
         return tid;
     }
