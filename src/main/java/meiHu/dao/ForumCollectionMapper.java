@@ -7,4 +7,10 @@ public interface ForumCollectionMapper {
      * @return  该帖子被收藏的次数
      */
     public int selectCollectedCountByPid(int pid);
+
+    //用户对一条帖子进行收藏
+    public int addCollectionByUidAndPid(int uid,int pid);
+
+    //用户对一条帖子进行取消收藏
+    public int deleteCollectionByUidAndPid(int uid,int pid);
 }

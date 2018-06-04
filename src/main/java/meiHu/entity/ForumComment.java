@@ -5,15 +5,20 @@ import java.util.Date;
 public class ForumComment {
     private Integer cid;
 
-    private ForumUser user ;
+    private int  uid ;
 
-    private ForumPost post ;
+    private int pid ;
 
-    private ForumComment comment ;
 
     private Date commenttime;
 
     private String commenttext;
+
+    public ForumComment(int uid, int pid, String commenttext) {
+        this.uid = uid;
+        this.pid = pid;
+        this.commenttext = commenttext;
+    }
 
     public Integer getCid() {
         return cid;
@@ -23,28 +28,20 @@ public class ForumComment {
         this.cid = cid;
     }
 
-    public ForumUser getUser() {
-        return user;
+    public int getUid() {
+        return uid;
     }
 
-    public void setUser(ForumUser user) {
-        this.user = user;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
-    public ForumPost getPost() {
-        return post;
+    public int getPid() {
+        return pid;
     }
 
-    public void setPost(ForumPost post) {
-        this.post = post;
-    }
-
-    public ForumComment getComment() {
-        return comment;
-    }
-
-    public void setComment(ForumComment comment) {
-        this.comment = comment;
+    public void setPid(int pid) {
+        this.pid = pid;
     }
 
     public Date getCommenttime() {
@@ -60,6 +57,6 @@ public class ForumComment {
     }
 
     public void setCommenttext(String commenttext) {
-        this.commenttext = commenttext == null ? null : commenttext.trim();
+        this.commenttext = commenttext;
     }
 }
