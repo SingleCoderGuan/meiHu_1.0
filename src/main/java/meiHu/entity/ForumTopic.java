@@ -5,17 +5,6 @@ public class ForumTopic {
 
     private String tname;
 
-    private Integer pnumber;
-    private String tpicname;
-
-    public String getTpicname() {
-        return tpicname;
-    }
-
-    public void setTpicname(String tpicname) {
-        this.tpicname = tpicname;
-    }
-
     public Integer getTid() {
         return tid;
     }
@@ -32,11 +21,4 @@ public class ForumTopic {
         this.tname = tname == null ? null : tname.trim();
     }
 
-    public Integer getPnumber() {
-        return pnumber;
-    }
-
-    public void setPnumber(Integer pnumber) {
-        this.pnumber = pnumber;
-    }
 }

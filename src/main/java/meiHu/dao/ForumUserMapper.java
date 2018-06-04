@@ -1,6 +1,7 @@
 package meiHu.dao;
 
 import meiHu.entity.ForumUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,6 +12,13 @@ public interface ForumUserMapper {
      * @return  该uid对应的用户
      */
     public ForumUser selectUserByUid(int uid) ;
+
+    /**
+     * 根据电话号码查询用户
+     * @param tel   执行select的电话号码
+     * @return  该tek对应的用户
+     */
+    public ForumUser selectUserByTel(String tel);
 
     /**
      * 根据title_id从forum_user表中查询该称号下所有用户
@@ -47,9 +55,11 @@ public interface ForumUserMapper {
     public boolean updateUser(ForumUser forumUser) ;
 
     /**
-     * 向forum_user表中增加一条数据
-     * @param forumUser 增加的用户
-     * @return  是否增加成功
+     * 向用户表中插入一行数据
+     * @param uanme 用户名
+     * @param passwrod  密码
+     * @param tel 电话号码
+     * @return 是否插入成功
      */
-    public boolean insertUser(ForumUser forumUser) ;
+    public boolean insertUser(@Param("uname")String uanme,@Param("password")String passwrod ,@Param("tel")String tel) ;
 }

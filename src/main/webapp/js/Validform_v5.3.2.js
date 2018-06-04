@@ -239,7 +239,7 @@
 			curform.find("[datatype]").each(function(){
 				if(tiptype==2){
 					if($(this).parent().next().find(".Validform_checktip").length==0){
-						$(this).parent().next().append("<span class='Validform_checktip' />");
+						$(this).parent().next().append("<span class='Validform_checktip'  />");
 						$(this).siblings(".Validform_checktip").remove();
 					}
 				}else if(tiptype==3 || tiptype==4){

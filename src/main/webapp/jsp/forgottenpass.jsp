@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path =request.getContextPath();
+    String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html >
 <head>
@@ -14,9 +18,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>美乎忘记密码</title>
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.styleluntan.css">
-    <link rel="stylesheet" href="../css/style_inner.css">
+    <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<%=basePath%>css/stylelogin.css">
+    <link rel="stylesheet" href="<%=basePath%>css/style_inner.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 </head>
@@ -57,10 +61,10 @@
     </div>
 </div>
 
-<script src="../js/index.js"></script>
-<script src='../js/jquery.min.js'></script>
-<script src="../js/index_inner.js"></script>
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script src="<%=basePath%>js/index.js"></script>
+<script src='<%=basePath%>js/jquery.min.js'></script>
+<script src="<%=basePath%>js/index_inner.js"></script>
+<script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>
