@@ -40,13 +40,13 @@
             </div>
 
             <div class="form-group" style="position: relative;left: 53px;">
-                <input type="button"style="position: relative;left: -314px;top: 5px;" id="sendtext" class="btn_my_login" value="发送短信验证码" onclick="send()" disabled/>
+                <input type="button"style="position: relative;left: -314px;top: 5px;" id="btn" class="btn_my_login" value="发送短信验证码" onclick="sendMessage()" disabled />
             </div>
 
             <div class="form-group"style="position: relative;left: 53px;">
                 <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 167px;color:#996666;font-size: 18px">短信验证码</label>
                 <div class="col-sm-4">
-                    <input type="text"  class="forgotteninput" id="code" placeholder="请输入短信验证码入">
+                    <input type="text"  class="forgotteninput" id="code" placeholder="请输入短信验证码入" />
                     <span style="position: absolute;left: 200px;top: 80px;" id="verifcode"></span>
                 </div>
             </div>
@@ -75,7 +75,7 @@
             $("#teltip").removeClass()
             $("#teltip").addClass("wrong")
             $("#teltip").html("请输入正确格式")
-            $("#sendtext").attr("disabled","disabled")
+            $("#btn").attr("disabled","true")
         }else{
             $.ajax({
                 type:"get",
@@ -86,12 +86,12 @@
                         $("#teltip").html("电话号码未注册")
                         $("#teltip").removeClass()
                         $("#teltip").addClass("wrong")
-                        $("#sendtext").attr("disabled","disabled")
+                        $("#btn").attr("disabled","true")
                     }else {
                         $("#teltip").html("ok")
                         $("#teltip").removeClass()
                         $("#teltip").addClass("right")
-                        $("#sendtext").removeAttr("disabled") ;
+                        $("#btn").attr("disabled",false) ;
                     }
                 }
             })
@@ -122,6 +122,30 @@
     }
 </script>
 <script>
+    var sms="";
+    $("#btn").click(function(){
+        var tel=$("#tel").val();
+        $.ajax({
+            url:"sendSMS",
+            type:"post",
+            data:{"phone":tel},
+            success:function(result){
+                sms=result;
+            }
+        });
+    });
+    $("#lo").blur(function () {
+        $.ajax({
+            url:"sendSMS",
+            type:"post",
+            data:{"phone":tel},
+            success:function(result){
+                sms=result;
+            }
+
+        })
+    })
+
     $("#lo").click(function(){
         var code=$("#code").val();
         if(code==""){
@@ -136,6 +160,7 @@
         };
 
     });
+
 </script>
 </body>
 </html>

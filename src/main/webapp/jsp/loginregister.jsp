@@ -11,6 +11,7 @@
     String path =request.getContextPath();
     String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -32,6 +33,22 @@
         .action{padding-left:92px;}
     </style>
 
+    <script>
+        function getUrlParms(name){
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)
+                return unescape(r[2]);
+            return null;
+        }
+        var id = getUrlParms("rslt");
+        if(id=="1"){
+            alert("密码错误")
+        }
+        if(id=="2"){
+            alert("用户名错误")
+        }
+    </script>
 </head>
 <body>
 

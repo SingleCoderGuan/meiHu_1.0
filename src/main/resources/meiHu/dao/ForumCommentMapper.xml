@@ -45,10 +45,10 @@
     </insert>
 
 
-    <!--public List<ForumComment> selectAllCommentForComment(int pid);-->
-    <select id="selectAllCommentForComment" resultMap="commentforcomment" parameterType="int">
-        SELECT c.*,u.uname,t.title FROM  forum_comment c,forum_user u, forum_title t
-           WHERE c.user_uid = u.uid AND u.title_id = t.titleid AND post_pid=#{parameter}
-    </select>
+    <!--&lt;!&ndash;public List<ForumComment> selectAllCommentForComment(int pid);&ndash;&gt;-->
+    <!--<select id="selectAllCommentForComment" resultMap="commentforcomment" parameterType="int">-->
+        <!--SELECT c.*,u.uname,t.title FROM  forum_comment c,forum_user u, forum_title t-->
+           <!--WHERE c.user_uid = u.uid AND u.title_id = t.titleid AND post_pid=#{parameter}-->
+    <!--</select>-->
 
 </mapper>
