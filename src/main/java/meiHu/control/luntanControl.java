@@ -1,6 +1,7 @@
 package meiHu.control;
 
 
+import meiHu.entity.ForumComment;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumPostreport;
 import meiHu.entity.ForumTopic;
@@ -45,11 +46,14 @@ public class luntanControl {
     @RequestMapping(value = "/tiezidetail.action",method = RequestMethod.GET)
     public void tiezidetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
-        //System.out.println(pid);
         int pid1 = Integer.parseInt(pid);
+        int collection = luntanService.selectCollectedCountByPid(pid1);
+        request.setAttribute("collectionnum",collection);
         ForumPost forumPost = luntanService.selectPostByPid(pid1);
         request.setAttribute("forumPost",forumPost);
-       // System.out.println(forumPost.getPtitle());
+        int postCommentNum = luntanService.selectPostCommentNum(pid1);
+        List<ForumComment> forumCommentList = luntanService.selectAllPostCommentByPid(pid1);
+        request.setAttribute("forumCommentList",forumCommentList);
 
         request.getRequestDispatcher("/jsp/tiezidetail.jsp").forward(request,response);
     }
@@ -89,6 +93,7 @@ public class luntanControl {
 
        int uidd = Integer.parseInt(uid);
        int pidd = Integer.parseInt(pid);
+       luntanService.updatePostVisitNum(pidd);
        //System.out.println(luntanService.addCollectionByUidAndPid(uidd,pidd));
        PrintWriter out = response.getWriter();
        if(luntanService.addCollectionByUidAndPid(uidd,pidd)){
@@ -102,10 +107,9 @@ public class luntanControl {
     public  void quxiaoshoucang(HttpServletRequest request,HttpServletResponse response) throws IOException {
         String uid =request.getParameter("uid");
         String pid =request.getParameter("pid");
-
         int uidd = Integer.parseInt(uid);
         int pidd = Integer.parseInt(pid);
-
+        luntanService.updatePostVisitNumSub(pidd);
         PrintWriter out = response.getWriter();
         if(luntanService.deleteCollectionByUidAndPid(uidd,pidd)){
             out.print(1);
@@ -119,10 +123,9 @@ public class luntanControl {
    public  void dianzan(HttpServletRequest request,HttpServletResponse response) throws IOException {
        String uid =request.getParameter("uid");
        String pid =request.getParameter("pid");
-       System.out.println("dianzan"+uid+"---"+pid);
        int uidd = Integer.parseInt(uid);
        int pidd = Integer.parseInt(pid);
-        //return luntanService.addLikeByUidAndPid(uidd,pidd);
+       luntanService.updatePostLikeNumByPid(pidd);
        PrintWriter out = response.getWriter();
        if(luntanService.addLikeByUidAndPid(uidd,pidd)){
            out.print(1);
@@ -138,6 +141,7 @@ public class luntanControl {
 
         int uidd = Integer.parseInt(uid);
         int pidd = Integer.parseInt(pid);
+        luntanService.updatePostLikeNumByPidSub(pidd);
         PrintWriter out = response.getWriter();
         if(luntanService.deleteLikeByUidAndPid(uidd,pidd)){
             out.print(1);
@@ -164,6 +168,23 @@ public class luntanControl {
 
         }
 
+    }
+
+    @RequestMapping("/postcomment.action")
+    public void postcomment(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String uid =request.getParameter("uid");
+        String pid =request.getParameter("pid");
+        int uidd = Integer.parseInt(uid);
+        int pidd = Integer.parseInt(pid);
+        String postcomment = request.getParameter("postcomment");
+        ForumComment forumComment = new ForumComment(uidd,pidd,postcomment);
+        PrintWriter out = response.getWriter();
+        if(luntanService.addForumComment(forumComment)){
+            out.print(1);
+        }else{
+            out.print(0);
+
+        }
     }
 
 

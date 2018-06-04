@@ -1,5 +1,6 @@
 package meiHu.service;
 
+import meiHu.entity.ForumComment;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumPostreport;
 import meiHu.entity.ForumTopic;
@@ -27,4 +28,20 @@ public interface LuntanService {
     public boolean deleteCollectionByUidAndPid(int uid,int pid);
 
     public boolean addPostReport(ForumPostreport forumPostreport);
+
+    public boolean addForumComment(ForumComment forumComment);
+
+    public int selectCollectedCountByPid(int pid);
+
+    public boolean updatePostLikeNumByPid(int pid);
+
+    public boolean updatePostLikeNumByPidSub(int pid);
+
+    public void updatePostVisitNum(int pid);
+
+    public void updatePostVisitNumSub(int pid);
+
+    public int selectPostCommentNum(int pid);
+
+    public List<ForumComment> selectAllPostCommentByPid(int pid);
 }

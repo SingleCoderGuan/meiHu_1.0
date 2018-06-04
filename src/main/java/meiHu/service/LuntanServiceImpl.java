@@ -1,6 +1,7 @@
 package meiHu.service;
 
 import meiHu.dao.*;
+import meiHu.entity.ForumComment;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumPostreport;
 import meiHu.entity.ForumTopic;
@@ -20,6 +21,8 @@ public class LuntanServiceImpl implements LuntanService{
     private ForumLikeMapper forumLikeMapper;
     @Autowired
     private ForumPostreportMapper forumPostreportMapper;
+    @Autowired
+    private ForumCommentMapper forumCommentMapper;
 
     @Override
     public List<ForumTopic> getAllTopics() {
@@ -95,6 +98,60 @@ public class LuntanServiceImpl implements LuntanService{
         }else{
             return false;
         }
+    }
+
+    @Override
+    public boolean addForumComment(ForumComment forumComment) {
+        int a = forumCommentMapper.addForumComment(forumComment);
+        if(a==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public int selectCollectedCountByPid(int pid) {
+        return forumCollectionMapper.selectCollectedCountByPid(pid);
+    }
+
+    @Override
+    public boolean updatePostLikeNumByPid(int pid) {
+        int a = forumPostMapper.updatePostLikeNumByPid(pid);
+        if(a==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updatePostLikeNumByPidSub(int pid) {
+        int a = forumPostMapper.updatePostLikeNumByPidSub(pid);
+        if(a==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    @Override
+    public void updatePostVisitNum(int pid){
+        forumPostMapper.updatePostVisitNum(pid);
+    }
+
+    @Override
+    public void updatePostVisitNumSub(int pid) {
+        forumPostMapper.updatePostVisitNumSub(pid);
+    }
+
+    @Override
+    public int selectPostCommentNum(int pid) {
+        return forumCommentMapper.selectPostCommentNum(pid);
+    }
+
+    @Override
+    public List<ForumComment> selectAllPostCommentByPid(int pid) {
+        return forumCommentMapper.selectAllPostCommentByPid(pid);
     }
 
 

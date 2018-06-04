@@ -4,4 +4,22 @@
     <!--public ForumComment selectCommentByUid(int uid) ;-->
 
     <!--public ForumComment selectCommentBypid(int pid) ;-->
+
+
+    <!--public int addForumComment(ForumComment forumComment);-->
+    <insert id="addForumComment" parameterType="ForumComment">
+        INSERT INTO forum_comment (user_uid,post_pid,commenttext) VALUES (#{uid},#{pid},#{commenttext})
+    </insert>
+
+    <!--public int selectPostCommentNum(int pid);-->
+    <select id="selectPostCommentNum" resultType="int" parameterType="int">
+        SELECT COUNT(*) FROM forum_comment WHERE post_pid=#{parameter}
+    </select>
+
+
+    <!--public List<ForumComment> selectAllPostCommentByPid(int pid);-->
+    <select id="selectAllPostCommentByPid" resultType="ForumComment" parameterType="int">
+        SELECT * FROM  forum_comment WHERE post_pid=#{parameter}
+    </select>
+
 </mapper>

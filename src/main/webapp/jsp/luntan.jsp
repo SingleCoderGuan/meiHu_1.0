@@ -311,14 +311,15 @@
 					<a href="#">${postList.topic.tname}</a><%--标签--%>
 				</span> •
                                             <a href="#" class="aw-user-name" >${postList.user.uname}</a>
-                                            <span class="aw-text-color-999" >${postList.likecount}次点赞 • 7 人关注 •
+                                            <span class="aw-text-color-999" >${postList.likecount}次点赞  •
                                                     ${postList.visitcount} 次浏览 •<fmt:formatDate value='${postList.createtime}'
-                                                                                                pattern='yyyy-MM-dd hh:mm:ss'/>"	</span>
+                                                                                                pattern='yyyy-MM-dd hh:mm:ss'/>   </span>
                                         </p>
 
                                     </div>
                                 </div>
                                 </c:forEach>
+
 
 
                                 <!--底部Google 信息流广告-->
@@ -453,25 +454,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="aw-side-bar-mod">
-                        <div class="aw-mod-head">
-                            <h3>热门帖子</h3>
-                        </div>
-                        <div class="aw-mod-body">
-                            <ul>
-                                <li><i class="feature_icon"><img style="width: 40px;height: 40px;"
-                                                                 src="../images/remen.png" alt=""></i><a
-                                        href="#">香水评测大全</a></li>
 
-                                <li><i class="feature_icon"><img style="width: 40px;height: 40px;"
-                                                                 src="../images/remen.png" alt=""></i><a
-                                        href="#">香水评测大全</a></li>
-                                <li><i class="feature_icon"><img style="width: 40px;height: 40px;"
-                                                                 src="../images/remen.png" alt=""></i><a
-                                        href="#">兰蔻新款试用</a></li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="aw-side-bar-mod">
                         <div class="ad-item">
 

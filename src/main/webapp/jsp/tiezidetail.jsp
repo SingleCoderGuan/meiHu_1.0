@@ -19,7 +19,7 @@
     <meta name="description" content="美论"/>
 
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../css/font-awesome.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../css/aw-font.css"/>
 
     <link href="../css/common.css" rel="stylesheet" type="text/css"/>
@@ -104,7 +104,7 @@
                         <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off"
                                name="q" id="aw-search-query" class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
-                              onClick="$('#global_search_form').submit();"><i class="fa fa-search"></i></span>
+                              onClick="$('#global_search_form').submit();">搜索</span>
                         <div class="clearfix"></div>
 
                     </div>
@@ -406,21 +406,21 @@
                                         <div class="collapse" id="collapseExample">
                                             <div class="well">
 
-                                                    <input type="text" class="form-control" id="postcomment"/>
-                                                    <br/>
-                                                    <input type="button" class="btn btn-info"
-                                                           style="width: 300px"
-                                                    onclick="pinglun(${uid},${forumPost.pid},$('#postcomment').val()"></input>
+                                                <input type="text" class="form-control" id="postcomment"/>
+                                                <br/>
+                                                <input type="button" class="btn btn-info"
+                                                       style="width: 300px" value="发表评论"
+                                                       onclick="pinglun(${uid},${forumPost.pid},$('#postcomment').val())"></input>
                                                 <script>
-                                                    function pinglun(uidd,pidd,text) {
-
+                                                    function pinglun(uidd, pidd, text) {
                                                         $.ajax({
                                                             type: "post",
-                                                            url: "${pageContext.request.contextPath}/luntan/postreport.action",
-                                                            data: "uid=" + uidd + "&pid=" + pidd+"&postcomment="+text,
-                                                            success:function (result) {
-                                                                if(result==1){
+                                                            url: "${pageContext.request.contextPath}/luntan/postcomment.action",
+                                                            data: "uid=" + uidd + "&pid=" + pidd + "&postcomment=" + text,
+                                                            success: function (result) {
+                                                                if (result == 1) {
                                                                     alert("评论成功！！");
+                                                                    window.load();
                                                                 }
                                                             }
                                                         });
@@ -432,26 +432,27 @@
                                         <div class="collapse" id="jubao">
                                             <div class="well">
                                                 <%--<form action="luntan/postreport.action?uid=${uid}&pid=${forumPost.pid}&reportseason=${"#postreport"}.val()" method="post">--%>
-                                                    <select id="postreport" class="form-control">
-                                                        <option selected>请选择举报类型</option>
-                                                        <option value="色情">色情</option>
-                                                        <option value="暴力">暴力</option>
-                                                        <option value="违反国家政治">违反国家政治</option>
-                                                    </select>
+                                                <select id="postreport" class="form-control">
+                                                    <option selected>请选择举报类型</option>
+                                                    <option value="色情">色情</option>
+                                                    <option value="暴力">暴力</option>
+                                                    <option value="违反国家政治">违反国家政治</option>
+                                                </select>
 
-                                                    <br/>
-                                                    <input type="button" class="btn btn-info" value="举报"
-                                                           onclick="jubao(${uid},${forumPost.pid},$('#postreport').val())"  style="width: 300px"></input>
+                                                <br/>
+                                                <input type="button" class="btn btn-info" value="举报"
+                                                       onclick="jubao(${uid},${forumPost.pid},$('#postreport').val())"
+                                                       style="width: 300px"></input>
 
                                                 <script>
-                                                    function jubao(uidd,pidd,reason) {
+                                                    function jubao(uidd, pidd, reason) {
 
                                                         $.ajax({
                                                             type: "post",
                                                             url: "${pageContext.request.contextPath}/luntan/postreport.action",
-                                                            data: "uid=" + uidd + "&pid=" + pidd+"&reportreason="+reason,
-                                                            success:function (result) {
-                                                                if(result==1){
+                                                            data: "uid=" + uidd + "&pid=" + pidd + "&reportreason=" + reason,
+                                                            success: function (result) {
+                                                                if (result == 1) {
                                                                     alert("举报成功,我们会尽快处理。净化网络感谢有你");
                                                                 }
                                                             }
@@ -476,14 +477,11 @@
                                 <div class="aw-mod-head">
                                     <ul class="nav nav-tabs aw-reset-nav-tabs">
 
-                                        <h2 class="hidden-xs">5 个回复</h2>
+                                        <h2 class="hidden-xs">${postCommentNum}个回复</h2>
                                     </ul>
                                 </div>
                                 <div class="aw-mod-body aw-dynamic-topic">
-                                    <!-- 最佳回答 -->
-                                    <p>
-                                        最佳回复 </p>
-                                    <!-- end 最佳回答 -->
+                                    <c:forEach items="${forumCommentList}" var="forumCommentList">
                                     <div class="aw-item" uninterested_count="0" force_fold="0" id="answer_list_63059">
                                         <a class="anchor" name="answer_63059"></a>
                                         <!-- 用户头像 -->
@@ -507,18 +505,17 @@
                                                     <!-- 评论内容 -->
 
                                                     <div class="markitup-box">
-                                                        <p>iOS在11.3及以后定位描述有调整，需要新增<strong>NSLocationAlwaysAndWhenInUseUsageDescription</strong>。<br/>
-                                                            <a href="http://ask.dcloud.net.cn/article/12964">http://ask.dcloud.net.cn/article/12964</a>已经加粗描述，请仔细阅读文档。
-                                                        </p><br/>
+                                                        这是帖子评论  ${forumCommentList.commenttext}
                                                     </div>
+
 
                                                     <!-- end 评论内容 -->
 
                                                 </div>
                                                 <!-- 社交操作 -->
                                                 <div class="mod-footer aw-dynamic-topic-meta">
-                                                    <span class="aw-text-color-999">5 天前</span>
-                                                    <a class="aw-add-comment aw-text-color-999" data-toggle="collapse"
+                                                    <span class="aw-text-color-999">${forumCommentList.commenttime}</span>
+                                                   <%-- <a class="aw-add-comment aw-text-color-999" data-toggle="collapse"
                                                        href="#chakanpinglun" aria-expanded="false"
                                                        aria-controls="collapseExample"> 1 条评论 </a>
                                                     <div class="collapse" id="chakanpinglun">
@@ -526,22 +523,53 @@
                                                             6666666666666
 
                                                         </div>
-                                                    </div>
-                                                    <a class="aw-add-comment aw-text-color-999" data-toggle="collapse"
-                                                       href="#pinglun" aria-expanded="false"
-                                                       aria-controls="collapseExample"> 发表评论 </a>
+                                                    </div>--%>
 
-                                                    <div class="collapse" id="pinglun">
-                                                        <div class="well">
-                                                            <form action="#" method="post">
-                                                                <input type="text" class="form-control"/>
+                                                    <a class="aw-add-comment aw-text-color-999"  data-toggle="modal" data-target=".bs-example-modal-sm">举报</a>
+
+                                                    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                                                        <div class="modal-dialog modal-sm" role="document">
+                                                            <div class="modal-content">
+                                                                <select id="podtcommentreport" class="form-control">
+                                                                    <option selected>请选择举报类型</option>
+                                                                    <option value="色情">色情</option>
+                                                                    <option value="暴力">暴力</option>
+                                                                    <option value="违反国家政治">违反国家政治</option>
+                                                                </select>
+
                                                                 <br/>
-                                                                <input type="submit" class="btn btn-info"
-                                                                       style="width: 300px"></input>
-                                                            </form>
-
+                                                                <input type="button" class="btn btn-info" value="举报"
+                                                                       onclick=""
+                                                                       style="width: 200px;margin-left: 50px"></input>
+                                                            </div>
                                                         </div>
                                                     </div>
+
+                                                    <a class="aw-add-comment aw-text-color-999" data-toggle="modal" data-target="#exampleModal" >发表评论</a>
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                                                                    <h4 class="modal-title" id="exampleModalLabel">新评论</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form>
+
+                                                                        <div class="form-group">
+
+                                                                            <textarea class="form-control" id="message-text"></textarea>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                                    <button type="button" class="btn btn-primary">发表评论</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <!-- end 可显示/隐藏的操作box -->
 
                                                 </div>
@@ -552,13 +580,10 @@
 
                                 </div>
 
+                                </c:forEach>
                             </div>
-                            <!-- end 问题详细模块 -->
-
-                            <!-- 回复编辑器 -->
-
-                            <!-- end 回复编辑器 -->
                         </div>
+
                         <!-- 侧边栏 -->
                         <div class="col-md-3 aw-side-bar hidden-xs hidden-sm">
                             <!-- 发起人 -->
@@ -577,8 +602,13 @@
                                             <a class="aw-user-name" href="#" data-id="523760">
                                                 1348516637@qq.com </a>
                                             <p>
+                                                关注：4人
+                                            </p>
+                                            <p>
+                                                粉丝：4人
                                             </p>
                                         </dd>
+
                                     </dl>
                                 </div>
                             </div>
@@ -591,13 +621,11 @@
                                 </div>
                                 <div class="aw-mod-body">
                                     <ul>
-                                        <li>
-                                            最新活动: <span class="aw-text-color-blue">5 天前</span></li>
-                                        <li>
-                                            浏览: <span class="aw-text-color-blue">129</span></li>
-                                        <li>
-                                            关注: <span class="aw-text-color-blue">4</span> 人
-                                        </li>
+
+                                        浏览: <span class="aw-text-color-blue">${forumPost.visitcount}</span></li>
+                                        点赞: <span class="aw-text-color-blue">${forumPost.likecount}</span></li>
+                                        关注: <span class="aw-text-color-blue">${collectionnum}</span></li>
+
 
                                         <li class="aw-side-bar-user-list aw-border-radius-5" id="focus_users"></li>
                                     </ul>
@@ -635,7 +663,6 @@
                                     <span style="font-size:13px;">看看代购</span>
                                 </a>
                             </div>
-                            <!-- end 付费技术服务 -->
 
                             <!--公告文章-->
                             <div class="aw-side-bar-mod aw-text-align-justify question_related_list">
@@ -687,17 +714,12 @@
 </div>
 
 
-
-
 <div style="position:fixed; left:0px;
 bottom:0px; width:100%; height:30px;font-weight: bold;
 background-color: #ce8483; z-index:9999;text-align: center">
     © 2018 美乎. All rights reserved | Design by
     <a href="#">第六组</a>
 </div>
-
-
-
 
 
 </body>

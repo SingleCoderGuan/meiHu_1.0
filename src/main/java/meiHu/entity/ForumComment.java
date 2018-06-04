@@ -9,7 +9,6 @@ public class ForumComment {
 
     private int pid ;
 
-    private ForumComment comment ;
 
     private Date commenttime;
 
@@ -43,14 +42,6 @@ public class ForumComment {
 
     public void setPid(int pid) {
         this.pid = pid;
-    }
-
-    public ForumComment getComment() {
-        return comment;
-    }
-
-    public void setComment(ForumComment comment) {
-        this.comment = comment;
     }
 
     public Date getCommenttime() {

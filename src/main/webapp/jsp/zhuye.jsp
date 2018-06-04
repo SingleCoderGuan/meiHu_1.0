@@ -77,7 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="<%=basePath%>luntan/luntanshouye.action?tid=1" class="scroll">美论</a>
                     </li>
                     <li>
-                        <a href="#" class="scroll">美购</a>
+                        <a href="#" class="scroll">美文</a>
                     </li>
                     <li>
                         <a href="#" class="scroll">美淘</a>
