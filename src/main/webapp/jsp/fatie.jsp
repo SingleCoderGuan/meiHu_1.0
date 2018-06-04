@@ -48,6 +48,7 @@
 
             var title = document.getElementById('title').value;
             document.getElementById('content').value=editor.txt.html();
+            var topicid = $("#select option:selected").val() ;
             document.getElementById('newspost').submit();
         }
     </script>
@@ -194,11 +195,14 @@
 
                     </ul>
                     <!-- end tab 切换 -->
-                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/newspost.action" enctype="multipart/form-data">
+                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/newpost.action" enctype="multipart/form-data">
 
                         标题：
                         <input type="text" id="title" name="title"/><br/><br/>
 
+                        <select name="" id="">
+                            <c:forEach items="${topicList}" var="topic"><option ${topic.tid}>${topic.tname}</option></c:forEach>
+                        </select>
 
                         <input type="hidden" id="content" name="content"/>
 
@@ -626,7 +630,6 @@
         customInsert: function (insertImg, result, editor) {
             // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
             // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
-
 
             var url = result.url;
             insertImg(url);

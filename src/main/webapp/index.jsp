@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -34,23 +33,18 @@
 
             var title = document.getElementById('title').value;
             document.getElementById('content').value=editor.txt.html();
-            var topicid = $("#select option:selected").val() ;
             document.getElementById('newspost').submit();
-
         }
     </script>
 
 </head>
 <body>
 
-<form id="newspost" method="post" action="<%=application.getContextPath()%>/newpost.action" enctype="multipart/form-data">
+<form id="newspost" method="post" action="<%=application.getContextPath()%>/newspost.action" enctype="multipart/form-data">
 
     标题：
     <input type="text" id="title" name="title"/><br/><br/>
 
-    <select name="topics" id="select">
-        <c:forEach items="${topicList}" var="topic"><option value="${topic.tid}">${topic.tname}</option></c:forEach>
-    </select>
     <input type="hidden" id="content" name="content"/>
 
     <div id="div1" class="toolbar">
