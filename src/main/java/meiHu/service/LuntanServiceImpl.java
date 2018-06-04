@@ -1,10 +1,7 @@
 package meiHu.service;
 
 import meiHu.dao.*;
-import meiHu.entity.ForumComment;
-import meiHu.entity.ForumPost;
-import meiHu.entity.ForumPostreport;
-import meiHu.entity.ForumTopic;
+import meiHu.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +20,9 @@ public class LuntanServiceImpl implements LuntanService{
     private ForumPostreportMapper forumPostreportMapper;
     @Autowired
     private ForumCommentMapper forumCommentMapper;
+    @Autowired
+    private ForumCommentreportMapper forumCommentreportMapper;
+
 
     @Override
     public List<ForumTopic> getAllTopics() {
@@ -152,6 +152,26 @@ public class LuntanServiceImpl implements LuntanService{
     @Override
     public List<ForumComment> selectAllPostCommentByPid(int pid) {
         return forumCommentMapper.selectAllPostCommentByPid(pid);
+    }
+
+    @Override
+    public boolean addCommentReport(ForumCommentreport forumCommentreport) {
+        int a = forumCommentreportMapper.addCommentReport(forumCommentreport);
+        if(a==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addCommentForComment(ForumComment forumComment) {
+        int a = forumCommentMapper.addCommentForComment(forumComment);
+        if(a==1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

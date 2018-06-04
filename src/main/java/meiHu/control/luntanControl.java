@@ -1,10 +1,7 @@
 package meiHu.control;
 
 
-import meiHu.entity.ForumComment;
-import meiHu.entity.ForumPost;
-import meiHu.entity.ForumPostreport;
-import meiHu.entity.ForumTopic;
+import meiHu.entity.*;
 import meiHu.service.LuntanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,6 +49,7 @@ public class luntanControl {
         ForumPost forumPost = luntanService.selectPostByPid(pid1);
         request.setAttribute("forumPost",forumPost);
         int postCommentNum = luntanService.selectPostCommentNum(pid1);
+        request.setAttribute("postCommentNum",postCommentNum);
         List<ForumComment> forumCommentList = luntanService.selectAllPostCommentByPid(pid1);
         request.setAttribute("forumCommentList",forumCommentList);
 
@@ -180,6 +178,43 @@ public class luntanControl {
         ForumComment forumComment = new ForumComment(uidd,pidd,postcomment);
         PrintWriter out = response.getWriter();
         if(luntanService.addForumComment(forumComment)){
+            out.print(1);
+        }else{
+            out.print(0);
+
+        }
+    }
+
+    @RequestMapping("/commentreport.action")
+    public void commentjubao(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String uid =request.getParameter("uid");
+        String cid =request.getParameter("cid");
+        int uidd = Integer.parseInt(uid);
+        int cidd = Integer.parseInt(cid);
+        String reason = request.getParameter("reason");
+        ForumCommentreport forumCommentreport = new ForumCommentreport(uidd,cidd,reason);
+        PrintWriter out = response.getWriter();
+
+        if(luntanService.addCommentReport(forumCommentreport)){
+            out.print(1);
+        }else{
+            out.print(0);
+
+        }
+    }
+    @RequestMapping("/commentcomment.action")
+    public void commentcomment(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String uid =request.getParameter("uid");
+        String cid =request.getParameter("cid");
+        String ccid =request.getParameter("ccid");
+        int uidd = Integer.parseInt(uid);
+        int cidd = Integer.parseInt(cid);
+        int ccidd = Integer.parseInt(ccid);
+        String commentcomment = request.getParameter("commentcomment");
+        ForumComment forumComment = new ForumComment(uidd,cidd,ccidd,commentcomment);
+        PrintWriter out = response.getWriter();
+
+       if(luntanService.addCommentForComment(forumComment)){
             out.print(1);
         }else{
             out.print(0);

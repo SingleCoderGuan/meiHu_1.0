@@ -27,4 +27,12 @@ public interface ForumCommentMapper {
 
     //根据某个 pid查询所有评论
     public List<ForumComment> selectAllPostCommentByPid(int pid);
+
+
+    //用户对评论进行评论
+    public int addCommentForComment(ForumComment forumComment);
+
+    //显示一个评论下的所有评论
+
+    public List<ForumComment> selectAllCommentForComment(int pid);
 }

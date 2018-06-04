@@ -10,4 +10,8 @@ public interface ForumCommentreportMapper {
      * @return  所有评论举报表中的数据
      */
     public List<ForumCommentreport> getAllCommentReports() ;
+
+
+    //用户对评论进行举报
+    public int addCommentReport(ForumCommentreport forumCommentreport);
 }
