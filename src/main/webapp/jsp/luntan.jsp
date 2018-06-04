@@ -176,7 +176,7 @@
                 <!-- 登陆&注册栏 -->
                 <span>
                     <c:if test="${!empty user}">
-                        <a href="#"><img src="${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <a href="<%=basePath%>/jsp/userPersonalCenter.jsp"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
                     </c:if>
                     <c:if test="${empty user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
