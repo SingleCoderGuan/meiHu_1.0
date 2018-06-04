@@ -77,4 +77,13 @@ public class UserController {
             return "1" ;
         }
     }
+    @RequestMapping(value = "/checktel.action",method = RequestMethod.GET)
+    public String checkTel(String tel,HttpServletRequest request,HttpServletResponse response){
+        if(userService.findUserByTel(tel)!=null){
+            return "1" ;
+        }else{
+            return "0" ;
+        }
+    }
+
 }

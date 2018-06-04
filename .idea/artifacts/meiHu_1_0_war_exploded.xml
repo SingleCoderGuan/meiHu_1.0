@@ -32,7 +32,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/meiHu_1.0/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/WebMaven_day02/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="meiHu_1.0/web/Web" />
     </root>
