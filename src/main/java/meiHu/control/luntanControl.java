@@ -1,18 +1,23 @@
 package meiHu.control;
 
 
+import meiHu.entity.ForumComment;
 import meiHu.entity.ForumPost;
+import meiHu.entity.ForumPostreport;
 import meiHu.entity.ForumTopic;
 import meiHu.service.LuntanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -31,6 +36,7 @@ public class luntanControl {
         request.setAttribute("topicList",topicList);
         request.setAttribute("postList",postList);
         request.setAttribute("tid1",tid1);
+        request.getSession().setAttribute("uid",102);
         request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
 
 
@@ -40,11 +46,15 @@ public class luntanControl {
     @RequestMapping(value = "/tiezidetail.action",method = RequestMethod.GET)
     public void tiezidetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
-        //System.out.println(pid);
         int pid1 = Integer.parseInt(pid);
+        int collection = luntanService.selectCollectedCountByPid(pid1);
+        request.setAttribute("collectionnum",collection);
         ForumPost forumPost = luntanService.selectPostByPid(pid1);
         request.setAttribute("forumPost",forumPost);
-       // System.out.println(forumPost.getPtitle());
+        int postCommentNum = luntanService.selectPostCommentNum(pid1);
+        List<ForumComment> forumCommentList = luntanService.selectAllPostCommentByPid(pid1);
+        request.setAttribute("forumCommentList",forumCommentList);
+
         request.getRequestDispatcher("/jsp/tiezidetail.jsp").forward(request,response);
     }
 
@@ -75,6 +85,107 @@ public class luntanControl {
            request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
        }
    }
+
+   @RequestMapping("/shoucang.action")
+   public  void shoucang(HttpServletRequest request,HttpServletResponse response) throws IOException {
+       String uid =request.getParameter("uid");
+       String pid =request.getParameter("pid");
+
+       int uidd = Integer.parseInt(uid);
+       int pidd = Integer.parseInt(pid);
+       luntanService.updatePostVisitNum(pidd);
+       //System.out.println(luntanService.addCollectionByUidAndPid(uidd,pidd));
+       PrintWriter out = response.getWriter();
+       if(luntanService.addCollectionByUidAndPid(uidd,pidd)){
+           out.print(1);
+       }else {
+           out.print(0);
+
+       }
+   }
+    @RequestMapping("/quxiaoshoucang.action")
+    public  void quxiaoshoucang(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String uid =request.getParameter("uid");
+        String pid =request.getParameter("pid");
+        int uidd = Integer.parseInt(uid);
+        int pidd = Integer.parseInt(pid);
+        luntanService.updatePostVisitNumSub(pidd);
+        PrintWriter out = response.getWriter();
+        if(luntanService.deleteCollectionByUidAndPid(uidd,pidd)){
+            out.print(1);
+        }else {
+            out.print(0);
+
+        }
+    }
+
+   @RequestMapping("/dianzan.action")
+   public  void dianzan(HttpServletRequest request,HttpServletResponse response) throws IOException {
+       String uid =request.getParameter("uid");
+       String pid =request.getParameter("pid");
+       int uidd = Integer.parseInt(uid);
+       int pidd = Integer.parseInt(pid);
+       luntanService.updatePostLikeNumByPid(pidd);
+       PrintWriter out = response.getWriter();
+       if(luntanService.addLikeByUidAndPid(uidd,pidd)){
+           out.print(1);
+       }else{
+           out.print(0);
+
+       }
+   }
+    @RequestMapping("/quxiaodianzan.action")
+    public  void quxiaodianzan(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String uid =request.getParameter("uid");
+        String pid =request.getParameter("pid");
+
+        int uidd = Integer.parseInt(uid);
+        int pidd = Integer.parseInt(pid);
+        luntanService.updatePostLikeNumByPidSub(pidd);
+        PrintWriter out = response.getWriter();
+        if(luntanService.deleteLikeByUidAndPid(uidd,pidd)){
+            out.print(1);
+        }else{
+            out.print(0);
+
+        }
+    }
+
+
+    @RequestMapping("/postreport.action")
+    public void postreport(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String uid =request.getParameter("uid");
+        String pid =request.getParameter("pid");
+        String reportreason = request.getParameter("reportreason");
+        int uidd = Integer.parseInt(uid);
+        int pidd = Integer.parseInt(pid);
+        ForumPostreport forumPostreport = new ForumPostreport(uidd,pidd,reportreason);
+        PrintWriter out = response.getWriter();
+        if(luntanService.addPostReport(forumPostreport)){
+            out.print(1);
+        }else{
+            out.print(0);
+
+        }
+
+    }
+
+    @RequestMapping("/postcomment.action")
+    public void postcomment(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String uid =request.getParameter("uid");
+        String pid =request.getParameter("pid");
+        int uidd = Integer.parseInt(uid);
+        int pidd = Integer.parseInt(pid);
+        String postcomment = request.getParameter("postcomment");
+        ForumComment forumComment = new ForumComment(uidd,pidd,postcomment);
+        PrintWriter out = response.getWriter();
+        if(luntanService.addForumComment(forumComment)){
+            out.print(1);
+        }else{
+            out.print(0);
+
+        }
+    }
 
 
 }

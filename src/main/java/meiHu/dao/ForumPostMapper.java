@@ -88,4 +88,17 @@ public interface ForumPostMapper {
      * @return  是否成功修改
      */
     public boolean deletePostByPid(int pid) ;
+
+    //用户点赞后对帖子表进行更改数据
+    public int updatePostLikeNumByPid(int pid);
+
+    public int updatePostLikeNumByPidSub(int pid);
+    //用户收藏后对帖子表进行更改数据
+    public void updatePostVisitNum(int pid);
+
+    public void updatePostVisitNumSub(int pid);
+
+
+
+
 }

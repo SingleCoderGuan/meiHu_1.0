@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumCollectionMapper">
+    <!--<parameterMap id="getForumCollection" type="ForumCollection">
+       &lt;!&ndash; private Integer collectionid;
+        private ForumUser user ;
+        private ForumPost post ;&ndash;&gt;
+        <id column="collectionid" property="collectionid"/>
+        <association property="user" javaType="ForumUser">
+            <id column="uid" property="uid"/>
+        </association>
+        <association property="post" javaType="ForumPost">
+            <id column="pid" property="pid"/>
+        </association>
+    </parameterMap>-->
     <!--public int selectCollectedCountByPid(int pid);-->
     <select id="selectCollectedCountByPid" resultType="int">
         SELECT count(*) FROM  forum_collection WHERE post_pid=#{_parameter}
     </select>
+
+
+    <!--public void addCollectionByUidAndPid(int uid,int pid);-->
+    <insert id="addCollectionByUidAndPid" parameterType="int">
+        insert into forum_collection (user_uid,post_pid) VALUES (#{param1},#{param2})
+    </insert>
+
+
+    <!--public int deleteCollectionByUidAndPid(int uid,int pid);-->
+    <delete id="deleteCollectionByUidAndPid" parameterType="int">
+                DELETE FROM forum_collection WHERE user_uid =#{param1} and post_pid =#{param2}
+
+    </delete>
 </mapper>

@@ -22,8 +22,8 @@
 
 
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/font-awesome.css"/>
-    <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/aw-font.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aw-font.css"/>
 
     <link href="../css/common.css" rel="stylesheet" type="text/css"/>
     <link href="../css/link.css" rel="stylesheet" type="text/css"/>
@@ -291,26 +291,17 @@
                                         top: 0px;
                                     }
                                 </style>
-                                <c:forEach var="postList" items="${postList}">
+                                <c:forEach var="postList" items="${postList}"  varStatus="status">
                                 <div class="aw-item ">
                                     <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
-                                        <img src="../images/touxiang1.png" alt="" />
+                                       <%-- <img src="../images/touxiang1.png" alt="" />--%>
+                                        <span style="font-size: 40px "><strong>${status.index+1}</strong></span>
                                     </a>
 
                                     <div class="aw-question-content">
                                         <h4>
                                             <a href="<%=basePath%>/luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
                                         </h4>
-
-                                            <p class="pull-right hidden-xs">
-                                                <span>收藏:</span>
-
-                                                <a class="aw-user-name"  href="" rel="nofollow"><img src="../images/shoucang.png" alt="" /></a>
-                                                <span>举报:</span>
-                                                <a class="aw-user-name"  href="" rel="nofollow"><img src="../images/jubao.png" alt="" /></a>
-                                                <span>点赞:</span>
-                                                <a class="aw-user-name"  href="" rel="nofollow"><img src="../images/dianzan.png" alt="" /></a>
-                                            </p>
 
 
 
@@ -320,14 +311,15 @@
 					<a href="#">${postList.topic.tname}</a><%--标签--%>
 				</span> •
                                             <a href="#" class="aw-user-name" >${postList.user.uname}</a>
-                                            <span class="aw-text-color-999" >${postList.likecount}次点赞 • 7 人关注 •
+                                            <span class="aw-text-color-999" >${postList.likecount}次点赞  •
                                                     ${postList.visitcount} 次浏览 •<fmt:formatDate value='${postList.createtime}'
-                                                                                                pattern='yyyy-MM-dd hh:mm:ss'/>"	</span>
+                                                                                                pattern='yyyy-MM-dd hh:mm:ss'/>   </span>
                                         </p>
 
                                     </div>
                                 </div>
                                 </c:forEach>
+
 
 
                                 <!--底部Google 信息流广告-->
@@ -462,25 +454,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="aw-side-bar-mod">
-                        <div class="aw-mod-head">
-                            <h3>热门帖子</h3>
-                        </div>
-                        <div class="aw-mod-body">
-                            <ul>
-                                <li><i class="feature_icon"><img style="width: 40px;height: 40px;"
-                                                                 src="../images/remen.png" alt=""></i><a
-                                        href="#">香水评测大全</a></li>
 
-                                <li><i class="feature_icon"><img style="width: 40px;height: 40px;"
-                                                                 src="../images/remen.png" alt=""></i><a
-                                        href="#">香水评测大全</a></li>
-                                <li><i class="feature_icon"><img style="width: 40px;height: 40px;"
-                                                                 src="../images/remen.png" alt=""></i><a
-                                        href="#">兰蔻新款试用</a></li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="aw-side-bar-mod">
                         <div class="ad-item">
 
