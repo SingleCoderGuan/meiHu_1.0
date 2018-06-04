@@ -34,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- for banner-->
         <!-- font-awesome-icons -->
 
-        <link rel="stylesheet" href="css/font-awesome.min.css" />
+        <link href="css/font-awesome.min.css" rel="stylesheet"  />
         <!-- //font-awesome-icons -->
         <!-- //custom-theme files-->
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -61,7 +61,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="#">
                     <h1 style="width: 140px;">
                         <img src="images/LOGO.png" height="70px" width="10px"/>
                     </h1>

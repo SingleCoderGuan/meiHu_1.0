@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumCommentMapper">
+    <resultMap id="postforummapper" type="ForumComment">
+        <id column="cid" property="cid"/>
+        <result column="post_pid" property="pid"/>
+        <result column="commenttime" property="commenttime"/>
+        <result column="commenttext" property="commenttext"/>
+        <association property="user" javaType="ForumUser">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
+            <association property="title" javaType="ForumTitle">
+                <id column="titleid" property="titleid"/>
+                <result column="title" property="title"/>
+            </association>
+        </association>
+    </resultMap>
+
     <!--public ForumComment selectCommentByUid(int uid) ;-->
 
     <!--public ForumComment selectCommentBypid(int pid) ;-->
@@ -18,8 +33,22 @@
 
 
     <!--public List<ForumComment> selectAllPostCommentByPid(int pid);-->
-    <select id="selectAllPostCommentByPid" resultType="ForumComment" parameterType="int">
-        SELECT * FROM  forum_comment WHERE post_pid=#{parameter}
+    <select id="selectAllPostCommentByPid" resultMap="postforummapper" parameterType="int">
+        SELECT c.*,u.uname,t.title FROM  forum_comment c,forum_user u, forum_title t
+         WHERE c.user_uid = u.uid AND u.title_id = t.titleid AND post_pid=#{parameter}
+    </select>
+
+
+    <!--public int addCommentForComment(ForumComment forumComment);-->
+    <insert id="addCommentForComment" parameterType="ForumComment">
+        INSERT INTO forum_comment (user_uid,post_pid,commenttext,commentid) VALUES (#{uid},#{pid},#{commenttext},#{ccid})
+    </insert>
+
+
+    <!--public List<ForumComment> selectAllCommentForComment(int pid);-->
+    <select id="selectAllCommentForComment" resultMap="commentforcomment" parameterType="int">
+        SELECT c.*,u.uname,t.title FROM  forum_comment c,forum_user u, forum_title t
+           WHERE c.user_uid = u.uid AND u.title_id = t.titleid AND post_pid=#{parameter}
     </select>
 
 </mapper>

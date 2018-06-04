@@ -117,7 +117,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-                <img src="../images/LOGO.png" style="width: 72px; height: 41px;"/>
+               <a href="http://localhost:8080/meiHu/"> <img src="../images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->

@@ -73,7 +73,7 @@
 
     <!--启动页面 项目名指向位置-->
     <welcome-file-list>
-        <welcome-file>jsp/loginregister.jsp</welcome-file>
+        <welcome-file>jsp/zhuye.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

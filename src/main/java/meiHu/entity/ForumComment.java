@@ -5,18 +5,68 @@ import java.util.Date;
 public class ForumComment {
     private Integer cid;
 
-    private int  uid ;
+    private Integer  uid ;
 
-    private int pid ;
+    private Integer pid ;
+
+    private Integer ccid;
 
 
     private Date commenttime;
 
     private String commenttext;
 
-    public ForumComment(int uid, int pid, String commenttext) {
+    private ForumUser user;
+
+    private ForumComment forumComment;
+
+    public Integer getCcid() {
+        return ccid;
+    }
+
+    public void setCcid(Integer ccid) {
+        this.ccid = ccid;
+    }
+
+    public ForumComment getForumComment() {
+        return forumComment;
+    }
+
+    public void setForumComment(ForumComment forumComment) {
+        this.forumComment = forumComment;
+    }
+
+    public ForumComment() {
+    }
+
+    public ForumComment(Integer cid, Integer uid, Integer pid, Date commenttime, String commenttext, ForumUser user) {
+        this.cid = cid;
         this.uid = uid;
         this.pid = pid;
+        this.commenttime = commenttime;
+        this.commenttext = commenttext;
+        this.user = user;
+    }
+
+    public ForumUser getUser() {
+        return user;
+    }
+
+    public void setUser(ForumUser user) {
+        this.user = user;
+    }
+
+    public ForumComment(int uid, int pid,String commenttext) {
+        this.uid = uid;
+        this.pid = pid;
+        this.commenttext = commenttext;
+    }
+
+    public ForumComment(Integer uid, Integer pid, Integer ccid,  String commenttext) {
+        this.uid = uid;
+        this.pid = pid;
+        this.ccid = ccid;
+
         this.commenttext = commenttext;
     }
 
@@ -28,19 +78,19 @@ public class ForumComment {
         this.cid = cid;
     }
 
-    public int getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 
-    public int getPid() {
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 

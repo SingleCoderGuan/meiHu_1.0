@@ -1,9 +1,6 @@
 package meiHu.service;
 
-import meiHu.entity.ForumComment;
-import meiHu.entity.ForumPost;
-import meiHu.entity.ForumPostreport;
-import meiHu.entity.ForumTopic;
+import meiHu.entity.*;
 
 import java.util.List;
 
@@ -44,4 +41,9 @@ public interface LuntanService {
     public int selectPostCommentNum(int pid);
 
     public List<ForumComment> selectAllPostCommentByPid(int pid);
+
+    public boolean addCommentReport(ForumCommentreport forumCommentreport);
+
+    public boolean addCommentForComment(ForumComment forumComment);
+
 }

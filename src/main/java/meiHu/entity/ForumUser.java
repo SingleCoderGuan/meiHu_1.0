@@ -16,12 +16,21 @@ public class ForumUser {
     private String sex;
 
     private Integer point;
+    private Integer titleid;
 
     private ForumTitle title ;
 
     private String headpic;
 
     private Date registertime;
+
+    public Integer getTitleid() {
+        return titleid;
+    }
+
+    public void setTitleid(Integer titleid) {
+        this.titleid = titleid;
+    }
 
     public Integer getUid() {
         return uid;

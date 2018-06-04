@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -94,7 +95,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-                <img src="../images/LOGO.png" style="width: 72px; height: 41px;"/>
+               <a href="http://localhost:8080/meiHu/"> <img src="../images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -495,9 +496,9 @@
                                                 <div class="mod-head">
                                                     <p>
                                                         <a class="aw-user-name" href="#" data-id="46">
-                                                            DCloud_App_Array </a>
-                                                        <span>称号:<button
-                                                                class="btn btn-primary btn-xs">发帖小能手</button></span>
+                                                            ${forumCommentList.user.uname} </a>
+                                                        <span>头衔:<button
+                                                                class="btn btn-primary btn-xs">${forumCommentList.user.title.title}</button></span>
                                                     </p>
 
                                                 </div>
@@ -505,7 +506,7 @@
                                                     <!-- 评论内容 -->
 
                                                     <div class="markitup-box">
-                                                        这是帖子评论  ${forumCommentList.commenttext}
+                                                        ${forumCommentList.commenttext}
                                                     </div>
 
 
@@ -514,32 +515,52 @@
                                                 </div>
                                                 <!-- 社交操作 -->
                                                 <div class="mod-footer aw-dynamic-topic-meta">
-                                                    <span class="aw-text-color-999">${forumCommentList.commenttime}</span>
-                                                   <%-- <a class="aw-add-comment aw-text-color-999" data-toggle="collapse"
+                                                    <span class="aw-text-color-999">
+                                                    <fmt:formatDate value='${forumCommentList.commenttime}'
+                                                                    pattern='yyyy-MM-dd hh:mm:ss'/> </span>
+                                                    <a class="aw-add-comment aw-text-color-999" data-toggle="collapse"
                                                        href="#chakanpinglun" aria-expanded="false"
-                                                       aria-controls="collapseExample"> 1 条评论 </a>
+                                                       aria-controls="collapseExample"> (1) 条评论 </a>
                                                     <div class="collapse" id="chakanpinglun">
                                                         <div class="well">
-                                                            6666666666666
+                                                           君君： 6666666666666
 
                                                         </div>
-                                                    </div>--%>
+
+                                                    </div>
 
                                                     <a class="aw-add-comment aw-text-color-999"  data-toggle="modal" data-target=".bs-example-modal-sm">举报</a>
 
                                                     <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                                                         <div class="modal-dialog modal-sm" role="document">
                                                             <div class="modal-content">
-                                                                <select id="podtcommentreport" class="form-control">
+                                                                <select id="postcommentreport" class="form-control">
                                                                     <option selected>请选择举报类型</option>
                                                                     <option value="色情">色情</option>
                                                                     <option value="暴力">暴力</option>
                                                                     <option value="违反国家政治">违反国家政治</option>
                                                                 </select>
+                                                                <script>
 
+                                                                    function pinglunjubao(uidd, cidd, commentreportreason) {
+                                                                        $.ajax({
+                                                                            type: "post",
+                                                                            url: "${pageContext.request.contextPath}/luntan/commentreport.action",
+                                                                            data: "uid=" + uidd + "&cid=" + cidd + "&reason=" + commentreportreason,
+                                                                            success: function (result) {
+                                                                                if (result == 1) {
+                                                                                    alert("举报成功！！");
+                                                                                    window.load();
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                    }
+
+
+                                                                </script>
                                                                 <br/>
                                                                 <input type="button" class="btn btn-info" value="举报"
-                                                                       onclick=""
+                                                                       onclick="pinglunjubao(${uid},${forumCommentList.cid},$('#postcommentreport').val())"
                                                                        style="width: 200px;margin-left: 50px"></input>
                                                             </div>
                                                         </div>
@@ -554,18 +575,35 @@
                                                                     <h4 class="modal-title" id="exampleModalLabel">新评论</h4>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form>
 
                                                                         <div class="form-group">
 
-                                                                            <textarea class="form-control" id="message-text"></textarea>
+                                                                            <textarea class="form-control" id="message-text" placeholder="请输入您的评论"></textarea>
                                                                         </div>
-                                                                    </form>
+
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                                    <button type="button" class="btn btn-primary">发表评论</button>
+                                                                    <button type="button" id="guanbi" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                                    <button type="button" class="btn btn-primary" onclick="pinglunpinglun(${uid},${forumCommentList.cid},$('#message-text').val(),${forumCommentList.cid})">发表评论</button>
                                                                 </div>
+                                                                <script>
+                                                                    function pinglunpinglun(uidd, cidd, text,ccidd) {
+                                                                        $.ajax({
+                                                                            type: "post",
+                                                                            url: "${pageContext.request.contextPath}/luntan/commentcomment.action",
+                                                                            data: "uid=" + uidd + "&cid=" + cidd + "&commentcomment=" + text +"&ccid=" + ccidd,
+                                                                            success: function (result) {
+                                                                                if (result == 1) {
+                                                                                    alert("评论成功！！");
+                                                                                    $("#guanbi").click();
+                                                                                    window.load();
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                    }
+
+
+                                                                </script>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -578,11 +616,12 @@
                                         </div>
                                     </div>
 
-                                </div>
+
 
                                 </c:forEach>
                             </div>
                         </div>
+                    </div>
 
                         <!-- 侧边栏 -->
                         <div class="col-md-3 aw-side-bar hidden-xs hidden-sm">

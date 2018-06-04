@@ -3,11 +3,17 @@ package meiHu.entity;
 public class ForumCommentreport {
     private Integer reportid;
 
-    private ForumUser user ;
+    private Integer uid ;
 
-    private ForumComment comment ;
+    private Integer cid ;
 
     private String reportreason;
+
+    public ForumCommentreport(Integer uid, Integer cid, String reportreason) {
+        this.uid = uid;
+        this.cid = cid;
+        this.reportreason = reportreason;
+    }
 
     public Integer getReportid() {
         return reportid;
@@ -17,20 +23,20 @@ public class ForumCommentreport {
         this.reportid = reportid;
     }
 
-    public ForumUser getUser() {
-        return user;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setUser(ForumUser user) {
-        this.user = user;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
-    public ForumComment getComment() {
-        return comment;
+    public Integer getCid() {
+        return cid;
     }
 
-    public void setComment(ForumComment comment) {
-        this.comment = comment;
+    public void setCid(Integer cid) {
+        this.cid = cid;
     }
 
     public String getReportreason() {
