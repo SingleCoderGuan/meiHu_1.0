@@ -481,3 +481,21 @@ margin-left: 30px;
 .registerform li label {
   color: #000;
 }
+.forgotteninput {
+  padding: 15px 5px;
+  margin-left: 10px;
+  margin-top: 20px;
+  width: 260px;
+  border: none;
+  text-align: center;
+  color: #757575;
+}
+.resetform li >input {
+  padding: 15px 5px;
+  margin-left: 10px;
+  margin-top: 20px;
+  width: 260px;
+  border: none;
+  text-align: center;
+  color: #757575;
+}

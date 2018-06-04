@@ -77,7 +77,7 @@
                                 <input style="position:relative;top: 20px;" type="password" name="password" placeholder="请输入密码" <c:if test="${param.rslt}=='2'"><span style="color: red;">密码错误</span></c:if> />
 
                                 <button class="btn_my_login" type="submit">登录</button>
-                                <div><a style="text-decoration:none;" href="#"><span id="forgotten">忘记密码？</span></a></div>
+                                <div><a style="text-decoration:none;" href="<%=basePath%>jsp/forgottenpass.jsp"><span id="forgotten">忘记密码？</span></a></div>
                                 <a id="extralogin" >第三方登录</a>
                                 <div id="elentrance">
                                     <img class="extralogin" src="<%=basePath%>images/qqlogin.png" alt="">
@@ -102,7 +102,7 @@
                     <h2>注册</h2>
                     <form class="registerform" >
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
-                            <label class="label" style="position: relative;font-size: 14px;top: 10px;">用户名：</label>
+                            <label class="label" style="position: relative;font-size: 14px;top: 10px;color:#996666;">用户名：</label>
                             <input style="position: relative;padding: 15px 5px;
 margin-left: 10px;
 margin-top: 20px;
@@ -113,7 +113,7 @@ text-align: left;
                             <span style="position: absolute;left: 200px;top: 80px;" id="unametip"></span>
                         </li>
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
-                            <label class="label" style="position: relative;left: 7px;top: 10px;font-size: 14px">密  码：</label>
+                            <label class="label" style="position: relative;left: 7px;top: 10px;font-size: 14px;color:#996666;">密  码：</label>
                             <input style="position: relative;padding: 15px 5px;
 margin-left: 10px;
 margin-top: 20px;
@@ -123,7 +123,7 @@ text-align: left;
   color: #757575;background-color: #fff" type="password"  value="" name="userpassword" class="inputxt" />
                         </li>
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
-                            <label class="label" style="position: relative;left: -6px;top: 10px;font-size: 14px;width: 80px;">确认密码：</label>
+                            <label class="label" style="position: relative;left: -6px;top: 10px;font-size: 14px;color:#996666;width: 80px;">确认密码：</label>
                             <input style="position: relative;left: -5px;padding: 15px 5px;
 margin-left: 10px;
 margin-top: 20px;
@@ -133,7 +133,7 @@ text-align: left;
   color: #757575;background-color: #fff" type="password" value="" name="verificationpsw" class="inputxt"/>
                         </li>
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
-                            <label class="label" style="position: relative;left: -6px;top: 10px;font-size: 14px;width: 80px;">手机号码：</label>
+                            <label class="label" style="position: relative;left: -6px;top: 10px;color:#996666;font-size: 14px;width: 80px;">手机号码：</label>
                             <input style="position: relative;left: -5px;padding: 15px 5px;
 margin-left: 10px;
 margin-top: 20px;
@@ -146,7 +146,7 @@ text-align: left;
                             <input class="btn_my_login" style="position: relative;top: -7px;" type="button" value="发送手机短信验证码"/>
                         </li>
                         <li style="position: relative;top: -5px;left:-65px;list-style-type:none; ">
-                            <label class="label" style="font-size: 14px;position: relative;top: 10px;">验证码：</label>
+                            <label class="label" style="font-size: 14px;position: relative;top: 10px;color:#996666;">验证码：</label>
                             <input style="position: relative;padding: 15px 5px;
                                 margin-left: 10px;
                                 margin-top: 20px;
@@ -172,7 +172,7 @@ text-align: left;
                     <div class="modal-body" style="background-color: #F0DAD2">
                         <form class="registerform" >
                             <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
-                                <label class="label" style="position: relative;left: -23px;font-size: 15px;top: 10px;">用户名：</label>
+                                <label class="label" style="position: relative;left: -23px;font-size: 15px;color:#996666;top: 10px;">用户名：</label>
                                 <input style="position: relative;left: -45px;padding: 15px 5px;
 margin-left: 10px;
 margin-top: 20px;
@@ -183,7 +183,7 @@ text-align: left;
                                 <span style="position: absolute;left: 200px;top: 80px;" id="perunametip"></span>
                             </li>
                             <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
-                                <label class="label" style="position: relative;left: -12px;top: 10px;font-size: 14px">密  码：</label>
+                                <label class="label" style="position: relative;left: -12px;top: 10px;color:#996666;font-size: 14px">密  码：</label>
                                 <input style="position: relative;left: -45px;padding: 15px 5px;
 margin-left: 10px;
 margin-top: 20px;
@@ -193,7 +193,7 @@ text-align: left;
   color: #757575;background-color: #fff" type="password"  value="" name="userpassword" class="inputxt" />
                             </li>
                             <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
-                                <label class="label" style="position: relative;left: -28px;top: 10px;font-size: 14px;width: 80px;">确认密码：</label>
+                                <label class="label" style="position: relative;left: -28px;top: 10px;color:#996666;font-size: 14px;width: 80px;">确认密码：</label>
                                 <input style="position: relative;left: -50px;padding: 15px 5px;
 margin-left: 10px;
 margin-top: 20px;
@@ -204,7 +204,7 @@ text-align: left;
                             </li>
                             <img src="<%=basePath%>images/LOGO.png"    style="position: relative; left: -20px;top: 20px;width: 190px;height: 50px;"/>
                             <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
-                                <label class="label" style="font-size: 14px;position: relative;left: -20px;top: 10px;">验证码：</label>
+                                <label class="label" style="font-size: 14px;position: relative;left: -20px;top: 10px;color:#996666;">验证码：</label>
                                 <input style="position: relative;left: -45px;padding: 15px 5px;
                                 margin-left: 10px;
                                 margin-top: 20px;

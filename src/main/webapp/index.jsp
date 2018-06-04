@@ -1,48 +1,33 @@
 <%--
   Created by IntelliJ IDEA.
-  User: chimeralala
-  Date: 2018/6/2
-  Time: 10:16
+  User: Xena
+  Date: 2018/5/31
+  Time: 上午9:50
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String path =request.getContextPath();
-    String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="UTF-8">
-    <title>文章发布</title>
-    <meta name="keywords" content="美论" />
-    <meta name="description" content="美论" />
+    <title>编辑器</title>
+    <%--<link rel="stylesheet" type="text/css" href="<%= basePath%>/release/wangEditor-fullscreen-plugin.css}"/>--%>
     <script type="text/javascript" src="<%= basePath%>/release/jquery-3.2.1.min.js"></script>
+    <%--<script type="text/javascript" src="<%= basePath%>/release/wangEditor-fullscreen-plugin.js"></script>--%>
     <script type="text/javascript" src="<%= basePath%>/release/wangEditor.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/font-awesome.css" />
-    <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/aw-font.css" />
-
-    <link href="<%=basePath%>css/common.css" rel="stylesheet" type="text/css" />
-
-    <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css" />
-
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/functions.js?v=20171108" type="text/javascript"></script>
-
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/common.js?v=20171108" type="text/javascript"></script>
-
-    <script type="text/javascript" src="//img-cdn-qiniu.dcloud.net.cn/static/js/compatibility.js"></script>
     <style type="text/css">
         .toolbar {
             border: 1px solid #ccc;
         }
+        .text {
+            border: 1px solid #ccc;
+            height: 400px;
+        }
     </style>
+
     <script>
         function subm(){
 
@@ -51,190 +36,29 @@
             document.getElementById('newspost').submit();
         }
     </script>
+
 </head>
-<style type="text/css">
-    .sponsor .sponsor-level {
-        width: 13px;
-        height: 13px;
-        position: absolute;
-        left: 45px;
-        top: 9px;
-        margin-left: 0;
-    }
-
-    .sponsor .sponsor-count {
-        width: 8px;
-        height: 8px;
-        position: absolute;
-        left: 48px;
-        top: 11px;
-        margin-left: 0;
-    }
-</style>
-<style>
-    .ad-item {
-        position: relative;
-    }
-
-    .ad-item .close {
-        position: absolute;
-        width: 18px;
-        height: 18px;
-        background-color: #000000;
-        opacity: 0.5;
-        text-align: center;
-        right: 0px;
-        top: 0px;
-        line-height: 18px;
-        display: none;
-    }
-
-    .ad-item .close a {
-        font-size: 14px;
-        color: #FFFFFF;
-        text-decoration: none;
-    }
-
-    .ad-item .guide {
-        display: none;
-    }
-
-    .ad-item:hover .close {
-        display: block;
-    }
-</style>
-
 <body>
-<div class="aw-top-menu-wrap">
-    <div class="aw-wecenter aw-top-menu clearfix">
-        <div class="container">
-            <!-- logo -->
-            <div class="aw-logo hidden-xs">
-                <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;" />
-            </div>
-            <!-- end logo -->
-            <!-- 搜索框 -->
-            <div class="aw-search-box  hidden-xs hidden-sm">
-                <form class="navbar-search pull-right" action="#" id="global_search_form" method="post">
-                    <div class="input-group">
-                        <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off" name="q" id="aw-search-query" class="search-query" />
-                        <span class="input-group-addon" title="搜索" id="global_search_btns" onClick="$('#global_search_form').submit();"><i class="fa fa-search"></i></span>
-                        <div class="clearfix"></div>
 
-                    </div>
-                </form>
-            </div>
-            <!-- end 搜索框 -->
-            <!-- 导航 -->
-            <div class="aw-top-nav navbar">
-                <div class="navbar-header">
-                    <button class="navbar-toggle pull-left">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
-                    <ul class="nav navbar-nav">
+<form id="newspost" method="post" action="<%=application.getContextPath()%>/newspost.action" enctype="multipart/form-data">
 
-                        <li class="nav-current" role="presentation">
-                            <a href="luntanshouyetest.html">美论首页</a>
-                        </li>
-                        <li>
-                            <a href="index.html">美乎</a>
-                        </li>
-                        <li>
-                            <a href="#">美购</a>
-                        </li>
-                        <li>
-                            <a href="#">美商城</a>
-                        </li>
-                        <li>
-                            <a href="#">活动</a>
-                        </li>
+    标题：
+    <input type="text" id="title" name="title"/><br/><br/>
 
-                        <li>
-                            <a href="#">关于</a>
-                        </li>
 
-                    </ul>
-                </nav>
+    <input type="hidden" id="content" name="content"/>
 
-            </div>
-            <!-- end 导航 -->
-            <!-- 用户栏 -->
-            <div class="aw-user-nav">
-                <!-- 登陆&注册栏 -->
-                <span>
-							<a href="#" ><img src="<%=basePath%>images/touxiang1.png"/>欢迎您：美乎小编 </a>
-
-                    <!--<a href="#">注册</a>
-                    <a href="#">登录</a>-->
-						</span>
-
-                <!-- end 登陆&注册栏 -->
-            </div>
-            <!-- end 用户栏 -->
-            <!-- 发起 -->
-            <!-- end 发起 -->
-        </div>
+    <div id="div1" class="toolbar">
     </div>
-</div>
+    <div style="padding: 5px 0; color: #ccc"></div>
+    <div id="div2" class="text">
 
-<div class="aw-container-wrap">
-    <div class="container aw-publish">
-        <div class="row">
-            <div class="aw-content-wrap clearfix">
-                <div class="col-sm-12 col-md-9 aw-main-content">
-                    <!-- tab 切换 -->
-                    <ul class="nav nav-tabs aw-nav-tabs active">
-                        <li>
-                            <a >发表帖子</a>
-                        </li>
-
-                    </ul>
-                    <!-- end tab 切换 -->
-                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/newspost.action" enctype="multipart/form-data">
-
-                        标题：
-                        <input type="text" id="title" name="title"/><br/><br/>
-
-
-                        <input type="hidden" id="content" name="content"/>
-
-                        <div id="div1" class="toolbar">
-                        </div>
-                        <div style="padding: 5px 0; color: #ccc"></div>
-                        <div id="div2" class="text" style="height: 480px;">
-
-                        </div>
-                        <input type="button" value="保存" onclick="subm()"></input>
-
-                    </form>
-
-                </div>
-                <!-- 侧边栏 -->
-                <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
-                    <!-- 问题发起指南 -->
-                    <div class="aw-mod publish-help">
-                        <div class="mod-head">
-                            <h3>问题发起指南</h3>
-                        </div>
-                        <div class="mod-body">
-                            <p><b>• 问题标题:</b> 请用准确的语言描述您发布的问题思想</p>
-                            <br />
-                            <p><b>• 问题补充:</b> 详细补充您的帖子内容, 并提供一些相关的素材以供参与者更多的了解您所要问题的主题思想</p>
-                            <br />
-                            <p><b>• 关于积分：</b> 发起一个帖子会曾总您 10 个积分, 每多一个回复你将获得 5 个积分的奖励 ,积分在商城可兑换商品, 在发起问题的时候希望能够更好的描述您的问题以及多使用站内搜索功能.</p>
-                        </div>
-                    </div>
-                    <!-- end 问题发起指南 -->
-                </div>
-                <!-- end 侧边栏 -->
-            </div>
-        </div>
     </div>
-</div>
+    <input type="button" value="保存" onclick="subm()"></input>
+
+</form>
+
+
 <script type="text/javascript">
 
     var E = window.wangEditor;
@@ -591,7 +415,7 @@
     // 字体
     editor.customConfig.fontNames = [
         '宋体', '黑体', '微软雅黑', '微软正黑体', '新细明体', '标楷体', '仿宋', '楷体', '文细黑', '华文黑体',
-        '华文楷体', '华文宋体', '华文仿宋', '儷黑 Pro', '儷宋 Pro', '標楷體', '蘋果儷中黑', '蘋果儷細宋', '新宋体',
+         '华文楷体', '华文宋体', '华文仿宋', '儷黑 Pro', '儷宋 Pro', '標楷體', '蘋果儷中黑', '蘋果儷細宋', '新宋体',
         '楷体_GB2312', '微軟正黑體', '微软雅黑体', '隶书', '幼圆', '华文细黑', '华文楷体', '华文宋体', '华文中宋',
         '华文仿宋', '方正舒体', '方正姚体', '华文彩云', '华文琥珀', '华文隶书', '华文行楷', '华文新魏', '仿宋_GB2312',
         'Arial', 'Helvetica', 'Tahoma', 'Verdana', 'Lucida Grande', 'Times New Roman', 'Georgia',
@@ -638,5 +462,4 @@
 
 </script>
 </body>
-
 </html>

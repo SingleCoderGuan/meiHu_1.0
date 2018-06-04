@@ -28,17 +28,18 @@ public class UserController {
             if(user.getPassword().equals(password)){
 //                登陆成功
                 request.setAttribute("user",user);
-                request.getRequestDispatcher("/jsp/login&register.jsp?rslt=0").forward(request,response);
+                request.getRequestDispatcher("/jsp/loginregister.jsp?rslt=0").forward(request,response);
             }else{
 //                密码错误
-                response.sendRedirect(request.getContextPath()+"/jsp/login&register.jsp?rslt=2");
+                response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp?rslt=2");
             }
         }else{
 //            用户名不存在
-            response.sendRedirect(request.getContextPath()+"/jsp/login&register.jsp?rslt=1");
+            response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp?rslt=1");
         }
 
     }
+
     @RequestMapping(value = "/register.action",method = RequestMethod.POST)
     public String register(String id ,String password ,String tel,HttpServletRequest request ,HttpServletResponse response ){
         if(id.equals("3")){
@@ -47,6 +48,7 @@ public class UserController {
             return "账号注册失败" ;
         }
     }
+
     @RequestMapping(value = "/loginWithTel.action",method = RequestMethod.GET)
     public void findUser(String tel,String vcode,HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
         PrintWriter out = response.getWriter() ;
@@ -69,12 +71,22 @@ public class UserController {
     }
 
     @RequestMapping(value = "/namecheck.action",method = RequestMethod.GET)
-    public String checkUname(String uname,HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public String checkUname(String uname,HttpServletRequest request,HttpServletResponse response){
         ForumUser user = userService.findUserByUname(uname);
         if(user!=null){
             return "0" ;
         }else{
             return "1" ;
+        }
+    }
+
+    @RequestMapping(value = "/checktel.action",method = RequestMethod.GET)
+    public String checkTel(String tel,HttpServletRequest request,HttpServletResponse response){
+        ForumUser user = userService.findUserByTel(tel);
+        if(user!=null){
+            return "1";
+        }else{
+            return "0" ;
         }
     }
 }
