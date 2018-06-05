@@ -73,5 +73,40 @@
         UPDATE forum_post SET visitcount = visitcoun-1 WHERE pid=#{_parameter}
     </update>
 
+    <resultMap id="selectCollectedPostsByUidMap" type="ForumPost">
 
+        <id column="pid" property="pid"/>
+        <result column="createtime" property="createtime"/>
+        <result column="hot" property="hot"/>
+        <result column="visitcount" property="visitcount"/>
+        <result column="likecount" property="likecount"/>
+        <result column="ptitle" property="ptitle"/>
+        <result column="pcontent" property="pcontent"/>
+        <association property="user" javaType="ForumUser">
+            <id column="uid" property="uid" />
+            <result column="uname" property="uname" />
+            <result column="password" property="password" />
+            <result column="tel" property="tel" />
+            <result column="email" property="email" />
+            <result column="sex" property="sex" />
+            <result column="point" property="point" />
+            <result column="headpic" property="headpic" />
+            <result column="registertime" property="registertime" />
+        </association>
+        <association property="topic" javaType="ForumTopic">
+            <id column="tid" property="tid"/>
+            <result column="tname" property="tname"/>
+        </association>
+    </resultMap>
+
+    <!--public List<ForumPost> selectCollectedPostsByUid(int uid) ;-->
+    <select id="selectCollectedPostsByUid" resultMap="selectCollectedPostsByUidMap" parameterType="int">
+        SELECT u.*, p.*,t.* FROM forum_user u ,forum_post p ,forum_topic t,forum_collection c
+        WHERE c.user_uid =#{_parameter} AND p.pid=c.post_pid and p.user_uid=u.uid AND t.tid=p.topic_tid
+    </select>
+
+    <!--public List<ForumPost> selectPostsByUid(int uid) ;-->
+    <select id="selectPostsByUid" parameterType="int" resultMap="selectCollectedPostsByUidMap">
+        SELECT p.* FROM forum_post p WHERE p.user_uid=#{_parameter}
+    </select>
 </mapper>

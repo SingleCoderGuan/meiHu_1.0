@@ -14,6 +14,7 @@
         </association>
     </parameterMap>-->
     <!--public int selectCollectedCountByPid(int pid);-->
+
     <select id="selectCollectedCountByPid" resultType="int">
         SELECT count(*) FROM  forum_collection WHERE post_pid=#{_parameter}
     </select>
@@ -30,4 +31,6 @@
                 DELETE FROM forum_collection WHERE user_uid =#{param1} and post_pid =#{param2}
 
     </delete>
+
+
 </mapper>

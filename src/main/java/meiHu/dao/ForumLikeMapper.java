@@ -7,5 +7,4 @@ public interface ForumLikeMapper {
     //用户对一条帖子取消点赞
     public int deleteLikeByUidAndPid(int uid,int pid);
 
-
 }

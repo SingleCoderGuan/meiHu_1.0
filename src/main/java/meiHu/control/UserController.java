@@ -1,6 +1,8 @@
 package meiHu.control;
 
+import meiHu.entity.ForumPost;
 import meiHu.entity.ForumUser;
+import meiHu.service.PostService;
 import meiHu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,14 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 
 @RestController
 public class UserController {
     @Autowired
     private UserService userService ;
+    @Autowired
+    private PostService postService ;
 
     @RequestMapping(value = "/loginWithAccount.action",method = RequestMethod.POST)
     public void findUserByUname(String uname,String password, HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
@@ -85,6 +91,17 @@ public class UserController {
         }else{
             return "0" ;
         }
+    }
+
+    @RequestMapping(value = "/userCenter.action")
+    public void gotoUserCenter(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession() ;
+        ForumUser user = (ForumUser) session.getAttribute("user");
+        List<ForumPost> collectionList = postService.selectCollectionByUserUid(user.getUid()) ;
+        List<ForumPost> postList = postService.selectPostsByUid(user.getUid()) ;
+        session.setAttribute("collectionList",collectionList);
+        session.setAttribute("postList",postList);
+        response.sendRedirect(request.getContextPath()+"/jsp/userPersonalCenter.jsp");
     }
 
 }

@@ -20,8 +20,7 @@
     </resultMap>
     <!--public ForumUser selectUserByUid(int uid) ;-->
     <select id="selectUserByUid" resultMap="selectUserMap">
-        SELECT u.uid,u.uname,u.password,u.tel,u.email,
-                u.sex,u.point,u.headpic,u.registertime,t.* FROM forum_user u,forum_title t WHERE u.title_id = t.titleid and uid = #{_parameter}
+        SELECT u.*,t.* FROM forum_user u,forum_title t WHERE u.title_id = t.titleid and uid = #{_parameter}
     </select>
 
     <!--public ForumUser selectUsersByUname(String uname) ;-->

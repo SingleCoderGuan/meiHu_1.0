@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: chimeralala
@@ -152,7 +153,7 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="#" ><img src="<%=basePath%>images/${user.headpic}"/>${user.uname}</a>
+                    <a href="#" disabled="true" ><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
                     <!--<a href="#">注册</a>
                     <a href="#">登录</a>-->
                 </span>
@@ -182,39 +183,32 @@
                             </span>
                             <h1>${user.uname}</h1>
                             <!--用户名-->
-                            <p class="text-color-999">发帖小能手</p>
+                            <p class="text-color-999">${user.title.title}</p>
                             <!--称号-->
                             <p class="aw-user-flag">
                             </p>
                         </div>
                         <div class="mod-body">
                             <div class="meta">
-                                <span><i class="icon icon-score"></i> 积分 : <em class="aw-text-color-orange">250</em></span>
+                                <span><i class="icon icon-score"></i> 积分 : ${user.point}<em class="aw-text-color-orange"></em></span>
                                 <span><i class="icon icon-agree"></i> 赞同 : <em class="aw-text-color-orange">0</em></span>
                             </div>
 
                         </div>
                         <div class="mod-footer">
                             <ul class="nav nav-tabs aw-nav-tabs">
-                                <li class="active">
-                                    <a href="#overview" id="page_overview" data-toggle="tab">概述</a>
+                                <li style="width: 175px;text-align: center">
+                                    <a href="#questions" id="page_questions" data-toggle="tab" style="font-size: 20px">发问<span class="badge">0</span></a>
                                 </li>
-                                <li>
-                                    <a href="#questions" id="page_questions" data-toggle="tab">发问<span class="badge">0</span></a>
-                                </li>
-                                <li>
-                                    <a href="#answers" id="page_answers" data-toggle="tab">回复<span class="badge">0</span></a>
+                                <li style="width: 175px;text-align: center">
+                                    <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">回复<span class="badge">0</span></a>
                                 </li>
 
-                                <li>
-                                    <a href="#focus" id="page_focus" data-toggle="tab">关注话题</a>
+                                <li style="width: 175px;text-align: center">
+                                    <a href="#focus" id="page_focus" data-toggle="tab" style="font-size: 20px">关注话题</a>
                                 </li>
-
-                                <li>
-                                    <a href="#detail" id="page_detail" data-toggle="tab">详细资料</a>
-                                </li>
-                                <li>
-                                    <a href="#integral" id="page_integral" data-toggle="tab">我的积分</a>
+                                <li style="width: 175px;text-align: center">
+                                    <a href="#integral" id="page_integral" data-toggle="tab" style="font-size: 20px">我的积分</a>
                                 </li>
                             </ul>
                         </div>
@@ -223,52 +217,26 @@
 
                     <div class="aw-user-center-tab">
                         <div class="tab-content">
-                            <div class="tab-pane active" id="overview">
-                                <!-- 回复 -->
-                                <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3>回复</h3>
-                                    </div>
-                                    <div class="mod-body">
-                                        <div class="aw-profile-answer-list">
-                                            <p class="padding10 text-center">没有内容</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end 回复 -->
-
-                                <!-- 发问 -->
-                                <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3>发问</h3>
-                                    </div>
-                                    <div class="mod-body">
-                                        <div class="aw-profile-publish-list">
-                                            <p class="padding10 text-center">没有内容</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end 发问 -->
-
-                                <!-- 最新动态 -->
-
-                            </div>
                             <div class="tab-pane" id="questions">
                                 <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3>发问</h3>
-                                    </div>
                                     <div class="mod-body">
                                         <div class="aw-profile-publish-list" id="contents_user_actions_questions">
-                                            这里是问题
+                                            <div style="background-color: #FFCCCC;height: 30px"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">作者</span></div>
+                                            <c:forEach items="${postList}" var="post">
+                                                <div style="position:relative ;left: 20px;margin-top: 15px">
+                                                    <a href="#"><span>${post.ptitle}</span></a>
+                                                    <div style="position: absolute;left: 369px;top: -1px;width: 70px;height:20px ;text-align:center;"><a href="#" style="margin:0 auto;"><span>${post.topic.tname}</span></a></div>
+                                                    <div style="position: absolute;left: 478px;top: -1px;width: 145px;text-align:center ;"><a href="#"><span>${post.user.uname}</span></a></div>
+                                                </div>
+                                            </c:forEach>
                                         </div>
                                     </div>
                                     <div class="mod-footer">
                                         <!-- 加载更多内容 -->
                                         <a class="aw-load-more-content" id="bp_user_actions_questions_more">
-                                            <span>更多</span>
+                                            <span>展开全部</span>
                                         </a>
-                                        <!-- end 加载更多内容 -->
+                                        <!-- end 加载展开全部内容 -->
                                     </div>
                                 </div>
                             </div>
@@ -283,7 +251,7 @@
                                     <div class="mod-footer">
                                         <!-- 加载更多内容 -->
                                         <a class="aw-load-more-content" id="bp_user_actions_answers_more">
-                                            <span>更多</span>
+                                            <span>展开全部</span>
                                         </a>
                                         <!-- end 加载更多内容 -->
                                     </div>
@@ -300,7 +268,7 @@
                                     <div class="mod-footer">
                                         <!-- 加载更多内容 -->
                                         <a class="aw-load-more-content" id="bp_user_actions_articles_more">
-                                            <span>更多</span>
+                                            <span>展开全部</span>
                                         </a>
                                         <!-- end 加载更多内容 -->
                                     </div>
@@ -314,14 +282,19 @@
                                         <div class="aw-tab-content">
                                             <div class="aw-mod aw-user-center-follow-mod">
                                                 <div class="mod-body">
-                                                    <ul id="contents_user_follows" class="clearfix">
-                                                        <li>asdas d</li>
-                                                    </ul>
+                                                    <div style="background-color: #FFCCCC;height: 30px"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">作者</span></div>
+                                                    <c:forEach items="${collectionList}" var="collection">
+                                                        <div style="position:relative ;left: 20px;margin-top: 15px">
+                                                            <a href="#"><span>${collection.ptitle}</span></a>
+                                                            <div style="position: absolute;left: 369px;top: -1px;width: 70px;height:20px ;text-align:center;"><a href="#" style="margin:0 auto;"><span>${collection.topic.tname}</span></a></div>
+                                                            <div style="position: absolute;left: 478px;top: -1px;width: 145px;text-align:center ;"><a href="#"><span>${collection.user.uname}</span></a></div>
+                                                        </div>
+                                                    </c:forEach>
                                                 </div>
                                                 <div class="mod-footer">
                                                     <!-- 加载更多内容 -->
                                                     <a class="aw-load-more-content" id="bp_user_follows_more">
-                                                        <span>更多</span>
+                                                        <span>展开全部</span>
                                                     </a>
                                                     <!-- end 加载更多内容 -->
                                                 </div>
@@ -333,7 +306,7 @@
                                                 <div class="mod-footer">
                                                     <!-- 加载更多内容 -->
                                                     <a class="aw-load-more-content" id="bp_user_fans_more">
-                                                        <span>更多</span>
+                                                        <span>展开全部</span>
                                                     </a>
                                                     <!-- end 加载更多内容 -->
                                                 </div>
@@ -345,7 +318,7 @@
                                                 <div class="mod-footer">
                                                     <!-- 加载更多内容 -->
                                                     <a class="aw-load-more-content" id="bp_user_topics_more">
-                                                        <span>更多</span>
+                                                        <span>展开全部</span>
                                                     </a>
                                                     <!-- end 加载更多内容 -->
                                                 </div>
@@ -356,27 +329,6 @@
                                 <!-- end 自定义切换 -->
                             </div>
 
-                            <div class="tab-pane" id="detail">
-                                <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3>详细资料</h3>
-                                    </div>
-                                    <div class="mod-body aw-user-center-details">
-                                        <dl>
-                                            <dt><span>个人成就:</span></dt>
-                                            <dd>
-                                                <p class="meta">
-                                                    <span><i class="icon icon-score"></i>积分: <em class="aw-text-color-orange">250</em></span>
-                                                    <span><i class="icon icon-agree"></i>赞同: <em class="aw-text-color-orange">0</em></span>
-                                                </p>
-                                            </dd>
-                                        </dl>
-
-
-
-                                    </div>
-                                </div>
-                            </div>
                             <div class="tab-pane" id="integral">
                                 <div class="aw-mod">
                                     <div class="mod-head">
@@ -398,7 +350,7 @@
                                     <div class="mod-footer">
                                         <!-- 加载更多内容 -->
                                         <a class="aw-load-more-content" id="bp_user_integral">
-                                            <span>更多</span>
+                                            <span>展开全部</span>
                                         </a>
                                         <!-- end 加载更多内容 -->
                                     </div>
@@ -432,11 +384,7 @@
                             </ul>
                         </div>
                         <br /><br />
-                        <div class="aw-mod-body">
-                            <ul>
-                                <li>关注帖子5个</li>
-                            </ul>
-                        </div>
+
                     </div>
 
                 </div>

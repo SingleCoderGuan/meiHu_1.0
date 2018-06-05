@@ -99,6 +99,4 @@ public interface ForumPostMapper {
     public void updatePostVisitNumSub(int pid);
 
 
-
-
 }
