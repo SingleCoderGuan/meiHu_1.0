@@ -19,4 +19,9 @@ public class PostServiceImpl implements PostService {
     public List<ForumPost> selectPostsByUid(int uid) {
         return forumPostMapper.selectPostsByUid(uid);
     }
+
+    @Override
+    public boolean postNewPost(ForumPost post) {
+        return forumPostMapper.insert(post);
+    }
 }

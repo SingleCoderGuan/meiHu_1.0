@@ -2,6 +2,8 @@ package meiHu.service;
 
 import meiHu.entity.ForumUser;
 
+import java.util.List;
+
 public interface UserService {
     /**
      * 通过用户名在数据库中查找是否有该用户
@@ -25,4 +27,18 @@ public interface UserService {
      * @return  该tel对应的用户
      */
     public ForumUser findUserByTel(String tel) ;
+
+    /**
+     * 根据uid查询该用户关注的用户
+     * @param uid   执行查询的用户uid
+     * @return  该用户关注的人
+     */
+    public List<ForumUser> findFocusUsersByUid(int uid);
+
+    /**
+     * 根据uid查询该用户的追随者
+     * @param uid 执行查询的uid
+     * @return  所有该用户的追随者
+     */
+    public List<ForumUser> findFollowersByUid(int uid);
 }

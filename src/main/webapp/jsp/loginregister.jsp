@@ -219,17 +219,7 @@ border: none;
 text-align: left;
   color: #757575;background-color: #fff" type="password" value="" name="verificationpsw" class="inputxt"/>
                             </li>
-                            <img src="<%=basePath%>images/LOGO.png"    style="position: relative; left: -20px;top: 20px;width: 190px;height: 50px;"/>
-                            <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
-                                <label class="label" style="font-size: 14px;position: relative;left: -20px;top: 10px;color:#996666;">验证码：</label>
-                                <input style="position: relative;left: -45px;padding: 15px 5px;
-                                margin-left: 10px;
-                                margin-top: 20px;
-                                  width: 180px;
-                                border: none;
-                                text-align: left;
-                                  color: #757575;background-color: #fff" type="text" value="" name="text" class="inputxt"/>
-                            </li>
+
                             <div class="action" style="position: relative;top: 20px;left:-20px">
                                 <input type="submit" style="position: relative;top: -20px;width: 90px;left: -72px;" class="btn_my_login" value="提 交" />
                                 <input type="reset" style="position: relative;top: -20px;width: 90px; left: 40px;" class="btn_my_login" value="重 置" />

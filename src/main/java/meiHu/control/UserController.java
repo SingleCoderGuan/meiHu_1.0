@@ -97,11 +97,20 @@ public class UserController {
     public void gotoUserCenter(HttpServletRequest request,HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession() ;
         ForumUser user = (ForumUser) session.getAttribute("user");
-        List<ForumPost> collectionList = postService.selectCollectionByUserUid(user.getUid()) ;
-        List<ForumPost> postList = postService.selectPostsByUid(user.getUid()) ;
+        int  uid = user.getUid() ;
+        List<ForumPost> collectionList = postService.selectCollectionByUserUid(uid) ;
+        List<ForumPost> postList = postService.selectPostsByUid(uid) ;
+        List<ForumUser> focusUsers = userService.findFocusUsersByUid(uid) ;
+        List<ForumUser> followers = userService.findFollowersByUid(uid) ;
         session.setAttribute("collectionList",collectionList);
         session.setAttribute("postList",postList);
+        session.setAttribute("focusUsers",focusUsers);
+        session.setAttribute("followers",followers);
         response.sendRedirect(request.getContextPath()+"/jsp/userPersonalCenter.jsp");
     }
-
+    @RequestMapping(value = "/signOut.action")
+    public void signOut(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        request.getSession().invalidate();
+        response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp");
+    }
 }

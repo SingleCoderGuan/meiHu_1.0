@@ -109,4 +109,9 @@
     <select id="selectPostsByUid" parameterType="int" resultMap="selectCollectedPostsByUidMap">
         SELECT p.* FROM forum_post p WHERE p.user_uid=#{_parameter}
     </select>
+
+    <!--public boolean insert(ForumPost post) ;-->
+    <insert id="insert" parameterType="ForumPost">
+        INSERT INTO forum_post (user_uid,createtime,ptitle,pcontent,topic_tid) VALUES (#{user.uid},#{createtime},#{ptitle},#{pcontent},#{topic.tid})
+    </insert>
 </mapper>

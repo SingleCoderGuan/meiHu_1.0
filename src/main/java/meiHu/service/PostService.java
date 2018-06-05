@@ -18,4 +18,11 @@ public interface PostService {
      * @return  该uid发布的帖子
      */
     public List<ForumPost> selectPostsByUid(int uid) ;
+
+    /**
+     * 用户发帖
+     * @param post 需要发的帖子
+     * @return  是否成功发帖
+     */
+    public boolean postNewPost(ForumPost post) ;
 }

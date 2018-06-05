@@ -1,9 +1,11 @@
 package meiHu.control;
 
+import meiHu.dao.ForumPostMapper;
 import meiHu.dao.ForumTopicMapper;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumTopic;
 //import net.sf.json.JSONObject;
+import meiHu.entity.ForumUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +24,28 @@ import java.util.UUID;
 public class fatieControl {
     @Autowired
     ForumTopicMapper forumTopicMapper ;
-    @RequestMapping(value = "/newpost",method = RequestMethod.POST)
-    public void newPost(ForumPost post , String topicid, HttpServletRequest request, HttpServletResponse response){
-        Integer topicId = Integer.parseInt(topicid);
-        ForumTopic topic = forumTopicMapper.selectTopicByTid(topicId);
+    @Autowired
+    ForumPostMapper forumPostMapper ;
+    @RequestMapping(value = "/fatie.action")
+    public void fatie(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if(request.getSession().getAttribute("user")==null){
+            response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp");
+        }else {
+            response.sendRedirect(request.getContextPath()+"/jsp/fatie.jsp");
+        }
+    }
+    @RequestMapping(value = "/newpost.action")
+    public void newPost(ForumPost post , int topicid, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ForumTopic topic = forumTopicMapper.selectTopicByTid(topicid);
         ForumPost forumPost = post ;
-        forumPost.setTopic(topic);
+        forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
+        forumPost.setTopic(topic);
+        if(forumPostMapper.insert(forumPost)){
+            response.sendRedirect(request.getContextPath()+"/luntan/luntanshouye.action");
+        }else{
+            System.out.println("发帖失败");
+        }
 
     }
     @RequestMapping(value = "/picload.action",method = RequestMethod.POST)

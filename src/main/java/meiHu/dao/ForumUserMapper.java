@@ -62,4 +62,18 @@ public interface ForumUserMapper {
      * @return 是否插入成功
      */
     public boolean insertUser(@Param("uname")String uanme,@Param("password")String passwrod ,@Param("tel")String tel) ;
+
+    /**
+     * 根据uid查询所有该用户关注的用户
+     * @param uid   需要查询的uid
+     * @return  所有该用户关注的用户
+     */
+    public List<ForumUser> selectFocusUsersByUid(int uid) ;
+
+    /**
+     * 根据uid查询所有该用户的关注者
+     * @param uid 需要查询的用户uid
+     * @return  所有关注该用户的用户
+     */
+    public List<ForumUser> selectFollowerByUid(int uid) ;
 }

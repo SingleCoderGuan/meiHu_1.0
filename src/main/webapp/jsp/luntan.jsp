@@ -162,7 +162,7 @@
                         </li>
 
                         <li>
-                            <a href="#">发帖</a>
+                            <a href="<%=basePath%>fatie.action">发帖</a>
                         </li>
 
 
@@ -177,6 +177,7 @@
                 <span>
                     <c:if test="${!empty user}">
                         <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                     </c:if>
                     <c:if test="${empty user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
