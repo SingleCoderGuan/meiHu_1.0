@@ -1,0 +1,240 @@
+/* vietnamese */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 100;
+    src: local('Josefin Sans Thin Italic'), local('JosefinSans-ThinItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3GZQNVED7rKGKxtqIqX5EUCEQZbHUEj6M7.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 100;
+    src: local('Josefin Sans Thin Italic'), local('JosefinSans-ThinItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3GZQNVED7rKGKxtqIqX5EUCEQZbHQEj6M7.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 100;
+    src: local('Josefin Sans Thin Italic'), local('JosefinSans-ThinItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3GZQNVED7rKGKxtqIqX5EUCEQZbHoEjw.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 300;
+    src: local('Josefin Sans Light Italic'), local('JosefinSans-LightItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3HZQNVED7rKGKxtqIqX5EUCETRfm0sqp4C_Q.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 300;
+    src: local('Josefin Sans Light Italic'), local('JosefinSans-LightItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3HZQNVED7rKGKxtqIqX5EUCETRfm0tqp4C_Q.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 300;
+    src: local('Josefin Sans Light Italic'), local('JosefinSans-LightItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3HZQNVED7rKGKxtqIqX5EUCETRfm0jqp4.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Josefin Sans Italic'), local('JosefinSans-Italic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3EZQNVED7rKGKxtqIqX5EUCEx1XHgciw.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Josefin Sans Italic'), local('JosefinSans-Italic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3EZQNVED7rKGKxtqIqX5EUCEx0XHgciw.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Josefin Sans Italic'), local('JosefinSans-Italic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3EZQNVED7rKGKxtqIqX5EUCEx6XHg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 600;
+    src: local('Josefin Sans SemiBold Italic'), local('JosefinSans-SemiBoldItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3HZQNVED7rKGKxtqIqX5EUCESleG0sqp4C_Q.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 600;
+    src: local('Josefin Sans SemiBold Italic'), local('JosefinSans-SemiBoldItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3HZQNVED7rKGKxtqIqX5EUCESleG0tqp4C_Q.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 600;
+    src: local('Josefin Sans SemiBold Italic'), local('JosefinSans-SemiBoldItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3HZQNVED7rKGKxtqIqX5EUCESleG0jqp4.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 700;
+    src: local('Josefin Sans Bold Italic'), local('JosefinSans-BoldItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3HZQNVED7rKGKxtqIqX5EUCETBeW0sqp4C_Q.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 700;
+    src: local('Josefin Sans Bold Italic'), local('JosefinSans-BoldItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3HZQNVED7rKGKxtqIqX5EUCETBeW0tqp4C_Q.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 700;
+    src: local('Josefin Sans Bold Italic'), local('JosefinSans-BoldItalic'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3HZQNVED7rKGKxtqIqX5EUCETBeW0jqp4.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Josefin Sans Thin'), local('JosefinSans-Thin'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3EZQNVED7rKGKxtqIqX5Ecbkx1XHgciw.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Josefin Sans Thin'), local('JosefinSans-Thin'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3EZQNVED7rKGKxtqIqX5Ecbkx0XHgciw.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Josefin Sans Thin'), local('JosefinSans-Thin'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3EZQNVED7rKGKxtqIqX5Ecbkx6XHg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Josefin Sans Light'), local('JosefinSans-Light'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3FZQNVED7rKGKxtqIqX5Ecpl5tdF0hspo.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Josefin Sans Light'), local('JosefinSans-Light'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3FZQNVED7rKGKxtqIqX5Ecpl5tdV0hspo.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Josefin Sans Light'), local('JosefinSans-Light'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3FZQNVED7rKGKxtqIqX5Ecpl5te10h.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Josefin Sans Regular'), local('JosefinSans-Regular'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3aZQNVED7rKGKxtqIqX5EUAnx4RHw.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Josefin Sans Regular'), local('JosefinSans-Regular'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3aZQNVED7rKGKxtqIqX5EUA3x4RHw.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Josefin Sans Regular'), local('JosefinSans-Regular'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3aZQNVED7rKGKxtqIqX5EUDXx4.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Josefin Sans SemiBold'), local('JosefinSans-SemiBold'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3FZQNVED7rKGKxtqIqX5Ec0lhtdF0hspo.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Josefin Sans SemiBold'), local('JosefinSans-SemiBold'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3FZQNVED7rKGKxtqIqX5Ec0lhtdV0hspo.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Josefin Sans SemiBold'), local('JosefinSans-SemiBold'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3FZQNVED7rKGKxtqIqX5Ec0lhte10h.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Josefin Sans Bold'), local('JosefinSans-Bold'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3FZQNVED7rKGKxtqIqX5EctlltdF0hspo.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Josefin Sans Bold'), local('JosefinSans-Bold'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3FZQNVED7rKGKxtqIqX5EctlltdV0hspo.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Josefin Sans Bold'), local('JosefinSans-Bold'), url(http://fonts.gstatic.com/s/josefinsans/v12/Qw3FZQNVED7rKGKxtqIqX5Ectllte10h.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

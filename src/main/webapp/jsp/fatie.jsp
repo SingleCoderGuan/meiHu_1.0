@@ -43,15 +43,7 @@
             border: 1px solid #ccc;
         }
     </style>
-    <script>
-        function subm(){
 
-            var title = document.getElementById('title').value;
-            document.getElementById('content').value=editor.txt.html();
-            var topicid = $("#topicList option:selected").val();
-            document.getElementById('newspost').submit();
-        }
-    </script>
 </head>
 <style type="text/css">
     .sponsor .sponsor-level {
@@ -199,7 +191,7 @@
                         <input type="text" id="title" name="title"/><br/><br/>
 
                         板块：
-                        <select style="position: relative;top: -10px;" id="topicList">
+                        <select style="position: relative;top: -10px;" id="topicList" name="topicid">
                             <option value="1">香水</option>
                             <option value="2">水乳</option>
                             <option value="3">口红</option>
@@ -217,7 +209,7 @@
                         <div id="div2" class="text" style="height: 480px;">
 
                         </div>
-                        <input type="button" value="保存" onclick="subm()" />
+                        <input type="submit" value="保存" />
 
                     </form>
 

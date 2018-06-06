@@ -108,6 +108,7 @@ public class UserController {
         session.setAttribute("followers",followers);
         response.sendRedirect(request.getContextPath()+"/jsp/userPersonalCenter.jsp");
     }
+
     @RequestMapping(value = "/signOut.action")
     public void signOut(HttpServletRequest request,HttpServletResponse response) throws IOException {
         request.getSession().invalidate();

@@ -887,9 +887,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //banner slider js -->
 
 <!-- //here starts scrolling icon -->
-<script src="../js/SmoothScroll.min.js"></script>
-<script type="text/javascript" src="../js/move-top.js"></script>
-<script type="text/javascript" src="../js/easing.js"></script>
+<script src="<%=basePath%>js/SmoothScroll.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/move-top.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/easing.js"></script>
 <!-- here stars scrolling script -->
 <script type="text/javascript">
     $(document).ready(function () {
