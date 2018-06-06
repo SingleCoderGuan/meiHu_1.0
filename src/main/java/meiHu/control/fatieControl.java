@@ -34,16 +34,19 @@ public class fatieControl {
             response.sendRedirect(request.getContextPath()+"/jsp/fatie.jsp");
         }
     }
-    @RequestMapping(value = "/newpost.action")
-    public void newPost(ForumPost post , int topicid, HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    @RequestMapping(value = "/newpost.action", method = RequestMethod.POST)
+    public void newPost(int topicid, ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println(topicid);
+        System.out.println(post);
         ForumTopic topic = forumTopicMapper.selectTopicByTid(topicid);
-        ForumPost forumPost = post ;
+        ForumPost forumPost = post;
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         forumPost.setTopic(topic);
-        if(forumPostMapper.insert(forumPost)){
-            response.sendRedirect(request.getContextPath()+"/luntan/luntanshouye.action");
-        }else{
+        if (forumPostMapper.insert(forumPost)) {
+            response.sendRedirect(request.getContextPath() + "/luntan/luntanshouye.action?tid=1");
+        } else {
             System.out.println("发帖失败");
         }
 

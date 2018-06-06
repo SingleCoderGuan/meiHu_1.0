@@ -7,7 +7,7 @@
     </select>
 
     <!--public ForumTopic selectTopicByTid(int tid) ;-->
-    <select id="selectTopicByTid" parameterType="int">
+    <select id="selectTopicByTid" parameterType="int" resultType="ForumTopic">
         SELECT * FROM forum_topic WHERE tid=#{_parameter}
     </select>
 </mapper>

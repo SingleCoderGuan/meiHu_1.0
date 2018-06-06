@@ -60,7 +60,7 @@ ul.tabs li a {
 }
 
 #extralogin {
-    position:relative ;
+    position:absolute ;
     top: 30px;
     left:-95px;
     font-family: 'Lato', sans-serif;

@@ -107,7 +107,7 @@
 
     <!--public List<ForumPost> selectPostsByUid(int uid) ;-->
     <select id="selectPostsByUid" parameterType="int" resultMap="selectCollectedPostsByUidMap">
-        SELECT p.* FROM forum_post p WHERE p.user_uid=#{_parameter}
+        SELECT p.*,t.*,u.* FROM forum_post p,forum_topic t,forum_user u WHERE p.user_uid=#{_parameter} AND p.topic_tid=t.tid AND p.user_uid=u.uid
     </select>
 
     <!--public boolean insert(ForumPost post) ;-->

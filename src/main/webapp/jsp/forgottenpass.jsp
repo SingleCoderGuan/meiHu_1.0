@@ -14,7 +14,7 @@
 <html >
 <head>
 
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>美乎忘记密码</title>
@@ -30,7 +30,7 @@
     <div class="cont_centrar">
         <img id="logo" src="<%=basePath%>images/LOGO.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
-        <form class="form-horizontal forgottenform" >
+        <form class="form-horizontal forgottenform"  >
             <div class="form-group" style="position: relative;left: 53px;">
                 <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 167px;color:#996666;font-size: 18px">手机号码</label>
                 <div class="col-sm-4">
@@ -43,17 +43,17 @@
                 <input type="button"style="position: relative;left: -314px;top: 5px;" id="btn" class="btn_my_login" value="发送短信验证码" onclick="sendMessage()" disabled />
             </div>
 
-            <div class="form-group"style="position: relative;left: 53px;">
+            <div class="form-group" style="position: relative;left: 53px;">
                 <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 167px;color:#996666;font-size: 18px">短信验证码</label>
                 <div class="col-sm-4">
                     <input type="text"  class="forgotteninput" id="code" placeholder="请输入短信验证码入" />
-                    <span style="position: absolute;left: 200px;top: 80px;" id="verifcode"></span>
+                    <span style="position: absolute;left: 200px;top: 80px;" id="codetip"></span>
                 </div>
             </div>
 
             <div class="form-group"style="position: relative;left: 53px;">
                 <div class="col-sm-offset-2 col-sm-1">
-                    <button type="submit" class="btn_my_login" id="lo" style="width: 200px;position:relative;top: 4px;left:212px;background-color: #f44336;color: #fff;">确定</button>
+                    <button class="btn_my_login"  id="lo" style="width: 200px;position:relative;top: 4px;left:212px;background-color: #f44336;color: #fff;" disabled>确定</button>
                 </div>
             </div>
         </form>
@@ -66,6 +66,23 @@
 <script src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
 <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
 
+<script>
+    $("#code").blur(function () {
+        var telnum = $("#code").val();
+        if(telnum.length <5){
+            $("#codetip").html("")
+            $("#codetip").removeClass()
+            $("#codetip").addClass("wrong")
+            $("#codetip").html("请输入正确格式")
+            $("#lo").attr("disabled","true")
+        }else{
+            $("#codetip").removeClass()
+            $("#codetip").addClass("right")
+            $("#codetip").html("ok")
+            $("#lo").attr("disabled",false) ;
+        }
+    })
+</script>
 <script>
     $("#tel").blur(function () {
         var telnum = $("#tel").val();
@@ -92,6 +109,7 @@
                         $("#teltip").removeClass()
                         $("#teltip").addClass("right")
                         $("#btn").attr("disabled",false) ;
+                        $("#tel").attr("disabled",true);
                     }
                 }
             })
@@ -126,39 +144,35 @@
     $("#btn").click(function(){
         var tel=$("#tel").val();
         $.ajax({
-            url:"sendSMS",
-            type:"post",
-            data:{"phone":tel},
+            url:"${pageContext.request.contextPath}/resetSend.action",
+            type:"get",
+            data:{"tel":tel},
             success:function(result){
                 sms=result;
+                alert(sms)
             }
         });
     });
-    $("#lo").blur(function () {
-        $.ajax({
-            url:"sendSMS",
-            type:"post",
-            data:{"phone":tel},
-            success:function(result){
-                sms=result;
-            }
-
-        })
-    })
 
     $("#lo").click(function(){
         var code=$("#code").val();
         if(code==""){
             alert("请输入验证码");
         }else{
-            if(sms==code){
-                window.location.href="success.jsp";
-            }else{
-                alert("验证码错误");
+            $.ajax({
+                url:"${pageContext.request.contextPath}/sendCodes.action",
+                type:"get",
+                data:{"trueCode":sms,"userCode":code},
+                success:function(result){
+                    if(result=="wrong"){
+                        alert("验证码错误");
+                    }else {
+                        window.location.href(result);
+                    }
+                }
+            })
 
-            };
         };
-
     });
 
 </script>

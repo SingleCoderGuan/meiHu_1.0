@@ -2,6 +2,7 @@ package meiHu.service;
 
 import meiHu.entity.ForumUser;
 
+import java.util.Date;
 import java.util.List;
 
 public interface UserService {
@@ -19,7 +20,7 @@ public interface UserService {
      * @param tel 电话号码
      * @return
      */
-    public boolean insertUser(String uname,String password,String tel);
+    public boolean insertUser(String uname, String password, String tel, Date registertime);
 
     /**
      * 根据电话号码查询该电话号码是否已被注册

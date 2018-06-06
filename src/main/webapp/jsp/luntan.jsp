@@ -110,7 +110,10 @@
         display: block;
     }
 </style>
-<body>
+<body style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
 <div class="aw-top-menu-wrap"
 >
     <div class="aw-wecenter aw-top-menu clearfix">
@@ -196,25 +199,70 @@
 </div>
 
 
-<div class="aw-container-wrap">
-    <div class="aw-container aw-wecenter">
+<div class="aw-container-wrap " style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
+    <div class="aw-container aw-wecenter" style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
         <div class="container">
             <div class="row category">
                 <div class="col-sm-12">
+                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai1.png" style="position: relative;left: 30px;"/></dt>
+                            <dd>
+                                <p class="title"><a href="#">香水</a></p>
+                            </dd>
+                        </dl>
+                    </a>
+                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=2">
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai2.png" style="position: relative;left: 30px;"/></dt>
+                            <dd>
+                                <p class="title"><a href="#">水乳</a></p>
 
-                    <c:forEach items="${topicList}" var="topicList">
-                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList.tid}">
-                            <dl>
-                                <dt><img src="<%=basePath%>images/${topicList.tpicname}"/></dt>
-                                <dd>
-                                    <p class="title"><a href="#">${topicList.tname}</a></p>
+                            </dd>
+                        </dl>
+                    </a>
+                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=3">
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai3.png" style="position: relative;left: 30px;"/></dt>
+                            <dd>
+                                <p class="title"><a href="#">口红</a></p>
 
-                                </dd>
-                            </dl>
-                        </a>
-                    </c:forEach>
+                            </dd>
+                        </dl>
+                    </a>
+                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=4">
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai4.png" style="position: relative;left: 30px;"/></dt>
+                            <dd>
+                                <p class="title"><a href="#">防晒霜</a></p>
 
+                            </dd>
+                        </dl>
+                    </a>
+                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=5">
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai5.png" style="position: relative;left: 30px;"/></dt>
+                            <dd>
+                                <p class="title"><a href="#">洗面奶</a></p>
 
+                            </dd>
+                        </dl>
+                    </a>
+                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=6">
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai6.png" style="position: relative;left: 30px;"/></dt>
+                            <dd>
+                                <p class="title"><a href="#">眼霜</a></p>
+
+                            </dd>
+                        </dl>
+                    </a>
                 </div>
             </div>
         </div>
@@ -532,7 +580,10 @@
     </div>
 </div>
 
-<div class="aw-footer-wrap">
+<div class="aw-footer-wrap" style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
 
 
     <div class="aw-footer aw-wecenter">

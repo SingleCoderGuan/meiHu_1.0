@@ -150,11 +150,14 @@
             <!-- 用户栏 -->
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
-                <span>
-							<a href="#"><img src="../images/touxiang1.png"/>欢迎您：美乎小编</a>
-                    <!--<a href="#">注册</a>
-                    <a href="#">登录</a>-->
-						</span>
+                <c:if test="${!empty user}">
+                    <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
+                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 60px;top: -53px">注销</a>
+                </c:if>
+                <c:if test="${empty user}">
+                    <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
+                    <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
+                </c:if>
 
                 <!-- end 登陆&注册栏 -->
             </div>

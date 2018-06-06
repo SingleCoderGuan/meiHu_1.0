@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,11 +31,29 @@ public class UserController {
     private PostService postService ;
 
     @RequestMapping(value = "/loginWithAccount.action",method = RequestMethod.POST)
-    public void findUserByUname(String uname,String password, HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+    public void findUserByUname(String uname,String password,String flag, HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         ForumUser user = userService.findUserByUname(uname);
         if(user!=null){
             if(user.getPassword().equals(password)){
 //                登陆成功
+                if("1".equals(flag)) {
+                    boolean f = false ;
+                    Cookie[] cookies = request.getCookies() ;
+                    for(Cookie c : cookies) {
+                        if("userInfo".equals(c.getName())) {
+                            f = true ;
+                            break ;
+                        }
+                    }
+                    if(!f) {
+                        Cookie cookie = new Cookie("userInfo", uname+"-"+password) ;
+                        cookie.setMaxAge(10000);
+                        cookie.setPath("/");
+
+                        response.addCookie(cookie);
+                    }
+                }
+
                 request.getSession().setAttribute("user",user);
                 request.getRequestDispatcher("/luntan/luntanshouye.action?tid=1").forward(request,response);
             }else{
@@ -46,12 +67,11 @@ public class UserController {
 
     }
     @RequestMapping(value = "/register.action",method = RequestMethod.POST)
-    public String register(String id ,String password ,String tel,HttpServletRequest request ,HttpServletResponse response ){
-        if(id.equals("3")){
-            return "账号注册成功";
-        }else{
-            return "账号注册失败" ;
-        }
+    public void register(String username ,String userpassword ,String phone,HttpServletRequest request ,HttpServletResponse response ) throws UnsupportedEncodingException {
+        request.setCharacterEncoding("utf-8");
+        userService.insertUser(username,userpassword,phone,new Date()) ;
+        request.getRequestDispatcher(request.getContextPath()+"/jsp/loginregister.jsp") ;
+
     }
     @RequestMapping(value = "/loginWithTel.action",method = RequestMethod.GET)
     public void findUser(String tel,String vcode,HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
@@ -113,5 +133,17 @@ public class UserController {
     public void signOut(HttpServletRequest request,HttpServletResponse response) throws IOException {
         request.getSession().invalidate();
         response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp");
+    }
+
+    @RequestMapping(value = "/sendCodes.action",method = RequestMethod.GET)
+    public String RestCodesJudge(String trueCode,String userCode,HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+        System.out.println(trueCode+"-------------"+userCode);
+
+        if(trueCode.equals(userCode)){
+            System.out.println("验证码对了，但是没跳转");
+            return request.getContextPath()+"/jsp/resetpass.jsp" ;
+        }else{
+            return "wrong";
+        }
     }
 }
