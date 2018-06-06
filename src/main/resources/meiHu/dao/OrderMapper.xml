@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.OrderMapper">
+
+    <resultMap id="orderMap" type="Order">
+        <id column="orderid" property="orderid"/>
+        <result column="ordertime" property="ordertime"/>
+        <result column="total" property="total"/>
+        <result column="state" property="state"/>
+        <collection property="items" ofType="OrderItem">
+            <id column="itemid" property="itemid"/>
+            <result column="num" property="count"/>
+            <result column="subtotal" property="subtotal"/>
+            <association property="good" javaType="Goods">
+                <id column="goodid" property="goodid"/>
+                <result column="goodname" property="goodname"/>
+                <result column="goodpic" property="goodpic"/>
+                <result column="goodprice" property="goodprice"/>
+                <result column="goodstore" property="goodstore"/>
+                <result column="goodaddress" property="goodaddress"/>
+                <result column="gooddetail" property="gooddetail"/>
+                <result column="goodsales" property="goodsales"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <resultMap id="RunOrderMap" type="Order">
+        <id column="orderid" property="orderid"/>
+        <result column="ordertime" property="ordertime"/>
+        <result column="total" property="total"/>
+        <result column="state" property="state"/>
+        <collection property="items" ofType="OrderItem">
+            <id column="itemid" property="itemid"/>
+            <result column="num" property="count"/>
+            <result column="subtotal" property="subtotal"/>
+            <association property="good" javaType="Goods">
+                <id column="goodid" property="goodid"/>
+                <result column="goodname" property="goodname"/>
+                <result column="goodpic" property="goodpic"/>
+                <result column="goodprice" property="goodprice"/>
+                <result column="goodstore" property="goodstore"/>
+                <result column="goodaddress" property="goodaddress"/>
+                <result column="gooddetail" property="gooddetail"/>
+                <result column="goodsales" property="goodsales"/>
+            </association>
+        </collection>
+    </resultMap>
+    <!--//根据用户id查询我的订单信息-->
+    <!--public List<Order> findMyOrders(int uid);-->
+    <select id="findMyOrders" parameterType="int" resultMap="orderMap">
+       select * from shop_order so,shop_item si,shop_goods sg
+        where so.uid=#{_parameter}
+          and so.orderid=si.orderid
+          and si.goodid=sg.goodid
+          order by so.ordertime desc
+    </select>
+
+    <!--//保存订单信息-->
+    <!--public void save(Order order);-->
+    <insert id="save" parameterType="Order" useGeneratedKeys="true"
+            keyProperty="orderid">
+        insert into shop_order values(#{orderid},101,#{ordertime},2,#{total},0)
+    </insert>
+
+   <!-- public void saveItem(OrderItem oi);-->
+    <insert id="saveItem" parameterType="OrderItem" >
+        insert into shop_item values(#{itemid},#{order.orderid},#{good.goodid},#{count},#{subtotal})
+    </insert>
+
+    <!--public void deleteOrderItem(int orderid);-->
+    <delete id="deleteOrderItem" parameterType="int">
+        delete from shop_item where orderid=#{_parameter}
+    </delete>
+
+    <!--public void deleteOrder(int orderid);-->
+    <delete id="deleteOrder" parameterType="int">
+        delete from shop_order where orderid=#{_parameter}
+    </delete>
+
+   <!-- //用户查询已发货的订单
+    public List<Order> getRunOrder(int uid);-->
+    <select id="getRunOrder" parameterType="int" resultMap="RunOrderMap">
+           select *  from shop_order so,shop_item si,shop_goods sg
+          where so.uid=#{_parameter}
+          and so.orderid=si.orderid
+          and si.goodid=sg.goodid
+          and state=2
+    </select>
+
+    <!--//用户查询已完成的订单
+    public List<Order> getDoneOrder(int uid);-->
+
+
+</mapper>
