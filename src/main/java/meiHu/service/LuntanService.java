@@ -52,6 +52,9 @@ public interface LuntanService {
 
     public int selectCommentCommentNum(int cid);
 
+    public int SelectUidByPid(int pid);
+
+    public String selectTnameBuTid(int tid);
 
 
 }

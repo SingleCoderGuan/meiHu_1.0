@@ -5,6 +5,15 @@ public class ForumTopic {
 
     private String tname;
 
+    @Override
+    public String toString() {
+        return "ForumTopic{" +
+                "tid=" + tid +
+                ", tname='" + tname + '\'' +
+                ", tpicname='" + tpicname + '\'' +
+                '}';
+    }
+
     public String getTpicname() {
         return tpicname;
     }

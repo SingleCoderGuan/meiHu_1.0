@@ -13,6 +13,22 @@ public class ForumPost {
     public String pcontent;
     private ForumTopic topic;
 
+
+    @Override
+    public String toString() {
+        return "ForumPost{" +
+                "pid=" + pid +
+                ", user=" + user +
+                ", createtime=" + createtime +
+                ", hot=" + hot +
+                ", visitcount=" + visitcount +
+                ", likecount=" + likecount +
+                ", ptitle='" + ptitle + '\'' +
+                ", pcontent='" + pcontent + '\'' +
+                ", topic=" + topic +
+                '}';
+    }
+
     public Integer getPid() {
         return pid;
     }

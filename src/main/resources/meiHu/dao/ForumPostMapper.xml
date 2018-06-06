@@ -2,15 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumPostMapper">
     <resultMap id="getForumPost" type="ForumPost">
-      <!--  private Integer pid;
-        private ForumUser user;
-        private Date createtime;
-        private Integer hot;
-        private Integer visitcount ;
-        private Integer likeCount ;
-        private String ptitle;
-        public String pcontent;
-        private ForumTopic topic;-->
         <id column="pid" property="pid"/>
         <result column="createtime" property="createtime"/>
         <result column="hot" property="hot"/>
@@ -21,6 +12,7 @@
         <association property="user" javaType="ForumUser">
             <id column="uid" property="uid"/>
             <result column="uname" property="uname"/>
+            <result column="headpic" property="headpic"/>
         </association>
         <association property="topic" javaType="ForumTopic">
             <id column="tid" property="tid"/>
@@ -36,8 +28,8 @@
     </select>
 
     <!--public ForumPost selectPostByPid(int pid);-->
-    <select id="selectPostByPid" parameterType="int" resultType="ForumPost">
-        SELECT * FROM forum_post WHERE pid=#{parameter}
+    <select id="selectPostByPid" parameterType="int" resultMap="getForumPost">
+        SELECT p.*,u.* FROM forum_post p,forum_user u WHERE pid=#{parameter} AND p.user_uid = u.uid
     </select>
 
 
@@ -114,4 +106,19 @@
     <insert id="insert" parameterType="ForumPost">
         INSERT INTO forum_post (user_uid,createtime,ptitle,pcontent,topic_tid) VALUES (#{user.uid},#{createtime},#{ptitle},#{pcontent},#{topic.tid})
     </insert>
+
+
+
+    <!--public int SelectUidByPid(int pid);-->
+
+    <select id="SelectUidByPid" resultType="int" parameterType="int">
+        SELECT user_uid FROM forum_post WHERE pid = #{parameter}
+    </select>
+
+
+    <!--public List<ForumPost> selectPostsByPtitle(String keyword)-->
+    <select id="selectPostsByPtitle" resultMap="getForumPost" parameterType="String">
+        SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
+        WHERE  p.ptitle like CONCAT('%',#{parameter},'%')   AND p.user_uid = u.uid AND t.tid = p.topic_tid
+    </select>
 </mapper>

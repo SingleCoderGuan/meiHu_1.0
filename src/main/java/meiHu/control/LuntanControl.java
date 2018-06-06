@@ -2,6 +2,7 @@ package meiHu.control;
 
 
 import meiHu.entity.*;
+import meiHu.service.FocusService;
 import meiHu.service.LuntanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +24,11 @@ import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/luntan")
-public class luntanControl {
+public class LuntanControl {
     @Autowired
     private LuntanService luntanService;
+    @Autowired
+    private FocusService focusService;
 
     @RequestMapping(value = "/luntanshouye.action")
     public void luntanshouye(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +39,9 @@ public class luntanControl {
         List<ForumPost> postList=luntanService.selectPostsByTid(tid1);
         request.setAttribute("topicList",topicList);
         request.setAttribute("postList",postList);
-        request.setAttribute("tid1",tid1);
+        String tname = luntanService.selectTnameBuTid(tid1);
+        request.setAttribute("tname",tname);
+        request.getSession().setAttribute("uid",102);
         request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
 
 
@@ -50,6 +55,13 @@ public class luntanControl {
         int collection = luntanService.selectCollectedCountByPid(pid1);
         request.setAttribute("collectionnum",collection);
         ForumPost forumPost = luntanService.selectPostByPid(pid1);
+
+        int uid = luntanService.SelectUidByPid(pid1);
+        request.setAttribute("focusnum",focusService.selectUserFocusNum(uid));
+        request.setAttribute("focusednum",focusService.selectUserFocusedNum(uid));
+
+
+
         request.setAttribute("forumPost",forumPost);
         int postCommentNum = luntanService.selectPostCommentNum(pid1);
         request.setAttribute("postCommentNum",postCommentNum);
@@ -241,6 +253,26 @@ public class luntanControl {
             out.print(0);
 
         }
+    }
+
+    @RequestMapping("/focus.action")
+    public void focus( HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String focusuid = request.getParameter("focusuid");
+        String focusduid = request.getParameter("focusduid");
+        int uid = Integer.parseInt(focusuid);
+        int postuid = Integer.parseInt(focusduid);
+        PrintWriter out = response.getWriter();
+        if(focusService.selectFocusIfExist(uid,postuid)==null){
+            if(focusService.addFocusUser(uid,postuid)){
+                out.print(1);
+            }else {
+                out.print(0);
+            }
+        }else {
+            out.print(2);
+        }
+
+
     }
 
 

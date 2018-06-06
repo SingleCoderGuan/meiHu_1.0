@@ -98,5 +98,6 @@ public interface ForumPostMapper {
 
     public void updatePostVisitNumSub(int pid);
 
-
+    //根据帖子号查询uid
+    public int SelectUidByPid(int pid);
 }

@@ -102,4 +102,20 @@ public class ForumUser {
     public void setRegistertime(Date registertime) {
         this.registertime = registertime;
     }
+
+    @Override
+    public String toString() {
+        return "ForumUser{" +
+                "uid=" + uid +
+                ", uname='" + uname + '\'' +
+                ", password='" + password + '\'' +
+                ", tel='" + tel + '\'' +
+                ", email='" + email + '\'' +
+                ", sex='" + sex + '\'' +
+                ", point=" + point +
+                ", title=" + title +
+                ", headpic='" + headpic + '\'' +
+                ", registertime=" + registertime +
+                '}';
+    }
 }

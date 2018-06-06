@@ -17,5 +17,7 @@ public interface ForumTopicMapper {
      * @return  该tid对应版块数据
      */
     public ForumTopic selectTopicByTid(int tid) ;
+    //根据某个tid查询tname
+    public String selectTnameBuTid(int tid);
 
 }

@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumFocusMapper">
+    <!--public int addFocusUser(int uid,int focusuid);-->
+    <insert id="addFocusUser" parameterType="int">
+        INSERT INTO  forum_focus(user_uid,focused_user_id)
+        VALUES (#{param1},#{param2})
+    </insert>
 
+    <!--public int selectUserFocusNum(int uid);-->
+    <select id="selectUserFocusNum" parameterType="int" resultType="int">
+        SELECT count(*) FROM forum_focus WHERE user_uid=#{parameter}
+    </select>
+    <!--public int selectUserFocusedNum(int uid);-->
+    <select id="selectUserFocusedNum" parameterType="int" resultType="int">
+        SELECT count(*) FROM forum_focus WHERE focused_user_id=#{parameter}
+    </select>
+
+
+    <!--public ForumFocus selectFocusIfExist(int uid,int focusuid);-->
+    <select id="selectFocusIfExist" resultType="ForumFocus" parameterType="int">
+        SELECT * FROM forum_focus WHERE user_uid=#{param1} and focused_user_id=#{param2}
+    </select>
 </mapper>
