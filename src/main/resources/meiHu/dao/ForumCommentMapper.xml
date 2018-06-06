@@ -9,6 +9,7 @@
         <association property="user" javaType="ForumUser">
             <id column="uid" property="uid"/>
             <result column="uname" property="uname"/>
+            <result column="headpic" property="headpic"/>
             <association property="title" javaType="ForumTitle">
                 <id column="titleid" property="titleid"/>
                 <result column="title" property="title"/>
@@ -52,7 +53,7 @@
 
     <!--public List<ForumComment> selectAllPostCommentByPid(int pid);-->
     <select id="selectAllPostCommentByPid" resultMap="postforummapper" parameterType="int">
-        SELECT c.*,u.uname,t.title FROM  forum_comment c,forum_user u, forum_title t
+        SELECT c.*,u.*,t.title FROM  forum_comment c,forum_user u, forum_title t
          WHERE c.user_uid = u.uid AND u.title_id = t.titleid AND post_pid=#{parameter}
          AND commentid is null
     </select>

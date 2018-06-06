@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class LuntanServiceImpl implements LuntanService{
+
     private final ForumTopicMapper forumTopicMapper;
     private final ForumPostMapper forumPostMapper;
     private final ForumCollectionMapper forumCollectionMapper;
@@ -194,7 +195,15 @@ public class LuntanServiceImpl implements LuntanService{
         return forumCommentMapper.selectCommentCommentNum(cid);
     }
 
+    @Override
+    public int SelectUidByPid(int pid) {
+        return forumPostMapper.SelectUidByPid(pid);
+    }
 
+    @Override
+    public String selectTnameBuTid(int tid) {
+        return forumTopicMapper.selectTnameBuTid(tid);
+    }
 
 
 }

@@ -64,7 +64,6 @@ public class ArticleControl {
         int oid = Integer.parseInt(oaid);
         ForumOfficalarticle forumOfficalarticle = articleService.selectOfficalArticleByOaid(oid);
         request.setAttribute("forumOfficalarticle",forumOfficalarticle);
-        System.out.println(forumOfficalarticle.toString());
         request.getRequestDispatcher("/jsp/articledetail.jsp").forward(request,response);
 
     }

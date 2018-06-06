@@ -70,17 +70,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav link-effect">
                     <li class="active">
-                        <a href="shouye.html">美乎</a>
+                        <a href="#">美乎</a>
                     </li>
 
                     <li>
-                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=1" class="scroll">美论</a>
+                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=1" >美论</a>
                     </li>
                     <li>
-                        <a href="article/article.action" class="scroll">美文</a>
+                        <a href="article/article.action" >美文</a>
                     </li>
                     <li>
-                        <a href="#" class="scroll">美淘</a>
+                        <a href="#" >美淘</a>
 
                     </li>
 
@@ -218,7 +218,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="services-agile-w3l-icon-info">
                 <h5>香水</h5>
-                <p>那是谁的月亮站在琴弦上把香水川的忧伤一缕缕吟唱.</p>
+                <p>那是谁的月亮站在琴弦上把香水川的忧伤一缕缕吟唱.
+                哦 我的香水</p>
             </div>
         </div>
         <div class="col-xs-4 services-agile-w3l-right-grid grid-3">

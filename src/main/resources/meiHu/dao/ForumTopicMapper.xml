@@ -10,4 +10,10 @@
     <select id="selectTopicByTid" parameterType="int">
         SELECT * FROM forum_topic WHERE tid=#{_parameter}
     </select>
+
+
+    <!--public String selectTnameBuTid(int tid);-->
+    <select id="selectTnameBuTid" resultType="String" parameterType="int">
+        SELECT tname from forum_topic WHERE tid=#{parameter}
+    </select>
 </mapper>

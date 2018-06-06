@@ -25,4 +25,6 @@ public interface PostService {
      * @return  是否成功发帖
      */
     public boolean postNewPost(ForumPost post) ;
+
+    public List<ForumPost> selectPostsByPtitle(String keyword);
 }

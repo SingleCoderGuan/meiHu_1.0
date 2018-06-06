@@ -24,4 +24,9 @@ public class PostServiceImpl implements PostService {
     public boolean postNewPost(ForumPost post) {
         return forumPostMapper.insert(post);
     }
+
+    @Override
+    public List<ForumPost> selectPostsByPtitle(String keyword) {
+        return forumPostMapper.selectPostsByPtitle(keyword);
+    }
 }

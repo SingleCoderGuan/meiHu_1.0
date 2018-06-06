@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 上官龙超
-  Date: 2018/5/31/031
-  Time: 10:37
+  Date: 2018/6/6/006
+  Time: 15:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,12 +11,11 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-   // String tid = request.getParameter("tid");
+
 %>
 <html>
 <head>
-    <title>美论首页</title>
-
+    <title>搜索结果</title>
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
 
@@ -117,7 +116,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="http://localhost:8080/meiHu/"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+                <a href="http://localhost:8080/meiHu/"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -369,7 +368,7 @@
                             <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=zuixin&tid=<%=request.getParameter("tid")%>" >最新</a>
                         </li>
 
-                        <h2 class="hidden-xs"> ……姑娘清留步,这是${tname}区</h2>
+                        <h2 class="hidden-xs"> ……姑娘清留步,这是您需要的</h2>
                     </ul>
                     <!-- end tab切换 -->
 
@@ -399,32 +398,32 @@
                                     }
                                 </style>
                                 <c:forEach var="postList" items="${postList}"  varStatus="status">
-                                <div class="aw-item ">
-                                    <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
-                                       <%-- <img src="<%=basePath%>images/touxiang1.png" alt="" />--%>
-                                        <span style="font-size: 40px "><strong>${status.index+1}</strong></span>
-                                    </a>
+                                    <div class="aw-item ">
+                                        <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
+                                                <%-- <img src="<%=basePath%>images/touxiang1.png" alt="" />--%>
+                                            <span style="font-size: 40px "><strong>${status.index+1}</strong></span>
+                                        </a>
 
-                                    <div class="aw-question-content">
-                                        <h4>
-                                            <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
-                                        </h4>
+                                        <div class="aw-question-content">
+                                            <h4>
+                                                <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
+                                            </h4>
 
 
 
-                                        <p>
+                                            <p>
 							<span class="aw-question-tags">
 					<i class="fa fa-caret-left"></i>
 					<a href="#">${postList.topic.tname}</a><%--标签--%>
 				</span> •
-                                            <a href="#" class="aw-user-name" >${postList.user.uname}</a>
-                                            <span class="aw-text-color-999" >${postList.likecount}次点赞  •
+                                                <a href="#" class="aw-user-name" >${postList.user.uname}</a>
+                                                <span class="aw-text-color-999" >${postList.likecount}次点赞  •
                                                     ${postList.visitcount} 次浏览 •<fmt:formatDate value='${postList.createtime}'
                                                                                                 pattern='yyyy-MM-dd hh:mm:ss'/>   </span>
-                                        </p>
+                                            </p>
 
+                                        </div>
                                     </div>
-                                </div>
                                 </c:forEach>
 
 
@@ -698,4 +697,3 @@
 </script>
 </body>
 </html>
-

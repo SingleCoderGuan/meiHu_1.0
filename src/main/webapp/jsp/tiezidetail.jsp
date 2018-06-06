@@ -100,14 +100,59 @@
             <!-- end logo -->
             <!-- 搜索框 -->
             <div class="aw-search-box  hidden-xs hidden-sm">
-                <form class="navbar-search pull-right" action="#" id="global_search_form" method="post">
+                <form class="navbar-search pull-right" action="<%=basePath%>search/searchReasult.action" id="global_search_form" method="post">
                     <div class="input-group">
-                        <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off"
-                               name="q" id="aw-search-query" class="search-query"/>
+                        <input value="" class="form-control" type="text"
+                               placeholder="搜索问题、话题" autocomplete="off" name="searchcontent" id="aw-search-query"
+                               class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
                               onClick="$('#global_search_form').submit();">搜索</span>
-                        <div class="clearfix"></div>
+                        <div id="context1" style="background-color:white; border: 1px solid deepskyblue;width:167px;
+                                position: absolute;top: 36px;left:0px;display:none" ></div>
+                        <script>
+                            $("#aw-search-query").keyup(function(){
+                                var content=$(this).val();
+                                //如果当前搜索内容为空，无须进行查询
+                                if(content==""){
+                                    $("#context1").css("display","none");
+                                    return ;
+                                }
+                                //由于浏览器的缓存机制 所以我们每次传入一个时间
+                                var time=new Date().getTime();
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                    type:"post",
+                                    url:"${pageContext.request.contextPath}/search/automatch.action",
+                                    data:{name:content,time:time},
+                                    success:function(data){
+                                        //拼接html
+                                        var res=data.split(",");
+                                        var html="";
+                                        for(var i=0;i<res.length;i++){
+                                            //每一个div还有鼠标移出、移入点击事件
+                                            html+="<div onclick='setSearch_onclick(this)' onmouseout='changeBackColor_out(this)' onmouseover='changeBackColor_over(this)'>"+res[i]+"</div>";
+                                        }
+                                        $("#context1").html(html);
+                                        //显示为块级元素
+                                        $("#context1").css("display","block");
+                                    }
+                                });
+                            });
 
+                            //鼠标移动到内容上
+                            function changeBackColor_over(div){
+                                $(div).css("background-color","#CCCCCC");
+                            }
+                            //鼠标离开内容
+                            function changeBackColor_out(div){
+                                $(div).css("background-color","");
+                            }
+                            //将点击的内容放到搜索框
+                            function setSearch_onclick(div){
+                                $("#aw-search-query").val(div.innerText);
+                                $("#context1").css("display","none");
+                            }
+                        </script>
                     </div>
                 </form>
             </div>
@@ -313,6 +358,10 @@
 
                                     <script>
                                         function shoucang(uidd, pidd) {
+                                            <c:if test="${empty uid}">
+                                                alert("亲，请先登录");
+                                            </c:if>
+                                            <c:if test="${not empty uid}">
                                             if ($("#shoucang").attr("src") == ("../images/shoucang.png")) {
                                                 $("#shoucang").attr("src", "../images/shoucanghou.png");
                                                 $.ajax(
@@ -323,6 +372,7 @@
                                                     }
                                                 );
 
+
                                             } else {
                                                 $("#shoucang").attr("src", "../images/shoucang.png");
                                                 $.ajax(
@@ -332,12 +382,17 @@
                                                         data: "uid=" + uidd + "&pid=" + pidd,
                                                     }
                                                 );
+
                                             }
+                                            </c:if>
 
                                         }
 
                                         function dianzan(uidd, pidd) {
-
+                                            <c:if test="${empty uid}">
+                                                alert("亲，请先登录");
+                                            </c:if>
+                                            <c:if test="${not empty uid}">
                                             if ($("#dianzan").attr("src") == ("../images/dianzan.png")) {
                                                 $("#dianzan").attr("src", "../images/dianzanhou.png");
                                                 $.ajax(
@@ -348,6 +403,7 @@
 
                                                     }
                                                 );
+
 
                                             } else {
                                                 $("#dianzan").attr("src", "../images/dianzan.png");
@@ -361,6 +417,7 @@
                                                 );
 
                                             }
+                                            </c:if>
                                         }
 
 
@@ -414,6 +471,10 @@
                                                        onclick="pinglun(${uid},${forumPost.pid},$('#postcomment').val())"></input>
                                                 <script>
                                                     function pinglun(uidd, pidd, text) {
+                                                    <c:if test="${empty uid}">
+                                                        alert("亲，请先登录");
+                                                    </c:if>
+                                                    <c:if test="${not empty uid}">
                                                         $.ajax({
                                                             type: "post",
                                                             url: "${pageContext.request.contextPath}/luntan/postcomment.action",
@@ -425,6 +486,7 @@
                                                                 }
                                                             }
                                                         });
+                                                        </c:if>
                                                     }
                                                 </script>
 
@@ -447,7 +509,10 @@
 
                                                 <script>
                                                     function jubao(uidd, pidd, reason) {
-
+                                                        <c:if test="${empty uid}">
+                                                            alert("亲，请先登录");
+                                                        </c:if>
+                                                        <c:if test="${not empty uid}">
                                                         $.ajax({
                                                             type: "post",
                                                             url: "${pageContext.request.contextPath}/luntan/postreport.action",
@@ -458,6 +523,7 @@
                                                                 }
                                                             }
                                                         });
+                                                        </c:if>
                                                     }
                                                 </script>
 
@@ -487,7 +553,7 @@
                                         <a class="anchor" name="answer_63059"></a>
                                         <!-- 用户头像 -->
                                         <a class="aw-user-img aw-border-radius-5 pull-right" href="#" data-id="46">
-                                            <img src="../images/touxiang1.png" alt=""/>
+                                            <img src="${forumCommentList.user.headpic}" alt=""/>
                                         </a>
                                         <!-- end 用户头像 -->
                                         <div class="aw-mod-body clearfix">
@@ -557,6 +623,10 @@
                                                                 <script>
 
                                                                     function pinglunjubao(uidd, cidd, commentreportreason) {
+                                                                        <c:if test="${empty uid}">
+                                                                        alert("亲，请先登录");
+                                                                        </c:if>
+                                                                        <c:if test="${not empty uid}">
                                                                         $.ajax({
                                                                             type: "post",
                                                                             url: "${pageContext.request.contextPath}/luntan/commentreport.action",
@@ -568,6 +638,7 @@
                                                                                 }
                                                                             }
                                                                         });
+                                                                        </c:if>
                                                                     }
 
 
@@ -603,7 +674,10 @@
                                                                
                                                                 <script>
                                                                     function pinglunpinglun(uidd, cidd, text,pidd) {
-
+                                                                        <c:if test="${empty uid}">
+                                                                        alert("亲，请先登录");
+                                                                        </c:if>
+                                                                        <c:if test="${not empty uid}">
                                                                         $.ajax({
                                                                             type: "post",
                                                                             url: "${pageContext.request.contextPath}/luntan/commentcomment.action",
@@ -617,6 +691,7 @@
                                                                                 }
                                                                             }
                                                                         });
+                                                                        </c:if>
                                                                     }
 
 
@@ -651,21 +726,47 @@
                                     <dl style="padding-top: 5px;">
                                         <dt class="pull-left aw-border-radius-5">
                                             <a href="#">
-                                                <img alt="1348516637@qq.com" src="../images/touxiang1.png"/>
+                                                <img src="${forumPost.user.headpic}"/>
                                             </a>
                                         </dt>
                                         <dd class="pull-left">
                                             <a class="aw-user-name" href="#" data-id="523760">
-                                                ${forumPost.user.uname} </a>
+                                                用户名:${forumPost.user.uname} </a>
                                             <p>
-                                                关注：4人
+                                                关注：${focusnum}人
                                             </p>
                                             <p>
-                                                粉丝：4人
+                                                粉丝：${focusednum}人
                                             </p>
-                                            <button class="btn btn-primary btn-xs">
+                                            <button class="btn btn-primary btn-xs" onclick="guanzhu(${uid},${forumPost.user.uid})">
                                                 关注他（她）
                                             </button>
+                                            <script>
+                                                function guanzhu(uid,postuid) {
+                                                    <c:if test="${empty uid}">
+                                                    alert("亲，请先登录");
+                                                    </c:if>
+                                                    <c:if test="${not empty uid}">
+                                                    $.ajax({
+                                                        type:"post",
+                                                        url: "${pageContext.request.contextPath}/luntan/focus.action",
+                                                        data:"focusuid="+uid+"&focusduid="+postuid,
+                                                        success:function (result) {
+                                                            if(result==1){
+                                                                alert("关注成功");
+                                                                window.location.reload();
+                                                            }else if (result==0){
+                                                                alert("关注失败");
+                                                                window.location.reload();
+                                                            }else if (result==2){
+                                                                alert("亲，您已经关注过此用户");
+
+                                                            }
+                                                        }
+                                                    });
+                                                    </c:if>
+                                                }
+                                            </script>
                                         </dd>
 
                                     </dl>
@@ -717,7 +818,7 @@
                                     <img src="../images/zhichi.png"/>
                                     <span style="font-size:13px;">逛逛商城</span>
                                 </a>
-                                <a class="sponsor_btn btn top-btn" href="#">
+                                <a class="sponsor_btn btn top-btn" href="<%=basePath%>luntan/luntanshouye.action?tid=7">
                                     <img src="../images/daigou.png"/>
                                     <span style="font-size:13px;">看看代购</span>
                                 </a>
