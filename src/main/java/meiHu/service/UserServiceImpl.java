@@ -5,6 +5,8 @@ import meiHu.entity.ForumUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -22,4 +24,15 @@ public class UserServiceImpl implements UserService {
     public ForumUser findUserByTel(String tel) {
         return forumUserMapper.selectUserByTel(tel);
     }
+
+    @Override
+    public List<ForumUser> findFocusUsersByUid(int uid) {
+        return forumUserMapper.selectFocusUsersByUid(uid);
+    }
+
+    @Override
+    public List<ForumUser> findFollowersByUid(int uid) {
+        return forumUserMapper.selectFollowerByUid(uid);
+    }
+
 }

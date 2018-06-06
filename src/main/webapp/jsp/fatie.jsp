@@ -48,6 +48,7 @@
 
             var title = document.getElementById('title').value;
             document.getElementById('content').value=editor.txt.html();
+            var topicid = $("#topicList option:selected").val();
             document.getElementById('newspost').submit();
         }
     </script>
@@ -166,11 +167,9 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-							<a href="#" ><img src="<%=basePath%>images/touxiang1.png"/>欢迎您：美乎小编 </a>
-
-                    <!--<a href="#">注册</a>
-                    <a href="#">登录</a>-->
-						</span>
+                    <a href="#" ><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname} </a>
+                    <a href="<%=basePath%>signOut.action" style="position: absolute;left: 200px">注销</a>
+                </span>
 
                 <!-- end 登陆&注册栏 -->
             </div>
@@ -194,11 +193,21 @@
 
                     </ul>
                     <!-- end tab 切换 -->
-                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/newspost.action" enctype="multipart/form-data">
+                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/newpost.action" enctype="multipart/form-data">
 
                         标题：
                         <input type="text" id="title" name="title"/><br/><br/>
 
+                        板块：
+                        <select style="position: relative;top: -10px;" id="topicList">
+                            <option value="1">香水</option>
+                            <option value="2">水乳</option>
+                            <option value="3">口红</option>
+                            <option value="4">防晒霜</option>
+                            <option value="5">洗面奶</option>
+                            <option value="6">眼霜</option>
+                            <option value="7">代购</option>
+                        </select>
 
                         <input type="hidden" id="content" name="content"/>
 
@@ -208,7 +217,7 @@
                         <div id="div2" class="text" style="height: 480px;">
 
                         </div>
-                        <input type="button" value="保存" onclick="subm()"></input>
+                        <input type="button" value="保存" onclick="subm()" />
 
                     </form>
 
@@ -626,7 +635,6 @@
         customInsert: function (insertImg, result, editor) {
             // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
             // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
-
 
             var url = result.url;
             insertImg(url);

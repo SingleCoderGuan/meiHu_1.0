@@ -7,7 +7,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 
-
 	<typeAliases>
 		<package name="meiHu.entity"/>
 	</typeAliases>
@@ -17,9 +16,5 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<package name="meiHu.dao"/>
 	</mappers>
 
-
-
-
-	
 </configuration>
 

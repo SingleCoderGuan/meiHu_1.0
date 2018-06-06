@@ -5,8 +5,6 @@ public class ForumTopic {
 
     private String tname;
 
-    private String tpicname;
-
     public String getTpicname() {
         return tpicname;
     }
@@ -15,6 +13,7 @@ public class ForumTopic {
         this.tpicname = tpicname;
     }
 
+    private String tpicname ;
     public Integer getTid() {
         return tid;
     }

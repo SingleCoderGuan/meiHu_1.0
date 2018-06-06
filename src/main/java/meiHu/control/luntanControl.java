@@ -37,7 +37,6 @@ public class luntanControl {
         request.setAttribute("topicList",topicList);
         request.setAttribute("postList",postList);
         request.setAttribute("tid1",tid1);
-        request.getSession().setAttribute("uid",102);
         request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
 
 

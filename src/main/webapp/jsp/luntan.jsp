@@ -21,15 +21,15 @@
     <meta name="description" content="美论"/>
 
 
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/aw-font.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/aw-font.css"/>
 
-    <link href="../css/common.css" rel="stylesheet" type="text/css"/>
-    <link href="../css/link.css" rel="stylesheet" type="text/css"/>
-    <link href="../css/stylebankuai.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=basePath%>css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=basePath%>css/link.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=basePath%>css/stylebankuai.css" rel="stylesheet" type="text/css"/>
 
-    <link href="../css/classblack.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         var _F873F04AAB426252F46A5A8E6352AA6A = '';
         var G_POST_HASH = _F873F04AAB426252F46A5A8E6352AA6A;
@@ -117,7 +117,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="http://localhost:8080/meiHu/"> <img src="../images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+               <a href="http://localhost:8080/meiHu/"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -163,7 +163,7 @@
                         </li>
 
                         <li>
-                            <a href="#">发帖</a>
+                            <a href="<%=basePath%>fatie.action">发帖</a>
                         </li>
 
 
@@ -176,8 +176,15 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-							<a href="#">注册</a>
-							<a href="#">登录</a>
+                    <c:if test="${!empty user}">
+                        <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                    </c:if>
+                    <c:if test="${empty user}">
+                        <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
+                        <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
+                    </c:if>
+
 						</span>
                 <!-- end 登陆&注册栏 -->
             </div>
@@ -198,7 +205,7 @@
                     <c:forEach items="${topicList}" var="topicList">
                         <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList.tid}">
                             <dl>
-                                <dt><img src="../images/${topicList.tpicname}"/></dt>
+                                <dt><img src="<%=basePath%>images/${topicList.tpicname}"/></dt>
                                 <dd>
                                     <p class="title"><a href="#">${topicList.tname}</a></p>
 
@@ -295,7 +302,7 @@
                                 <c:forEach var="postList" items="${postList}"  varStatus="status">
                                 <div class="aw-item ">
                                     <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
-                                       <%-- <img src="../images/touxiang1.png" alt="" />--%>
+                                       <%-- <img src="<%=basePath%>images/touxiang1.png" alt="" />--%>
                                         <span style="font-size: 40px "><strong>${status.index+1}</strong></span>
                                     </a>
 
@@ -418,11 +425,11 @@
                         <div class="aw-mod-body">
 
                             <a class="sponsor_btn btn top-btn" href="#">
-                                <img src="../images/zhichi.png"/>
+                                <img src="<%=basePath%>images/zhichi.png"/>
                                 <span style="font-size:13px;">逛逛商城</span>
                             </a>
                             <a class="sponsor_btn btn top-btn" href="#">
-                                <img src="../images/daigou.png"/>
+                                <img src="<%=basePath%>images/daigou.png"/>
                                 <span style="font-size:13px;">看看代购</span>
                             </a>
                         </div>
@@ -433,22 +440,22 @@
                         </div>
                         <div class="aw-mod-body">
                             <ul>
-                                <li><i class="feature_icon"><img src="../images/bankuai1.png"
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai1.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
                                         href="<%=basePath%>luntan/luntanshouye.action?tid=1">口红</a></li>
-                                <li><i class="feature_icon"><img src="../images/bankuai6.png"
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai6.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
                                         href="<%=basePath%>luntan/luntanshouye.action?tid=6">眼霜</a></li>
-                                <li><i class="feature_icon"><img src="../images/bankuai4.png"
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai4.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
                                         href="<%=basePath%>luntan/luntanshouye.action?tid=2">水乳</a></li>
-                                <li><i class="feature_icon"><img src="../images/bankuai5.png"
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai5.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
                                         href="<%=basePath%>luntan/luntanshouye.action?tid=4">防晒</a></li>
-                                <li><i class="feature_icon"><img src="../images/bankuai2.png"
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai2.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
                                         href="<%=basePath%>luntan/luntanshouye.action?tid=5">洗面奶</a></li>
-                                <li><i class="feature_icon"><img src="../images/bankuai3.png"
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai3.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
                                         href="<%=basePath%>luntan/luntanshouye.action?tid=3">香水</a></li>
 
@@ -489,7 +496,7 @@
 
                             <dl>
                                 <dt class="pull-left aw-border-radius-5">
-                                    <a href=""><img alt="" src="../images/touxiang1.png"/></a>
+                                    <a href=""><img alt="" src="<%=basePath%>images/touxiang1.png"/></a>
                                 </dt>
                                 <dd class="pull-left">
                                     <a href="" data-id="15" class="aw-user-name">小姐姐<i class="aw-icon i-v i-ve"></i>
@@ -499,7 +506,7 @@
                             </dl>
                             <dl>
                                 <dt class="pull-left aw-border-radius-5">
-                                    <a href=""><img alt="" src="../images/touxiang2.png"/></a>
+                                    <a href=""><img alt="" src="<%=basePath%>images/touxiang2.png"/></a>
                                 </dt>
                                 <dd class="pull-left">
                                     <a href="" data-id="15" class="aw-user-name">小姐姐<i class="aw-icon i-v i-ve"></i>

@@ -40,19 +40,20 @@
             </div>
 
             <div class="form-group" style="position: relative;left: 53px;">
-                <input type="button"style="position: relative;left: -314px;top: 5px;" id="sendtext" class="btn_my_login" value="发送短信验证码" disabled/>
+                <input type="button"style="position: relative;left: -314px;top: 5px;" id="btn" class="btn_my_login" value="发送短信验证码" onclick="sendMessage()" disabled />
             </div>
 
             <div class="form-group"style="position: relative;left: 53px;">
                 <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 167px;color:#996666;font-size: 18px">短信验证码</label>
                 <div class="col-sm-4">
-                    <input type="text"  class="forgotteninput" id="mbtext" placeholder="请输入短信验证码入"><img src="" alt="">
+                    <input type="text"  class="forgotteninput" id="code" placeholder="请输入短信验证码入" />
+                    <span style="position: absolute;left: 200px;top: 80px;" id="verifcode"></span>
                 </div>
             </div>
 
             <div class="form-group"style="position: relative;left: 53px;">
                 <div class="col-sm-offset-2 col-sm-1">
-                    <button type="submit" class="btn_my_login" style="width: 200px;position:relative;top: 4px;left:212px;background-color: #f44336;color: #fff;">确定</button>
+                    <button type="submit" class="btn_my_login" id="lo" style="width: 200px;position:relative;top: 4px;left:212px;background-color: #f44336;color: #fff;">确定</button>
                 </div>
             </div>
         </form>
@@ -74,7 +75,7 @@
             $("#teltip").removeClass()
             $("#teltip").addClass("wrong")
             $("#teltip").html("请输入正确格式")
-            $("#sendtext").attr("disabled","disabled")
+            $("#btn").attr("disabled","true")
         }else{
             $.ajax({
                 type:"get",
@@ -85,17 +86,81 @@
                         $("#teltip").html("电话号码未注册")
                         $("#teltip").removeClass()
                         $("#teltip").addClass("wrong")
-                        $("#sendtext").attr("disabled","disabled")
+                        $("#btn").attr("disabled","true")
                     }else {
                         $("#teltip").html("ok")
                         $("#teltip").removeClass()
                         $("#teltip").addClass("right")
-                        $("#sendtext").removeAttr("disabled") ;
+                        $("#btn").attr("disabled",false) ;
                     }
                 }
             })
         }
     })
+</script>
+
+<script type="text/javascript">
+    var InterValObj; //timer变量，控制时间
+    var count = 30; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    function sendMessage(){curCount = count;
+        $("#btn").attr("disabled", "true");
+        $("#btn").val(curCount + "秒后可重新发送");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
+    }
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btn").removeAttr("disabled");//启用按钮
+            $("#btn").val("重新发送验证码");
+        }
+        else {
+            curCount--;
+            $("#btn").val(curCount + "秒后可重新发送");
+        }
+    }
+</script>
+<script>
+    var sms="";
+    $("#btn").click(function(){
+        var tel=$("#tel").val();
+        $.ajax({
+            url:"sendSMS",
+            type:"post",
+            data:{"phone":tel},
+            success:function(result){
+                sms=result;
+            }
+        });
+    });
+    $("#lo").blur(function () {
+        $.ajax({
+            url:"sendSMS",
+            type:"post",
+            data:{"phone":tel},
+            success:function(result){
+                sms=result;
+            }
+
+        })
+    })
+
+    $("#lo").click(function(){
+        var code=$("#code").val();
+        if(code==""){
+            alert("请输入验证码");
+        }else{
+            if(sms==code){
+                window.location.href="success.jsp";
+            }else{
+                alert("验证码错误");
+
+            };
+        };
+
+    });
+
 </script>
 </body>
 </html>

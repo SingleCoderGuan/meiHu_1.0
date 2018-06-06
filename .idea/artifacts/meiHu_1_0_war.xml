@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="meiHu_1.0:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="WebMaven_day02.war">
+    <root id="archive" name="meiHu1.0.war">
       <element id="artifact" artifact-name="meiHu_1.0:war exploded" />
     </root>
   </artifact>

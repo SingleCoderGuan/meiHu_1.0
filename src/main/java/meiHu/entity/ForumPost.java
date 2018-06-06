@@ -12,24 +12,6 @@ public class ForumPost {
     private String ptitle;
     public String pcontent;
     private ForumTopic topic;
-    private Integer uid;
-    private Integer tid;
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    public Integer getTid() {
-        return tid;
-    }
-
-    public void setTid(Integer tid) {
-        this.tid = tid;
-    }
 
     public Integer getPid() {
         return pid;
