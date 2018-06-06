@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.AddressMapper">
+
+<!--public List<Address> selectAddressById(int uid);-->
+    <select id="selectAddressById" parameterType="int" resultType="Address">
+        select * from shop_address where uid=#{_parameter}
+    </select>
+    <!--public int insertAddress(Address address);-->
+    <insert id="insertAddress" parameterType="Address">
+        insert into shop_address(uid,address,addressdetail,receivename,receivetel) values(101,#{address},#{addressdetail},#{receivename},#{receivetel})
+    </insert>
+</mapper>

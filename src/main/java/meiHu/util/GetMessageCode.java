@@ -1,3 +1,4 @@
+/*
 package meiHu.util;
 
 import java.io.BufferedReader;
@@ -104,3 +105,4 @@ public class GetMessageCode {
 	}
 }
 
+*/

@@ -1,0 +1,474 @@
+/*
+	Template: Lovely Cosmetics Responsive HTML Template
+	Version: 1.0
+	Author: Axact Idea
+	Email: axactidea@gmail.com
+	ThemeForest Profile: https://themeforest.net/user/axactidea
+*/
+/* ------------------------------------------------------ */
+/*         TABLE OF CONTENTS                              */
+/* ------------------------------------------------------ */
+/*   01 - Min width : 768px   */
+/*   09 - Max width : 768px   */
+/*   10 - Max width : 480px   */
+/*   11 - Max width: 1170px & Min width: 768px   */
+/*   12 - Maximum width: 620px and Minimum Width: 480px   */
+/* ------------------------------------------------------ */
+
+
+
+/*------------------------------------------------------------------------------*/
+/*                    Minimum width : 768px 
+/*------------------------------------------------------------------------------*/
+@media screen and (min-width:768px) {
+/* slideshow */
+.slide-image {
+  width:100%;
+}
+.carousel-main .carousel-content h1 {
+  font-size:2.5em;
+  line-height: 1.4em;	
+}
+/* footer */
+.payment-methods
+{
+  text-align:right;
+}
+.footer-links {
+  text-align:left;
+}
+/* navigations */
+.hidden-menu-trigger {
+  top: 16px;
+  right: 10px;
+  font-size: 16px;
+  font-size: 1rem;
+}
+.top-nav li:hover > ul {
+  display:block;
+  z-index:10;
+}
+.top-nav li:hover > ul ul {
+  left:100%;
+  margin:-2.5rem 0;
+  width:100%;
+}
+/* paddings */
+.padding-l-right-30 {
+  padding-right:30px !important; 
+}
+.padding-l-left-40 {
+  padding-left:30px !important;
+}
+/* margins */
+.margin-l-bottom-40 {
+  margin-bottom:40px;
+}
+}
+
+
+
+/*------------------------------------------------------------------------------*/
+/*                    Maximum width : 768px
+/*------------------------------------------------------------------------------*/
+@media screen and (max-width:768px) {
+.hide-l, .hide-s {
+  display:block;
+}
+.hide-m {
+  display:none;
+}
+.section  {
+  padding: 5em 1.30em;
+}
+.margin-m-bottom {
+  margin-bottom:2.5rem;
+}
+.margin-m-bottom-60 {
+  margin-bottom:60px;
+}
+.margin-m-top-60 {
+  margin-top:60px;
+}
+
+/* headings */
+h1 {
+  font-size:2em;
+  line-height: 1.3em;
+}
+h2, h4 {
+  font-size:1.5em;
+  line-height: 1.4em;
+}
+h3 {
+  font-size:1.2em;
+  line-height: 1.4em;
+}
+
+/* logo */
+.logo img {
+  margin:0 auto;
+}
+
+/* navigation */
+nav {
+  display:block;
+  cursor:pointer;
+  line-height:3;
+  padding:1.8rem 0;
+}
+.top-nav li {
+  float:none;
+  list-style:none outside none;
+  padding:0;
+}
+.top-nav li a {
+  border-bottom:1px solid #292526;
+  color:#fff;
+  display:block;
+  padding:0.600rem 0.625rem;
+  text-align:center;
+  text-decoration:none;
+}
+.top-nav li a:hover {
+  color:#fff;
+}
+.top-nav > ul {
+  height:0;
+  max-width:100%;
+  overflow:hidden;
+  position:relative;
+  z-index:999;
+}
+.top-nav > ul.show-menu,.aside-nav.minimize-on-small > ul.show-menu {
+  height:auto;
+}
+.top-nav ul ul {
+  left:0;
+  margin-top:0;
+  position:relative;
+  right:0;
+}
+.top-nav li ul li a {
+  min-width:100%;
+}
+.top-nav li ul,.top-nav li ul li ul {
+  display:block;  
+  overflow:hidden; 
+  height:0;   
+}
+.top-nav > ul ul.show-ul {
+  display:block;
+  height:auto;
+}
+.top-nav li ul li a {
+  background:none repeat scroll 0 0 #201d1e;
+  border-bottom:1px solid #292526;
+  padding:0.625rem;
+}
+.top-nav li ul li ul li a {
+  background:none repeat scroll 0 0 #292727;
+  border-bottom:1px solid #2a2828;
+}
+.top-nav .right {
+  float: none;
+}
+.nav-text {
+  color:#fff;
+  display:block;
+  font-size:1.2rem;
+  line-height:2;
+  margin-right:0.625rem;
+  max-width:100%;
+  text-align:center;
+  vertical-align:middle;
+}
+.nav-text:after {
+  content:"\f0c9";
+  font-family: 'FontAwesome';
+  font-size:2.1rem;
+  margin-left:0.5rem;
+  text-align:right;
+}
+
+/* top bar */
+#topbar ul {
+  display: flex;
+  justify-content: center;
+}
+#topbar ul li {
+  padding:0;
+}
+#topbar-primary ul {
+  display: flex;
+  justify-content: center;
+}
+#topbar-primary ul li {
+  padding:0;
+}
+
+/* slideshow */
+.carousel-main .image-box {
+  overflow:hidden;
+}
+.carousel-main .image-box  .image {
+  margin-left:-400px;
+}
+.line.content-center-vertical {
+  padding: 0 2em;
+}
+.carousel-main .carousel-content h1 {
+  font-size:2em;
+  line-height: 1.4em;	
+}
+.owl-buttons {
+  display: none;
+}
+.carousel-main .owl-item img, .carousel-main .owl-item video {
+  max-width: 250%;
+  width:auto;
+}
+.owl-buttons {
+  display: none;
+}
+.brand-overview {
+  margin-top:-140px;
+}
+
+/* product and blog item */
+.item-left {
+  padding-top:0px;
+  padding-left:20px;
+}
+.item-right {
+  padding-top:0px;
+  padding-right:20px;
+}
+
+/* tab */
+.tab-nav > .tab-label {
+  margin: 0.5px 0;
+  width: 100%;
+}
+
+/* blog */
+.comment-box {
+  background:#fafafa;
+  border:solid 1px #eee;
+  padding: 1rem;
+  margin-bottom:1rem;
+}
+.comment-reply-box {
+  background:#fff;
+  border:solid 1px #eee;
+  padding: 1rem;
+  margin-top:1rem;
+}
+.comment-box .comment-time {
+  float:none;
+  color:#adadad;
+}
+
+/* footer */
+footer .phone-number {
+  font-size:1.2em;
+}
+.payment-methods {
+  text-align:center;
+}
+.footer-links {
+  text-align:center;
+  margin-bottom:20px;
+}
+.footer-block {
+  margin:15px 0;
+}
+}
+
+
+
+/*------------------------------------------------------------------------------*/
+/*                    Maximum width : 480px 
+/*------------------------------------------------------------------------------*/
+@media screen and (max-width:480px) {
+.hide-l, .hide-m {
+  display:block;
+}
+.hide-s {
+  display:none;
+}
+.section  {
+  padding: 6rem 0.30rem;
+}
+.margin-s-bottom-60 {
+  margin-bottom: 60px;
+  display: block;
+}
+
+/* navigation */
+nav {
+  padding:2rem 0 1.2rem 0px;
+}
+
+/* top bar */
+.top-bar-social {
+  margin-bottom:12px !important;
+}
+.top-bar .right {
+  float: none;
+}
+.top-bar-contact p {
+  height: auto;
+  line-height: 1.3rem;
+  padding: 10px 0;
+  text-align: center;
+}
+.top-bar-social.right {
+  display: table;
+  float: none;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+/* slideshows */
+.carousel-main .image-box {
+  overflow:hidden;
+}
+.carousel-main .image-box  .image {
+  margin-left:-500px;
+}
+.line.content-center-vertical {
+  padding: 0 1em;
+}
+.carousel-main .owl-pagination {
+  bottom: -20px;
+}
+
+/* products */
+/* cart */
+.cart-item {
+  margin-bottom:30px;
+}
+.cart-item .cart-item-detail{
+  padding:0px;
+}
+.cart-item .cart-item-image{
+  border:solid 1px #c9bec1;
+}
+.cart-item .cart-item-detail h4 {
+  margin-top:15px; text-align:center;
+}
+.cart-item p {
+  text-align:center;
+}
+
+/* product and blog item */
+.item-left {
+  text-align:center;
+  padding-top:10px;
+  padding-left:0px;
+}
+.item-right {
+  text-align:center;
+  padding-top:20px;
+  padding-right:0px;
+}
+.product-design-2-detail h2, .product-design-2-detail p, .product-design-2-detail h5 {
+  text-align:center;
+}
+
+/* blog */
+.comment-box .user-photo {
+  width:130px;
+  margin-bottom:1rem;
+}
+
+/* footer */
+.payment-methods {
+  text-align:center;
+}
+.footer-links {
+  text-align:center;
+  margin-bottom:20px;
+}
+.footer-block {
+  margin:15px 0;
+}
+}
+
+
+
+/*------------------------------------------------------------------------------*/
+/*    Maximum width: 1170px and Minimum Width: 768px | Between Desktop and Tablet
+/*------------------------------------------------------------------------------*/
+@media screen and (max-width:1170px) and (min-width:768px) {
+/* navigations */
+.top-nav {
+  padding-right:1em;
+}
+.top-nav li a {
+  padding: 1.7em 0.8em;
+}
+
+/* logo */
+.logo img {
+  width:200px;
+}
+
+/* slideshow */
+.line.content-center-vertical {
+  padding: 0 2em;
+}
+.carousel-main .carousel-content h1 {
+  font-size:2em;
+  line-height: 1.3em;	
+}
+
+/* products */
+.product-design-2-detail {
+  padding-top:10px;
+  padding-left:40px;
+}
+
+/* product and blog item */
+.item-left {
+  padding-top:10px;
+  padding-left:40px;
+}
+.item-right {
+  padding-top:10px;
+  padding-right:40px;
+}
+
+/* paddings */
+.padding-m-s-left-50 {
+  padding-left:50px;
+}
+.padding-m-s-left-20 {
+  padding-left:20px;
+}
+}
+
+
+
+/*------------------------------------------------------------------------------*/
+/*    Maximum width: 620px and Minimum Width: 480px | Between Tablet and Mobile
+/*------------------------------------------------------------------------------*/
+@media screen and (max-width:620px) and (min-width:480px) {
+/* products */
+.product-hover-content .btn-box .btn {
+  padding: 0.600em 0.550em;
+  color:#1d191a;
+  background:#fff;
+  transition: all 0.20s linear 0s;
+  -o-transition: all 0.20s linear 0s;
+  -ms-transition: all 0.20s linear 0s;
+  -moz-transition: all 0.20s linear 0s;
+  -webkit-transition: all 0.20s linear 0s;
+}
+.product-hover-content .btn-box .btn:hover {
+  background: #1d191a;
+  color:#fff;
+}
+}
