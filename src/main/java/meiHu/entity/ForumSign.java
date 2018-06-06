@@ -1,11 +1,22 @@
 package meiHu.entity;
 
+import java.util.Date;
+
 public class ForumSign {
     private Integer signid;
 
     private ForumUser user ;
 
     private Integer signnumber;
+    private Date currenttime;
+
+    public Date getCurrenttime() {
+        return currenttime;
+    }
+
+    public void setCurrenttime(Date currenttime) {
+        this.currenttime = currenttime;
+    }
 
     public Integer getSignid() {
         return signid;

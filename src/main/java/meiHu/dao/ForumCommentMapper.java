@@ -34,5 +34,13 @@ public interface ForumCommentMapper {
 
     //显示一个评论下的所有评论
 
-    public List<ForumComment> selectAllCommentForComment(int pid);
+    public List<ForumComment> selectAllCommentForComment(int ccid);
+
+    //根据pid查询出一条帖子下所有对帖子的评论编号
+    public int[] selectAllCidByPid(int pid);
+
+    //查询某评论下的评论数量
+    public int selectCommentCommentNum(int cid);
+
+
 }

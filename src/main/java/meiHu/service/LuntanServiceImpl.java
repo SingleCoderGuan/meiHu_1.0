@@ -8,20 +8,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class LuntanServiceImpl implements LuntanService{
+    private final ForumTopicMapper forumTopicMapper;
+    private final ForumPostMapper forumPostMapper;
+    private final ForumCollectionMapper forumCollectionMapper;
+    private final ForumLikeMapper forumLikeMapper;
+    private final ForumPostreportMapper forumPostreportMapper;
+    private final ForumCommentMapper forumCommentMapper;
+    private final ForumCommentreportMapper forumCommentreportMapper;
+
+
     @Autowired
-    private ForumTopicMapper forumTopicMapper;
-    @Autowired
-    private ForumPostMapper forumPostMapper;
-    @Autowired
-    private ForumCollectionMapper forumCollectionMapper;
-    @Autowired
-    private ForumLikeMapper forumLikeMapper;
-    @Autowired
-    private ForumPostreportMapper forumPostreportMapper;
-    @Autowired
-    private ForumCommentMapper forumCommentMapper;
-    @Autowired
-    private ForumCommentreportMapper forumCommentreportMapper;
+    public LuntanServiceImpl(ForumTopicMapper forumTopicMapper, ForumPostMapper forumPostMapper, ForumCollectionMapper forumCollectionMapper, ForumLikeMapper forumLikeMapper, ForumPostreportMapper forumPostreportMapper, ForumCommentMapper forumCommentMapper, ForumCommentreportMapper forumCommentreportMapper) {
+        this.forumTopicMapper = forumTopicMapper;
+        this.forumPostMapper = forumPostMapper;
+        this.forumCollectionMapper = forumCollectionMapper;
+        this.forumLikeMapper = forumLikeMapper;
+        this.forumPostreportMapper = forumPostreportMapper;
+        this.forumCommentMapper = forumCommentMapper;
+        this.forumCommentreportMapper = forumCommentreportMapper;
+    }
 
 
     @Override
@@ -173,6 +178,23 @@ public class LuntanServiceImpl implements LuntanService{
             return false;
         }
     }
+
+    @Override
+    public List<ForumComment> selectAllCommentForComment(int ccid) {
+        return forumCommentMapper.selectAllCommentForComment(ccid);
+    }
+
+    @Override
+    public int[] selectAllCidByPid(int pid) {
+        return forumCommentMapper.selectAllCidByPid(pid);
+    }
+
+    @Override
+    public int selectCommentCommentNum(int cid) {
+        return forumCommentMapper.selectCommentCommentNum(cid);
+    }
+
+
 
 
 }

@@ -46,4 +46,12 @@ public interface LuntanService {
 
     public boolean addCommentForComment(ForumComment forumComment);
 
+    public List<ForumComment> selectAllCommentForComment(int ccid);
+
+    public int[] selectAllCidByPid(int pid);
+
+    public int selectCommentCommentNum(int cid);
+
+
+
 }

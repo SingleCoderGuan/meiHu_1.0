@@ -7,16 +7,38 @@ public class ForumOfficalarticle {
 
     private String oatitle;
 
+    private String oaprecontent;
+
     private String oacontent;
 
-    private Date publishDate;
+    private Date publishtime;
 
-    public Date getPublishDate() {
-        return publishDate;
+    @Override
+    public String toString() {
+        return "ForumOfficalarticle{" +
+                "oaid=" + oaid +
+                ", oatitle='" + oatitle + '\'' +
+                ", oaprecontent='" + oaprecontent + '\'' +
+                ", oacontent='" + oacontent + '\'' +
+                ", publishtime=" + publishtime +
+                '}';
     }
 
-    public void setPublishDate(Date publishDate) {
-        this.publishDate = publishDate;
+    public String getOaprecontent() {
+        return oaprecontent;
+    }
+
+    public void setOaprecontent(String oaprecontent) {
+        this.oaprecontent = oaprecontent;
+    }
+
+
+    public Date getPublishtime() {
+        return publishtime;
+    }
+
+    public void setPublishtime(Date publishtime) {
+        this.publishtime = publishtime;
     }
 
     public Integer getOaid() {

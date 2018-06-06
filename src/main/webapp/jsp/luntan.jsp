@@ -150,8 +150,9 @@
                         <li class="nav-current" role="presentation">
                             <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
+
                         <li>
-                            <a href="jsp/zhuye.jsp">美乎</a>
+                            <a href="<%=basePath%>jsp/article.jsp">美文</a>
                         </li>
 
                         <li>
@@ -307,7 +308,7 @@
 
                                     <div class="aw-question-content">
                                         <h4>
-                                            <a href="<%=basePath%>/luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
+                                            <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
                                         </h4>
 
 
