@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+body{font-size:12px; background-color:#f5f5f5;}
+*{margin:0px; padding:0px;}
+a{text-decoration:none;}
+a:VISITED,a:LINK{text-decoration:none;}
+ul{list-style:none;}
+
+.top{min-width:1028px; margin:0 auto;}
+.top01, .top02, .top03{width:100%; background:#ffb538;}
+.top02{background:#f4f4f4; height:30px;}
+.top03{background:#fff; height:150px;}
+.top01_1,.top02_1,.top03_1{width:1028px; margin:0 auto; height:80px;}
+
+.top02_1{line-height:30px; height:31px; position:relative; background:#f4f4f4;}
+.top01_1 img{height:160px; width:1228px;}
+.top02 a,.top02 button{color:#666;}
+a.top02_right_login{font-size:14px; color:#ff4040; padding:0 10px;}
+a.top02_right_regist{font-size:14px; color:#aaa;  padding:0 10px;}
+a.top02_right_order{padding:0 10px;}
+.btn_showdown{border:0; background:none; padding:0 10px;}
+.icon_font{width:14px; height:30px; line-height:30px; color:#aaa; font-weight:400;}
+.top02_right_ul li{float:left; position:relative; }
+.top02_right_ul1 li{float:none; margin-left:0px; }
+.top02_right_ul1 li h3{font-size:12px; margin:0; padding:7px 0; background:#fff;}
+.top02_right_ul1{border:1px solid #dbdbdb; border-top:none; text-align:center; }
+.top02_left{float:left; margin-left:10px;}
+.top02_right{position:absolute; left:699px; z-index:2; width:315px;}
+
+.top02_left a:hover,
+.top02_right_ul li a:hover,
+.top3_middle02 ul li a:hover,
+.top3_p a:hover{text-decoration:none; color:#ff4040; }
+.top03_13_cart a:hover{text-decoration:none;}
+
+.top03_1{height:auto; position:relative;}
+.top03_11,.top03_12,.top03_13{position:absolute; }
+.top03_11{width:261px; height:150px; left:10px;}
+.top03_12{top:30px; left:271px;}
+.top3_middle01{padding:2px; background:#ff4040; width:734px; padding-bottom:1px;}
+.top3_input{width:675px;  line-height:36px; outline:0 none; border:0 none; padding-left:10px; font-size:14px;}
+.top3_btn{width:50px; line-height:36px; background:#ff4040; border:0 none;}
+.top3_p a{color:#aaa; line-height:36px; margin-right:10px; font-size:14px; }
+.top3_middle02 ul li{float:left; margin-right:30px;}
+.top3_middle02 ul li a{font-size:16px; color:#333;}
+.top03_13_cart{width:132px; height:40px; border:1px solid #d7d7d7; text-align:center;}
+.top03_13_cart a{color:#666; font-size:16px; line-height:40px;}
+.top03_1{ height:150px; }
+
+.div_foot{width:980px; height:25px; text-align:center; margin:15px auto 15px; position:relative;}
