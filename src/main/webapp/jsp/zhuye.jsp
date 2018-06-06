@@ -34,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- for banner-->
         <!-- font-awesome-icons -->
 
-        <link href="css/font-awesome.min.css" rel="stylesheet"  />
+        <link href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"  />
         <!-- //font-awesome-icons -->
         <!-- //custom-theme files-->
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -77,7 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="<%=basePath%>luntan/luntanshouye.action?tid=1" class="scroll">美论</a>
                     </li>
                     <li>
-                        <a href="#" class="scroll">美文</a>
+                        <a href="article/article.action" class="scroll">美文</a>
                     </li>
                     <li>
                         <a href="#" class="scroll">美淘</a>

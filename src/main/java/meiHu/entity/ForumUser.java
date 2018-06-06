@@ -16,6 +16,7 @@ public class ForumUser {
     private String sex;
 
     private Integer point;
+
     private Integer titleid;
 
     private ForumTitle title ;

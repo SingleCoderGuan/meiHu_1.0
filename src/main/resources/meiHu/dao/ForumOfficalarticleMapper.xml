@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumOfficalarticleMapper">
+    <!--public List<ForumOfficalarticle> getAllOfficalArticles();-->
+    <select id="getAllOfficalArticles" resultType="ForumOfficalarticle">
+        select * from forum_officalarticle
+    </select>
 
+    <!--public ForumOfficalarticle selectOfficalArticleByOaid(int oaid);-->
+    <select id="selectOfficalArticleByOaid" resultType="ForumOfficalarticle" parameterType="int">
+        SELECT * FROM forum_officalarticle WHERE oaid=#{parameter}
+    </select>
 </mapper>

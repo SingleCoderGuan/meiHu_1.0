@@ -5,6 +5,7 @@ import meiHu.entity.*;
 import meiHu.service.LuntanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.SocketUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/luntan")
@@ -52,7 +56,25 @@ public class luntanControl {
         request.setAttribute("postCommentNum",postCommentNum);
         List<ForumComment> forumCommentList = luntanService.selectAllPostCommentByPid(pid1);
         request.setAttribute("forumCommentList",forumCommentList);
-
+        //根据pid查找出所有评论帖子的评论标号
+        int[] cidshuzu = luntanService.selectAllCidByPid(pid1);
+        Map<String,List<ForumComment>> map = new HashMap<>();
+        for(int i =0;i<cidshuzu.length;i++){
+            List<ForumComment> commentforcommentList = luntanService.selectAllCommentForComment(cidshuzu[i]);
+            map.put(cidshuzu[i]+"",commentforcommentList);
+        }
+        Map<String,String> mapnum = new HashMap<>();
+        for(int i =0;i<cidshuzu.length;i++){
+            int num = luntanService.selectCommentCommentNum(cidshuzu[i]);
+            mapnum.put(cidshuzu[i]+"",num+"");
+        }
+        //Set<String> set=map.keySet();
+       /* for(String key:set){
+            List<ForumComment> value=map.get(key);
+            System.out.println(key+"___"+value);
+        }*/
+        request.setAttribute("map",map);
+        request.setAttribute("mapnum",mapnum);
         request.getRequestDispatcher("/jsp/tiezidetail.jsp").forward(request,response);
     }
 
@@ -205,13 +227,13 @@ public class luntanControl {
     @RequestMapping("/commentcomment.action")
     public void commentcomment(HttpServletRequest request,HttpServletResponse response) throws IOException {
         String uid =request.getParameter("uid");
-        String cid =request.getParameter("cid");
-        String ccid =request.getParameter("ccid");
+        String pid =request.getParameter("pid");
+        String ccid =request.getParameter("ciddd");
         int uidd = Integer.parseInt(uid);
-        int cidd = Integer.parseInt(cid);
+        int pidd = Integer.parseInt(pid);
         int ccidd = Integer.parseInt(ccid);
         String commentcomment = request.getParameter("commentcomment");
-        ForumComment forumComment = new ForumComment(uidd,cidd,ccidd,commentcomment);
+        ForumComment forumComment = new ForumComment(uidd,pidd,ccidd,commentcomment);
         PrintWriter out = response.getWriter();
 
        if(luntanService.addCommentForComment(forumComment)){
@@ -221,6 +243,8 @@ public class luntanControl {
 
         }
     }
+
+
 
 
 }

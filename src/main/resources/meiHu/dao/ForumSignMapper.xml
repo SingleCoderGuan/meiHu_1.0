@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumSignMapper">
+    <!--public int addSignForNewUser(int uid);-->
+    <insert id="addSignForNewUser" parameterType="int">
+        INSERT  into forum_sign(user_uid,signnumber) VALUES
+        (#{parameter},1)
+    </insert>
+    <!--public int addSignForUser(int uid);-->
+    <update id="addSignForUser" parameterType="int">
+      UPDATE forum_sign SET signnumber=signnumber+1 WHERE
+      user_uid = #{parameter}
+    </update>
 
+    <!--public ForumSign queryIfExistUid(int uid);-->
+    <select id="queryIfExistUid" resultType="Date" parameterType="int">
+        SELECT  currentsigntime from forum_sign WHERE user_uid = #{parameter}
+    </select>
 </mapper>

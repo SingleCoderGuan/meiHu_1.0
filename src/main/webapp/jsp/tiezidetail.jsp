@@ -128,7 +128,7 @@
                             <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
                         <li>
-                            <a href="jsp/zhuye.jsp">美乎</a>
+                            <a href="<%=basePath%>jsp/article.jsp">美文</a>
                         </li>
 
                         <li>
@@ -421,7 +421,7 @@
                                                             success: function (result) {
                                                                 if (result == 1) {
                                                                     alert("评论成功！！");
-                                                                    window.load();
+                                                                    window.location.reload();
                                                                 }
                                                             }
                                                         });
@@ -518,23 +518,37 @@
                                                     <span class="aw-text-color-999">
                                                     <fmt:formatDate value='${forumCommentList.commenttime}'
                                                                     pattern='yyyy-MM-dd hh:mm:ss'/> </span>
-                                                    <a class="aw-add-comment aw-text-color-999" data-toggle="collapse"
-                                                       href="#chakanpinglun" aria-expanded="false"
-                                                       aria-controls="collapseExample"> (1) 条评论 </a>
-                                                    <div class="collapse" id="chakanpinglun">
+                                                    <c:forEach var="mapnum" items="${mapnum}">
+                                                        <c:if test="${mapnum.key==forumCommentList.cid}">
+                                                            <c:forEach items="${mapnum.value}" var="mapnumlist">
+                                                        <a class="aw-add-comment aw-text-color-999" data-toggle="collapse"
+                                                       href="#chakanpinglun${forumCommentList.cid}" aria-expanded="false"
+                                                       aria-controls="collapseExample"> ${mapnumlist} 条评论 </a>
+                                                            </c:forEach>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                    <input type="hidden" id="tagEweb" name="tagEweb" value="${forumCommentList.cid}" />
+                                                    <div class="collapse" id="chakanpinglun${forumCommentList.cid}">
+                                                       <c:forEach items="${map}" var="map">
+                                                           <c:if test="${map.key==forumCommentList.cid}">
+                                                        <c:forEach items="${map.value}" var="cclist">
                                                         <div class="well">
-                                                           君君： 6666666666666
-
+                                                            <a href="#">${cclist.user.uname} </a>:${cclist.commenttext}
                                                         </div>
+                                                        </c:forEach>
+                                                           </c:if>
+
+                                                        </c:forEach>
+
 
                                                     </div>
 
-                                                    <a class="aw-add-comment aw-text-color-999"  data-toggle="modal" data-target=".bs-example-modal-sm">举报</a>
+                                                    <a class="aw-add-comment aw-text-color-999"  data-toggle="modal" data-target=".bs-example-modal-sm${forumCommentList.cid}">举报</a>
 
-                                                    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                                                    <div class="modal fade bs-example-modal-sm${forumCommentList.cid}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                                                         <div class="modal-dialog modal-sm" role="document">
                                                             <div class="modal-content">
-                                                                <select id="postcommentreport" class="form-control">
+                                                                <select id="postcommentreport${forumCommentList.cid}" class="form-control">
                                                                     <option selected>请选择举报类型</option>
                                                                     <option value="色情">色情</option>
                                                                     <option value="暴力">暴力</option>
@@ -560,14 +574,14 @@
                                                                 </script>
                                                                 <br/>
                                                                 <input type="button" class="btn btn-info" value="举报"
-                                                                       onclick="pinglunjubao(${uid},${forumCommentList.cid},$('#postcommentreport').val())"
+                                                                       onclick="pinglunjubao(${uid},${forumCommentList.cid},$('#postcommentreport${forumCommentList.cid}').val())"
                                                                        style="width: 200px;margin-left: 50px"></input>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <a class="aw-add-comment aw-text-color-999" data-toggle="modal" data-target="#exampleModal" >发表评论</a>
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                                    <a class="aw-add-comment aw-text-color-999" data-toggle="modal" data-target="#exampleModal${forumCommentList.cid}" >发表评论</a>
+                                                    <div class="modal fade" id="exampleModal${forumCommentList.cid}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -578,25 +592,28 @@
 
                                                                         <div class="form-group">
 
-                                                                            <textarea class="form-control" id="message-text" placeholder="请输入您的评论"></textarea>
+                                                                            <textarea class="form-control" id="message-text${forumCommentList.cid}" placeholder="请输入您的评论"></textarea>
                                                                         </div>
 
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" id="guanbi" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                                    <button type="button" class="btn btn-primary" onclick="pinglunpinglun(${uid},${forumCommentList.cid},$('#message-text').val(),${forumCommentList.cid})">发表评论</button>
+                                                                    <button type="button" class="btn btn-primary" onclick="pinglunpinglun(${uid},${forumCommentList.cid},$('#message-text${forumCommentList.cid}').val(),${forumPost.pid})">发表评论</button>
                                                                 </div>
+                                                               
                                                                 <script>
-                                                                    function pinglunpinglun(uidd, cidd, text,ccidd) {
+                                                                    function pinglunpinglun(uidd, cidd, text,pidd) {
+
                                                                         $.ajax({
                                                                             type: "post",
                                                                             url: "${pageContext.request.contextPath}/luntan/commentcomment.action",
-                                                                            data: "uid=" + uidd + "&cid=" + cidd + "&commentcomment=" + text +"&ccid=" + ccidd,
+                                                                            data: "uid=" + uidd + "&ciddd=" + cidd + "&commentcomment=" + text +"&pid=" + pidd,
                                                                             success: function (result) {
                                                                                 if (result == 1) {
                                                                                     alert("评论成功！！");
+
                                                                                     $("#guanbi").click();
-                                                                                    window.load();
+                                                                                    window.location.reload();
                                                                                 }
                                                                             }
                                                                         });
@@ -639,13 +656,16 @@
                                         </dt>
                                         <dd class="pull-left">
                                             <a class="aw-user-name" href="#" data-id="523760">
-                                                1348516637@qq.com </a>
+                                                ${forumPost.user.uname} </a>
                                             <p>
                                                 关注：4人
                                             </p>
                                             <p>
                                                 粉丝：4人
                                             </p>
+                                            <button class="btn btn-primary btn-xs">
+                                                关注他（她）
+                                            </button>
                                         </dd>
 
                                     </dl>
