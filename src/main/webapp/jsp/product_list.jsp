@@ -28,10 +28,6 @@
     <!--[if lt IE 9]><script src="<%= basePath%>js/respond.js"></script><![endif]-->
 
     <style>
-        #tu{
-            width:360px;
-            hight:400px;
-        }
         .h1{
             color:white;
         }
@@ -39,7 +35,6 @@
             color:white;
         }
         #imgs{
-
             width:180px;
             hight:200px;
         }
@@ -48,6 +43,10 @@
         }
         .icon-text li a{
             color: white;
+        }
+        .section{
+            height:auto;
+            width:auto;
         }
     </style>
 </head>
@@ -449,6 +448,95 @@
     <!-- TESTIMONIALS END -->
 
     <!--/start-footer-section-->
+  <%--  <div class="footer-section">
+        <div class="footer-grids">
+            <div class="col-md-3 footer-grid">
+                <h4>最受欢迎</h4>
+                <div class="border2"></div>
+                <p>清透润白系列 「淡斑小瓷瓶」清透润白淡斑亮肤精华乳</p>
+                <p class="sub">焕颜紧致系列 「全明星眼霜」焕颜紧致眼霜.</p>
+                <p class="sub">恒润奇肌保湿系列 「小蓝瓶」恒润奇肌保湿精华液</p>
+                <p class="sub" >相宜本草 「红景天莹」透彻幼白精华乳（亮白乳液护肤）</p>
+            </div>
+            <div class="col-md-3 footer-grid tags">
+                <h4>类别</h4>
+                <div class="border2"></div>
+                <ul class="tag">
+                    <li><a href="#">面 部 洁 白</a></li>
+                    <li><a href="#">防 晒 护 理</a></li>
+                    <li><a href="#">美 妆 护 理</a></li>
+                    <li><a href="#">眼 部 护 理</a></li>
+                    <li><a href="#">保 湿 护 肤</a></li>
+                    <li><a href="#">香 气 怡 人</a></li>
+                    <li><a href="#">全 面 呵 护</a></li>
+                    <li><a href="#">特 别 活 动</a></li>
+                    <li><a href="#">礼品及超值套餐</a></li>
+
+
+                </ul>
+            </div>
+            <div class="col-md-3 footer-grid tweet">
+                <h4>关于我们</h4>
+                <div class="border2"></div>
+                <div class="icon-3-square">
+                    <a href="#"><i class="square-3"></i></a>
+                </div>
+                <div class="icon-text">
+                    <ul>
+                        <li><a href="#">选 择 美 乎</a></li>
+                        <li><a href="#">美 乎 妆 品</a></li>
+                        <li><a href="#">美 乎 中 心</a></li>
+                        <li><a href="#">品 类 选 择</a></li>
+                        <li><a href="#">美 妆 护 理</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="icon-3-square">
+                    <a href="#"><i class="square-3"></i></a>
+                </div>
+                <div class="icon-text">
+                    <ul>
+                        <li><a href="#">服 务 中 心</a></li>
+                        <li><a href="#">常 见 问 题</a></li>
+                        <li><a href="#">联 系 我 们</a></li>
+                        <li><a href="#">tel:135-2551-6040</a></li>
+                        <li><a href="#">email:920758051@qq.com</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-3 footer-grid flickr">
+                <h4>flickr feed</h4>
+                <div class="border2"></div>
+                <div class="flickr-grids">
+                    <div class="flickr-grid">
+                        <a href="#"><img src="<%= basePath%>images/1_06.jpg" alt=""/></a>
+                    </div>
+                    <div class="flickr-grid">
+                        <a href="#"><img src="<%= basePath%>images/4_15.jpg" alt=""/></a>
+                    </div>
+                    <div class="flickr-grid">
+                        <a href="#"><img src="<%= basePath%>images/6_03.jpg" alt=""/></a>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="flickr-grid">
+                        <a href="#"><img src="<%= basePath%>images/3_05.jpg" alt=""/></a>
+                    </div>
+                    <div class="flickr-grid">
+                        <a href="#"><img src="<%= basePath%>images/2_04.jpg" alt=""/></a>
+                    </div>
+                    <div class="flickr-grid">
+                        <a href="#"><img src="<%= basePath%>images/5_09.jpg" alt=""/></a>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>--%>
     <div class="footer-section">
         <div class="footer-grids">
             <div class="col-md-3 footer-grid">
@@ -543,14 +631,12 @@
     <div class="copyright">
         <p class="write">Copyright &copy; 2018 All rights  Reserved | Design by <a href="#">美乎网</a></p>
     </div>
-
-
-    <!-- jQuery Files -->
+<%--</div>--%>
+   <!-- jQuery Files -->
     <script type="text/javascript" src="<%= basePath%>js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="<%= basePath%>js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<%= basePath%>owl-carousel/owl.carousel.js"></script>
     <script type="text/javascript" src="<%= basePath%>js/custom.js"></script>
-
 
 </body>
 </html>

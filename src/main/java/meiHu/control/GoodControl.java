@@ -126,7 +126,7 @@ public class GoodControl {
        // int uid=Integer.parseInt(request.getParameter("uid"));
         List<Order> orderList =orderService.getOrderByUid(101);
         request.getSession().setAttribute("orderList",orderList);
-        request.getRequestDispatcher("/jsp/myorder_list.jsp").forward(request,response);
+        request.getRequestDispatcher("/jsp/mh-order.jsp").forward(request,response);
         return null;
     }
     @RequestMapping(value = "/address.action",method={RequestMethod.POST, RequestMethod.GET})
@@ -155,15 +155,46 @@ public class GoodControl {
         return result;
     }
 
+    //查询未付款的订单
+    @RequestMapping(value ="/noPayOrder.action",method = {RequestMethod.GET, RequestMethod.POST})
+    public void selectNoPayOrderByUid (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Order> noPayOrderList =orderService.noPayOrder(101);
+
+        request.getSession().setAttribute("noPayOrderList",noPayOrderList);
+        request.getRequestDispatcher("/jsp/mh-nopay-money.jsp").forward(request,response);
+    }
+    //查询等待发货的订单
+    @RequestMapping(value ="/waitOrder.action",method = {RequestMethod.GET, RequestMethod.POST})
+    public void waitOrderByUid (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Order> waitOrderList =orderService.waitOrder(101);
+
+        request.getSession().setAttribute("waitOrderList",waitOrderList);
+        request.getRequestDispatcher("/jsp/mh-waitsent.jsp").forward(request,response);
+    }
+
+
 
     //查询已经发货的订单
     @RequestMapping(value ="/runOrder.action",method = {RequestMethod.GET, RequestMethod.POST})
     public void selectRunOrderByUid (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     /*   int userid=Integer.parseInt(request.getParameter("uid"));*/
+
         List<Order> runOrderList =orderService.getRunOrder(101);
-        System.out.println(runOrderList+"--------------");
+
         request.getSession().setAttribute("runOrderList",runOrderList);
-        request.getRequestDispatcher("/jsp/uc-runorder.jsp").forward(request,response);
+        request.getRequestDispatcher("/jsp/mh-runorder.jsp").forward(request,response);
+    }
+
+
+    //查询已完成的订单
+    @RequestMapping(value ="/doneOrder.action",method = {RequestMethod.GET, RequestMethod.POST})
+    public void selectDoneOrderByUid (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Order> doneOrderList =orderService.getDoneOrder(101);
+
+        request.getSession().setAttribute("doneOrderList",doneOrderList);
+        request.getRequestDispatcher("/jsp/mh-doneorder.jsp").forward(request,response);
     }
 }
 

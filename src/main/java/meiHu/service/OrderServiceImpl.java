@@ -44,12 +44,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getRunOrder(int uid) {
-        /*orderMapper.getRunOrder(uid);
+    public List<Order> noPayOrder(int uid) {
+        return orderMapper.noPayOrder(uid);
+    }
 
-        for(OrderItem oi:order.getItems()){
-            orderMapper.saveItem(oi);
-        }*/
+    @Override
+    public List<Order> waitOrder(int uid) {
+        return orderMapper.waitOrder(uid);
+    }
+
+    @Override
+    public List<Order> getRunOrder(int uid) {
         return orderMapper.getRunOrder(uid);
     }
 

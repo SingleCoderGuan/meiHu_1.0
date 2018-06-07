@@ -17,63 +17,87 @@
     <script type="text/javascript" src="../js/jquery.dialogBox.js" ></script>
     <script type="text/javascript" src="../js/common-resolve.js" ></script>
     <script type="text/javascript" src="../js/myorders.js" ></script>
+    <style>
+        .logo1{
+            position: relative;
+            margin-top:-210px;
+            left:-450px;
+        }
+        nav{
+            display: inline-block;
+            margin-top:-40px;
+            left:370px;
+            font-family: 华文楷体;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+        nav a{
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            perspective:200px;
+        }
+        nav a span{
+            line-height: 50px;
+            background-color: #f8fff9;
+            display: inline-block;
+            padding: 0 30px;
+            position: relative;
+            transform-origin:top;
+            transition:all 1s;
+            transform-style:preserve-3d;
+
+        }
+        nav a span::after{
+            content: attr(data-hover);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #1f2d3d;
+            text-align: center;
+            color: #ffffff;
+            width: 100%;
+            height: 100%;
+            transform:rotateX(-90deg);
+            transform-origin:top;
+        }
+
+        nav a:hover span{
+            transform:rotateX(90deg) translateY(-20px);
+        }
+    </style>
 </head>
 <body>
 
 
-<%-- <input type="hidden" value="${user.uid}" id="uid">
-<div class="top">
-    <div class="top02">
-        <div class="top02_1">
 
-            <div class="top02_right">
-                <ul class="top02_right_ul">
-                    <c:if test="${user != null}">
-                        <li>
-                            <a href="#" class="top02_right_login">
-                                欢迎<c:out value="${user.uname}"></c:out>
-                            </a>
-                            <ul class="top02_right_ul1" id="top02_right_ul14" style="display:none;">
-                                <li><h3><a href="#" id="user_logout_bt">退出登录</a></h3></li>
-                            </ul>
-                        </li>
-
-                    </c:if>
-
-
-                    <li>
-                        <a class="btn_showdown" href="#">
-                            网站导航
-                            <span class="glyphicon glyphicon-chevron-down icon_font"></span>
-                        </a>
-                        <ul class="top02_right_ul1" id="top02_right_ul13" style="display:none;">
-                            <li><h3><a href="${pageContext.request.contextPath }/jsp/index.jsp">商城主页</a></h3></li>
-                            <li><h3><a id="aboutus_watching" href="#">关于我们</a></h3></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="top03">
-        <div class="top03_1">
-            <div class="top03_11">
-
-            </div>
-            <div class="top03_12">
-                <div class="top3_middle01">
-                   <form action="${pageContext.request.contextPath }/goods/getGoodByKw.action" method="post">
-                        <input type="hidden" name="pageIndex" value="1">
-                        <input type="text" placeholder="吃货天堂，快来加入吧" class="top3_input" name="kw"/>
-                        <button class="top3_btn"><span class="glyphicon glyphicon-search" style="color:#fff; "></span></button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>--%>
 <div class="middle01">
+    <nav>
+        <a href="<%=basePath%>jsp/index.jsp">
+            <span data-hover="美淘首页">美淘首页</span>
+        </a>
+        <a href="">
+            <span data-hover="芬馨香水">芬馨香水</span>
+        </a>
+        <a href="">
+            <span data-hover="眼霜">眼霜</span>
+        </a>
+        <a href="">
+            <span data-hover="洁面乳">洁面乳</span>
+        </a>
+        <a href="">
+            <span data-hover="防晒霜">防晒霜</span>
+        </a>
+        <a href="">
+            <span data-hover="口红">口红</span>
+        </a>
+        <a href="<%=basePath%>jsp/mh-address.jsp">
+            <span data-hover="个人中心">个人中心</span>
+        </a>
+        <a href="<%=basePath%>jsp/cart.jsp">
+            <span data-hover="购物车">购物车</span>
+        </a>
+    </nav>
 
     <div style="height:20px;"></div>
     <div class="middle01_n1">

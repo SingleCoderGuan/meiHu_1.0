@@ -24,7 +24,73 @@
         </collection>
     </resultMap>
 
+    <resultMap id="noPayOrderMap" type="Order">
+        <id column="orderid" property="orderid"/>
+        <result column="ordertime" property="ordertime"/>
+        <result column="total" property="total"/>
+        <result column="state" property="state"/>
+        <collection property="items" ofType="OrderItem">
+            <id column="itemid" property="itemid"/>
+            <result column="num" property="count"/>
+            <result column="subtotal" property="subtotal"/>
+            <association property="good" javaType="Goods">
+                <id column="goodid" property="goodid"/>
+                <result column="goodname" property="goodname"/>
+                <result column="goodpic" property="goodpic"/>
+                <result column="goodprice" property="goodprice"/>
+                <result column="goodstore" property="goodstore"/>
+                <result column="goodaddress" property="goodaddress"/>
+                <result column="gooddetail" property="gooddetail"/>
+                <result column="goodsales" property="goodsales"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <resultMap id="waitOrderMap" type="Order">
+        <id column="orderid" property="orderid"/>
+        <result column="ordertime" property="ordertime"/>
+        <result column="total" property="total"/>
+        <result column="state" property="state"/>
+        <collection property="items" ofType="OrderItem">
+            <id column="itemid" property="itemid"/>
+            <result column="num" property="count"/>
+            <result column="subtotal" property="subtotal"/>
+            <association property="good" javaType="Goods">
+                <id column="goodid" property="goodid"/>
+                <result column="goodname" property="goodname"/>
+                <result column="goodpic" property="goodpic"/>
+                <result column="goodprice" property="goodprice"/>
+                <result column="goodstore" property="goodstore"/>
+                <result column="goodaddress" property="goodaddress"/>
+                <result column="gooddetail" property="gooddetail"/>
+                <result column="goodsales" property="goodsales"/>
+            </association>
+        </collection>
+    </resultMap>
+
     <resultMap id="RunOrderMap" type="Order">
+        <id column="orderid" property="orderid"/>
+        <result column="ordertime" property="ordertime"/>
+        <result column="total" property="total"/>
+        <result column="state" property="state"/>
+        <collection property="items" ofType="OrderItem">
+            <id column="itemid" property="itemid"/>
+            <result column="num" property="count"/>
+            <result column="subtotal" property="subtotal"/>
+            <association property="good" javaType="Goods">
+                <id column="goodid" property="goodid"/>
+                <result column="goodname" property="goodname"/>
+                <result column="goodpic" property="goodpic"/>
+                <result column="goodprice" property="goodprice"/>
+                <result column="goodstore" property="goodstore"/>
+                <result column="goodaddress" property="goodaddress"/>
+                <result column="gooddetail" property="gooddetail"/>
+                <result column="goodsales" property="goodsales"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <resultMap id="doneOrderMap" type="Order">
         <id column="orderid" property="orderid"/>
         <result column="ordertime" property="ordertime"/>
         <result column="total" property="total"/>
@@ -77,6 +143,28 @@
         delete from shop_order where orderid=#{_parameter}
     </delete>
 
+    <!--//用户查询待付款的订单
+    public List<Order> noPayOrder(int uid);-->
+    <select id="noPayOrder" parameterType="int" resultMap="noPayOrderMap">
+        select *  from shop_order so,shop_item si,shop_goods sg
+        where so.uid=#{_parameter}
+        and so.orderid=si.orderid
+        and si.goodid=sg.goodid
+        and state=0
+    </select>
+
+
+   <!-- //用户查询待发货的订单
+    public List<Order> waitOrder(int uid);-->
+    <select id="waitOrder" parameterType="int" resultMap="waitOrderMap">
+        select *  from shop_order so,shop_item si,shop_goods sg
+        where so.uid=#{_parameter}
+        and so.orderid=si.orderid
+        and si.goodid=sg.goodid
+        and state=1
+    </select>
+
+
    <!-- //用户查询已发货的订单
     public List<Order> getRunOrder(int uid);-->
     <select id="getRunOrder" parameterType="int" resultMap="RunOrderMap">
@@ -87,8 +175,15 @@
           and state=2
     </select>
 
-    <!--//用户查询已完成的订单
+    <!--//用户查询已收货的订单
     public List<Order> getDoneOrder(int uid);-->
+    <select id="getDoneOrder" parameterType="int" resultMap="doneOrderMap">
+        select *  from shop_order so,shop_item si,shop_goods sg
+        where so.uid=#{_parameter}
+        and so.orderid=si.orderid
+        and si.goodid=sg.goodid
+        and state=3
+    </select>
 
 
 </mapper>
