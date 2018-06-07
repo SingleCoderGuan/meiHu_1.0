@@ -46,7 +46,7 @@
             <div class="logout divider"><a href="<%=basePath%>jsp/login.jsp">退出</a></div>
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车<span class="txt-theme">2</span>件</a></div>
-            <div class="order"><em></em><a href="<%=basePath%>jsp/uc-order.jsp">我的订单</a></div>
+            <div class="order"><em></em><a href="<%=basePath%>jsp/mh-order.jsp">我的订单</a></div>
             <div class="fav"><em></em><a href="#">我的收藏</a></div>
             <div class="help"><em></em><a href="<%=basePath%>jsp/help.jsp">帮助中心</a></div>
         </div>
@@ -94,29 +94,29 @@
             <div class="uc-menu">
                 <div class="tit">订单中心</div>
                 <ul class="sublist">
-                    <li><a  href="<%=basePath%>jsp/uc-order.jsp">我的订单</a></li>
+                    <li><a  href="<%=basePath%>jsp/mh-order.jsp">我的订单</a></li>
                    </ul>
                 <div class="tit">客户服务</div>
                 <ul class="sublist">
 
-                    <li><a href="<%=basePath%>jsp/uc-cancel.jsp">取消订单记录</a></li>
-                    <li><a  class="item active" href="<%=basePath%>jsp/uc-refund.jsp">退款/退货</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-cancel.jsp">取消订单记录</a></li>
+                    <li><a  class="item active" href="<%=basePath%>jsp/mh-refund.jsp">退款/退货</a></li>
                 </ul>
                 <div class="tit">账户中心</div>
                 <ul class="sublist">
 
-                    <li><a href="<%=basePath%>jsp/uc-address.jsp">收货地址</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-address.jsp">收货地址</a></li>
                 </ul>
 
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
-                    <li><a href="<%=basePath%>jsp/uc-tatal-credits.jsp">我的积分</a></li>
-                    <li><a href="<%=basePath%>jsp/uc-discount-coupon.jsp">我的优惠卷</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-tatal-credits.jsp">我的积分</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-discount-coupon.jsp">我的优惠卷</a></li>
 
                 </ul>
                 <div class="tit">服务中心</div>
                 <ul class="sublist">
-                    <li><a href="<%=basePath%>jsp/uc-msg.jsp">美淘服务</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-msg.jsp">美淘服务</a></li>
                 </ul>
             </div>
         </div>

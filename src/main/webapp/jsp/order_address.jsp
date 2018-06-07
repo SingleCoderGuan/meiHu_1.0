@@ -50,6 +50,15 @@
         .uc-header-bg{
             background-color: #dbd2db;
         }
+        .layui-form{
+            position: relative;
+            left:150px;
+            width:1119px;
+        }
+        .uc-content{
+            position: relative;
+            left:-80px;
+        }
         .logo1{
             position: relative;
             margin-top:-210px;
@@ -58,7 +67,7 @@
         nav{
             display: inline-block;
             margin-top:-40px;
-            left:390px;
+            left:330px;
             font-family: 华文楷体;
             font-size: 20px;
             font-weight: bolder;
@@ -100,11 +109,22 @@
         .address{
             float: left;
         }
+        .button{
+            position: relative;
+            margin-left:800px;
+            margin-top:-60px;
+        }
+        .pay{
+            position: relative;
+            margin-left:1050px;
+        }
+
+
     </style>
 </head>
 
 
-<body style="width: auto">
+<body style="width:100%">
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
@@ -113,21 +133,24 @@
     </div>
     <nav>
         <a href="">
-            <span data-hover="美乎首页">美乎首页</span>
+            <span data-hover="香水">香水</span>
         </a>
         <a href="">
-            <span data-hover="美淘首页">美淘首页</span>
+            <span data-hover="眼霜">眼霜</span>
         </a>
         <a href="">
-            <span data-hover="美论">美论</span>
+            <span data-hover="洁面乳">洁面乳</span>
         </a>
         <a href="">
-            <span data-hover="美购">美购</span>
+            <span data-hover="防晒霜">防晒霜</span>
         </a>
         <a href="">
+            <span data-hover="口红">口红</span>
+        </a>
+        <a href="<%=basePath%>jsp/mh-address.jsp">
             <span data-hover="个人中心">个人中心</span>
         </a>
-        <a href="">
+        <a href="<%=basePath%>jsp/cart.jsp">
             <span data-hover="购物车">购物车</span>
         </a>
     </nav>
@@ -135,79 +158,65 @@
 <h1 class="text-center">结算页</h1>
 <p id="p">愉快购物每一天！</p>
 
-<%--<c:forEach items="${addressList}" var="address">
 
-    <p>${address.address}</p>
-    <p>${address.addressdetail}</p>
-    <p>${address.receivename}</p>
-    <p>${address.receivetel}</p>
-
-</c:forEach>--%>
 <div class="uc-content">
     <div class="uc-panel">
         <div class="uc-bigtit">收货地址</div>
+        <div class="button"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新增地址</button></div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">新增地址</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="<%=basePath %>goods/address.action" method="post">
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">地址:</label>
+                                <input type="text" name="address" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">详细地址:</label>
+                                <input type="text" name="addressdetail" class="form-control" id="recipient-name1">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">收货人姓名:</label>
+                                <input type="text" name="receivename" class="form-control" id="recipient-name2">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">收货人联系方式:</label>
+                                <input type="text" name="receivetel" class="form-control" id="recipient-name3">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-primary">确定</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var recipient = button.data('whatever') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this)
+                modal.find('.modal-title').text('New message to ' + recipient)
+                modal.find('.modal-body input').val(recipient)
+            })
+        </script>
         <div class="uc-panel-bd">
 
-            <div class="ui-msg-info ui-msg-block">您已创建 2 个收货地址，最多可创建 5 个</div>
+
 
             <div class="address-list">
-                <div class="col col-4">
-                    <a class="item va-m-box ta-c add">
-                        <div class="add-new">
-
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新增地址</button>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">新增地址</h4>
-            </div>
-            <div class="modal-body">
-                <form action="<%=basePath %>goods/address.action" method="post">
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">地址:</label>
-                        <input type="text" name="address" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">详细地址:</label>
-                        <input type="text" name="addressdetail" class="form-control" id="recipient-name1">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">收货人姓名:</label>
-                        <input type="text" name="receivename" class="form-control" id="recipient-name2">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">收货人联系方式:</label>
-                        <input type="text" name="receivetel" class="form-control" id="recipient-name3">
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-primary">确定</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
-<script>
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('New message to ' + recipient)
-        modal.find('.modal-body input').val(recipient)
-    })
-</script>
-
-                         </div>
-                    </a>
-                </div>
+              <c:forEach items="${addressList}" var="address">
                 <div class="col col-4">
                     <div class="item">
                         <div class="action">
@@ -216,33 +225,21 @@
 
                         </div>
                         <div class="info">
-                            <c:forEach items="${addressList}" var="address">
-                                <div class="address1">
-                                <div class="info-item name ellipsis">${address.address}</div>
-                                <div class="info-item address">${address.addressdetail}</div>
-                                <div class="info-item tel ellipsis">${address.receivename}
-                                    <p>${address.receivetel}</p></div></div>
 
-                            </c:forEach>
-                          <%-- <div class="info-item name ellipsis">安徽合肥（小柚子 收）</div>
-                            <div class="info-item address">瑶海区东方商城</div>
-                            <div class="info-item tel ellipsis">13666666666</div>--%>
-                        </div>
+                             <div class="address1">
+                               <ul>
+                                <li >${address.address}</li>
+                                <li >${address.addressdetail}</li>
+                                <li>${address.receivename}</li>
+                                <li>${address.receivetel}</li>
+                               </ul>
+                            </div>
+
+
+                       </div>
                     </div>
                 </div>
-                <div class="col col-4">
-                    <div class="item active">
-                        <div class="action">
-                            <div class="fl"><a class="edit" href="javascript:;">修改</a><a class="del" href="javascript:;">删除</a></div>
-                            <div class="fr"><a class="setdft" href="javascript:;">设为默认</a></div>
-                        </div>
-                        <div class="info">
-                            <div class="info-item name ellipsis">安徽合肥（小柚子 收）</div>
-                            <div class="info-item address">瑶海区东方商城</div>
-                            <div class="info-item tel ellipsis">13666666666</div>
-                        </div>
-                    </div>
-                </div>
+               </c:forEach>
             </div>
 
         </div>
@@ -253,7 +250,9 @@
     <div id="orders" class="row deliverymode">
 
         <div class="col-lg-9 deliverymodeRight" >
+
             <div class="layui-form">
+                <div class="uc-bigtit">我的订单</div>
                 <table class="layui-table">
                     <tr>
                         <th colspan="2">订单编号：${order.orderid}</th>
@@ -284,16 +283,14 @@
                 </table>
 
 
-                </table>
+
             </div>
         </div>
     </div>
-</li>
 
 
-</ul>
 
-</div>
+
 
 
 <script type="text/javascript">
@@ -312,7 +309,8 @@
         }
     }
 </script>
-<form id="payform" action="<%=basePath %>goods/pay.action" method="post">
+<div class="pay">
+    <form id="payform" action="<%=basePath %>goods/pay.action" method="post">
     <div class="contenterFooter">
         <p>总金额：<span class="footerPrice">￥${order.total}</span></p>
         <p>运费：<span class="footerPrice">￥0.00</span></p>
@@ -327,7 +325,8 @@
 </div>
 
 
-</div>
+
+
 <!--主要内容-->
 
 <!-- SLIDESHOW START -->
@@ -477,9 +476,6 @@
 <div class="copyright">
     <p class="write">Copyright &copy; 2018 All rights  Reserved | Design by <a href="#">美乎网</a></p>
 </div>
-
-
-
 <!--js类引用-->
 <script type="text/javascript" src="<%= basePath%>plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="<%= basePath%>plugins/bootstrap/bootstrap.min.js"></script>
@@ -488,9 +484,7 @@
 <script type="text/javascript" src="<%= basePath%>js/CivilMilitaryIntegration/ShoppingCart.js"></script>
 <!--<script type="text/javascript" src="js/CivilMilitaryIntegration/abc.js" ></script>-->
 
-<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
 
-</div>
 
 
 </body>
