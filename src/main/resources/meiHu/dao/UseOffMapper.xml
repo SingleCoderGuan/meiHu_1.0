@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.UserOffMapper">
+    <!--//判断改种优惠券是否拥有-->
+    <!--public int selectOffIntoUser(int uid,int offid);-->
+    <select id="selectOffIntoUser"  parameterType="int">
+        SELECT * FROM user_off_level WHERE  uid=#{param1} AND offid=#{param2}
+    </select>
+    <!--//用户兑换积分券-->
+    <!--public int addOffIntoUser(int uid,int offid);-->
+<insert id="addOffIntoUser" parameterType="int">
+    INSERT INTO user_off_level WHERE  uid=#{param1} AND offid=#{param2}
+</insert>
+    <!--//用户使用积分券-->
+    <!--public int deleteOffFromUser(int uid,int offid);-->
+    <delete id="deleteOffFromUser" parameterType="int">
+        DELETE
+    </delete>
+
+    <!--//用户兑换券数量+1-->
+    <!--public int addUserOffNum(int uid,int offid);-->
+    <update id="addUserOffNum" parameterType="int">
+        update user_off_level set remainnum = remainnum+1 where
+          uid=#{param1} AND offid=#{param2};
+    </update>
+
+    <!--//用户兑换积分更变-->
+    <!--public int updateUserPoint(int uid,int offid);-->
+
+    <!--//显示某用户的全部积分-->
+    <!--public int selectUserPointByUid(int uid);-->
+    <select id="selectUserPointByUid" parameterType="int">
+        SELECT point from forum_user WHERE uid=#{parameter}
+    </select>
+
+    <!--//显示某用户所有优惠券-->
+    <!--public List<UserOff> selectAllOffByUid(int uid);-->
+    <select id="selectAllOffByUid" resultMap="useroffmap" parameterType="int">
+        SELECT * FROM user_off_level
+    </select>
+
+
+</mapper>

@@ -1,11 +1,10 @@
 package meiHu.control;
 
-import meiHu.dao.ForumPostMapper;
-import meiHu.dao.ForumTopicMapper;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumTopic;
-//import net.sf.json.JSONObject;
 import meiHu.entity.ForumUser;
+import meiHu.service.PostService;
+import meiHu.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +22,9 @@ import java.util.UUID;
 @Controller
 public class fatieControl {
     @Autowired
-    ForumTopicMapper forumTopicMapper ;
+    TopicService topicService ;
     @Autowired
-    ForumPostMapper forumPostMapper ;
+    PostService postService;
     @RequestMapping(value = "/fatie.action")
     public void fatie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if(request.getSession().getAttribute("user")==null){
@@ -37,20 +36,28 @@ public class fatieControl {
 
     @RequestMapping(value = "/newpost.action", method = RequestMethod.POST)
     public void newPost(int topicid, ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println(topicid);
-        System.out.println(post);
-        ForumTopic topic = forumTopicMapper.selectTopicByTid(topicid);
+        ForumTopic topic = topicService.selectTopicByTid(topicid);
         ForumPost forumPost = post;
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         forumPost.setTopic(topic);
-        if (forumPostMapper.insert(forumPost)) {
+        if (postService.postNewPost(forumPost)) {
             response.sendRedirect(request.getContextPath() + "/luntan/luntanshouye.action?tid=1");
         } else {
             System.out.println("发帖失败");
         }
 
     }
+    @RequestMapping(value = "updatePost.action",method = RequestMethod.POST)
+    public void updatePost(ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ForumPost forumPost = post ;
+        forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
+        forumPost.setCreatetime(new Date());
+        if(postService.updatePost(forumPost) ){
+            response.sendRedirect(request.getContextPath() + "/luntan/luntanshouye.action?tid=1");
+        }
+    }
+
     @RequestMapping(value = "/picload.action",method = RequestMethod.POST)
     public @ResponseBody Map<String, String> upload(MultipartFile uploadImage, HttpServletRequest request) throws IOException {
         //原始文件名称

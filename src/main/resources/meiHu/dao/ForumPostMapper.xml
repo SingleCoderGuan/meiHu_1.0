@@ -121,4 +121,10 @@
         SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
         WHERE  p.ptitle like CONCAT('%',#{parameter},'%')   AND p.user_uid = u.uid AND t.tid = p.topic_tid
     </select>
+
+    <!--public boolean update(ForumPost post) ;-->
+    <update id="update" parameterType="ForumPost">
+        UPDATE forum_post SET createtime=#{createtime},ptitile=#{ptitle} ,pcontent=#{pcontent} WHERE pid=#{pid}
+    </update>
+
 </mapper>

@@ -27,4 +27,8 @@ public interface PostService {
     public boolean postNewPost(ForumPost post) ;
 
     public List<ForumPost> selectPostsByPtitle(String keyword);
+
+    public ForumPost selectPostByPid(int pid) ;
+
+    public boolean updatePost(ForumPost post) ;
 }
