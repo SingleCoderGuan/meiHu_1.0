@@ -7,7 +7,7 @@ public class ForumTopic {
 
     @Override
     public String toString() {
-        return "ForumTopicService{" +
+        return "ForumTopic{" +
                 "tid=" + tid +
                 ", tname='" + tname + '\'' +
                 ", tpicname='" + tpicname + '\'' +
