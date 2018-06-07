@@ -132,20 +132,11 @@
       <artifactId>junit</artifactId>
       <version>4.12</version>
     </dependency>
-    <!--<dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-      <version>20160810</version>
-    </dependency>
 
 
 
-    <dependency>
-      <groupId>net.sf.json-lib</groupId>
-      <artifactId>json-lib</artifactId>
-      <version>2.4</version>
-    </dependency>-->
- <!--   <dependency>
+
+   <dependency>
       <groupId>net.sf.json-lib</groupId>
       <artifactId>json-lib</artifactId>
       <version>2.4</version>
@@ -154,13 +145,25 @@
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>20160810</version>
-    </dependency>-->
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.jsqlparser</groupId>
+      <artifactId>jsqlparser</artifactId>
+      <version>0.9.5</version>
+    </dependency>
+    <dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper</artifactId>
+    <version>4.1.6</version>
+  </dependency>
   </dependencies>
 
 
 
 
   <build>
+
     <finalName>meiHu1.0</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>

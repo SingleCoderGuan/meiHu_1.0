@@ -12,6 +12,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private ForumUserMapper forumUserMapper ;
+
+    //显示某用户的全部积分
+    public  int selectUserPointByUid(int uid){
+        return  forumUserMapper.selectUserPointByUid(uid);
+    }
     @Override
     public ForumUser findUserByUname(String uname) {
         return forumUserMapper.selectUsersByUname(uname);

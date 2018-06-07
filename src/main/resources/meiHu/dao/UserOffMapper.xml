@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.UserOffMapper">
+
+    <!--public int selectOffIntoUser(int uid,int offid);-->
+    <select id="selectOffIntoUser" resultType="UserOff" parameterType="int">
+        SELECT * FROM user_off_level WHERE  uid=#{param1} AND offid=#{param2}
+    </select>
+
+    <!--public int addOffIntoUser(int uid,int offid,int first);-->
+    <insert id="addOffIntoUser" parameterType="int">
+        INSERT INTO user_off_level(uid,offid,remainnum) VALUES (#{param1},#{param2},#{param3})
+    </insert>
+
+    <!--public int deleteOffFromUser(int uid,int offid);-->
+    <update id="deleteOffFromUser" parameterType="int">
+        update user_off_level set remainnum = remainnum-1 where
+        uid=#{param1} AND offid=#{param2};
+    </update>
+
+
+    <!--public int addUserOffNum(int uid,int offid);-->
+    <update id="addUserOffNum" parameterType="int">
+        update user_off_level set remainnum = remainnum+1 where
+        uid=#{param1} AND offid=#{param2};
+    </update>
+
+
+    <!--public int updateUserPoint(int uid,int consumpoint);-->
+    <update id="updateUserPoint" parameterType="int">
+        UPDATE forum_user SET point = point-#{param2} WHERE uid=#{param1}
+    </update>
+
+
+
+
+    <!--public List<UserOff> selectAllOffByUid(int uid);-->
+
+    <select id="selectAllOffByUid" resultMap="useroffmap" parameterType="int">
+        SELECT uol.*,ol.offname FROM user_off_level uol,off_level ol
+        WHERE uol.uid = #{parameter}
+    </select>
+    <resultMap id="useroffmap" type="UserOff">
+        <id column="requireid" property="requireid"/>
+        <result column="remainnum" property="remainnum"/>
+        <association property="forumUser" javaType="ForumUser">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
+        </association>
+        <association property="offLevel" javaType="OffLevel">
+            <id column="offid" property="offid"/>
+            <result column="offname" property="offname"/>
+        </association>
+    </resultMap>
+</mapper>

@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface UserService {
+
+    //显示某用户的全部积分
+    public  int selectUserPointByUid(int uid);
     /**
      * 通过用户名在数据库中查找是否有该用户
      * @param uname 执行select的用户名

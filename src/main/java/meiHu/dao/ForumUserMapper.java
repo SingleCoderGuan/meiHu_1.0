@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface ForumUserMapper {
+
+    //显示某用户的全部积分
+    public  int selectUserPointByUid(int uid);
     /**
      * 根据uid从forum_user表中查询该uid对应的用户
      * @param uid 执行select的uid

@@ -787,7 +787,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <img src="images/f6.jpg" alt="" />
                         </div>
                         <div class="footer-img-info">
-                            <p>美论美换活动开始了.</p>
+                           <a href="<%=basePath%>jsp/activity.jsp"> <p>美论美换活动开始了.</p></a>
 
                         </div>
                         <div class="clearfix"> </div>
