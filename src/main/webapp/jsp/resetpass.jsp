@@ -17,7 +17,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>美乎忘记密码</title>
+    <title>美乎重置密码</title>
     <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=basePath%>css/stylelogin.css">
     <link rel="stylesheet" href="<%=basePath%>css/style_inner.css">
@@ -34,8 +34,8 @@
         <div style="width: 480px;height: 520px;">
         <form class="resetform" >
             <li style="position: relative;top: 110px;left:-65px;list-style-type:none; ">
-                <label class="label" style="position: relative;top: 15px;left: 20px;color:#996666;font-size: 18px" >密  码：</label>
-                <input  type="password"  value=""style="position: relative; left: 20px;" placeholder="请输入新密码" name="userpassword" class="inputxt" />
+                <label class="label" style="position: relative;top: 15px;left: 8px;color:#996666;font-size: 18px" >新  密  码：</label>
+                <input  type="password"  value=""style="position: relative; left: 8px;" placeholder="请输入新密码" name="userpassword" class="inputxt" />
             </li>
             <li style="position: relative;top: 150px;left:-65px;list-style-type:none; ">
                 <label class="label" style="position: relative;top: 15px;left: -5px;color:#996666;font-size: 18px">确认新密码：</label>
@@ -50,27 +50,18 @@
 </div>
 
 <script src="<%=basePath%>js/index.js"></script>
-<script src='<%=basePath%>js/jquery.min.js'></script>
 <script src="<%=basePath%>js/index_inner.js"></script>
 <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/Validform_v5.3.2.js"></script>
+<script src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
+<script src="<%=basePath%>js/Validform_v5.3.2.js"></script>
 <script type="text/javascript">
 
     $(function(){
         var demo=$(".resetform").Validform({
             tiptype:3,
             label:".label",
-            showAllError:true,
-            datatype:{
-                "zh1-6":/^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/
-            },
-            ajaxPost:true
+            showAllError:false,
         });
-
-        //通过$.Tipmsg扩展默认提示信息;
-        //$.Tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
-        demo.tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
 
         demo.addRule([
             {

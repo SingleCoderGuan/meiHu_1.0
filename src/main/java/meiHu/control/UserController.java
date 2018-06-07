@@ -6,10 +6,7 @@ import meiHu.service.PostService;
 import meiHu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -23,7 +20,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
-@RestController
+@Controller
 public class UserController {
     @Autowired
     private UserService userService ;
@@ -66,13 +63,13 @@ public class UserController {
         }
 
     }
+
     @RequestMapping(value = "/register.action",method = RequestMethod.POST)
     public void register(String username ,String userpassword ,String phone,HttpServletRequest request ,HttpServletResponse response ) throws UnsupportedEncodingException {
-        request.setCharacterEncoding("utf-8");
         userService.insertUser(username,userpassword,phone,new Date()) ;
         request.getRequestDispatcher(request.getContextPath()+"/jsp/loginregister.jsp") ;
-
     }
+
     @RequestMapping(value = "/loginWithTel.action",method = RequestMethod.GET)
     public void findUser(String tel,String vcode,HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
         PrintWriter out = response.getWriter() ;
@@ -95,7 +92,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/namecheck.action",method = RequestMethod.GET)
-    public String checkUname(String uname,HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public @ResponseBody String checkUname(String uname,HttpServletRequest request,HttpServletResponse response) throws IOException {
         ForumUser user = userService.findUserByUname(uname);
         System.out.println(user);
         if(user!=null){
@@ -104,8 +101,9 @@ public class UserController {
             return "1" ;
         }
     }
+
     @RequestMapping(value = "/checktel.action",method = RequestMethod.GET)
-    public String checkTel(String tel,HttpServletRequest request,HttpServletResponse response){
+    public @ResponseBody String checkTel(String tel,HttpServletRequest request,HttpServletResponse response){
         if(userService.findUserByTel(tel)!=null){
             return "1" ;
         }else{
@@ -136,14 +134,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/sendCodes.action",method = RequestMethod.GET)
-    public String RestCodesJudge(String trueCode,String userCode,HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+    public void RestCodesJudge(String trueCode, String userCode, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         System.out.println(trueCode+"-------------"+userCode);
-
+        response.setContentType("text/text");
+        response.setCharacterEncoding("UTF-8");
         if(trueCode.equals(userCode)){
             System.out.println("验证码对了，但是没跳转");
-            return request.getContextPath()+"/jsp/resetpass.jsp" ;
+            response.getWriter().print(request.getContextPath()+"/jsp/resetpass.jsp");
         }else{
-            return "wrong";
+            response.getWriter().print("wrong");
         }
     }
 }

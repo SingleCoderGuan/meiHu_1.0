@@ -14,8 +14,6 @@
 %>
 
 <!DOCTYPE html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>美乎登录&注册</title>
@@ -194,7 +192,7 @@ text-align: left;
             <div class="modal-dialog" role="document">
                 <div class="modal-content" style="width: 460px;">
                     <div class="modal-header" style="background-color: #F0DAD2">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
                         <h4 class="modal-title" id="myModalLabel">请完善您的信息</h4>
                     </div>
                     <div class="modal-body" style="background-color: #F0DAD2">
@@ -259,12 +257,7 @@ text-align: left;
             tiptype:3,
             label:".label",
             showAllError:false,
-            ajaxPost:false
         });
-
-        //通过$.Tipmsg扩展默认提示信息;
-        //$.Tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
-        demo.tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
 
         demo.addRule([
             {
@@ -285,7 +278,7 @@ text-align: left;
         $.ajax({
             type:"get",
             url:"${pageContext.request.contextPath}/loginWithTel.action",
-            data:"tel="+$("#tel").val()+"&vcode="+$("#vcode").val(),
+            data: {"tel":$("#tel").val,"code":$("#code").val()},
             success:function (message) {
                 if(message=="1"){
                     $('#myModal').modal({
@@ -329,7 +322,7 @@ text-align: left;
 <script>
     $("#perfectuname").blur(function () {
         var content = $("#perfectuname").val();
-        if(content.length<5||content.length>20){
+        if(content.length < 5||content.length>20){
             $("#perunametip").html("")
             $("#perunametip").removeClass()
             $("#perunametip").addClass("wrong")
@@ -354,6 +347,7 @@ text-align: left;
         }
     })
 </script>
+
 <script type="text/javascript">
     var InterValObj; //timer变量，控制时间
     var count = 60; //间隔函数，1秒执行
@@ -377,28 +371,6 @@ text-align: left;
     }
 </script>
 
-<script type="text/javascript">
-    var InterValObj; //timer变量，控制时间
-    var count = 30; //间隔函数，1秒执行
-    var curCount;//当前剩余秒数
-    function sendMessage(){curCount = count;
-        $("#btn").attr("disabled", "true");
-        $("#btn").val(curCount + "秒后可重新发送");
-        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
-    }
-    //timer处理函数
-    function SetRemainTime() {
-        if (curCount == 0) {
-            window.clearInterval(InterValObj);//停止计时器
-            $("#btn").removeAttr("disabled");//启用按钮
-            $("#btn").val("重新发送验证码");
-        }
-        else {
-            curCount--;
-            $("#btn").val(curCount + "秒后可重新发送");
-        }
-    }
-</script>
 <script>
     var sms="";
     $("#btn").click(function(){
@@ -431,6 +403,7 @@ text-align: left;
     });
 
 </script>
+
 <script>
     $("#regtel").blur(function () {
         var telnum = $("#regtel").val();

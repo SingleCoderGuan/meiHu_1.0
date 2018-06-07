@@ -156,23 +156,18 @@
 
     $("#lo").click(function(){
         var code=$("#code").val();
-        if(code==""){
-            alert("请输入验证码");
-        }else{
-            $.ajax({
-                url:"${pageContext.request.contextPath}/sendCodes.action",
-                type:"get",
-                data:{"trueCode":sms,"userCode":code},
-                success:function(result){
-                    if(result=="wrong"){
-                        alert("验证码错误");
-                    }else {
-                        window.location.href(result);
-                    }
+        $.ajax({
+            url:"${pageContext.request.contextPath}/sendCodes.action",
+            type:"get",
+            data:{"trueCode":sms,"userCode":code},
+            success:function(result){
+                if(result=="wrong"){
+                    alert("验证码错误");
+                }else {
+                    $(location).attr("href","localhost:8080"+result);
                 }
-            })
-
-        };
+            }
+        })
     });
 
 </script>
