@@ -43,7 +43,12 @@
             border: 1px solid #ccc;
         }
     </style>
-
+    <script>
+        function subm(){
+            document.getElementById('content').value=editor.txt.html();
+            document.getElementById('newspost').submit();
+        }
+    </script>
 </head>
 <style type="text/css">
     .sponsor .sponsor-level {
@@ -188,7 +193,7 @@
                     <form id="newspost" method="post" action="<%=application.getContextPath()%>/newpost.action" enctype="multipart/form-data">
 
                         标题：
-                        <input type="text" id="title" name="title"/><br/><br/>
+                        <input type="text" id="title" name="ptitle"/><br/><br/>
 
                         板块：
                         <select style="position: relative;top: -10px;" id="topicList" name="topicid">
@@ -201,7 +206,7 @@
                             <option value="7">代购</option>
                         </select>
 
-                        <input type="hidden" id="content" name="content"/>
+                        <input type="hidden" id="content" name="pcontent"/>
 
                         <div id="div1" class="toolbar">
                         </div>
@@ -209,7 +214,7 @@
                         <div id="div2" class="text" style="height: 480px;">
 
                         </div>
-                        <input type="submit" value="保存" />
+                        <input type="button" value="保存" onclick="subm()" />
 
                     </form>
 

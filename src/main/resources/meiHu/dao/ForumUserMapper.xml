@@ -28,9 +28,9 @@
         SELECT u.*,t.* FROM forum_user u ,forum_title t WHERE u.uname=#{_parameter} and u.title_id=t.titleid
     </select>
 
-    <!--public boolean insertUser(String uanme,String passwrod ,String tel) ;-->
-    <insert id="insertUser" >
-        INSERT INTO forum_user (uname,password,tel,title_id) VALUES (#{uname},#{password},#{tel},1)
+    <!--public boolean insertUser(String uanme,String passwrod ,String tel,Date registertime) ;-->
+    <insert id="insertUser">
+        INSERT INTO forum_user (uname,password,tel,title_id,registertime) VALUES (#{uname},#{password},#{tel},1,#{registertime})
     </insert>
 
     <!--public ForumUser selectUserByTel(String tel);-->

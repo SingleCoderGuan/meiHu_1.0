@@ -3,6 +3,7 @@ package meiHu.dao;
 import meiHu.entity.ForumUser;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ForumUserMapper {
@@ -61,7 +62,7 @@ public interface ForumUserMapper {
      * @param tel 电话号码
      * @return 是否插入成功
      */
-    public boolean insertUser(@Param("uname")String uanme,@Param("password")String passwrod ,@Param("tel")String tel) ;
+    public boolean insertUser(@Param("uname")String uanme, @Param("password")String passwrod , @Param("tel")String tel,@Param("registertime")Date registertime) ;
 
     /**
      * 根据uid查询所有该用户关注的用户

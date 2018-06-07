@@ -1317,15 +1317,6 @@
 		});
 	};
 	
-	//公用方法显示&关闭信息提示框;
-	$.Showmsg=function(msg){
-		creatMsgbox();
-		Validform.util.showmsg.call(win,msg,1,{});
-	};
-	
-	$.Hidemsg=function(){
-		msgobj.hide();
-		msghidden=true;
-	};
+
 	
 })(jQuery,window);

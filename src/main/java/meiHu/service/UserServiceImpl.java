@@ -5,6 +5,7 @@ import meiHu.entity.ForumUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,8 +17,8 @@ public class UserServiceImpl implements UserService {
         return forumUserMapper.selectUsersByUname(uname);
     }
 
-    public boolean insertUser(String uname,String password,String tel){
-        return forumUserMapper.insertUser(uname,password,tel);
+    public boolean insertUser(String uname, String password, String tel, Date registertime){
+        return forumUserMapper.insertUser(uname,password,tel,registertime);
     }
 
     @Override

@@ -7,15 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%
     String path =request.getContextPath();
     String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <!DOCTYPE html>
-<html >
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>美乎登录&注册</title>
@@ -54,7 +54,8 @@
 
 <div class="cotn_principal">
     <div class="cont_centrar">
-
+        <c:set var="userCookie" value="${cookie.userInfo.value }"></c:set>
+        <c:set var="userArr" value='${fn:split(userCookie,"-") }'></c:set>
         <img id="logo" src="<%=basePath%>images/LOGO.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
         <div class="cont_login">
@@ -90,26 +91,34 @@
                             <form id="accountlogin" action="${pageContext.request.contextPath}/loginWithAccount.action" method="post">
                             <p id="one">
 
-                                <input style="position:relative;top: 20px;" type="text" name="uname" placeholder="请输入用户名"  <c:if test="${param.rslt}=='1'"><span style="color: red;">用户名不存在</span></c:if> />
-                                <input style="position:relative;top: 20px;" type="password" name="password" placeholder="请输入密码" <c:if test="${param.rslt}=='2'"><span style="color: red;">密码错误</span></c:if> />
-
-                                <button class="btn_my_login" type="submit">登录</button>
-                                <div><a style="text-decoration:none;" href="<%=basePath%>jsp/forgottenpass.jsp"><span id="forgotten">忘记密码？</span></a></div>
-                                <a id="extralogin" >第三方登录</a>
+                                <input style="position:relative;top: 20px;" type="text" name="uname" value="${userArr[0] }" placeholder="请输入用户名"/>
+                                <input style="position:relative;top: 20px;" type="password" name="password" value="${userArr[1] }"  placeholder="请输入密码" />
+                                <c:if test="${empty cookie.userInfo.value }">
+                                    <input style="position: absolute;left: -100px;top: 152px;" type="checkbox" name="flag" value="1"/>
+                                </c:if>
+                                <c:if test="${not empty cookie.userInfo.value }">
+                                <input style="position: absolute;left: -100px;top: 152px;" type="checkbox" checked="checked" name="flag" value="1"/>
+                                </c:if>
+                                <span style="position: absolute;left: 50px;top: 170px;">记住密码</span>
+                                <a style="position: absolute;top: 120px;left: 130px;text-decoration:none;" href="<%=basePath%>jsp/forgottenpass.jsp">
+                                    <span id="forgotten">忘记密码？</span>
+                                </a>
+                                <button class="btn_my_login" style="position: absolute;top:200px;left: 60px" type="submit">登录</button>
+                                <span disabled="disabled" style="position: absolute;top: 260px;left: 36px;" >第三方登录</span>
                                 <div id="elentrance">
-                                    <img class="extralogin" src="<%=basePath%>images/qqlogin.png" alt="">
-                                    <img class="extralogin" src="<%=basePath%>images/wechatlogin.png" alt="">
-                                    <img class="extralogin" src="<%=basePath%>images/weibologin.png" alt="">
+                                    <img class="extralogin" style="position: absolute;top: 95px;left: 60px;" src="<%=basePath%>images/qqlogin.png" alt="">
+                                    <img class="extralogin" style="position: absolute;top: 95px;left: 140px;" src="<%=basePath%>images/wechatlogin.png" alt="">
+                                    <img class="extralogin" style="position: absolute;top: 95px;left: 220px;" src="<%=basePath%>images/weibologin.png" alt="">
                                 </div>
                             </p>
                             </form>
 
-                            <form id="textlogin" class="demoform" >
+                            <form id="textlogin" class="demoform" action="<%=basePath%>telLogin.action"  method="post">
                                 <p class="ex" id="two" hidden>
-                                    <input style="position:relative;top: 20px;" id="tel" type="text" placeholder="请输入手机号码" />
-                                    <button class="btn_my_send" id="vcode" onClick="sendtext()">发送验证码</button>
-                                    <input style="position:relative;top: 20px;" type="password" placeholder="请输入验证码" />
-                                    <button class="btn_my_login" type="submit" id="tellogin">登录</button>
+                                    <input style="position:relative;top: 85px;" id="tel" type="text" placeholder="请输入手机号码" />
+                                    <button class="btn_my_send" style="position: relative;top: 98px;" id="vcode" onClick="sendtext()">发送验证码</button>
+                                    <input style="position:relative;top: 100px;" type="password" placeholder="请输入验证码" />
+                                    <button class="btn_my_login" style="position: relative;top: 120px;" type="submit" id="tellogin">登录</button>
                                 </p>
                             </form>
                         </div>
@@ -117,7 +126,7 @@
                 </div>
                 <div class="cont_form_sign_up">
                     <h2>注册</h2>
-                    <form class="registerform" >
+                    <form class="registerform" action="<%=basePath%>register.action" method="post" >
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
                             <label class="label" style="position: relative;font-size: 14px;top: 10px;color:#996666;">用户名：</label>
                             <input style="position: relative;padding: 15px 5px;
@@ -157,10 +166,12 @@ margin-top: 20px;
   width: 180px;
 border: none;
 text-align: left;
-  color: #757575;background-color: #fff" type="text" value="" name="phone" class="inputxt"/>
+  color: #757575;background-color: #fff" id="regtel" type="text" value="" name="phone" class="inputxt"/>
+                            <span id="teltip" style="position: absolute;top: 75px;left: 212px;"></span>
                         </li>
+
                         <li style="position: relative;top: 20px;left:-45px;list-style-type:none; ">
-                            <input class="btn_my_login" style="position: relative;top: -7px;" type="button" value="发送手机短信验证码"/>
+                            <input class="btn_my_login" id="btn" disabled style="position: relative;top: -7px;" type="button" onclick="sendMessage()" value="发送手机短信验证码"/>
                         </li>
                         <li style="position: relative;top: -5px;left:-65px;list-style-type:none; ">
                             <label class="label" style="font-size: 14px;position: relative;top: 10px;color:#996666;">验证码：</label>
@@ -170,10 +181,10 @@ text-align: left;
                                   width: 180px;
                                 border: none;
                                 text-align: left;
-                                  color: #757575;background-color: #fff" type="text" value="" name="text" class="inputxt"/>
+                                  color: #757575;background-color: #fff" id="code" type="text" value="" name="text" class="inputxt"/>
                         </li>
                         <div class="action" style="position: relative;top: 20px;left:-90px ">
-                            <input type="submit" style="position: relative;top: -28px;" class="btn_my_login" value="提 交" />
+                            <input type="submit" style="position: relative;top: -28px;" id="lo" disabled class="btn_my_login" value="提 交" />
                         </div>
                     </form>
                 </div>
@@ -247,11 +258,8 @@ text-align: left;
         var demo=$(".registerform").Validform({
             tiptype:3,
             label:".label",
-            showAllError:true,
-            datatype:{
-                "zh1-6":/^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/
-            },
-            ajaxPost:true
+            showAllError:false,
+            ajaxPost:false
         });
 
         //通过$.Tipmsg扩展默认提示信息;
@@ -267,10 +275,6 @@ text-align: left;
                 ele:".inputxt:eq(2)",
                 datatype:"*6-20",
                 recheck:"userpassword"
-            },
-            {
-                ele:".inputxt:eq(3)",
-                datatype:"m",
             }
             ]);
 
@@ -299,6 +303,7 @@ text-align: left;
             $("#unametip").removeClass()
             $("#unametip").addClass("wrong")
             $("#unametip").html("用户名必须是5到20位字符")
+            $("#lo").attr("disabled",true)
         }else{
             $.ajax({
                 type:"get",
@@ -309,10 +314,12 @@ text-align: left;
                         $("#unametip").html("用户名已被占用")
                         $("#unametip").removeClass()
                         $("#unametip").addClass("wrong")
+                        $("#lo").attr("disabled",true)
                     }else {
                         $("#unametip").html("ok")
                         $("#unametip").removeClass()
                         $("#unametip").addClass("right")
+                        $("#lo").attr("disabled",false)
                     }
                 }
             })
@@ -341,6 +348,118 @@ text-align: left;
                         $("#perunametip").html("ok")
                         $("#perunametip").removeClass()
                         $("#perunametip").addClass("right")
+                    }
+                }
+            })
+        }
+    })
+</script>
+<script type="text/javascript">
+    var InterValObj; //timer变量，控制时间
+    var count = 60; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    function sendMessage(){curCount = count;
+        $("#btn").attr("disabled", "true");
+        $("#btn").val(curCount + "秒后可重新发送");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
+    }
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btn").removeAttr("disabled");//启用按钮
+            $("#btn").val("重新发送验证码");
+        }
+        else {
+            curCount--;
+            $("#btn").val(curCount + "秒后可重新发送");
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    var InterValObj; //timer变量，控制时间
+    var count = 30; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    function sendMessage(){curCount = count;
+        $("#btn").attr("disabled", "true");
+        $("#btn").val(curCount + "秒后可重新发送");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
+    }
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btn").removeAttr("disabled");//启用按钮
+            $("#btn").val("重新发送验证码");
+        }
+        else {
+            curCount--;
+            $("#btn").val(curCount + "秒后可重新发送");
+        }
+    }
+</script>
+<script>
+    var sms="";
+    $("#btn").click(function(){
+        var tel=$("#regtel").val();
+        $.ajax({
+            url:"${pageContext.request.contextPath}/resetSend.action",
+            type:"get",
+            data:{"tel":tel},
+            success:function(result){
+                sms=result;
+                alert(sms)
+            }
+        });
+    });
+
+    $("#lo").click(function(){
+        var code=$("#code").val();
+        if(code==""){
+            alert("请输入验证码");
+        }else{
+            if(sms==code){
+                alert("验证码正确")
+
+            }else{
+                alert("验证码错误");
+
+            };
+        };
+
+    });
+
+</script>
+<script>
+    $("#regtel").blur(function () {
+        var telnum = $("#regtel").val();
+        var reg = /^1[345789]\d{9}$/;
+        if(!reg.test(telnum)){
+            $("#teltip").html("")
+            $("#teltip").removeClass()
+            $("#teltip").addClass("wrong")
+            $("#teltip").html("请输入正确格式")
+            $("#btn").attr("disabled","true")
+        }else{
+            $.ajax({
+                type:"get",
+                url:"${pageContext.request.contextPath}/checktel.action",
+                data:"tel="+telnum,
+                success:function (message) {
+                    if(message=="0"){
+                        $("#teltip").html("ok")
+                        $("#teltip").removeClass()
+                        $("#teltip").addClass("right")
+                        $("#btn").attr("disabled",false) ;
+                        $("#tel").attr("disabled",true);
+
+                    }else {
+
+                        $("#teltip").html("电话号码已注册")
+                        $("#teltip").removeClass()
+                        $("#teltip").addClass("wrong")
+                        $("#btn").attr("disabled","true")
                     }
                 }
             })
