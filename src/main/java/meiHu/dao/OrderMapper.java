@@ -18,9 +18,14 @@ public interface OrderMapper {
     public void deleteOrderItem(int orderid);
     public void deleteOrder(int orderid);
 
+    //用户查询待付款的订单
+    public List<Order> noPayOrder(int uid);
+    //用户查询待发货的订单
+    public List<Order> waitOrder(int uid);
+
     //用户查询已发货的订单
     public List<Order> getRunOrder(int uid);
-    //用户查询已完成的订单
+    //用户查询已收货的订单
     public List<Order> getDoneOrder(int uid);
 
 }

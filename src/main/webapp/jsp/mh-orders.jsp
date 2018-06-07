@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,13 +14,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8">
     <meta http-equiv="Cache-Control" content="no-siteapp">
-    <title>我的总积分</title>
+    <title>我的订单</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="<%=basePath%>css/iconfont.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/common1.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
-
     <style>
         .uc-header-bg{
             background-color: #cdc6d7;
@@ -47,7 +50,7 @@
             <div class="logout divider"><a href="<%=basePath%>jsp/login.jsp">退出</a></div>
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车<span class="txt-theme">2</span>件</a></div>
-            <div class="order"><em></em><a href="<%=basePath%>jsp/uc-order.jsp">我的订单</a></div>
+            <div class="order"><em></em><a href="<%=basePath%>jsp/mh-order.jsp">我的订单</a></div>
             <div class="fav"><em></em><a href="#">我的收藏</a></div>
             <div class="help"><em></em><a href="<%=basePath%>jsp/help.jsp">帮助中心</a></div>
         </div>
@@ -63,7 +66,7 @@
                 <span class="label">账户设置<i class="iconfont"></i></span>
                 <div class="toggle-cont">
                     <a href="#">个人信息</a>
-                    <a href="<%=basePath%>jsp/uc-address.jsp">收货地址</a>
+                    <a href="<%=basePath%>jsp/mh-address.jsp">收货地址</a>
                 </div>
             </li>
             <li><a href="#">系统消息</a></li>
@@ -92,25 +95,23 @@
             <div class="uc-menu">
                 <div class="tit">订单中心</div>
                 <ul class="sublist">
-                    <li><a  href="<%=basePath%>jsp/uc-order.jsp">我的订单</a></li>
+                    <li><a class="active" href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></li>
 
                 </ul>
                 <div class="tit">客户服务</div>
                 <ul class="sublist">
-                    <li><a href="<%=basePath%>jsp/uc-cancel.jsp">取消订单记录</a></li>
-                    <li><a href="<%=basePath%>jsp/uc-apply-refund.jsp">退款/退货</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-cancel.jsp">取消订单记录</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-apply-refund.jsp">退款/退货</a></li>
                 </ul>
                 <div class="tit">账户中心</div>
                 <ul class="sublist">
 
-                    <li><a href="<%=basePath%>jsp/uc-address.jsp">收货地址</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-address.jsp">收货地址</a></li>
                 </ul>
-
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
-                    <li><a  class="active" href="<%=basePath%>jsp/uc-tatal-credits.jsp">我的积分</a></li>
-                    <li><a href="<%=basePath%>jsp/uc-discount-coupon.jsp">我的优惠卷</a></li>
-
+                    <li><a href="<%=basePath%>jsp/mh-total-credits.jsp">我的消费积分</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-discount-coupon.jsp">我的优惠卷</a></li>
                 </ul>
                 <div class="tit">服务中心</div>
                 <ul class="sublist">
@@ -120,54 +121,23 @@
         </div>
         <div class="uc-content">
             <div class="uc-panel">
-                <div class="uc-bigtit">我的积分</div>
+                <div class="uc-bigtit">我的订单</div>
                 <div class="uc-panel-bd">
                     <div class="uc-sort">
                         <div class="uc-tabs">
-                            <p>当前积分:0</p>
-
+                            <a class="item active" href="<%=basePath%>goods/myOrder.action">所有订单</a>
+                            <a class="item " href="<%=basePath%>goods/noPayOrder.action">待付款</a>
+                            <a class="item" href="<%=basePath%>goods/waitOrder.action">待发货</a>
+                            <a class="item" href="<%=basePath%>goods/runOrder.action">已发货</a>
+                            <a class="item" href="<%=basePath%>goods/doneOrder.action">已收货</a></div>
                         </div>
-
+                        <div class="uc-search">
+                            <form action="">
+                                <input type="text" class="sch-input" placeholder="输入商品名称,订单号，商品编号" />
+                                <button class="sch-btn"><i class="iconfont icon-search"></i></button>
+                            </form>
+                        </div>
                     </div>
-
-                    <table class="uc-table">
-                        <thead>
-                        <td>商品详情</th>
-                        <th>单价</th>
-                        <th>数量</th>
-                        <th>总价</th>
-                        <th>状态</th>
-                        <th width="120">操作</th>
-                        </thead>
-                        <tr class="hd order-meta">
-                            <td colspan="4">
-
-                            </td>
-                        </tr>
-                        <tr class="order-goods">
-
-                            <td>
-
-                            </td>
-                            <td>298.00</td>
-                            <td>1</td>
-                            <td>
-
-                            </td>
-                            <td>付款</td>
-                            <td><a href="#">评价</a> || <a href="#">晒单</a></td>
-                        </tr>
-
-
-                    </table>
-
-
-                    <div class="pages">
-                        <a class="page prev" href="">上一页</a>
-                        <span class="cur-page">1</span>
-                        <a class="page next" href="">下一页</a>
-                    </div>
-
                 </div>
             </div>
         </div>

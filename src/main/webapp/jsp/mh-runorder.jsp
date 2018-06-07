@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8">
     <meta http-equiv="Cache-Control" content="no-siteapp">
-    <title>我的待发货</title>
+    <title>我的已发货</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="<%=basePath%>css/iconfont.css" rel="stylesheet"/>
@@ -47,7 +50,7 @@
             <div class="logout divider"><a href="<%=basePath%>jsp/login.jsp">退出</a></div>
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车<span class="txt-theme">2</span>件</a></div>
-            <div class="order"><em></em><a href="<%=basePath%>jsp/uc-order.jsp">我的订单</a></div>
+            <div class="order"><em></em><a href="<%=basePath%>jsp/mh-order.jsp">我的订单</a></div>
             <div class="fav"><em></em><a href="#">我的收藏</a></div>
             <div class="help"><em></em><a href="<%=basePath%>jsp/help.jsp">帮助中心</a></div>
         </div>
@@ -63,7 +66,7 @@
                 <span class="label">账户设置<i class="iconfont"></i></span>
                 <div class="toggle-cont">
                     <a href="#">个人信息</a>
-                    <a href="<%=basePath%>jsp/uc-address.jsp">收货地址</a>
+                    <a href="<%=basePath%>jsp/mh-address.jsp">收货地址</a>
                 </div>
             </li>
             <li><a href="#">系统消息</a></li>
@@ -92,29 +95,29 @@
             <div class="uc-menu">
                 <div class="tit">订单中心</div>
                 <ul class="sublist">
-                    <li><a class="active" href="<%=basePath%>jsp/uc-order.jsp">我的订单</a></li>
+                    <li><a class="active" href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></li>
 
                 </ul>
                 <div class="tit">客户服务</div>
                 <ul class="sublist">
-                    <li><a href="<%=basePath%>jsp/uc-cancel.jsp">取消订单记录</a></li>
-                    <li><a href="<%=basePath%>jsp/uc-refund.jsp">退款/退货</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-cancel.jsp">取消订单记录</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-refund.jsp">退款/退货</a></li>
                 </ul>
                 <div class="tit">账户中心</div>
                 <ul class="sublist">
 
-                    <li><a href="<%=basePath%>jsp/uc-address.jsp">收货地址</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-address.jsp">收货地址</a></li>
                 </ul>
 
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
-                    <li><a href="<%=basePath%>jsp/uc-tatal-credits.jsp">我的积分</a></li>
-                    <li><a href="<%=basePath%>jsp/uc-discount-coupon.jsp">我的优惠卷</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-tatal-credits.jsp">我的积分</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-discount-coupon.jsp">我的优惠卷</a></li>
 
                 </ul>
                 <div class="tit">服务中心</div>
                 <ul class="sublist">
-                    <li><a href="<%=basePath%>jsp/uc-msg.jsp">美淘服务</a></li>
+                    <li><a href="<%=basePath%>jsp/mh-msg.jsp">美淘服务</a></li>
                 </ul>
             </div>
         </div>
@@ -124,12 +127,12 @@
                 <div class="uc-panel-bd">
                     <div class="uc-sort">
                         <div class="uc-tabs">
-                            <a class="item" href="<%=basePath%>jsp/uc-order.jsp">所有订单</a>
-                            <a class="item" href="<%=basePath%>jsp/uc-nopay-money.jsp">待付款</a>
-                            <a class="item  active" href="<%=basePath%>jsp/uc-waitsent.jsp">待发货</a>
-                            <a class="item" href="<%=basePath%>jsp/uc-runorder.jsp">已发货</a>
-                            <a class="item" href="<%=basePath%>jsp/uc-wait-receive.jsp">待收货</a>
-                            <a class="item" href="<%=basePath%>jsp/uc-doneorder.jsp">已收货</a></div>
+                            <a class="item" href="<%=basePath%>goods/myOrder.action">所有订单</a>
+                            <a class="item" href="<%=basePath%>goods/noPayOrder.action">待付款</a>
+                            <a class="item" href="<%=basePath%>goods/waitOrder.action">待发货</a>
+                            <a class="item  active" href="<%=basePath%>goods/runOrder.action">已发货</a>
+                            <a class="item" href="<%=basePath%>goods/doneOrder.action">已收货</a></div>
+                        </div>
                         <div class="uc-search">
                             <form action="">
                                 <input type="text" class="sch-input" placeholder="输入商品名称,订单号，商品编号" />
@@ -139,44 +142,51 @@
                     </div>
                     <table class="uc-table">
                         <thead>
-                        <td>商品详情</th>
+                        <th>商品详情</th>
+                        <th>名称</th>
                         <th>单价</th>
                         <th>数量</th>
-                        <th>总价</th>
-                        <th>状态</th>
-                        <th width="120">操作</th>
+                        <th>小计</th>
+                        <th width="120">状态</th>
                         </thead>
-                        <tr class="hd order-meta">
-                            <td colspan="4">
-                                <div class="left">2016-05-29   订单号: 1947584672162364</div>
-                                <div class="right"></div>
+                        <c:forEach items="${runOrderList}" var="runorder">
+                        <tr>
+                            <td >
+                                <div class="left"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${runorder.ordertime}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单号: ${runorder.orderid}</div>
+
                             </td>
                         </tr>
-                        <tr class="order-goods">
-
+                        <c:forEach items="${runorder.items}" var="eachdetail">
+                            <td class="order-goods">
+                                <img src="${pageContext.request.contextPath }/${eachdetail.good.goodpic}" width="100px" height="100px">
+                            </td>
                             <td>
                                 <div class="goods-info">
-                                    <div>小米短袖T恤 五彩换 黑色 S</div>
-                                    <div>499元×1</div>
+                                    <div>
+                                            ${eachdetail.good.goodname}
+                                    </div>
                                 </div>
                             </td>
-                            <td>298.00</td>
-                            <td>1</td>
+                                <td>${eachdetail.good.goodprice}</td>
+                                <td>${eachdetail.count}</td>
+                                <td>
+                                    <span class="text-theme fwb">${eachdetail.subtotal}</span>
+                                </td>
                             <td>
-                                <span class="text-theme fwb">298.00元</span>
+                                <c:choose>
+                                    <c:when test="${runorder.state== 0}"> 未付款</c:when>
+                                    <c:when test="${runorder.state== 1 }">待发货</c:when>
+                                    <c:when test="${runorder.state == 2}">待收货</c:when>
+                                    <c:when test="${runorder.state== 3}">已收货</c:when>
+                                </c:choose>
                             </td>
-                            <td>已付款</td>
-                            <td>等待发货</td>
-                        </tr>
+                            </tr>
+                            </c:forEach>
+                        </c:forEach>
 
 
                     </table>
 
-                    <div class="pages">
-                        <a class="page prev" href="">上一页</a>
-                        <span class="cur-page">1</span>
-                        <a class="page next" href="">下一页</a>
-                    </div>
 
 
  <!--脚部-->

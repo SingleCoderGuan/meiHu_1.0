@@ -1,3 +1,4 @@
+<%@ page import="javax.swing.plaf.basic.BasicSpinnerUI" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -54,7 +55,7 @@
         nav{
             display: inline-block;
             margin-top:-40px;
-            left:390px;
+            left:330px;
             font-family: 华文楷体;
             font-size: 20px;
             font-weight: bolder;
@@ -109,21 +110,24 @@
     </div>
     <nav>
         <a href="">
-            <span data-hover="美乎首页">美乎首页</span>
+            <span data-hover="香水">香水</span>
         </a>
         <a href="">
-            <span data-hover="美淘首页">美淘首页</span>
+            <span data-hover="眼霜">眼霜</span>
         </a>
         <a href="">
-            <span data-hover="美论">美论</span>
+            <span data-hover="洁面乳">洁面乳</span>
         </a>
         <a href="">
-            <span data-hover="美购">美购</span>
+            <span data-hover="防晒霜">防晒霜</span>
         </a>
         <a href="">
+            <span data-hover="口红">口红</span>
+        </a>
+        <a href="<%=basePath%>jsp/mh-address.jsp">
             <span data-hover="个人中心">个人中心</span>
         </a>
-        <a href="">
+        <a href="<%=basePath%>jsp/cart.jsp">
             <span data-hover="购物车">购物车</span>
         </a>
     </nav>
