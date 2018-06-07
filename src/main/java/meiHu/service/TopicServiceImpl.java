@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ForumTopicServiceImpl implements  ForumTopicService{
+public class TopicServiceImpl implements TopicService {
     @Autowired
     private ForumTopicMapper forumTopicMapper ;
     @Override

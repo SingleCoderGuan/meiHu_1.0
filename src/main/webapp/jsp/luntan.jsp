@@ -482,10 +482,10 @@
                                         href="<%=basePath%>luntan/luntanshouye.action?tid=1">香水</a></li>
                                 <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai2.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=6">水乳</a></li>
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=2">水乳</a></li>
                                 <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai1.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=2">口红</a></li>
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=3">口红</a></li>
                                 <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai4.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
                                         href="<%=basePath%>luntan/luntanshouye.action?tid=4">防晒</a></li>

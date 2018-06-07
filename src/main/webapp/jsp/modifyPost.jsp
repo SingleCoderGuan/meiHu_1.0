@@ -16,7 +16,7 @@
 
 <head>
 
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>修改帖子</title>
     <meta name="keywords" content="美论" />
     <meta name="description" content="美论" />
@@ -191,23 +191,16 @@
 
                     </ul>
                     <!-- end tab 切换 -->
-                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/updatePost.action?pid=${post.pid}" enctype="multipart/form-data">
+                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/updatePost.action" enctype="multipart/form-data">
 
                         标题：
-                        <input type="text" id="title" value="${post.ptitle}" name="ptitle"/><br/><br/>
+                        <input type="text" id="title" name="ptitle" value="${post.ptitle}"/><br/><br/>
+                        <input type="text" name="pid" value="${post.pid}" hidden>
 
                         板块：
-                        <select style="position: relative;top: -10px;" id="topicList" name="topicid">
-                            <option value="1" <c:if test="${post.pid==1}">selected</c:if>>香水</option>
-                            <option value="2" <c:if test="${post.pid==2}">selected</c:if> >水乳</option>
-                            <option value="3" <c:if test="${post.pid==3}">selected</c:if> >口红</option>
-                            <option value="4" <c:if test="${post.pid==4}">selected</c:if> >防晒霜</option>
-                            <option value="5" <c:if test="${post.pid==5}">selected</c:if> >洗面奶</option>
-                            <option value="6" <c:if test="${post.pid==6}">selected</c:if> >眼霜</option>
-                            <option value="7" <c:if test="${post.pid==7}">selected</c:if> >代购</option>
-                        </select>
+                        ${post.topic.tname}
 
-                        <input type="hidden" id="content" value="${post.pcontent}" name="pcontent"/>
+                        <input type="hidden" id="content" name="pcontent" value="${post.pcontent}"/>
 
                         <div id="div1" class="toolbar">
                         </div>

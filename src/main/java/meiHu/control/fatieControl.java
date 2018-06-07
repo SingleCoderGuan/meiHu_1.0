@@ -3,8 +3,8 @@ package meiHu.control;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumTopic;
 import meiHu.entity.ForumUser;
-import meiHu.service.ForumTopicService;
-import meiHu.service.LuntanService;
+import meiHu.service.PostService;
+import meiHu.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +22,9 @@ import java.util.UUID;
 @Controller
 public class fatieControl {
     @Autowired
-    ForumTopicService forumTopicService ;
+    TopicService topicService ;
     @Autowired
-    LuntanService luntanService;
+    PostService postService;
     @RequestMapping(value = "/fatie.action")
     public void fatie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if(request.getSession().getAttribute("user")==null){
@@ -36,17 +36,26 @@ public class fatieControl {
 
     @RequestMapping(value = "/newpost.action", method = RequestMethod.POST)
     public void newPost(int topicid, ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ForumTopic topic = forumTopicService.selectTopicByTid(topicid);
+        ForumTopic topic = topicService.selectTopicByTid(topicid);
         ForumPost forumPost = post;
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         forumPost.setTopic(topic);
-        if (luntanService.insert(forumPost)) {
+        if (postService.postNewPost(forumPost)) {
             response.sendRedirect(request.getContextPath() + "/luntan/luntanshouye.action?tid=1");
         } else {
             System.out.println("发帖失败");
         }
 
+    }
+    @RequestMapping(value = "updatePost.action",method = RequestMethod.POST)
+    public void updatePost(ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ForumPost forumPost = post ;
+        forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
+        forumPost.setCreatetime(new Date());
+        if(postService.updatePost(forumPost) ){
+            response.sendRedirect(request.getContextPath() + "/luntan/luntanshouye.action?tid=1");
+        }
     }
 
     @RequestMapping(value = "/picload.action",method = RequestMethod.POST)
