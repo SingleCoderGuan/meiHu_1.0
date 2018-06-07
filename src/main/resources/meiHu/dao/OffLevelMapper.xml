@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.OffLevelMapper">
+
+    <!--public int deleteOffByOffid(int offid);-->
+<update id="deleteOffByOffid" parameterType="int">
+    UPDATE off_level SET offnum = offnum-1 WHERE offid=#{parameter}
+</update>
+
+    <!--public OffLevel selectOffLevelByOffid(int offid);-->
+<select id="selectOffLevelByOffid" resultType="OffLevel" parameterType="int">
+    SELECT * FROM off_level WHERE offid=#{parameter}
+</select>
+
+</mapper>
