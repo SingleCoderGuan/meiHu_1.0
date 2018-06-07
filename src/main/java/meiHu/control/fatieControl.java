@@ -5,7 +5,6 @@ import meiHu.entity.ForumTopic;
 import meiHu.entity.ForumUser;
 import meiHu.service.ForumTopicService;
 import meiHu.service.LuntanService;
-import meiHu.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ public class fatieControl {
     @Autowired
     ForumTopicService forumTopicService ;
     @Autowired
-    PostService postService;
+    LuntanService luntanService;
     @RequestMapping(value = "/fatie.action")
     public void fatie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if(request.getSession().getAttribute("user")==null){
@@ -42,7 +41,7 @@ public class fatieControl {
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         forumPost.setTopic(topic);
-        if (postService.postNewPost(forumPost)) {
+        if (luntanService.insert(forumPost)) {
             response.sendRedirect(request.getContextPath() + "/luntan/luntanshouye.action?tid=1");
         } else {
             System.out.println("发帖失败");

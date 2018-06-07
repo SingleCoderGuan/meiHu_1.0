@@ -110,7 +110,10 @@
         display: block;
     }
 </style>
-<body>
+<body style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
 <div class="aw-top-menu-wrap"
 >
     <div class="aw-wecenter aw-top-menu clearfix">
@@ -122,59 +125,15 @@
             <!-- end logo -->
             <!-- 搜索框 -->
             <div class="aw-search-box  hidden-xs hidden-sm">
-                <form class="navbar-search pull-right" action="<%=basePath%>search/searchReasult.action" id="global_search_form" method="post">
+                <form class="navbar-search pull-right" action="#" id="global_search_form" method="post">
                     <div class="input-group">
                         <input value="" class="form-control" type="text"
-                               placeholder="搜索问题、话题" autocomplete="off" name="searchcontent" id="aw-search-query"
+                               placeholder="搜索问题、话题" autocomplete="off" name="q" id="aw-search-query"
                                class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
-                              onClick="$('#global_search_form').submit();">搜索</span>
-                        <div id="context1" style="background-color:white; border: 1px solid deepskyblue;width:167px;
-                                position: absolute;top: 36px;left:0px;display:none" ></div>
-                        <script>
-                            $("#aw-search-query").keyup(function(){
-                                var content=$(this).val();
-                                //如果当前搜索内容为空，无须进行查询
-                                if(content==""){
-                                    $("#context1").css("display","none");
-                                    return ;
-                                }
-                                //由于浏览器的缓存机制 所以我们每次传入一个时间
-                                var time=new Date().getTime();
-                                $.ajax({
-                                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                                    type:"post",
-                                    url:"${pageContext.request.contextPath}/search/automatch.action",
-                                    data:{name:content,time:time},
-                                    success:function(data){
-                                        //拼接html
-                                        var res=data.split(",");
-                                        var html="";
-                                        for(var i=0;i<res.length;i++){
-                                            //每一个div还有鼠标移出、移入点击事件
-                                            html+="<div onclick='setSearch_onclick(this)' onmouseout='changeBackColor_out(this)' onmouseover='changeBackColor_over(this)'>"+res[i]+"</div>";
-                                        }
-                                        $("#context1").html(html);
-                                        //显示为块级元素
-                                        $("#context1").css("display","block");
-                                    }
-                                });
-                            });
+                              onClick="$('#global_search_form').submit();"><i class="fa fa-search"></i></span>
+                        <div class="clearfix"></div>
 
-                            //鼠标移动到内容上
-                            function changeBackColor_over(div){
-                                $(div).css("background-color","#CCCCCC");
-                            }
-                            //鼠标离开内容
-                            function changeBackColor_out(div){
-                                $(div).css("background-color","");
-                            }
-                            //将点击的内容放到搜索框
-                            function setSearch_onclick(div){
-                                $("#aw-search-query").val(div.innerText);
-                                $("#context1").css("display","none");
-                            }
-                        </script>
                     </div>
                 </form>
             </div>
@@ -240,80 +199,70 @@
 </div>
 
 
-<div class="aw-container-wrap">
-    <div class="aw-container aw-wecenter">
+<div class="aw-container-wrap " style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
+    <div class="aw-container aw-wecenter" style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
         <div class="container">
             <div class="row category">
                 <div class="col-sm-12">
-
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">
-                        <dl>
-                            <dt><img src="../images/bankuai1.png"/></dt>
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai3.png" style="position: relative;left: 30px;"/></dt>
                             <dd>
-                                <p class="title">
-                                    <a href="#">口红</a>
-                                </p>
-
+                                <p class="title"><a href="#">香水</a></p>
                             </dd>
                         </dl>
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=2">
-                        <dl>
-                            <dt><img src="../images/bankuai6.png"/></dt>
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai2.png" style="position: relative;left: 30px;"/></dt>
                             <dd>
-                                <p class="title">
-                                    <a href="#">眼霜</a>
-                                </p>
+                                <p class="title"><a href="#">水乳</a></p>
 
                             </dd>
                         </dl>
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=3">
-                        <dl>
-                            <dt><img src="../images/bankuai3.png"/></dt>
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai1.png" style="position: relative;left: 30px;"/></dt>
                             <dd>
-                                <p class="title">
-                                    <a href="#">香水</a>
-                                </p>
+                                <p class="title"><a href="#">口红</a></p>
 
                             </dd>
                         </dl>
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=4">
-                        <dl>
-                            <dt><img src="../images/bankuai4.png"/></dt>
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai4.png" style="position: relative;left: 30px;"/></dt>
                             <dd>
-                                <p class="title">
-                                    <a href="#">水乳</a>
-                                </p>
+                                <p class="title"><a href="#">防晒霜</a></p>
 
                             </dd>
                         </dl>
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=5">
-                        <dl>
-                            <dt><img src="../images/bankuai2.png"/></dt>
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai5.png" style="position: relative;left: 30px;"/></dt>
                             <dd>
-                                <p class="title">
-                                    <a href="#">防晒</a>
-                                </p>
+                                <p class="title"><a href="#">洗面奶</a></p>
 
                             </dd>
                         </dl>
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=6">
-                        <dl>
-                            <dt><img src="../images/bankuai5.png"/></dt>
+                        <dl style="text-align: center">
+                            <dt><img src="<%=basePath%>images/bankuai6.png" style="position: relative;left: 30px;"/></dt>
                             <dd>
-                                <p class="title">
-                                    <a href="#">洗面奶</a>
-                                </p>
+                                <p class="title"><a href="#">眼霜</a></p>
 
                             </dd>
                         </dl>
                     </a>
-
-
                 </div>
             </div>
         </div>
@@ -369,7 +318,7 @@
                             <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=zuixin&tid=<%=request.getParameter("tid")%>" >最新</a>
                         </li>
 
-                        <h2 class="hidden-xs"> ……姑娘清留步,这是${tname}区</h2>
+                        <h2 class="hidden-xs"> ……姑娘清留步</h2>
                     </ul>
                     <!-- end tab切换 -->
 
@@ -457,17 +406,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
                 <!-- 侧边栏 -->
                 <div class="col-sm-12 col-md-3 aw-side-bar aw-index-side-bar hidden-xs hidden-sm">
                     <style>
@@ -523,11 +461,13 @@
                         <!--</div>-->
                         <div class="aw-mod-body">
 
-
-                            <a class="sponsor_btn btn top-btn"
-                               href="<%=basePath%>luntan/luntanshouye.action?tid=7">
-                                <img src="../images/daigou.png" style="width:28px;"/>
-                                <span style="font-size:30px;">看看代购</span>
+                            <a class="sponsor_btn btn top-btn" href="#">
+                                <img src="<%=basePath%>images/zhichi.png"/>
+                                <span style="font-size:13px;">逛逛商城</span>
+                            </a>
+                            <a class="sponsor_btn btn top-btn" href="#">
+                                <img src="<%=basePath%>images/daigou.png"/>
+                                <span style="font-size:13px;">看看代购</span>
                             </a>
                         </div>
                     </div>
@@ -537,24 +477,24 @@
                         </div>
                         <div class="aw-mod-body">
                             <ul>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai1.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=1">口红</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai6.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=6">眼霜</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai4.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=2">水乳</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai5.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=4">防晒</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai2.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=5">洗面奶</a></li>
                                 <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai3.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=3">香水</a></li>
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=1">香水</a></li>
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai2.png"
+                                                                 style="width: 50px;height: 50px;"/></i><a
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=6">水乳</a></li>
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai1.png"
+                                                                 style="width: 50px;height: 50px;"/></i><a
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=2">口红</a></li>
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai4.png"
+                                                                 style="width: 50px;height: 50px;"/></i><a
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=4">防晒</a></li>
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai5.png"
+                                                                 style="width: 50px;height: 50px;"/></i><a
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=5">洗面奶</a></li>
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai6.png"
+                                                                 style="width: 50px;height: 50px;"/></i><a
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=3">眼霜</a></li>
 
                             </ul>
                         </div>
@@ -629,7 +569,10 @@
     </div>
 </div>
 
-<div class="aw-footer-wrap">
+<div class="aw-footer-wrap" style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
 
 
     <div class="aw-footer aw-wecenter">

@@ -145,9 +145,4 @@ public class UserController {
             response.getWriter().print("wrong");
         }
     }
-//    @RequestMapping(value = "modifyPost.action")
-//    public void modifyPost(int pid,HttpServletRequest request, HttpServletResponse response){
-//        request.setAttribute("post",postService.selectPostByPid(pid));
-//        request.getRequestDispatcher(request.getContextPath()+"/jsp/modifyPost.jsp") ;
-//    }
 }
