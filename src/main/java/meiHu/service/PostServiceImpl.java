@@ -29,4 +29,9 @@ public class PostServiceImpl implements PostService {
     public List<ForumPost> selectPostsByPtitle(String keyword) {
         return forumPostMapper.selectPostsByPtitle(keyword);
     }
+
+    @Override
+    public ForumPost selectPostByPid(int pid) {
+        return forumPostMapper.selectPostByPid(pid);
+    }
 }

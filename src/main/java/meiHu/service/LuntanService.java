@@ -56,5 +56,5 @@ public interface LuntanService {
 
     public String selectTnameBuTid(int tid);
 
-
+    public boolean insert(ForumPost post) ;
 }

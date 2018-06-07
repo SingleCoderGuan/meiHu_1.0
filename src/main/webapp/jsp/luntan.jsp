@@ -212,7 +212,7 @@
                 <div class="col-sm-12">
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">
                         <dl style="text-align: center">
-                            <dt><img src="<%=basePath%>images/bankuai1.png" style="position: relative;left: 30px;"/></dt>
+                            <dt><img src="<%=basePath%>images/bankuai3.png" style="position: relative;left: 30px;"/></dt>
                             <dd>
                                 <p class="title"><a href="#">香水</a></p>
                             </dd>
@@ -229,7 +229,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=3">
                         <dl style="text-align: center">
-                            <dt><img src="<%=basePath%>images/bankuai3.png" style="position: relative;left: 30px;"/></dt>
+                            <dt><img src="<%=basePath%>images/bankuai1.png" style="position: relative;left: 30px;"/></dt>
                             <dd>
                                 <p class="title"><a href="#">口红</a></p>
 
@@ -406,17 +406,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
                 <!-- 侧边栏 -->
                 <div class="col-sm-12 col-md-3 aw-side-bar aw-index-side-bar hidden-xs hidden-sm">
                     <style>
@@ -488,24 +477,24 @@
                         </div>
                         <div class="aw-mod-body">
                             <ul>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai1.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=1">口红</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai6.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=6">眼霜</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai4.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=2">水乳</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai5.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=4">防晒</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai2.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=5">洗面奶</a></li>
                                 <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai3.png"
                                                                  style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=3">香水</a></li>
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=1">香水</a></li>
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai2.png"
+                                                                 style="width: 50px;height: 50px;"/></i><a
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=6">水乳</a></li>
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai1.png"
+                                                                 style="width: 50px;height: 50px;"/></i><a
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=2">口红</a></li>
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai4.png"
+                                                                 style="width: 50px;height: 50px;"/></i><a
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=4">防晒</a></li>
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai5.png"
+                                                                 style="width: 50px;height: 50px;"/></i><a
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=5">洗面奶</a></li>
+                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai6.png"
+                                                                 style="width: 50px;height: 50px;"/></i><a
+                                        href="<%=basePath%>luntan/luntanshouye.action?tid=3">眼霜</a></li>
 
                             </ul>
                         </div>

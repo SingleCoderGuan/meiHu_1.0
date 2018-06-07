@@ -205,5 +205,10 @@ public class LuntanServiceImpl implements LuntanService{
         return forumTopicMapper.selectTnameBuTid(tid);
     }
 
+    @Override
+    public boolean insert(ForumPost post) {
+        return forumPostMapper.insert(post);
+    }
+
 
 }

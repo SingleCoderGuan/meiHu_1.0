@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumTopicMapper">
-    <!--public List<ForumTopic> getAllTopics()-->
+    <!--public List<ForumTopicService> getAllTopics()-->
     <select id="getAllTopics" resultType="ForumTopic">
         SELECT * FROM forum_topic
     </select>
 
-    <!--public ForumTopic selectTopicByTid(int tid) ;-->
+    <!--public ForumTopicService selectTopicByTid(int tid) ;-->
     <select id="selectTopicByTid" parameterType="int" resultType="ForumTopic">
         SELECT * FROM forum_topic WHERE tid=#{_parameter}
     </select>

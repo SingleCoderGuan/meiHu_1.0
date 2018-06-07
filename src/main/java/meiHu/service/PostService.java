@@ -27,4 +27,11 @@ public interface PostService {
     public boolean postNewPost(ForumPost post) ;
 
     public List<ForumPost> selectPostsByPtitle(String keyword);
+
+    /**
+     * 根据帖子pid查询该帖子
+     * @param pid   需要查询的帖子pid
+     * @return  该pid对应的帖子
+     */
+    public ForumPost selectPostByPid(int pid);
 }
