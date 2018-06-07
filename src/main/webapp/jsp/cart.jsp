@@ -52,6 +52,11 @@
             margin-top:-210px;
             left:-450px;
         }
+        #imgs{
+            width: 250px;
+            height:250px;
+
+        }
         nav{
             display: inline-block;
             margin-top:-40px;
@@ -94,6 +99,13 @@
         nav a:hover span{
             transform:rotateX(90deg) translateY(-20px);
         }
+        #gouwu1{
+            position: relative;
+            left:350px;
+            margin-top:-80px;
+            width: 600px;
+            height:300px;
+        }
 
 
 
@@ -124,7 +136,7 @@
         <a href="">
             <span data-hover="口红">口红</span>
         </a>
-        <a href="<%=basePath%>jsp/mh-address.jsp">
+        <a href="<%=basePath%>jsp/mh-orders.jsp">
             <span data-hover="个人中心">个人中心</span>
         </a>
         <a href="<%=basePath%>jsp/cart.jsp">
@@ -149,19 +161,20 @@
         <div class="fullwidth cart-item">
 
             <div class="s-12 m-8 l-9 cart-item-detail">
-                <div id="zi" style="text-align: center"><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    购物车里空空如也，快快逛逛吧！！！！</h6></div>
+                <div id="zi" style="text-align: center"><h6><a href="<%=basePath%>jsp/index.jsp"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img  id="gouwu1"src="<%=basePath%>images/gouwu1.jpg"></a></h6></div>
             </div>
         </div>
     </c:if>
     <c:if test="${not empty cart.cartItems}">
     <!-- cart left and right -->
     <div class="line">
-        <div class="s-12 m-12 l-8">
+        <div class="s-12 m-12 l-7">
             <c:forEach items="${cart.cartItems}" var="cart">
                 <!-- item 1 -->
                 <div class="fullwidth cart-item">
-                    <div class="s-12 m-4 l-3 cart-item-image">
+                    <div class="s-12 m-4 l-3 cart-item-image" id="imgs">
                         <img src="<%= basePath%>${cart.good.goodpic}"  alt="">
                     </div>
                     <div class="s-12 m-8 l-9 cart-item-detail">

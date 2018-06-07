@@ -1,3 +1,4 @@
+/*
 package meiHu.control;
 
 import meiHu.service.UserService;
@@ -48,3 +49,4 @@ public class SendSmsControl {
         response.getWriter().print(code);
     }
 }
+*/

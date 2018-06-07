@@ -15,14 +15,14 @@ public interface OrderMapper {
     //根据用户id查询我的订单信息
     public List<Order> findMyOrders(int uid);
     //用户取消订单
+    //先删除item表中的数据
     public void deleteOrderItem(int orderid);
+    //删除order中对应的订单
     public void deleteOrder(int orderid);
-
     //用户查询待付款的订单
     public List<Order> noPayOrder(int uid);
     //用户查询待发货的订单
     public List<Order> waitOrder(int uid);
-
     //用户查询已发货的订单
     public List<Order> getRunOrder(int uid);
     //用户查询已收货的订单

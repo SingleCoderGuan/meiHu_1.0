@@ -125,10 +125,10 @@
         <a href="">
             <span data-hover="口红">口红</span>
         </a>
-        <a href="<%=basePath%>jsp/mh-address.jsp">
+        <a href="<%=basePath%>jsp/mh-orders.jsp">
             <span data-hover="个人中心">个人中心</span>
         </a>
-        <a href="<%=basePath%>jsp/cart.jsp">
+        <a href="<%=basePath%>goods/cart.action">
             <span data-hover="购物车">购物车</span>
         </a>
     </nav>

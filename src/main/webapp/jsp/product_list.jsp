@@ -35,8 +35,8 @@
             color:white;
         }
         #imgs{
-            width:180px;
-            hight:200px;
+            width:220px;
+            hight:180px;
         }
         .icon-text{
             font-family: 华文楷体;

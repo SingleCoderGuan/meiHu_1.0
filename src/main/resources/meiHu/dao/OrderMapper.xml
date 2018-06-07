@@ -125,7 +125,7 @@
     <!--public void save(Order order);-->
     <insert id="save" parameterType="Order" useGeneratedKeys="true"
             keyProperty="orderid">
-        insert into shop_order values(#{orderid},101,#{ordertime},2,#{total},0)
+        insert into shop_order values(#{orderid},#{user.uid},#{ordertime},2,#{total},#{state})
     </insert>
 
    <!-- public void saveItem(OrderItem oi);-->

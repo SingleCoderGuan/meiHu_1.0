@@ -74,7 +74,7 @@
                         <li class="nav-current" role="presentation"><a href="#">美文首页</a></li>
                         <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美乎</a></li>
                         <li  role="presentation"><a href="#">美购</a></li>
-                        <li  role="presentation"><a href="#">美淘</a></li>
+                        <li  role="presentation"><a href="<%=basePath%>jsp/index.jsp">美淘</a></li>
                         <li  role="presentation"><a href="#">活动</a></li>
 
                         <li  role="presentation"><a href="#">关于我们</a></li>

@@ -80,7 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="article/article.action" >美文</a>
                     </li>
                     <li>
-                        <a href="#" >美淘</a>
+                        <a href="<%=basePath%>jsp/index.jsp">美淘</a>
 
                     </li>
 

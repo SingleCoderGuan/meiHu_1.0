@@ -41,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <span class="active"><span class="valign"><span class="vertical">商品浏览</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">商品浏览</span></span></span>
         </a>
-        <a class="link tdz" href="<%=basePath %>jsp/cart.jsp">
+        <a class="link tdz" href="<%=basePath %>goods/cart.action">
             <span class="active"><span class="valign"><span class="vertical">购物车</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">购物车</span></span></span>
         </a>

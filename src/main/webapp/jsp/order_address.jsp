@@ -147,7 +147,7 @@
         <a href="">
             <span data-hover="口红">口红</span>
         </a>
-        <a href="<%=basePath%>jsp/mh-address.jsp">
+        <a href="<%=basePath%>jsp/mh-orders.jsp">
             <span data-hover="个人中心">个人中心</span>
         </a>
         <a href="<%=basePath%>jsp/cart.jsp">
@@ -189,7 +189,6 @@
                                 <label for="recipient-name" class="control-label">收货人联系方式:</label>
                                 <input type="text" name="receivetel" class="form-control" id="recipient-name3">
                             </div>
-
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                                 <button type="submit" class="btn btn-primary">确定</button>
@@ -211,6 +210,24 @@
                 modal.find('.modal-body input').val(recipient)
             })
         </script>
+
+
+        <script type="text/javascript">
+            function remove() {
+                if(confirm("您确定要取消订单吗？")){
+                    $.ajax({
+                        type:"get",
+                        url:"<%=basePath %>goods/deleteOrder.action",
+                        data:"orderid="+${order.orderid},
+                        success:function(result){
+                            $("#orders").html("");
+                            $("#payform").html("");
+                        }
+
+                    });
+                }
+            }
+        </script>
         <div class="uc-panel-bd">
 
 
@@ -218,10 +235,29 @@
             <div class="address-list">
               <c:forEach items="${addressList}" var="address">
                 <div class="col col-4">
-                    <div class="item">
+                    <div class="item" id="item">
                         <div class="action">
-                            <div class="fl"><a class="edit" href="javascript:;">修改</a><a class="del" href="javascript:;">删除</a></div>
-                            <div class="fr"><a class="setdft" href="javascript:;">设为默认</a></div>
+                            <div class="fl"><a class="edit" href="javascript:void(0);">修改</a>
+                                <a class="del" onclick="deleteAddress(${address.addressid})">删除</a></div>
+                            <script>
+                                function deleteAddress(addressid) {
+
+                                    if(confirm("您确定要删除地址信息吗？")){
+                                        $.ajax({
+                                            type:"get",
+                                            url:"<%=basePath %>goods/deleteAddress.action",
+                                            data:"addressid="+addressid,
+
+                                            success:function(flag){
+                                                $("#item1").html("");
+                                                window.location.reload();
+                                            }
+
+                                        });
+                                    }
+                                }
+                            </script>
+                            <div class="fr"><a class="setdft" href="javascript:void(0);">设为默认</a></div>
 
                         </div>
                         <div class="info">
@@ -289,26 +325,6 @@
     </div>
 
 
-
-
-
-
-<script type="text/javascript">
-    function remove() {
-        if(confirm("您确定要取消订单吗？")){
-            $.ajax({
-                type:"get",
-                url:"<%=basePath %>goods/deleteOrder.action",
-                data:"orderid="+${order.orderid},
-                success:function(result){
-                    $("#orders").html("");
-                    $("#payform").html("");
-                }
-
-            });
-        }
-    }
-</script>
 <div class="pay">
     <form id="payform" action="<%=basePath %>goods/pay.action" method="post">
     <div class="contenterFooter">
