@@ -361,10 +361,10 @@
 
                                     <script>
                                         function shoucang(uidd, pidd) {
-                                            <c:if test="${empty uid}">
+                                            <c:if test="${empty sessionScope.uid}">
                                                 alert("亲，请先登录");
                                             </c:if>
-                                            <c:if test="${not empty uid}">
+                                            <c:if test="${not empty sessionScope.uid}">
                                             if ($("#shoucang").attr("src") == ("../images/shoucang.png")) {
                                                 $("#shoucang").attr("src", "../images/shoucanghou.png");
                                                 $.ajax(
@@ -392,10 +392,10 @@
                                         }
 
                                         function dianzan(uidd, pidd) {
-                                            <c:if test="${empty uid}">
+                                            <c:if test="${empty sessionScope.uid}">
                                                 alert("亲，请先登录");
                                             </c:if>
-                                            <c:if test="${not empty uid}">
+                                            <c:if test="${not empty sessionScope.uid}">
                                             if ($("#dianzan").attr("src") == ("../images/dianzan.png")) {
                                                 $("#dianzan").attr("src", "../images/dianzanhou.png");
                                                 $.ajax(
@@ -474,10 +474,10 @@
                                                        onclick="pinglun(${uid},${forumPost.pid},$('#postcomment').val())"></input>
                                                 <script>
                                                     function pinglun(uidd, pidd, text) {
-                                                    <c:if test="${empty uid}">
+                                                    <c:if test="${empty sessionScope.uid}">
                                                         alert("亲，请先登录");
                                                     </c:if>
-                                                    <c:if test="${not empty uid}">
+                                                    <c:if test="${not empty sessionScope.uid}">
                                                         $.ajax({
                                                             type: "post",
                                                             url: "${pageContext.request.contextPath}/luntan/postcomment.action",
@@ -512,10 +512,10 @@
 
                                                 <script>
                                                     function jubao(uidd, pidd, reason) {
-                                                        <c:if test="${empty uid}">
+                                                        <c:if test="${empty sessionScope.uid}">
                                                             alert("亲，请先登录");
                                                         </c:if>
-                                                        <c:if test="${not empty uid}">
+                                                        <c:if test="${not empty sessionScope.uid}">
                                                         $.ajax({
                                                             type: "post",
                                                             url: "${pageContext.request.contextPath}/luntan/postreport.action",
@@ -626,10 +626,10 @@
                                                                 <script>
 
                                                                     function pinglunjubao(uidd, cidd, commentreportreason) {
-                                                                        <c:if test="${empty uid}">
+                                                                        <c:if test="${empty sessionScope.uid}">
                                                                         alert("亲，请先登录");
                                                                         </c:if>
-                                                                        <c:if test="${not empty uid}">
+                                                                        <c:if test="${not empty sessionScope.uid}">
                                                                         $.ajax({
                                                                             type: "post",
                                                                             url: "${pageContext.request.contextPath}/luntan/commentreport.action",
@@ -677,10 +677,10 @@
                                                                
                                                                 <script>
                                                                     function pinglunpinglun(uidd, cidd, text,pidd) {
-                                                                        <c:if test="${empty uid}">
+                                                                        <c:if test="${empty sessionScope.uid}">
                                                                         alert("亲，请先登录");
                                                                         </c:if>
-                                                                        <c:if test="${not empty uid}">
+                                                                        <c:if test="${not empty sessionScope.uid}">
                                                                         $.ajax({
                                                                             type: "post",
                                                                             url: "${pageContext.request.contextPath}/luntan/commentcomment.action",
@@ -741,15 +741,15 @@
                                             <p>
                                                 粉丝：${focusednum}人
                                             </p>
-                                            <button class="btn btn-primary btn-xs" onclick="guanzhu(${uid},${forumPost.user.uid})">
+                                            <button class="btn btn-primary btn-xs" onclick="guanzhu(${sessionScope.uid},${forumPost.user.uid})">
                                                 关注他（她）
                                             </button>
                                             <script>
                                                 function guanzhu(uid,postuid) {
-                                                    <c:if test="${empty uid}">
+                                                    <c:if test="${empty sessionScope.uid}">
                                                     alert("亲，请先登录");
                                                     </c:if>
-                                                    <c:if test="${not empty uid}">
+                                                    <c:if test="${not empty sessionScope.uid}">
                                                     $.ajax({
                                                         type:"post",
                                                         url: "${pageContext.request.contextPath}/luntan/focus.action",

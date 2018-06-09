@@ -178,11 +178,11 @@
                 <script>
 
                     function sign(uidd){
-                        <c:if test="${empty uid}">
+                        <c:if test="${empty sessionScope.uid}">
                         alert("亲，请先登录");
                         window.location.href="<%=basePath%>jsp/loginregister.jsp";
                         </c:if>
-                        <c:if test="${not empty uid}">
+                        <c:if test="${not empty sessionScope.uid}">
                         $.ajax({
                             type:"post",
                             url: "${pageContext.request.contextPath}/article/sign.action",

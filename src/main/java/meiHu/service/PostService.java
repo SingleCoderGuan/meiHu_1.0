@@ -31,4 +31,6 @@ public interface PostService {
     public ForumPost selectPostByPid(int pid) ;
 
     public boolean updatePost(ForumPost post) ;
+//某用户收藏帖子数量
+    public int selectCollectionNumByUid(int uid);
 }

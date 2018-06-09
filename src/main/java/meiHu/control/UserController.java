@@ -2,6 +2,8 @@ package meiHu.control;
 
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumUser;
+import meiHu.service.FocusService;
+import meiHu.service.LuntanService;
 import meiHu.service.PostService;
 import meiHu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,10 @@ public class UserController {
     private UserService userService ;
     @Autowired
     private PostService postService ;
+    @Autowired
+    private FocusService focusService;
+
+
 
     @RequestMapping(value = "/loginWithAccount.action",method = RequestMethod.POST)
     public void findUserByUname(String uname,String password,String flag, HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
@@ -150,5 +156,20 @@ public class UserController {
         ForumPost post = postService.selectPostByPid(pid) ;
         request.setAttribute("post",post);
         request.getRequestDispatcher(request.getContextPath()+"/jsp/modifyPost.jsp") ;
+    }
+
+    @RequestMapping("userdetail.action")
+    public void userpostdetail(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        int uid = Integer.parseInt(request.getParameter("uid"));
+
+        List<ForumPost> postList = postService.selectPostsByUid(uid);
+        request.setAttribute("userlikenum",userService.selectLikeNumBuUid(uid));
+        request.setAttribute("forumUser",userService.selectUserByUid(uid));
+        request.setAttribute("point",userService.selectUserPointByUid(uid));
+        request.setAttribute("postList",postList);
+        request.setAttribute("focusnum",focusService.selectUserFocusNum(uid));
+        request.setAttribute("focusednum",focusService.selectUserFocusedNum(uid));
+        request.setAttribute("collectionnum",postService.selectCollectionNumByUid(uid));
+        request.getRequestDispatcher("jsp/userdetail.jsp").forward(request,response);
     }
 }

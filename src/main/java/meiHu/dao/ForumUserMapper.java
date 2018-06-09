@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface ForumUserMapper {
 
+    //显示用户所有获赞数
+    public int selectLikeNumBuUid(int uid);
+
     //显示某用户的全部积分
     public  int selectUserPointByUid(int uid);
     /**
@@ -80,4 +83,7 @@ public interface ForumUserMapper {
      * @return  所有关注该用户的用户
      */
     public List<ForumUser> selectFollowerByUid(int uid) ;
+
+    //显示titleid>3的用户
+    public List<ForumUser> selectUsersByTitleId();
 }

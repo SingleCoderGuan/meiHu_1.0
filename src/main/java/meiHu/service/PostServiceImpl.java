@@ -1,5 +1,6 @@
 package meiHu.service;
 
+import meiHu.dao.ForumCollectionMapper;
 import meiHu.dao.ForumPostMapper;
 import meiHu.entity.ForumPost;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
     @Autowired
     private ForumPostMapper forumPostMapper;
+    @Autowired
+    private ForumCollectionMapper forumCollectionMapper;
     @Override
     public List<ForumPost> selectCollectionByUserUid(int uid) {
         return forumPostMapper.selectCollectedPostsByUid(uid);
@@ -38,5 +41,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public boolean updatePost(ForumPost post) {
         return forumPostMapper.update(post);
+    }
+
+    @Override
+    public int selectCollectionNumByUid(int uid) {
+        return forumCollectionMapper.selectCollectionNumByUid(uid);
     }
 }

@@ -57,4 +57,12 @@ public interface LuntanService {
     public String selectTnameBuTid(int tid);
 
 
+    //查询某板块的帖子数量
+    public int selectPostNumByTid(int tid);
+    //查询某板块的评论数量
+    public int selectCommentNumByTid(int tid);
+
+    public List<ForumUser> selectUsersByTitleId();
+
+
 }

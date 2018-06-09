@@ -55,4 +55,17 @@
     <select id="selectUserPointByUid" resultType="int" parameterType="int">
         SELECT point from forum_user WHERE uid=#{parameter}
     </select>
+
+    <!--public int selectLikeNumBuUid(int uid);-->
+<select id="selectLikeNumBuUid" parameterType="int" resultType="int">
+    SELECT COUNT(*) FROM forum_like WHERE post_pid IN
+(select pid FROM forum_post WHERE user_uid = #{parameter})
+</select>
+
+    <!--public List<ForumUser> selectUsersByTitleId();-->
+    <select id="selectUsersByTitleId" resultMap="selectUserMap">
+        SELECT u.*,t.* FROM forum_user u , forum_title t
+        WHERE  title_id>3 AND u.title_id=t.titleid
+    </select>
+
 </mapper>

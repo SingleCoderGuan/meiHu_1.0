@@ -17,10 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/luntan")
@@ -36,12 +33,17 @@ public class LuntanControl {
         String tid = request.getParameter("tid");
         int tid1 = Integer.parseInt(tid);
         List<ForumTopic> topicList=luntanService.getAllTopics();
+        List<ForumTopic> topicList1 = new ArrayList<>();
+        for(int i=0;i<topicList.size()-1;i++){
+            topicList1.add(topicList.get(i));
+        }
         List<ForumPost> postList=luntanService.selectPostsByTid(tid1);
-        request.setAttribute("topicList",topicList);
+        request.setAttribute("topicList1",topicList1);
         request.setAttribute("postList",postList);
+        request.setAttribute("userlist",luntanService.selectUsersByTitleId());
         String tname = luntanService.selectTnameBuTid(tid1);
         request.setAttribute("tname",tname);
-        request.getSession().setAttribute("uid",102);
+        request.getSession().setAttribute("uid",103);
         request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
 
 

@@ -131,7 +131,7 @@
                                placeholder="搜索问题、话题" autocomplete="off" name="q" id="aw-search-query"
                                class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
-                              onClick="$('#global_search_form').submit();"><i class="fa fa-search"></i></span>
+                              onClick="$('#global_search_form').submit();">搜索</span>
                         <div class="clearfix"></div>
 
                     </div>
@@ -210,59 +210,17 @@
         <div class="container">
             <div class="row category">
                 <div class="col-sm-12">
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">
+                    <c:forEach items="${topicList1}" var="topicList1">
+                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList1.tid}">
                         <dl style="text-align: center">
-                            <dt><img src="<%=basePath%>images/bankuai3.png" style="position: relative;left: 30px;"/></dt>
+                            <dt><img src="<%=basePath%>images/${topicList1.tpicname}" style="position: relative;left: 30px;"/></dt>
                             <dd>
-                                <p class="title"><a href="#">香水</a></p>
+                                <p class="title"><a href="#">${topicList1.tname}</a></p>
                             </dd>
                         </dl>
                     </a>
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=2">
-                        <dl style="text-align: center">
-                            <dt><img src="<%=basePath%>images/bankuai2.png" style="position: relative;left: 30px;"/></dt>
-                            <dd>
-                                <p class="title"><a href="#">水乳</a></p>
+                    </c:forEach>
 
-                            </dd>
-                        </dl>
-                    </a>
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=3">
-                        <dl style="text-align: center">
-                            <dt><img src="<%=basePath%>images/bankuai1.png" style="position: relative;left: 30px;"/></dt>
-                            <dd>
-                                <p class="title"><a href="#">口红</a></p>
-
-                            </dd>
-                        </dl>
-                    </a>
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=4">
-                        <dl style="text-align: center">
-                            <dt><img src="<%=basePath%>images/bankuai4.png" style="position: relative;left: 30px;"/></dt>
-                            <dd>
-                                <p class="title"><a href="#">防晒霜</a></p>
-
-                            </dd>
-                        </dl>
-                    </a>
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=5">
-                        <dl style="text-align: center">
-                            <dt><img src="<%=basePath%>images/bankuai5.png" style="position: relative;left: 30px;"/></dt>
-                            <dd>
-                                <p class="title"><a href="#">洗面奶</a></p>
-
-                            </dd>
-                        </dl>
-                    </a>
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=6">
-                        <dl style="text-align: center">
-                            <dt><img src="<%=basePath%>images/bankuai6.png" style="position: relative;left: 30px;"/></dt>
-                            <dd>
-                                <p class="title"><a href="#">眼霜</a></p>
-
-                            </dd>
-                        </dl>
-                    </a>
                 </div>
             </div>
         </div>
@@ -465,7 +423,7 @@
                                 <img src="<%=basePath%>images/zhichi.png"/>
                                 <span style="font-size:13px;">逛逛商城</span>
                             </a>
-                            <a class="sponsor_btn btn top-btn" href="#">
+                            <a class="sponsor_btn btn top-btn" href="<%=basePath%>luntan/luntanshouye.action?tid=7">
                                 <img src="<%=basePath%>images/daigou.png"/>
                                 <span style="font-size:13px;">看看代购</span>
                             </a>
@@ -538,7 +496,7 @@
                                 <dd class="pull-left">
                                     <a href="" data-id="15" class="aw-user-name">小姐姐<i class="aw-icon i-v i-ve"></i>
                                     </a>
-                                    <p>回复了 <b>754</b> 个问题, 获得 <b>763</b> 次赞同</p>
+                                    <p>回复了 <b>754</b> 次, 获得 <b>763</b> 次赞同</p>
                                 </dd>
                             </dl>
                             <dl>
@@ -548,17 +506,24 @@
                                 <dd class="pull-left">
                                     <a href="" data-id="15" class="aw-user-name">小姐姐<i class="aw-icon i-v i-ve"></i>
                                     </a>
-                                    <p>回复了 <b>754</b> 个问题, 获得 <b>763</b> 次赞同</p>
+                                    <p>回复了 <b>754</b>次, 获得 <b>763</b> 次赞同</p>
                                 </dd>
                             </dl>
-
-
+                            <c:forEach items="${userlist}" var="userlist" begin="0" end="4" step="1">
                             <dl>
                                 <dt class="pull-left aw-border-radius-5">
-
+                                    <a href=""><img alt="" src="<%=basePath%>images/touxiang1.png"/></a>
                                 </dt>
-
+                                <dd class="pull-left">
+                                    <a href="" data-id="15" class="aw-user-name">${userlist.uname}<i class="aw-icon i-v i-ve"></i>
+                                    </a>
+                                    <p>${userlist.title.title}</p>
+                                </dd>
                             </dl>
+                            </c:forEach>
+
+
+
                         </div>
                     </div>
 

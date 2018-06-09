@@ -13,6 +13,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ForumUserMapper forumUserMapper ;
 
+
+    @Override
+    public int selectLikeNumBuUid(int uid) {
+        return forumUserMapper.selectLikeNumBuUid(uid);
+    }
+
     //显示某用户的全部积分
     public  int selectUserPointByUid(int uid){
         return  forumUserMapper.selectUserPointByUid(uid);
@@ -39,6 +45,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<ForumUser> findFollowersByUid(int uid) {
         return forumUserMapper.selectFollowerByUid(uid);
+    }
+
+    @Override
+    public ForumUser selectUserByUid(int uid) {
+        return forumUserMapper.selectUserByUid(uid);
     }
 
 }

@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface UserService {
 
+    public int selectLikeNumBuUid(int uid);
+
     //显示某用户的全部积分
     public  int selectUserPointByUid(int uid);
     /**
@@ -45,4 +47,8 @@ public interface UserService {
      * @return  所有该用户的追随者
      */
     public List<ForumUser> findFollowersByUid(int uid);
+
+    public ForumUser selectUserByUid(int uid);
+
+
 }

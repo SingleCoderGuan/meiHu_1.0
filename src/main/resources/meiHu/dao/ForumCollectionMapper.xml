@@ -32,5 +32,10 @@
 
     </delete>
 
+    <!--public int selectCollectionNumByUid(int uid);-->
+    <select id="selectCollectionNumByUid" parameterType="int" resultType="int">
+        SELECT count(*) from forum_collection WHERE user_uid =#{parameter}
+    </select>
+
 
 </mapper>

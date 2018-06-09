@@ -18,5 +18,8 @@ public interface ForumCollectionMapper {
     //用户对一条帖子进行取消收藏
     public int deleteCollectionByUidAndPid(int uid,int pid);
 
+    //查询某用户收藏帖子的数目
+    public int selectCollectionNumByUid(int uid);
+
 
 }
