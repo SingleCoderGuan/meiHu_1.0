@@ -50,4 +50,14 @@
         SELECT u.*,t.* FROM forum_user u , forum_title t ,forum_focus f
         WHERE f.focused_user_id=#{_parameter} AND f.user_uid=u.uid AND u.title_id=t.titleid
     </select>
+
+    <!--public boolean updateUser(ForumUser forumUser) ;-->
+    <update id="updateUser" parameterType="ForumUser">
+        UPDATE forum_user SET uname=#{uname} ,sex=#{sex} ,tel=#{tel} ,email=#{email} ,headpic=#{headpic} WHERE uid=#{uid}
+    </update>
+
+    <!--public boolean resetPass(ForumUser user);-->
+    <update id="resetPass" parameterType="ForumUser">
+        UPDATE forum_user SET password=#{password} WHERE uid=#{uid}
+    </update>
 </mapper>

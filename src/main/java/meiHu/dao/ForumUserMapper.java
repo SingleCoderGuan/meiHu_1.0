@@ -77,4 +77,11 @@ public interface ForumUserMapper {
      * @return  所有关注该用户的用户
      */
     public List<ForumUser> selectFollowerByUid(int uid) ;
+
+    /**
+     * 根据uid对该用户密码进行重置
+     * @param user 需要重置密码的用户
+     * @return  是否成功重置密码
+     */
+    public boolean resetPass(ForumUser user);
 }

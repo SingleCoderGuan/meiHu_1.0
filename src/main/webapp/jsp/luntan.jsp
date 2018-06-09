@@ -16,7 +16,7 @@
 <html>
 <head>
     <title>美论首页</title>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
 
@@ -180,7 +180,7 @@
                 <!-- 登陆&注册栏 -->
                 <span>
                     <c:if test="${!empty user}">
-                        <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
                         <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                     </c:if>
                     <c:if test="${empty user}">

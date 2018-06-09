@@ -193,11 +193,11 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav">
+            <div class="aw-user-nav" style="width: 143px">
                 <!-- 登陆&注册栏 -->
                 <c:if test="${!empty user}">
-                    <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
-                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 60px;top: -53px">注销</a>
+                    <a style="position: relative;left: -94px;width: 50px" href="<%=basePath%>userCenter.action"><img style="position: relative;width: 50px;height: 50px" src="<%=basePath%>images/${user.headpic}"/></a><span style="position: relative;left: -60px;top: -42px;">欢迎您：${user.uname}</span>
+                    <a href="<%=basePath%>signOut.action" style="position: relative;text-align:center ;left: 100px;top: -70px;height: 18px"><span>注销</span></a>
                 </c:if>
                 <c:if test="${empty user}">
                     <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
@@ -556,7 +556,7 @@
                                         <a class="anchor" name="answer_63059"></a>
                                         <!-- 用户头像 -->
                                         <a class="aw-user-img aw-border-radius-5 pull-right" href="#" data-id="46">
-                                            <img src="${forumCommentList.user.headpic}" alt=""/>
+                                            <img src="<%=basePath%>images/>${forumCommentList.user.headpic}" alt=""/>
                                         </a>
                                         <!-- end 用户头像 -->
                                         <div class="aw-mod-body clearfix">

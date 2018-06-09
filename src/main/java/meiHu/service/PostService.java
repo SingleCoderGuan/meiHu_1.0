@@ -31,4 +31,15 @@ public interface PostService {
     public ForumPost selectPostByPid(int pid) ;
 
     public boolean updatePost(ForumPost post) ;
+
+    /**
+     * 根据pid删除帖子
+     * 删除收藏表中该pid对应数据
+     * 删除点赞表中该pid对应数据
+     * 删除评论表中该pid对应数据
+     * 删除举报表中该pid对应数据
+     * @param pid 需要删除的帖子pid
+     * @return  是否删除成功
+     */
+    public boolean deletePost(int pid) ;
 }

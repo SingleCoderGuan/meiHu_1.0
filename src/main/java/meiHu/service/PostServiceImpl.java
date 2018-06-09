@@ -39,4 +39,11 @@ public class PostServiceImpl implements PostService {
     public boolean updatePost(ForumPost post) {
         return forumPostMapper.update(post);
     }
+
+    @Override
+    public boolean deletePost(int pid) {
+        return false;
+    }
+
+
 }

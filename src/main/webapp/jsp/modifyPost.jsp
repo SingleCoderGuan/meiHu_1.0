@@ -12,14 +12,12 @@
     String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang = "zh-CN">
 
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>修改帖子</title>
-    <meta name="keywords" content="美论" />
-    <meta name="description" content="美论" />
     <script type="text/javascript" src="<%= basePath%>/release/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="<%= basePath%>/release/wangEditor.min.js"></script>
 
@@ -44,6 +42,9 @@
             border: 1px solid #ccc;
         }
     </style>
+    <script>
+
+    </script>
     <script>
         function subm(){
             document.getElementById('content').value=editor.txt.html();
@@ -200,7 +201,7 @@
                         板块：
                         ${post.topic.tname}
 
-                        <input type="hidden" id="content" name="pcontent" value="${post.pcontent}"/>
+                        <input type="hidden" id="content" value="${post.pcontent}" name="pcontent"/>
 
                         <div id="div1" class="toolbar">
                         </div>
@@ -211,7 +212,7 @@
                         <input type="button" value="保存" onclick="subm()" />
 
                     </form>
-
+--%>
                 </div>
                 <!-- 侧边栏 -->
                 <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">

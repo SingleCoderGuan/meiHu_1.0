@@ -15,8 +15,6 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>美乎忘记密码</title>
     <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=basePath%>css/stylelogin.css">
@@ -30,11 +28,11 @@
     <div class="cont_centrar">
         <img id="logo" src="<%=basePath%>images/LOGO.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
-        <form class="form-horizontal forgottenform"  >
+        <form id="resetform" class="form-horizontal forgottenform"  action="<%=basePath%>preresetpass.action" method="post" >
             <div class="form-group" style="position: relative;left: 53px;">
                 <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 167px;color:#996666;font-size: 18px">手机号码</label>
                 <div class="col-sm-4">
-                    <input type="text" class="forgotteninput"  id="tel" placeholder="请输入手机号码">
+                    <input type="text" name="tel" class="forgotteninput"  id="tel" placeholder="请输入手机号码">
                     <span style="position: absolute;left: 200px;top: 80px;" id="teltip"></span>
                 </div>
             </div>
@@ -53,7 +51,8 @@
 
             <div class="form-group"style="position: relative;left: 53px;">
                 <div class="col-sm-offset-2 col-sm-1">
-                    <button class="btn_my_login"  id="lo" style="width: 200px;position:relative;top: 4px;left:212px;background-color: #f44336;color: #fff;" disabled>确定</button>
+                    <input  class="btn_my_login" type="button"  id="lo" style="text-align:center;width: 200px;position:relative;top: 4px;left:212px;background-color: #f44336;color: #fff;" disabled>
+                    <span style="position: relative;left: 250px;top: -26px;color: #eeeeee">确定</span></input>
                 </div>
             </div>
         </form>
@@ -109,7 +108,6 @@
                         $("#teltip").removeClass()
                         $("#teltip").addClass("right")
                         $("#btn").attr("disabled",false) ;
-                        $("#tel").attr("disabled",true);
                     }
                 }
             })
@@ -156,18 +154,17 @@
 
     $("#lo").click(function(){
         var code=$("#code").val();
-        $.ajax({
-            url:"${pageContext.request.contextPath}/sendCodes.action",
-            type:"get",
-            data:{"trueCode":sms,"userCode":code},
-            success:function(result){
-                if(result=="wrong"){
-                    alert("验证码错误");
-                }else {
-                    $(location).attr("href","localhost:8080"+result);
-                }
-            }
-        })
+        if(code==""){
+            alert("请输入验证码");
+        }else{
+            if(sms==code){
+                alert("验证码正确")
+                $("#resetform").submit();
+            }else{
+                alert("验证码错误");
+            };
+        };
+
     });
 
 </script>

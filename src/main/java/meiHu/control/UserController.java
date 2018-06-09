@@ -6,17 +6,16 @@ import meiHu.service.PostService;
 import meiHu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.Date;
 import java.util.List;
 
@@ -65,9 +64,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register.action",method = RequestMethod.POST)
-    public void register(String username ,String userpassword ,String phone,HttpServletRequest request ,HttpServletResponse response ) throws UnsupportedEncodingException {
+    public void register(String username ,String userpassword ,String phone,HttpServletRequest request ,HttpServletResponse response ) throws IOException, ServletException {
         userService.insertUser(username,userpassword,phone,new Date()) ;
-        request.getRequestDispatcher(request.getContextPath()+"/jsp/loginregister.jsp") ;
+        response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp?rslt=3");
     }
 
     @RequestMapping(value = "/loginWithTel.action",method = RequestMethod.GET)
@@ -133,22 +132,65 @@ public class UserController {
         response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp");
     }
 
-    @RequestMapping(value = "/sendCodes.action",method = RequestMethod.GET)
-    public void RestCodesJudge(String trueCode, String userCode, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println(trueCode+"-------------"+userCode);
-        response.setContentType("text/text");
-        response.setCharacterEncoding("UTF-8");
-        if(trueCode.equals(userCode)){
-            System.out.println("验证码对了，但是没跳转");
-            response.getWriter().print(request.getContextPath()+"/jsp/resetpass.jsp");
-        }else{
-            response.getWriter().print("wrong");
+    @RequestMapping(value = "/preresetpass.action",method = RequestMethod.POST)
+    public void preresetpass(String tel,HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        System.out.println(tel+" ---------------------");
+        request.setAttribute("tel",tel);
+        request.getRequestDispatcher("/jsp/resetpass.jsp").forward(request,response);
+    }
+
+    @RequestMapping(value = "/resetpass.action",method = RequestMethod.POST)
+    public void resetPass(String tel,String password,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ForumUser user = userService.findUserByTel(tel);
+        user.setPassword(password);
+        if(userService.resetPass(user)){
+            response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp?rslt=4");
         }
     }
-    @RequestMapping(value = "modifyPost.action",method = RequestMethod.GET)
-    public void modifyPost(int pid,HttpServletRequest request,HttpServletResponse response){
+    @RequestMapping(value = "/modifyPost.action",method = RequestMethod.GET)
+    public void modifyPost(int pid,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         ForumPost post = postService.selectPostByPid(pid) ;
+        System.out.println(post);
         request.setAttribute("post",post);
-        request.getRequestDispatcher(request.getContextPath()+"/jsp/modifyPost.jsp") ;
+        request.getRequestDispatcher("/jsp/modifyPost.jsp").forward(request,response);
     }
+    @Transactional
+    @RequestMapping(value = "/deletePost.action",method = RequestMethod.GET)
+    public void deletePost(int pid,HttpServletRequest request,HttpServletResponse response){
+
+    }
+
+    @RequestMapping(value = "/updateUser.action",method = RequestMethod.POST)
+    public void updateTrue(MultipartFile imgFileUp, ForumUser forumUser, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ForumUser newUser = forumUser ;
+        System.out.println(newUser);
+//        MultipartFile imgFileUp  接收文件选择器上传的文件
+        //获取该文件的名字
+        String filename=imgFileUp.getOriginalFilename();
+        //  d://java_workplace//demo//images
+        // 将这个文件上传到服务器上  （images 文件夹在服务器上绝对路径）
+        String imgFile=request.getServletContext().getRealPath("images/userHeadpic");
+//        d://java_workplace//demo//images//菊花.pig
+        String img=imgFile+"/"+filename;
+        File file=new File(img);
+//        创建
+        if (!file.exists()){//不存在直接创建
+            file.mkdirs();
+        }else{
+            file.delete();//删除再创建
+            file.mkdirs();
+        }
+        //通过IO技术将自己电脑上的文件内容一个个读取到服务器上新创建的图片上
+        imgFileUp.transferTo(file);    //图片的复制
+        //图片路径发生改变
+        newUser.setHeadpic("images/userHeadpic/"+filename);
+
+//                调用service层的修改方法
+        if (userService.updateUser(newUser)){
+            request.getSession().setAttribute("user",userService.selectUserByUid(newUser.getUid()));
+            request.getRequestDispatcher("/userCenter.action") .forward(request,response);
+        }else{
+        }
+    }
+
 }

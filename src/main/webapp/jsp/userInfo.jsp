@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -124,7 +125,7 @@
                     <ul class="nav navbar-nav">
 
                         <li class="nav-current" role="presentation">
-                            <a href="luntanshouyetest.html">美论首页</a>
+                            <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
                         <li>
                             <a href="index.html">美乎</a>
@@ -152,7 +153,7 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-							<a href="#" ><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
+							<a href="#" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
                     <!--<a href="#">注册</a>
                     <a href="#">登录</a>-->
 						</span>
@@ -179,63 +180,59 @@
 
                         <div class="tab-content clearfix">
                             <!-- 基本信息 -->
-                            <form action="" method="post">
-                                <div class="aw-mod">
-                                    <div class="mod-body">
-                                        <div class="aw-mod mod-base">
-                                            <div class="mod-head">
-                                                <h3>基本信息</h3>
-                                            </div>
-                                            <form id="setting_form" method="post" action="http://wenda.wecenter.com/account/ajax/profile_setting/">
-                                                <div class="mod-body">
-                                                    <dl>
-                                                        <dt>用户名:</dt>
-                                                        <dd><input type="text" placeholder="${user.uname}"/></dd>
-                                                    </dl>
-                                                    <dl>
-                                                        <dt>性别:</dt>
-                                                        <dd>
-                                                            <label>
+                            <div class="aw-mod">
+                                <div class="mod-body">
+                                    <div class="aw-mod mod-base">
+                                        <div class="mod-head">
+                                            <h3>基本信息</h3>
+                                        </div>
+                                        <form id="setting_form"  action="<%=basePath%>/updateUser.action" method="post"  enctype="multipart/form-data">
+                                            <div class="mod-body">
+                                                <input type="hidden" name="uid" value="${user.uid}" hidden />
+                                                <dl>
+                                                    <dt>用户名:</dt>
+                                                    <dd><input type="text" name="uname" placeholder="${user.uname}"/></dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>性别:</dt>
+                                                    <dd>
+                                                        <label>
 
-                                                                <input name="sex" id="sex1" value="1" type="radio"<c:if test="${user.sex=='男'}">checked</c:if> /> 男						</label>
-                                                            <label>
-                                                                <input name="sex" id="sex2" value="2" type="radio" <c:if test="${user.sex=='女'}">checked="checked"</c:if> /> 女						</label>
+                                                            <input name="sex" id="sex1" value="男" type="radio"<c:if test="${user.sex=='男'}">checked</c:if> /> 男						</label>
+                                                        <label>
+                                                            <input name="sex" id="sex2" value="女" type="radio" <c:if test="${user.sex=='女'}">checked="checked"</c:if> /> 女						</label>
 
+                                                    </dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>电话:</dt>
+                                                    <dd><input type="text" name="tel" placeholder="${user.tel}"/></dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>邮箱:</dt>
+                                                    <dd><input type="text" name="email" placeholder="${user.email}"/></dd>
+                                                </dl>
+
+                                                <!-- 上传头像 -->
+                                                <div class="side-bar">
+                                                    <dl>
+                                                        <dt class="pull-left"><img class="aw-border-radius-5" style="width: 100px;height: 100px;" src="<%=basePath%>${user.headpic}" alt="" id="avatar_src" /></dt>
+                                                        <dd class="pull-left">
+                                                            <h5>头像设置</h5>
+                                                            <p>支持 jpg、gif、png 等格式的图片</p>
+                                                            <input name="imgFileUp" type="file" multiple="multiple"/>
                                                         </dd>
                                                     </dl>
-                                                    <dl>
-                                                        <dt>电话:</dt>
-                                                        <dd><input type="text" placeholder="${user.tel}"/></dd>
-                                                    </dl>
-                                                    <dl>
-                                                        <dt>邮箱:</dt>
-                                                        <dd><input type="text" placeholder="${user.email}"/></dd>
-                                                    </dl>
-                                                    <dl>
-                                                        <dt>注册时间:</dt>
-                                                        <dd><input type="date"/></dd>
-                                                    </dl>
-                                                    <!-- 上传头像 -->
-                                                    <div class="side-bar">
-                                                        <dl>
-                                                            <dt class="pull-left"><img class="aw-border-radius-5" src="<%=basePath%>images/${user.headpic}" alt="" id="avatar_src" /></dt>
-                                                            <dd class="pull-left">
-                                                                <h5>头像设置</h5>
-                                                                <p>支持 jpg、gif、png 等格式的图片</p>
-                                                                <a class="btn btn-mini btn-success" id="avatar_uploader" href="javascript:;">上传头像</a> <span id="avatar_uploading_status" class="collapse"><i class="aw-loading"></i> 文件上传中...</span>
-                                                            </dd>
-                                                        </dl>
-                                                    </div>
-                                                    <!-- end 上传头像 -->
                                                 </div>
+                                                <!-- end 上传头像 -->
+                                            </div>
                                             <div class="mod-footer clearfix">
-                                            <input type="submit"  class="btn btn-large btn-success pull-right" value="保存"></input>
-                                        </div>
-                                            </form>
-                                        </div>
+                                                <input type="submit"  class="btn btn-large btn-success pull-right" value="保存"></input>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

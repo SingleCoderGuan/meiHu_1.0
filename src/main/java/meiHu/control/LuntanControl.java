@@ -35,9 +35,7 @@ public class LuntanControl {
 
         String tid = request.getParameter("tid");
         int tid1 = Integer.parseInt(tid);
-        List<ForumTopic> topicList=luntanService.getAllTopics();
         List<ForumPost> postList=luntanService.selectPostsByTid(tid1);
-        request.setAttribute("topicList",topicList);
         request.setAttribute("postList",postList);
         String tname = luntanService.selectTnameBuTid(tid1);
         request.setAttribute("tname",tname);

@@ -11,8 +11,9 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Stict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
+strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang = "zh-CN">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -141,7 +142,7 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="#" ><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
+                    <a href="#" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
                     <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                 </span>
 
@@ -164,7 +165,7 @@
                     <!-- 用户数据内容 -->
                     <div class="aw-mod aw-user-detail-box">
                         <div class="mod-head">
-                            <img src="<%=basePath%>images/${user.headpic}" />
+                            <img style="width: 100px" src="<%=basePath%>${user.headpic}" />
                             <span class="pull-right operate">
                                 <a href="<%=basePath%>jsp/userInfo.jsp" class="btn btn-mini btn-success">编辑</a>
                             </span>
@@ -204,7 +205,7 @@
 
                     <div class="aw-user-center-tab">
                         <div class="tab-content">
-                            <div class="tab-pane" id="questions">
+                            <div class="tab-pane active" id="questions">
                                 <div class="aw-mod">
                                     <div class="mod-body">
                                         <div class="aw-profile-publish-list" id="contents_user_actions_questions">
@@ -213,7 +214,7 @@
                                                 <div style="position:relative ;left: 20px;margin-top: 15px">
                                                     <a href="#"><span>${post.ptitle}</span></a>
                                                     <div style="position: absolute;left: 369px;top: -1px;width: 70px;height:20px ;text-align:center;"><a href="#" style="margin:0 auto;"><span>${post.topic.tname}</span></a></div>
-                                                    <div style="position: absolute;left: 478px;top: -1px;width: 145px;text-align:center ;"><a href="<%=basePath%>modifyPost.action?pid=${post.pid}"><span>编辑</span></a>|<a href="#"><span>删除</span></a></div>
+                                                    <div style="position: absolute;left: 478px;top: -1px;width: 145px;text-align:center ;"><a href="<%=basePath%>modifyPost.action?pid=${post.pid}"><span>编辑</span></a>|<a onclick="show_confirm(${post.pid})"><span>删除</span></a></div>
                                                 </div>
                                             </c:forEach>
                                         </div>
@@ -363,7 +364,7 @@
                                 <li>关注我的：
                                      <ul>
                                          <c:forEach items="${followers}" var="user">
-                                             <a href=""><img style="width: 60px;height: 60px" src="<%=basePath%>images/${user.headpic}" alt=""></a>
+                                             <a href=""><img style="width: 60px;height: 60px" src="<%=basePath%>${user.headpic}" alt=""></a>
                                          </c:forEach>
                                      </ul>
                                 </li>
@@ -376,7 +377,7 @@
                                 <li>我关注的：
                                     <ul>
                                         <c:forEach items="${focusUsers}" var="user">
-                                            <a href="#"><img style="width: 60px;height: 60px" src="<%=basePath%>images/${user.headpic}" alt=""></a>
+                                            <a href="#"><img style="width: 60px;height: 60px" src="<%=basePath%>${user.headpic}" alt=""></a>
                                         </c:forEach>
                                     </ul>
                                 </li>
@@ -402,7 +403,32 @@
 
 </div>
 </div>
-
+<script type="text/javascript">
+    function show_confirm(pid)
+    {
+        var r=confirm("确认删除吗？");
+        if (r==true)
+        {
+            $.ajax({
+                type:" get",
+                data:{"pid":pid},
+                url:"${pageContext.request.contextPath}deletePost.action",
+                success:function (messsage) {
+                    if(messsage=="1"){
+                        alert("删除成功")
+                        location.reload();
+                    }else{
+                        alert("删除失败")
+                    }
+                }
+            })
+        }
+        else
+        {
+            alert("You pressed Cancel!");
+        }
+    }
+</script>
 </body>
 
 </html>

@@ -15,10 +15,9 @@
 
 <head>
 
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>文章发布</title>
-    <meta name="keywords" content="美论" />
-    <meta name="description" content="美论" />
+
     <script type="text/javascript" src="<%= basePath%>/release/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="<%= basePath%>/release/wangEditor.min.js"></script>
 
@@ -164,7 +163,7 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="#" ><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname} </a>
+                    <a href="#" ><img src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname} </a>
                     <a href="<%=basePath%>signOut.action" style="position: absolute;left: 200px">注销</a>
                 </span>
 

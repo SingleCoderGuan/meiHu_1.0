@@ -42,4 +42,26 @@ public interface UserService {
      * @return  所有该用户的追随者
      */
     public List<ForumUser> findFollowersByUid(int uid);
+
+    /**
+     * 更新用户信息 接收user对象 根据uid更新对应的用户相关信息
+     * @param user 需要更新的用户
+     * @return 是否更新成功
+     */
+    public boolean updateUser(ForumUser user) ;
+
+    /**
+     * 根据uid查询该用户
+     * @param uid 需要查询的uid
+     * @return 该uid对应的用户对象
+     */
+    public ForumUser selectUserByUid(int uid);
+
+    /**
+     * 根据uid查询该用户并为其密码更新
+     * @param user 需要更新密码的用户
+     * @return 是否成功更新密码
+     */
+    public boolean resetPass(ForumUser user);
+
 }
