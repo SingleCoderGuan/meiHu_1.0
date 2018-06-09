@@ -43,9 +43,6 @@
         }
     </style>
     <script>
-
-    </script>
-    <script>
         function subm(){
             document.getElementById('content').value=editor.txt.html();
             document.getElementById('newspost').submit();
@@ -166,7 +163,7 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="#" ><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname} </a>
+                    <a href="#" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname} </a>
                     <a href="<%=basePath%>signOut.action" style="position: absolute;left: 200px">注销</a>
                 </span>
 
@@ -200,8 +197,7 @@
 
                         板块：
                         ${post.topic.tname}
-
-                        <input type="hidden" id="content" value="${post.pcontent}" name="pcontent"/>
+                        <input type="hidden" id="content" name="pcontent"/>
 
                         <div id="div1" class="toolbar">
                         </div>
@@ -212,7 +208,7 @@
                         <input type="button" value="保存" onclick="subm()" />
 
                     </form>
---%>
+
                 </div>
                 <!-- 侧边栏 -->
                 <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
@@ -635,7 +631,7 @@
     }
 
     editor.create();
-
+    editor.txt.html()
 </script>
 </body>
 

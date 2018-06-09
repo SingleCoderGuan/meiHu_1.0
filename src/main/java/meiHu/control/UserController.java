@@ -150,7 +150,8 @@ public class UserController {
     @RequestMapping(value = "/modifyPost.action",method = RequestMethod.GET)
     public void modifyPost(int pid,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         ForumPost post = postService.selectPostByPid(pid) ;
-        System.out.println(post);
+        post.setPcontent(post.getPcontent().replace(" ", ""));
+        System.out.println("-----------------"+post);
         request.setAttribute("post",post);
         request.getRequestDispatcher("/jsp/modifyPost.jsp").forward(request,response);
     }
