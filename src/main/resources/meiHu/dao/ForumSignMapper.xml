@@ -16,4 +16,22 @@
     <select id="queryIfExistUid" resultType="Date" parameterType="int">
         SELECT  currentsigntime from forum_sign WHERE user_uid = #{parameter}
     </select>
+
+
+    <!--//    <p>2、发表帖子 +5 分</p>-->
+
+    <!--public void fatiezijiawufen(int uid);-->
+    <update id="fatiezijiawufen" parameterType="int">
+        UPDATE forum_user SET point=point+5 WHERE uid=#{parameter}
+    </update>
+    <!--//                        <p>3、发表评论 +2 分</p>-->
+    <!--public void fapinglunjialiangfen(int uid);-->
+    <update id="fapinglunjialiangfen" parameterType="int">
+        UPDATE forum_user SET point=point+2 WHERE uid=#{parameter}
+    </update>
+    <!--//                        <p>4、每日签到 +3 分</p>-->
+    <!--public void qiandaojiasanfen(int uid);-->
+    <update id="qiandaojiasanfen" parameterType="int">
+        UPDATE forum_user SET point=point+3 WHERE uid=#{parameter}
+    </update>
 </mapper>

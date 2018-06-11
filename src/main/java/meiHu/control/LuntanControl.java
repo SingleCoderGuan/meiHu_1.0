@@ -2,6 +2,7 @@ package meiHu.control;
 
 
 import meiHu.entity.*;
+import meiHu.service.ArticleService;
 import meiHu.service.FocusService;
 import meiHu.service.LuntanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import java.util.*;
 @Controller
 @RequestMapping(value = "/luntan")
 public class LuntanControl {
+    @Autowired
+    private ArticleService articleService;
     @Autowired
     private LuntanService luntanService;
     @Autowired
@@ -213,6 +216,7 @@ public class LuntanControl {
         ForumComment forumComment = new ForumComment(uidd,pidd,postcomment);
         PrintWriter out = response.getWriter();
         if(luntanService.addForumComment(forumComment)){
+            articleService.fapinglunjialiangfen(uidd);
             out.print(1);
         }else{
             out.print(0);
@@ -250,6 +254,7 @@ public class LuntanControl {
         PrintWriter out = response.getWriter();
 
        if(luntanService.addCommentForComment(forumComment)){
+           articleService.fapinglunjialiangfen(uidd);
             out.print(1);
         }else{
             out.print(0);

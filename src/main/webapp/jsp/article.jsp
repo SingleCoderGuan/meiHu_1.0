@@ -150,7 +150,7 @@
                     function sign(uidd){
                         <c:if test="${empty sessionScope.uid}">
                         alert("亲，请先登录");
-                        window.location.href="loginregister.jsp";
+                        window.location.href="<%=basePath%>jsp/loginregister.jsp";
                         </c:if>
                         <c:if test="${not empty sessionScope.uid}">
                         $.ajax({
@@ -177,14 +177,12 @@
                     <h4 class="title">最热搜</h4>
                     <div class="content tag-cloud">
                         <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
+                        <a href="#">防晒</a>
+                        <a href="#">口红</a>
+                        <a href="#">香奈儿</a>
+                        <a href="#">兰蔻</a>
+                        <a href="#">小黑瓶</a>
+                        <a href="#">美肤宝</a>
 
 
 
@@ -225,20 +223,13 @@
                 <div class="widget">
                     <h4 class="title">标签云</h4>
                     <div class="content tag-cloud">
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
+                        <a href="#">水乳</a>
+                        <a href="#">防晒</a>
+                        <a href="#">口红</a>
+                        <a href="#">香奈儿</a>
+                        <a href="#">兰蔻</a>
+                        <a href="#">小黑瓶</a>
+                        <a href="#">美肤宝</a>
 
                         <a href="/tag-cloud/">...</a>
                     </div>

@@ -155,7 +155,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>jsp/article.jsp">美文</a>
+                            <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
 
                         <li>
@@ -276,7 +276,7 @@
                             <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=zuixin&tid=<%=request.getParameter("tid")%>" >最新</a>
                         </li>
 
-                        <h2 class="hidden-xs"> ……姑娘清留步</h2>
+                        <h2 class="hidden-xs"> ……姑娘清留步  这是${tname}区</h2>
                     </ul>
                     <!-- end tab切换 -->
 

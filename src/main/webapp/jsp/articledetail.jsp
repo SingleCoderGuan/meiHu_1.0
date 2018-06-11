@@ -162,8 +162,8 @@
                     <h4 class="title">社区</h4>
                     <div class="content community">
                         <p>QQ群：123456789</p>
-                        <p><a href="<%=basePath%>luntan/luntanshouye.action?tid=1" title="问答社区" target="_blank" onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '问答社区'])"><i class="fa fa-comments"></i> 问答社区</a></p>
-                        <p><a href="index.html" title="官方微博" target="_blank" onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '官方微博'])"><i class="fa fa-weibo"></i> 官方微博</a></p>
+                        <p><a href="<%=basePath%>luntan/luntanshouye.action?tid=1" title="问答社区"  onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '问答社区'])"><i class="fa fa-comments"></i> 问答社区</a></p>
+                        <p><a href="#" title="官方微博" ><i class="fa fa-weibo"></i> 官方微博</a></p>
                     </div>
                 </div>
                 <!-- end tag cloud widget -->
@@ -207,15 +207,12 @@
                     <h4 class="title">最热搜</h4>
                     <div class="content tag-cloud">
                         <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-
+                        <a href="#">防晒</a>
+                        <a href="#">口红</a>
+                        <a href="#">香奈儿</a>
+                        <a href="#">兰蔻</a>
+                        <a href="#">小黑瓶</a>
+                        <a href="#">美肤宝</a>
 
 
                     </div>
@@ -255,22 +252,15 @@
                 <div class="widget">
                     <h4 class="title">标签云</h4>
                     <div class="content tag-cloud">
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
+                        <a href="#">水乳</a>
+                        <a href="#">防晒</a>
+                        <a href="#">口红</a>
+                        <a href="#">香奈儿</a>
+                        <a href="#">兰蔻</a>
+                        <a href="#">小黑瓶</a>
+                        <a href="#">美肤宝</a>
 
-                        <a href="/tag-cloud/">...</a>
+                        <a href="#">...</a>
                     </div>
                 </div>
             </div>
