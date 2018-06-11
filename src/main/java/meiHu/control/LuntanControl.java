@@ -89,6 +89,7 @@ public class LuntanControl {
             List<ForumComment> value=map.get(key);
             System.out.println(key+"___"+value);
         }*/
+       luntanService.updatePostVisitNum(pid1);
         request.setAttribute("map",map);
         request.setAttribute("mapnum",mapnum);
         request.getRequestDispatcher("/jsp/tiezidetail.jsp").forward(request,response);
@@ -129,7 +130,7 @@ public class LuntanControl {
 
        int uidd = Integer.parseInt(uid);
        int pidd = Integer.parseInt(pid);
-       luntanService.updatePostVisitNum(pidd);
+
        //System.out.println(luntanService.addCollectionByUidAndPid(uidd,pidd));
        PrintWriter out = response.getWriter();
        if(luntanService.addCollectionByUidAndPid(uidd,pidd)){
@@ -145,7 +146,6 @@ public class LuntanControl {
         String pid =request.getParameter("pid");
         int uidd = Integer.parseInt(uid);
         int pidd = Integer.parseInt(pid);
-        luntanService.updatePostVisitNumSub(pidd);
         PrintWriter out = response.getWriter();
         if(luntanService.deleteCollectionByUidAndPid(uidd,pidd)){
             out.print(1);

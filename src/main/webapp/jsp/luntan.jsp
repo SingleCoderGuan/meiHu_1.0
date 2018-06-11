@@ -582,28 +582,6 @@
     })();
 </script>
 
-<script>
-    (function ($) {
-        $('.ad-item').on('click', '.close', function () {
-            var self = this;
-            var level = $(self).data('level');
-            if (level && (level > 0)) {
-                $.ajax({
-                    url: '//' + location.host + '/account/ajax/set_ad_sign/' + '?ad_type=' + $(self).data('type'),
-                    success: function (data) {
-                        var result = JSON.parse(data);
-                        if (result.code === 200) {
-                            $(self).parent().parent().css('display', 'none');
-                        }
-                    }
-                });
-            } else {
-                $(self).css('display', 'none');
-                $(self).next().css('display', 'inline-block');
-            }
-        });
-    }(window.jQuery));
-</script>
 </body>
 </html>
 
