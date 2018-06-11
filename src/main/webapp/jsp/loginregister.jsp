@@ -39,10 +39,10 @@
         }
         var id = getUrlParms("rslt");
         if(id=="1"){
-            alert("密码错误")
+            alert("用户名或密码错误")
         }
         if(id=="2"){
-            alert("用户名错误")
+            alert("用户名或密码错误")
         }
         if(id=="3"){
             alert("注册成功")

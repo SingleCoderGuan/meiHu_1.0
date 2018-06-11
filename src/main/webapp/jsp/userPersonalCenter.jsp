@@ -92,8 +92,8 @@ strict.dtd">
     }
 </style>
 
-<body>
-<div class="aw-top-menu-wrap">
+<body >
+<div class="aw-top-menu-wrap" style="height: 55px">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
             <!-- logo -->
@@ -101,6 +101,16 @@ strict.dtd">
                 <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;" />
             </div>
             <!-- end logo -->
+            <div class="aw-search-box  hidden-xs hidden-sm">
+                <form class="navbar-search pull-right" action="#" id="global_search_form" method="post">
+                    <div class="input-group">
+                        <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off" name="q" id="aw-search-query" class="search-query" />
+                        <span class="input-group-addon" title="搜索" id="global_search_btns" onClick="$('#global_search_form').submit();"><i class="fa fa-search"></i></span>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </form>
+            </div>
             <!-- 导航 -->
             <div class="aw-top-nav navbar">
                 <div class="navbar-header">
@@ -139,10 +149,10 @@ strict.dtd">
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav">
+            <div class="aw-user-nav" style="position: relative;top: -55px;">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="#" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                    <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
                     <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                 </span>
 
@@ -158,9 +168,9 @@ strict.dtd">
 <!--主体-->
 
 <div class="aw-container-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="aw-content-wrap clearfix">
+    <div class="container" >
+        <div class="row" >
+            <div class="aw-content-wrap clearfix" style="height: 840px;>
                 <div class="col-sm-12 col-md-9 aw-main-content">
                     <!-- 用户数据内容 -->
                     <div class="aw-mod aw-user-detail-box">
@@ -186,14 +196,14 @@ strict.dtd">
                         <div class="mod-footer">
                             <ul class="nav nav-tabs aw-nav-tabs">
                                 <li style="width: 175px;text-align: center">
-                                    <a href="#questions" id="page_questions" data-toggle="tab" style="font-size: 20px">发问<span class="badge">0</span></a>
+                                    <a href="#questions" id="page_questions" data-toggle="tab" style="font-size: 20px">我的帖子<span class="badge">0</span></a>
                                 </li>
                                 <li style="width: 175px;text-align: center">
-                                    <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">回复<span class="badge">0</span></a>
+                                    <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">我的提醒<span class="badge">0</span></a>
                                 </li>
 
                                 <li style="width: 175px;text-align: center">
-                                    <a href="#focus" id="page_focus" data-toggle="tab" style="font-size: 20px">关注话题</a>
+                                    <a href="#focus" id="page_focus" data-toggle="tab" style="font-size: 20px">我的收藏</a>
                                 </li>
                                 <li style="width: 175px;text-align: center">
                                     <a href="#integral" id="page_integral" data-toggle="tab" style="font-size: 20px">我的积分</a>
@@ -209,39 +219,24 @@ strict.dtd">
                                 <div class="aw-mod">
                                     <div class="mod-body">
                                         <div class="aw-profile-publish-list" id="contents_user_actions_questions">
-                                            <div style="background-color: #FFCCCC;height: 30px"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">操作</span></div>
+                                            <div style="background-color: #CC99CC;height: 30px ;width: 100%"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">操作</span></div>
                                             <c:forEach items="${postList}" var="post">
                                                 <div style="position:relative ;left: 20px;margin-top: 15px">
-                                                    <a href="#"><span>${post.ptitle}</span></a>
+                                                    <a href="<%=basePath%>luntan/tiezidetail.action?pid=${post.pid}"><span>${post.ptitle}</span></a>
                                                     <div style="position: absolute;left: 369px;top: -1px;width: 70px;height:20px ;text-align:center;"><a href="#" style="margin:0 auto;"><span>${post.topic.tname}</span></a></div>
                                                     <div style="position: absolute;left: 478px;top: -1px;width: 145px;text-align:center ;"><a href="<%=basePath%>modifyPost.action?pid=${post.pid}"><span>编辑</span></a>|<a onclick="show_confirm(${post.pid})"><span>删除</span></a></div>
                                                 </div>
                                             </c:forEach>
                                         </div>
                                     </div>
-                                    <div class="mod-footer">
-                                        <!-- 加载更多内容 -->
-                                        <a class="aw-load-more-content" id="bp_user_actions_questions_more">
-                                            <span>展开全部</span>
-                                        </a>
-                                        <!-- end 加载展开全部内容 -->
-                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane" id="answers">
                                 <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3>回复</h3>
-                                    </div>
                                     <div class="mod-body">
-                                        <div class="aw-profile-answer-list" id="contents_user_actions_answers"></div>
-                                    </div>
-                                    <div class="mod-footer">
-                                        <!-- 加载更多内容 -->
-                                        <a class="aw-load-more-content" id="bp_user_actions_answers_more">
-                                            <span>展开全部</span>
-                                        </a>
-                                        <!-- end 加载更多内容 -->
+                                        <div class="aw-profile-publish-list" id="contents_user_actions_questions">
+                                            <div style="background-color: #FFCCCC;height: 30px"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">操作</span></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -252,13 +247,6 @@ strict.dtd">
                                     </div>
                                     <div class="mod-body">
                                         <div class="aw-profile-publish-list" id="contents_user_actions_articles"></div>
-                                    </div>
-                                    <div class="mod-footer">
-                                        <!-- 加载更多内容 -->
-                                        <a class="aw-load-more-content" id="bp_user_actions_articles_more">
-                                            <span>展开全部</span>
-                                        </a>
-                                        <!-- end 加载更多内容 -->
                                     </div>
                                 </div>
                             </div>
@@ -279,36 +267,15 @@ strict.dtd">
                                                         </div>
                                                     </c:forEach>
                                                 </div>
-                                                <div class="mod-footer">
-                                                    <!-- 加载更多内容 -->
-                                                    <a class="aw-load-more-content" id="bp_user_follows_more">
-                                                        <span>展开全部</span>
-                                                    </a>
-                                                    <!-- end 加载更多内容 -->
-                                                </div>
                                             </div>
                                             <div class="aw-mod aw-user-center-follow-mod collapse">
                                                 <div class="mod-body">
                                                     <ul class="clearfix" id="contents_user_fans"></ul>
                                                 </div>
-                                                <div class="mod-footer">
-                                                    <!-- 加载更多内容 -->
-                                                    <a class="aw-load-more-content" id="bp_user_fans_more">
-                                                        <span>展开全部</span>
-                                                    </a>
-                                                    <!-- end 加载更多内容 -->
-                                                </div>
                                             </div>
                                             <div class="aw-mod aw-user-center-follow-mod collapse">
                                                 <div class="mod-body">
                                                     <ul id="contents_user_topics" class="clearfix"></ul>
-                                                </div>
-                                                <div class="mod-footer">
-                                                    <!-- 加载更多内容 -->
-                                                    <a class="aw-load-more-content" id="bp_user_topics_more">
-                                                        <span>展开全部</span>
-                                                    </a>
-                                                    <!-- end 加载更多内容 -->
                                                 </div>
                                             </div>
                                         </div>
@@ -319,29 +286,7 @@ strict.dtd">
 
                             <div class="tab-pane" id="integral">
                                 <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3><i class="icon icon-point"></i>我的积分</h3>
-                                    </div>
-                                    <div class="mod-body">
-                                        <table class="table table-hover aw-table">
-                                            <thead>
-                                            <tr class="info">
-                                                <th width="14%">时间</th>
-                                                <th width="8%">数额</th>
-                                                <th width="17%">描述</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="contents_user_integral">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="mod-footer">
-                                        <!-- 加载更多内容 -->
-                                        <a class="aw-load-more-content" id="bp_user_integral">
-                                            <span>展开全部</span>
-                                        </a>
-                                        <!-- end 加载更多内容 -->
-                                    </div>
+                                    <div style="background-color: #FFCCCC;height: 30px"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">操作</span></div>
                                 </div>
                             </div>
                         </div>
@@ -356,7 +301,7 @@ strict.dtd">
 
                     <div class="aw-side-bar-mod">
                         <div class="aw-mod-head">
-                            <p style="font-size: 20px;">关注详情</p>
+                            <p style="font-size: 20px;">个人中心</p>
                         </div>
                         <br />
                         <div class="aw-mod-body">
@@ -406,15 +351,14 @@ strict.dtd">
 <script type="text/javascript">
     function show_confirm(pid)
     {
-        var r=confirm("确认删除吗？");
-        if (r==true)
+        if (confirm("确认删除吗？"))
         {
             $.ajax({
-                type:" get",
-                data:{"pid":pid},
-                url:"${pageContext.request.contextPath}deletePost.action",
-                success:function (messsage) {
-                    if(messsage=="1"){
+                type:"get",
+                data:"pid="+pid,
+                url:"${pageContext.request.contextPath}/deletePost.action",
+                success:function (message) {
+                    if(message=="1"){
                         alert("删除成功")
                         location.reload();
                     }else{
@@ -422,10 +366,6 @@ strict.dtd">
                     }
                 }
             })
-        }
-        else
-        {
-            alert("You pressed Cancel!");
         }
     }
 </script>

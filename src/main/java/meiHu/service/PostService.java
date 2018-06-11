@@ -1,10 +1,18 @@
 package meiHu.service;
 
+import com.github.pagehelper.PageInfo;
 import meiHu.entity.ForumPost;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PostService {
+    /**
+     * 按分页显示所有帖子
+     * @param map
+     * @return
+     */
+    public PageInfo<ForumPost> selectPosts(Map<String ,Object> map) ;
     /**
      * 通过用户uid查询该用户收藏的所有帖子
      * @param uid 需要查询的uid

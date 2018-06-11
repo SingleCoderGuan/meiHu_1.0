@@ -1,9 +1,11 @@
 package meiHu.control;
 
 
+import com.github.pagehelper.PageInfo;
 import meiHu.entity.*;
 import meiHu.service.FocusService;
 import meiHu.service.LuntanService;
+import meiHu.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.SocketUtils;
@@ -29,14 +31,30 @@ public class LuntanControl {
     private LuntanService luntanService;
     @Autowired
     private FocusService focusService;
-
+    @Autowired
+    private PostService postService ;
     @RequestMapping(value = "/luntanshouye.action")
     public void luntanshouye(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String tid = request.getParameter("tid");
+        System.out.println("+++++++++"+tid+"---------");
         int tid1 = Integer.parseInt(tid);
-        List<ForumPost> postList=luntanService.selectPostsByTid(tid1);
-        request.setAttribute("postList",postList);
+        Map<String ,Object> cmap=new HashMap<>();
+
+        //每页显示的条数
+        int pageSize=2;
+        //当前的页面默认是首页
+        int curPage=1;
+        String scurPage=request.getParameter("curPage");
+        if (scurPage!=null&&!scurPage.trim().equals("")){
+
+            curPage=Integer.parseInt(scurPage);
+        }
+        cmap.put("curPage",curPage);
+        cmap.put("pageSize",pageSize);
+        cmap.put("tid",tid1) ;
+        PageInfo<ForumPost> pageInfo= postService.selectPosts(cmap);
+        request.setAttribute("pageInfo",pageInfo);
         String tname = luntanService.selectTnameBuTid(tid1);
         request.setAttribute("tname",tname);
         request.getSession().setAttribute("uid",102);

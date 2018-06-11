@@ -153,7 +153,8 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-							<a href="#" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+							<a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                     <!--<a href="#">注册</a>
                     <a href="#">登录</a>-->
 						</span>
@@ -191,7 +192,7 @@
                                                 <input type="hidden" name="uid" value="${user.uid}" hidden />
                                                 <dl>
                                                     <dt>用户名:</dt>
-                                                    <dd><input type="text" name="uname" placeholder="${user.uname}"/></dd>
+                                                    <dd><input type="text" name="uname" value="${user.uname}"/></dd>
                                                 </dl>
                                                 <dl>
                                                     <dt>性别:</dt>
@@ -206,11 +207,11 @@
                                                 </dl>
                                                 <dl>
                                                     <dt>电话:</dt>
-                                                    <dd><input type="text" name="tel" placeholder="${user.tel}"/></dd>
+                                                    <dd><input type="text" name="tel" value="${user.tel}"/></dd>
                                                 </dl>
                                                 <dl>
                                                     <dt>邮箱:</dt>
-                                                    <dd><input type="text" name="email" placeholder="${user.email}"/></dd>
+                                                    <dd><input type="text" name="email" value="${user.email}"/></dd>
                                                 </dl>
 
                                                 <!-- 上传头像 -->

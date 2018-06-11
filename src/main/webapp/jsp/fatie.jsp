@@ -102,7 +102,7 @@
 </style>
 
 <body>
-<div class="aw-top-menu-wrap">
+<div class="aw-top-menu-wrap" style="height: 55px">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
             <!-- logo -->
@@ -135,7 +135,7 @@
                     <ul class="nav navbar-nav">
 
                         <li class="nav-current" role="presentation">
-                            <a href="luntanshouyetest.html">美论首页</a>
+                            <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
                         <li>
                             <a href="index.html">美乎</a>
@@ -160,11 +160,11 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav">
+            <div class="aw-user-nav" style="position: relative;top: -55px;">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="#" ><img src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname} </a>
-                    <a href="<%=basePath%>signOut.action" style="position: absolute;left: 200px">注销</a>
+                    <a href="<%=basePath%>userCenter.action" ><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname} </a>
+                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                 </span>
 
                 <!-- end 登陆&注册栏 -->
@@ -191,11 +191,11 @@
                     <!-- end tab 切换 -->
                     <form id="newspost" method="post" action="<%=application.getContextPath()%>/newpost.action" enctype="multipart/form-data">
 
-                        标题：
-                        <input type="text" id="title" name="ptitle"/><br/><br/>
+                        <span style="position: relative;left:5px;top: 5px;font-size: 20px">标题：</span>
+                        <input type="text" style="width: 590px;position: relative;top: 10px; " class="form-control" id="title" name="ptitle"/><br/><br/>
 
-                        板块：
-                        <select style="position: relative;top: -10px;" id="topicList" name="topicid">
+                        <span style="position: relative;left:5px;top: -11px;font-size: 20px">板块：</span>
+                        <select style="position: relative;top: -10px;width: 130px" class="form-control" id="topicList" name="topicid">
                             <option value="1">香水</option>
                             <option value="2">水乳</option>
                             <option value="3">口红</option>

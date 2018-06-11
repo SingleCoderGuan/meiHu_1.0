@@ -28,9 +28,11 @@
 
     <!--public int deleteCollectionByUidAndPid(int uid,int pid);-->
     <delete id="deleteCollectionByUidAndPid" parameterType="int">
-                DELETE FROM forum_collection WHERE user_uid =#{param1} and post_pid =#{param2}
-
+    DELETE FROM forum_collection WHERE user_uid =#{param1} and post_pid =#{param2}
+</delete>
+    <!--public boolean deleteCollectionByPid(int pid);-->
+    <delete id="deleteCollectionByPid" parameterType="int">
+        DELETE FROM forum_collection WHERE post_pid=#{_parameter}
     </delete>
-
 
 </mapper>

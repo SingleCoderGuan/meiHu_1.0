@@ -82,4 +82,8 @@
         select count(*) from forum_comment WHERE commentid=#{parameter};
     </select>
 
+    <!--public boolean deleteCommentByPid(int pid);-->
+    <delete id="deleteCommentByPid" parameterType="int">
+        DELETE FROM forum_comment WHERE post_pid=#{_parameter}
+    </delete>
 </mapper>

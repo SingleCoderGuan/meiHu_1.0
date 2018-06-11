@@ -6,6 +6,8 @@ import meiHu.service.PostService;
 import meiHu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -150,21 +152,25 @@ public class UserController {
     @RequestMapping(value = "/modifyPost.action",method = RequestMethod.GET)
     public void modifyPost(int pid,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         ForumPost post = postService.selectPostByPid(pid) ;
-        post.setPcontent(post.getPcontent().replace(" ", ""));
+        post.setPcontent(post.getPcontent().replace("(\r\n|\r|\n|\n\r)", ""));
         System.out.println("-----------------"+post);
         request.setAttribute("post",post);
         request.getRequestDispatcher("/jsp/modifyPost.jsp").forward(request,response);
     }
     @Transactional
     @RequestMapping(value = "/deletePost.action",method = RequestMethod.GET)
-    public void deletePost(int pid,HttpServletRequest request,HttpServletResponse response){
-
+    public @ResponseBody String deletePost(int pid,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        if (postService.deletePost(pid)){
+            System.out.println("删除成功");
+            return "1" ;
+        }else {
+            return "0" ;
+        }
     }
 
     @RequestMapping(value = "/updateUser.action",method = RequestMethod.POST)
     public void updateTrue(MultipartFile imgFileUp, ForumUser forumUser, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ForumUser newUser = forumUser ;
-        System.out.println(newUser);
 //        MultipartFile imgFileUp  接收文件选择器上传的文件
         //获取该文件的名字
         String filename=imgFileUp.getOriginalFilename();
