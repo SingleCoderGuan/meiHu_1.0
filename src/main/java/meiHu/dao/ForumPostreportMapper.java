@@ -14,10 +14,4 @@ public interface ForumPostreportMapper {
 //    用户举报帖子
     public int addPostReport(ForumPostreport forumPostreport);
 
-    /**
-     * 根据pid删除帖子举报表中对应数据，为删除帖子做准备
-     * @param pid
-     * @return
-     */
-    public boolean deletePostReportByPid(int pid);
 }

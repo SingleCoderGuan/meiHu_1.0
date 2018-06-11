@@ -42,9 +42,4 @@ public class SendSmsControl {
 		response.getWriter().print(code);
 
 	}
-
-	public void registerSend(String tel,HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String code = GetMessageCode.getCode(tel);
-        response.getWriter().print(code);
-    }
 }

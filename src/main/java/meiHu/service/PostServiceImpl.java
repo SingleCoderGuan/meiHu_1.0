@@ -3,7 +3,7 @@ package meiHu.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import meiHu.dao.*;
-import meiHu.entity.ForumPost;
+import meiHu.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -70,27 +70,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    @Transactional
     public boolean deletePost(int pid) {
-        boolean flag = false ;
-        if(collectionMapper.deleteCollectionByPid(pid)){
-            System.out.println("收藏表删除成功");
-            if (commentMapper.deleteCommentByPid(pid)){
-                System.out.println("评论删除成功");
-                if (likeMapper.deleteLikeByPid(pid)){
-                    System.out.println("点赞表删除成功");
-                    if (postreportMapper.deletePostReportByPid(pid)){
-                        System.out.println("举报表删除成功");
-                        if (forumPostMapper.deletePostByPid(pid)){
-                            System.out.println("帖子删除成功");
-                            flag = true ;
-                        }
-                    }
-                }
-            }
-        }
-        return flag;
+        return forumPostMapper.deletePostByPid(pid);
     }
-
 
 }

@@ -9,8 +9,4 @@
     <delete id="deleteLikeByUidAndPid" parameterType="int">
         DELETE  FROM forum_like WHERE user_uid =#{param1} AND post_pid=#{param2}
     </delete>
-    <!--public boolean deleteLikeByPid(int pid) ;-->
-    <delete id="deleteLikeByPid" parameterType="int">
-        DELETE FROM forum_like WHERE  post_pid=#{_parameter}
-    </delete>
 </mapper>

@@ -151,17 +151,17 @@ public class UserController {
     }
     @RequestMapping(value = "/modifyPost.action",method = RequestMethod.GET)
     public void modifyPost(int pid,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+
         ForumPost post = postService.selectPostByPid(pid) ;
         post.setPcontent(post.getPcontent().replace("(\r\n|\r|\n|\n\r)", ""));
         System.out.println("-----------------"+post);
         request.setAttribute("post",post);
         request.getRequestDispatcher("/jsp/modifyPost.jsp").forward(request,response);
     }
-    @Transactional
+
     @RequestMapping(value = "/deletePost.action",method = RequestMethod.GET)
     public @ResponseBody String deletePost(int pid,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        if (postService.deletePost(pid)){
-            System.out.println("删除成功");
+        if(postService.deletePost(pid)){
             return "1" ;
         }else {
             return "0" ;

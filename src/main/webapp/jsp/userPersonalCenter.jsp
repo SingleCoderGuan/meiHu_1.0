@@ -170,7 +170,7 @@ strict.dtd">
 <div class="aw-container-wrap">
     <div class="container" >
         <div class="row" >
-            <div class="aw-content-wrap clearfix" style="height: 840px;>
+            <div class="aw-content-wrap clearfix" style="height: 840px;">
                 <div class="col-sm-12 col-md-9 aw-main-content">
                     <!-- 用户数据内容 -->
                     <div class="aw-mod aw-user-detail-box">
@@ -234,7 +234,7 @@ strict.dtd">
                             <div class="tab-pane" id="answers">
                                 <div class="aw-mod">
                                     <div class="mod-body">
-                                        <div class="aw-profile-publish-list" id="contents_user_actions_questions">
+                                        <div class="aw-profile-publish-list" id="contents_user_actions_reply">
                                             <div style="background-color: #FFCCCC;height: 30px"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">操作</span></div>
                                         </div>
                                     </div>
@@ -360,7 +360,7 @@ strict.dtd">
                 success:function (message) {
                     if(message=="1"){
                         alert("删除成功")
-                        location.reload();
+                        window.location.href = "${pageContext.request.contextPath}/userCenter.action" ;
                     }else{
                         alert("删除失败")
                     }

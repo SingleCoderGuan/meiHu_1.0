@@ -1,5 +1,6 @@
 package meiHu.dao;
 
+import meiHu.entity.ForumCollection;
 import meiHu.entity.ForumPost;
 
 import java.util.List;
@@ -18,11 +19,5 @@ public interface ForumCollectionMapper {
     //用户对一条帖子进行取消收藏
     public int deleteCollectionByUidAndPid(int uid,int pid);
 
-    /**
-     * 根据帖子pid删除收藏该帖子的信息，为删除该帖子做准备
-     * @param pid
-     * @return
-     */
-    public boolean deleteCollectionByPid(int pid);
 
 }

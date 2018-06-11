@@ -127,4 +127,8 @@
         UPDATE forum_post SET createtime=#{createtime},ptitle=#{ptitle} ,pcontent=#{pcontent} WHERE pid=#{pid}
     </update>
 
+    <!--public boolean deletePostByPid(int pid) ;-->
+    <delete id="deletePostByPid" parameterType="int">
+        DELETE  FROM forum_post WHERE pid=#{_parameter}
+    </delete>
 </mapper>

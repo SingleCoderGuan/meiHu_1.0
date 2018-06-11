@@ -42,10 +42,4 @@ public interface ForumCommentMapper {
     //查询某评论下的评论数量
     public int selectCommentCommentNum(int cid);
 
-    /**
-     * 删除该帖子下所有评论，为删除该帖子做准备
-     * @param pid
-     * @return
-     */
-    public boolean deleteCommentByPid(int pid);
 }

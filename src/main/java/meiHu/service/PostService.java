@@ -1,7 +1,7 @@
 package meiHu.service;
 
 import com.github.pagehelper.PageInfo;
-import meiHu.entity.ForumPost;
+import meiHu.entity.*;
 
 import java.util.List;
 import java.util.Map;
@@ -41,7 +41,7 @@ public interface PostService {
     public boolean updatePost(ForumPost post) ;
 
     /**
-     * 根据pid删除帖子
+     * 根据pid删除帖子 数据库设计表级联删除
      * 删除收藏表中该pid对应数据
      * 删除点赞表中该pid对应数据
      * 删除评论表中该pid对应数据
@@ -50,4 +50,6 @@ public interface PostService {
      * @return  是否删除成功
      */
     public boolean deletePost(int pid) ;
+
+
 }
