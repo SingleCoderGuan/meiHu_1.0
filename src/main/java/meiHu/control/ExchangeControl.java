@@ -22,13 +22,19 @@ public class ExchangeControl {
     private UserService userService;
     @RequestMapping("/exchange.action")
     public void exchange(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        String uidd = request.getParameter("uid");
-        int uid = Integer.parseInt(uidd);
-        int point = userService.selectUserPointByUid(uid);
-        request.setAttribute("point",point);
-        List<OffLevel> levelList = exchangeService.selectAllOffLevel();
-        request.setAttribute("levelList",levelList);
-        request.getRequestDispatcher("jsp/exchange.jsp").forward(request,response);
+        if(request.getParameter("uid")==null){
+            List<OffLevel> levelList = exchangeService.selectAllOffLevel();
+            request.setAttribute("levelList",levelList);
+            request.getRequestDispatcher("jsp/exchange.jsp").forward(request,response);
+        }else {
+            String uidd = request.getParameter("uid");
+            int uid = Integer.parseInt(uidd);
+            int point = userService.selectUserPointByUid(uid);
+            request.setAttribute("point", point);
+            List<OffLevel> levelList = exchangeService.selectAllOffLevel();
+            request.setAttribute("levelList", levelList);
+            request.getRequestDispatcher("jsp/exchange.jsp").forward(request, response);
+        }
 
     }
 @RequestMapping("/duihuan.action")

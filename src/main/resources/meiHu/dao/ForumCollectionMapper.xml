@@ -37,5 +37,11 @@
         SELECT count(*) from forum_collection WHERE user_uid =#{parameter}
     </select>
 
+    <!--public ForumCollection selectIfCollection(int uid,int pid);-->
+<select id="selectIfCollection" resultType="ForumCollection" parameterType="int">
+                    select * from  forum_collection WHERE user_uid =#{param1} and post_pid =#{param2}
+
+</select>
+
 
 </mapper>

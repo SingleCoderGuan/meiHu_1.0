@@ -28,13 +28,12 @@
     <link href="../css/stylebankuai.css" rel="stylesheet" type="text/css"/>
 
     <link href="../css/classblack.css" rel="stylesheet" type="text/css"/>
-    <script src="../js/bootstrap.js"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108"
-            type="text/javascript"></script>
 
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/common.js?v=20171108" type="text/javascript"></script>
+
+    <script type="text/javascript" src="<%=basePath%>js/jquery-3.2.1.min.js"></script>
+
+    <script src="<%=basePath%>js/bootstrap.js"></script>
+
 
 </head>
 <style type="text/css">
@@ -173,14 +172,14 @@
                             <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
                         <li>
-                            <a href="<%=basePath%>jsp/article.jsp">美文</a>
+                            <a href="<%=basePath%>article.action">美文</a>
                         </li>
 
                         <li>
                             <a href="#">美淘</a>
                         </li>
                         <li>
-                            <a href="#">精彩活动</a>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
                         </li>
 
                         <li>
@@ -195,14 +194,17 @@
             <!-- 用户栏 -->
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
-                <c:if test="${!empty user}">
-                    <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
-                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 60px;top: -53px">注销</a>
-                </c:if>
-                <c:if test="${empty user}">
-                    <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
-                    <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
-                </c:if>
+                <span>
+                    <c:if test="${!empty user}">
+                        <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                    </c:if>
+                    <c:if test="${empty user}">
+                        <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
+                        <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
+                    </c:if>
+
+						</span>
 
                 <!-- end 登陆&注册栏 -->
             </div>
@@ -366,12 +368,20 @@
                                             </c:if>
                                             <c:if test="${not empty sessionScope.uid}">
                                             if ($("#shoucang").attr("src") == ("../images/shoucang.png")) {
-                                                $("#shoucang").attr("src", "../images/shoucanghou.png");
+
                                                 $.ajax(
                                                     {
                                                         type: "post",
                                                         url: "${pageContext.request.contextPath}/luntan/shoucang.action",
                                                         data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd,
+                                                        success:function (data) {
+                                                            if(data==1){
+                                                                alert("收藏成功");
+                                                                $("#shoucang").attr("src", "../images/shoucanghou.png");
+                                                            }else if(data==2){
+                                                                alert("您已收藏过该帖子");
+                                                            }
+                                                        }
                                                     }
                                                 );
 
@@ -383,6 +393,11 @@
                                                         type: "post",
                                                         url: "${pageContext.request.contextPath}/luntan/quxiaoshoucang.action",
                                                         data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd,
+                                                        success:function (data) {
+                                                            if(data==1){
+                                                                alert("取消收藏成功");
+                                                            }
+                                                        }
                                                     }
                                                 );
 
@@ -780,7 +795,7 @@
                             <!-- 问题状态 -->
                             <div class="aw-side-bar-mod aw-side-bar-mod-question-status">
                                 <div class="aw-mod-head">
-                                    <h3>问题状态</h3>
+                                    <h3>帖子状态</h3>
                                 </div>
                                 <div class="aw-mod-body">
                                     <ul>

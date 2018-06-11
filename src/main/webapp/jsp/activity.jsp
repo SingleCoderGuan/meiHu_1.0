@@ -25,6 +25,8 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script type="text/javascript" src="<%=basePath%>/js/zzsc.js"></script>
+
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.5/styles/monokai_sublime.min.css">
     <link href="https://cdn.bootcss.com/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
@@ -83,9 +85,9 @@
                     <ul class="menu">
                         <li class="nav-current" role="presentation"><a href="luntanshouyetest.html">美论首页</a></li>
                         <li  role="presentation"><a href="#">美乎</a></li>
-                        <li  role="presentation"><a href="#">美购</a></li>
-                        <li  role="presentation"><a href="#">美商城</a></li>
-                        <li  role="presentation"><a href="<%=basePath%>exchange.action?uid=102">兑换</a></li>
+
+                        <li  role="presentation"><a href="#">美淘</a></li>
+                        <li  role="presentation"><a href="<%=basePath%>exchange.action">兑换</a></li>
 
                         <li  role="presentation"><a href="#">关于</a></li>
                     </ul>
@@ -206,20 +208,44 @@
                     </div>
                 </div>
                 <!-- end widget -->
-
+                <style>
+                    #div1{height:400px;width:200px; position:relative; margin:10px auto;}
+                    #div1 a{position:absolute;top:0px;left:0px;color:black;font-weight:bold;padding:3px 6px;}
+                    #div1 a:hover{border:1px solid #eee;background:pink;border-radius:5px;}
+                </style>
                 <!-- start tag cloud widget -->
                 <div class="widget">
                     <h4 class="title">最热搜</h4>
                     <div class="content tag-cloud">
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
+                        <div id="div1">
+                            <a href="#" target="_blank">水乳</a>
+                            <a href="#" target="_blank">美肤宝</a>
+                            <a href="#" target="_blank">口红</a>
+                            <a href="#" target="_blank">香奈儿</a>
+                            <a href="#" target="_blank">Mac</a>
+                            <a href="#" target="_blank">杨树林</a>
+                            <a href="#" target="_blank">防晒霜</a>
+                            <a href="#" target="_blank">香水</a>
+                            <a href="#" target="_blank">迪奥</a>
+                            <a href="#" target="_blank">阿玛尼</a>
+                            <a href="#" target="_blank">兰蔻</a>
+                            <a href="#" target="_blank">小黑瓶</a>
+                            <a href="#" target="_blank">水乳</a>
+                            <a href="#" target="_blank">美肤宝</a>
+                            <a href="#" target="_blank">口红</a>
+                            <a href="#" target="_blank">香奈儿</a>
+                            <a href="#" target="_blank">Mac</a>
+                            <a href="#" target="_blank">杨树林</a>
+                            <a href="#" target="_blank">防晒霜</a>
+                            <a href="#" target="_blank">香水</a>
+                            <a href="#" target="_blank">迪奥</a>
+                            <a href="#" target="_blank">阿玛尼</a>
+                            <a href="#" target="_blank">兰蔻</a>
+                            <a href="#" target="_blank">小黑瓶</a>
+
+
+
+                        </div>
 
 
 

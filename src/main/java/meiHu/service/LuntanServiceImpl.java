@@ -221,5 +221,11 @@ private  ForumUserMapper forumUserMapper;
         return forumUserMapper.selectUsersByTitleId();
     }
 
+    @Override
+    public ForumCollection selectIfCollection(int uid, int pid) {
+        return forumCollectionMapper.selectIfCollection( uid, pid);
+
+    }
+
 
 }

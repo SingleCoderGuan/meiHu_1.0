@@ -1,5 +1,6 @@
 package meiHu.dao;
 
+import meiHu.entity.ForumCollection;
 import meiHu.entity.ForumPost;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public interface ForumCollectionMapper {
 
     //查询某用户收藏帖子的数目
     public int selectCollectionNumByUid(int uid);
+
+    public ForumCollection selectIfCollection(int uid,int pid);
 
 
 }

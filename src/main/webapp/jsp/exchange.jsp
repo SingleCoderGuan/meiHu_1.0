@@ -223,22 +223,22 @@
                                         </div>
 
                                         <button id="button${levelList.offid}" class="btn btn-danger" style="width: 310px;"
-                                                onclick="duihuan(<%=request.getParameter("uid")%>,${levelList.offid},${point})">
+                                                onclick="duihuan(${levelList.offid},${point})">
                                             ${levelList.needpoint}积分兑换
                                         </button>
                                     </div>
                                     <script>
-                                        function duihuan(uidd,offidd,pointt) {
+                                        function duihuan(offidd,pointt) {
 
-                                            <%--<c:if test="${empty uid}">--%>
-                                            <%--alert("亲，请先登录");--%>
-                                            <%--</c:if>--%>
-                                            <%--<c:if test="${not empty uid}">--%>
+                                            <c:if test="${empty sessionScope.uid}">
+                                            alert("亲，请先登录");
+                                            </c:if>
+                                            <c:if test="${not empty sessionScope.uid}">
 
                                             $.ajax({
                                                 type: "post",
                                                 url: "${pageContext.request.contextPath}/duihuan.action",
-                                                data: "uidd=" + uidd + "&offidd=" + offidd+"&pointt="+pointt,
+                                                data: "uidd=" + ${sessionScope.uid} + "&offidd=" + offidd+"&pointt="+pointt,
                                                 success: function (result) {
                                                     if (result == 1) {
                                                         alert("兑换成功");
@@ -250,7 +250,7 @@
                                             });
 
 
-                                            <%--</c:if>--%>
+                                            </c:if>
                                         }
 
 

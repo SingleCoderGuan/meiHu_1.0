@@ -30,35 +30,19 @@
     <link href="<%=basePath%>css/stylebankuai.css" rel="stylesheet" type="text/css"/>
 
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript">
-        var _F873F04AAB426252F46A5A8E6352AA6A = '';
-        var G_POST_HASH = _F873F04AAB426252F46A5A8E6352AA6A;
-        var G_INDEX_SCRIPT = '';
-        var G_SITE_NAME = '美论';
-        var G_BASE_URL = '//ask.dcloud.net.cn';
-        var G_STATIC_URL = '//img-cdn-qiniu.dcloud.net.cn/static';
-        var G_UPLOAD_URL = '//img-cdn-qiniu.dcloud.net.cn/uploads';
-        var G_USER_ID = 0;
-        var G_USER_NAME = '';
-        var G_UPLOAD_ENABLE = 'N';
-        var G_UNREAD_NOTIFICATION = 0;
-        var G_NOTIFICATION_INTERVAL = 300000;
-        var G_CAN_CREATE_TOPIC = '';
 
-    </script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
-    <%--<script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108"
-            type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/functions.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/aw_template.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/common.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/app.js?v=20171108" type="text/javascript"></script>
-    <script type="text/javascript" src="//img-cdn-qiniu.dcloud.net.cn/static/js/compatibility.js"></script>--%>
-    <!--[if lte IE 8]>
+    <script type="text/javascript" src="<%=basePath%>/js/zzsc.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+
+
     <script type="text/javascript" src="//img-cdn-qiniu.dcloud.net.cn/static/js/respond.js"></script>
     <![endif]-->
 </head>
+<style>
+    #div1{height:400px;width:200px; position:relative; margin:10px auto;}
+    #div1 a{position:absolute;top:0px;left:0px;color:#fff;font-weight:bold;padding:3px 6px;}
+    #div1 a:hover{border:1px solid #eee;background:#000;border-radius:5px;}
+</style>
 <style type="text/css">
     .sponsor .sponsor-level {
         width: 13px;
@@ -162,7 +146,7 @@
                             <a href="#">美淘</a>
                         </li>
                         <li>
-                            <a href="#">精彩活动</a>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
                         </li>
 
                         <li>
@@ -429,34 +413,45 @@
                             </a>
                         </div>
                     </div>
-                    <div class="aw-side-bar-mod">
-                        <div class="aw-mod-head">
-                            <h3>板块</h3>
-                        </div>
-                        <div class="aw-mod-body">
-                            <ul>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai3.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=1">香水</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai2.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=2">水乳</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai1.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=3">口红</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai4.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=4">防晒</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai5.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=5">洗面奶</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai6.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=3">眼霜</a></li>
 
-                            </ul>
-                        </div>
-                    </div>
+                            <div class="aw-side-bar-mod">
+                                <div class="aw-mod-head">
+                                    <h3>热门</h3>
+                                </div>
+                                <div class="aw-mod-body" style="background-color: ff534d" >
+
+
+                                    <div id="div1">
+                                        <a href="#" target="_blank">水乳</a>
+                                        <a href="#" target="_blank">美肤宝</a>
+                                        <a href="#" target="_blank">口红</a>
+                                        <a href="#" target="_blank">香奈儿</a>
+                                        <a href="#" target="_blank">Mac</a>
+                                        <a href="#" target="_blank">杨树林</a>
+                                        <a href="#" target="_blank">防晒霜</a>
+                                        <a href="#" target="_blank">香水</a>
+                                        <a href="#" target="_blank">迪奥</a>
+                                        <a href="#" target="_blank">阿玛尼</a>
+                                        <a href="#" target="_blank">兰蔻</a>
+                                        <a href="#" target="_blank">小黑瓶</a>
+                                        <a href="#" target="_blank">水乳</a>
+                                        <a href="#" target="_blank">美肤宝</a>
+                                        <a href="#" target="_blank">口红</a>
+                                        <a href="#" target="_blank">香奈儿</a>
+                                        <a href="#" target="_blank">Mac</a>
+                                        <a href="#" target="_blank">杨树林</a>
+                                        <a href="#" target="_blank">防晒霜</a>
+                                        <a href="#" target="_blank">香水</a>
+                                        <a href="#" target="_blank">迪奥</a>
+                                        <a href="#" target="_blank">阿玛尼</a>
+                                        <a href="#" target="_blank">兰蔻</a>
+                                        <a href="#" target="_blank">小黑瓶</a>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
 
                     <div class="aw-side-bar-mod">
                         <div class="ad-item">
