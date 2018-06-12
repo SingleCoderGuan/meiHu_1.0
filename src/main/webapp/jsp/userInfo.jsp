@@ -127,19 +127,20 @@
                         <li class="nav-current" role="presentation">
                             <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
+
                         <li>
-                            <a href="index.html">美乎</a>
-                        </li>
-                        <li>
-                            <a href="#">美淘</a>
+                            <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
 
                         <li>
-                            <a href="#">活动</a>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
+                        </li>
+                        <li>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
                         </li>
 
                         <li>
-                            <a href="#">关于</a>
+                            <a href="<%=basePath%>fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -213,11 +214,11 @@
                                                 <!-- 上传头像 -->
                                                 <div class="side-bar">
                                                     <dl>
-                                                        <dt class="pull-left"><img class="aw-border-radius-5" style="width: 100px;height: 100px;" src="<%=basePath%>${user.headpic}" alt="" id="avatar_src" /></dt>
+                                                        <dt class="pull-left"><img class="aw-border-radius-5" style="width: 100px;height: 100px;" src="<%=basePath%>${user.headpic}" id="img-show"/></dt>
                                                         <dd class="pull-left">
                                                             <h5>头像设置</h5>
                                                             <p>支持 jpg、gif、png 等格式的图片</p>
-                                                            <input name="imgFileUp" type="file" multiple="multiple"/>
+                                                            <input name="imgFileUp" id="img-upload"  type="file" multiple="multiple" accept="image/*"/>
                                                         </dd>
                                                     </dl>
                                                 </div>
@@ -227,6 +228,19 @@
                                                 <input type="submit"  class="btn btn-large btn-success pull-right" value="保存"></input>
                                             </div>
                                         </form>
+                                        <script type="text/javascript">
+                                            $('#img-upload').change(function(e){
+                                                var input = $("#img-upload");
+                                                var file = input[0].files[0];//获取input上传的文件
+                                                if(!file.name){
+                                                    alert("未选择图片");
+                                                }else{
+                                                    //高版本浏览器对文件上传路径进行了安全处理，无法直接通过获取input的value进行访问，故转化为获取图片的url进行安全访问
+                                                    var url = window.URL.createObjectURL(file);//将上传的文件转化为url
+                                                    $("#img-show").attr('src', url);//更新img的src属性
+                                                };
+                                            });
+                                        </script>
                                     </div>
                                 </div>
                             </div>

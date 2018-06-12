@@ -69,8 +69,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register.action",method = RequestMethod.POST)
-    public void register(String username ,String userpassword ,String phone,HttpServletRequest request ,HttpServletResponse response ) throws IOException, ServletException {
-        userService.insertUser(username,userpassword,phone,new Date()) ;
+    public void register(String username ,String password ,String phone,HttpServletRequest request ,HttpServletResponse response ) throws IOException, ServletException {
+        userService.insertUser(username,password,phone,new Date()) ;
         response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp?rslt=3");
     }
 

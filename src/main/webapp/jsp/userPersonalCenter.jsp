@@ -126,18 +126,20 @@ strict.dtd">
                         <li class="nav-current" role="presentation">
                             <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
+
                         <li>
-                            <a href="index.html">美乎</a>
-                        </li>
-                        <li>
-                            <a href="#">美淘</a>
-                        </li>
-                        <li>
-                            <a href="#">活动</a>
+                            <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
 
                         <li>
-                            <a href="#">关于</a>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
+                        </li>
+                        <li>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
+                        </li>
+
+                        <li>
+                            <a href="<%=basePath%>fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -146,7 +148,7 @@ strict.dtd">
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav" style="position: relative;top: -55px;">
+            <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
                     <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
@@ -186,7 +188,7 @@ strict.dtd">
                         <div class="mod-body">
                             <div class="meta">
                                 <span><i class="icon icon-score"></i> 积分 : ${user.point}<em class="aw-text-color-orange"></em></span>
-                                <span><i class="icon icon-agree"></i> 赞同 : <em class="aw-text-color-orange">0</em></span>
+                                <span><i class="icon icon-agree"></i> 赞同 : <em class="aw-text-color-orange">${userlikenum}</em></span>
                             </div>
 
                         </div>

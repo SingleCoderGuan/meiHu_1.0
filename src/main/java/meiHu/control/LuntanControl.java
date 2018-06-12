@@ -46,7 +46,7 @@ public class LuntanControl {
         Map<String ,Object> cmap=new HashMap<>();
 
         //每页显示的条数
-        int pageSize=2;
+        int pageSize=10;
         //当前的页面默认是首页
         int curPage=1;
         String scurPage=request.getParameter("curPage");
@@ -72,6 +72,8 @@ public class LuntanControl {
     public void tiezidetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
         int pid1 = Integer.parseInt(pid);
+        luntanService.updatePostVisitNum(pid1);
+
         int collection = luntanService.selectCollectedCountByPid(pid1);
         request.setAttribute("collectionnum",collection);
         ForumPost forumPost = luntanService.selectPostByPid(pid1);
@@ -127,7 +129,7 @@ public class LuntanControl {
             Map<String ,Object> cmap=new HashMap<>();
 
             //每页显示的条数
-            int pageSize=2;
+            int pageSize=10;
             //当前的页面默认是首页
             int curPage=1;
             String scurPage=request.getParameter("curPage");
@@ -153,7 +155,7 @@ public class LuntanControl {
             Map<String ,Object> cmap=new HashMap<>();
 
             //每页显示的条数
-            int pageSize=2;
+            int pageSize=10;
             //当前的页面默认是首页
             int curPage=1;
             String scurPage=request.getParameter("curPage");
