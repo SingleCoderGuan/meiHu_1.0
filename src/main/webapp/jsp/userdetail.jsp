@@ -132,10 +132,7 @@
                             <a href="index.html">美乎</a>
                         </li>
                         <li>
-                            <a href="#">美购</a>
-                        </li>
-                        <li>
-                            <a href="#">美商城</a>
+                            <a href="#">美淘</a>
                         </li>
                         <li>
                             <a href="#">活动</a>
@@ -297,10 +294,10 @@
                         <div class="aw-mod-body">
 
                             <button type="button" class="btn btn-danger" style="width: 230px"
-                                    onclick="guanzhu(${sessionScope.uid},<%=request.getParameter("uid")%>)">关注他（她）
+                                    onclick="guanzhu()">关注他（她）
                             </button>
                             <script>
-                                function guanzhu(uid, postuid) {
+                                function guanzhu() {
                                     <c:if test="${empty sessionScope.uid}">
                                     alert("亲，请先登录");
                                     </c:if>
@@ -308,7 +305,7 @@
                                     $.ajax({
                                         type: "post",
                                         url: "${pageContext.request.contextPath}/luntan/focus.action",
-                                        data: "focusuid=" + uid + "&focusduid=" + postuid,
+                                        data: "focusuid=" + ${sessionScope.uid} + "&focusduid=" + <%=request.getParameter("uid")%>,
                                         success: function (result) {
                                             if (result == 1) {
                                                 alert("关注成功");

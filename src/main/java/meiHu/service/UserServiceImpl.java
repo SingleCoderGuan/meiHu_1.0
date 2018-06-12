@@ -52,6 +52,24 @@ public class UserServiceImpl implements UserService {
     public boolean resetPass(ForumUser user) {
         return forumUserMapper.resetPass(user);
     }
+@Override
+    public int selectPointByUid(int uid){
+        return forumUserMapper.selectPointByUid(uid);
+}
+    @Override
+    public List<ForumUser> selectUsersByTitleId(){
+        return forumUserMapper.selectUsersByTitleId();
+    }
 
+    //查询用户获赞数
+    @Override
+    public int selectLikeNumByUid(int uid){
+        return forumUserMapper.selectLikeNumByUid(uid);
+    }
 
+    //查询用户收藏数-->
+    @Override
+    public int selectCollectionNumByUid(int uid){
+        return forumUserMapper.selectCollectionNumByUid(uid);
+    }
 }

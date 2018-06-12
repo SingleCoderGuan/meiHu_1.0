@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class LuntanServiceImpl implements LuntanService{
     @Autowired
-private  ForumUserMapper forumUserMapper;
+    private  ForumUserMapper forumUserMapper;
     private final ForumTopicMapper forumTopicMapper;
     private final ForumPostMapper forumPostMapper;
     private final ForumCollectionMapper forumCollectionMapper;
@@ -216,16 +216,16 @@ private  ForumUserMapper forumUserMapper;
         return forumTopicMapper.selectCommentNumByTid(tid);
     }
 
-    @Override
-    public List<ForumUser> selectUsersByTitleId() {
-        return forumUserMapper.selectUsersByTitleId();
-    }
+//    @Override
+//    public List<ForumUser> selectUsersByTitleId() {
+//        return forumUserMapper.selectUsersByTitleId();
+//    }
 
-    @Override
+    /*@Override
     public ForumCollection selectIfCollection(int uid, int pid) {
         return forumCollectionMapper.selectIfCollection( uid, pid);
 
-    }
+    }*/
 
 
 }

@@ -29,8 +29,8 @@ public class ExchangeControl {
         }else {
             String uidd = request.getParameter("uid");
             int uid = Integer.parseInt(uidd);
-            int point = userService.selectUserPointByUid(uid);
-            request.setAttribute("point", point);
+           int point = userService.selectPointByUid(uid);
+           request.setAttribute("point", point);
             List<OffLevel> levelList = exchangeService.selectAllOffLevel();
             request.setAttribute("levelList", levelList);
             request.getRequestDispatcher("jsp/exchange.jsp").forward(request, response);

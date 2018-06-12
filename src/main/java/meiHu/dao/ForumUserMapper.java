@@ -84,4 +84,14 @@ public interface ForumUserMapper {
      * @return  是否成功重置密码
      */
     public boolean resetPass(ForumUser user);
+
+    //查询给用户的积分
+    public int selectPointByUid(int uid);
+
+    //显示titleid>3的用户
+    public List<ForumUser> selectUsersByTitleId();
+    //查询用户获赞数
+    public int selectLikeNumByUid(int uid);
+    //查询用户收藏数
+    public int selectCollectionNumByUid(int uid);
 }

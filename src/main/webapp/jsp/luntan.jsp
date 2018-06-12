@@ -426,7 +426,7 @@
                                 <div class="aw-mod-head">
                                     <h3>热门</h3>
                                 </div>
-                                <div class="aw-mod-body" style="background-color: ff534d" >
+                                <div class="aw-mod-body" style="background-color: pink" >
 
 
                                     <div id="div1">

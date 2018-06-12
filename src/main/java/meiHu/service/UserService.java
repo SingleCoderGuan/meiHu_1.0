@@ -64,4 +64,15 @@ public interface UserService {
      */
     public boolean resetPass(ForumUser user);
 
+    public int selectPointByUid(int uid);
+
+public List<ForumUser> selectUsersByTitleId();
+
+    //查询用户获赞数
+    public int selectLikeNumByUid(int uid);
+
+    //查询用户收藏数-->
+    public int selectCollectionNumByUid(int uid);
+
+
 }

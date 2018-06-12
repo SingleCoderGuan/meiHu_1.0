@@ -62,9 +62,9 @@ public interface LuntanService {
     //查询某板块的评论数量
     public int selectCommentNumByTid(int tid);
 
-    public List<ForumUser> selectUsersByTitleId();
+//    public List<ForumUser> selectUsersByTitleId();
 
-    public ForumCollection selectIfCollection(int uid,int pid);
+//    public ForumCollection selectIfCollection(int uid,int pid);
 
 
 
