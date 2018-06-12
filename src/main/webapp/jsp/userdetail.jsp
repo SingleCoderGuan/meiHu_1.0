@@ -151,9 +151,8 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-							<a href="#"><img src="<%=basePath%>images/touxiang1.png" style="width:50px;height: 50px"/>欢迎您：美乎小编</a>
-                    <!--<a href="#">注册</a>
-                    <a href="#">登录</a>-->
+							<a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
 						</span>
 
                 <!-- end 登陆&注册栏 -->
@@ -298,14 +297,14 @@
                             </button>
                             <script>
                                 function guanzhu() {
-                                    <c:if test="${empty sessionScope.user.uid}">
+                                    <c:if test="${empty sessionScope.user}">
                                     alert("亲，请先登录");
                                     </c:if>
-                                    <c:if test="${not empty sessionScope.user.uid}">
+                                    <c:if test="${not empty sessionScope.user}">
                                     $.ajax({
                                         type: "post",
                                         url: "${pageContext.request.contextPath}/luntan/focus.action",
-                                        data: "focusuid=" + ${sessionScope.user.uid} + "&focusduid=" + <%=request.getParameter("uid")%>,
+                                        data: "focusuid=" + ${user.uid} + "&focusduid=" + <%=request.getParameter("uid")%>,
                                         success: function (result) {
                                             if (result == 1) {
                                                 alert("关注成功");

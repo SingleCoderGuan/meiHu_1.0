@@ -220,7 +220,7 @@ strict.dtd">
                                             <c:forEach items="${postList}" var="post">
                                                 <div style="position:relative ;left: 20px;margin-top: 15px">
                                                     <a href="<%=basePath%>luntan/tiezidetail.action?pid=${post.pid}"><span>${post.ptitle}</span></a>
-                                                    <div style="position: absolute;left: 369px;top: -1px;width: 70px;height:20px ;text-align:center;"><a href="#" style="margin:0 auto;"><span>${post.topic.tname}</span></a></div>
+                                                    <div style="position: absolute;left: 369px;top: -1px;width: 70px;height:20px ;text-align:center;"><a href="<%=basePath%>luntan/luntanshouye.action?tid=${post.topic.tid}" style="margin:0 auto;"><span>${post.topic.tname}</span></a></div>
                                                     <div style="position: absolute;left: 478px;top: -1px;width: 145px;text-align:center ;"><a href="<%=basePath%>modifyPost.action?pid=${post.pid}"><span>编辑</span></a>|<a onclick="show_confirm(${post.pid})"><span>删除</span></a></div>
                                                 </div>
                                             </c:forEach>
@@ -258,9 +258,9 @@ strict.dtd">
                                                     <div style="background-color: #FFCCCC;height: 30px"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">作者</span></div>
                                                     <c:forEach items="${collectionList}" var="collection">
                                                         <div style="position:relative ;left: 20px;margin-top: 15px">
-                                                            <a href="#"><span>${collection.ptitle}</span></a>
-                                                            <div style="position: absolute;left: 369px;top: -1px;width: 70px;height:20px ;text-align:center;"><a href="#" style="margin:0 auto;"><span>${collection.topic.tname}</span></a></div>
-                                                            <div style="position: absolute;left: 478px;top: -1px;width: 145px;text-align:center ;"><a href="#"><span>${collection.user.uname}</span></a></div>
+                                                            <a href="<%=basePath%>luntan/tiezidetail.action?pid=${collection.pid}"><span>${collection.ptitle}</span></a>
+                                                            <div style="position: absolute;left: 369px;top: -1px;width: 70px;height:20px ;text-align:center;"><a href="<%=basePath%>luntan/luntanshouye.action?tid=${collection.topic.tid}" style="margin:0 auto;"><span>${collection.topic.tname}</span></a></div>
+                                                            <div style="position: absolute;left: 478px;top: -1px;width: 145px;text-align:center ;"><a href="<%=basePath%>luntan/userdetail.action?uid=${collection.user.uid}"><span>${collection.user.uname}</span></a></div>
                                                         </div>
                                                     </c:forEach>
                                                 </div>
@@ -306,7 +306,7 @@ strict.dtd">
                                 <li>关注我的：
                                      <ul>
                                          <c:forEach items="${followers}" var="user">
-                                             <a href=""><img style="width: 60px;height: 60px" src="<%=basePath%>${user.headpic}" alt=""></a>
+                                             <a href="<%=basePath%>luntan/userdetail.action?uid=${user.uid}"><img style="width: 60px;height: 60px" src="<%=basePath%>${user.headpic}" alt=""></a>
                                          </c:forEach>
                                      </ul>
                                 </li>
@@ -319,7 +319,7 @@ strict.dtd">
                                 <li>我关注的：
                                     <ul>
                                         <c:forEach items="${focusUsers}" var="user">
-                                            <a href="#"><img style="width: 60px;height: 60px" src="<%=basePath%>${user.headpic}" alt=""></a>
+                                            <a href="<%=basePath%>luntan/userdetail.action?uid=${user.uid}"><img style="width: 60px;height: 60px" src="<%=basePath%>${user.headpic}" alt=""></a>
                                         </c:forEach>
                                     </ul>
                                 </li>
