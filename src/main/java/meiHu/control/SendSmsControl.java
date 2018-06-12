@@ -20,20 +20,6 @@ public class SendSmsControl {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "sendtext.action",method = RequestMethod.GET)
-	public void sendText(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String phone = request.getParameter("phone");
-		if(userService.findUserByTel(phone)!=null){
-			//根据获取到的手机号发送验证码
-			String code = GetMessageCode.getCode(phone);
-			response.getWriter().print(code);
-		}else{
-			response.getWriter().print("0");
-		}
-
-	}
-
 	@RequestMapping(value = "resetSend.action",method = RequestMethod.GET)
 	public void resetSend(String phone,HttpServletRequest request, HttpServletResponse response)
 			throws IOException {

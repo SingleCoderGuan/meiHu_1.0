@@ -72,24 +72,24 @@ public class UserController {
     }
 
     @RequestMapping(value = "/loginWithTel.action",method = RequestMethod.GET)
-    public void findUser(String tel,String vcode,HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
-        PrintWriter out = response.getWriter() ;
-        //验证短信验证码
-//        boolean f = true ;
-       /* //验证码正确
-        if (f){
-            ForumUser user = userService.findUserByTel(tel) ;
-            if (user!=null){
-                request.setAttribute("user",user);
-                request.getRequestDispatcher("#").forward(request,response);
-            }else{
-                //该用户是新用户，ajax刷新完善信息
-                out.print("1");
-            }
+    public void findUser(String tel,HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+
+        ForumUser user = userService.findUserByTel(tel) ;
+        if(user!=null){
+            request.getSession().setAttribute("user",user);
+            response.getWriter().print("1");
         }else {
-            out.print("0");
-        }*/
-        out.print("1");
+            response.getWriter().print("0");
+        }
+    }
+
+    @RequestMapping(value = "/perferUser.action",method = RequestMethod.POST)
+    public void perfectUser(ForumUser user ,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        user.setRegistertime(new Date());
+        userService.insertUser(user.getUname(),user.getPassword(),user.getTel(),new Date()) ;
+        ForumUser forumUser = userService.findUserByTel(user.getTel()) ;
+        request.getSession().setAttribute("user",forumUser);
+        request.getRequestDispatcher("/luntan/luntanshouye.action?tid=1").forward(request,response);
     }
 
     @RequestMapping(value = "/namecheck.action",method = RequestMethod.GET)
@@ -116,7 +116,8 @@ public class UserController {
     public void gotoUserCenter(HttpServletRequest request,HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession() ;
         ForumUser user = (ForumUser) session.getAttribute("user");
-        int  uid = user.getUid() ;
+        System.out.println(user);
+        int uid = user.getUid() ;
         List<ForumPost> collectionList = postService.selectCollectionByUserUid(uid) ;
         List<ForumPost> postList = postService.selectPostsByUid(uid) ;
         List<ForumUser> focusUsers = userService.findFocusUsersByUid(uid) ;
@@ -136,7 +137,6 @@ public class UserController {
 
     @RequestMapping(value = "/preresetpass.action",method = RequestMethod.POST)
     public void preresetpass(String tel,HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println(tel+" ---------------------");
         request.setAttribute("tel",tel);
         request.getRequestDispatcher("/jsp/resetpass.jsp").forward(request,response);
     }
