@@ -5,7 +5,7 @@ import meiHu.entity.UserOff;
 import java.util.List;
 
 public interface UserOffMapper {
-//判断改种优惠券是否拥有
+    //判断改种优惠券是否拥有
     public int selectOffIntoUser(int uid, int offid);
     //用户兑换积分券
     public int addOffIntoUser(int uid, int offid);
