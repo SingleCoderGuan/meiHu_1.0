@@ -7,12 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface ForumUserMapper {
-
-    //显示用户所有获赞数
-    public int selectLikeNumBuUid(int uid);
-
-    //显示某用户的全部积分
-    public  int selectUserPointByUid(int uid);
     /**
      * 根据uid从forum_user表中查询该uid对应的用户
      * @param uid 执行select的uid
@@ -84,6 +78,10 @@ public interface ForumUserMapper {
      */
     public List<ForumUser> selectFollowerByUid(int uid) ;
 
-    //显示titleid>3的用户
-    public List<ForumUser> selectUsersByTitleId();
+    /**
+     * 根据uid对该用户密码进行重置
+     * @param user 需要重置密码的用户
+     * @return  是否成功重置密码
+     */
+    public boolean resetPass(ForumUser user);
 }

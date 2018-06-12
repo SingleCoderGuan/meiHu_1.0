@@ -12,14 +12,12 @@
     String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang = "zh-CN">
 
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>修改帖子</title>
-    <meta name="keywords" content="美论" />
-    <meta name="description" content="美论" />
     <script type="text/javascript" src="<%= basePath%>/release/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="<%= basePath%>/release/wangEditor.min.js"></script>
 
@@ -137,7 +135,7 @@
                     <ul class="nav navbar-nav">
 
                         <li class="nav-current" role="presentation">
-                            <a href="luntanshouyetest.html">美论首页</a>
+                            <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
                         <li>
                             <a href="index.html">美乎</a>
@@ -165,7 +163,7 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="#" ><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname} </a>
+                    <a href="#" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname} </a>
                     <a href="<%=basePath%>signOut.action" style="position: absolute;left: 200px">注销</a>
                 </span>
 
@@ -193,14 +191,12 @@
                     <!-- end tab 切换 -->
                     <form id="newspost" method="post" action="<%=application.getContextPath()%>/updatePost.action" enctype="multipart/form-data">
 
-                        标题：
-                        <input type="text" id="title" name="ptitle" value="${post.ptitle}"/><br/><br/>
+                        <span style="position: relative;left:5px;top: 5px;font-size: 20px">标题：</span>
+                        <input type="text" style="width: 590px;position: relative;top: 10px; " class="form-control" id="title" name="ptitle" value="${post.ptitle}"/><br/><br/>
                         <input type="text" name="pid" value="${post.pid}" hidden>
 
-                        板块：
-                        ${post.topic.tname}
-
-                        <input type="hidden" id="content" name="pcontent" value="${post.pcontent}"/>
+                        <span style="position: relative;left:5px;top: -11px;font-size: 20px">板块：</span>
+                        <input type="hidden" id="content" name="pcontent"/>
 
                         <div id="div1" class="toolbar">
                         </div>
@@ -634,7 +630,7 @@
     }
 
     editor.create();
-
+    editor.txt.html('${post.pcontent}')
 </script>
 </body>
 

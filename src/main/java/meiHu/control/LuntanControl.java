@@ -1,10 +1,11 @@
 package meiHu.control;
 
 
+import com.github.pagehelper.PageInfo;
 import meiHu.entity.*;
-import meiHu.service.ArticleService;
 import meiHu.service.FocusService;
 import meiHu.service.LuntanService;
+import meiHu.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.SocketUtils;
@@ -18,35 +19,45 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/luntan")
 public class LuntanControl {
     @Autowired
-    private ArticleService articleService;
-    @Autowired
     private LuntanService luntanService;
     @Autowired
     private FocusService focusService;
-
+    @Autowired
+    private PostService postService ;
     @RequestMapping(value = "/luntanshouye.action")
     public void luntanshouye(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String tid = request.getParameter("tid");
+        System.out.println("+++++++++"+tid+"---------");
         int tid1 = Integer.parseInt(tid);
-        List<ForumTopic> topicList=luntanService.getAllTopics();
-        List<ForumTopic> topicList1 = new ArrayList<>();
-        for(int i=0;i<topicList.size()-1;i++){
-            topicList1.add(topicList.get(i));
+        Map<String ,Object> cmap=new HashMap<>();
+
+        //每页显示的条数
+        int pageSize=2;
+        //当前的页面默认是首页
+        int curPage=1;
+        String scurPage=request.getParameter("curPage");
+        if (scurPage!=null&&!scurPage.trim().equals("")){
+
+            curPage=Integer.parseInt(scurPage);
         }
-        List<ForumPost> postList=luntanService.selectPostsByTid(tid1);
-        request.setAttribute("topicList1",topicList1);
-        request.setAttribute("postList",postList);
-        request.setAttribute("userlist",luntanService.selectUsersByTitleId());
+        cmap.put("curPage",curPage);
+        cmap.put("pageSize",pageSize);
+        cmap.put("tid",tid1) ;
+        PageInfo<ForumPost> pageInfo= postService.selectPosts(cmap);
+        request.setAttribute("pageInfo",pageInfo);
         String tname = luntanService.selectTnameBuTid(tid1);
         request.setAttribute("tname",tname);
-        request.getSession().setAttribute("uid",103);
+        request.getSession().setAttribute("uid",102);
         request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
 
 
@@ -89,7 +100,6 @@ public class LuntanControl {
             List<ForumComment> value=map.get(key);
             System.out.println(key+"___"+value);
         }*/
-       luntanService.updatePostVisitNum(pid1);
         request.setAttribute("map",map);
         request.setAttribute("mapnum",mapnum);
         request.getRequestDispatcher("/jsp/tiezidetail.jsp").forward(request,response);
@@ -130,18 +140,14 @@ public class LuntanControl {
 
        int uidd = Integer.parseInt(uid);
        int pidd = Integer.parseInt(pid);
+       luntanService.updatePostVisitNum(pidd);
+       //System.out.println(luntanService.addCollectionByUidAndPid(uidd,pidd));
        PrintWriter out = response.getWriter();
-
-       if(luntanService.selectIfCollection(uidd,pidd)==null){
-           out.print(2);
-
+       if(luntanService.addCollectionByUidAndPid(uidd,pidd)){
+           out.print(1);
        }else {
-           if (luntanService.addCollectionByUidAndPid(uidd, pidd)) {
-               out.print(1);
-           } else {
-               out.print(0);
+           out.print(0);
 
-           }
        }
    }
     @RequestMapping("/quxiaoshoucang.action")
@@ -150,6 +156,7 @@ public class LuntanControl {
         String pid =request.getParameter("pid");
         int uidd = Integer.parseInt(uid);
         int pidd = Integer.parseInt(pid);
+        luntanService.updatePostVisitNumSub(pidd);
         PrintWriter out = response.getWriter();
         if(luntanService.deleteCollectionByUidAndPid(uidd,pidd)){
             out.print(1);
@@ -220,7 +227,6 @@ public class LuntanControl {
         ForumComment forumComment = new ForumComment(uidd,pidd,postcomment);
         PrintWriter out = response.getWriter();
         if(luntanService.addForumComment(forumComment)){
-            articleService.fapinglunjialiangfen(uidd);
             out.print(1);
         }else{
             out.print(0);
@@ -258,7 +264,6 @@ public class LuntanControl {
         PrintWriter out = response.getWriter();
 
        if(luntanService.addCommentForComment(forumComment)){
-           articleService.fapinglunjialiangfen(uidd);
             out.print(1);
         }else{
             out.print(0);

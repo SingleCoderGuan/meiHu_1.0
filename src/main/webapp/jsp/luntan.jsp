@@ -16,7 +16,7 @@
 <html>
 <head>
     <title>美论首页</title>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
 
@@ -98,7 +98,7 @@
 	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
-<div class="aw-top-menu-wrap"
+<div class="aw-top-menu-wrap" style="height: 55px"
 >
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
@@ -160,12 +160,12 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav">
+            <div class="aw-user-nav" style="width: 250px">
                 <!-- 登陆&注册栏 -->
                 <span>
                     <c:if test="${!empty user}">
-                        <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
-                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                        <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 60px;top: -55px;">注销</a>
                     </c:if>
                     <c:if test="${empty user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
@@ -289,24 +289,24 @@
                                         top: 0px;
                                     }
                                 </style>
-                                <c:forEach var="postList" items="${postList}"  varStatus="status">
+                                <c:forEach var="postList" items="${pageInfo.list}"  varStatus="status">
+
                                 <div class="aw-item ">
                                     <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
                                        <%-- <img src="<%=basePath%>images/touxiang1.png" alt="" />--%>
-                                        <span style="font-size: 40px "><strong>${status.index+1}</strong></span>
+                                        <%--<span style="font-size: 40px "><strong>${status.index+1}</strong></span>--%>
+                                           <img style="width: 50px" src="<%=basePath%>${postList.user.headpic}"/>
                                     </a>
 
                                     <div class="aw-question-content">
                                         <h4>
                                             <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
                                         </h4>
-
-
-
                                         <p>
 							<span class="aw-question-tags">
 					<i class="fa fa-caret-left"></i>
 					<a href="#">${postList.topic.tname}</a><%--标签--%>
+                                <input name="curTid" id="curTid" value="${postList.topic.tid}" hidden />
 				</span> •
                                             <a href="#" class="aw-user-name" >${postList.user.uname}</a>
                                             <span class="aw-text-color-999" >${postList.likecount}次点赞  •
@@ -316,37 +316,45 @@
 
                                     </div>
                                 </div>
+
                                 </c:forEach>
-
-
-
                                 <!--底部Google 信息流广告-->
-
                             </div>
                         </div>
                     </div>
 
+                    <form id="mainForm" action="<%=basePath%>luntan/luntanshouye.action" method="post" >
+                        <input hidden name="curPage" id="curPage" />
+                        <input hidden name="tid" id="tid" />
+                    </form>
                     <div class="page-control clearfix">
                         <ul class="pagination pull-right">
-                            <li>
-                                <a href="#">&lt;&lt;</a>
-                            </li>
-                            <li>
-                                <a href="#">&lt;</a>
-                            </li>
-                            <li><a>当前第1页，共10页</a></li>
-                            <li>
-                                <a href="#">&gt;</a>
-                            </li>
-                            <li>
-                                <a href="#">&gt;&gt;</a>
+
+                            <li>共 <b>${pageInfo.total}</b> 条
+
+                                <a href="javascript:getPage(${pageInfo.firstPage})" >首页</a>
+                                <c:if test="${!pageInfo.isFirstPage}">
+                                    <a href="javascript:getPage(${pageInfo.prePage})" >上一页</a>
+                                </c:if>
+
+                                当前第<span>${pageInfo.pageNum}</span>页
+                                <c:if test="${!pageInfo.isLastPage}">
+                                    <a href="javascript:getPage(${pageInfo.nextPage})" >下一页</a>
+                                </c:if>
+                                <a href="javascript:getPage(${pageInfo.lastPage})" >末页</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-
-
-
+                <script>
+                    function getPage(curPage) {
+                        document.getElementById("tid").value=document.getElementById("curTid").value ;
+                        //将隐藏域的值变成curPage
+                        document.getElementById("curPage").value=curPage;
+                        //触发表单的提交事件
+                        document.getElementById("mainForm").submit();
+                    }
+                </script>
 
                 <!-- 侧边栏 -->
                 <div class="col-sm-12 col-md-3 aw-side-bar aw-index-side-bar hidden-xs hidden-sm">

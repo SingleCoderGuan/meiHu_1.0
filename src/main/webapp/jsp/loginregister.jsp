@@ -14,10 +14,8 @@
 %>
 
 <!DOCTYPE html>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta  http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>美乎登录&注册</title>
-
     <link rel="stylesheet" href="<%=basePath%>css/stylelogin.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>css/style_inner.css" type="text/css">
     <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,14 +39,20 @@
         }
         var id = getUrlParms("rslt");
         if(id=="1"){
-            alert("密码错误")
+            alert("用户名或密码错误")
         }
         if(id=="2"){
-            alert("用户名错误")
+            alert("用户名或密码错误")
+        }
+        if(id=="3"){
+            alert("注册成功")
+        }
+        if(id=="4"){
+            alert("密码重置成功")
         }
     </script>
 </head>
-<body>
+<body style="width: 100%;">
 
 <div class="cotn_principal">
     <div class="cont_centrar">
@@ -257,6 +261,7 @@ text-align: left;
             tiptype:3,
             label:".label",
             showAllError:false,
+            ajaxPost:false,
         });
 
         demo.addRule([

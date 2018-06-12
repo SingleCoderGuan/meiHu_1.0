@@ -6,4 +6,9 @@
         INSERT  INTO forum_postreport (post_pid,user_uid,reportreason)
          VALUES (#{pid},#{uid},#{reportreason});
     </insert>
+
+    <!--public boolean deletePostReportByPid(int pid);-->
+    <delete id="deletePostReportByPid" parameterType="int">
+        DELETE FROM forum_postreport WHERE post_pid=#{_parameter}
+    </delete>
 </mapper>

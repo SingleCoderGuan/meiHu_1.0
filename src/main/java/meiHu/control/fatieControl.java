@@ -41,6 +41,7 @@ public class fatieControl {
     public void newPost(int topicid, ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ForumTopic topic = topicService.selectTopicByTid(topicid);
         ForumPost forumPost = post;
+        forumPost.setPcontent(forumPost.getPcontent().replace("\r|\n",""));
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         forumPost.setTopic(topic);
@@ -58,7 +59,7 @@ public class fatieControl {
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         if(postService.updatePost(forumPost) ){
-            response.sendRedirect(request.getContextPath() + "/luntan/luntanshouye.action?tid=1");
+            response.getWriter().print("1");
         }
     }
 
@@ -82,9 +83,6 @@ public class fatieControl {
         uploadImage.transferTo(uploadPic);
         System.out.println(request.getServletContext().getContextPath()+"image/upload"+"/"+newFileName);
         Map<String,String> map=new HashMap();
-//        map.put("url",request.getContextPath()+"/image/upload"+"/"+newFileName);
-//        JSONObject jsonObject = JSONObject.fromObject(map);
-//        return jsonObject.toString();
         map.put("url",request.getContextPath()+"/image/upload"+"/"+newFileName);
         return map;
 

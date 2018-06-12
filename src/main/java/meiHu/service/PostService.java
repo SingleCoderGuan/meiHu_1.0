@@ -1,10 +1,18 @@
 package meiHu.service;
 
+import com.github.pagehelper.PageInfo;
 import meiHu.entity.ForumPost;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PostService {
+    /**
+     * 按分页显示所有帖子
+     * @param map
+     * @return
+     */
+    public PageInfo<ForumPost> selectPosts(Map<String ,Object> map) ;
     /**
      * 通过用户uid查询该用户收藏的所有帖子
      * @param uid 需要查询的uid
@@ -31,6 +39,15 @@ public interface PostService {
     public ForumPost selectPostByPid(int pid) ;
 
     public boolean updatePost(ForumPost post) ;
-//某用户收藏帖子数量
-    public int selectCollectionNumByUid(int uid);
+
+    /**
+     * 根据pid删除帖子
+     * 删除收藏表中该pid对应数据
+     * 删除点赞表中该pid对应数据
+     * 删除评论表中该pid对应数据
+     * 删除举报表中该pid对应数据
+     * @param pid 需要删除的帖子pid
+     * @return  是否删除成功
+     */
+    public boolean deletePost(int pid) ;
 }

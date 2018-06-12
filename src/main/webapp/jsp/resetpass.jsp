@@ -14,8 +14,7 @@
 <html >
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta  http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>美乎重置密码</title>
     <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,16 +31,18 @@
         <img id="logo" src="<%=basePath%>images/LOGO.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
         <div style="width: 480px;height: 520px;">
-        <form class="resetform" >
+        <form class="resetform" action="<%=basePath%>resetpass.action" method="post">
             <li style="position: relative;top: 110px;left:-65px;list-style-type:none; ">
+
                 <label class="label" style="position: relative;top: 15px;left: 8px;color:#996666;font-size: 18px" >新  密  码：</label>
-                <input  type="password"  value=""style="position: relative; left: 8px;" placeholder="请输入新密码" name="userpassword" class="inputxt" />
+                <input  type="password"  value=""style="position: relative; left: 8px;" placeholder="请输入新密码" name="password" class="inputxt" />
             </li>
             <li style="position: relative;top: 150px;left:-65px;list-style-type:none; ">
                 <label class="label" style="position: relative;top: 15px;left: -5px;color:#996666;font-size: 18px">确认新密码：</label>
                 <input  type="password" value="" style="position: relative; left: -5px;" placeholder="请确认新密码" name="verificationpsw" class="inputxt"/>
             </li>
             <div class="action" style="position: relative;top: 160px;left:-30px ">
+                <input type="hidden" name="tel" value="${tel}" />
                 <input type="submit"  class="btn_my_login" value="提 交" />
             </div>
         </form>
@@ -71,7 +72,7 @@
             {
                 ele:".inputxt:eq(1)",
                 datatype:"*6-20",
-                recheck:"userpassword"
+                recheck:"password"
             }
         ]);
     })

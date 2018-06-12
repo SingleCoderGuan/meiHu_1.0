@@ -23,7 +23,7 @@
     <!--public List<ForumPost> selectPostsByTid(int tid)-->
 
     <select id="selectPostsByTid" parameterType="int" resultMap="getForumPost">
-        SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
+        SELECT p.*,u.*,t.tname FROM forum_post p,forum_user u,forum_topic t
         WHERE  topic_tid=#{parameter} AND p.user_uid = u.uid AND t.tid = p.topic_tid
     </select>
 
@@ -35,7 +35,7 @@
 
     <!--public List<ForumPost> selectAllPostsOrderByVisits() ;-->
     <select id="selectAllPostsOrderByVisits" parameterType="int" resultMap="getForumPost">
-        SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
+        SELECT p.*,u.uname,u.headpic,t.tid,t.tname FROM forum_post p,forum_user u,forum_topic t
         WHERE  topic_tid=#{parameter} AND p.user_uid = u.uid AND t.tid = p.topic_tid
         ORDER BY visitcount DESC
     </select>
@@ -44,7 +44,7 @@
 
     <!--public List<ForumPost> selectAllPostsOrderByCreatetime() ;-->
     <select id="selectAllPostsOrderByCreatetime" parameterType="int" resultMap="getForumPost">
-        SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
+        SELECT p.*,u.uname,u.headpic,t.tid,t.tname FROM forum_post p,forum_user u,forum_topic t
         WHERE  topic_tid=#{parameter} AND p.user_uid = u.uid AND t.tid = p.topic_tid
         ORDER  by createtime DESC
     </select>
@@ -124,7 +124,7 @@
 
     <!--public boolean update(ForumPost post) ;-->
     <update id="update" parameterType="ForumPost">
-        UPDATE forum_post SET createtime=#{createtime},ptitile=#{ptitle} ,pcontent=#{pcontent} WHERE pid=#{pid}
+        UPDATE forum_post SET createtime=#{createtime},ptitle=#{ptitle} ,pcontent=#{pcontent} WHERE pid=#{pid}
     </update>
 
 </mapper>
