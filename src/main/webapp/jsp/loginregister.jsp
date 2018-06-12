@@ -133,8 +133,9 @@
                             <label class="label" style="position: relative;font-size: 14px;top: 10px;color:#996666;">用户名：</label>
                             <input style="position: relative;padding: 15px 5px;
 margin-left: 10px;
-margin-top: 20px;
+margin-top: 10px;
   width: 180px;
+  height: 30px;
 border: none;
 text-align: left;
   color: #757575;background-color: #fff" type="text" id="reguname"  name="username" class="inputxt"/>
@@ -144,8 +145,9 @@ text-align: left;
                             <label class="label" style="position: relative;left: 7px;top: 10px;font-size: 14px;color:#996666;">密  码：</label>
                             <input style="position: relative;padding: 15px 5px;
 margin-left: 10px;
-margin-top: 20px;
+margin-top: 10px;
   width: 180px;
+  height: 30px;
 border: none;
 text-align: left;
   color: #757575;background-color: #fff" type="password"  value="" name="userpassword" class="inputxt" />
@@ -154,8 +156,9 @@ text-align: left;
                             <label class="label" style="position: relative;left: -6px;top: 10px;font-size: 14px;color:#996666;width: 80px;">确认密码：</label>
                             <input style="position: relative;left: -5px;padding: 15px 5px;
 margin-left: 10px;
-margin-top: 20px;
+margin-top: 10px;
   width: 180px;
+  height: 30px;
 border: none;
 text-align: left;
   color: #757575;background-color: #fff" type="password" value="" name="verificationpsw" class="inputxt"/>
@@ -164,8 +167,9 @@ text-align: left;
                             <label class="label" style="position: relative;left: -6px;top: 10px;color:#996666;font-size: 14px;width: 80px;">手机号码：</label>
                             <input style="position: relative;left: -5px;padding: 15px 5px;
 margin-left: 10px;
-margin-top: 20px;
+margin-top: 10px;
   width: 180px;
+  height: 30px;
 border: none;
 text-align: left;
   color: #757575;background-color: #fff" id="regtel" type="text" value="" name="phone" class="inputxt"/>
@@ -179,8 +183,9 @@ text-align: left;
                             <label class="label" style="font-size: 14px;position: relative;top: 10px;color:#996666;">验证码：</label>
                             <input style="position: relative;padding: 15px 5px;
                                 margin-left: 10px;
-                                margin-top: 20px;
-                                  width: 180px;
+                              margin-top: 10px;
+  width: 180px;
+  height: 30px;
                                 border: none;
                                 text-align: left;
                                   color: #757575;background-color: #fff" id="code" type="text" value="" name="text" class="inputxt"/>
@@ -373,7 +378,6 @@ text-align: left;
             data:{"tel":tel},
             success:function(result){
                 sms=result;
-                alert(sms)
             }
         });
     });
@@ -463,7 +467,6 @@ text-align: left;
             data:{"tel":tel},
             success:function(result){
                 sms=result;
-                alert(sms)
             }
         });
     });

@@ -51,7 +51,7 @@
             <div class="col-sm-12">
 
                 <!-- start logo -->
-                <a class="branding" href="http://localhost:8080/meiHu/" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
+                <a class="branding" href="<%=basePath%>jsp/zhuye.jsp"" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
                 <!-- end logo -->
                 <h2 style="color: black; font-family: '本墨锵黑';">姐妹们，争做时尚最前沿</h2>
 
@@ -75,7 +75,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
-                        <li class="nav-current" role="presentation"><a href="#">美文首页</a></li>
+                        <li class="nav-current" role="presentation"><a href="<%=basePath%>article/article.action">美文首页</a></li>
                         <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美乎</a></li>
 
                         <li  role="presentation"><a href="">美淘</a></li>
@@ -326,32 +326,12 @@
 
 <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdn.bootcss.com/fitvids/1.1.0/jquery.fitvids.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/8.5/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
-<script src="js/main.js"></script>
-<script>
-    $(function(){
-        $('.post-content img').each(function(item){
-            var src = $(this).attr('src');
-
-            $(this).wrap('<a href="' + src + '" class="mfp-zoom" style="display:block;"></a>');
-        });
-
-        /*$('.post-content').magnificPopup({
-          delegate: 'a',
-          type: 'image'
-        });*/
-    });
-</script>
 
 <script>
     window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 </script>
 
-<
+
 
 </body>
 </html>

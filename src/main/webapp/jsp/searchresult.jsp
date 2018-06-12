@@ -116,7 +116,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-                <a href="http://localhost:8080/meiHu/"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+                <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -195,14 +195,14 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>jsp/article.jsp">美文</a>
+                            <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
 
                         <li>
                             <a href="#">美淘</a>
                         </li>
                         <li>
-                            <a href="#">精彩活动</a>
+                            <a href="<%=basePath%>jsp.activity.jsp">精彩活动</a>
                         </li>
 
                         <li>
@@ -361,12 +361,6 @@
                     <!-- tab切换 -->
                     <ul class="nav nav-tabs aw-reset-nav-tabs hidden-xs">
 
-                        <li>
-                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=tuijian&tid=<%=request.getParameter("tid")%>" >推荐</a>
-                        </li>
-                        <li>
-                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=zuixin&tid=<%=request.getParameter("tid")%>" >最新</a>
-                        </li>
 
                         <h2 class="hidden-xs"> ……姑娘清留步,这是您需要的</h2>
                     </ul>
@@ -437,24 +431,6 @@
 
                             </div>
                         </div>
-                    </div>
-
-                    <div class="page-control clearfix">
-                        <ul class="pagination pull-right">
-                            <li>
-                                <a href="#">&lt;&lt;</a>
-                            </li>
-                            <li>
-                                <a href="#">&lt;</a>
-                            </li>
-                            <li><a>当前第1页，共10页</a></li>
-                            <li>
-                                <a href="#">&gt;</a>
-                            </li>
-                            <li>
-                                <a href="#">&gt;&gt;</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
 
@@ -589,42 +565,6 @@
                             <script src="http://dup.baidustatic.com/js/os.js"></script>
                         </div>
                     </div>
-                    <div class="aw-side-bar-mod aw-text-align-justify aw-no-border-bottom">
-                        <div class="aw-mod-head">
-                            <h3>明星用户</h3>
-                        </div>
-                        <div class="aw-mod-body">
-
-                            <dl>
-                                <dt class="pull-left aw-border-radius-5">
-                                    <a href=""><img alt="" src="<%=basePath%>images/touxiang1.png"/></a>
-                                </dt>
-                                <dd class="pull-left">
-                                    <a href="" data-id="15" class="aw-user-name">小姐姐<i class="aw-icon i-v i-ve"></i>
-                                    </a>
-                                    <p>回复了 <b>754</b> 个问题, 获得 <b>763</b> 次赞同</p>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt class="pull-left aw-border-radius-5">
-                                    <a href=""><img alt="" src="<%=basePath%>images/touxiang2.png"/></a>
-                                </dt>
-                                <dd class="pull-left">
-                                    <a href="" data-id="15" class="aw-user-name">小姐姐<i class="aw-icon i-v i-ve"></i>
-                                    </a>
-                                    <p>回复了 <b>754</b> 个问题, 获得 <b>763</b> 次赞同</p>
-                                </dd>
-                            </dl>
-
-
-                            <dl>
-                                <dt class="pull-left aw-border-radius-5">
-
-                                </dt>
-
-                            </dl>
-                        </div>
-                    </div>
 
                 </div>
                 <!-- end 侧边栏 -->
@@ -656,49 +596,10 @@
 <!-- DO NOT REMOVE -->
 <div id="aw-ajax-box" class="aw-ajax-box"></div>
 
-<div style="display:none;" id="__crond">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#__crond').html(unescape('%3Cimg%20src%3D%22' + G_BASE_URL + '/crond/run/1527305624%22%20width%3D%221%22%20height%3D%221%22%20/%3E'));
-        });
-
-    </script>
-</div>
 
 <!-- Escape time: 0.19415783882141 -->
 <script type="text/javascript" id="bdshare_js" data="type=tools"></script>
 <!-- / DO NOT REMOVE -->
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?1aa4e79e9d9a938cfe5605a1d0269239";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
 
-<script>
-    (function ($) {
-        $('.ad-item').on('click', '.close', function () {
-            var self = this;
-            var level = $(self).data('level');
-            if (level && (level > 0)) {
-                $.ajax({
-                    url: '//' + location.host + '/account/ajax/set_ad_sign/' + '?ad_type=' + $(self).data('type'),
-                    success: function (data) {
-                        var result = JSON.parse(data);
-                        if (result.code === 200) {
-                            $(self).parent().parent().css('display', 'none');
-                        }
-                    }
-                });
-            } else {
-                $(self).css('display', 'none');
-                $(self).next().css('display', 'inline-block');
-            }
-        });
-    }(window.jQuery));
-</script>
 </body>
 </html>
