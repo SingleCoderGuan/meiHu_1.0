@@ -41,7 +41,7 @@ public class fatieControl {
     public void newPost(int topicid, ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ForumTopic topic = topicService.selectTopicByTid(topicid);
         ForumPost forumPost = post;
-        forumPost.setPcontent(forumPost.getPcontent().replace("\r|\n",""));
+        forumPost.setPcontent(forumPost.getPcontent().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         forumPost.setTopic(topic);
@@ -59,7 +59,7 @@ public class fatieControl {
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         if(postService.updatePost(forumPost) ){
-            response.getWriter().print("1");
+            response.sendRedirect(request.getContextPath() + "/userCenter.action");
         }
     }
 
