@@ -28,13 +28,12 @@
     <link href="../css/stylebankuai.css" rel="stylesheet" type="text/css"/>
 
     <link href="../css/classblack.css" rel="stylesheet" type="text/css"/>
-    <script src="../js/bootstrap.js"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108"
-            type="text/javascript"></script>
 
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/common.js?v=20171108" type="text/javascript"></script>
+
+    <script type="text/javascript" src="<%=basePath%>js/jquery-3.2.1.min.js"></script>
+
+    <script src="<%=basePath%>js/bootstrap.js"></script>
+
 
 </head>
 <style type="text/css">
@@ -173,14 +172,14 @@
                             <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
                         <li>
-                            <a href="<%=basePath%>jsp/article.jsp">美文</a>
+                            <a href="<%=basePath%>article.action">美文</a>
                         </li>
 
                         <li>
                             <a href="#">美淘</a>
                         </li>
                         <li>
-                            <a href="#">精彩活动</a>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
                         </li>
 
                         <li>
@@ -193,16 +192,19 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav" style="width: 143px">
+            <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
-                <c:if test="${!empty user}">
-                    <a style="position: relative;left: -94px;width: 50px" href="<%=basePath%>userCenter.action"><img style="position: relative;width: 50px;height: 50px" src="<%=basePath%>images/${user.headpic}"/></a><span style="position: relative;left: -60px;top: -42px;">欢迎您：${user.uname}</span>
-                    <a href="<%=basePath%>signOut.action" style="position: relative;text-align:center ;left: 100px;top: -70px;height: 18px"><span>注销</span></a>
-                </c:if>
-                <c:if test="${empty user}">
-                    <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
-                    <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
-                </c:if>
+                <span>
+                    <c:if test="${!empty user}">
+                        <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                    </c:if>
+                    <c:if test="${empty user}">
+                        <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
+                        <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
+                    </c:if>
+
+						</span>
 
                 <!-- end 登陆&注册栏 -->
             </div>
@@ -360,18 +362,26 @@
                                     </div>
 
                                     <script>
-                                        function shoucang(uidd, pidd) {
-                                            <c:if test="${empty uid}">
+                                        function shoucang( pidd) {
+                                            <c:if test="${empty sessionScope.uid}">
                                                 alert("亲，请先登录");
                                             </c:if>
-                                            <c:if test="${not empty uid}">
+                                            <c:if test="${not empty sessionScope.uid}">
                                             if ($("#shoucang").attr("src") == ("../images/shoucang.png")) {
-                                                $("#shoucang").attr("src", "../images/shoucanghou.png");
+
                                                 $.ajax(
                                                     {
                                                         type: "post",
                                                         url: "${pageContext.request.contextPath}/luntan/shoucang.action",
-                                                        data: "uid=" + uidd + "&pid=" + pidd,
+                                                        data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd,
+                                                        success:function (data) {
+                                                            if(data==1){
+                                                                alert("收藏成功");
+                                                                $("#shoucang").attr("src", "../images/shoucanghou.png");
+                                                            }else if(data==2){
+                                                                alert("您已收藏过该帖子");
+                                                            }
+                                                        }
                                                     }
                                                 );
 
@@ -382,7 +392,12 @@
                                                     {
                                                         type: "post",
                                                         url: "${pageContext.request.contextPath}/luntan/quxiaoshoucang.action",
-                                                        data: "uid=" + uidd + "&pid=" + pidd,
+                                                        data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd,
+                                                        success:function (data) {
+                                                            if(data==1){
+                                                                alert("取消收藏成功");
+                                                            }
+                                                        }
                                                     }
                                                 );
 
@@ -391,18 +406,18 @@
 
                                         }
 
-                                        function dianzan(uidd, pidd) {
-                                            <c:if test="${empty uid}">
+                                        function dianzan( pidd) {
+                                            <c:if test="${empty sessionScope.uid}">
                                                 alert("亲，请先登录");
                                             </c:if>
-                                            <c:if test="${not empty uid}">
+                                            <c:if test="${not empty sessionScope.uid}">
                                             if ($("#dianzan").attr("src") == ("../images/dianzan.png")) {
                                                 $("#dianzan").attr("src", "../images/dianzanhou.png");
                                                 $.ajax(
                                                     {
                                                         type: "post",
                                                         url: "${pageContext.request.contextPath}/luntan/dianzan.action",
-                                                        data: "uid=" + uidd + "&pid=" + pidd,
+                                                        data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd,
 
                                                     }
                                                 );
@@ -414,7 +429,7 @@
                                                     {
                                                         type: "post",
                                                         url: "${pageContext.request.contextPath}/luntan/quxiaodianzan.action",
-                                                        data: "uid=" + uidd + "&pid=" + pidd,
+                                                        data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd,
 
                                                     }
                                                 );
@@ -451,10 +466,10 @@
                                             <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
                                         </div>
                                         <span class="aw-text-color-999">点赞
-                                            <a href="#" onclick="dianzan(${uid},${forumPost.pid})"><img id="dianzan"
+                                            <a href="#" onclick="dianzan(${forumPost.pid})"><img id="dianzan"
                                                                                                         src="../images/dianzan.png"/></a></span>
                                         <span class="aw-text-color-999">收藏
-                                            <a href="#" onclick="shoucang(${uid},${forumPost.pid})"><img id="shoucang"
+                                            <a href="#" onclick="shoucang(${forumPost.pid})"><img id="shoucang"
                                                                                                          src="../images/shoucang.png"/></a></span>
 
                                         <a class="aw-text-color-999" data-toggle="collapse" href="#jubao"
@@ -471,17 +486,17 @@
                                                 <br/>
                                                 <input type="button" class="btn btn-info"
                                                        style="width: 300px" value="发表评论"
-                                                       onclick="pinglun(${uid},${forumPost.pid},$('#postcomment').val())"></input>
+                                                       onclick="pinglun(${forumPost.pid},$('#postcomment').val())"></input>
                                                 <script>
-                                                    function pinglun(uidd, pidd, text) {
-                                                    <c:if test="${empty uid}">
+                                                    function pinglun( pidd, text) {
+                                                    <c:if test="${empty sessionScope.uid}">
                                                         alert("亲，请先登录");
                                                     </c:if>
-                                                    <c:if test="${not empty uid}">
+                                                    <c:if test="${not empty sessionScope.uid}">
                                                         $.ajax({
                                                             type: "post",
                                                             url: "${pageContext.request.contextPath}/luntan/postcomment.action",
-                                                            data: "uid=" + uidd + "&pid=" + pidd + "&postcomment=" + text,
+                                                            data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd + "&postcomment=" + text,
                                                             success: function (result) {
                                                                 if (result == 1) {
                                                                     alert("评论成功！！");
@@ -497,7 +512,7 @@
                                         </div>
                                         <div class="collapse" id="jubao">
                                             <div class="well">
-                                                <%--<form action="luntan/postreport.action?uid=${uid}&pid=${forumPost.pid}&reportseason=${"#postreport"}.val()" method="post">--%>
+                                                <%--<form action="luntan/postreport.action?uid=${sessionScope.uid}&pid=${forumPost.pid}&reportseason=${"#postreport"}.val()" method="post">--%>
                                                 <select id="postreport" class="form-control">
                                                     <option selected>请选择举报类型</option>
                                                     <option value="色情">色情</option>
@@ -507,19 +522,19 @@
 
                                                 <br/>
                                                 <input type="button" class="btn btn-info" value="举报"
-                                                       onclick="jubao(${uid},${forumPost.pid},$('#postreport').val())"
+                                                       onclick="jubao(${forumPost.pid},$('#postreport').val())"
                                                        style="width: 300px"></input>
 
                                                 <script>
-                                                    function jubao(uidd, pidd, reason) {
-                                                        <c:if test="${empty uid}">
+                                                    function jubao( pidd, reason) {
+                                                        <c:if test="${empty sessionScope.uid}">
                                                             alert("亲，请先登录");
                                                         </c:if>
-                                                        <c:if test="${not empty uid}">
+                                                        <c:if test="${not empty sessionScope.uid}">
                                                         $.ajax({
                                                             type: "post",
                                                             url: "${pageContext.request.contextPath}/luntan/postreport.action",
-                                                            data: "uid=" + uidd + "&pid=" + pidd + "&reportreason=" + reason,
+                                                            data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd + "&reportreason=" + reason,
                                                             success: function (result) {
                                                                 if (result == 1) {
                                                                     alert("举报成功,我们会尽快处理。净化网络感谢有你");
@@ -556,7 +571,7 @@
                                         <a class="anchor" name="answer_63059"></a>
                                         <!-- 用户头像 -->
                                         <a class="aw-user-img aw-border-radius-5 pull-right" href="#" data-id="46">
-                                            <img src="<%=basePath%>images/>${forumCommentList.user.headpic}" alt=""/>
+                                            <img src="${forumCommentList.user.headpic}" alt=""/>
                                         </a>
                                         <!-- end 用户头像 -->
                                         <div class="aw-mod-body clearfix">
@@ -625,15 +640,15 @@
                                                                 </select>
                                                                 <script>
 
-                                                                    function pinglunjubao(uidd, cidd, commentreportreason) {
-                                                                        <c:if test="${empty uid}">
+                                                                    function pinglunjubao( cidd, commentreportreason) {
+                                                                        <c:if test="${empty sessionScope.uid}">
                                                                         alert("亲，请先登录");
                                                                         </c:if>
-                                                                        <c:if test="${not empty uid}">
+                                                                        <c:if test="${not empty sessionScope.uid}">
                                                                         $.ajax({
                                                                             type: "post",
                                                                             url: "${pageContext.request.contextPath}/luntan/commentreport.action",
-                                                                            data: "uid=" + uidd + "&cid=" + cidd + "&reason=" + commentreportreason,
+                                                                            data: "uid=" + ${sessionScope.uid} + "&cid=" + cidd + "&reason=" + commentreportreason,
                                                                             success: function (result) {
                                                                                 if (result == 1) {
                                                                                     alert("举报成功！！");
@@ -648,7 +663,7 @@
                                                                 </script>
                                                                 <br/>
                                                                 <input type="button" class="btn btn-info" value="举报"
-                                                                       onclick="pinglunjubao(${uid},${forumCommentList.cid},$('#postcommentreport${forumCommentList.cid}').val())"
+                                                                       onclick="pinglunjubao(${forumCommentList.cid},$('#postcommentreport${forumCommentList.cid}').val())"
                                                                        style="width: 200px;margin-left: 50px"></input>
                                                             </div>
                                                         </div>
@@ -672,19 +687,19 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" id="guanbi" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                                    <button type="button" class="btn btn-primary" onclick="pinglunpinglun(${uid},${forumCommentList.cid},$('#message-text${forumCommentList.cid}').val(),${forumPost.pid})">发表评论</button>
+                                                                    <button type="button" class="btn btn-primary" onclick="pinglunpinglun(${forumCommentList.cid},$('#message-text${forumCommentList.cid}').val(),${forumPost.pid})">发表评论</button>
                                                                 </div>
                                                                
                                                                 <script>
-                                                                    function pinglunpinglun(uidd, cidd, text,pidd) {
-                                                                        <c:if test="${empty uid}">
+                                                                    function pinglunpinglun( cidd, text,pidd) {
+                                                                        <c:if test="${empty sessionScope.uid}">
                                                                         alert("亲，请先登录");
                                                                         </c:if>
-                                                                        <c:if test="${not empty uid}">
+                                                                        <c:if test="${not empty sessionScope.uid}">
                                                                         $.ajax({
                                                                             type: "post",
                                                                             url: "${pageContext.request.contextPath}/luntan/commentcomment.action",
-                                                                            data: "uid=" + uidd + "&ciddd=" + cidd + "&commentcomment=" + text +"&pid=" + pidd,
+                                                                            data: "uid=" + ${sessionScope.uid} + "&ciddd=" + cidd + "&commentcomment=" + text +"&pid=" + pidd,
                                                                             success: function (result) {
                                                                                 if (result == 1) {
                                                                                     alert("评论成功！！");
@@ -741,15 +756,15 @@
                                             <p>
                                                 粉丝：${focusednum}人
                                             </p>
-                                            <button class="btn btn-primary btn-xs" onclick="guanzhu(${uid},${forumPost.user.uid})">
+                                            <button class="btn btn-primary btn-xs" onclick="guanzhu(${forumPost.user.uid})">
                                                 关注他（她）
                                             </button>
                                             <script>
                                                 function guanzhu(uid,postuid) {
-                                                    <c:if test="${empty uid}">
+                                                    <c:if test="${empty sessionScope.uid}">
                                                     alert("亲，请先登录");
                                                     </c:if>
-                                                    <c:if test="${not empty uid}">
+                                                    <c:if test="${not empty sessionScope.uid}">
                                                     $.ajax({
                                                         type:"post",
                                                         url: "${pageContext.request.contextPath}/luntan/focus.action",
@@ -780,7 +795,7 @@
                             <!-- 问题状态 -->
                             <div class="aw-side-bar-mod aw-side-bar-mod-question-status">
                                 <div class="aw-mod-head">
-                                    <h3>问题状态</h3>
+                                    <h3>帖子状态</h3>
                                 </div>
                                 <div class="aw-mod-body">
                                     <ul>

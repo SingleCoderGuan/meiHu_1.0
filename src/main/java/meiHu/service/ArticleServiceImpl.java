@@ -52,4 +52,19 @@ public class ArticleServiceImpl implements ArticleService {
     public ForumOfficalarticle selectOfficalArticleByOaid(int oaid) {
         return forumOfficalarticleMapper.selectOfficalArticleByOaid(oaid);
     }
+
+    @Override
+    public void fatiezijiawufen(int uid) {
+        forumSignMapper.fatiezijiawufen(uid);
+    }
+
+    @Override
+    public void fapinglunjialiangfen(int uid) {
+        forumSignMapper.fapinglunjialiangfen(uid);
+    }
+
+    @Override
+    public void qiandaojiasanfen(int uid) {
+        forumSignMapper.qiandaojiasanfen(uid);
+    }
 }

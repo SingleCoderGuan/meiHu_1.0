@@ -16,4 +16,5 @@
     <select id="selectTnameBuTid" resultType="String" parameterType="int">
         SELECT tname from forum_topic WHERE tid=#{parameter}
     </select>
+
 </mapper>

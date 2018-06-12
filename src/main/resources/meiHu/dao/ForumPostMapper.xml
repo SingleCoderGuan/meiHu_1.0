@@ -59,11 +59,11 @@
         UPDATE forum_post SET likecount = likecount-1 WHERE pid=#{_parameter}
     </update>
     <update id="updatePostVisitNum" parameterType="int">
-        UPDATE forum_post SET visitcount = visitcoun+1 WHERE pid=#{_parameter}
+        UPDATE forum_post SET visitcount = visitcount+1 WHERE pid=#{_parameter}
     </update>
 
     <update id="updatePostVisitNumSub" parameterType="int">
-        UPDATE forum_post SET visitcount = visitcoun-1 WHERE pid=#{_parameter}
+        UPDATE forum_post SET visitcount = visitcount-1 WHERE pid=#{_parameter}
     </update>
 
     <resultMap id="selectCollectedPostsByUidMap" type="ForumPost">

@@ -7,6 +7,24 @@ public class OffLevel {
     private String offname;
     private int offnum;
     private Date endtime;
+    private String picname;
+    private  int needpoint;
+
+    public int getNeedpoint() {
+        return needpoint;
+    }
+
+    public void setNeedpoint(int needpoint) {
+        this.needpoint = needpoint;
+    }
+
+    public String getPicname() {
+        return picname;
+    }
+
+    public void setPicname(String picname) {
+        this.picname = picname;
+    }
 
     public int getOffid() {
         return offid;

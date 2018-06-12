@@ -34,10 +34,36 @@ public class PostServiceImpl implements PostService {
 
         PageHelper.startPage(curPage,pageSize);
 
-        List<ForumPost> postList = forumPostMapper.selectAllPostsOrderByCreatetime((Integer) map.get("tid")) ;
+        List<ForumPost> postList = forumPostMapper.selectPostsByTid((Integer) map.get("tid")) ;
         PageInfo<ForumPost> pageInfo=new PageInfo<>(postList);
         return  pageInfo ;
     }
+@Override
+    public PageInfo<ForumPost> selectPostsByCreatetime(Map<String ,Object> map) {
+    //起始条件
+    int curPage= (int) map.get("curPage");
+    //查询的条数
+    int pageSize=(int)map.get("pageSize");
+
+    PageHelper.startPage(curPage,pageSize);
+
+    List<ForumPost> postList = forumPostMapper.selectAllPostsOrderByCreatetime((Integer) map.get("tid")) ;
+    PageInfo<ForumPost> pageInfo=new PageInfo<>(postList);
+    return  pageInfo ;
+}
+@Override
+    public PageInfo<ForumPost> selectPostsByVisit(Map<String ,Object> map) {
+    //起始条件
+    int curPage= (int) map.get("curPage");
+    //查询的条数
+    int pageSize=(int)map.get("pageSize");
+
+    PageHelper.startPage(curPage,pageSize);
+
+    List<ForumPost> postList = forumPostMapper.selectAllPostsOrderByVisits((Integer) map.get("tid")) ;
+    PageInfo<ForumPost> pageInfo=new PageInfo<>(postList);
+    return  pageInfo ;
+}
 
     @Override
     public List<ForumPost> selectCollectionByUserUid(int uid) {

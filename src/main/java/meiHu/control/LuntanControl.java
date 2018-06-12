@@ -6,6 +6,7 @@ import meiHu.entity.*;
 import meiHu.service.FocusService;
 import meiHu.service.LuntanService;
 import meiHu.service.PostService;
+import meiHu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.SocketUtils;
@@ -19,14 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/luntan")
 public class LuntanControl {
+    @Autowired
+    private UserService userService;
     @Autowired
     private LuntanService luntanService;
     @Autowired
@@ -35,9 +35,13 @@ public class LuntanControl {
     private PostService postService ;
     @RequestMapping(value = "/luntanshouye.action")
     public void luntanshouye(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        List<ForumTopic> topicList=luntanService.getAllTopics();
+        List<ForumTopic> topicList1 = new ArrayList<>();
+        for(int i=0;i<topicList.size()-1;i++){
+            topicList1.add(topicList.get(i));
+        }
+        request.setAttribute("topicList1",topicList1);
         String tid = request.getParameter("tid");
-        System.out.println("+++++++++"+tid+"---------");
         int tid1 = Integer.parseInt(tid);
         Map<String ,Object> cmap=new HashMap<>();
 
@@ -111,24 +115,59 @@ public class LuntanControl {
    @RequestMapping("/tiaojian.action")
    public void tiaojian(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        String tiaojian = request.getParameter("tiaojian");
-       System.out.println(tiaojian);
        String tid = request.getParameter("tid");
-       System.out.println(tid);
        int tid1 = Integer.parseInt(tid);
         if("tuijian".equals(tiaojian)){
-            List<ForumTopic> topicList= luntanService.getAllTopics();
-            List<ForumPost> postList= luntanService.selectAllPostsOrderByVisits(tid1);
-           request.setAttribute("topicList",topicList);
-           request.setAttribute("postList",postList);
-            request.setAttribute("tid1",tid1);
+            List<ForumTopic> topicList=luntanService.getAllTopics();
+            List<ForumTopic> topicList1 = new ArrayList<>();
+            for(int i=0;i<topicList.size()-1;i++){
+                topicList1.add(topicList.get(i));
+            }
+            request.setAttribute("topicList1",topicList1);
+            Map<String ,Object> cmap=new HashMap<>();
+
+            //每页显示的条数
+            int pageSize=2;
+            //当前的页面默认是首页
+            int curPage=1;
+            String scurPage=request.getParameter("curPage");
+            if (scurPage!=null&&!scurPage.trim().equals("")){
+
+                curPage=Integer.parseInt(scurPage);
+            }
+            cmap.put("curPage",curPage);
+            cmap.put("pageSize",pageSize);
+            cmap.put("tid",tid1) ;
+            PageInfo<ForumPost> pageInfo= postService.selectPostsByVisit(cmap);
+            request.setAttribute("pageInfo",pageInfo);
+            String tname = luntanService.selectTnameBuTid(tid1);
+            request.setAttribute("tname",tname);
            request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
        }else if("zuixin".equals(tiaojian)){
+            List<ForumTopic> topicList=luntanService.getAllTopics();
+            List<ForumTopic> topicList1 = new ArrayList<>();
+            for(int i=0;i<topicList.size()-1;i++){
+                topicList1.add(topicList.get(i));
+            }
+            request.setAttribute("topicList1",topicList1);
+            Map<String ,Object> cmap=new HashMap<>();
 
-            List<ForumTopic> topicList= luntanService.getAllTopics();
-            List<ForumPost> postList= luntanService.selectAllPostsOrderByCreatetime(tid1);
-           request.setAttribute("topicList",topicList);
-           request.setAttribute("postList",postList);
-            request.setAttribute("tid1",tid1);
+            //每页显示的条数
+            int pageSize=2;
+            //当前的页面默认是首页
+            int curPage=1;
+            String scurPage=request.getParameter("curPage");
+            if (scurPage!=null&&!scurPage.trim().equals("")){
+
+                curPage=Integer.parseInt(scurPage);
+            }
+            cmap.put("curPage",curPage);
+            cmap.put("pageSize",pageSize);
+            cmap.put("tid",tid1) ;
+            PageInfo<ForumPost> pageInfo= postService.selectPostsByCreatetime(cmap);
+            request.setAttribute("pageInfo",pageInfo);
+            String tname = luntanService.selectTnameBuTid(tid1);
+            request.setAttribute("tname",tname);
            request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
        }
    }
@@ -289,6 +328,20 @@ public class LuntanControl {
         }
 
 
+    }
+    @RequestMapping("userdetail.action")
+    public void userpostdetail(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        int uid = Integer.parseInt(request.getParameter("uid"));
+
+        List<ForumPost> postList = postService.selectPostsByUid(uid);
+        request.setAttribute("userlikenum",userService.selectLikeNumByUid(uid));
+        request.setAttribute("forumUser",userService.selectUserByUid(uid));
+        request.setAttribute("point",userService.selectPointByUid(uid));
+        request.setAttribute("postList",postList);
+        request.setAttribute("focusnum",focusService.selectUserFocusNum(uid));
+        request.setAttribute("focusednum",focusService.selectUserFocusedNum(uid));
+        request.setAttribute("collectionnum",userService.selectCollectionNumByUid(uid));
+        request.getRequestDispatcher("/jsp/userdetail.jsp").forward(request,response);
     }
 
 

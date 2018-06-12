@@ -102,9 +102,9 @@
                                 <input style="position: absolute;left: -100px;top: 152px;" type="checkbox" checked="checked" name="flag" value="1"/>
                                 </c:if>
                                 <span style="position: absolute;left: 50px;top: 170px;">记住密码</span>
-                                <a style="position: absolute;top: 120px;left: 130px;text-decoration:none;" href="<%=basePath%>jsp/forgottenpass.jsp">
-                                    <span id="forgotten">忘记密码？</span>
-                                </a>
+                                <a href="<%=basePath%>jsp/forgottenpass.jsp"><span style="position: absolute;left: 220px;top: 170px;">忘记密码</span></a>
+
+
                                 <button class="btn_my_login" style="position: absolute;top:200px;left: 60px" type="submit">登录</button>
                                 <span disabled="disabled" style="position: absolute;top: 260px;left: 36px;" >第三方登录</span>
                                 <div id="elentrance">

@@ -2,6 +2,7 @@ package meiHu.control;
 
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumUser;
+import meiHu.service.FocusService;
 import meiHu.service.PostService;
 import meiHu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ import java.util.List;
 
 @Controller
 public class UserController {
+    @Autowired
+    private FocusService focusService;
     @Autowired
     private UserService userService ;
     @Autowired
@@ -200,5 +203,7 @@ public class UserController {
         }else{
         }
     }
+
+
 
 }

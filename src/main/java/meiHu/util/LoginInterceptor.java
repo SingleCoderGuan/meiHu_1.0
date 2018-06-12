@@ -17,7 +17,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 
         //安全认证
         String url = request.getRequestURI();
-        if(url.endsWith("login.jsp")||url.endsWith("main.action")||url.endsWith("/")){
+        if(url.endsWith("login.jsp")||url.endsWith("loginadmin.jsp")||url.endsWith("/")){
             return true;
         }
         //如果是已经登录过的
@@ -28,7 +28,7 @@ public class LoginInterceptor implements HandlerInterceptor{
         }
 
 //        其他情况下，转发到登录页面
-        request.getRequestDispatcher("jsp/login.jsp").forward(request,response);
+        request.getRequestDispatcher("/jsp/login.jsp").forward(request,response);
         return false;
     }
 

@@ -60,4 +60,28 @@
     <update id="resetPass" parameterType="ForumUser">
         UPDATE forum_user SET password=#{password} WHERE uid=#{uid}
     </update>
+
+    <!--public int selectPointByUid(int uid);-->
+<select id="selectPointByUid" parameterType="int" resultType="int">
+    SELECT point from forum_user WHERE uid=#{parameter}
+</select>
+
+    <!--//显示titleid>3的用户-->
+    <!--public List<ForumUser> selectUsersByTitleId();-->
+    <select id="selectUsersByTitleId"  resultMap="selectUserMap">
+        SELECT u.*,t.* FROM forum_user u , forum_title t
+        WHERE  title_id>3 AND u.title_id=t.titleid
+    </select>
+
+    <!--//查询用户获赞数-->
+    <!--public int selectLikeNumByUid(int uid);-->
+    <select id="selectLikeNumByUid"  resultType="int" parameterType="int">
+          SELECT COUNT(*) FROM forum_like WHERE post_pid IN
+(select pid FROM forum_post WHERE user_uid = #{parameter})
+    </select>
+    <!--//查询用户收藏数-->
+    <!--public int selectCollectionNumByUid(int uid);-->
+    <select id="selectCollectionNumByUid"  resultType="int" parameterType="int">
+        SELECT count(*) from forum_collection WHERE user_uid=#{parameter}
+    </select>
 </mapper>

@@ -7,9 +7,14 @@
     UPDATE off_level SET offnum = offnum-1 WHERE offid=#{parameter}
 </update>
 
-    <!--public OffLevel selectOffLevelByOffid(int offid);-->
-<select id="selectOffLevelByOffid" resultType="OffLevel" parameterType="int">
-    SELECT * FROM off_level WHERE offid=#{parameter}
+
+    <!--public List<OffLevel> selectAllOffLevel();-->
+<select id="selectAllOffLevel" resultType="OffLevel" >
+    SELECT * from off_level
 </select>
 
+    <!--public OffLevel selectOffLevelByOffid(int offid)-->
+    <select id="selectOffLevelByOffid" parameterType="int" resultType="OffLevel">
+        SELECT * FROM off_level WHERE offid=#{parameter}
+    </select>
 </mapper>

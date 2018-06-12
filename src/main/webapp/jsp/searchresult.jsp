@@ -397,6 +397,10 @@
                                         top: 0px;
                                     }
                                 </style>
+                                <c:if test="${empty postList}">
+                                    姑娘，小美没有找到呀！
+                                </c:if>
+                                <c:if test="${not empty postList}">
                                 <c:forEach var="postList" items="${postList}"  varStatus="status">
                                     <div class="aw-item ">
                                         <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
@@ -425,6 +429,7 @@
                                         </div>
                                     </div>
                                 </c:forEach>
+                                </c:if>
 
 
 
