@@ -485,7 +485,7 @@ text-align: left;
                             window.location.href = "${pageContext.request.contextPath}/luntan/luntanshouye.action?tid=1";
                         }
                         if(message=="0"){
-                            $("#hiddenTel").value = tel ;
+                            $("#hiddenTel").val(tel) ;
                             $('#myModal').modal({
                             })
                         }

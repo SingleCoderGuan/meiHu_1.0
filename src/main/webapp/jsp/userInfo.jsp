@@ -150,14 +150,12 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav">
+            <div class="aw-user-nav" style="width: 200px;">
                 <!-- 登陆&注册栏 -->
-                <span>
-							<a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                    <a href="<%=basePath%>userCenter.action" ><img style="position: relative;width: 50px;height: 50px" src="<%=basePath%>${user.headpic}"/><span style="position: relative;width: 120px">欢迎您：${user.uname}</span></a>
+                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 60px;top: -55px;">注销</a>
                     <!--<a href="#">注册</a>
                     <a href="#">登录</a>-->
-						</span>
 
                 <!-- end 登陆&注册栏 -->
             </div>

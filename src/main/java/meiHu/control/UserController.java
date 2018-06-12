@@ -149,6 +149,7 @@ public class UserController {
             response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp?rslt=4");
         }
     }
+
     @RequestMapping(value = "/modifyPost.action",method = RequestMethod.GET)
     public void modifyPost(int pid,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 

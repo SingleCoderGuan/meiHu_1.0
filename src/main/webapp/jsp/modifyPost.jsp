@@ -163,8 +163,8 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="#" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname} </a>
-                    <a href="<%=basePath%>signOut.action" style="position: absolute;left: 200px">注销</a>
+                    <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname} </a>
+                    <a href="<%=basePath%>signOut.action" style="position: absolute;left: 180px;width: 50px">注销</a>
                 </span>
 
                 <!-- end 登陆&注册栏 -->
@@ -195,7 +195,7 @@
                         <input type="text" style="width: 590px;position: relative;top: 10px; " class="form-control" id="title" name="ptitle" value="${post.ptitle}"/><br/><br/>
                         <input type="text" name="pid" value="${post.pid}" hidden>
 
-                        <span style="position: relative;left:5px;top: -11px;font-size: 20px">板块：</span>
+                        <span style="position: relative;left:5px;top: -11px;font-size: 20px">板块：</span><span style="position: relative;left: 20px;top: -12px;font-size: 15px">${post.topic.tname}</span>
                         <input type="hidden" id="content" name="pcontent"/>
 
                         <div id="div1" class="toolbar">

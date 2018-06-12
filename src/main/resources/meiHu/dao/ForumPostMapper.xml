@@ -24,12 +24,13 @@
 
     <select id="selectPostsByTid" parameterType="int" resultMap="getForumPost">
         SELECT p.*,u.*,t.tname FROM forum_post p,forum_user u,forum_topic t
-        WHERE  topic_tid=#{parameter} AND p.user_uid = u.uid AND t.tid = p.topic_tid
+        WHERE  topic_tid=#{parameter} AND p.user_uid = u.uid AND t.tid = p.topic_tid ORDER  by createtime DESC
     </select>
 
     <!--public ForumPost selectPostByPid(int pid);-->
     <select id="selectPostByPid" parameterType="int" resultMap="getForumPost">
-        SELECT p.*,u.* FROM forum_post p,forum_user u WHERE pid=#{parameter} AND p.user_uid = u.uid
+        SELECT p.*,u.*,t.* FROM forum_post p,forum_user u ,forum_topic t
+        WHERE pid=#{parameter} AND p.user_uid = u.uid ORDER  by createtime DESC
     </select>
 
 
@@ -95,11 +96,13 @@
     <select id="selectCollectedPostsByUid" resultMap="selectCollectedPostsByUidMap" parameterType="int">
         SELECT u.*, p.*,t.* FROM forum_user u ,forum_post p ,forum_topic t,forum_collection c
         WHERE c.user_uid =#{_parameter} AND p.pid=c.post_pid and p.user_uid=u.uid AND t.tid=p.topic_tid
+        ORDER  by createtime DESC
     </select>
 
     <!--public List<ForumPost> selectPostsByUid(int uid) ;-->
     <select id="selectPostsByUid" parameterType="int" resultMap="selectCollectedPostsByUidMap">
         SELECT p.*,t.*,u.* FROM forum_post p,forum_topic t,forum_user u WHERE p.user_uid=#{_parameter} AND p.topic_tid=t.tid AND p.user_uid=u.uid
+        ORDER  by createtime DESC
     </select>
 
     <!--public boolean insert(ForumPost post) ;-->
