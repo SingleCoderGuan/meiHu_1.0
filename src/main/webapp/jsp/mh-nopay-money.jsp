@@ -99,7 +99,7 @@
 
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
-                    <li><a href="<%=basePath%>goods/selectDiscount.action">我的优惠卷</a></li>
+                    <li><a href="<%=basePath%>goods/selectDiscount.action">我的优惠券</a></li>
                 </ul>
                 <div class="tit">服务中心</div>
                 <ul class="sublist">

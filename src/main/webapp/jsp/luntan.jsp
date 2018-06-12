@@ -10,13 +10,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-   // String tid = request.getParameter("tid");
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    // String tid = request.getParameter("tid");
 %>
 <html>
 <head>
     <title>美论首页</title>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
 
@@ -30,35 +30,37 @@
     <link href="<%=basePath%>css/stylebankuai.css" rel="stylesheet" type="text/css"/>
 
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript">
-        var _F873F04AAB426252F46A5A8E6352AA6A = '';
-        var G_POST_HASH = _F873F04AAB426252F46A5A8E6352AA6A;
-        var G_INDEX_SCRIPT = '';
-        var G_SITE_NAME = '美论';
-        var G_BASE_URL = '//ask.dcloud.net.cn';
-        var G_STATIC_URL = '//img-cdn-qiniu.dcloud.net.cn/static';
-        var G_UPLOAD_URL = '//img-cdn-qiniu.dcloud.net.cn/uploads';
-        var G_USER_ID = 0;
-        var G_USER_NAME = '';
-        var G_UPLOAD_ENABLE = 'N';
-        var G_UNREAD_NOTIFICATION = 0;
-        var G_NOTIFICATION_INTERVAL = 300000;
-        var G_CAN_CREATE_TOPIC = '';
 
-    </script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
-    <%--<script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108"
-            type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/functions.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/aw_template.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/common.js?v=20171108" type="text/javascript"></script>
-    <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/app.js?v=20171108" type="text/javascript"></script>
-    <script type="text/javascript" src="//img-cdn-qiniu.dcloud.net.cn/static/js/compatibility.js"></script>--%>
-    <!--[if lte IE 8]>
+    <script type="text/javascript" src="<%=basePath%>/js/zzsc.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+
+
     <script type="text/javascript" src="//img-cdn-qiniu.dcloud.net.cn/static/js/respond.js"></script>
     <![endif]-->
 </head>
+<style>
+    #div1 {
+        height: 400px;
+        width: 200px;
+        position: relative;
+        margin: 10px auto;
+    }
+
+    #div1 a {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        color: #fff;
+        font-weight: bold;
+        padding: 3px 6px;
+    }
+
+    #div1 a:hover {
+        border: 1px solid #eee;
+        background: #000;
+        border-radius: 5px;
+    }
+</style>
 <style type="text/css">
     .sponsor .sponsor-level {
         width: 13px;
@@ -110,14 +112,18 @@
         display: block;
     }
 </style>
-<body>
-<div class="aw-top-menu-wrap"
+<body style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
+<div class="aw-top-menu-wrap" style="height: 55px"
 >
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="http://localhost:8080/meiHu/"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+                <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>images/LOGO.png"
+                                                             style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -125,7 +131,7 @@
                 <form class="navbar-search pull-right" action="<%=basePath%>search/searchReasult.action" id="global_search_form" method="post">
                     <div class="input-group">
                         <input value="" class="form-control" type="text"
-                               placeholder="搜索问题、话题" autocomplete="off" name="searchcontent" id="aw-search-query"
+                               placeholder="搜索问题、话题" autocomplete="off" name="q" id="aw-search-query"
                                class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
                               onClick="$('#global_search_form').submit();">搜索</span>
@@ -175,6 +181,7 @@
                                 $("#context1").css("display","none");
                             }
                         </script>
+
                     </div>
                 </form>
             </div>
@@ -196,14 +203,14 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>jsp/article.jsp">美文</a>
+                            <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
 
                         <li>
                             <a href="<%=basePath%>jsp/index.jsp">美淘</a>
                         </li>
                         <li>
-                            <a href="#">精彩活动</a>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
                         </li>
 
                         <li>
@@ -211,20 +218,19 @@
                         </li>
 
 
-
                     </ul>
                 </nav>
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav">
+            <div class="aw-user-nav" style="width: 250px">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <c:if test="${!empty user}">
-                        <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
-                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
-                    </c:if>
-                    <c:if test="${empty user}">
+                     <c:if test="${not empty sessionScope.user}">
+                         <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                         <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                     </c:if>
+                    <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
                         <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
                     </c:if>
@@ -240,79 +246,28 @@
 </div>
 
 
-<div class="aw-container-wrap">
-    <div class="aw-container aw-wecenter">
+<div class="aw-container-wrap " style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
+    <div class="aw-container aw-wecenter" style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
         <div class="container">
             <div class="row category">
                 <div class="col-sm-12">
-
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">
-                        <dl>
-                            <dt><img src="../images/bankuai1.png"/></dt>
-                            <dd>
-                                <p class="title">
-                                    <a href="#">口红</a>
-                                </p>
-
-                            </dd>
-                        </dl>
-                    </a>
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=2">
-                        <dl>
-                            <dt><img src="../images/bankuai6.png"/></dt>
-                            <dd>
-                                <p class="title">
-                                    <a href="#">眼霜</a>
-                                </p>
-
-                            </dd>
-                        </dl>
-                    </a>
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=3">
-                        <dl>
-                            <dt><img src="../images/bankuai3.png"/></dt>
-                            <dd>
-                                <p class="title">
-                                    <a href="#">香水</a>
-                                </p>
-
-                            </dd>
-                        </dl>
-                    </a>
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=4">
-                        <dl>
-                            <dt><img src="../images/bankuai4.png"/></dt>
-                            <dd>
-                                <p class="title">
-                                    <a href="#">水乳</a>
-                                </p>
-
-                            </dd>
-                        </dl>
-                    </a>
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=5">
-                        <dl>
-                            <dt><img src="../images/bankuai2.png"/></dt>
-                            <dd>
-                                <p class="title">
-                                    <a href="#">防晒</a>
-                                </p>
-
-                            </dd>
-                        </dl>
-                    </a>
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=6">
-                        <dl>
-                            <dt><img src="../images/bankuai5.png"/></dt>
-                            <dd>
-                                <p class="title">
-                                    <a href="#">洗面奶</a>
-                                </p>
-
-                            </dd>
-                        </dl>
-                    </a>
-
+                    <c:forEach items="${topicList1}" var="topicList1">
+                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList1.tid}">
+                            <dl style="text-align: center">
+                                <dt><img src="<%=basePath%>images/${topicList1.tpicname}"
+                                         style="position: relative;left: 30px;"/></dt>
+                                <dd>
+                                    <p class="title"><a href="#">${topicList1.tname}</a></p>
+                                </dd>
+                            </dl>
+                        </a>
+                    </c:forEach>
 
                 </div>
             </div>
@@ -355,7 +310,7 @@
         <!--可能需要父级套一个div来调整在不同容器下的整体宽度-->
 
 
-        <br />
+        <br/>
         <div class="container">
             <div class="row aw-content-wrap">
                 <div class="col-sm-12 col-md-9 aw-main-content aw-all-question">
@@ -363,13 +318,13 @@
                     <ul class="nav nav-tabs aw-reset-nav-tabs hidden-xs">
 
                         <li>
-                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=tuijian&tid=<%=request.getParameter("tid")%>" >推荐</a>
+                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=tuijian&tid=<%=request.getParameter("tid")%>">推荐</a>
                         </li>
                         <li>
-                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=zuixin&tid=<%=request.getParameter("tid")%>" >最新</a>
+                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=zuixin&tid=<%=request.getParameter("tid")%>">最新</a>
                         </li>
 
-                        <h2 class="hidden-xs"> ……姑娘清留步,这是${tname}区</h2>
+                        <h2 class="hidden-xs"> ……姑娘清留步 这是${tname}区</h2>
                     </ul>
                     <!-- end tab切换 -->
 
@@ -398,75 +353,80 @@
                                         top: 0px;
                                     }
                                 </style>
-                                <c:forEach var="postList" items="${postList}"  varStatus="status">
-                                <div class="aw-item ">
-                                    <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
-                                       <%-- <img src="<%=basePath%>images/touxiang1.png" alt="" />--%>
-                                        <span style="font-size: 40px "><strong>${status.index+1}</strong></span>
-                                    </a>
+                                <c:forEach var="postList" items="${pageInfo.list}" varStatus="status">
 
-                                    <div class="aw-question-content">
-                                        <h4>
-                                            <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
-                                        </h4>
+                                    <div class="aw-item ">
+                                        <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
+                                                <%-- <img src="<%=basePath%>images/touxiang1.png" alt="" />--%>
+                                                <%--<span style="font-size: 40px "><strong>${status.index+1}</strong></span>--%>
+                                            <img style="width: 50px" src="<%=basePath%>${postList.user.headpic}"/>
+                                        </a>
 
-
-
-                                        <p>
+                                        <div class="aw-question-content">
+                                            <h4>
+                                                <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
+                                            </h4>
+                                            <p>
 							<span class="aw-question-tags">
 					<i class="fa fa-caret-left"></i>
 					<a href="#">${postList.topic.tname}</a><%--标签--%>
+                                <input name="curTid" id="curTid" value="${postList.topic.tid}" hidden/>
 				</span> •
-                                            <a href="#" class="aw-user-name" >${postList.user.uname}</a>
-                                            <span class="aw-text-color-999" >${postList.likecount}次点赞  •
-                                                    ${postList.visitcount} 次浏览 •<fmt:formatDate value='${postList.createtime}'
-                                                                                                pattern='yyyy-MM-dd hh:mm:ss'/>   </span>
-                                        </p>
+                                                <a href="#" class="aw-user-name">${postList.user.uname}</a>
+                                                <span class="aw-text-color-999">${postList.likecount}次点赞  •
+                                                    ${postList.visitcount} 次浏览 •<fmt:formatDate
+                                                            value='${postList.createtime}'
+                                                            pattern='yyyy-MM-dd hh:mm:ss'/>   </span>
+                                            </p>
 
+                                        </div>
                                     </div>
-                                </div>
+
                                 </c:forEach>
-
-
-
                                 <!--底部Google 信息流广告-->
-
                             </div>
                         </div>
                     </div>
 
+                    <form id="mainForm"
+                          action="<%=basePath%>luntan/luntanshouye.action?tid=<%=request.getParameter("tid")%>"
+                          method="post">
+                        <input hidden name="curPage" id="curPage"/>
+                        <input hidden name="tid" id="tid"/>
+                    </form>
                     <div class="page-control clearfix">
                         <ul class="pagination pull-right">
                             <li>
-                                <a href="#">&lt;&lt;</a>
-                            </li>
-                            <li>
-                                <a href="#">&lt;</a>
-                            </li>
-                            <li><a>当前第1页，共10页</a></li>
-                            <li>
-                                <a href="#">&gt;</a>
-                            </li>
-                            <li>
-                                <a href="#">&gt;&gt;</a>
+                                <c:if test="${!pageInfo.isFirstPage}">
+
+                                    <a href="javascript:getPage(${pageInfo.firstPage})">首页</a>
+                                </c:if>
+
+                                <c:if test="${!pageInfo.isFirstPage}">
+                                    <a href="javascript:getPage(${pageInfo.prePage})">上一页</a>
+                                </c:if>
+                                <a> 共 ${pageInfo.total}条
+                                    当前第<span>${pageInfo.pageNum}</span>页</a>
+                                <c:if test="${!pageInfo.isLastPage}">
+                                    <a href="javascript:getPage(${pageInfo.nextPage})">下一页</a>
+                                </c:if>
+                                <c:if test="${!pageInfo.isLastPage}">
+                                    <a href="javascript:getPage(${pageInfo.lastPage})">末页</a>
+                                </c:if>
+
                             </li>
                         </ul>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                <script>
+                    function getPage(curPage) {
+                        document.getElementById("tid").value = document.getElementById("curTid").value;
+                        //将隐藏域的值变成curPage
+                        document.getElementById("curPage").value = curPage;
+                        //触发表单的提交事件
+                        document.getElementById("mainForm").submit();
+                    }
+                </script>
 
                 <!-- 侧边栏 -->
                 <div class="col-sm-12 col-md-3 aw-side-bar aw-index-side-bar hidden-xs hidden-sm">
@@ -523,40 +483,52 @@
                         <!--</div>-->
                         <div class="aw-mod-body">
 
-
-                            <a class="sponsor_btn btn top-btn"
-                               href="<%=basePath%>luntan/luntanshouye.action?tid=7">
-                                <img src="../images/daigou.png" style="width:28px;"/>
-                                <span style="font-size:30px;">看看代购</span>
+                            <a class="sponsor_btn btn top-btn" href="#">
+                                <img src="<%=basePath%>images/zhichi.png"/>
+                                <span style="font-size:13px;">逛逛商城</span>
+                            </a>
+                            <a class="sponsor_btn btn top-btn" href="<%=basePath%>luntan/luntanshouye.action?tid=7">
+                                <img src="<%=basePath%>images/daigou.png"/>
+                                <span style="font-size:13px;">看看代购</span>
                             </a>
                         </div>
                     </div>
+
                     <div class="aw-side-bar-mod">
                         <div class="aw-mod-head">
-                            <h3>板块</h3>
+                            <h3>热门</h3>
                         </div>
-                        <div class="aw-mod-body">
-                            <ul>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai1.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=1">口红</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai6.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=6">眼霜</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai4.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=2">水乳</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai5.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=4">防晒</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai2.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=5">洗面奶</a></li>
-                                <li><i class="feature_icon"><img src="<%=basePath%>images/bankuai3.png"
-                                                                 style="width: 50px;height: 50px;"/></i><a
-                                        href="<%=basePath%>luntan/luntanshouye.action?tid=3">香水</a></li>
+                        <div class="aw-mod-body" style="background-color: pink">
 
-                            </ul>
+
+                            <div id="div1">
+                                <a href="#" target="_blank">水乳</a>
+                                <a href="#" target="_blank">美肤宝</a>
+                                <a href="#" target="_blank">口红</a>
+                                <a href="#" target="_blank">香奈儿</a>
+                                <a href="#" target="_blank">Mac</a>
+                                <a href="#" target="_blank">杨树林</a>
+                                <a href="#" target="_blank">防晒霜</a>
+                                <a href="#" target="_blank">香水</a>
+                                <a href="#" target="_blank">迪奥</a>
+                                <a href="#" target="_blank">阿玛尼</a>
+                                <a href="#" target="_blank">兰蔻</a>
+                                <a href="#" target="_blank">小黑瓶</a>
+                                <a href="#" target="_blank">水乳</a>
+                                <a href="#" target="_blank">美肤宝</a>
+                                <a href="#" target="_blank">口红</a>
+                                <a href="#" target="_blank">香奈儿</a>
+                                <a href="#" target="_blank">Mac</a>
+                                <a href="#" target="_blank">杨树林</a>
+                                <a href="#" target="_blank">防晒霜</a>
+                                <a href="#" target="_blank">香水</a>
+                                <a href="#" target="_blank">迪奥</a>
+                                <a href="#" target="_blank">阿玛尼</a>
+                                <a href="#" target="_blank">兰蔻</a>
+                                <a href="#" target="_blank">小黑瓶</a>
+
+
+                            </div>
                         </div>
                     </div>
 
@@ -598,7 +570,7 @@
                                 <dd class="pull-left">
                                     <a href="" data-id="15" class="aw-user-name">小姐姐<i class="aw-icon i-v i-ve"></i>
                                     </a>
-                                    <p>回复了 <b>754</b> 个问题, 获得 <b>763</b> 次赞同</p>
+                                    <p>回复了 <b>754</b> 次, 获得 <b>763</b> 次赞同</p>
                                 </dd>
                             </dl>
                             <dl>
@@ -608,17 +580,24 @@
                                 <dd class="pull-left">
                                     <a href="" data-id="15" class="aw-user-name">小姐姐<i class="aw-icon i-v i-ve"></i>
                                     </a>
-                                    <p>回复了 <b>754</b> 个问题, 获得 <b>763</b> 次赞同</p>
+                                    <p>回复了 <b>754</b>次, 获得 <b>763</b> 次赞同</p>
                                 </dd>
                             </dl>
+                            <c:forEach items="${userlist}" var="userlist" begin="0" end="4" step="1">
+                                <dl>
+                                    <dt class="pull-left aw-border-radius-5">
+                                        <a href=""><img alt="" src="<%=basePath%>images/touxiang1.png"/></a>
+                                    </dt>
+                                    <dd class="pull-left">
+                                        <a href="" data-id="15" class="aw-user-name">${userlist.uname}<i
+                                                class="aw-icon i-v i-ve"></i>
+                                        </a>
+                                        <p>${userlist.title.title}</p>
+                                    </dd>
+                                </dl>
+                            </c:forEach>
 
 
-                            <dl>
-                                <dt class="pull-left aw-border-radius-5">
-
-                                </dt>
-
-                            </dl>
                         </div>
                     </div>
 
@@ -629,7 +608,10 @@
     </div>
 </div>
 
-<div class="aw-footer-wrap">
+<div class="aw-footer-wrap" style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
 
 
     <div class="aw-footer aw-wecenter">
@@ -674,28 +656,6 @@
     })();
 </script>
 
-<script>
-    (function ($) {
-        $('.ad-item').on('click', '.close', function () {
-            var self = this;
-            var level = $(self).data('level');
-            if (level && (level > 0)) {
-                $.ajax({
-                    url: '//' + location.host + '/account/ajax/set_ad_sign/' + '?ad_type=' + $(self).data('type'),
-                    success: function (data) {
-                        var result = JSON.parse(data);
-                        if (result.code === 200) {
-                            $(self).parent().parent().css('display', 'none');
-                        }
-                    }
-                });
-            } else {
-                $(self).css('display', 'none');
-                $(self).next().css('display', 'inline-block');
-            }
-        });
-    }(window.jQuery));
-</script>
 </body>
 </html>
 

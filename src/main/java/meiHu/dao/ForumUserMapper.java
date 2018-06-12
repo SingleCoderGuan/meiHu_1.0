@@ -77,4 +77,21 @@ public interface ForumUserMapper {
      * @return  所有关注该用户的用户
      */
     public List<ForumUser> selectFollowerByUid(int uid) ;
+
+    /**
+     * 根据uid对该用户密码进行重置
+     * @param user 需要重置密码的用户
+     * @return  是否成功重置密码
+     */
+    public boolean resetPass(ForumUser user);
+
+    //查询给用户的积分
+    public int selectPointByUid(int uid);
+
+    //显示titleid>3的用户
+    public List<ForumUser> selectUsersByTitleId();
+    //查询用户获赞数
+    public int selectLikeNumByUid(int uid);
+    //查询用户收藏数
+    public int selectCollectionNumByUid(int uid);
 }

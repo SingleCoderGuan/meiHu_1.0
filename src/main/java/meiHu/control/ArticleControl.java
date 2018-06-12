@@ -27,22 +27,22 @@ public class ArticleControl {
     @RequestMapping("/sign.action")
     public void sign(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
         String uid = request.getParameter("uid");
+        boolean flag = false;
         int uidd = Integer.parseInt(uid);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date currenttime = articleService.queryIfExistUid(uidd);
-        Date todaytime = new Date();
-        String ctime = sdf.format(currenttime);
-        String ttime = sdf.format(todaytime);
-        boolean flag = false;
-        if(currenttime==null){
+        if(articleService.queryIfExistUid(uidd)==null){
             flag = articleService.addSignForNewUser(uidd);
         }else {
+            Date currenttime = articleService.queryIfExistUid(uidd);
+            Date todaytime = new Date();
+            String ctime = sdf.format(currenttime);
+            String ttime = sdf.format(todaytime);
             if( (sdf.parse(ttime).getTime() - sdf.parse(ctime).getTime())< 24*60*60*1000){
                 flag = false;
             }else {
                 flag = articleService.addSignForUser(uidd);
+                articleService.fapinglunjialiangfen(uidd);
             }
-
         }
         PrintWriter out =  response.getWriter();
         if(flag==true){

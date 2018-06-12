@@ -6,4 +6,5 @@
         INSERT  INTO forum_postreport (post_pid,user_uid,reportreason)
          VALUES (#{pid},#{uid},#{reportreason});
     </insert>
+
 </mapper>

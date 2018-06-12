@@ -28,7 +28,14 @@
             <value>10000000</value>
         </property>
     </bean>
-
+<!--    <mvc:interceptors>
+        <mvc:interceptor>
+            &lt;!&ndash;两个星号&ndash;&gt;
+            <mvc:mapping path="/**"/>
+            &lt;!&ndash; 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求，此为自定义拦截器的路径 &ndash;&gt;
+            <bean class="meiHu.util.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
 
 
 </beans>

@@ -13,4 +13,5 @@ public interface ForumPostreportMapper {
 
 //    用户举报帖子
     public int addPostReport(ForumPostreport forumPostreport);
+
 }

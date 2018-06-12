@@ -32,7 +32,7 @@
         <span class="slogan">中国最专业化妆品交流平台</span>
         <form class="form-horizontal forgottenform"  >
             <div class="form-group" style="position: relative;left: 53px;">
-                <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 167px;color:#996666;font-size: 18px">手机号码</label>
+                <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 100px;color:#996666;font-size: 18px">手机号码</label>
                 <div class="col-sm-4">
                     <input type="text" class="forgotteninput"  id="tel" placeholder="请输入手机号码">
                     <span style="position: absolute;left: 200px;top: 80px;" id="teltip"></span>
@@ -40,11 +40,11 @@
             </div>
 
             <div class="form-group" style="position: relative;left: 53px;">
-                <input type="button"style="position: relative;left: -314px;top: 5px;" id="btn" class="btn_my_login" value="发送短信验证码" onclick="sendMessage()" disabled />
+                <input type="button"style="position: relative;left: -215px;top: 5px;" id="btn" class="btn_my_login" value="发送短信验证码" onclick="sendMessage()" disabled />
             </div>
 
             <div class="form-group" style="position: relative;left: 53px;">
-                <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 167px;color:#996666;font-size: 18px">短信验证码</label>
+                <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 100px;color:#996666;font-size: 18px">短信验证码</label>
                 <div class="col-sm-4">
                     <input type="text"  class="forgotteninput" id="code" placeholder="请输入短信验证码入" />
                     <span style="position: absolute;left: 200px;top: 80px;" id="codetip"></span>
@@ -53,7 +53,7 @@
 
             <div class="form-group"style="position: relative;left: 53px;">
                 <div class="col-sm-offset-2 col-sm-1">
-                    <button class="btn_my_login"  id="lo" style="width: 200px;position:relative;top: 4px;left:212px;background-color: #f44336;color: #fff;" disabled>确定</button>
+                    <button class="btn_my_login"  id="lo" style="width: 200px;position:relative;top: 4px;left:130px;background-color: #f44336;color: #fff;" disabled>确定</button>
                 </div>
             </div>
         </form>
@@ -156,23 +156,18 @@
 
     $("#lo").click(function(){
         var code=$("#code").val();
-        if(code==""){
-            alert("请输入验证码");
-        }else{
-            $.ajax({
-                url:"${pageContext.request.contextPath}/sendCodes.action",
-                type:"get",
-                data:{"trueCode":sms,"userCode":code},
-                success:function(result){
-                    if(result=="wrong"){
-                        alert("验证码错误");
-                    }else {
-                        window.location.href(result);
-                    }
+        $.ajax({
+            url:"${pageContext.request.contextPath}/sendCodes.action",
+            type:"get",
+            data:{"trueCode":sms,"userCode":code},
+            success:function(result){
+                if(result=="wrong"){
+                    alert("验证码错误");
+                }else {
+                    $(location).attr("href","localhost:8080"+result);
                 }
-            })
-
-        };
+            }
+        })
     });
 
 </script>

@@ -23,19 +23,20 @@
     <!--public List<ForumPost> selectPostsByTid(int tid)-->
 
     <select id="selectPostsByTid" parameterType="int" resultMap="getForumPost">
-        SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
-        WHERE  topic_tid=#{parameter} AND p.user_uid = u.uid AND t.tid = p.topic_tid
+        SELECT p.*,u.*,t.tname FROM forum_post p,forum_user u,forum_topic t
+        WHERE  topic_tid=#{parameter} AND p.user_uid = u.uid AND t.tid = p.topic_tid ORDER  by createtime DESC
     </select>
 
     <!--public ForumPost selectPostByPid(int pid);-->
     <select id="selectPostByPid" parameterType="int" resultMap="getForumPost">
-        SELECT p.*,u.* FROM forum_post p,forum_user u WHERE pid=#{parameter} AND p.user_uid = u.uid
+        SELECT p.*,u.*,t.* FROM forum_post p,forum_user u ,forum_topic t
+        WHERE pid=#{parameter} AND p.user_uid = u.uid ORDER  by createtime DESC
     </select>
 
 
     <!--public List<ForumPost> selectAllPostsOrderByVisits() ;-->
     <select id="selectAllPostsOrderByVisits" parameterType="int" resultMap="getForumPost">
-        SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
+        SELECT p.*,u.uname,u.headpic,t.tid,t.tname FROM forum_post p,forum_user u,forum_topic t
         WHERE  topic_tid=#{parameter} AND p.user_uid = u.uid AND t.tid = p.topic_tid
         ORDER BY visitcount DESC
     </select>
@@ -44,7 +45,7 @@
 
     <!--public List<ForumPost> selectAllPostsOrderByCreatetime() ;-->
     <select id="selectAllPostsOrderByCreatetime" parameterType="int" resultMap="getForumPost">
-        SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
+        SELECT p.*,u.uname,u.headpic,t.tid,t.tname FROM forum_post p,forum_user u,forum_topic t
         WHERE  topic_tid=#{parameter} AND p.user_uid = u.uid AND t.tid = p.topic_tid
         ORDER  by createtime DESC
     </select>
@@ -58,11 +59,11 @@
         UPDATE forum_post SET likecount = likecount-1 WHERE pid=#{_parameter}
     </update>
     <update id="updatePostVisitNum" parameterType="int">
-        UPDATE forum_post SET visitcount = visitcoun+1 WHERE pid=#{_parameter}
+        UPDATE forum_post SET visitcount = visitcount+1 WHERE pid=#{_parameter}
     </update>
 
     <update id="updatePostVisitNumSub" parameterType="int">
-        UPDATE forum_post SET visitcount = visitcoun-1 WHERE pid=#{_parameter}
+        UPDATE forum_post SET visitcount = visitcount-1 WHERE pid=#{_parameter}
     </update>
 
     <resultMap id="selectCollectedPostsByUidMap" type="ForumPost">
@@ -95,11 +96,13 @@
     <select id="selectCollectedPostsByUid" resultMap="selectCollectedPostsByUidMap" parameterType="int">
         SELECT u.*, p.*,t.* FROM forum_user u ,forum_post p ,forum_topic t,forum_collection c
         WHERE c.user_uid =#{_parameter} AND p.pid=c.post_pid and p.user_uid=u.uid AND t.tid=p.topic_tid
+        ORDER  by createtime DESC
     </select>
 
     <!--public List<ForumPost> selectPostsByUid(int uid) ;-->
     <select id="selectPostsByUid" parameterType="int" resultMap="selectCollectedPostsByUidMap">
         SELECT p.*,t.*,u.* FROM forum_post p,forum_topic t,forum_user u WHERE p.user_uid=#{_parameter} AND p.topic_tid=t.tid AND p.user_uid=u.uid
+        ORDER  by createtime DESC
     </select>
 
     <!--public boolean insert(ForumPost post) ;-->
@@ -121,4 +124,14 @@
         SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
         WHERE  p.ptitle like CONCAT('%',#{parameter},'%')   AND p.user_uid = u.uid AND t.tid = p.topic_tid
     </select>
+
+    <!--public boolean update(ForumPost post) ;-->
+    <update id="update" parameterType="ForumPost">
+        UPDATE forum_post SET createtime=#{createtime},ptitle=#{ptitle} ,pcontent=#{pcontent} WHERE pid=#{pid}
+    </update>
+
+    <!--public boolean deletePostByPid(int pid) ;-->
+    <delete id="deletePostByPid" parameterType="int">
+        DELETE  FROM forum_post WHERE pid=#{_parameter}
+    </delete>
 </mapper>

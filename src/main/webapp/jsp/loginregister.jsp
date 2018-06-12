@@ -14,12 +14,8 @@
 %>
 
 <!DOCTYPE html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta  http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>美乎登录&注册</title>
-
     <link rel="stylesheet" href="<%=basePath%>css/stylelogin.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>css/style_inner.css" type="text/css">
     <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,14 +39,20 @@
         }
         var id = getUrlParms("rslt");
         if(id=="1"){
-            alert("密码错误")
+            alert("用户名或密码错误")
         }
         if(id=="2"){
-            alert("用户名错误")
+            alert("用户名或密码错误")
+        }
+        if(id=="3"){
+            alert("注册成功")
+        }
+        if(id=="4"){
+            alert("密码重置成功")
         }
     </script>
 </head>
-<body>
+<body style="width: 100%;">
 
 <div class="cotn_principal">
     <div class="cont_centrar">
@@ -91,7 +93,7 @@
                             <form id="accountlogin" action="${pageContext.request.contextPath}/loginWithAccount.action" method="post">
                             <p id="one">
 
-                                <input style="position:relative;top: 20px;" type="text" name="uname" value="${userArr[0] }" placeholder="请输入用户名"/>
+                                <input style="position:relative;top: 20px;"  type="text" name="uname" value="${userArr[0] }" placeholder="请输入用户名"/>
                                 <input style="position:relative;top: 20px;" type="password" name="password" value="${userArr[1] }"  placeholder="请输入密码" />
                                 <c:if test="${empty cookie.userInfo.value }">
                                     <input style="position: absolute;left: -100px;top: 152px;" type="checkbox" name="flag" value="1"/>
@@ -100,9 +102,9 @@
                                 <input style="position: absolute;left: -100px;top: 152px;" type="checkbox" checked="checked" name="flag" value="1"/>
                                 </c:if>
                                 <span style="position: absolute;left: 50px;top: 170px;">记住密码</span>
-                                <a style="position: absolute;top: 120px;left: 130px;text-decoration:none;" href="<%=basePath%>jsp/forgottenpass.jsp">
-                                    <span id="forgotten">忘记密码？</span>
-                                </a>
+                                <a href="<%=basePath%>jsp/forgottenpass.jsp"><span style="position: absolute;left: 220px;top: 170px;">忘记密码</span></a>
+
+
                                 <button class="btn_my_login" style="position: absolute;top:200px;left: 60px" type="submit">登录</button>
                                 <span disabled="disabled" style="position: absolute;top: 260px;left: 36px;" >第三方登录</span>
                                 <div id="elentrance">
@@ -113,12 +115,12 @@
                             </p>
                             </form>
 
-                            <form id="textlogin" class="demoform" action="<%=basePath%>telLogin.action"  method="post">
+                            <form id="textlogin" class="demoform">
                                 <p class="ex" id="two" hidden>
                                     <input style="position:relative;top: 85px;" id="tel" type="text" placeholder="请输入手机号码" />
-                                    <button class="btn_my_send" style="position: relative;top: 98px;" id="vcode" onClick="sendtext()">发送验证码</button>
-                                    <input style="position:relative;top: 100px;" type="password" placeholder="请输入验证码" />
-                                    <button class="btn_my_login" style="position: relative;top: 120px;" type="submit" id="tellogin">登录</button>
+                                    <input class="btn_my_login"  id="vcode" style="position: relative;top: 98px;color: #eeeeee;text-align: center;width: 200px" onClick="sendText()" value="发送验证码" />
+                                    <input style="position:relative;top: 100px;" id="userCode" type="password" placeholder="请输入验证码" />
+                                    <button class="btn_my_login" style="position: relative;top: 120px;" id="tellogin">登录</button>
                                 </p>
                             </form>
                         </div>
@@ -146,7 +148,7 @@ margin-top: 20px;
   width: 180px;
 border: none;
 text-align: left;
-  color: #757575;background-color: #fff" type="password"  value="" name="userpassword" class="inputxt" />
+  color: #757575;background-color: #fff" type="password"  value="" name="password" class="inputxt" />
                         </li>
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
                             <label class="label" style="position: relative;left: -6px;top: 10px;font-size: 14px;color:#996666;width: 80px;">确认密码：</label>
@@ -171,7 +173,7 @@ text-align: left;
                         </li>
 
                         <li style="position: relative;top: 20px;left:-45px;list-style-type:none; ">
-                            <input class="btn_my_login" id="btn" disabled style="position: relative;top: -7px;" type="button" onclick="sendMessage()" value="发送手机短信验证码"/>
+                            <input class="btn_my_login" id="btn" style="position: relative;top: -7px;" type="button" onclick="sendMessage()" value="发送手机短信验证码"/>
                         </li>
                         <li style="position: relative;top: -5px;left:-65px;list-style-type:none; ">
                             <label class="label" style="font-size: 14px;position: relative;top: 10px;color:#996666;">验证码：</label>
@@ -194,20 +196,21 @@ text-align: left;
             <div class="modal-dialog" role="document">
                 <div class="modal-content" style="width: 460px;">
                     <div class="modal-header" style="background-color: #F0DAD2">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
                         <h4 class="modal-title" id="myModalLabel">请完善您的信息</h4>
                     </div>
                     <div class="modal-body" style="background-color: #F0DAD2">
-                        <form class="registerform" >
+                        <form class="registerform" action="<%=basePath%>perferUser.action" method="post">
                             <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
                                 <label class="label" style="position: relative;left: -23px;font-size: 15px;color:#996666;top: 10px;">用户名：</label>
+
                                 <input style="position: relative;left: -45px;padding: 15px 5px;
 margin-left: 10px;
 margin-top: 20px;
   width: 180px;
 border: none;
 text-align: left;
-  color: #757575;background-color: #fff" type="text" id="perfectuname" name="username" class="inputxt" />
+  color: #757575;background-color: #fff" type="text" id="perfectuname" name="uname" class="inputxt" />
                                 <span style="position: absolute;left: 200px;top: 80px;" id="perunametip"></span>
                             </li>
                             <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
@@ -218,7 +221,7 @@ margin-top: 20px;
   width: 180px;
 border: none;
 text-align: left;
-  color: #757575;background-color: #fff" type="password"  value="" name="userpassword" class="inputxt" />
+  color: #757575;background-color: #fff" type="password"  value="" name="password" class="inputxt" />
                             </li>
                             <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
                                 <label class="label" style="position: relative;left: -28px;top: 10px;color:#996666;font-size: 14px;width: 80px;">确认密码：</label>
@@ -230,7 +233,7 @@ border: none;
 text-align: left;
   color: #757575;background-color: #fff" type="password" value="" name="verificationpsw" class="inputxt"/>
                             </li>
-
+                            <input hidden id="hiddenTel" name="tel" />
                             <div class="action" style="position: relative;top: 20px;left:-20px">
                                 <input type="submit" style="position: relative;top: -20px;width: 90px;left: -72px;" class="btn_my_login" value="提 交" />
                                 <input type="reset" style="position: relative;top: -20px;width: 90px; left: 40px;" class="btn_my_login" value="重 置" />
@@ -259,12 +262,8 @@ text-align: left;
             tiptype:3,
             label:".label",
             showAllError:false,
-            ajaxPost:false
+            ajaxPost:false,
         });
-
-        //通过$.Tipmsg扩展默认提示信息;
-        //$.Tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
-        demo.tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
 
         demo.addRule([
             {
@@ -274,27 +273,13 @@ text-align: left;
             {
                 ele:".inputxt:eq(2)",
                 datatype:"*6-20",
-                recheck:"userpassword"
+                recheck:"password"
             }
             ]);
 
     })
 </script>
-<script>
-    $("#tellogin").click(function () {
-        $.ajax({
-            type:"get",
-            url:"${pageContext.request.contextPath}/loginWithTel.action",
-            data:"tel="+$("#tel").val()+"&vcode="+$("#vcode").val(),
-            success:function (message) {
-                if(message=="1"){
-                    $('#myModal').modal({
-                    })
-                }
-            }
-        })
-    })
-</script>
+
 <script>
     $("#reguname").blur(function () {
         var content = $("#reguname").val();
@@ -329,7 +314,7 @@ text-align: left;
 <script>
     $("#perfectuname").blur(function () {
         var content = $("#perfectuname").val();
-        if(content.length<5||content.length>20){
+        if(content.length < 5||content.length>20){
             $("#perunametip").html("")
             $("#perunametip").removeClass()
             $("#perunametip").addClass("wrong")
@@ -354,11 +339,13 @@ text-align: left;
         }
     })
 </script>
+
 <script type="text/javascript">
     var InterValObj; //timer变量，控制时间
     var count = 60; //间隔函数，1秒执行
     var curCount;//当前剩余秒数
-    function sendMessage(){curCount = count;
+    function sendMessage(){
+        curCount = count;
         $("#btn").attr("disabled", "true");
         $("#btn").val(curCount + "秒后可重新发送");
         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
@@ -377,28 +364,6 @@ text-align: left;
     }
 </script>
 
-<script type="text/javascript">
-    var InterValObj; //timer变量，控制时间
-    var count = 30; //间隔函数，1秒执行
-    var curCount;//当前剩余秒数
-    function sendMessage(){curCount = count;
-        $("#btn").attr("disabled", "true");
-        $("#btn").val(curCount + "秒后可重新发送");
-        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
-    }
-    //timer处理函数
-    function SetRemainTime() {
-        if (curCount == 0) {
-            window.clearInterval(InterValObj);//停止计时器
-            $("#btn").removeAttr("disabled");//启用按钮
-            $("#btn").val("重新发送验证码");
-        }
-        else {
-            curCount--;
-            $("#btn").val(curCount + "秒后可重新发送");
-        }
-    }
-</script>
 <script>
     var sms="";
     $("#btn").click(function(){
@@ -409,7 +374,7 @@ text-align: left;
             data:{"tel":tel},
             success:function(result){
                 sms=result;
-                alert(sms)
+
             }
         });
     });
@@ -431,6 +396,7 @@ text-align: left;
     });
 
 </script>
+
 <script>
     $("#regtel").blur(function () {
         var telnum = $("#regtel").val();
@@ -465,6 +431,74 @@ text-align: left;
             })
         }
     })
+</script>
+<script type="text/javascript">
+    var InterValObj1; //timer变量，控制时间
+    var lcount = 60; //间隔函数，1秒执行
+    var lcurCount;//当前剩余秒数
+    function sendText(){
+        lcurCount = lcount;
+        $("#vcode").attr("disabled", "true");
+        $("#vcode").val(lcurCount + "秒后可重新发送");
+        InterValObj1 = window.setInterval(SetRemainTime1, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
+    }
+    //timer处理函数
+    function SetRemainTime1() {
+        if (lcurCount == 0) {
+            window.clearInterval(InterValObj1);//停止计时器
+            $("#vcode").removeAttr("disabled");//启用按钮
+            $("#vcode").val("重新发送验证码");
+        }
+        else {
+            lcurCount--;
+            $("#vcode").val(lcurCount + "秒后可重新发送");
+        }
+    }
+</script>
+<script>
+    var sms="";
+    $("#vcode").click(function(){
+        var tel=$("#tel").val();
+        $.ajax({
+            url:"${pageContext.request.contextPath}/resetSend.action",
+            type:"get",
+            data:{"tel":tel},
+            success:function(result){
+                sms=result;
+
+            }
+        });
+    });
+
+    $("#tellogin").click(function(){
+        var tel=$("#tel").val() ;
+        var code=$("#userCode").val();
+        if(code==""){
+            alert("请输入验证码");
+        }else{
+            if(sms==code){
+                alert("验证码正确")
+                $.ajax({
+                    type:"get",
+                    url:"${pageContext.request.contextPath}/loginWithTel.action",
+                    data:"tel="+tel,
+                    success:function (message) {
+                        if(message=="1"){
+                            window.location.href = "${pageContext.request.contextPath}/luntan/luntanshouye.action?tid=1";
+                        }
+                        if(message=="0"){
+                            $("#hiddenTel").val(tel) ;
+                            $('#myModal').modal({
+                            })
+                        }
+                    }
+                })
+            }else{
+                alert("验证码错误");
+
+            };
+        };
+    });
 </script>
 </body>
 </html>

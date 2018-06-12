@@ -18,12 +18,11 @@ public class ExchangeServiceImpl implements  ExchangeService {
     private OffLevelMapper offLevelMapper;
 
 
-   /* @Override
+    @Override
     public List<OffLevel> selectAllOffLevel() {
-
         return offLevelMapper.selectAllOffLevel();
     }
-*/
+
     @Override
     public void deleteOffByOffid(int offid) {
         offLevelMapper.deleteOffByOffid(offid);
@@ -35,31 +34,28 @@ public class ExchangeServiceImpl implements  ExchangeService {
     }
 
 
-   /* @Override
+    @Override
     public UserOff selectOffIntoUser(int uid, int offid) {
         return userOffMapper.selectOffIntoUser(uid, offid);
     }
-*/
-   /* @Override
+
+    @Override
     public void addOffIntoUser(int uid, int offid, int firstnum) {
         userOffMapper.addOffIntoUser(uid, offid, firstnum);
-    }*/
+    }
 
     @Override
     public void addUserOffNum(int uid, int offid) {
-
         userOffMapper.addUserOffNum(uid, offid);
     }
 
     @Override
     public void deleteOffFromUser(int uid, int offid) {
-
         userOffMapper.deleteOffFromUser(uid, offid);
     }
 
     @Override
     public void updateUserPoint(int uid, int consumpoint) {
-
         userOffMapper.updateUserPoint(uid, consumpoint);
     }
 
@@ -67,7 +63,6 @@ public class ExchangeServiceImpl implements  ExchangeService {
 
     @Override
     public List<UserOff> selectAllOffByUid(int uid) {
-
         return userOffMapper.selectAllOffByUid(uid);
     }
 }

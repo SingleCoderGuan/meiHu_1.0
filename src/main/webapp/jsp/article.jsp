@@ -31,6 +31,7 @@
     <link href="../css/magnific-popup.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/screen.css" />
 
+    <script type="text/javascript" src="<%=basePath%>/js/zzsc.js"></script>
 
 
 
@@ -47,7 +48,7 @@
             <div class="col-sm-12">
 
                 <!-- start logo -->
-                <a class="branding" href="http://localhost:8080/meiHu/" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
+                <a class="branding" href="<%=basePath%>jsp/zhuye.jsp"" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
                 <!-- end logo -->
                 <h2 style="color: black; font-family: '本墨锵黑';">姐妹们，争做时尚最前沿</h2>
 
@@ -73,9 +74,9 @@
                     <ul class="menu">
                         <li class="nav-current" role="presentation"><a href="#">美文首页</a></li>
                         <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美乎</a></li>
-                        <li  role="presentation"><a href="#">美购</a></li>
-                        <li  role="presentation"><a href="<%=basePath%>jsp/index.jsp">美淘</a></li>
-                        <li  role="presentation"><a href="#">活动</a></li>
+
+                        <li  role="presentation"><a href="#">美淘</a></li>
+                        <li  role="presentation"><a href="<%=basePath%>jsp/activity.jsp">活动</a></li>
 
                         <li  role="presentation"><a href="#">关于我们</a></li>
                     </ul>
@@ -141,22 +142,22 @@
                 <div class="widget">
                     <h4 class="title">每日签到</h4>
                     <div class="content download">
-                        <a href="#" class="btn btn-default btn-block" onclick="sign(${uid})">点我签到</a>
+                        <a href="#" class="btn btn-default btn-block" onclick="sign()">点我签到</a>
                     </div>
                 </div>
 
                 <script>
 
-                    function sign(uidd){
-                        <c:if test="${empty uid}">
+                    function sign(){
+                        <c:if test="${empty sessionScope.user.uid}">
                         alert("亲，请先登录");
-                        window.location.href="loginregister.jsp";
+                        window.location.href="<%=basePath%>jsp/loginregister.jsp";
                         </c:if>
-                        <c:if test="${not empty uid}">
+                        <c:if test="${not empty sessionScope.user.uid}">
                         $.ajax({
                             type:"post",
                             url: "${pageContext.request.contextPath}/article/sign.action",
-                            data: "uid=" + uidd,
+                            data: "uid=" + ${ sessionScope.user.uid},
                             success: function (result) {
                                 if (result == 1) {
                                     alert("签到成功！！");
@@ -171,20 +172,44 @@
                     }
                 </script>
                 <!-- end widget -->
-
+                <style>
+                    #div1{height:400px;width:200px; position:relative; margin:10px auto;}
+                    #div1 a{position:absolute;top:0px;left:0px;color:black;font-weight:bold;padding:3px 6px;}
+                    #div1 a:hover{border:1px solid #eee;background:pink;border-radius:5px;}
+                </style>
                 <!-- start tag cloud widget -->
                 <div class="widget">
                     <h4 class="title">最热搜</h4>
                     <div class="content tag-cloud">
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
-                        <a href="#">水乳</a>
+                        <div id="div1">
+                            <a href="#" target="_blank">水乳</a>
+                            <a href="#" target="_blank">美肤宝</a>
+                            <a href="#" target="_blank">口红</a>
+                            <a href="#" target="_blank">香奈儿</a>
+                            <a href="#" target="_blank">Mac</a>
+                            <a href="#" target="_blank">杨树林</a>
+                            <a href="#" target="_blank">防晒霜</a>
+                            <a href="#" target="_blank">香水</a>
+                            <a href="#" target="_blank">迪奥</a>
+                            <a href="#" target="_blank">阿玛尼</a>
+                            <a href="#" target="_blank">兰蔻</a>
+                            <a href="#" target="_blank">小黑瓶</a>
+                            <a href="#" target="_blank">水乳</a>
+                            <a href="#" target="_blank">美肤宝</a>
+                            <a href="#" target="_blank">口红</a>
+                            <a href="#" target="_blank">香奈儿</a>
+                            <a href="#" target="_blank">Mac</a>
+                            <a href="#" target="_blank">杨树林</a>
+                            <a href="#" target="_blank">防晒霜</a>
+                            <a href="#" target="_blank">香水</a>
+                            <a href="#" target="_blank">迪奥</a>
+                            <a href="#" target="_blank">阿玛尼</a>
+                            <a href="#" target="_blank">兰蔻</a>
+                            <a href="#" target="_blank">小黑瓶</a>
+
+
+
+                        </div>
 
 
 
@@ -225,20 +250,13 @@
                 <div class="widget">
                     <h4 class="title">标签云</h4>
                     <div class="content tag-cloud">
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
+                        <a href="#">水乳</a>
+                        <a href="#">防晒</a>
+                        <a href="#">口红</a>
+                        <a href="#">香奈儿</a>
+                        <a href="#">兰蔻</a>
+                        <a href="#">小黑瓶</a>
+                        <a href="#">美肤宝</a>
 
                         <a href="/tag-cloud/">...</a>
                     </div>
@@ -276,27 +294,6 @@
 </div>
 
 <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
-
-<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdn.bootcss.com/fitvids/1.1.0/jquery.fitvids.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/8.5/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
-
-<script>
-    $(function(){
-        $('.post-content img').each(function(item){
-            var src = $(this).attr('src');
-
-            $(this).wrap('<a href="' + src + '" class="mfp-zoom" style="display:block;"></a>');
-        });
-
-        /*$('.post-content').magnificPopup({
-          delegate: 'a',
-          type: 'image'
-        });*/
-    });
-</script>
 
 <script>
     window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];

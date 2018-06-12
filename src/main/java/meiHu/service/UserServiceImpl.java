@@ -17,9 +17,11 @@ public class UserServiceImpl implements UserService {
         return forumUserMapper.selectUsersByUname(uname);
     }
 
-    public boolean insertUser(String uname, String password, String tel, Date registertime){
+    @Override
+    public boolean insertUser(String uname, String password, String tel, Date registertime) {
         return forumUserMapper.insertUser(uname,password,tel,registertime);
     }
+
 
     @Override
     public ForumUser findUserByTel(String tel) {
@@ -36,4 +38,38 @@ public class UserServiceImpl implements UserService {
         return forumUserMapper.selectFollowerByUid(uid);
     }
 
+    @Override
+    public boolean updateUser(ForumUser user) {
+        return forumUserMapper.updateUser(user);
+    }
+
+    @Override
+    public ForumUser selectUserByUid(int uid) {
+        return forumUserMapper.selectUserByUid(uid);
+    }
+
+    @Override
+    public boolean resetPass(ForumUser user) {
+        return forumUserMapper.resetPass(user);
+    }
+@Override
+    public int selectPointByUid(int uid){
+        return forumUserMapper.selectPointByUid(uid);
+}
+    @Override
+    public List<ForumUser> selectUsersByTitleId(){
+        return forumUserMapper.selectUsersByTitleId();
+    }
+
+    //查询用户获赞数
+    @Override
+    public int selectLikeNumByUid(int uid){
+        return forumUserMapper.selectLikeNumByUid(uid);
+    }
+
+    //查询用户收藏数-->
+    @Override
+    public int selectCollectionNumByUid(int uid){
+        return forumUserMapper.selectCollectionNumByUid(uid);
+    }
 }
