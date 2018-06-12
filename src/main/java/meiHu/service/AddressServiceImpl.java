@@ -20,4 +20,18 @@ public class AddressServiceImpl implements AddressService {
     public int insertAddress(Address address) {
         return addressMapper.insertAddress(address);
     }
+
+   /* @Override
+    public int removeAddress(int addressid) {
+        if(addressMapper.deleteAddress(addressid)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }*/
+   @Override
+   public int deleteAddressByAddressid(int addressid) {
+       addressMapper.deleteAddressByAddressid(addressid);
+       return 1;
+   }
 }

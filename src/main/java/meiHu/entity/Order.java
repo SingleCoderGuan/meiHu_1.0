@@ -9,10 +9,37 @@ public class Order {
     private Date ordertime;
     private Double total;
     private Integer state;
+    private String addressdetail;
+    private String receivename;
+    private String receivetel;
     private ForumUser user;
     private List<OrderItem> items=new ArrayList<>();
 
     public Order() {
+    }
+
+    public String getAddressdetail() {
+        return addressdetail;
+    }
+
+    public void setAddressdetail(String addressdetail) {
+        this.addressdetail = addressdetail;
+    }
+
+    public String getReceivename() {
+        return receivename;
+    }
+
+    public void setReceivename(String receivename) {
+        this.receivename = receivename;
+    }
+
+    public String getReceivetel() {
+        return receivetel;
+    }
+
+    public void setReceivetel(String receivetel) {
+        this.receivetel = receivetel;
     }
 
     public Integer getOrderid() {

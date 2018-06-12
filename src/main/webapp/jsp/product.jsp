@@ -33,8 +33,8 @@
     <style>
 
         #tu{
-            width:360px;
-            hight:400px;
+            width:300px;
+            hight:300px;
         }
         .icon-text{
             font-family: 华文楷体;
@@ -48,8 +48,9 @@
         }
         .logo1{
             position: relative;
-            margin-top:-210px;
+            margin-top:-220px;
             left:-450px;
+
         }
         nav{
             display: inline-block;
@@ -69,7 +70,7 @@
             line-height: 50px;
             background-color: #f8fff9;
             display: inline-block;
-            padding: 0 40px;
+            padding: 0 30px;
             position: relative;
             transform-origin:top;
             transition:all 1s;
@@ -94,6 +95,25 @@
             transform:rotateX(90deg) translateY(-20px);
         }
 
+        #jia {
+            position: relative;
+            margin-top: -32px;
+            margin-left: 195px;
+            width: 30px;
+            height: 30px;
+            cursor:pointer;
+        }
+        #jian{
+            position: relative;
+            margin-top: -30px;
+            margin-left: 60px;
+            width: 30px;
+            height: 30px;
+            cursor:pointer;
+        }
+        .uc-header-bg{
+            background-color: rgba(192,192,191,0.81);
+        }
     </style>
 
 
@@ -106,26 +126,29 @@
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
-            <img src="<%=basePath%>images/u8.png" style="width: 180px;height: 90px;" alt="" /></a></div>
+            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 180px;height:120px;" alt="" /></a></div>
 
     </div>
     <nav>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=2">
             <span data-hover="香水">香水</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=5">
             <span data-hover="眼霜">眼霜</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=3">
             <span data-hover="洁面乳">洁面乳</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=4">
             <span data-hover="防晒霜">防晒霜</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=1">
             <span data-hover="口红">口红</span>
         </a>
-        <a href="<%=basePath%>jsp/mh-address.jsp">
+        <a href="<%= basePath %>goods/glist.action?categoryid=6">
+            <span data-hover="水乳">水乳</span>
+        </a>
+        <a href="<%=basePath%>jsp/mh-orders.jsp">
             <span data-hover="个人中心">个人中心</span>
         </a>
         <a href="<%=basePath%>jsp/cart.jsp">
@@ -146,23 +169,48 @@
             <div class="s-12 m-8 l-7 padding-l-left">
                 <h2 class="text-primary">${product.goodname}</h2>
                 <p>${product.gooddetail}</p>
+                <p>抢购价：${product.goodprice}</p>
+                <p>生产地：${product.goodaddress}</p>
+                <p>月销量：${product.goodsales}件</p>
                 <ul class="speciality margin-bottom">
                     <li>不一样的体验</li>
-                    <li>重回二十岁</li>
+                    <li>重回二十岁,enjoy yourself</li>
                     <li>青春永驻，靓丽人生</li>
                 </ul>
                 <div class="fullwidth margin-bottom-40">
-                    <div class="numbers-row">
-                        <form action="<%= basePath%>goods/cart.action" id="form1" method="get">
+                    <div>
+                        <form class="form-inline" action="<%= basePath%>goods/cart.action" id="form1" method="post">
                             <input type="hidden" name="method" value="addCart">
                             <input type="hidden" name="gid" value="${product.goodid }" >
-                            <label>购买数量:</label>
-                            <input type="text" name="count" value="1">
+
+
+                            <div class="form-group">
+                                <label for="countvalue">购买数量</label>
+                                <input type="text" class="form-control" name="count" id="countvalue" style="text-align: center" value="1">
+                            </div>
+                            <%--<input id="countvalue" type="text" name="count" value="1">--%>
+                            <div id="jia"><img  id="jiacount" src="<%=basePath%>images/+.png"/></div>
+                            <div id="jian"><img  id="jiancount"src="<%=basePath%>images/-.png"/></div>
                         </form>
-                    </div>
+
+                   </div>
                 </div>
+                <script>
+                        $("#jiacount").click(function(){
+                            var count=parseInt($("#countvalue").val());
+                            $("#countvalue").val(count+1);
+                        });
+                        $("#jiancount").click(function(){
+                            var count=parseInt($("#countvalue").val());
+                            var newcount=count-1;
+                            if(newcount<=1) {
+                                $("#countvalue").val(1);
+                            }else{
+                                $("#countvalue").val(newcount);
+                            }
+                        });
+                </script>
                 <div class="s-12 m-6 l-4">
-                    <%--<%= basePath%>goods/cart.action--%><%--<%= basePath%>jsp/cart.jsp--%>
                     <a href="javascript:void(0)" class="button" onclick="subForm()">加入购物车</a>
                 </div>
             </div>
@@ -431,7 +479,6 @@
 <script type="text/javascript" src="<%= basePath%>js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%= basePath%>owl-carousel/owl.carousel.js"></script>
 <script type="text/javascript" src="<%= basePath%>js/custom.js"></script>
-
 <script src="<%=basePath%>js/jquery.js"></script>
 <link rel="stylesheet" href="<%=basePath%>css/style2.css"/>
 <script src="<%=basePath%>js/icheck.min.js"></script>

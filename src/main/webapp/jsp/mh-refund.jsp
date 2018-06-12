@@ -1,5 +1,9 @@
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -28,43 +32,34 @@
     <div class="wrapper">
         <div class="left-bar">
             <div class="back-home divider">
-                <em></em><a href="#">美淘商城</a>
+                <em></em><a href="<%=basePath%>jsp/index.jsp">美淘商城</a>
             </div>
-            <div class="item"><a href="#">登录</a></div>
-            <div class="item"><a href="#">注册</a></div>
+
         </div>
         <div class="right-bar">
             <div class="login-user sub-menu">
-                <a class="menu-hd" href="">txtangxia<em></em></a>
-                <div class="down">
-                    <a href="">内容</a>
-                    <a href="">内容</a>
-                    <a href="">内容</a>
-                </div>
+                <a class="menu-hd" href="">欢迎您：${user.uname}<em></em></a>
+
             </div>
-            <div class="item"><a href="#">消息（<span class="txt-theme">0</span>）</a></div>
+            <div class="item"><a href="#">消息</a></div>
             <div class="logout divider"><a href="<%=basePath%>jsp/login.jsp">退出</a></div>
             <span class=""></span>
-            <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车<span class="txt-theme">2</span>件</a></div>
-            <div class="order"><em></em><a href="<%=basePath%>jsp/mh-order.jsp">我的订单</a></div>
+            <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车</a></div>
+            <div class="order"><em></em><a href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></div>
             <div class="fav"><em></em><a href="#">我的收藏</a></div>
-            <div class="help"><em></em><a href="<%=basePath%>jsp/help.jsp">帮助中心</a></div>
+            <div class="help"><em></em><a href="#">帮助中心</a></div>
         </div>
     </div>
 </div>
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <a class="logo" href="index.html"><img src="<%=basePath%>images/u8.png" alt="" /></a>
-        <div class="back-home"><a href="">返回商城首页</a></div>
+        <div class="back-home"><a href="<%=basePath%>jsp/index.jsp">返回商城首页</a></div>
         <ul class="uc-nav">
             <li><a href="<%=basePath%>jsp/index.jsp">首页</a></li>
             <li class="toggle">
                 <span class="label">账户设置<i class="iconfont"></i></span>
-                <div class="toggle-cont">
 
-                    <a href="#">个人信息</a>
-                    <a href="<%=basePath%>jsp/uc-address.jsp">收货地址</a>
-                </div>
             </li>
             <li><a href="#">系统消息</a></li>
         </ul>
@@ -72,9 +67,7 @@
             <form action="" method="post">
                 <input class="search-txt" type="text" placeholder="请输入搜索内容"/>
                 <button class="search-btn">搜索</button>
-                <!--<div class="suggest-box">
-                    <div class="item" data-title="上衣 短款 短袖">上衣 短款 短袖<div class="tags"><span>雪纺</span><span>蕾丝</span><span>一字领</span></div></div>
-                </div>-->
+
             </form>
         </div>
     </div>
@@ -94,24 +87,18 @@
             <div class="uc-menu">
                 <div class="tit">订单中心</div>
                 <ul class="sublist">
-                    <li><a  href="<%=basePath%>jsp/mh-order.jsp">我的订单</a></li>
+                    <li><a  href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></li>
                    </ul>
                 <div class="tit">客户服务</div>
                 <ul class="sublist">
 
-                    <li><a href="<%=basePath%>jsp/mh-cancel.jsp">取消订单记录</a></li>
-                    <li><a  class="item active" href="<%=basePath%>jsp/mh-refund.jsp">退款/退货</a></li>
+                    <li><a href="<%=basePath%>goods/doneOrder.action">退款/退货</a></li>
                 </ul>
-                <div class="tit">账户中心</div>
-                <ul class="sublist">
 
-                    <li><a href="<%=basePath%>jsp/mh-address.jsp">收货地址</a></li>
-                </ul>
 
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
-                    <li><a href="<%=basePath%>jsp/mh-tatal-credits.jsp">我的积分</a></li>
-                    <li><a href="<%=basePath%>jsp/mh-discount-coupon.jsp">我的优惠卷</a></li>
+                    <li><a href="<%=basePath%>goods/selectDiscount.action">我的优惠卷</a></li>
 
                 </ul>
                 <div class="tit">服务中心</div>
@@ -132,78 +119,81 @@
                         <tr class="item-head">
                             <td colspan="4">
                                 <div class="fl">
-                                    退款编号: 1947584672162364 <span class="ml15">商家：<a class="sname" href="">小米旗舰店</a></span>
+                                    订单编号：${order.orderid}
                                 </div>
-                                <div class="fr">申请时间：2016-05-29 16:02   </div>
+                                <div class="fr">申请时间:<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="<%=new Date()%>"/>   </div>
                             </td>
                         </tr>
                         <tr class="item">
                             <td class="first">
                                 <div class="good-desc">
-                                    <img class="gimg" src="Picture/9.jpg" alt="" />
+                                    <img src="<%=basePath%>${orderItem.good.goodpic}" width="100px" height="100px">
                                     <div class="ginfo">
-                                        小米短袖T恤 五彩换<br />订单编号：16978514363344786
+                                        <br />商品名称：${orderItem.good.goodname}
                                     </div>
                                 </div>
                             </td>
-                            <td>单价：499.00元×1</td>
-                            <td>合计：<span class="text-danger">499.00元</span></td>
+                            <td>单价：${orderItem.good.goodprice}元*${orderItem.count}件</td>
+                            <td>合计：<span class="text-danger">${orderItem.subtotal}元</span></td>
                             <td width="160">
-                                    <span class="btn-get-wl" >物流信息<i class="caret"></i>
-                                        <div class="wl-toggle">
-                                            <div class="inner-box">
-                                                <i class="arrow"></i>
-                                                <div class="wl-hd">百汇世通:846721123123</div>
-                                                <div class="wl-item active">已签收,签收凭取货吗签收，感谢使用百汇世通及速递易【自提柜】期待再次为你服务</div>
-                                                <div class="wl-item">已签收,签收凭取货吗签收，感谢使用百汇世通及速递易【自提柜】期待再次为你服务</div>
-                                                <div class="wl-item">以上为最新信息跟踪信息 <a class="text-info" href="">查看全部</a></div>
-                                            </div>
-                                        </div>
-                                    </span>
+
                             </td>
                         </tr>
                     </table>
-
+                    <form action="#" method="post">
                     <div class="refund-returns-panel mt15">
                         <div class="tabs">
-                            <a class="item active" href="">我要退货</a><a class="item" href="">我要退款（无需退货）</a>
+                            <a class="item active" href="#">我要退货退款</a>
                         </div>
                         <div class="panel-bd">
-                            <div class="control-group">
-                                <div class="hd"><em>*</em>是否收货：</div>
-                                <div class="bd">
-                                    <label class="check"><input type="radio" name="sex" />未收到货</label>
-                                    <label class="check ml25"><input type="radio" name="sex" />已收到货</label>
-                                </div>
-                            </div>
+
                             <div class="control-group">
                                 <div class="hd"><em>*</em>退款原因：</div>
-                                <div class="bd"><select name="" id="" class="ui-txtin"><option value="">请选择</option></select></div>
+                                <div class="bd"><select name="drawbackreason" id="drawbackreason" class="ui-txtin">
+                                    <option value="请选择">请选择</option>
+                                    <option>商品发错了</option>
+                                    <option>色差相差太大</option>
+                                    <option>收到的商品与描述不符</option>
+                                    <option>与想象中相差有点大</option>
+                                    <option>收到的商品破损</option>
+                                    <option>未按约定时间发货</option>
+                                </select></div>
                             </div>
                             <div class="control-group">
                                 <div class="hd"><em>*</em>退款金额：</div>
-                                <div class="bd"><input class="ui-txtin" type="text" name=""  value="499.00" /><span class="ml10 text-muted">最多499.00元</span></div>
+                                <div class="bd"><input class="ui-txtin" type="text" name=""  value="${orderItem.subtotal}" /><span class="ml10 text-muted">${orderItem.subtotal}元</span></div>
                             </div>
                             <div class="control-group">
                                 <div class="hd vat">退款说明：</div>
-                                <div class="bd"><textarea name="" id=""  class="ui-txtin" style="width:560px;height:90px;"></textarea><span class="vab dib ml10">还可以输入200字</span></div>
-                            </div>
-                            <div class="control-group">
-                                <div class="hd vat">上传凭证：</div>
-                                <div class="bd">
-                                    <label class="ui-uploads">
-                                        <span class="upload-img"></span>
-                                        <input type="file" name="" id="" />
-                                    </label>
-                                    <div class="mt10 text-muted">每张图片大小不超过5M，最多3张，支持gif、jpg、png、bmp格式</div>
-                                </div>
+                                <div class="bd"><textarea name="detail" id="detail"  class="ui-txtin" style="width:560px;height:90px;"></textarea></div>
                             </div>
                             <div class="submit-group">
-                                <input class="ui-btn-theme uc-btn-lg" type="submit" value="提交退款申请" />
+                                <input class="ui-btn-theme uc-btn-lg" onclick="tiaojiao(${order.orderid})" value="提交申请" />
                             </div>
+
+                            <script>
+                                function tiaojiao(orderid){
+                                    var drawbackreason=document.getElementById("drawbackreason").value;
+                                    var detail=document.getElementById("detail").value;
+                                    $.ajax({
+                                        type:"post",
+                                        dataType:"json",
+                                        url:"<%=basePath%>goods/refundOrder.action?orderid="+orderid,
+                                        data:"drawbackreason="+drawbackreason+"&detail="+detail,
+                                        success:function(result){
+                                            if(result==1){
+                                                alert("提交成功！");
+                                               window.location.reload();
+                                            }else{
+                                                alert("提交失败！");
+                                            }
+                                        }
+                                    })
+                                }
+                            </script>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

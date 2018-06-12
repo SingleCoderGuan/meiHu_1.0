@@ -10,4 +10,6 @@ public interface AddressService {
 
     public int insertAddress(Address address);
 
+    /*public int removeAddress(int addressid);*/
+    public int deleteAddressByAddressid(int addressid);
 }
