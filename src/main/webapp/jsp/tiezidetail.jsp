@@ -94,7 +94,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="http://localhost:8080/meiHu/"> <img src="../images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+               <a href="http://localhost:8080/meiHu/"> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -196,7 +196,7 @@
                 <!-- 登陆&注册栏 -->
                 <span>
                     <c:if test="${!empty user}">
-                        <a href="<%=basePath%>userCenter.action"><img src="<%=basePath%>images/${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
                         <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                     </c:if>
                     <c:if test="${empty user}">
@@ -363,17 +363,17 @@
 
                                     <script>
                                         function shoucang( pidd) {
-                                            <c:if test="${empty sessionScope.uid}">
+                                            <c:if test="${empty sessionScope.user}">
                                                 alert("亲，请先登录");
                                             </c:if>
-                                            <c:if test="${not empty sessionScope.uid}">
+                                            <c:if test="${not empty sessionScope.user}">
                                             if ($("#shoucang").attr("src") == ("../images/shoucang.png")) {
 
                                                 $.ajax(
                                                     {
                                                         type: "post",
                                                         url: "${pageContext.request.contextPath}/luntan/shoucang.action",
-                                                        data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd,
+                                                        data: "uid=" + ${sessionScope.user.uid} + "&pid=" + pidd,
                                                         success:function (data) {
                                                             if(data==1){
                                                                 alert("收藏成功");
@@ -392,7 +392,7 @@
                                                     {
                                                         type: "post",
                                                         url: "${pageContext.request.contextPath}/luntan/quxiaoshoucang.action",
-                                                        data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd,
+                                                        data: "uid=" + ${sessionScope.user.uid} + "&pid=" + pidd,
                                                         success:function (data) {
                                                             if(data==1){
                                                                 alert("取消收藏成功");
@@ -407,17 +407,17 @@
                                         }
 
                                         function dianzan( pidd) {
-                                            <c:if test="${empty sessionScope.uid}">
+                                            <c:if test="${empty sessionScope.user}">
                                                 alert("亲，请先登录");
                                             </c:if>
-                                            <c:if test="${not empty sessionScope.uid}">
+                                            <c:if test="${not empty sessionScope.user}">
                                             if ($("#dianzan").attr("src") == ("../images/dianzan.png")) {
                                                 $("#dianzan").attr("src", "../images/dianzanhou.png");
                                                 $.ajax(
                                                     {
                                                         type: "post",
                                                         url: "${pageContext.request.contextPath}/luntan/dianzan.action",
-                                                        data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd,
+                                                        data: "uid=" + ${sessionScope.user.uid} + "&pid=" + pidd,
 
                                                     }
                                                 );
@@ -429,7 +429,7 @@
                                                     {
                                                         type: "post",
                                                         url: "${pageContext.request.contextPath}/luntan/quxiaodianzan.action",
-                                                        data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd,
+                                                        data: "uid=" + ${sessionScope.user.uid} + "&pid=" + pidd,
 
                                                     }
                                                 );
@@ -489,14 +489,14 @@
                                                        onclick="pinglun(${forumPost.pid},$('#postcomment').val())"></input>
                                                 <script>
                                                     function pinglun( pidd, text) {
-                                                    <c:if test="${empty sessionScope.uid}">
+                                                    <c:if test="${empty sessionScope.user}">
                                                         alert("亲，请先登录");
                                                     </c:if>
-                                                    <c:if test="${not empty sessionScope.uid}">
+                                                    <c:if test="${not empty sessionScope.user}">
                                                         $.ajax({
                                                             type: "post",
                                                             url: "${pageContext.request.contextPath}/luntan/postcomment.action",
-                                                            data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd + "&postcomment=" + text,
+                                                            data: "uid=" + ${sessionScope.user.uid} + "&pid=" + pidd + "&postcomment=" + text,
                                                             success: function (result) {
                                                                 if (result == 1) {
                                                                     alert("评论成功！！");
@@ -512,7 +512,7 @@
                                         </div>
                                         <div class="collapse" id="jubao">
                                             <div class="well">
-                                                <%--<form action="luntan/postreport.action?uid=${sessionScope.uid}&pid=${forumPost.pid}&reportseason=${"#postreport"}.val()" method="post">--%>
+                                                <%--<form action="luntan/postreport.action?uid=${sessionScope.user}&pid=${forumPost.pid}&reportseason=${"#postreport"}.val()" method="post">--%>
                                                 <select id="postreport" class="form-control">
                                                     <option selected>请选择举报类型</option>
                                                     <option value="色情">色情</option>
@@ -527,14 +527,14 @@
 
                                                 <script>
                                                     function jubao( pidd, reason) {
-                                                        <c:if test="${empty sessionScope.uid}">
+                                                        <c:if test="${empty sessionScope.user}">
                                                             alert("亲，请先登录");
                                                         </c:if>
-                                                        <c:if test="${not empty sessionScope.uid}">
+                                                        <c:if test="${not empty sessionScope.user}">
                                                         $.ajax({
                                                             type: "post",
                                                             url: "${pageContext.request.contextPath}/luntan/postreport.action",
-                                                            data: "uid=" + ${sessionScope.uid} + "&pid=" + pidd + "&reportreason=" + reason,
+                                                            data: "uid=" + ${sessionScope.user.uid} + "&pid=" + pidd + "&reportreason=" + reason,
                                                             success: function (result) {
                                                                 if (result == 1) {
                                                                     alert("举报成功,我们会尽快处理。净化网络感谢有你");
@@ -571,7 +571,7 @@
                                         <a class="anchor" name="answer_63059"></a>
                                         <!-- 用户头像 -->
                                         <a class="aw-user-img aw-border-radius-5 pull-right" href="#" data-id="46">
-                                            <img src="${forumCommentList.user.headpic}" alt=""/>
+                                            <img src="<%=basePath%>${forumCommentList.user.headpic}" alt=""/>
                                         </a>
                                         <!-- end 用户头像 -->
                                         <div class="aw-mod-body clearfix">
@@ -641,14 +641,14 @@
                                                                 <script>
 
                                                                     function pinglunjubao( cidd, commentreportreason) {
-                                                                        <c:if test="${empty sessionScope.uid}">
+                                                                        <c:if test="${empty sessionScope.user}">
                                                                         alert("亲，请先登录");
                                                                         </c:if>
-                                                                        <c:if test="${not empty sessionScope.uid}">
+                                                                        <c:if test="${not empty sessionScope.user}">
                                                                         $.ajax({
                                                                             type: "post",
                                                                             url: "${pageContext.request.contextPath}/luntan/commentreport.action",
-                                                                            data: "uid=" + ${sessionScope.uid} + "&cid=" + cidd + "&reason=" + commentreportreason,
+                                                                            data: "uid=" + ${sessionScope.user.uid} + "&cid=" + cidd + "&reason=" + commentreportreason,
                                                                             success: function (result) {
                                                                                 if (result == 1) {
                                                                                     alert("举报成功！！");
@@ -692,14 +692,14 @@
                                                                
                                                                 <script>
                                                                     function pinglunpinglun( cidd, text,pidd) {
-                                                                        <c:if test="${empty sessionScope.uid}">
+                                                                        <c:if test="${empty sessionScope.user}">
                                                                         alert("亲，请先登录");
                                                                         </c:if>
-                                                                        <c:if test="${not empty sessionScope.uid}">
+                                                                        <c:if test="${not empty sessionScope.user}">
                                                                         $.ajax({
                                                                             type: "post",
                                                                             url: "${pageContext.request.contextPath}/luntan/commentcomment.action",
-                                                                            data: "uid=" + ${sessionScope.uid} + "&ciddd=" + cidd + "&commentcomment=" + text +"&pid=" + pidd,
+                                                                            data: "uid=" + ${sessionScope.user.uid} + "&ciddd=" + cidd + "&commentcomment=" + text +"&pid=" + pidd,
                                                                             success: function (result) {
                                                                                 if (result == 1) {
                                                                                     alert("评论成功！！");
@@ -743,8 +743,8 @@
                                 <div class="aw-mod-body">
                                     <dl style="padding-top: 5px;">
                                         <dt class="pull-left aw-border-radius-5">
-                                            <a href="#">
-                                                <img src="${forumPost.user.headpic}"/>
+                                            <a href="<%=basePath%>luntan/userdetail.action?uid=${forumPost.user.uid}">
+                                                <img src="<%=basePath%>${forumPost.user.headpic}"/>
                                             </a>
                                         </dt>
                                         <dd class="pull-left">
@@ -760,15 +760,15 @@
                                                 关注他（她）
                                             </button>
                                             <script>
-                                                function guanzhu(uid,postuid) {
-                                                    <c:if test="${empty sessionScope.uid}">
+                                                function guanzhu(postuid) {
+                                                    <c:if test="${empty sessionScope.user}">
                                                     alert("亲，请先登录");
                                                     </c:if>
-                                                    <c:if test="${not empty sessionScope.uid}">
+                                                    <c:if test="${not empty sessionScope.user}">
                                                     $.ajax({
                                                         type:"post",
                                                         url: "${pageContext.request.contextPath}/luntan/focus.action",
-                                                        data:"focusuid="+uid+"&focusduid="+postuid,
+                                                        data: "focusuid=" + ${sessionScope.user.uid}+"&focusduid="+postuid,
                                                         success:function (result) {
                                                             if(result==1){
                                                                 alert("关注成功");

@@ -323,27 +323,33 @@
                         </div>
                     </div>
 
-                    <form id="mainForm" action="<%=basePath%>luntan/luntanshouye.action" method="post" >
+                    <form id="mainForm" action="<%=basePath%>luntan/luntanshouye.action?tid=<%= request.getParameter("tid")%>" method="post" >
                         <input hidden name="curPage" id="curPage" />
                         <input hidden name="tid" id="tid" />
                     </form>
                     <div class="page-control clearfix">
                         <ul class="pagination pull-right">
-
-                            <li>共 <b>${pageInfo.total}</b> 条
-
-                                <a href="javascript:getPage(${pageInfo.firstPage})" >首页</a>
+                            <li>
                                 <c:if test="${!pageInfo.isFirstPage}">
-                                    <a href="javascript:getPage(${pageInfo.prePage})" >上一页</a>
+
+                                <a href="javascript:getPage(${pageInfo.firstPage})">首页</a>
                                 </c:if>
 
-                                当前第<span>${pageInfo.pageNum}</span>页
-                                <c:if test="${!pageInfo.isLastPage}">
-                                    <a href="javascript:getPage(${pageInfo.nextPage})" >下一页</a>
+                                <c:if test="${!pageInfo.isFirstPage}">
+                                <a href="javascript:getPage(${pageInfo.prePage})">上一页</a>
                                 </c:if>
-                                <a href="javascript:getPage(${pageInfo.lastPage})" >末页</a>
+                                <a> 共 ${pageInfo.total}条
+                                    当前第<span>${pageInfo.pageNum}</span>页</a>
+                                <c:if test="${!pageInfo.isLastPage}">
+                                <a href="javascript:getPage(${pageInfo.nextPage})">下一页</a>
+                                </c:if>
+                                <c:if test="${!pageInfo.isLastPage}">
+                                <a href="javascript:getPage(${pageInfo.lastPage})">末页</a>
+                                </c:if>
+
                             </li>
                         </ul>
+
                     </div>
                 </div>
                 <script>
