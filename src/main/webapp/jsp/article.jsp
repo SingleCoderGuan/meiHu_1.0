@@ -142,22 +142,22 @@
                 <div class="widget">
                     <h4 class="title">每日签到</h4>
                     <div class="content download">
-                        <a href="#" class="btn btn-default btn-block" onclick="sign(${uid})">点我签到</a>
+                        <a href="#" class="btn btn-default btn-block" onclick="sign()">点我签到</a>
                     </div>
                 </div>
 
                 <script>
 
-                    function sign(uidd){
-                        <c:if test="${empty sessionScope.uid}">
+                    function sign(){
+                        <c:if test="${empty sessionScope.user.uid}">
                         alert("亲，请先登录");
                         window.location.href="<%=basePath%>jsp/loginregister.jsp";
                         </c:if>
-                        <c:if test="${not empty sessionScope.uid}">
+                        <c:if test="${not empty sessionScope.user.uid}">
                         $.ajax({
                             type:"post",
                             url: "${pageContext.request.contextPath}/article/sign.action",
-                            data: "uid=" + uidd,
+                            data: "uid=" + ${ sessionScope.user.uid},
                             success: function (result) {
                                 if (result == 1) {
                                     alert("签到成功！！");

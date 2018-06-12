@@ -1,5 +1,6 @@
 package meiHu.dao;
 
+import meiHu.entity.ForumCollection;
 import meiHu.entity.ForumPost;
 
 import java.util.List;
@@ -24,5 +25,7 @@ public interface ForumCollectionMapper {
      * @return
      */
     public boolean deleteCollectionByPid(int pid);
+    //查询该帖子有没有被收藏过
+    public ForumCollection selectIfCollection(int uid,int pid);
 
 }

@@ -64,7 +64,7 @@ public interface LuntanService {
 
 //    public List<ForumUser> selectUsersByTitleId();
 
-//    public ForumCollection selectIfCollection(int uid,int pid);
+  public ForumCollection selectIfCollection(int uid,int pid);
 
 
 

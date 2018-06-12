@@ -180,11 +180,11 @@
                     <div class="aw-nav-filter">
                         <div class="mod-head clearfix">
                             <h2 class="pull-left"><i class="icon icon-users"></i>美论美换兑换专区(以下券均为全场通用)</h2>
-                            <c:if test="${empty sessionScope.uid}">
+                            <c:if test="${empty sessionScope.user.uid}">
                                 <h1 class="pull-right">登录即可查看积分</h1>
 
                             </c:if>
-                            <c:if test="${not empty sessionScope.uid}">
+                            <c:if test="${not empty sessionScope.user.uid}">
                                 <h1 class="pull-right">您当前剩余积分<strong>${point}</strong>分</h1>
 
                             </c:if>
@@ -237,15 +237,15 @@
                                     <script>
                                         function duihuan(offidd) {
 
-                                            <c:if test="${empty sessionScope.uid}">
+                                            <c:if test="${empty sessionScope.user.uid}">
                                             alert("亲，请先登录");
                                             </c:if>
-                                            <c:if test="${not empty sessionScope.uid}">
+                                            <c:if test="${not empty sessionScope.user.uid}">
 
                                             $.ajax({
                                                 type: "post",
                                                 url: "${pageContext.request.contextPath}/duihuan.action",
-                                                data: "uidd=" + ${sessionScope.uid} + "&offidd=" + offidd+"&pointt="+${point}),
+                                                data: "uidd=" + ${sessionScope.user.uid} + "&offidd=" + offidd+"&pointt="+${point}),
                                                 success: function (result) {
                                                     if (result == 1) {
                                                         alert("兑换成功");

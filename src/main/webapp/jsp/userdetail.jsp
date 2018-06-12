@@ -175,7 +175,7 @@
                     <!-- 用户数据内容 -->
                     <div class="aw-mod aw-user-detail-box">
                         <div class="mod-head">
-                            <img src="<%=basePath%>images/touxiang1.png" style="width:100px;height:
+                            <img src="<%=basePath%>${forumUser.headpic}" style="width:100px;height:
                             100px;"/>
 
                             <button type="button" class="btn btn-warning">${forumUser.uname} </button>
@@ -298,14 +298,14 @@
                             </button>
                             <script>
                                 function guanzhu() {
-                                    <c:if test="${empty sessionScope.uid}">
+                                    <c:if test="${empty sessionScope.user.uid}">
                                     alert("亲，请先登录");
                                     </c:if>
-                                    <c:if test="${not empty sessionScope.uid}">
+                                    <c:if test="${not empty sessionScope.user.uid}">
                                     $.ajax({
                                         type: "post",
                                         url: "${pageContext.request.contextPath}/luntan/focus.action",
-                                        data: "focusuid=" + ${sessionScope.uid} + "&focusduid=" + <%=request.getParameter("uid")%>,
+                                        data: "focusuid=" + ${sessionScope.user.uid} + "&focusduid=" + <%=request.getParameter("uid")%>,
                                         success: function (result) {
                                             if (result == 1) {
                                                 alert("关注成功");

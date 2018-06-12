@@ -61,7 +61,7 @@ public class LuntanControl {
         request.setAttribute("pageInfo",pageInfo);
         String tname = luntanService.selectTnameBuTid(tid1);
         request.setAttribute("tname",tname);
-        request.getSession().setAttribute("uid",102);
+        request.setAttribute("userlist",userService.selectUsersByTitleId());
         request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
 
 
@@ -179,15 +179,19 @@ public class LuntanControl {
 
        int uidd = Integer.parseInt(uid);
        int pidd = Integer.parseInt(pid);
-       luntanService.updatePostVisitNum(pidd);
-       //System.out.println(luntanService.addCollectionByUidAndPid(uidd,pidd));
        PrintWriter out = response.getWriter();
-       if(luntanService.addCollectionByUidAndPid(uidd,pidd)){
-           out.print(1);
-       }else {
-           out.print(0);
 
+       if(luntanService.selectIfCollection(uidd,pidd)==null){
+           if(luntanService.addCollectionByUidAndPid(uidd,pidd)){
+               out.print(1);
+           }else {
+               out.print(0);
+
+           }
+       }else{
+           out.print(2);
        }
+
    }
     @RequestMapping("/quxiaoshoucang.action")
     public  void quxiaoshoucang(HttpServletRequest request,HttpServletResponse response) throws IOException {

@@ -130,10 +130,7 @@ strict.dtd">
                             <a href="index.html">美乎</a>
                         </li>
                         <li>
-                            <a href="#">美购</a>
-                        </li>
-                        <li>
-                            <a href="#">美商城</a>
+                            <a href="#">美淘</a>
                         </li>
                         <li>
                             <a href="#">活动</a>
