@@ -42,13 +42,13 @@
         </div>
         <div class="right-bar">
             <div class="login-user sub-menu">
-                <a class="menu-hd" href="">${user.uname}<em></em></a>
+                <a class="menu-hd" href="">欢迎您：${user.uname}<em></em></a>
 
             </div>
             <div class="item"><a href="#">消息</a></div>
             <div class="logout divider"><a href="<%=basePath%>jsp/index.jsp">退出</a></div>
             <span class=""></span>
-            <div class="cart"><em></em><a href="<%=basePath%>goods/cart.action">购物车</a></div>
+            <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车</a></div>
             <div class="order"><em></em><a href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></div>
             <div class="fav"><em></em><a href="#">我的收藏</a></div>
             <div class="help"><em></em><a href="#">帮助中心</a></div>
@@ -63,10 +63,7 @@
             <li><a href="<%=basePath%>jsp/index.jsp">首页</a></li>
             <li class="toggle">
                 <span class="label">账户设置<i class="iconfont"></i></span>
-                <div class="toggle-cont">
-                    <a href="#">个人信息</a>
-                    <a href="<%=basePath%>jsp/order_address.jsp">收货地址</a>
-                </div>
+
             </li>
             <li><a href="#">系统消息</a></li>
         </ul>
@@ -100,13 +97,12 @@
                 <div class="tit">客户服务</div>
                 <ul class="sublist">
 
-                    <li><a href="<%=basePath%>jsp/mh-refund.jsp">退款/退货</a></li>
+                    <li><a href="<%=basePath%>goods/doneOrder.action">退款/退货</a></li>
                 </ul>
 
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
-                    <li><a href="<%=basePath%>jsp/mh-total-credits.jsp">我的消费积分</a></li>
-                    <li><a href="<%=basePath%>jsp/mh-discount-coupon.jsp">我的优惠卷</a></li>
+                    <li><a href="<%=basePath%>goods/selectDiscount.action">我的优惠卷</a></li>
                 </ul>
                 <div class="tit">服务中心</div>
                 <ul class="sublist">
@@ -126,12 +122,7 @@
                             <a class="item" href="<%=basePath%>goods/runOrder.action">已发货</a>
                             <a class="item" href="<%=basePath%>goods/doneOrder.action">已收货</a></div>
                         </div>
-                        <div class="uc-search">
-                            <form action="">
-                                <input type="text" class="sch-input" placeholder="输入商品名称,订单号，商品编号" />
-                                <button class="sch-btn"><i class="iconfont icon-search"></i></button>
-                            </form>
-                        </div>
+
                     </div>
                 </div>
             </div>

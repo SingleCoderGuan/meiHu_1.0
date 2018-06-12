@@ -11,12 +11,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <title>订单结算页</title>
+    <script type="text/javascript" src="//cdn.staticfile.org/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
     <link rel="stylesheet" href="<%= basePath%>plugins/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="<%= basePath%>plugins/layui/css/layui.css" />
     <link rel="stylesheet" href="<%= basePath%>plugins/awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="<%= basePath%>plugins/eleme-ui/index.css" />
     <link rel="stylesheet" href="<%= basePath%>css/CivilMilitaryIntegration/public.css" />
-    <link rel="stylesheet" href="<%= basePath%>css/CivilMilitaryIntegration/ShoppingCartAdress.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -48,7 +48,7 @@
             color: #ffffff;
         }
         .uc-header-bg{
-            background-color: #dbd2db;
+            background-color: #c0c0bf;
         }
         .layui-form{
             position: relative;
@@ -82,7 +82,7 @@
             line-height: 50px;
             background-color: #f8fff9;
             display: inline-block;
-            padding: 0 40px;
+            padding: 0 30px;
             position: relative;
             transform-origin:top;
             transition:all 1s;
@@ -106,9 +106,7 @@
         nav a:hover span{
             transform:rotateX(90deg) translateY(-20px);
         }
-        .address{
-            float: left;
-        }
+
         .button{
             position: relative;
             margin-left:800px;
@@ -118,8 +116,13 @@
             position: relative;
             margin-left:1050px;
         }
-
-
+        .uc-header-bg{
+            background-color: rgba(192,192,191,0.81);
+        }
+        .footer-section{
+            position: relative;
+            margin-top: -70px;
+        }
     </style>
 </head>
 
@@ -128,24 +131,27 @@
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
-            <img src="<%=basePath%>images/u8.png"style="height: 90px;width: 180px;" alt="" /></a></div>
+            <img src="<%=basePath%>images/LOGOMeiTao.png"style="height: 120px;width: 180px;" alt="" /></a></div>
 
     </div>
     <nav>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=2">
             <span data-hover="香水">香水</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=5">
             <span data-hover="眼霜">眼霜</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=3">
             <span data-hover="洁面乳">洁面乳</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=4">
             <span data-hover="防晒霜">防晒霜</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=1">
             <span data-hover="口红">口红</span>
+        </a>
+        <a href="<%= basePath %>goods/glist.action?categoryid=6">
+            <span data-hover="水乳">水乳</span>
         </a>
         <a href="<%=basePath%>jsp/mh-orders.jsp">
             <span data-hover="个人中心">个人中心</span>
@@ -158,8 +164,8 @@
 <h1 class="text-center">结算页</h1>
 <p id="p">愉快购物每一天！</p>
 
-
-<div class="uc-content">
+<div class="section">
+<div class="uc-content" >
     <div class="uc-panel">
         <div class="uc-bigtit">收货地址</div>
         <div class="button"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新增地址</button></div>
@@ -172,33 +178,55 @@
                         <h4 class="modal-title" id="exampleModalLabel">新增地址</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="<%=basePath %>goods/address.action" method="post">
-                            <div class="form-group">
-                                <label for="recipient-name" class="control-label">地址:</label>
-                                <input type="text" name="address" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="control-label">详细地址:</label>
-                                <input type="text" name="addressdetail" class="form-control" id="recipient-name1">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="control-label">收货人姓名:</label>
-                                <input type="text" name="receivename" class="form-control" id="recipient-name2">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="control-label">收货人联系方式:</label>
-                                <input type="text" name="receivetel" class="form-control" id="recipient-name3">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="submit" class="btn btn-primary">确定</button>
-                            </div>
-                        </form>
+
+                        <div class="form-group">
+                            <label  class="control-label">地址:</label>
+                            <input type="text" name="address" class="form-control" id="address1">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">详细地址:</label>
+                            <input type="text" name="addressdetail" class="form-control" id="addressdetail1">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">收货人姓名:</label>
+                            <input type="text" name="receivename" class="form-control" id="receivename1">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">收货人联系方式:</label>
+                            <input type="text" name="receivetel" class="form-control" id="receivetel1">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button  onclick="tianjiaAddr()" class="btn btn-primary">确定</button>
+                        </div>
+
                     </div>
 
                 </div>
             </div>
         </div>
+
+
+
+
+        <script>
+            function tianjiaAddr() {
+                var address=document.getElementById("address1").value;
+                var addressdetail=document.getElementById("addressdetail1").value;
+                var receivename=document.getElementById("receivename1").value;
+                var receivetel=document.getElementById("receivetel1").value;
+                $.ajax({
+                    type:"post",
+                    url:"<%=basePath %>/goods/insertAddress.action",
+                    data:"address="+address+"&addressdetail="+addressdetail+"&receivename="+receivename+"&receivetel="+receivetel,
+                    success:function (address1) {
+                        $("#exampleModal").modal('hide');
+                        $("#parent").append("<div class='item'><ul><li>"+address+"</li><li>"+addressdetail+"</li><li>"+receivename+"</li><li>"+receivetel+"</li></ul></div>");
+                    }
+                });
+            }
+        </script>
         <script>
             $('#exampleModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
@@ -210,192 +238,126 @@
                 modal.find('.modal-body input').val(recipient)
             })
         </script>
-
-
-        <script type="text/javascript">
-            function remove() {
-                if(confirm("您确定要取消订单吗？")){
-                    $.ajax({
-                        type:"get",
-                        url:"<%=basePath %>goods/deleteOrder.action",
-                        data:"orderid="+${order.orderid},
-                        success:function(result){
-                            $("#orders").html("");
-                            $("#payform").html("");
-                        }
-
-                    });
-                }
-            }
-        </script>
         <div class="uc-panel-bd">
 
+            <div class="address-list"id="parent">
+                <c:forEach items="${addressList}" var="address">
+                    <div class="col col-4" id="${address.addressid}" >
+                        <div class="item">
+                            <div class="action">
+                                <div class="fl">
+                                    <a class="del" onclick="deleteAddress(${address.addressid})">删除</a></div>
+                                <div class="fr"><a class="setdft" href="javascript:;">设为默认</a></div>
 
-
-            <div class="address-list">
-              <c:forEach items="${addressList}" var="address">
-                <div class="col col-4">
-                    <div class="item" id="item">
-                        <div class="action">
-                            <div class="fl"><a class="edit" href="javascript:void(0);">修改</a>
-                                <a class="del" onclick="deleteAddress(${address.addressid})">删除</a></div>
-                            <script>
-                                function deleteAddress(addressid) {
-
-                                    if(confirm("您确定要删除地址信息吗？")){
-                                        $.ajax({
-                                            type:"get",
-                                            url:"<%=basePath %>goods/deleteAddress.action",
-                                            data:"addressid="+addressid,
-
-                                            success:function(flag){
-                                                $("#item1").html("");
-                                                window.location.reload();
-                                            }
-
-                                        });
+                                <script>
+                                    function deleteAddress(addressid) {
+                                        var add=addressid;
+                                        if(confirm("您确定要删除地址信息吗？")){
+                                            $.ajax({
+                                                type:"get",
+                                                url:"<%=basePath %>goods/deleteAddress.action",
+                                                data:"addressid="+add,
+                                                success:function(flag){
+                                                    var parent=document.getElementById("parent");
+                                                    parent.removeChild(document.getElementById(add));
+                                                }
+                                            });
+                                        }
                                     }
-                                }
-                            </script>
-                            <div class="fr"><a class="setdft" href="javascript:void(0);">设为默认</a></div>
-
-                        </div>
-                        <div class="info">
-
-                             <div class="address1">
-                               <ul>
-                                <li >${address.address}</li>
-                                <li >${address.addressdetail}</li>
-                                <li>${address.receivename}</li>
-                                <li>${address.receivetel}</li>
-                               </ul>
+                                </script>
                             </div>
-
-
-                       </div>
+                            <div class="info">
+                                <ul>
+                                    <li >${address.address}</li>
+                                    <li >${address.addressdetail}</li>
+                                    <li>${address.receivename}</li>
+                                    <li>${address.receivetel}</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
-               </c:forEach>
+                </c:forEach>
             </div>
-
         </div>
     </div>
 </div>
 
 
-    <div id="orders" class="row deliverymode">
+<div  class="row deliverymode">
 
-        <div class="col-lg-9 deliverymodeRight" >
+    <div id="orders" class="col-lg-9 deliverymodeRight" >
 
-            <div class="layui-form">
-                <div class="uc-bigtit">我的订单</div>
-                <table class="layui-table">
+        <div class="layui-form">
+            <div class="uc-bigtit">&nbsp;&nbsp;&nbsp;&nbsp;我的订单</div>
+            <table class="layui-table">
+                <tr>
+                    <th colspan="2">订单编号：${order.orderid}</th>
+                    <th colspan="1">未付款</th>
+                    <th colspan="2">时间：<fmt:formatDate value="${order.ordertime}" pattern="yyyy-MM-dd HH:mm:ss"/> </th>
+                </tr>
+                <tr>
+                    <th>商品图片</th>
+                    <th>商品名称</th>
+                    <th>商品价格</th>
+                    <th>数量</th>
+                    <th>小计</th>
+                </tr>
+                <c:forEach items="${order.items}" var="order">
                     <tr>
-                        <th colspan="2">订单编号：${order.orderid}</th>
-                        <th colspan="1">未付款</th>
-                        <th colspan="2">时间：<fmt:formatDate value="${order.ordertime}" pattern="yyyy-MM-dd HH:mm:ss"/> </th>
+                        <td><img src="<%=basePath %>${order.good.goodpic}" width="50px" height="50px"/></td>
+                        <td>${order.good.goodname}</td>
+                        <td>${order.good.goodprice}</td>
+                        <td>${order.count}</td>
+                        <td>${order.subtotal}</td>
                     </tr>
-                    <tr>
-                        <th>商品图片</th>
-                        <th>商品名称</th>
-                        <th>商品价格</th>
-                        <th>数量</th>
-                        <th>小计</th>
-                    </tr>
-                    <c:forEach items="${order.items}" var="order">
-                        <tr>
-                            <td><img src="<%=basePath %>${order.good.goodpic}" width="50px" height="50px"/></td>
-                            <td>${order.good.goodname}</td>
-                            <td>${order.good.goodprice}</td>
-                            <td>${order.count}</td>
-                            <td>${order.subtotal}</td>
-                        </tr>
-                    </c:forEach>
-                    <tr>
-                        <td colspan="3"></td>
-                        <td><a href="javascript:void(0)" onclick='remove()'>取消订单</a></td>
-                        <td><a href="<%=basePath %>jsp/cart.jsp">返回修改购物车</a></td>
-                    </tr>
-                </table>
+                </c:forEach>
+                <tr>
+                    <td colspan="3"></td>
+                    <td><a href="javascript:void(0)" onclick='remove()'>取消订单</a></td>
+                    <td><a href="<%=basePath %>jsp/cart.jsp">返回修改购物车</a></td>
+                </tr>
+            </table>
 
 
 
-            </div>
         </div>
     </div>
+</div>
 
+<script type="text/javascript">
+    function remove() {
+        if(confirm("您确定要取消订单吗？")){
+            $.ajax({
+                type:"get",
+                url:"<%=basePath %>goods/deleteOrder.action",
+                data:"orderid="+${order.orderid},
+                success:function(result){
+                    $("#orders").html("");
+                    $("#payform").html("");
+                }
+
+            });
+        }
+    }
+
+</script>
 
 <div class="pay">
     <form id="payform" action="<%=basePath %>goods/pay.action" method="post">
-    <div class="contenterFooter">
-        <p>总金额：<span class="footerPrice">￥${order.total}</span></p>
-        <p>运费：<span class="footerPrice">￥0.00</span></p>
-    </div>
-    <div class="clearfix"></div>
-    <div class="row footerRow">
-        <span class="footerRowprice">应付金额：<span>${order.total}元</span></span>
+        <div class="contenterFooter">
+            <p>总金额：<span class="footerPrice">￥${order.total}</span></p>
+            <p>运费：<span class="footerPrice">￥0.00</span></p>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row footerRow">
+            <span class="footerRowprice">应付金额：<span>${order.total}元</span></span>
 
-    </div>
-    <button class="btn submitForm" onclick="click()">确定提交</button>
-</form>
+        </div>
+        <button class="btn submitForm" onclick="click()">确定提交</button>
+    </form>
 </div>
 
-
-
-
-<!--主要内容-->
-
-<!-- SLIDESHOW START -->
-<div class="carousel-fade-transition owl-carousel carousel-main">
-    <!-- slide 1 -->
-    <div class="item">
-        <!-- slideshow photo -->
-        <div class="image-box">
-            <div class="image">
-                <img src="<%= basePath%>img/slideshow/banner31.jpg" alt="">
-            </div>
-        </div>
-        <!-- slideshow content -->
-        <div class="carousel-content">
-            <div class="content-center-vertical line">
-                <div class="s-12 m-8 l-7">
-                    <h1 class="h1">请相信化妆的神奇力量</h1>
-                    <p class="p">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis eum iriure dolor in hendrerit in vulputate.</p>
-                    <div class="animated-carousel-element">
-                        <a href="" class="slideshow-btn">立即购物</a><a href="" class="slideshow-btn2">查看更多</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- slide 2 -->
-    <div class="item">
-        <!-- slideshow photo -->
-        <div class="image-box">
-            <div class="image">
-                <img src="<%= basePath%>img/slideshow/banner31.jpg" alt="">
-            </div>
-        </div>
-
-
-        <!-- slideshow content -->
-        <div class="carousel-content">
-            <div class="content-center-vertical line">
-                <div class="s-12 m-8 l-7">
-                    <h1 class="h1">请让自己的肌肤保持长时间的水润嫩白</h1>
-                    <p class="p">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis eum iriure dolor in hendrerit in vulputate.</p>
-                    <div class="animated-carousel-element">
-                        <a href="" class="slideshow-btn">立即购物</a><a href="" class="slideshow-btn2">查看更多</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-<!-- SLIDESHOW END -->
-
-
 <!--/start-footer-section-->
 <div class="footer-section">
     <div class="footer-grids">
@@ -499,9 +461,6 @@
 <script type="text/javascript" src="<%= basePath%>plugins/eleme-ui/index.js"></script>
 <script type="text/javascript" src="<%= basePath%>js/CivilMilitaryIntegration/ShoppingCart.js"></script>
 <!--<script type="text/javascript" src="js/CivilMilitaryIntegration/abc.js" ></script>-->
-
-
-
 
 </body>
 </html>

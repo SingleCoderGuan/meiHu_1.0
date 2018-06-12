@@ -31,7 +31,6 @@ public class AddressServiceImpl implements AddressService {
     }*/
    @Override
    public int deleteAddressByAddressid(int addressid) {
-
        addressMapper.deleteAddressByAddressid(addressid);
        return 1;
    }

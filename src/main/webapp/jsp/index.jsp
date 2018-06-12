@@ -33,23 +33,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <span class="menu"></span>
     <div class="navbar">
         <a class="menu" href="#"><i class="icon-align-justify"></i></a>
-        <a class="link hme" href="<%=basePath %>jsp/index.jsp">
+        <a class="link hme" href="#">
             <span class="active"><span class="valign"><span class="vertical">首页</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">首页</span></span></span>
         </a>
-        <a class="link abt" href="<%= basePath %>goods/glist.action?categoryid=1">
+        <a class="link abt" href="<%= basePath %>goods/glists.action?categoryid=1">
             <span class="active"><span class="valign"><span class="vertical">商品浏览</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">商品浏览</span></span></span>
         </a>
-        <a class="link tdz" href="<%=basePath %>goods/cart.action">
+        <a class="link abt" href="<%=basePath %>jsp/cart.jsp">
             <span class="active"><span class="valign"><span class="vertical">购物车</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">购物车</span></span></span>
         </a>
-        <a class="link" href="<%=basePath %>goods/myOrder.action?method=findMyOrders<%--&uid=${user.uid}--%>">
+        <a class="link abt" href="<%=basePath %>jsp/mh-orders.jsp">
             <span class="active"><span class="valign"><span class="vertical">我的订单</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">我的订单</span></span></span>
         </a>
-        <a class="link con" href="#">
+        <a class="link abt" href="#">
             <span class="active"><span class="valign"><span class="vertical">关于我们</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">关于我们</span></span></span>
         </a>
@@ -75,12 +75,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
         <!--about-->
-        <div class="about">
-            <div class="second-head">
-                <h3>About</h3>
-                <p>Duis autem vel eum iriure dolor in hendrerit,Ut wisi enim ad minim veniam, quis nostrud.We Provide Worlds top fashion for less fashionpress.</p>
-            </div>
-        </div>
+
 
         <!----trends--->
         <div class="trends">
@@ -156,8 +151,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!--/start-featured-->
         <div class="featured-section">
             <div class="second-head">
-                <h3>Featured Videos</h3>
-                <p>Duis autem vel eum iriure dolor in hendrerit,Ut wisi enim ad minim veniam, quis nostrud.We Provide Worlds top fashion for less fashionpress.</p>
+                <h3>The Mysteries Of Fashion</h3>
+                <p>We are fashion vanguards. We are the protagonist of fashion. Do not say we are innocent. quis nostrud.They are varied in style, taste and presentation.</p>
             </div>
             <div id="img"><img src="<%=basePath %>img/18.jpg" width="600px" height="500px"/></div>
             <div class="featured-video">

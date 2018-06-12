@@ -7,6 +7,9 @@
         <result column="ordertime" property="ordertime"/>
         <result column="total" property="total"/>
         <result column="state" property="state"/>
+        <result column="addressdetail" property="addressdetail"/>
+        <result column="receivename" property="receivename"/>
+        <result column="receivetel" property="receivetel"/>
         <collection property="items" ofType="OrderItem">
             <id column="itemid" property="itemid"/>
             <result column="num" property="count"/>
@@ -29,6 +32,9 @@
         <result column="ordertime" property="ordertime"/>
         <result column="total" property="total"/>
         <result column="state" property="state"/>
+        <result column="addressdetail" property="addressdetail"/>
+        <result column="receivename" property="receivename"/>
+        <result column="receivetel" property="receivetel"/>
         <collection property="items" ofType="OrderItem">
             <id column="itemid" property="itemid"/>
             <result column="num" property="count"/>
@@ -51,6 +57,9 @@
         <result column="ordertime" property="ordertime"/>
         <result column="total" property="total"/>
         <result column="state" property="state"/>
+        <result column="addressdetail" property="addressdetail"/>
+        <result column="receivename" property="receivename"/>
+        <result column="receivetel" property="receivetel"/>
         <collection property="items" ofType="OrderItem">
             <id column="itemid" property="itemid"/>
             <result column="num" property="count"/>
@@ -73,6 +82,9 @@
         <result column="ordertime" property="ordertime"/>
         <result column="total" property="total"/>
         <result column="state" property="state"/>
+        <result column="addressdetail" property="addressdetail"/>
+        <result column="receivename" property="receivename"/>
+        <result column="receivetel" property="receivetel"/>
         <collection property="items" ofType="OrderItem">
             <id column="itemid" property="itemid"/>
             <result column="num" property="count"/>
@@ -95,6 +107,9 @@
         <result column="ordertime" property="ordertime"/>
         <result column="total" property="total"/>
         <result column="state" property="state"/>
+        <result column="addressdetail" property="addressdetail"/>
+        <result column="receivename" property="receivename"/>
+        <result column="receivetel" property="receivetel"/>
         <collection property="items" ofType="OrderItem">
             <id column="itemid" property="itemid"/>
             <result column="num" property="count"/>
@@ -111,6 +126,21 @@
             </association>
         </collection>
     </resultMap>
+    <resultMap id="OrderItemMap" type="OrderItem">
+        <id column="itemid" property="itemid"/>
+        <result column="num" property="count"/>
+        <result column="subtotal" property="subtotal"/>
+        <association property="good" javaType="Goods">
+            <id column="goodid" property="goodid"/>
+            <result column="goodname" property="goodname"/>
+            <result column="goodpic" property="goodpic"/>
+            <result column="goodprice" property="goodprice"/>
+            <result column="goodstore" property="goodstore"/>
+            <result column="goodaddress" property="goodaddress"/>
+            <result column="gooddetail" property="gooddetail"/>
+            <result column="goodsales" property="goodsales"/>
+        </association>
+    </resultMap>
     <!--//根据用户id查询我的订单信息-->
     <!--public List<Order> findMyOrders(int uid);-->
     <select id="findMyOrders" parameterType="int" resultMap="orderMap">
@@ -125,7 +155,7 @@
     <!--public void save(Order order);-->
     <insert id="save" parameterType="Order" useGeneratedKeys="true"
             keyProperty="orderid">
-        insert into shop_order values(#{orderid},#{user.uid},#{ordertime},2,#{total},#{state})
+        insert into shop_order values(#{orderid},#{user.uid},#{ordertime},2,#{total},#{state},null,null,null)
     </insert>
 
    <!-- public void saveItem(OrderItem oi);-->
@@ -185,5 +215,16 @@
         and state=3
     </select>
 
+    <!--//根据订单编号查询订单信息
+    public Order showOrderById(int orderid);-->
+    <select id="showOrderById" parameterType="int" resultType="Order">
+        select * from shop_order where orderid=#{_parameter}
+    </select>
+
+    <!--//根据订单详情编号查询订单详情信息
+    public OrderItem showOrderItemById(int itemid);-->
+    <select id="showOrderItemById" parameterType="int" resultMap="OrderItemMap">
+        select * from shop_item,shop_goods where itemid=#{_parameter} and shop_item.goodid=shop_goods.goodid
+    </select>
 
 </mapper>

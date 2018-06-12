@@ -45,8 +45,23 @@
             color: white;
         }
         .section{
-            height:auto;
-            width:auto;
+            position: relative;
+            margin-bottom:-52px;
+        }
+        .image{
+            position: relative;
+            width: 1680px;
+            height: 836px;
+        }
+        .footer-section{
+            position: relative;
+            width:1310px;
+            left:20px;
+        }
+        .copyright{
+            position: relative;
+            width:1310px;
+            left:20px;
         }
     </style>
 </head>
@@ -68,9 +83,10 @@
             <div class="content-center-vertical line">
                 <div class="s-12 m-8 l-7">
                     <h1 class="h1">化妆的神奇魔力</h1>
-                    <p class="p">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis eum iriure dolor in hendrerit in vulputate.</p>
+                    <p class="p">The magic power of make-up.Do not miss every wonderful moment, love him, love yourself.</p>
                     <div class="animated-carousel-element">
                         <a href="" class="slideshow-btn">立即购物</a><a href="" class="slideshow-btn2">查看更多</a>
+                        &nbsp;  &nbsp;<a href="<%=basePath%>jsp/index.jsp" class="slideshow-btn">返回首页</a>
                     </div>
                 </div>
             </div>
@@ -82,7 +98,7 @@
         <!-- slideshow photo -->
         <div class="image-box">
             <div class="image">
-                <img src="<%= basePath%>img/slideshow/banner40.jpg" alt="">
+                <img src="<%= basePath%>images/f31.jpg" alt="">
             </div>
         </div>
 
@@ -92,9 +108,10 @@
             <div class="content-center-vertical line">
                 <div class="s-12 m-8 l-7">
                     <h1 class="h1">肌肤水润嫩白，精致每一天</h1>
-                    <p class="p">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis eum iriure dolor in hendrerit in vulputate.</p>
+                    <p class="p">Skin water and whitening, delicate every day.Every day I have to be wonderful.</p>
                     <div class="animated-carousel-element">
                         <a href="" class="slideshow-btn">立即购物</a><a href="" class="slideshow-btn2">查看更多</a>
+                        &nbsp; &nbsp;<a href="<%=basePath%>jsp/index.jsp" class="slideshow-btn">返回首页</a>
                     </div>
                 </div>
             </div>
@@ -167,8 +184,8 @@
                         <i class="fa fa-paper-plane-o fa-3x text-primary"></i>
                     </div>
                     <div class="margin-left-60">
-                        <h3>Our vision</h3>
-                        <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat iriure vulputate autem vel eum.</p>
+                        <h3>Water milk</h3>
+                        <p>Whitening moisturizing nourishing moisturizing whitening cream pearl white pure smooth rich and moist curd.</p>
                         <a class="text-more-info text-primary-hover" href="">Read more</a>
                     </div>
                 </div>
@@ -178,8 +195,8 @@
                         <i class="fa fa-eye fa-3x text-primary"></i>
                     </div>
                     <div class="margin-left-60">
-                        <h3>Our mission</h3>
-                        <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat iriure vulputate autem vel eum.</p>
+                        <h3>Eye Cream</h3>
+                        <p>Fine lines, dark circles,pouch lifting,tight and light eye (compact repair) instant eye care,eye care desalination.</p>
                         <a class="text-more-info text-primary-hover" href="">Read more</a>
                     </div>
                 </div>
@@ -189,8 +206,8 @@
                         <i class="fa fa-diamond fa-3x text-primary"></i>
                     </div>
                     <div class="margin-left-60">
-                        <h3>Behind the brand</h3>
-                        <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat iriure vulputate autem vel eum.</p>
+                        <h3>Fragrance</h3>
+                        <p>The fragrance is strong, the lady is persistent fragrant pink tender fragrant fragrant and sweet and the lady likes it.</p>
                         <a class="text-more-info text-primary-hover" href="">Read more</a>
                     </div>
                 </div>
@@ -200,8 +217,8 @@
                         <i class="fa fa-calendar fa-3x text-primary"></i>
                     </div>
                     <div class="margin-left-60">
-                        <h3>Our history begins</h3>
-                        <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat iriure vulputate autem vel eum.</p>
+                        <h3>Mildy Wash</h3>
+                        <p>Face moistening foam cleanser oil control charcoal anti black face cleansing cream mild transparent and transparent mining.</p>
                         <a class="text-more-info text-primary-hover" href="">Read more</a>
                     </div>
                 </div>
@@ -211,8 +228,8 @@
                         <i class="fa fa-heart-o fa-3x text-primary"></i>
                     </div>
                     <div class="margin-left-60">
-                        <h3>Our products</h3>
-                        <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat iriure vulputate autem vel eum.</p>
+                        <h3>Sunscreen Cream</h3>
+                        <p>Snow moisturizing cream, sunscreen cream, fresh water, light, refreshing, sunscreen, light and double Nude blemish.</p>
                         <a class="text-more-info text-primary-hover" href="">Read more</a>
                     </div>
                 </div>
@@ -222,8 +239,8 @@
                         <i class="fa fa-question-circle-o fa-3x text-primary"></i>
                     </div>
                     <div class="margin-left-60">
-                        <h3>Why us?</h3>
-                        <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat iriure vulputate autem vel eum.</p>
+                        <h3>Lipstick</h3>
+                        <p>Pure Olive Lip Gloss colorful core,lip balm vitality scarlet sugar nourishing moisturizing, moisturizing, moisturizing and moisturizing.</p>
                         <a class="text-more-info text-primary-hover" href="">Read more</a>
                     </div>
                 </div>
@@ -448,95 +465,7 @@
     <!-- TESTIMONIALS END -->
 
     <!--/start-footer-section-->
-  <%--  <div class="footer-section">
-        <div class="footer-grids">
-            <div class="col-md-3 footer-grid">
-                <h4>最受欢迎</h4>
-                <div class="border2"></div>
-                <p>清透润白系列 「淡斑小瓷瓶」清透润白淡斑亮肤精华乳</p>
-                <p class="sub">焕颜紧致系列 「全明星眼霜」焕颜紧致眼霜.</p>
-                <p class="sub">恒润奇肌保湿系列 「小蓝瓶」恒润奇肌保湿精华液</p>
-                <p class="sub" >相宜本草 「红景天莹」透彻幼白精华乳（亮白乳液护肤）</p>
-            </div>
-            <div class="col-md-3 footer-grid tags">
-                <h4>类别</h4>
-                <div class="border2"></div>
-                <ul class="tag">
-                    <li><a href="#">面 部 洁 白</a></li>
-                    <li><a href="#">防 晒 护 理</a></li>
-                    <li><a href="#">美 妆 护 理</a></li>
-                    <li><a href="#">眼 部 护 理</a></li>
-                    <li><a href="#">保 湿 护 肤</a></li>
-                    <li><a href="#">香 气 怡 人</a></li>
-                    <li><a href="#">全 面 呵 护</a></li>
-                    <li><a href="#">特 别 活 动</a></li>
-                    <li><a href="#">礼品及超值套餐</a></li>
-
-
-                </ul>
-            </div>
-            <div class="col-md-3 footer-grid tweet">
-                <h4>关于我们</h4>
-                <div class="border2"></div>
-                <div class="icon-3-square">
-                    <a href="#"><i class="square-3"></i></a>
-                </div>
-                <div class="icon-text">
-                    <ul>
-                        <li><a href="#">选 择 美 乎</a></li>
-                        <li><a href="#">美 乎 妆 品</a></li>
-                        <li><a href="#">美 乎 中 心</a></li>
-                        <li><a href="#">品 类 选 择</a></li>
-                        <li><a href="#">美 妆 护 理</a></li>
-
-                    </ul>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="icon-3-square">
-                    <a href="#"><i class="square-3"></i></a>
-                </div>
-                <div class="icon-text">
-                    <ul>
-                        <li><a href="#">服 务 中 心</a></li>
-                        <li><a href="#">常 见 问 题</a></li>
-                        <li><a href="#">联 系 我 们</a></li>
-                        <li><a href="#">tel:135-2551-6040</a></li>
-                        <li><a href="#">email:920758051@qq.com</a></li>
-                    </ul>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="col-md-3 footer-grid flickr">
-                <h4>flickr feed</h4>
-                <div class="border2"></div>
-                <div class="flickr-grids">
-                    <div class="flickr-grid">
-                        <a href="#"><img src="<%= basePath%>images/1_06.jpg" alt=""/></a>
-                    </div>
-                    <div class="flickr-grid">
-                        <a href="#"><img src="<%= basePath%>images/4_15.jpg" alt=""/></a>
-                    </div>
-                    <div class="flickr-grid">
-                        <a href="#"><img src="<%= basePath%>images/6_03.jpg" alt=""/></a>
-                    </div>
-                    <div class="clearfix"> </div>
-
-                    <div class="flickr-grid">
-                        <a href="#"><img src="<%= basePath%>images/3_05.jpg" alt=""/></a>
-                    </div>
-                    <div class="flickr-grid">
-                        <a href="#"><img src="<%= basePath%>images/2_04.jpg" alt=""/></a>
-                    </div>
-                    <div class="flickr-grid">
-                        <a href="#"><img src="<%= basePath%>images/5_09.jpg" alt=""/></a>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>--%>
+</div>
     <div class="footer-section">
         <div class="footer-grids">
             <div class="col-md-3 footer-grid">

@@ -32,9 +32,9 @@
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
     <style>
 
-        #tu{
-            width:360px;
-            hight:400px;
+        #imgs{
+            width:220px;
+            hight:220px;
         }
         .icon-text{
             font-family: 华文楷体;
@@ -104,14 +104,6 @@
             width:50px;
             height:50px;
         }
-        #gouwu1{
-            position: relative;
-            height:300px;
-            width:570px;
-            top:-50px;
-            left:350px;
-
-        }
 
     </style>
 
@@ -159,181 +151,55 @@
 
 
 
+
+
+
 <div class="section">
-
-    <!-- heading and description -->
     <div class="line">
-        <div class="fullwidth margin-bottom-20">
-            <h1 class="text-center">我的购物车</h1>
-            <p class="text-center">随心所欲，享受购物</p>
-            <hr class="break-small break-center">
-        </div>
-    </div>
+        <!-- heading -->
 
-    <c:if test="${empty cart||empty cart.cartItems}">
+        <h1 class="text-center"><span class="text-primary">精选</span>商品</h1>
+        <hr class="break-small break-center">
+        <!-- products tabs start -->
+        <div class="tabs">
+            <!-- tab 1 start -->
+            <div class="tab-item tab-active">
+                <%-- <a class="tab-label active-btn">Skin Care</a>--%>
+                <div class="tab-content">
+                    <div class="margin">
 
-        <div class="fullwidth cart-item">
+                        <c:forEach items="${glists}" var="goods">
+                            <div class="s-12 m-4 l-3 margin-bottom-30">
+                                <div class="fullwidth">
+                                    <figure class="imghvr-reveal-down">
 
-            <div class="s-12 m-8 l-9 cart-item-detail">
-                <div id="zi" style="text-align: center"><h6><a href="<%=basePath%>jsp/index.jsp"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img  id="gouwu1"src="<%=basePath%>images/gouwu1.jpg"></a></h6></div>
-            </div>
-        </div>
-    </c:if>
-    <c:if test="${not empty cart.cartItems}">
-    <!-- cart left and right -->
-    <div class="line">
-        <div class="s-12 m-12 l-7">
-            <c:forEach items="${cart.cartItems}" var="cart">
-                <!-- item 1 -->
-                <div class="fullwidth cart-item">
-                    <div class="s-12 m-4 l-3 cart-item-image" id="imgs">
-                        <img src="<%= basePath%>${cart.good.goodpic}"  alt="">
-                    </div>
-                    <div class="s-12 m-8 l-9 cart-item-detail">
-                        <h4>${cart.good.goodname}</h4>
-                        <p>
-                            价格: <span class="strike">Was $150</span> Now ${cart.good.goodprice}<br />
-                            数量: ${cart.count}<br />
-                            总价: <span class="text-primary">${cart.subtotal}</span>
-                        </p>
-                        <p><a href="javascript:void(0);" onclick="removeFromCart('${cart.good.goodid}')" class="remove-item">移除</a></p>
-                    </div>
-                </div>
-            </c:forEach>
+                                        <div id="imgs"><img src='<%=basePath %>${goods.goodpic}'/></div>
 
-        </div>
-        <div id="right">
-            <div class="s-12 m-12 l-4 margin-m-top-60 padding border-1">
-                <p class="margin-bottom text-size-16">配送费: <span class="right">免费</span></p>
-                <p class="margin-bottom text-size-16">总价: <span class="right">${cart.totalprice}</span></p>
-                <a href="<%=basePath %>goods/removeAllCart.action?method=removeAll" class="button">清空购物车</a>&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="<%=basePath %>goods/order.action?method=save" class="button">提交订单</a>
-            </div>
-        </div>
-        </c:if>
-        <script type="text/javascript">
-            function removeFromCart(gid){
-                if(confirm("您确定要删除吗？")){
-                    location.href="<%=basePath %>goods/removecart.action?method=remove&gid="+gid;
-                }
-            }
-
-        </script>
-
-        <!-- cart right -->
-
-    </div>
-</div>
-<!-- PAGE CONTENT END -->
-
-
-<!-- RELATED PRODUCTS START -->
-<div class="section padding-top-0">
-    <div class="line">
-        <div class="margin">
-            <div class="fullwidth margin-bottom-20">
-                <h2 class="text-center">热卖产品</h2>
-                <hr class="break-small break-center">
-            </div>
-
-            <!-- product 1 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/1.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看更多</a>
-                                    </div>
+                                        <figcaption>
+                                            <div class="product-hover-content">
+                                                <div class="btn-box">
+                                                    <a href="<%= basePath%>goods/list.action?goodid=${goods.goodid}" class="btn">查看详情</a>
+                                                </div>
+                                            </div>
+                                        </figcaption>
+                                    </figure>
                                 </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- product 2 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/2.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看更多</a>
-                                    </div>
+                                <div class="fullwidth">
+                                    <h5>${goods.goodname}</h5>
+                                    <p class="text-center"><span class="strike">$600.00</span> &nbsp;&nbsp;现价<span class="text-primary">${goods.goodprice}</span></p>
                                 </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
-                    </div>
-                </div>
-            </div>
+                            </div>
+                        </c:forEach>
 
-            <!-- product 3 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/3.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看更多</a>
-                                    </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- product 4 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/4.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看更多</a>
-                                    </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
                     </div>
                 </div>
             </div>
+            <!-- tab 1 end -->
 
         </div>
     </div>
 </div>
-
-
-
-
 <!--/start-footer-section-->
 <div class="footer-section">
     <div class="footer-grids">

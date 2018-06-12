@@ -8,12 +8,8 @@
     </select>
     <!--public int insertAddress(Address address);-->
     <insert id="insertAddress" parameterType="Address">
-        insert into shop_address(uid,address,addressdetail,receivename,receivetel) values(#{user.uid},#{address},#{addressdetail},#{receivename},#{receivetel})
+        insert into shop_address(uid,address,addressdetail,receivename,receivetel) values(#{uid},#{address},#{addressdetail},#{receivename},#{receivetel})
     </insert>
-   <!-- public void deleteAddress(int addressid);
-    <delete id="deleteAddress" parameterType="int">
-        delete from shop_address where address=#{_parameter}
-    </delete>-->
     <!-- //用户根据地址id删除用户地址
  public void deleteAddressByAddressid(int addressid);-->
     <delete id="deleteAddressByAddressid" parameterType="int">
