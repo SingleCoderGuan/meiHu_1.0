@@ -189,7 +189,7 @@ strict.dtd">
                         <div class="mod-body">
                             <div class="meta">
                                 <span><i class="icon icon-score"></i> 积分 : ${user.point}<em class="aw-text-color-orange"></em></span>
-                                <span><i class="icon icon-agree"></i> 赞同 : <em class="aw-text-color-orange">0</em></span>
+                                <span><i class="icon icon-agree"></i> 赞同 : <em class="aw-text-color-orange">${userlikenum}</em></span>
                             </div>
 
                         </div>

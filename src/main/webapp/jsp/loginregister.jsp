@@ -93,7 +93,7 @@
                             <form id="accountlogin" action="${pageContext.request.contextPath}/loginWithAccount.action" method="post">
                             <p id="one">
 
-                                <input style="position:relative;top: 20px;" type="text" name="uname" value="${userArr[0] }" placeholder="请输入用户名"/>
+                                <input style="position:relative;top: 20px;"  type="text" name="uname" value="${userArr[0] }" placeholder="请输入用户名"/>
                                 <input style="position:relative;top: 20px;" type="password" name="password" value="${userArr[1] }"  placeholder="请输入密码" />
                                 <c:if test="${empty cookie.userInfo.value }">
                                     <input style="position: absolute;left: -100px;top: 152px;" type="checkbox" name="flag" value="1"/>
@@ -118,7 +118,7 @@
                             <form id="textlogin" class="demoform">
                                 <p class="ex" id="two" hidden>
                                     <input style="position:relative;top: 85px;" id="tel" type="text" placeholder="请输入手机号码" />
-                                    <button class="btn_my_send" style="position: relative;top: 98px;" id="vcode" onClick="sendtext()">发送验证码</button>
+                                    <input class="btn_my_login"  id="vcode" style="position: relative;top: 98px;color: #eeeeee;text-align: center;width: 200px" onClick="sendText()" value="发送验证码" />
                                     <input style="position:relative;top: 100px;" id="userCode" type="password" placeholder="请输入验证码" />
                                     <button class="btn_my_login" style="position: relative;top: 120px;" id="tellogin">登录</button>
                                 </p>
@@ -148,7 +148,7 @@ margin-top: 20px;
   width: 180px;
 border: none;
 text-align: left;
-  color: #757575;background-color: #fff" type="password"  value="" name="userpassword" class="inputxt" />
+  color: #757575;background-color: #fff" type="password"  value="" name="password" class="inputxt" />
                         </li>
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
                             <label class="label" style="position: relative;left: -6px;top: 10px;font-size: 14px;color:#996666;width: 80px;">确认密码：</label>
@@ -173,7 +173,7 @@ text-align: left;
                         </li>
 
                         <li style="position: relative;top: 20px;left:-45px;list-style-type:none; ">
-                            <input class="btn_my_login" id="btn" disabled style="position: relative;top: -7px;" type="button" onclick="sendMessage()" value="发送手机短信验证码"/>
+                            <input class="btn_my_login" id="btn" style="position: relative;top: -7px;" type="button" onclick="sendMessage()" value="发送手机短信验证码"/>
                         </li>
                         <li style="position: relative;top: -5px;left:-65px;list-style-type:none; ">
                             <label class="label" style="font-size: 14px;position: relative;top: 10px;color:#996666;">验证码：</label>
@@ -344,7 +344,8 @@ text-align: left;
     var InterValObj; //timer变量，控制时间
     var count = 60; //间隔函数，1秒执行
     var curCount;//当前剩余秒数
-    function sendMessage(){curCount = count;
+    function sendMessage(){
+        curCount = count;
         $("#btn").attr("disabled", "true");
         $("#btn").val(curCount + "秒后可重新发送");
         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
@@ -432,24 +433,25 @@ text-align: left;
     })
 </script>
 <script type="text/javascript">
-    var InterValObj; //timer变量，控制时间
-    var count = 60; //间隔函数，1秒执行
-    var curCount;//当前剩余秒数
-    function sendtext(){curCount = count;
+    var InterValObj1; //timer变量，控制时间
+    var lcount = 60; //间隔函数，1秒执行
+    var lcurCount;//当前剩余秒数
+    function sendText(){
+        lcurCount = lcount;
         $("#vcode").attr("disabled", "true");
-        $("#vcode").val(curCount + "秒后可重新发送");
-        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
+        $("#vcode").val(lcurCount + "秒后可重新发送");
+        InterValObj1 = window.setInterval(SetRemainTime1, 1000); //启动计时器，1秒执行一次请求后台发送验证码 TODO
     }
     //timer处理函数
-    function SetRemainTime() {
-        if (curCount == 0) {
-            window.clearInterval(InterValObj);//停止计时器
+    function SetRemainTime1() {
+        if (lcurCount == 0) {
+            window.clearInterval(InterValObj1);//停止计时器
             $("#vcode").removeAttr("disabled");//启用按钮
             $("#vcode").val("重新发送验证码");
         }
         else {
-            curCount--;
-            $("#vcode").val(curCount + "秒后可重新发送");
+            lcurCount--;
+            $("#vcode").val(lcurCount + "秒后可重新发送");
         }
     }
 </script>
@@ -496,7 +498,6 @@ text-align: left;
 
             };
         };
-
     });
 </script>
 </body>

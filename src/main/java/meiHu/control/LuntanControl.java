@@ -46,7 +46,7 @@ public class LuntanControl {
         Map<String ,Object> cmap=new HashMap<>();
 
         //每页显示的条数
-        int pageSize=2;
+        int pageSize=10;
         //当前的页面默认是首页
         int curPage=1;
         String scurPage=request.getParameter("curPage");
@@ -61,7 +61,6 @@ public class LuntanControl {
         request.setAttribute("pageInfo",pageInfo);
         String tname = luntanService.selectTnameBuTid(tid1);
         request.setAttribute("tname",tname);
-        request.getSession().setAttribute("uid",102);
         request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
 
 

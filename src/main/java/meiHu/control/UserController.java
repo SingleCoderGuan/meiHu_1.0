@@ -69,8 +69,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register.action",method = RequestMethod.POST)
-    public void register(String username ,String userpassword ,String phone,HttpServletRequest request ,HttpServletResponse response ) throws IOException, ServletException {
-        userService.insertUser(username,userpassword,phone,new Date()) ;
+    public void register(String username ,String password ,String phone,HttpServletRequest request ,HttpServletResponse response ) throws IOException, ServletException {
+        userService.insertUser(username,password,phone,new Date()) ;
         response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp?rslt=3");
     }
 
@@ -125,6 +125,7 @@ public class UserController {
         List<ForumPost> postList = postService.selectPostsByUid(uid) ;
         List<ForumUser> focusUsers = userService.findFocusUsersByUid(uid) ;
         List<ForumUser> followers = userService.findFollowersByUid(uid) ;
+        session.setAttribute("userlikenum",userService.selectLikeNumByUid(uid));
         session.setAttribute("collectionList",collectionList);
         session.setAttribute("postList",postList);
         session.setAttribute("focusUsers",focusUsers);

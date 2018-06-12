@@ -21,10 +21,11 @@ public class SendSmsControl {
 	private UserService userService;
 
 	@RequestMapping(value = "resetSend.action",method = RequestMethod.GET)
-	public void resetSend(String phone,HttpServletRequest request, HttpServletResponse response)
+	public void resetSend(String tel,HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
+
 		//根据获取到的手机号发送验证码
-		String code = GetMessageCode.getCode(phone);
+		String code = GetMessageCode.getCode(tel);
 		response.getWriter().print(code);
 
 	}
