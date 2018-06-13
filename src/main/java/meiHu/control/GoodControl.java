@@ -48,7 +48,7 @@ public class GoodControl {
         String categoryId=request.getParameter("categoryid");
         int category=Integer.parseInt(categoryId);
         request.setAttribute("glists",goodService.getGoods(category));
-        request.getRequestDispatcher("jsp/product_lists.jsp").forward(request,response);
+        request.getRequestDispatcher("/jsp/product_lists.jsp").forward(request,response);
     }
     //查看商品详情
     @RequestMapping(value = "/list.action",method={RequestMethod.POST, RequestMethod.GET})
@@ -269,5 +269,6 @@ public class GoodControl {
         int result=refundOrderService.insertDrawbackInfo(ro);
         return result;
     }
+    //查看该类商品的销量，并按销量降序排列
 }
 

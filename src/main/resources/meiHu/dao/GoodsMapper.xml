@@ -15,6 +15,21 @@
             <result column="categoryname" property="categoryname"/>
         </association>
     </resultMap>
+
+
+    <resultMap id="selectGoodsMap" type="Goods">
+        <id column="goodid" property="goodid"/>
+        <result column="goodname" property="goodname"/>
+        <result column="goodpic" property="goodpic"/>
+        <result column="goodprice" property="goodprice"/>
+        <result column="goodstore" property="goodstore"/>
+        <result column="goodaddress" property="goodaddress"/>
+        <result column="gooddetail" property="gooddetail"/>
+        <result column="goodsales" property="goodsales"/>
+        <association property="category" javaType="GoodsCategory">
+            <result column="categoryname" property="categoryname"/>
+        </association>
+    </resultMap>
     <!--public List<Goods> getGoods(int categoryid);-->
     <select id="getGoods" parameterType="int" resultMap="getGoodsMap">
         select g.*,c.categoryname from shop_goods g,shop_category c where g.categoryid=#{_parameter} and c.categoryid=#{_parameter}
@@ -23,6 +38,14 @@
    <!--public Goods getGood(int id);-->
     <select id="getGood" parameterType="int" resultType="Goods">
         select * from shop_goods where goodid=#{_paramter}
+    </select>
+
+    <!--//查询该类商品，并按商品销量的降序排列
+    public List<Goods> selectGoodsBySales(int categoryid);-->
+    <select id="selectGoodsBySales" parameterType="int" resultMap="selectGoodsMap">
+        select g.*,c.categoryname from shop_goods g,shop_category c
+        where g.categoryid=#{_parameter} and c.categoryid=#{_parameter}
+         ORDER BY g.goodsales DESC
     </select>
 
 </mapper>

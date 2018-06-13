@@ -12,10 +12,12 @@
     <meta name="keywords" content="New Trendz Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
     <link href="<%= basePath%>css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="<%= basePath%>css/style.css" rel='stylesheet' type='text/css' />
     <script src="<%= basePath%>js/jquery.min.js"> </script>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700|Cinzel+Decorative:400,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>images/defaultheadpic.png" />
     <style>
         #img{
             position:absolute;
@@ -33,7 +35,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <span class="menu"></span>
     <div class="navbar">
         <a class="menu" href="#"><i class="icon-align-justify"></i></a>
-        <a class="link hme" href="#">
+        <a class="link hme" href="<%=basePath%>jsp/zhuye.jsp">
             <span class="active"><span class="valign"><span class="vertical">首页</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">首页</span></span></span>
         </a>
