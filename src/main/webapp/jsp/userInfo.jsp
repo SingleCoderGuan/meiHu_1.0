@@ -28,6 +28,7 @@
 <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="<%=basePath%>css/user.css" />
 <link rel="stylesheet" href="<%=basePath%>css/user-setting.css" />
+<link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
 <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
 <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>

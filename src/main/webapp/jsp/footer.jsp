@@ -17,6 +17,8 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700|Cinzel+Decorative:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="<%= basePath%>css/myresponsee.css">
     <link rel="stylesheet" href="<%= basePath%>css/style1.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<%= basePath%>css/responsive.css" rel="stylesheet">

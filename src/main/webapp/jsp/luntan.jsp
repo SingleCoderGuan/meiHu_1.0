@@ -20,6 +20,7 @@
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
 
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/font-awesome.css"/>
@@ -32,7 +33,7 @@
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
 
     <script type="text/javascript" src="<%=basePath%>/js/zzsc.js"></script>
-    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/jquery-3.2.1.min.js"></script>
 
 
     <script type="text/javascript" src="//img-cdn-qiniu.dcloud.net.cn/static/js/respond.js"></script>
@@ -482,11 +483,6 @@
                         <!--<h3>置顶</h3>-->
                         <!--</div>-->
                         <div class="aw-mod-body">
-
-                            <a class="sponsor_btn btn top-btn" href="#">
-                                <img src="<%=basePath%>images/zhichi.png"/>
-                                <span style="font-size:13px;">逛逛商城</span>
-                            </a>
                             <a class="sponsor_btn btn top-btn" href="<%=basePath%>luntan/luntanshouye.action?tid=7">
                                 <img src="<%=basePath%>images/daigou.png"/>
                                 <span style="font-size:13px;">看看代购</span>
@@ -627,34 +623,17 @@
 </div>
 
 
-<a class="aw-back-top hidden-xs" href="javascript:;" onclick="$.scrollTo(1, 600, {queue:true});"><i
-        class="fa fa-arrow-up"></i></a>
+
 
 
 <!-- DO NOT REMOVE -->
-<div id="aw-ajax-box" class="aw-ajax-box"></div>
 
-<div style="display:none;" id="__crond">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#__crond').html(unescape('%3Cimg%20src%3D%22' + G_BASE_URL + '/crond/run/1527305624%22%20width%3D%221%22%20height%3D%221%22%20/%3E'));
-        });
 
-    </script>
-</div>
 
 <!-- Escape time: 0.19415783882141 -->
 <script type="text/javascript" id="bdshare_js" data="type=tools"></script>
 <!-- / DO NOT REMOVE -->
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?1aa4e79e9d9a938cfe5605a1d0269239";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
 
 </body>
 </html>

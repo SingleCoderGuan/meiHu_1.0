@@ -30,6 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 window.scrollTo(0, 1);
             }
         </script>
+    <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>/images/defaultheadpic.png" />
 
         <link rel="stylesheet" type="text/css" href="css/slicebox.css" />
         <!-- for banner-->
@@ -57,13 +58,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <nav class="navbar navbar-inverse">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+
                 <a class="navbar-brand" href="#">
-                    <h1 style="width: 140px;">
+                    <h1 style="width: 150px;padding-top: -10px">
                         <img src="images/LOGO.png" height="70px" width="10px"/>
                     </h1>
                 </a>

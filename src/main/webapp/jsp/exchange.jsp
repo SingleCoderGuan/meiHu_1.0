@@ -17,6 +17,7 @@
     <title>兑换专区</title>
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/font-awesome.css"/>

@@ -18,6 +18,7 @@
 
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../css/font-awesome.min.css"/>
@@ -176,7 +177,7 @@
                         </li>
 
                         <li>
-                            <a href="#">美淘</a>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
                         </li>
                         <li>
                             <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
@@ -617,7 +618,8 @@
                                                            <c:if test="${map.key==forumCommentList.cid}">
                                                         <c:forEach items="${map.value}" var="cclist">
                                                         <div class="well">
-                                                            <a href="#">${cclist.user.uname} </a>:${cclist.commenttext}
+                                                            <a href="<%=basePath%>luntan/userdetail.action?uid=${cclist.user.uid}">${cclist.user.uname} </a>:${cclist.commenttext}&nbsp;&nbsp;&nbsp;
+                                                            <a data-toggle="modal" data-target="#exampleModal${forumCommentList.cid}">评论</a>
                                                         </div>
                                                         </c:forEach>
                                                            </c:if>
@@ -748,7 +750,7 @@
                                             </a>
                                         </dt>
                                         <dd class="pull-left">
-                                            <a class="aw-user-name" href="#" data-id="523760">
+                                            <a class="aw-user-name" >
                                                 用户名:${forumPost.user.uname} </a>
                                             <p>
                                                 关注：${focusnum}人
@@ -860,7 +862,7 @@
                                     </style>
                                     <ul class="notice-list">
                                         <li>
-                                            <a target="_blank" href="#">美论美换活动开始了</a>
+                                            <a target="_blank" href="<%=basePath%>jsp/activity.jsp">美论美换活动开始了</a>
                                         </li>
                                     </ul>
 
