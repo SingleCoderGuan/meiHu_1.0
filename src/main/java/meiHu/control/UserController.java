@@ -98,7 +98,6 @@ public class UserController {
     @RequestMapping(value = "/namecheck.action",method = RequestMethod.GET)
     public @ResponseBody String checkUname(String uname,HttpServletRequest request,HttpServletResponse response) throws IOException {
         ForumUser user = userService.findUserByUname(uname);
-        System.out.println(user);
         if(user!=null){
             return "0" ;
         }else{
@@ -119,12 +118,12 @@ public class UserController {
     public void gotoUserCenter(HttpServletRequest request,HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession() ;
         ForumUser user = (ForumUser) session.getAttribute("user");
-        System.out.println(user);
         int uid = user.getUid() ;
         List<ForumPost> collectionList = postService.selectCollectionByUserUid(uid) ;
         List<ForumPost> postList = postService.selectPostsByUid(uid) ;
         List<ForumUser> focusUsers = userService.findFocusUsersByUid(uid) ;
         List<ForumUser> followers = userService.findFollowersByUid(uid) ;
+        session.setAttribute("postsNum",postList.size());
         session.setAttribute("userlikenum",userService.selectLikeNumByUid(uid));
         session.setAttribute("collectionList",collectionList);
         session.setAttribute("postList",postList);
@@ -159,7 +158,6 @@ public class UserController {
 
         ForumPost post = postService.selectPostByPid(pid) ;
         post.setPcontent(post.getPcontent().replace("(\r\n|\r|\n|\n\r)", ""));
-        System.out.println("-----------------"+post);
         request.setAttribute("post",post);
         request.getRequestDispatcher("/jsp/modifyPost.jsp").forward(request,response);
     }
@@ -204,7 +202,10 @@ public class UserController {
         }else{
         }
     }
+    @RequestMapping(value = "/messageList.action",method = RequestMethod.POST)
+    public void messageList(String uid,HttpServletRequest request,HttpServletResponse response){
 
+    }
 
 
 }

@@ -195,10 +195,10 @@ strict.dtd">
                         <div class="mod-footer">
                             <ul class="nav nav-tabs aw-nav-tabs">
                                 <li style="width: 175px;text-align: center">
-                                    <a href="#questions" id="page_questions" data-toggle="tab" style="font-size: 20px">我的帖子<span class="badge">0</span></a>
+                                    <a href="#questions" id="page_questions" data-toggle="tab" style="font-size: 20px">我的帖子<span class="badge" style="font-size: 18px">${postsNum}</span></a>
                                 </li>
                                 <li style="width: 175px;text-align: center">
-                                    <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">我的提醒<span class="badge">0</span></a>
+                                    <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">我的提醒<span class="badge" style="font-size: 18px">0</span></a>
                                 </li>
 
                                 <li style="width: 175px;text-align: center">

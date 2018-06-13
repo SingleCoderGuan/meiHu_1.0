@@ -71,15 +71,4 @@
            WHERE c.user_uid = u.uid and  c.commentid=#{parameter}
     </select>
 
-    <!--public int[] selectAllCidByPid(int pid);-->
-    <select id="selectAllCidByPid" resultType="int" parameterType="int">
-        SELECT cid FROM  forum_comment WHERE post_pid=#{parameter} AND commentid is null
-    </select>
-
-
-    <!--public int selectCommentCommentNum(int cid);-->
-    <select id="selectCommentCommentNum" resultType="int" parameterType="int">
-        select count(*) from forum_comment WHERE commentid=#{parameter};
-    </select>
-
 </mapper>

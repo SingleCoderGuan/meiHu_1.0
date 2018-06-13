@@ -42,4 +42,10 @@ public interface ForumCommentMapper {
     //查询某评论下的评论数量
     public int selectCommentCommentNum(int cid);
 
+    /**
+     * 查询该用户收到的所有评论
+     * @param uid
+     * @return
+     */
+    public List<ForumComment> selectComments(int uid) ;
 }

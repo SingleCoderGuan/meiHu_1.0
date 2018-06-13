@@ -1,5 +1,6 @@
 package meiHu.service;
 
+import meiHu.entity.ForumComment;
 import meiHu.entity.ForumUser;
 
 import java.util.Date;
@@ -74,5 +75,11 @@ public List<ForumUser> selectUsersByTitleId();
     //查询用户收藏数-->
     public int selectCollectionNumByUid(int uid);
 
+    /**
+     * 查询用户收到的评论
+     * @param uid
+     * @return
+     */
+    public List<ForumComment> getMessage(int uid) ;
 
 }
