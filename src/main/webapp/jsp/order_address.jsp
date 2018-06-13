@@ -36,6 +36,8 @@
     <link href="<%=basePath%>css/iconfont.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/common1.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
+
     <style>
         #p{
             text-align: center;

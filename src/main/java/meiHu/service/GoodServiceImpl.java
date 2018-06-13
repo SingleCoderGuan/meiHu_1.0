@@ -25,6 +25,11 @@ public class GoodServiceImpl implements GoodService {
         return goodsMapper.getGood(id);
     }
 
+    @Override
+    public List<Goods> selectGoodsBySales(int categoryid) {
+        return goodsMapper.selectGoodsBySales(categoryid);
+    }
+
   /*  @Override
     public List<Goods> getProducts() {
         return goodsMapper.getProducts();
