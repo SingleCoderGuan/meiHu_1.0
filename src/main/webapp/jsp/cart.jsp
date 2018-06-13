@@ -1,4 +1,3 @@
-<%@ page import="javax.swing.plaf.basic.BasicSpinnerUI" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -6,12 +5,11 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<html>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zxx">
 <head>
     <meta charset="UTF-8">
-    <title>购物车</title>
+    <title>商品详情页面</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -26,6 +24,7 @@
     <link href="<%= basePath%>css/responsive.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
     <script src="<%= basePath%>js/respond.js"></script>
+
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="<%=basePath%>css/iconfont.css" rel="stylesheet"/>
@@ -33,29 +32,29 @@
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
     <style>
 
-        #zi {
-            text-align: center;
+        #tu{
+            width:360px;
+            hight:400px;
         }
         .icon-text{
             font-family: 华文楷体;
 
         }
-
         .icon-text li a{
             color: #ffffff;
         }
         .uc-header-bg{
-            background-color: #dbd2db;
+            background-color: #c0c0bf;
         }
         .logo1{
             position: relative;
-            margin-top:-210px;
+            margin-top:-220px;
             left:-450px;
         }
         nav{
             display: inline-block;
             margin-top:-40px;
-            left:330px;
+            left:340px;
             font-family: 华文楷体;
             font-size: 20px;
             font-weight: bolder;
@@ -70,7 +69,7 @@
             line-height: 50px;
             background-color: #f8fff9;
             display: inline-block;
-            padding: 0 40px;
+            padding: 0 30px;
             position: relative;
             transform-origin:top;
             transition:all 1s;
@@ -94,37 +93,61 @@
         nav a:hover span{
             transform:rotateX(90deg) translateY(-20px);
         }
+        #jia {
+            position: absolute;
+            float: left;
+            margin-left: 100px;
+            width: 50px;
+            height: 50px;
+        }
+        #jian{
+            width:50px;
+            height:50px;
+        }
+        #gouwu1{
+            position: relative;
+            height:300px;
+            width:570px;
+            top:-50px;
+            left:350px;
 
-
+        }
 
     </style>
+
+
 </head>
 
 <body class="size-1140">
 
+
+<!-- SLIDESHOW START -->
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
-            <img src="<%=basePath%>images/u8.png" style="height: 90px;width: 180px;" alt="" /></a></div>
+            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 180px;height:120px;" alt="" /></a></div>
 
     </div>
     <nav>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=2">
             <span data-hover="香水">香水</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=5">
             <span data-hover="眼霜">眼霜</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=3">
             <span data-hover="洁面乳">洁面乳</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=4">
             <span data-hover="防晒霜">防晒霜</span>
         </a>
-        <a href="">
+        <a href="<%= basePath %>goods/glist.action?categoryid=1">
             <span data-hover="口红">口红</span>
         </a>
-        <a href="<%=basePath%>jsp/mh-address.jsp">
+        <a href="<%= basePath %>goods/glist.action?categoryid=6">
+            <span data-hover="水乳">水乳</span>
+        </a>
+        <a href="<%=basePath%>jsp/mh-orders.jsp">
             <span data-hover="个人中心">个人中心</span>
         </a>
         <a href="<%=basePath%>jsp/cart.jsp">
@@ -132,7 +155,10 @@
         </a>
     </nav>
 </div>
-<!-- PAGE CONTENT START -->
+<!-- SLIDESHOW END -->
+
+
+
 <div class="section">
 
     <!-- heading and description -->
@@ -149,19 +175,20 @@
         <div class="fullwidth cart-item">
 
             <div class="s-12 m-8 l-9 cart-item-detail">
-                <div id="zi" style="text-align: center"><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    购物车里空空如也，快快逛逛吧！！！！</h6></div>
+                <div id="zi" style="text-align: center"><h6><a href="<%=basePath%>jsp/index.jsp"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img  id="gouwu1"src="<%=basePath%>images/gouwu1.jpg"></a></h6></div>
             </div>
         </div>
     </c:if>
     <c:if test="${not empty cart.cartItems}">
     <!-- cart left and right -->
     <div class="line">
-        <div class="s-12 m-12 l-8">
+        <div class="s-12 m-12 l-7">
             <c:forEach items="${cart.cartItems}" var="cart">
                 <!-- item 1 -->
                 <div class="fullwidth cart-item">
-                    <div class="s-12 m-4 l-3 cart-item-image">
+                    <div class="s-12 m-4 l-3 cart-item-image" id="imgs">
                         <img src="<%= basePath%>${cart.good.goodpic}"  alt="">
                     </div>
                     <div class="s-12 m-8 l-9 cart-item-detail">
@@ -303,7 +330,9 @@
         </div>
     </div>
 </div>
-<!-- RELATED PRODUCTS END -->
+
+
+
 
 <!--/start-footer-section-->
 <div class="footer-section">
@@ -315,7 +344,6 @@
             <p class="sub">焕颜紧致系列 「全明星眼霜」焕颜紧致眼霜.</p>
             <p class="sub">恒润奇肌保湿系列 「小蓝瓶」恒润奇肌保湿精华液</p>
             <p class="sub" >相宜本草 「红景天莹」透彻幼白精华乳（亮白乳液护肤）</p>
-            <p class="sub" >百雀羚 「至臻皙白」晶亮焕肤乳液（补水保湿 美白焕肤）</p>
         </div>
         <div class="col-md-3 footer-grid tags">
             <h4>类别</h4>
@@ -401,15 +429,16 @@
 <div class="copyright">
     <p class="write">Copyright &copy; 2018 All rights  Reserved | Design by <a href="#">美乎网</a></p>
 </div>
-</div>
-</div>
+
+
+<!--//end-footer-section-->
+<!--/start-copyright-section-->
 
 <!-- jQuery Files -->
 <script type="text/javascript" src="<%= basePath%>js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="<%= basePath%>js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%= basePath%>owl-carousel/owl.carousel.js"></script>
 <script type="text/javascript" src="<%= basePath%>js/custom.js"></script>
-
 <script src="<%=basePath%>js/jquery.js"></script>
 <link rel="stylesheet" href="<%=basePath%>css/style2.css"/>
 <script src="<%=basePath%>js/icheck.min.js"></script>
@@ -417,7 +446,7 @@
 <script src="<%=basePath%>js/global.js"></script>
 
 
+
 </body>
 </html>
-
 

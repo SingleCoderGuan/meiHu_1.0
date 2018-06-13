@@ -103,13 +103,58 @@
             <!-- end logo -->
             <!-- 搜索框 -->
             <div class="aw-search-box  hidden-xs hidden-sm">
-                <form class="navbar-search pull-right" action="#" id="global_search_form" method="post">
+                <form class="navbar-search pull-right" action="<%=basePath%>search/searchReasult.action" id="global_search_form" method="post">
                     <div class="input-group">
                         <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off"
                                name="q" id="aw-search-query" class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
-                              onClick="$('#global_search_form').submit();"><i class="fa fa-search"></i></span>
-                        <div class="clearfix"></div>
+                              onClick="$('#global_search_form').submit();">搜索</span>
+                        <div id="context1" style="background-color:white; border: 1px solid deepskyblue;width:167px;
+                                position: absolute;top: 36px;left:0px;display:none" ></div>
+                        <script>
+                            $("#aw-search-query").keyup(function(){
+                                var content=$(this).val();
+                                //如果当前搜索内容为空，无须进行查询
+                                if(content==""){
+                                    $("#context1").css("display","none");
+                                    return ;
+                                }
+                                //由于浏览器的缓存机制 所以我们每次传入一个时间
+                                var time=new Date().getTime();
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                    type:"post",
+                                    url:"${pageContext.request.contextPath}/search/automatch.action",
+                                    data:{name:content,time:time},
+                                    success:function(data){
+                                        //拼接html
+                                        var res=data.split(",");
+                                        var html="";
+                                        for(var i=0;i<res.length;i++){
+                                            //每一个div还有鼠标移出、移入点击事件
+                                            html+="<div onclick='setSearch_onclick(this)' onmouseout='changeBackColor_out(this)' onmouseover='changeBackColor_over(this)'>"+res[i]+"</div>";
+                                        }
+                                        $("#context1").html(html);
+                                        //显示为块级元素
+                                        $("#context1").css("display","block");
+                                    }
+                                });
+                            });
+
+                            //鼠标移动到内容上
+                            function changeBackColor_over(div){
+                                $(div).css("background-color","#CCCCCC");
+                            }
+                            //鼠标离开内容
+                            function changeBackColor_out(div){
+                                $(div).css("background-color","");
+                            }
+                            //将点击的内容放到搜索框
+                            function setSearch_onclick(div){
+                                $("#aw-search-query").val(div.innerText);
+                                $("#context1").css("display","none");
+                            }
+                        </script>
 
                     </div>
                 </form>
@@ -128,19 +173,17 @@
                     <ul class="nav navbar-nav">
 
                         <li class="nav-current" role="presentation">
-                            <a href="luntanshouyetest.html">美论首页</a>
+                            <a href="<%=basePath%>jsp/zhuye.jsp">美乎</a>
                         </li>
                         <li>
-                            <a href="index.html">美乎</a>
+                            <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论</a>
+                        </li>
+
+                        <li>
+                            <a href="#">美淘</a>
                         </li>
                         <li>
-                            <a href="#">美购</a>
-                        </li>
-                        <li>
-                            <a href="#">美商城</a>
-                        </li>
-                        <li>
-                            <a href="#">活动</a>
+                            <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
 
                         <li>
@@ -156,10 +199,16 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-							<a href="#"><img src="<%=basePath%>images/touxiang1.png"/>欢迎您：美乎小编 </a>
+                    <c:if test="${not empty sessionScope.user}">
+                        <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                    </c:if>
+                    <c:if test="${empty sessionScope.user}">
+                        <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
+                        <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
+                    </c:if>
 
-                    <!--<a href="#">注册</a>
-                    <a href="#">登录</a>-->
+
 						</span>
 
                 <!-- end 登陆&注册栏 -->
@@ -180,11 +229,11 @@
                     <div class="aw-nav-filter">
                         <div class="mod-head clearfix">
                             <h2 class="pull-left"><i class="icon icon-users"></i>美论美换兑换专区(以下券均为全场通用)</h2>
-                            <c:if test="${empty sessionScope.uid}">
+                            <c:if test="${empty sessionScope.user.uid}">
                                 <h1 class="pull-right">登录即可查看积分</h1>
 
                             </c:if>
-                            <c:if test="${not empty sessionScope.uid}">
+                            <c:if test="${not empty sessionScope.user.uid}">
                                 <h1 class="pull-right">您当前剩余积分<strong>${point}</strong>分</h1>
 
                             </c:if>
@@ -237,15 +286,15 @@
                                     <script>
                                         function duihuan(offidd) {
 
-                                            <c:if test="${empty sessionScope.uid}">
+                                            <c:if test="${empty sessionScope.user.uid}">
                                             alert("亲，请先登录");
                                             </c:if>
-                                            <c:if test="${not empty sessionScope.uid}">
+                                            <c:if test="${not empty sessionScope.user.uid}">
 
                                             $.ajax({
                                                 type: "post",
                                                 url: "${pageContext.request.contextPath}/duihuan.action",
-                                                data: "uidd=" + ${sessionScope.uid} + "&offidd=" + offidd+"&pointt="+${point}),
+                                                data: "uidd=" + ${sessionScope.user.uid} + "&offidd=" + offidd+"&pointt="+${point},
                                                 success: function (result) {
                                                     if (result == 1) {
                                                         alert("兑换成功");

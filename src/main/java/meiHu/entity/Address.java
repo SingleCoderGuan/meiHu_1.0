@@ -66,4 +66,16 @@ public class Address {
     public void setUid(Integer uid) {
         this.uid = uid;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "addressid=" + addressid +
+                ", address='" + address + '\'' +
+                ", addressdetail='" + addressdetail + '\'' +
+                ", receivename='" + receivename + '\'' +
+                ", receivetel='" + receivetel + '\'' +
+                ", uid=" + uid +
+                '}';
+    }
 }

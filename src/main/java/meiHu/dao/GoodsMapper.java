@@ -11,7 +11,5 @@ public interface GoodsMapper {
     public List<Goods> getGoods(int categoryid);
     //根据商品id，查询商品详情
     public Goods getGood(int id);
-    //查询全部商品信息
-    //public List<Goods> getProducts();
 
 }

@@ -34,21 +34,15 @@
 
 
 
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 
-    <script type="text/javascript" src="js/main.js"></script>
+    <%--<script type="text/javascript" src="../js/main.js"></script>--%>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
 
 
     <link rel="alternate" type="application/rss+xml" title="美乎" href="#" />
 
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "luntanshouyetest.html";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+
 </head>
 <body class="home-template">
 
@@ -59,11 +53,10 @@
             <div class="col-sm-12">
 
                 <!-- start logo -->
-                <a class="branding" href="index.html" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
+                <a class="branding" href="<%=basePath%>jsp/zhuye.jsp"" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
                 <!-- end logo -->
                 <h2 style="color: black; font-family: '本墨锵黑';">姐妹们，争做时尚最前沿</h2>
 
-                <img src="http://static.ghostchina.com/image/6/d1/fcb3879e14429d75833a461572e64.jpg" alt="Ghost 博客系统" class="hide">
             </div>
         </div>
     </div>
@@ -83,13 +76,14 @@
                 </div>
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
-                        <li class="nav-current" role="presentation"><a href="luntanshouyetest.html">美论首页</a></li>
-                        <li  role="presentation"><a href="#">美乎</a></li>
+                        <li class="nav-current" role="presentation"><a href="<%=basePath%>article/article.action">美文首页</a></li>
+                        <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美乎</a></li>
 
                         <li  role="presentation"><a href="#">美淘</a></li>
                         <li  role="presentation"><a href="<%=basePath%>exchange.action">兑换</a></li>
 
                         <li  role="presentation"><a href="#">关于</a></li>
+
                     </ul>
                 </div>
             </div>
@@ -194,8 +188,8 @@
                     <h4 class="title">社区</h4>
                     <div class="content community">
                         <p>QQ群：123456789</p>
-                        <p><a href="bankuan.html" title="问答社区" target="_blank" onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '问答社区'])"><i class="fa fa-comments"></i> 问答社区</a></p>
-                        <p><a href="index.html" title="官方微博" target="_blank" onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '官方微博'])"><i class="fa fa-weibo"></i> 官方微博</a></p>
+                        <p><a href="<%=basePath%>luntan/luntanshouye.action?tid=1" title="美乎社区" target="_blank" onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '问答社区'])"><i class="fa fa-comments"></i> 问答社区</a></p>
+                        <p><a href="https://weibo.com/?topnav=1&mod=logo" title="官方微博" target="_blank" onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '官方微博'])"><i class="fa fa-weibo"></i> 官方微博</a></p>
                     </div>
                 </div>
                 <!-- end tag cloud widget -->
@@ -204,9 +198,33 @@
                 <div class="widget">
                     <h4 class="title">每日签到</h4>
                     <div class="content download">
-                        <a href="#" class="btn btn-default btn-block" onclick="qiandao()">点我签到</a>
+                        <a href="#" class="btn btn-default btn-block" onclick="sign()">点我签到</a>
                     </div>
                 </div>
+                <script>
+                    function sign(){
+                        <c:if test="${empty sessionScope.user.uid}">
+                        alert("亲，请先登录");
+                        window.location.href="<%=basePath%>jsp/loginregister.jsp";
+                        </c:if>
+                        <c:if test="${not empty sessionScope.user.uid}">
+                        $.ajax({
+                            type:"post",
+                            url: "${pageContext.request.contextPath}/article/sign.action",
+                            data: "uid=" + ${ sessionScope.user.uid},
+                            success: function (result) {
+                                if (result == 1) {
+                                    alert("签到成功！！");
+                                    window.load();
+                                }
+                                else if (result == 0) {
+                                    alert("您今日已经签到了亲！！");
+                                }
+                            }
+                        });
+                        </c:if>
+                    }
+                </script>
                 <!-- end widget -->
                 <style>
                     #div1{height:400px;width:200px; position:relative; margin:10px auto;}
@@ -286,20 +304,13 @@
                 <div class="widget">
                     <h4 class="title">标签云</h4>
                     <div class="content tag-cloud">
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
-                        <a>水乳</a>
+                        <a href="#">水乳</a>
+                        <a href="#">防晒</a>
+                        <a href="#">口红</a>
+                        <a href="#">香奈儿</a>
+                        <a href="#">兰蔻</a>
+                        <a href="#">小黑瓶</a>
+                        <a href="#">美肤宝</a>
 
                         <a href="/tag-cloud/">...</a>
                     </div>
@@ -339,40 +350,14 @@
 
 <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdn.bootcss.com/fitvids/1.1.0/jquery.fitvids.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/8.5/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
-<script src="js/main.js"></script>
-<script>
-    $(function(){
-        $('.post-content img').each(function(item){
-            var src = $(this).attr('src');
 
-            $(this).wrap('<a href="' + src + '" class="mfp-zoom" style="display:block;"></a>');
-        });
 
-        /*$('.post-content').magnificPopup({
-          delegate: 'a',
-          type: 'image'
-        });*/
-    });
-</script>
 
 <script>
     window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 </script>
 
-<script>
-    $(function(){
-        var version = '0.7.4';
-        var $download =  $('.download > a').first();
-        var html = $download.html().replace(/\d\.\d\.\d/, version);
 
-        $download.html(html);
-    });
-</script>
 
 </body>
 </html>

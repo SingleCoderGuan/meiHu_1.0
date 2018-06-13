@@ -10,8 +10,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-   // String tid = request.getParameter("tid");
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    // String tid = request.getParameter("tid");
 %>
 <html>
 <head>
@@ -39,9 +39,27 @@
     <![endif]-->
 </head>
 <style>
-    #div1{height:400px;width:200px; position:relative; margin:10px auto;}
-    #div1 a{position:absolute;top:0px;left:0px;color:#fff;font-weight:bold;padding:3px 6px;}
-    #div1 a:hover{border:1px solid #eee;background:#000;border-radius:5px;}
+    #div1 {
+        height: 400px;
+        width: 200px;
+        position: relative;
+        margin: 10px auto;
+    }
+
+    #div1 a {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        color: #fff;
+        font-weight: bold;
+        padding: 3px 6px;
+    }
+
+    #div1 a:hover {
+        border: 1px solid #eee;
+        background: #000;
+        border-radius: 5px;
+    }
 </style>
 <style type="text/css">
     .sponsor .sponsor-level {
@@ -104,19 +122,65 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="http://localhost:8080/meiHu/"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+                <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>images/LOGO.png"
+                                                             style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
             <div class="aw-search-box  hidden-xs hidden-sm">
-                <form class="navbar-search pull-right" action="#" id="global_search_form" method="post">
+                <form class="navbar-search pull-right" action="<%=basePath%>search/searchReasult.action" id="global_search_form" method="post">
                     <div class="input-group">
                         <input value="" class="form-control" type="text"
                                placeholder="搜索问题、话题" autocomplete="off" name="q" id="aw-search-query"
                                class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
                               onClick="$('#global_search_form').submit();">搜索</span>
-                        <div class="clearfix"></div>
+                        <div id="context1" style="background-color:white; border: 1px solid deepskyblue;width:167px;
+                                position: absolute;top: 36px;left:0px;display:none" ></div>
+                        <script>
+                            $("#aw-search-query").keyup(function(){
+                                var content=$(this).val();
+                                //如果当前搜索内容为空，无须进行查询
+                                if(content==""){
+                                    $("#context1").css("display","none");
+                                    return ;
+                                }
+                                //由于浏览器的缓存机制 所以我们每次传入一个时间
+                                var time=new Date().getTime();
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                    type:"post",
+                                    url:"${pageContext.request.contextPath}/search/automatch.action",
+                                    data:{name:content,time:time},
+                                    success:function(data){
+                                        //拼接html
+                                        var res=data.split(",");
+                                        var html="";
+                                        for(var i=0;i<res.length;i++){
+                                            //每一个div还有鼠标移出、移入点击事件
+                                            html+="<div onclick='setSearch_onclick(this)' onmouseout='changeBackColor_out(this)' onmouseover='changeBackColor_over(this)'>"+res[i]+"</div>";
+                                        }
+                                        $("#context1").html(html);
+                                        //显示为块级元素
+                                        $("#context1").css("display","block");
+                                    }
+                                });
+                            });
+
+                            //鼠标移动到内容上
+                            function changeBackColor_over(div){
+                                $(div).css("background-color","#CCCCCC");
+                            }
+                            //鼠标离开内容
+                            function changeBackColor_out(div){
+                                $(div).css("background-color","");
+                            }
+                            //将点击的内容放到搜索框
+                            function setSearch_onclick(div){
+                                $("#aw-search-query").val(div.innerText);
+                                $("#context1").css("display","none");
+                            }
+                        </script>
 
                     </div>
                 </form>
@@ -143,7 +207,7 @@
                         </li>
 
                         <li>
-                            <a href="#">美淘</a>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
                         </li>
                         <li>
                             <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
@@ -154,7 +218,6 @@
                         </li>
 
 
-
                     </ul>
                 </nav>
             </div>
@@ -163,11 +226,11 @@
             <div class="aw-user-nav" style="width: 250px">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <c:if test="${!empty user}">
-                        <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 60px;top: -55px;">注销</a>
-                    </c:if>
-                    <c:if test="${empty user}">
+                     <c:if test="${not empty sessionScope.user}">
+                         <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                         <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                     </c:if>
+                    <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
                         <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
                     </c:if>
@@ -195,14 +258,15 @@
             <div class="row category">
                 <div class="col-sm-12">
                     <c:forEach items="${topicList1}" var="topicList1">
-                    <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList1.tid}">
-                        <dl style="text-align: center">
-                            <dt><img src="<%=basePath%>images/${topicList1.tpicname}" style="position: relative;left: 30px;"/></dt>
-                            <dd>
-                                <p class="title"><a href="#">${topicList1.tname}</a></p>
-                            </dd>
-                        </dl>
-                    </a>
+                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList1.tid}">
+                            <dl style="text-align: center">
+                                <dt><img src="<%=basePath%>images/${topicList1.tpicname}"
+                                         style="position: relative;left: 30px;"/></dt>
+                                <dd>
+                                    <p class="title"><a href="#">${topicList1.tname}</a></p>
+                                </dd>
+                            </dl>
+                        </a>
                     </c:forEach>
 
                 </div>
@@ -246,7 +310,7 @@
         <!--可能需要父级套一个div来调整在不同容器下的整体宽度-->
 
 
-        <br />
+        <br/>
         <div class="container">
             <div class="row aw-content-wrap">
                 <div class="col-sm-12 col-md-9 aw-main-content aw-all-question">
@@ -254,13 +318,13 @@
                     <ul class="nav nav-tabs aw-reset-nav-tabs hidden-xs">
 
                         <li>
-                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=tuijian&tid=<%=request.getParameter("tid")%>" >推荐</a>
+                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=tuijian&tid=<%=request.getParameter("tid")%>">推荐</a>
                         </li>
                         <li>
-                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=zuixin&tid=<%=request.getParameter("tid")%>" >最新</a>
+                            <a href="<%=basePath%>luntan/tiaojian.action?tiaojian=zuixin&tid=<%=request.getParameter("tid")%>">最新</a>
                         </li>
 
-                        <h2 class="hidden-xs"> ……姑娘清留步  这是${tname}区</h2>
+                        <h2 class="hidden-xs"> ……姑娘清留步 这是${tname}区</h2>
                     </ul>
                     <!-- end tab切换 -->
 
@@ -289,33 +353,34 @@
                                         top: 0px;
                                     }
                                 </style>
-                                <c:forEach var="postList" items="${pageInfo.list}"  varStatus="status">
+                                <c:forEach var="postList" items="${pageInfo.list}" varStatus="status">
 
-                                <div class="aw-item ">
-                                    <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
-                                       <%-- <img src="<%=basePath%>images/touxiang1.png" alt="" />--%>
-                                        <%--<span style="font-size: 40px "><strong>${status.index+1}</strong></span>--%>
-                                           <img style="width: 50px" src="<%=basePath%>${postList.user.headpic}"/>
-                                    </a>
+                                    <div class="aw-item ">
+                                        <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
+                                                <%-- <img src="<%=basePath%>images/touxiang1.png" alt="" />--%>
+                                                <%--<span style="font-size: 40px "><strong>${status.index+1}</strong></span>--%>
+                                            <img style="width: 50px" src="<%=basePath%>${postList.user.headpic}"/>
+                                        </a>
 
-                                    <div class="aw-question-content">
-                                        <h4>
-                                            <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
-                                        </h4>
-                                        <p>
+                                        <div class="aw-question-content">
+                                            <h4>
+                                                <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
+                                            </h4>
+                                            <p>
 							<span class="aw-question-tags">
 					<i class="fa fa-caret-left"></i>
 					<a href="#">${postList.topic.tname}</a><%--标签--%>
-                                <input name="curTid" id="curTid" value="${postList.topic.tid}" hidden />
+                                <input name="curTid" id="curTid" value="${postList.topic.tid}" hidden/>
 				</span> •
-                                            <a href="#" class="aw-user-name" >${postList.user.uname}</a>
-                                            <span class="aw-text-color-999" >${postList.likecount}次点赞  •
-                                                    ${postList.visitcount} 次浏览 •<fmt:formatDate value='${postList.createtime}'
-                                                                                                pattern='yyyy-MM-dd hh:mm:ss'/>   </span>
-                                        </p>
+                                                <a href="#" class="aw-user-name">${postList.user.uname}</a>
+                                                <span class="aw-text-color-999">${postList.likecount}次点赞  •
+                                                    ${postList.visitcount} 次浏览 •<fmt:formatDate
+                                                            value='${postList.createtime}'
+                                                            pattern='yyyy-MM-dd hh:mm:ss'/>   </span>
+                                            </p>
 
+                                        </div>
                                     </div>
-                                </div>
 
                                 </c:forEach>
                                 <!--底部Google 信息流广告-->
@@ -323,40 +388,41 @@
                         </div>
                     </div>
 
-                    <form id="mainForm" action="<%=basePath%>luntan/luntanshouye.action?tid=<%= request.getParameter("tid")%>" method="post" >
-                        <input hidden name="curPage" id="curPage" />
-                        <input hidden name="tid" id="tid" />
+                    <form id="mainForm"
+                          action="<%=basePath%>luntan/luntanshouye.action?tid=<%=request.getParameter("tid")%>"
+                          method="post">
+                        <input hidden name="curPage" id="curPage"/>
+                        <input hidden name="tid" id="tid"/>
                     </form>
                     <div class="page-control clearfix">
                         <ul class="pagination pull-right">
                             <li>
                                 <c:if test="${!pageInfo.isFirstPage}">
 
-                                <a href="javascript:getPage(${pageInfo.firstPage})">首页</a>
+                                    <a href="javascript:getPage(${pageInfo.firstPage})">首页</a>
                                 </c:if>
 
                                 <c:if test="${!pageInfo.isFirstPage}">
-                                <a href="javascript:getPage(${pageInfo.prePage})">上一页</a>
+                                    <a href="javascript:getPage(${pageInfo.prePage})">上一页</a>
                                 </c:if>
                                 <a> 共 ${pageInfo.total}条
                                     当前第<span>${pageInfo.pageNum}</span>页</a>
                                 <c:if test="${!pageInfo.isLastPage}">
-                                <a href="javascript:getPage(${pageInfo.nextPage})">下一页</a>
+                                    <a href="javascript:getPage(${pageInfo.nextPage})">下一页</a>
                                 </c:if>
                                 <c:if test="${!pageInfo.isLastPage}">
-                                <a href="javascript:getPage(${pageInfo.lastPage})">末页</a>
+                                    <a href="javascript:getPage(${pageInfo.lastPage})">末页</a>
                                 </c:if>
 
                             </li>
                         </ul>
-
                     </div>
                 </div>
                 <script>
                     function getPage(curPage) {
-                        document.getElementById("tid").value=document.getElementById("curTid").value ;
+                        document.getElementById("tid").value = document.getElementById("curTid").value;
                         //将隐藏域的值变成curPage
-                        document.getElementById("curPage").value=curPage;
+                        document.getElementById("curPage").value = curPage;
                         //触发表单的提交事件
                         document.getElementById("mainForm").submit();
                     }
@@ -428,44 +494,43 @@
                         </div>
                     </div>
 
-                            <div class="aw-side-bar-mod">
-                                <div class="aw-mod-head">
-                                    <h3>热门</h3>
-                                </div>
-                                <div class="aw-mod-body" style="background-color: pink" >
+                    <div class="aw-side-bar-mod">
+                        <div class="aw-mod-head">
+                            <h3>热门</h3>
+                        </div>
+                        <div class="aw-mod-body" style="background-color: pink">
 
 
-                                    <div id="div1">
-                                        <a href="#" target="_blank">水乳</a>
-                                        <a href="#" target="_blank">美肤宝</a>
-                                        <a href="#" target="_blank">口红</a>
-                                        <a href="#" target="_blank">香奈儿</a>
-                                        <a href="#" target="_blank">Mac</a>
-                                        <a href="#" target="_blank">杨树林</a>
-                                        <a href="#" target="_blank">防晒霜</a>
-                                        <a href="#" target="_blank">香水</a>
-                                        <a href="#" target="_blank">迪奥</a>
-                                        <a href="#" target="_blank">阿玛尼</a>
-                                        <a href="#" target="_blank">兰蔻</a>
-                                        <a href="#" target="_blank">小黑瓶</a>
-                                        <a href="#" target="_blank">水乳</a>
-                                        <a href="#" target="_blank">美肤宝</a>
-                                        <a href="#" target="_blank">口红</a>
-                                        <a href="#" target="_blank">香奈儿</a>
-                                        <a href="#" target="_blank">Mac</a>
-                                        <a href="#" target="_blank">杨树林</a>
-                                        <a href="#" target="_blank">防晒霜</a>
-                                        <a href="#" target="_blank">香水</a>
-                                        <a href="#" target="_blank">迪奥</a>
-                                        <a href="#" target="_blank">阿玛尼</a>
-                                        <a href="#" target="_blank">兰蔻</a>
-                                        <a href="#" target="_blank">小黑瓶</a>
+                            <div id="div1">
+                                <a href="#" target="_blank">水乳</a>
+                                <a href="#" target="_blank">美肤宝</a>
+                                <a href="#" target="_blank">口红</a>
+                                <a href="#" target="_blank">香奈儿</a>
+                                <a href="#" target="_blank">Mac</a>
+                                <a href="#" target="_blank">杨树林</a>
+                                <a href="#" target="_blank">防晒霜</a>
+                                <a href="#" target="_blank">香水</a>
+                                <a href="#" target="_blank">迪奥</a>
+                                <a href="#" target="_blank">阿玛尼</a>
+                                <a href="#" target="_blank">兰蔻</a>
+                                <a href="#" target="_blank">小黑瓶</a>
+                                <a href="#" target="_blank">水乳</a>
+                                <a href="#" target="_blank">美肤宝</a>
+                                <a href="#" target="_blank">口红</a>
+                                <a href="#" target="_blank">香奈儿</a>
+                                <a href="#" target="_blank">Mac</a>
+                                <a href="#" target="_blank">杨树林</a>
+                                <a href="#" target="_blank">防晒霜</a>
+                                <a href="#" target="_blank">香水</a>
+                                <a href="#" target="_blank">迪奥</a>
+                                <a href="#" target="_blank">阿玛尼</a>
+                                <a href="#" target="_blank">兰蔻</a>
+                                <a href="#" target="_blank">小黑瓶</a>
 
 
-
-                                    </div>
-                                </div>
                             </div>
+                        </div>
+                    </div>
 
                     <div class="aw-side-bar-mod">
                         <div class="ad-item">
@@ -519,18 +584,18 @@
                                 </dd>
                             </dl>
                             <c:forEach items="${userlist}" var="userlist" begin="0" end="4" step="1">
-                            <dl>
-                                <dt class="pull-left aw-border-radius-5">
-                                    <a href=""><img alt="" src="<%=basePath%>images/touxiang1.png"/></a>
-                                </dt>
-                                <dd class="pull-left">
-                                    <a href="" data-id="15" class="aw-user-name">${userlist.uname}<i class="aw-icon i-v i-ve"></i>
-                                    </a>
-                                    <p>${userlist.title.title}</p>
-                                </dd>
-                            </dl>
+                                <dl>
+                                    <dt class="pull-left aw-border-radius-5">
+                                        <a href=""><img alt="" src="<%=basePath%>images/touxiang1.png"/></a>
+                                    </dt>
+                                    <dd class="pull-left">
+                                        <a href="" data-id="15" class="aw-user-name">${userlist.uname}<i
+                                                class="aw-icon i-v i-ve"></i>
+                                        </a>
+                                        <p>${userlist.title.title}</p>
+                                    </dd>
+                                </dl>
                             </c:forEach>
-
 
 
                         </div>

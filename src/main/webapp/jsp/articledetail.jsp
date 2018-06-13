@@ -51,7 +51,7 @@
             <div class="col-sm-12">
 
                 <!-- start logo -->
-                <a class="branding" href="http://localhost:8080/meiHu/" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
+                <a class="branding" href="<%=basePath%>jsp/zhuye.jsp"" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
                 <!-- end logo -->
                 <h2 style="color: black; font-family: '本墨锵黑';">姐妹们，争做时尚最前沿</h2>
 
@@ -75,7 +75,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
-                        <li class="nav-current" role="presentation"><a href="#">美文首页</a></li>
+                        <li class="nav-current" role="presentation"><a href="<%=basePath%>article/article.action">美文首页</a></li>
                         <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美乎</a></li>
 
                         <li  role="presentation"><a href="">美淘</a></li>
@@ -174,21 +174,21 @@
                 <div class="widget">
                     <h4 class="title">每日签到</h4>
                     <div class="content download">
-                        <a href="#" class="btn btn-default btn-block" onclick="sign(${uid})">点我签到</a>
+                        <a href="#" class="btn btn-default btn-block" onclick="sign()">点我签到</a>
                     </div>
                 </div>
                 <script>
 
-                    function sign(uidd){
-                        <c:if test="${empty sessionScope.uid}">
+                    function sign(){
+                        <c:if test="${empty sessionScope.user.uid}">
                         alert("亲，请先登录");
                         window.location.href="<%=basePath%>jsp/loginregister.jsp";
                         </c:if>
-                        <c:if test="${not empty sessionScope.uid}">
+                        <c:if test="${not empty sessionScope.user.uid}">
                         $.ajax({
                             type:"post",
                             url: "${pageContext.request.contextPath}/article/sign.action",
-                            data: "uid=" + uidd,
+                            data: "uid=" + ${sessionScope.user.uid},
                             success: function (result) {
                                 if (result == 1) {
                                     alert("签到成功！！");
@@ -326,32 +326,12 @@
 
 <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdn.bootcss.com/fitvids/1.1.0/jquery.fitvids.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/8.5/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
-<script src="js/main.js"></script>
-<script>
-    $(function(){
-        $('.post-content img').each(function(item){
-            var src = $(this).attr('src');
-
-            $(this).wrap('<a href="' + src + '" class="mfp-zoom" style="display:block;"></a>');
-        });
-
-        /*$('.post-content').magnificPopup({
-          delegate: 'a',
-          type: 'image'
-        });*/
-    });
-</script>
 
 <script>
     window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 </script>
 
-<
+
 
 </body>
 </html>

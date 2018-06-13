@@ -64,5 +64,15 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.getDoneOrder(uid);
     }
 
+    @Override
+    public Order selectOrderById(int orderid) {
+        return orderMapper.showOrderById(orderid);
+    }
+
+    @Override
+    public OrderItem selectOrderItemById(int itemid) {
+        return orderMapper.showOrderItemById(itemid);
+    }
+
 
 }

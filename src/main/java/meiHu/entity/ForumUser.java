@@ -103,6 +103,28 @@ public class ForumUser {
         this.registertime = registertime;
     }
 
+    public ForumUser(Integer uid, String uname, String password) {
+        this.uid = uid;
+        this.uname = uname;
+        this.password = password;
+    }
+
+   public ForumUser() {
+    }
+
+    public ForumUser(Integer uid, String uname, String password, String tel, String email, String sex, Integer point, ForumTitle title, String headpic, Date registertime) {
+        this.uid = uid;
+        this.uname = uname;
+        this.password = password;
+        this.tel = tel;
+        this.email = email;
+        this.sex = sex;
+        this.point = point;
+        this.title = title;
+        this.headpic = headpic;
+        this.registertime = registertime;
+    }
+
     @Override
     public String toString() {
         return "ForumUser{" +

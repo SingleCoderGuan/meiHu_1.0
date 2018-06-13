@@ -35,6 +35,7 @@ public class Cart {
     public void setTotalprice(double totalprice) {
         this.totalprice = totalprice;
     }
+
     public Collection<CartItem> getCartItems(){
         return itemMap.values();
     }

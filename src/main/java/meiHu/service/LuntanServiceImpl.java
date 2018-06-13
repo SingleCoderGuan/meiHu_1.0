@@ -221,11 +221,11 @@ public class LuntanServiceImpl implements LuntanService{
 //        return forumUserMapper.selectUsersByTitleId();
 //    }
 
-    /*@Override
+    @Override
     public ForumCollection selectIfCollection(int uid, int pid) {
         return forumCollectionMapper.selectIfCollection( uid, pid);
 
-    }*/
+    }
 
 
 }

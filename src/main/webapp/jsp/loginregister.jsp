@@ -374,7 +374,7 @@ text-align: left;
             data:{"tel":tel},
             success:function(result){
                 sms=result;
-                alert(sms)
+
             }
         });
     });
@@ -465,7 +465,7 @@ text-align: left;
             data:{"tel":tel},
             success:function(result){
                 sms=result;
-                alert(sms)
+
             }
         });
     });

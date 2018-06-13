@@ -20,6 +20,12 @@
   </properties>
 
   <dependencies>
+<!--
+  <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.4</version>
+    </dependency>-->
     <!--测试 junit12-->
     <dependency>
       <groupId>junit</groupId>
@@ -133,11 +139,7 @@
       <version>4.12</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-      <version>20160810</version>
-    </dependency>
+
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
@@ -157,6 +159,16 @@
       <artifactId>pagehelper</artifactId>
       <version>5.0.0</version>
     </dependency>
+      <dependency>
+          <groupId>net.sf.json-lib</groupId>
+          <artifactId>json-lib</artifactId>
+          <version>2.4</version>
+      </dependency>
+      <dependency>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+          <version>20160810</version>
+      </dependency>
 
 
     <!--
@@ -167,17 +179,8 @@
       <groupId>net.sf.json-lib</groupId>
       <artifactId>json-lib</artifactId>
       <version>2.4</version>
-    </dependency>-->
- <!--   <dependency>
-      <groupId>net.sf.json-lib</groupId>
-      <artifactId>json-lib</artifactId>
-      <version>2.4</version>
     </dependency>
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-      <version>20160810</version>
-    </dependency>-->
+   -->
   </dependencies>
 
 

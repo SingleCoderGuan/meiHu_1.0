@@ -28,8 +28,22 @@
 
     <!--public int deleteCollectionByUidAndPid(int uid,int pid);-->
     <delete id="deleteCollectionByUidAndPid" parameterType="int">
-    DELETE FROM forum_collection WHERE user_uid =#{param1} and post_pid =#{param2}
-</delete>
+                DELETE FROM forum_collection WHERE user_uid =#{param1} and post_pid =#{param2}
+
+    </delete>
+
+    <!--public int selectCollectionNumByUid(int uid);-->
+    <select id="selectCollectionNumByUid" parameterType="int" resultType="int">
+        SELECT count(*) from forum_collection WHERE user_uid =#{parameter}
+    </select>
+
+    <!--    public ForumCollection selectIfCollection(int uid,int pid);
+;-->
+<select id="selectIfCollection" resultType="ForumCollection" parameterType="int">
+                    select * from  forum_collection WHERE user_uid =#{param1} and post_pid =#{param2}
+
+</select>
+
 
     <!--public int selectCollectionNumByUid(int uid);-->
     <select id="selectCollectionNumByUid" parameterType="int" resultType="int">

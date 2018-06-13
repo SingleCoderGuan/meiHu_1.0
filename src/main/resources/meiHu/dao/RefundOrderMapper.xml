@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.RefundOrderMapper">
+<!--//在退款表中插入退款信息
+    public String addDrawbackInfo(RefundOrder ro);-->
+    <insert id="addDrawbackInfo" parameterType="RefundOrder">
+        insert into shop_drawback values(#{drawbackid},#{order.orderid},#{user.uid},#{drawbackreason},#{drawbacktime},#{detail},#{processstate})
+    </insert>
+</mapper>
