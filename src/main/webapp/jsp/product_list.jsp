@@ -18,6 +18,7 @@
     <link href="<%= basePath%>css/style.css" rel='stylesheet' type='text/css' />
     <script src="<%= basePath%>js/jquery.min.js"> </script>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700|Cinzel+Decorative:400,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <link rel="stylesheet" href="<%= basePath%>css/myresponsee.css">
     <link rel="stylesheet" href="<%= basePath%>css/style1.css">
@@ -175,7 +176,7 @@
     <div class="section">
         <div class="line">
             <!-- heading -->
-            <h1 class="text-center">关于我们</h1>
+            <h1 class="text-center">产品介绍</h1>
             <hr class="break-small break-center">
             <div class="margin">
                 <!-- block 1 -->

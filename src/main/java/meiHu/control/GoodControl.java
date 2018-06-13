@@ -269,5 +269,6 @@ public class GoodControl {
         int result=refundOrderService.insertDrawbackInfo(ro);
         return result;
     }
+    //查看该类商品的销量，并按销量降序排列
 }
 

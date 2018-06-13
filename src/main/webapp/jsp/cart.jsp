@@ -9,10 +9,13 @@
 <html lang="zxx">
 <head>
     <meta charset="UTF-8">
-    <title>商品详情页面</title>
+    <title>购物车</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+    <base href="<%=basePath%>" >
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
     <link href="<%= basePath%>css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="<%= basePath%>css/style.css" rel='stylesheet' type='text/css' />
     <script src="<%= basePath%>js/jquery.min.js"> </script>

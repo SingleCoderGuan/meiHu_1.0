@@ -24,6 +24,7 @@
     <link href="<%= basePath%>css/responsive.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
     <script src="<%= basePath%>js/respond.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <meta name="keywords" content="">
     <meta name="description" content="">

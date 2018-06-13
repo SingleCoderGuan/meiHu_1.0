@@ -30,7 +30,7 @@
     a,img{border:0;}
     body{font:12px/180% Arial, Helvetica, sans-serif ,"新宋体";}
     /* pageLoad */
-    #pageLoad{background:#0f1923;position:fixed;_position:absolute;left:0;right:0;top:0;bottom:0;z-index:999;}
+    #pageLoad{background:#0f1923;position:fixed;_position:absolute;left:0;right:0;top:350px;bottom:0;z-index:999;}
     #pageLoad div{text-align:center;height:150px;width:350px;padding-left:30px;position:absolute;}
     #pageLoad a,#pageLoad samp{display:block;background:url(<%=basePath%>images/loadbf.jpg) no-repeat center 0;height:80px;width:390px;position:absolute;z-index:0;left:0;top:0;}
     #pageLoad p{background:#0f1923;width:2px;position:absolute;left:0;top:0;height:60px;z-index:5;}
