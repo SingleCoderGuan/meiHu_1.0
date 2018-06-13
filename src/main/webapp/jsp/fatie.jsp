@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/aw-font.css"/>
 
     <link href="<%=basePath%>css/common.css" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
 

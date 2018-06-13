@@ -15,6 +15,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="<%= basePath%>css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="<%= basePath%>css/style.css" rel='stylesheet' type='text/css' />
     <script src="<%= basePath%>js/jquery.min.js"> </script>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
+
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700|Cinzel+Decorative:400,700' rel='stylesheet' type='text/css'>
     <style>
         #img{
@@ -68,8 +70,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="header-top">
                 <div class="container">
                     <div class="logo">
-                        <a href="index.html"><h1>美 <br>
-                            <span>淘</span></h1></a>
+                        <a href="<%=basePath%>jsp/zhuye.jsp" ><h1 style="font-family: '本墨锵黑'">美 <br>
+                            <span style="font-family: '本墨锵黑'">淘</span></h1></a>
                     </div>
                 </div>
             </div>

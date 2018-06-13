@@ -228,7 +228,7 @@
                 <span>
                      <c:if test="${not empty sessionScope.user}">
                          <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                         <a href="<%=basePath%>signOut.action" style="position: relative;left: 50px;top: -55px;">注销</a>
+                         <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                      </c:if>
                     <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
@@ -655,36 +655,7 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
-<script>
-    if(${sessionScope.user}){
-        $(function () {
-            (function longPolling() {
-                $.ajax({
-                    type:"post" ,
-                    url: "${pageContext.request.contextPath}/messageList.action",
-                    data: {"uid": ${user.uid}},
-                    dataType: "json",
-                    timeout: 5000,
-                    error: function (XMLHttpRequest, textStatus) {
-                        $("#state").append("[state: " + textStatus + ", error: " + errorThrown + " ]<br/>");
-                        if (textStatus == "timeout") { // 请求超时
-                            longPolling(); // 递归调用
-                            // 其他错误，如网络错误等
-                        } else {
-                            longPolling();
-                        }
-                    },
-                    success: function (data, textStatus) {
-                        $("#state").append("[state: " + textStatus + ", data: { " + data + "} ]<br/>");
-                        if (textStatus == "success") { // 请求成功
-                            longPolling();
-                        }
-                    }
-                });
-            })();
-        })
-    }
-</script>
+
 </body>
 </html>
 

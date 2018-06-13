@@ -22,7 +22,7 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="/favicon.ico">
+
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <%--<link rel="stylesheet" href="../css/font-awesome.min.css">--%>
@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="../css/monokai_sublime.min.css">
     <link href="../css/magnific-popup.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/screen.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <script type="text/javascript" src="<%=basePath%>/js/zzsc.js"></script>
 

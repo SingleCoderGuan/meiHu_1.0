@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/font-awesome.css"/>
     <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/aw-font.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <link href="<%=basePath%>css/common.css" rel="stylesheet" type="text/css"/>
     <link href="<%=basePath%>css/stylebankuai.css" rel="stylesheet" type="text/css"/>
@@ -101,13 +102,59 @@
             <!-- end logo -->
             <!-- 搜索框 -->
             <div class="aw-search-box  hidden-xs hidden-sm">
-                <form class="navbar-search pull-right" action="#" id="global_search_form" method="post">
+                <form class="navbar-search pull-right" action="<%=basePath%>search/searchReasult.action" id="global_search_form" method="post">
                     <div class="input-group">
-                        <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off"
-                               name="q" id="aw-search-query" class="search-query"/>
+                        <input value="" class="form-control" type="text"
+                               placeholder="搜索问题、话题" autocomplete="off" name="q" id="aw-search-query"
+                               class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
-                              onClick="$('#global_search_form').submit();"><i class="fa fa-search"></i></span>
-                        <div class="clearfix"></div>
+                              onClick="$('#global_search_form').submit();">搜索</span>
+                        <div id="context1" style="background-color:white; border: 1px solid deepskyblue;width:167px;
+                                position: absolute;top: 36px;left:0px;display:none" ></div>
+                        <script>
+                            $("#aw-search-query").keyup(function(){
+                                var content=$(this).val();
+                                //如果当前搜索内容为空，无须进行查询
+                                if(content==""){
+                                    $("#context1").css("display","none");
+                                    return ;
+                                }
+                                //由于浏览器的缓存机制 所以我们每次传入一个时间
+                                var time=new Date().getTime();
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                    type:"post",
+                                    url:"${pageContext.request.contextPath}/search/automatch.action",
+                                    data:{name:content,time:time},
+                                    success:function(data){
+                                        //拼接html
+                                        var res=data.split(",");
+                                        var html="";
+                                        for(var i=0;i<res.length;i++){
+                                            //每一个div还有鼠标移出、移入点击事件
+                                            html+="<div onclick='setSearch_onclick(this)' onmouseout='changeBackColor_out(this)' onmouseover='changeBackColor_over(this)'>"+res[i]+"</div>";
+                                        }
+                                        $("#context1").html(html);
+                                        //显示为块级元素
+                                        $("#context1").css("display","block");
+                                    }
+                                });
+                            });
+
+                            //鼠标移动到内容上
+                            function changeBackColor_over(div){
+                                $(div).css("background-color","#CCCCCC");
+                            }
+                            //鼠标离开内容
+                            function changeBackColor_out(div){
+                                $(div).css("background-color","");
+                            }
+                            //将点击的内容放到搜索框
+                            function setSearch_onclick(div){
+                                $("#aw-search-query").val(div.innerText);
+                                $("#context1").css("display","none");
+                            }
+                        </script>
 
                     </div>
                 </form>
@@ -126,25 +173,27 @@
                     <ul class="nav navbar-nav">
 
                         <li class="nav-current" role="presentation">
-                            <a href="luntanshouyetest.html">美论首页</a>
-                        </li>
-                        <li>
-                            <a href="index.html">美乎</a>
-                        </li>
-                        <li>
-                            <a href="#">美淘</a>
-                        </li>
-                        <li>
-                            <a href="#">活动</a>
+                            <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
 
                         <li>
-                            <a href="#">关于</a>
+                            <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
+
+                        <li>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
+                        </li>
+                        <li>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
+                        </li>
+
+                        <li>
+                            <a href="<%=basePath%>fatie.action">发帖</a>
+                        </li>
+
 
                     </ul>
                 </nav>
-
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->

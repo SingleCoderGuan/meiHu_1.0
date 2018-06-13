@@ -16,6 +16,8 @@
 <!DOCTYPE html>
 <meta  http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>美乎登录&注册</title>
+<link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
+
     <link rel="stylesheet" href="<%=basePath%>css/stylelogin.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>css/style_inner.css" type="text/css">
     <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
