@@ -131,4 +131,19 @@ public class fatieControl {
         request.setAttribute("articleList",articleService.getAllOfficalArticles());
         request.getRequestDispatcher("/jsp/wenzhangxiangqing.jsp").forward(request,response);
     }
+
+    @RequestMapping(value = "/admin/getArticle.action",method = RequestMethod.POST)
+    public @ResponseBody ForumOfficalarticle findArticleByOaid(String oaid,HttpServletRequest request, HttpServletResponse response){
+        Integer id = Integer.parseInt(oaid) ;
+        return articleService.selectOfficalArticleByOaid(id);
+    }
+    @RequestMapping(value = "/admin/deleteArticle.action",method = RequestMethod.POST)
+    public @ResponseBody String deleteArticle(String oaid,HttpServletRequest request, HttpServletResponse response){
+        if(officalArticleService.deleteArticle(Integer.parseInt(oaid))){
+            return "1" ;
+        }else {
+            return "0" ;
+        }
+
+    }
 }

@@ -24,4 +24,11 @@ public interface ForumOfficalarticleMapper {
      * @return
      */
     public boolean insertArticle(ForumOfficalarticle forumOfficalarticle) ;
+
+    /**
+     * 根据id删除文章
+     * @param oaid
+     * @return
+     */
+    public boolean deleteArticle(int oaid);
 }

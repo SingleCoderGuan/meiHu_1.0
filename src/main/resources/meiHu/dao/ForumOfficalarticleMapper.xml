@@ -16,4 +16,8 @@
         INSERT INTO forum_officalarticle (oatitle,oaprecontent,oacontent) VALUES (#{oatitle},#{oaprecontent},#{oacontent})
     </insert>
 
+    <!--public boolean deleteArticle(int oaid);-->
+    <delete id="deleteArticle" parameterType="int">
+        DELETE FROM forum_officalarticle WHERE oaid=#{_parameter}
+    </delete>
 </mapper>

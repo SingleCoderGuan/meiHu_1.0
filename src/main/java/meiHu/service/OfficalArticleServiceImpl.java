@@ -13,4 +13,9 @@ public class OfficalArticleServiceImpl implements  OfficalArticleService {
     public boolean insertArticle(ForumOfficalarticle forumOfficalarticle) {
         return forumOfficalarticleMapper.insertArticle(forumOfficalarticle);
     }
+
+    @Override
+    public boolean deleteArticle(int oaid) {
+        return forumOfficalarticleMapper.deleteArticle(oaid);
+    }
 }

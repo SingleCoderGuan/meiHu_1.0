@@ -13,20 +13,20 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     // String tid = request.getParameter("tid");
 %>
-<html>
+<!DOCTYPE html>
 <head>
+    <meta  http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>后台管理系统</title>
     <meta name="author" content="DeathGhost" />
-    <link rel="stylesheet" type="text/css" href="../css/styleadmin.css">
-    <%--<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">--%>
-    <!--[if lt IE 9]>
-    <script src="../js/html5.js"></script>
-    <![endif]-->
-    <script src="../js/jquery.js"></script>
-    <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/styleadmin.css">
+    <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="<%=basePath%>js/jquery.min.js"></script>
+    <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
 
-    </script>
+    <script src="<%=basePath%>js/html5.js"></script>
+    <script src="<%=basePath%>js/jquery.mCustomScrollbar.concat.min.js"></script>
 </head>
 <body>
 <!--header-->
@@ -83,23 +83,67 @@
         <div class="page_title">
             <h2 class="fl">官方文章发表</h2>
         </div>
-        <section>
-            <div style="width: 1600px;height: 700px;">
+        <section style="height: 700px;">
+            <div style="width: 1600px;height: 700px;" id="content">
                 <div style="position: relative;top: 20px;height: 50px;">
-                    <span style="position: relative;left: 150px;">标题</span><span style="position: relative;left:500px;">预标题</span><span style="position: relative;left:900px;">发布时间</span>
+                    <span style="position: relative;left: 150px;">标题</span><span style="position: relative;left:500px;">预标题</span><span style="position: relative;left:900px;">发布时间</span><span style="position: absolute;left:1188px;">操作</span>
                 </div>
-                <c:forEach items="${articleList}" var="article">
-                    <div style="position: relative;left: 100px;padding-top: 20px">
-                        <a href="#">${article.oatitle}</a>
-                        <a href="#"><span style="position: absolute;left:350px;">${article.oaprecontent}</span></a>
-                        <a href="#"><span style="position: absolute;left:800px;">${article.publishtime}</span></a>
+                <c:forEach items="${articleList}" var="article" varStatus="status">
+                    <div style="position: relative;left: 100px;padding-top: 20px" id="${status.index}">
+                        <a href="javascript:void(0);" onclick="showDetail(${article.oaid})" >${article.oatitle}</a>
+                        <a href="javascript:void(0);"><span style="position: absolute;left:350px;">${article.oaprecontent}</span></a>
+                        <a href="javascript:void(0);" disabled="disabled"><span style="position: absolute;left:800px;">${article.publishtime}</span></a>
+                        <a href="javascript:void(0);" onclick="deleteArticle(${article.oaid},${status.index})"><span style="position: absolute;left:1090px;">删除</span></a>
                     </div>
                 </c:forEach>
             </div>
         </section>
     </div>
 </section>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="position: relative;left: -300px;width: 1300px;">
+            <div class="modal-header" >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                <h4 class="modal-title" id="myModalLabel"><span id="oatitle"></span></h4>
+            </div>
+            <div class="modal-body" id="oacontent">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function showDetail(oaid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/admin/getArticle.action",
+            data:"oaid="+oaid,
+            success:function (officalArticle){
+                $("#oatitle").html(officalArticle.oatitle);
+                $("#oacontent").html(officalArticle.oacontent);
+                $('#myModal').modal({
+                })
+            }
+        })
 
+    }
+    function deleteArticle(oaid,index) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/admin/deleteArticle.action",
+            data:"oaid="+oaid,
+            success:function (message) {
+                if(message=="1"){
+                    alert("删除成功")
+                    document.getElementById("content").removeChild(document.getElementById(index))
+                }
+                if(message=="0"){
+                    alert("删除失败")
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>
 
