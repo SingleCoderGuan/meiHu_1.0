@@ -498,7 +498,7 @@
                                                 <br/>
                                                 <input type="button" class="btn btn-info"
                                                        style="width: 300px" value="发表评论"
-                                                       onclick="pinglun(${forumPost.pid},$('#postcomment').val())"></input>
+                                                       onclick="pinglun(${forumPost.pid},$('#postcomment').val());doSend(${forumPost.user.uid})"></input>
                                                 <script>
                                                     function pinglun( pidd, text) {
                                                     <c:if test="${empty sessionScope.user}">
@@ -930,6 +930,47 @@ background-color: #ce8483; z-index:9999;text-align: center">
 </div>
 
 
+<script type="text/javascript" src="http://cdn.bootcss.com/sockjs-client/1.1.1/sockjs.js"></script>
+<script type="text/javascript">
+    var websocket = null;
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://localhost:8080/meiHu_1.0/websocket/socketServer");
+    }
+    else if ('MozWebSocket' in window) {
+        websocket = new MozWebSocket("ws://localhost:8080/meiHu_1.0/websocket/socketServer");
+    }
+    else {
+        websocket = new SockJS("http://localhost:8080/meiHu_1.0/sockjs/socketServer");
+    }
+    websocket.onopen = onOpen;
+    websocket.onmessage = onMessage;
+    websocket.onerror = onError;
+    websocket.onclose = onClose;
+
+    function onOpen(openEvt) {
+        //alert(openEvt.Data);
+    }
+
+    function onMessage(evt) {
+        alert(evt.data);
+    }
+    function onError() {}
+    function onClose() {}
+
+    function doSend(uid) {
+        if (websocket.readyState == websocket.OPEN) {
+            websocket.send(uid);//调用后台handleTextMessage方法
+            alert("发送成功!");
+        } else {
+            alert("连接失败!");
+        }
+    }
+
+    window.close=function()
+    {
+        websocket.onclose();
+    }
+</script>
 </body>
 
 </html>

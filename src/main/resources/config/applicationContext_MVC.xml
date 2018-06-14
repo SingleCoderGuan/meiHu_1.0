@@ -15,7 +15,7 @@
     <mvc:annotation-driven ></mvc:annotation-driven>
     <!--处理器注解，扫描注解的处理器-->
     <context:component-scan base-package="meiHu.control"/>
-
+    <context:component-scan base-package="meiHu.util"/>
 
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>

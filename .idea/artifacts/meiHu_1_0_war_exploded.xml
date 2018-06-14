@@ -40,6 +40,8 @@
           <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.4" />
           <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.0.0" />
           <element id="library" level="project" name="Maven: org.json:json:20160810" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-websocket:4.3.17.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-messaging:4.3.17.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -660,39 +660,46 @@
     <input type="button" id="btnClose" value="关闭" />
     <input type="button" id="btnSend" value="发送" />
 </div>
+<script type="text/javascript" src="http://cdn.bootcss.com/sockjs-client/1.1.1/sockjs.js"></script>
 <script type="text/javascript">
-    var uid = ${user.uid}
-    $("#btnConnection").click(function() {
-        //实现化WebSocket对象，指定要连接的服务器地址与端口
-        socket = new WebSocket("ws://localhost:8080/meiHu_1.0/messageReminding");
-        //打开事件
-        socket.onopen = function() {
-            alert("Socket 已打开");
-            //socket.send("这是来自客户端的消息" + location.href + new Date());
-        };
-        //获得消息事件
-        socket.onmessage = function(msg) {
-            alert(msg.data);
-        };
-        //关闭事件
-        socket.onclose = function() {
-            alert("Socket已关闭");
-        };
-        //发生了错误事件
-        socket.onerror = function() {
-            alert("发生了错误");
+    var websocket = null;
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://localhost:8080/meiHu_1.0/websocket/socketServer");
+    }
+    else if ('MozWebSocket' in window) {
+        websocket = new MozWebSocket("ws://localhost:8080/meiHu_1.0/websocket/socketServer");
+    }
+    else {
+        websocket = new SockJS("http://localhost:8080/meiHu_1.0/sockjs/socketServer");
+    }
+    websocket.onopen = onOpen;
+    websocket.onmessage = onMessage;
+    websocket.onerror = onError;
+    websocket.onclose = onClose;
+
+    function onOpen(openEvt) {
+        //alert(openEvt.Data);
+    }
+
+    function onMessage(evt) {
+        alert(evt.data);
+    }
+    function onError() {}
+    function onClose() {}
+
+    function doSend() {
+        if (websocket.readyState == websocket.OPEN) {
+            websocket.send(msg);//调用后台handleTextMessage方法
+            alert("发送成功!");
+        } else {
+            alert("连接失败!");
         }
-    });
+    }
 
-    //发送消息
-    $("#btnSend").click(function() {
-        socket.send(uid);
-    });
-
-    //关闭
-    $("#btnClose").click(function() {
-        socket.close();
-    });
+    window.close=function()
+    {
+        websocket.onclose();
+    }
 </script>
 </body>
 </html>
