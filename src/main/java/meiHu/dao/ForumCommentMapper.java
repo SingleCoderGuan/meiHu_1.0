@@ -48,4 +48,11 @@ public interface ForumCommentMapper {
      * @return
      */
     public List<ForumComment> selectComments(int uid) ;
+
+    /**
+     * 查询该用户的所有新评论消息
+     * @param uid
+     * @return
+     */
+    public List<ForumComment> getNewComments(int uid);
 }
