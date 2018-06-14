@@ -78,7 +78,27 @@
     </ul>
 </aside>
 
-
+<section class="rt_wrap content mCustomScrollbar">
+    <div class="rt_content">
+        <div class="page_title">
+            <h2 class="fl">官方文章发表</h2>
+        </div>
+        <section>
+            <div style="width: 1600px;height: 700px;">
+                <div style="position: relative;top: 20px;height: 50px;">
+                    <span style="position: relative;left: 150px;">标题</span><span style="position: relative;left:500px;">预标题</span><span style="position: relative;left:900px;">发布时间</span>
+                </div>
+                <c:forEach items="${articleList}" var="article">
+                    <div style="position: relative;left: 100px;padding-top: 20px">
+                        <a href="#">${article.oatitle}</a>
+                        <a href="#"><span style="position: absolute;left:350px;">${article.oaprecontent}</span></a>
+                        <a href="#"><span style="position: absolute;left:800px;">${article.publishtime}</span></a>
+                    </div>
+                </c:forEach>
+            </div>
+        </section>
+    </div>
+</section>
 
 </body>
 </html>

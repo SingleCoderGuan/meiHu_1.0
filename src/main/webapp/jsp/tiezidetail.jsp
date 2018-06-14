@@ -95,7 +95,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="<%=basePath%>jsp/zhuye.jsp""> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+               <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -363,11 +363,17 @@
                                     </div>
 
                                     <script>
-                                        function shoucang( pidd) {
-                                            <c:if test="${empty sessionScope.user}">
-                                                alert("亲，请先登录");
-                                            </c:if>
-                                            <c:if test="${not empty sessionScope.user}">
+                                        function shoucang(pidd) {
+                                            <c:choose>
+                                            <c:when test="${empty sessionScope.user}">
+                                            alert("亲，请先登录");
+                                            </c:when>
+                                            <c:otherwise>
+                                            <c:choose>
+                                            <c:when test="${sessionScope.user.uid==forumPost.user.uid}">
+                                            alert("亲，不能关注自己帖子呦！！");
+                                            </c:when>
+                                            <c:otherwise>
                                             if ($("#shoucang").attr("src") == ("../images/shoucang.png")) {
 
                                                 $.ajax(
@@ -403,7 +409,12 @@
                                                 );
 
                                             }
-                                            </c:if>
+                                            </c:otherwise>
+                                            </c:choose>
+                                            </c:otherwise>
+
+                                            </c:choose>
+
 
                                         }
 
@@ -745,7 +756,14 @@
                                 <div class="aw-mod-body">
                                     <dl style="padding-top: 5px;">
                                         <dt class="pull-left aw-border-radius-5">
-                                            <a href="<%=basePath%>luntan/userdetail.action?uid=${forumPost.user.uid}">
+                                            <c:choose>
+                                                <c:when test="${sessionScope.user.uid==forumPost.user.uid}">
+                                                <a href="<%=basePath%>userCenter.action">
+                                                </c:when>
+                                                    <c:otherwise>
+                                                <a href="<%=basePath%>luntan/userdetail.action?uid=${forumPost.user.uid}">
+                                                </c:otherwise>
+                                            </c:choose>
                                                 <img src="<%=basePath%>${forumPost.user.headpic}"/>
                                             </a>
                                         </dt>
@@ -763,10 +781,16 @@
                                             </button>
                                             <script>
                                                 function guanzhu(postuid) {
-                                                    <c:if test="${empty sessionScope.user}">
+                                                    <c:choose>
+                                                    <c:when test="${empty sessionScope.user}">
                                                     alert("亲，请先登录");
-                                                    </c:if>
-                                                    <c:if test="${not empty sessionScope.user}">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <c:choose>
+                                                    <c:when test="${sessionScope.user.uid==forumPost.user.uid}">
+                                                    alert("您不能自己关注自己哦");
+                                                    </c:when>
+                                                    <c:otherwise>
                                                     $.ajax({
                                                         type:"post",
                                                         url: "${pageContext.request.contextPath}/luntan/focus.action",
@@ -784,7 +808,11 @@
                                                             }
                                                         }
                                                     });
-                                                    </c:if>
+                                                    </c:otherwise>
+                                                    </c:choose>
+                                                    </c:otherwise>
+
+                                                    </c:choose>
                                                 }
                                             </script>
                                         </dd>

@@ -46,7 +46,7 @@ public class LuntanControl {
         Map<String ,Object> cmap=new HashMap<>();
 
         //每页显示的条数
-        int pageSize=10;
+        int pageSize=8;
         //当前的页面默认是首页
         int curPage=1;
         String scurPage=request.getParameter("curPage");

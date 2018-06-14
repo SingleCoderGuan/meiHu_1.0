@@ -10,4 +10,10 @@
     <select id="selectOfficalArticleByOaid" resultType="ForumOfficalarticle" parameterType="int">
         SELECT * FROM forum_officalarticle WHERE oaid=#{parameter}
     </select>
+
+    <!--public boolean insertArticle(ForumOfficalarticle forumOfficalarticle) ;-->
+    <insert id="insertArticle" parameterType="ForumOfficalarticle">
+        INSERT INTO forum_officalarticle (oatitle,oaprecontent,oacontent) VALUES (#{oatitle},#{oaprecontent},#{oacontent})
+    </insert>
+
 </mapper>

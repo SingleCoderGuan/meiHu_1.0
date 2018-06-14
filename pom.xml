@@ -139,12 +139,12 @@
       <version>4.12</version>
     </dependency>
 
-
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.12</version>
     </dependency>
+
     <!--分页需要的两个-->
     <!-- https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->
     <dependency>
@@ -165,18 +165,14 @@
           <artifactId>json</artifactId>
           <version>20160810</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api -->
+      <dependency>
+          <groupId>javax.websocket</groupId>
+          <artifactId>javax.websocket-api</artifactId>
+          <version>1.1</version>
+          <scope>provided</scope>
+      </dependency>
 
-
-    <!--
-
-
-
-    <dependency>
-      <groupId>net.sf.json-lib</groupId>
-      <artifactId>json-lib</artifactId>
-      <version>2.4</version>
-    </dependency>
-   -->
   </dependencies>
 
 
