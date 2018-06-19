@@ -203,7 +203,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>fatie.action">发帖</a>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -215,9 +215,9 @@
             <div class="aw-user-nav" style="width: 259px">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                    <img id="message" hidden style="position: absolute;left: 75px;width: 20px" src="<%=basePath%>images/comment.png"/>
-                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                    <a href="<%=basePath%>user/userCenter.action" style="position: relative;left: -40px;top: -0.5px;"><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                         <img id="message" hidden style="position: absolute;left: 60px;width: 20px" src="<%=basePath%>images/comment.png"/>
+                         <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 200px;">注销</a>
                 </span>
 
                 <!-- end 登陆&注册栏 -->
@@ -242,7 +242,7 @@
 
                     </ul>
                     <!-- end tab 切换 -->
-                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/newpost.action"
+                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/user/newpost.action"
                           enctype="multipart/form-data">
 
                         <span style="position: relative;left:5px;top: 5px;font-size: 20px">标题：</span>
@@ -2276,7 +2276,7 @@
     // 限制一次最多上传 10 张图片
     editor.customConfig.uploadImgMaxLength = 10;
     editor.customConfig.uploadImgParamsWithUrl = true;//如果还需要将参数拼接到 url 中，可再加上如下配置
-    editor.customConfig.uploadImgServer = '<%=basePath%>/picload.action';//官方文档上写的是服务器地址，也就是上传图片的方法名
+    editor.customConfig.uploadImgServer = '<%=basePath%>user/picload.action';//官方文档上写的是服务器地址，也就是上传图片的方法名
     editor.customConfig.uploadFileName = 'uploadImage';     //给上传的本地图片文件命名的统一名称
 
     editor.customConfig.uploadImgHooks = {

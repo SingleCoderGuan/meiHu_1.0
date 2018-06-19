@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@RequestMapping("/user")
 @Controller
 public class UserController {
     @Autowired
@@ -149,8 +149,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/preresetpass.action",method = RequestMethod.POST)
-    public void preresetpass(String tel,HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setAttribute("tel",tel);
+    public void preresetpass(String phone,HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.setAttribute("tel",phone);
         request.getRequestDispatcher("/jsp/resetpass.jsp").forward(request,response);
     }
 
@@ -208,12 +208,12 @@ public class UserController {
 //                调用service层的修改方法
         if (userService.updateUser(newUser)){
             request.getSession().setAttribute("user",userService.selectUserByUid(newUser.getUid()));
-            request.getRequestDispatcher("/userCenter.action") .forward(request,response);
+            request.getRequestDispatcher("/user/userCenter.action") .forward(request,response);
         }else{
         }
     }
 
-    @RequestMapping(value = "/readReply.action",method = RequestMethod.GET)
+    @RequestMapping(value = "/user/readReply.action",method = RequestMethod.GET)
     public void readReply(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
         String cid = request.getParameter("cid") ;

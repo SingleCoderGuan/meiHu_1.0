@@ -34,7 +34,7 @@ public class fatieControl {
     @Autowired
     private OfficalArticleService officalArticleService ;
 
-    @RequestMapping(value = "/fatie.action")
+    @RequestMapping(value = "/user/fatie.action")
     public void fatie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if(request.getSession().getAttribute("user")==null){
             response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp");
@@ -43,7 +43,7 @@ public class fatieControl {
         }
     }
 
-    @RequestMapping(value = "/newpost.action", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/newpost.action", method = RequestMethod.POST)
     public void newPost(int topicid, ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ForumTopic topic = topicService.selectTopicByTid(topicid);
         ForumPost forumPost = post;
@@ -66,17 +66,17 @@ public class fatieControl {
         }
     }
 
-    @RequestMapping(value = "updatePost.action",method = RequestMethod.POST)
+    @RequestMapping(value = "/user/updatePost.action",method = RequestMethod.POST)
     public void updatePost(ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ForumPost forumPost = post ;
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         if(postService.updatePost(forumPost) ){
-            response.sendRedirect(request.getContextPath() + "/userCenter.action");
+            response.sendRedirect(request.getContextPath() + "/user/userCenter.action");
         }
     }
 
-    @RequestMapping(value = "/picload.action",method = RequestMethod.POST)
+    @RequestMapping(value = "/user/picload.action",method = RequestMethod.POST)
     public @ResponseBody Map<String, String> upload(MultipartFile uploadImage, HttpServletRequest request) throws IOException {
         //原始文件名称
         String pictureFile_name =  uploadImage.getOriginalFilename();

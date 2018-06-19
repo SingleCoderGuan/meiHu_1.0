@@ -214,7 +214,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>fatie.action">发帖</a>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
 
@@ -223,13 +223,13 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav" style="width: 250px">
+            <div class="aw-user-nav" style="position: relative;left: 20px;width: 259px">
                 <!-- 登陆&注册栏 -->
                 <span>
                      <c:if test="${not empty sessionScope.user}">
-                         <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                         <a href="<%=basePath%>user/userCenter.action" style="position: relative;left: -60px;top: -0.5px;"><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
                          <img id="message" hidden style="position: absolute;left: 60px;width: 20px" src="<%=basePath%>images/comment.png"/>
-                         <a href="<%=basePath%>signOut.action" style="position: relative;left: 80px;top:-55px">注销</a>
+                         <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 200px;">注销</a>
 
                      </c:if>
                     <c:if test="${empty sessionScope.user}">

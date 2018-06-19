@@ -92,7 +92,7 @@
                         </ul>
 
                         <div id="content">
-                            <form id="accountlogin" action="${pageContext.request.contextPath}/loginWithAccount.action" method="post">
+                            <form id="accountlogin" action="${pageContext.request.contextPath}/user/loginWithAccount.action" method="post">
                             <p id="one">
 
                                 <input style="position:relative;top: 20px;"  type="text" name="uname" value="${userArr[0] }" placeholder="请输入用户名"/>
@@ -130,7 +130,7 @@
                 </div>
                 <div class="cont_form_sign_up">
                     <h2>注册</h2>
-                    <form class="registerform" action="<%=basePath%>register.action" method="post" >
+                    <form class="registerform" action="<%=basePath%>user/register.action" method="post" >
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
                             <label class="label" style="position: relative;font-size: 14px;top: 10px;color:#996666;">用户名：</label>
                             <input style="position: relative;padding: 15px 5px;
@@ -202,7 +202,7 @@ text-align: left;
                         <h4 class="modal-title" id="myModalLabel">请完善您的信息</h4>
                     </div>
                     <div class="modal-body" style="background-color: #F0DAD2">
-                        <form class="registerform" action="<%=basePath%>perferUser.action" method="post">
+                        <form class="registerform" action="<%=basePath%>user/perferUser.action" method="post">
                             <li style="position: relative;margin: 0 auto ;list-style-type:none; ">
                                 <label class="label" style="position: relative;left: -23px;font-size: 15px;color:#996666;top: 10px;">用户名：</label>
 
@@ -294,7 +294,7 @@ text-align: left;
         }else{
             $.ajax({
                 type:"get",
-                url:"${pageContext.request.contextPath}/namecheck.action",
+                url:"${pageContext.request.contextPath}/user/namecheck.action",
                 data:"uname="+content,
                 success:function (message) {
                     if(message=="0"){
@@ -324,7 +324,7 @@ text-align: left;
         }else{
             $.ajax({
                 type:"get",
-                url:"${pageContext.request.contextPath}/namecheck.action",
+                url:"${pageContext.request.contextPath}/user/namecheck.action",
                 data:"uname="+content,
                 success:function (message) {
                     if(message=="0"){
@@ -371,7 +371,7 @@ text-align: left;
     $("#btn").click(function(){
         var tel=$("#regtel").val();
         $.ajax({
-            url:"${pageContext.request.contextPath}/resetSend.action",
+            url:"${pageContext.request.contextPath}/user/resetSend.action",
             type:"get",
             data:{"tel":tel},
             success:function(result){
@@ -412,7 +412,7 @@ text-align: left;
         }else{
             $.ajax({
                 type:"get",
-                url:"${pageContext.request.contextPath}/checktel.action",
+                url:"${pageContext.request.contextPath}/user/checktel.action",
                 data:"tel="+telnum,
                 success:function (message) {
                     if(message=="0"){
@@ -462,7 +462,7 @@ text-align: left;
     $("#vcode").click(function(){
         var tel=$("#tel").val();
         $.ajax({
-            url:"${pageContext.request.contextPath}/resetSend.action",
+            url:"${pageContext.request.contextPath}/user/resetSend.action",
             type:"get",
             data:{"tel":tel},
             success:function(result){
@@ -482,7 +482,7 @@ text-align: left;
                 alert("验证码正确")
                 $.ajax({
                     type:"get",
-                    url:"${pageContext.request.contextPath}/loginWithTel.action",
+                    url:"${pageContext.request.contextPath}/user/loginWithTel.action",
                     data:"tel="+tel,
                     success:function (message) {
                         if(message=="1"){

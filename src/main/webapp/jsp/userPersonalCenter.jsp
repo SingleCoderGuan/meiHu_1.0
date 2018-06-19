@@ -141,7 +141,7 @@ strict.dtd">
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>fatie.action">发帖</a>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -153,9 +153,9 @@ strict.dtd">
             <div class="aw-user-nav" style="width: 259px">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                    <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" ><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
                     <img id="message" hidden style="position: absolute;left: 70px;width: 20px" src="<%=basePath%>images/comment.png"/>
-                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                    <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 214px;">注销</a>
                 </span>
 
                 <!-- end 登陆&注册栏 -->
@@ -226,7 +226,7 @@ strict.dtd">
                                                 <div style="position:relative ;left: 20px;margin-top: 15px">
                                                     <a href="<%=basePath%>luntan/tiezidetail.action?pid=${post.pid}"><span>${post.ptitle}</span></a>
                                                     <div style="position: absolute;left: 369px;top: -1px;width: 70px;height:20px ;text-align:center;"><a href="<%=basePath%>luntan/luntanshouye.action?tid=${post.topic.tid}" style="margin:0 auto;"><span>${post.topic.tname}</span></a></div>
-                                                    <div style="position: absolute;left: 478px;top: -1px;width: 145px;text-align:center ;"><a href="<%=basePath%>modifyPost.action?pid=${post.pid}"><span>编辑</span></a>|<a onclick="show_confirm(${post.pid})"><span>删除</span></a></div>
+                                                    <div style="position: absolute;left: 478px;top: -1px;width: 145px;text-align:center ;"><a href="<%=basePath%>user/modifyPost.action?pid=${post.pid}"><span>编辑</span></a>|<a onclick="show_confirm(${post.pid})"><span>删除</span></a></div>
                                                 </div>
                                             </c:forEach>
                                         </div>
@@ -245,7 +245,7 @@ strict.dtd">
                                                 </c:if>
                                             <c:forEach items="${newComments}" var="newComment">
                                                 <div style="position: relative;left: 20px;margin-top: 20px;">
-                                                    <div>回复人：<span><a href="#">${newComment.user.uname}</a></span><span style="position: absolute;left: 150px;">内容：<a href="<%=basePath%>readReply.action?pid=${newComment.post.pid}&cid=${newComment.cid}#${newComment.cid}">${newComment.commenttext}</a></span></div>
+                                                    <div>回复人：<span><a href="#">${newComment.user.uname}</a></span><span style="position: absolute;left: 150px;">内容：<a href="<%=basePath%>user/readReply.action?pid=${newComment.post.pid}&cid=${newComment.cid}#${newComment.cid}">${newComment.commenttext}</a></span></div>
                                                     <div style="margin-top: 20px"><span>回复我的帖子：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${newComment.post.pid}">${newComment.post.ptitle}</a></span><span style="position: absolute;left: 500px;"><fmt:formatDate value='${newComment.commenttime}'
                                                                                                                                                                                                                                                                                 pattern='yyyy-MM-dd hh:mm:ss'/></span></div>
                                                     <hr />
@@ -393,11 +393,11 @@ strict.dtd">
             $.ajax({
                 type:"get",
                 data:"pid="+pid,
-                url:"${pageContext.request.contextPath}/deletePost.action",
+                url:"${pageContext.request.contextPath}/user/deletePost.action",
                 success:function (message) {
                     if(message=="1"){
                         alert("删除成功")
-                        window.location.href = "${pageContext.request.contextPath}/userCenter.action" ;
+                        window.location.href = "${pageContext.request.contextPath}/user/userCenter.action" ;
                     }else{
                         alert("删除失败")
                     }

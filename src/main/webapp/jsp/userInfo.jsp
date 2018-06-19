@@ -141,7 +141,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>fatie.action">发帖</a>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -150,11 +150,11 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav" style="width: 200px;">
+            <div class="aw-user-nav" style="width: 259px;">
                 <!-- 登陆&注册栏 -->
-                    <a href="<%=basePath%>userCenter.action" ><img style="position: relative;width: 50px;height: 50px" src="<%=basePath%>${user.headpic}"/><span style="position: relative;width: 120px">欢迎您：${user.uname}</span></a>
-                    <img id="message" hidden style="position: absolute;left: 75px;width: 20px" src="<%=basePath%>images/comment.png"/>
-                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 60px;top: -55px;">注销</a>
+                <a style="position: relative;width:210px ;left: 5px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" ><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                <img id="message" hidden style="position: absolute;left: 70px;width: 20px" src="<%=basePath%>images/comment.png"/>
+                <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 225px;top: -55px;width: 50px">注销</a>
                     <!--<a href="#">注册</a>
                     <a href="#">登录</a>-->
 
@@ -186,7 +186,7 @@
                                         <div class="mod-head">
                                             <h3>基本信息</h3>
                                         </div>
-                                        <form id="setting_form"  action="<%=basePath%>/updateUser.action" method="post"  enctype="multipart/form-data">
+                                        <form id="setting_form"  action="<%=basePath%>user/updateUser.action" method="post"  enctype="multipart/form-data">
                                             <div class="mod-body">
                                                 <input type="hidden" name="uid" value="${user.uid}" hidden />
                                                 <dl>
