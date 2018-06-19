@@ -153,6 +153,7 @@
             <div class="aw-user-nav" style="width: 200px;">
                 <!-- 登陆&注册栏 -->
                     <a href="<%=basePath%>userCenter.action" ><img style="position: relative;width: 50px;height: 50px" src="<%=basePath%>${user.headpic}"/><span style="position: relative;width: 120px">欢迎您：${user.uname}</span></a>
+                    <img id="message" hidden style="position: absolute;left: 75px;width: 20px" src="<%=basePath%>images/comment.png"/>
                     <a href="<%=basePath%>signOut.action" style="position: relative;left: 60px;top: -55px;">注销</a>
                     <!--<a href="#">注册</a>
                     <a href="#">登录</a>-->
@@ -252,4 +253,30 @@
         </div>
     </div>
 </body>
+<script>
+    var uid = ${user.uid}
+
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
+
+    function getMessage(uid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/user/getMessage.action",
+            data:"uid="+uid,
+            success:function (data) {
+                if(data!="0"){
+                    $("#message").removeAttr("hidden")
+                }else {
+                    $("#message").attr("hidden","true")
+                }
+            }
+        })
+    }
+
+</script>
 </html>

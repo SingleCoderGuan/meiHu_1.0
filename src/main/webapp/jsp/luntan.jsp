@@ -228,7 +228,7 @@
                 <span>
                      <c:if test="${not empty sessionScope.user}">
                          <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                         <img id="message" hidden style="position: absolute;left: 110px;width: 15px" src="<%=basePath%>images/message.png"/>
+                         <img id="message" hidden style="position: absolute;left: 60px;width: 20px" src="<%=basePath%>images/comment.png"/>
                          <a href="<%=basePath%>signOut.action" style="position: relative;left: 80px;top:-55px">注销</a>
 
                      </c:if>

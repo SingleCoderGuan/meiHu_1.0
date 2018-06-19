@@ -216,6 +216,7 @@
                 <!-- 登陆&注册栏 -->
                 <span>
                     <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                    <img id="message" hidden style="position: absolute;left: 75px;width: 20px" src="<%=basePath%>images/comment.png"/>
                     <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                 </span>
 
@@ -2308,5 +2309,30 @@
 
 </script>
 </body>
+<script>
+    var uid = ${user.uid}
 
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
+
+    function getMessage(uid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/user/getMessage.action",
+            data:"uid="+uid,
+            success:function (data) {
+                if(data!="0"){
+                    $("#message").removeAttr("hidden")
+                }else {
+                    $("#message").attr("hidden","true")
+                }
+            }
+        })
+    }
+
+</script>
 </html>

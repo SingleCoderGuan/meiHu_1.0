@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -69,7 +70,7 @@ strict.dtd">
         position: absolute;
         width: 18px;
         height: 18px;
-        background-color: #000000;
+        background-color: 000000;
         opacity: 0.5;
         text-align: center;
         right: 0px;
@@ -153,6 +154,7 @@ strict.dtd">
                 <!-- 登陆&注册栏 -->
                 <span>
                     <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                    <img id="message" hidden style="position: absolute;left: 70px;width: 20px" src="<%=basePath%>images/comment.png"/>
                     <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                 </span>
 
@@ -199,7 +201,7 @@ strict.dtd">
                                     <a href="#questions" id="page_questions" data-toggle="tab" style="font-size: 20px">我的帖子<span class="badge" style="font-size: 18px">${postsNum}</span></a>
                                 </li>
                                 <li style="width: 175px;text-align: center">
-                                    <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">我的提醒<span class="badge" style="font-size: 18px">${commentsNum}</span></a>
+                                    <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">我的提醒<span id="messageNum" class="badge" style="font-size: 18px">${commentsNum}</span></a>
                                 </li>
 
                                 <li style="width: 175px;text-align: center">
@@ -235,20 +237,37 @@ strict.dtd">
                                 <div class="aw-mod">
                                     <div class="mod-body">
                                         <div class="aw-profile-publish-list" id="contents_user_actions_reply">
-                                            新回复
+                                            <div><span style="position: relative;left: 313px;top: 15px;">新消息</span><hr />
+                                                <c:if test="${empty newComments}">
+                                                    <div style="position: relative;top: 40px;text-align: center">
+                                                        <span style="font-size: 25px;">还没有新消息</span>
+                                                    </div>
+                                                </c:if>
                                             <c:forEach items="${newComments}" var="newComment">
                                                 <div style="position: relative;left: 20px;margin-top: 20px;">
-                                                    <div><span>用户<a href="#">${newComment.user.uname}</a></span><span style="position: absolute;left: 150px;"><a href="<%=basePath%>readReply.action?pid=${newComment.post.pid}&cid=${newComment.cid}">${newComment.commenttext}</a></span></div>
-                                                    <div style="margin-top: 20px"><span>回复我的帖子：<a href="#">${newComment.post.ptitle}</a></span><span style="position: absolute;left: 500px;">时间：${newComment.commenttime}</span></div>
+                                                    <div>回复人：<span><a href="#">${newComment.user.uname}</a></span><span style="position: absolute;left: 150px;">内容：<a href="<%=basePath%>readReply.action?pid=${newComment.post.pid}&cid=${newComment.cid}#${newComment.cid}">${newComment.commenttext}</a></span></div>
+                                                    <div style="margin-top: 20px"><span>回复我的帖子：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${newComment.post.pid}">${newComment.post.ptitle}</a></span><span style="position: absolute;left: 500px;"><fmt:formatDate value='${newComment.commenttime}'
+                                                                                                                                                                                                                                                                                pattern='yyyy-MM-dd hh:mm:ss'/></span></div>
+                                                    <hr />
                                                 </div>
                                             </c:forEach>
-                                            已查看
+                                            </div>
+                                            <div style="position: relative;top: 90px;">
+                                                <span style="position: relative;left: 313px;top: 15px;">已查看</span><hr />
+                                            <c:if test="${empty oldComments}">
+                                                <div style="position: relative;top: 40px;text-align: center">
+                                                    <span style="font-size: 25px;">还没有新消息</span>
+                                                </div>
+                                            </c:if>
                                             <c:forEach items="${oldComments}" var="oldComment">
                                                 <div style="position: relative;left: 20px;margin-top: 20px;">
-                                                    <div ><span>用户<a href="#">${oldComment.user.uname}</a></span><span style="position: absolute;left: 150px;"><a href="<%=basePath%>readReply.action?pid=${oldComment.post.pid}&cid=${oldComment.cid}">${oldComment.commenttext}</a></span></div>
-                                                    <div style="margin-top: 20px"><span>回复我的帖子：<a href="#">${oldComment.post.ptitle}</a></span><span style="position: absolute;left: 500px;">时间：${oldComment.commenttime}</span></div>
+                                                    <div >回复人：<span><a href="#">${oldComment.user.uname}</a></span><span style="position: absolute;left: 150px;">内容：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${oldComment.post.pid}">${oldComment.commenttext}</a></span></div>
+                                                    <div style="margin-top: 20px"><span>回复我的帖子：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${oldComment.post.pid}">${oldComment.post.ptitle}</a></span><span style="position: absolute;left: 500px;"><fmt:formatDate value='${oldComment.commenttime}'
+                                                                                                                                                                                                                                                                             pattern='yyyy-MM-dd hh:mm:ss'/></span></div>
+                                                    <hr />
                                                 </div>
                                             </c:forEach>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -272,6 +291,11 @@ strict.dtd">
                                             <div class="aw-mod aw-user-center-follow-mod">
                                                 <div class="mod-body">
                                                     <div style="background-color: #FFCCCC;height: 30px"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">作者</span></div>
+                                                    <c:if test="${empty collectionList}">
+                                                        <div style="text-align: center">
+                                                            <span style="position: relative;top: 50px;font-size: 30px">您还没有收藏过帖子</span>
+                                                        </div>
+                                                    </c:if>
                                                     <c:forEach items="${collectionList}" var="collection">
                                                         <div style="position:relative ;left: 20px;margin-top: 15px">
                                                             <a href="<%=basePath%>luntan/tiezidetail.action?pid=${collection.pid}"><span>${collection.ptitle}</span></a>
@@ -381,6 +405,34 @@ strict.dtd">
             })
         }
     }
+</script>
+<script>
+    var uid = ${user.uid}
+
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
+
+    function getMessage(uid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/user/getMessage.action",
+            data:"uid="+uid,
+            success:function (data) {
+                if(data!="0"){
+                    $("#message").removeAttr("hidden")
+                    $("#messageNum").html(data)
+                }else {
+                    $("#message").attr("hidden","true")
+                    $("#messageNum").html(0)
+                }
+            }
+        })
+    }
+
 </script>
 </body>
 

@@ -244,7 +244,6 @@ public class UserController {
             int num = luntanService.selectCommentCommentNum(cidshuzu[i]);
             mapnum.put(cidshuzu[i]+"",num+"");
         }
-
         request.setAttribute("map",map);
         request.setAttribute("mapnum",mapnum);
         request.getRequestDispatcher("/jsp/tiezidetail.jsp").forward(request,response);

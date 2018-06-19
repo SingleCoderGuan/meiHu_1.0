@@ -18,17 +18,17 @@
 
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
-    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>images/defaultheadpic.png" />
 
-    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="../css/aw-font.css"/>
+    <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="<%=basePath%>css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="<%=basePath%>css/aw-font.css"/>
 
-    <link href="../css/common.css" rel="stylesheet" type="text/css"/>
-    <link href="../css/link.css" rel="stylesheet" type="text/css"/>
-    <link href="../css/stylebankuai.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=basePath%>css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=basePath%>css/link.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=basePath%>css/stylebankuai.css" rel="stylesheet" type="text/css"/>
 
-    <link href="../css/classblack.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
 
 
     <script type="text/javascript" src="<%=basePath%>js/jquery-3.2.1.min.js"></script>
@@ -88,6 +88,19 @@
         display: block;
     }
 </style>
+<script>
+    function getUrlParms(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)
+            return unescape(r[2]);
+        return null;
+    }
+    var cid = getUrlParms("cid");
+    if(cid!=null){
+        document.getElementById(cid).scrollIntoView();
+    }
+</script>
 
 <body>
 <div class="aw-top-menu-wrap">
@@ -95,7 +108,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+               <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -198,6 +211,7 @@
                 <span>
                     <c:if test="${not empty sessionScope.user}">
                         <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <img id="message" hidden style="position: absolute;left: 75px;width: 20px" src="<%=basePath%>images/comment.png"/>
                         <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
                     </c:if>
                     <c:if test="${empty sessionScope.user}">
@@ -223,7 +237,7 @@
                 <div class="col-sm-12">
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">
                         <dl>
-                            <dt><img src="../images/bankuai1.png"/></dt>
+                            <dt><img src="<%=basePath%>images/bankuai1.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">口红</a>
@@ -234,7 +248,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=2">
                         <dl>
-                            <dt><img src="../images/bankuai6.png"/></dt>
+                            <dt><img src="<%=basePath%>images/bankuai6.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">眼霜</a>
@@ -245,7 +259,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=3">
                         <dl>
-                            <dt><img src="../images/bankuai3.png"/></dt>
+                            <dt><img src="<%=basePath%>images/bankuai3.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">香水</a>
@@ -256,7 +270,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=4">
                         <dl>
-                            <dt><img src="../images/bankuai4.png"/></dt>
+                            <dt><img src="<%=basePath%>images/bankuai4.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">水乳</a>
@@ -267,7 +281,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=5">
                         <dl>
-                            <dt><img src="../images/bankuai2.png"/></dt>
+                            <dt><img src="<%=basePath%>images/bankuai2.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">防晒</a>
@@ -278,7 +292,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=6">
                         <dl>
-                            <dt><img src="../images/bankuai5.png"/></dt>
+                            <dt><img src="<%=basePath%>images/bankuai5.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">洗面奶</a>
@@ -344,7 +358,6 @@
                                 <div class="aw-mod-head">
                                     <h1>
                                         ${forumPost.ptitle}</h1>
-
                                     <div class="aw-topic-editor" id="question_topic_editor" data-type="question"
                                          data-id="55229">
 
@@ -374,7 +387,7 @@
                                             alert("亲，不能关注自己帖子呦！！");
                                             </c:when>
                                             <c:otherwise>
-                                            if ($("#shoucang").attr("src") == ("../images/shoucang.png")) {
+                                            if ($("#shoucang").attr("src") == ("<%=basePath%>images/shoucang.png")) {
 
                                                 $.ajax(
                                                     {
@@ -384,7 +397,7 @@
                                                         success:function (data) {
                                                             if(data==1){
                                                                 alert("收藏成功");
-                                                                $("#shoucang").attr("src", "../images/shoucanghou.png");
+                                                                $("#shoucang").attr("src", "<%=basePath%>images/shoucanghou.png");
                                                             }else if(data==2){
                                                                 alert("您已收藏过该帖子");
                                                             }
@@ -394,7 +407,7 @@
 
 
                                             } else {
-                                                $("#shoucang").attr("src", "../images/shoucang.png");
+                                                $("#shoucang").attr("src", "<%=basePath%>images/shoucang.png");
                                                 $.ajax(
                                                     {
                                                         type: "post",
@@ -423,8 +436,8 @@
                                                 alert("亲，请先登录");
                                             </c:if>
                                             <c:if test="${not empty sessionScope.user}">
-                                            if ($("#dianzan").attr("src") == ("../images/dianzan.png")) {
-                                                $("#dianzan").attr("src", "../images/dianzanhou.png");
+                                            if ($("#dianzan").attr("src") == ("<%=basePath%>images/dianzan.png")) {
+                                                $("#dianzan").attr("src", "<%=basePath%>images/dianzanhou.png");
                                                 $.ajax(
                                                     {
                                                         type: "post",
@@ -436,7 +449,7 @@
 
 
                                             } else {
-                                                $("#dianzan").attr("src", "../images/dianzan.png");
+                                                $("#dianzan").attr("src", "<%=basePath%>images/dianzan.png");
                                                 $.ajax(
                                                     {
                                                         type: "post",
@@ -479,10 +492,10 @@
                                         </div>
                                         <span class="aw-text-color-999">点赞
                                             <a href="#" onclick="dianzan(${forumPost.pid})"><img id="dianzan"
-                                                                                                        src="../images/dianzan.png"/></a></span>
+                                                                                                        src="<%=basePath%>images/dianzan.png"/></a></span>
                                         <span class="aw-text-color-999">收藏
                                             <a href="#" onclick="shoucang(${forumPost.pid})"><img id="shoucang"
-                                                                                                         src="../images/shoucang.png"/></a></span>
+                                                                                                         src="<%=basePath%>images/shoucang.png"/></a></span>
 
                                         <a class="aw-text-color-999" data-toggle="collapse" href="#jubao"
                                            aria-expanded="false" aria-controls="collapseExample">
@@ -579,6 +592,7 @@
                                 </div>
                                 <div class="aw-mod-body aw-dynamic-topic">
                                     <c:forEach items="${forumCommentList}" var="forumCommentList">
+                                        <a id="${forumCommentList.cid}"></a>
                                     <div class="aw-item" uninterested_count="0" force_fold="0" id="answer_list_63059">
                                         <a class="anchor" name="answer_63059"></a>
                                         <!-- 用户头像 -->
@@ -863,11 +877,11 @@
                             <div class="aw-side-bar-mod">
 
                                 <a class="sponsor_btn btn top-btn" href="#">
-                                    <img src="../images/zhichi.png"/>
+                                    <img src="<%=basePath%>images/zhichi.png"/>
                                     <span style="font-size:13px;">逛逛商城</span>
                                 </a>
                                 <a class="sponsor_btn btn top-btn" href="<%=basePath%>luntan/luntanshouye.action?tid=7">
-                                    <img src="../images/daigou.png"/>
+                                    <img src="<%=basePath%>images/daigou.png"/>
                                     <span style="font-size:13px;">看看代购</span>
                                 </a>
                             </div>
@@ -928,7 +942,32 @@ background-color: #ce8483; z-index:9999;text-align: center">
     © 2018 美乎. All rights reserved | Design by
     <a href="#">第六组</a>
 </div>
+<script>
+    var uid = ${user.uid}
 
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
+
+    function getMessage(uid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/user/getMessage.action",
+            data:"uid="+uid,
+            success:function (data) {
+                if(data!="0"){
+                    $("#message").removeAttr("hidden")
+                }else {
+                    $("#message").attr("hidden","true")
+                }
+            }
+        })
+    }
+
+</script>
 </body>
 
 </html>
