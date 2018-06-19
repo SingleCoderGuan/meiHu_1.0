@@ -18,7 +18,17 @@ public class ForumComment {
 
     private ForumUser user;
 
+    private ForumPost post ;
+
     private ForumComment forumComment;
+
+    public ForumPost getPost() {
+        return post;
+    }
+
+    public void setPost(ForumPost post) {
+        this.post = post;
+    }
 
     public Integer getCcid() {
         return ccid;

@@ -78,7 +78,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ForumComment> getMessage(int uid) {
-        return forumCommentMapper.selectComments(uid);
+    public List<ForumComment> getNewComments(int uid) {
+        return forumCommentMapper.selectNewComments(uid);
+    }
+
+    @Override
+    public boolean readComment(int cid) {
+        return forumCommentMapper.updateCommentState(cid);
+    }
+
+    @Override
+    public List<ForumComment> getOldComments(int uid) {
+        return forumCommentMapper.selectOldComments(uid);
     }
 }

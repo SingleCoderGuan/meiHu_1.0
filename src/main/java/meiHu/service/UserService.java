@@ -75,11 +75,19 @@ public List<ForumUser> selectUsersByTitleId();
     //查询用户收藏数-->
     public int selectCollectionNumByUid(int uid);
 
+
     /**
-     * 查询用户收到的评论
+     * 根据用户查询该用户收到的所有评论
      * @param uid
      * @return
      */
-    public List<ForumComment> getMessage(int uid) ;
+    public List<ForumComment> getOldComments(int uid) ;
+    public List<ForumComment> getNewComments(int uid) ;
 
+    /**
+     * 改变评论状态为已读
+     * @param cid
+     * @return
+     */
+    public boolean readComment(int cid);
 }

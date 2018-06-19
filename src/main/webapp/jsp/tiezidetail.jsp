@@ -193,7 +193,7 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav">
+            <div class="aw-user-nav" style="width: 259px;">
                 <!-- 登陆&注册栏 -->
                 <span>
                     <c:if test="${not empty sessionScope.user}">

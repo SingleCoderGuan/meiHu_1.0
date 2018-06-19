@@ -212,7 +212,7 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav">
+            <div class="aw-user-nav" style="width: 259px">
                 <!-- 登陆&注册栏 -->
                 <span>
                     <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>

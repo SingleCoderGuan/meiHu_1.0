@@ -41,13 +41,14 @@ public interface ForumCommentMapper {
 
     //查询某评论下的评论数量
     public int selectCommentCommentNum(int cid);
-
     /**
-     * 查询该用户收到的所有评论
+     * 查询该用户收到的所有已读评论
      * @param uid
      * @return
      */
-    public List<ForumComment> selectComments(int uid) ;
+    public List<ForumComment> selectOldComments(int uid) ;
+    //未读评论
+    public List<ForumComment> selectNewComments(int uid) ;
 
     /**
      * 查询该用户的所有新评论消息
@@ -55,4 +56,11 @@ public interface ForumCommentMapper {
      * @return
      */
     public List<ForumComment> getNewComments(int uid);
+
+    /**
+     * 改变评论状态为已读
+     * @param cid
+     * @return
+     */
+    public boolean updateCommentState(int cid);
 }

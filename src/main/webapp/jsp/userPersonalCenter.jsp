@@ -149,7 +149,7 @@ strict.dtd">
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav">
+            <div class="aw-user-nav" style="width: 259px">
                 <!-- 登陆&注册栏 -->
                 <span>
                     <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
@@ -199,7 +199,7 @@ strict.dtd">
                                     <a href="#questions" id="page_questions" data-toggle="tab" style="font-size: 20px">我的帖子<span class="badge" style="font-size: 18px">${postsNum}</span></a>
                                 </li>
                                 <li style="width: 175px;text-align: center">
-                                    <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">我的提醒<span class="badge" style="font-size: 18px">0</span></a>
+                                    <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">我的提醒<span class="badge" style="font-size: 18px">${commentsNum}</span></a>
                                 </li>
 
                                 <li style="width: 175px;text-align: center">
@@ -235,7 +235,20 @@ strict.dtd">
                                 <div class="aw-mod">
                                     <div class="mod-body">
                                         <div class="aw-profile-publish-list" id="contents_user_actions_reply">
-                                            <div style="background-color: #FFCCCC;height: 30px"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">操作</span></div>
+                                            新回复
+                                            <c:forEach items="${newComments}" var="newComment">
+                                                <div style="position: relative;left: 20px;margin-top: 20px;">
+                                                    <div><span>用户<a href="#">${newComment.user.uname}</a></span><span style="position: absolute;left: 150px;"><a href="<%=basePath%>readReply.action?pid=${newComment.post.pid}&cid=${newComment.cid}">${newComment.commenttext}</a></span></div>
+                                                    <div style="margin-top: 20px"><span>回复我的帖子：<a href="#">${newComment.post.ptitle}</a></span><span style="position: absolute;left: 500px;">时间：${newComment.commenttime}</span></div>
+                                                </div>
+                                            </c:forEach>
+                                            已查看
+                                            <c:forEach items="${oldComments}" var="oldComment">
+                                                <div style="position: relative;left: 20px;margin-top: 20px;">
+                                                    <div ><span>用户<a href="#">${oldComment.user.uname}</a></span><span style="position: absolute;left: 150px;"><a href="<%=basePath%>readReply.action?pid=${oldComment.post.pid}&cid=${oldComment.cid}">${oldComment.commenttext}</a></span></div>
+                                                    <div style="margin-top: 20px"><span>回复我的帖子：<a href="#">${oldComment.post.ptitle}</a></span><span style="position: absolute;left: 500px;">时间：${oldComment.commenttime}</span></div>
+                                                </div>
+                                            </c:forEach>
                                         </div>
                                     </div>
                                 </div>

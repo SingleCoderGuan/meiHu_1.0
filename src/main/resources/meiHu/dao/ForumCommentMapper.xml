@@ -35,6 +35,20 @@
         </association>
     </resultMap>
 
+    <resultMap id="OldAndNewcommentsMap" type="ForumComment">
+        <id column="cid" property="cid"/>
+        <result column="commenttime" property="commenttime"/>
+        <result column="commenttext" property="commenttext"/>
+        <association property="user" javaType="ForumUser">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
+        </association>
+        <association property="post" javaType="ForumPost">
+            <id column="pid" property="pid"/>
+            <result column="ptitle" property="ptitle" />
+        </association>
+    </resultMap>
+
     <!--public ForumComment selectCommentByUid(int uid) ;-->
 
     <!--public ForumComment selectCommentBypid(int pid) ;-->
@@ -82,9 +96,28 @@
         select count(*) from forum_comment WHERE commentid=#{parameter};
     </select>
 
+    <!--public List<ForumComment> selectComments(int uid) ;-->
+    <select id="selectOldComments" parameterType="int" resultMap="OldAndNewcommentsMap">
+        SELECT pp.ptitle,c.commenttime,c.commenttext ,u.uname,c.cidFROM forum_comment c,forum_user u ,forum_post pp WHERE c.post_pid
+        in (select p.pid FROM forum_post p WHERE p.user_uid=#{_parameter}) and c.user_uid=u.uid and c.post_pid=pp.pid AND c.isread = 1
+        ORDER by c.commenttime DESC
+    </select>
+
+    <!--public List<ForumComment> selectComments(int uid) ;-->
+    <select id="selectNewComments" parameterType="int" resultMap="OldAndNewcommentsMap">
+        SELECT pp.ptitle,c.commenttime,c.commenttext ,u.uname,c.cid FROM forum_comment c,forum_user u ,forum_post pp WHERE c.post_pid
+        in (select p.pid FROM forum_post p WHERE p.user_uid=#{_parameter}) and c.user_uid=u.uid and c.post_pid=pp.pid AND c.isread = 0
+        ORDER by c.commenttime DESC
+    </select>
+
     <!--public List<ForumComment> getNewComments(int uid);-->
     <select id="getNewComments" parameterType="int" resultType="ForumComment">
         SELECT c.cid FROM forum_comment c WHERE c.post_pid
         in (select p.pid FROM forum_post p WHERE p.user_uid=#{_parameter}) AND c.isread = 0
     </select>
+
+    <!--public boolean updateCommentState(int cid);-->
+    <update id="updateCommentState" parameterType="int">
+        UPDATE forum_comment SET isread = 1 WHERE cid=#{parameter}
+    </update>
 </mapper>
