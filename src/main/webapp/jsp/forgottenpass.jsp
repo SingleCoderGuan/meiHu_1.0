@@ -33,10 +33,11 @@
         <img id="logo" src="<%=basePath%>images/LOGO.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
         <form id="resetForm" method="post" class="form-horizontal forgottenform" action="<%=basePath%>user/preresetpass.action"  >
+            <input type="text" hidden name="phone" id="phone" />
             <div class="form-group" style="position: relative;left: 53px;">
                 <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 100px;color:#996666;font-size: 18px">手机号码</label>
                 <div class="col-sm-4">
-                    <input type="text" class="forgotteninput"  id="tel" name="phone" placeholder="请输入手机号码">
+                    <input type="text" class="forgotteninput"  id="tel" name="tel" placeholder="请输入手机号码">
                     <span style="position: absolute;left: 200px;top: 80px;" id="teltip"></span>
                 </div>
             </div>
@@ -158,6 +159,7 @@
         var code=$("#code").val();
         if(code==sms){
             alert("验证码正确")
+            $("#phone").val($("#tel").val())
             $("#resetForm").submit()
         }else {
             alert("验证码错误")

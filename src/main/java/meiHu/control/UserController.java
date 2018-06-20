@@ -213,7 +213,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/user/readReply.action",method = RequestMethod.GET)
+    @RequestMapping(value = "/readReply.action",method = RequestMethod.GET)
     public void readReply(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
         String cid = request.getParameter("cid") ;
