@@ -340,12 +340,12 @@ strict.dtd">
 </div>
 </div>
 
-<div class="aw-footer aw-wecenter">
-    <p>© 2018 美乎. All rights reserved | Design by
-        <a href="#">第六组</a>
-    </p>
-    </span>
 
+<div style="position:fixed; left:0px;
+bottom:0px; width:100%; height:30px;font-weight: bold;
+background-color: #ce8483; z-index:9999;text-align: center">
+    © 2018 美乎. All rights reserved | Design by
+    <a href="#">第六组</a>
 </div>
 </div>
 <script type="text/javascript">

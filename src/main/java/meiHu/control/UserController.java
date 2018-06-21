@@ -55,8 +55,15 @@ public class UserController {
                     }
                 }
 
-                request.getSession().setAttribute("user",user);
-                request.getRequestDispatcher("/luntan/luntanshouye.action?tid=1").forward(request,response);
+
+                    request.getSession().setAttribute("user",user);
+
+                    request.getRequestDispatcher("/luntan/luntanshouye.action?tid=1").forward(request,response);
+
+
+
+
+
             }else{
 //                密码错误
                 response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp?rslt=1");

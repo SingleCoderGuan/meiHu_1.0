@@ -17,4 +17,18 @@ public interface ForumOfficalarticleMapper {
      * @return  该oaid对应的官方文章
      */
     public ForumOfficalarticle selectOfficalArticleByOaid(int oaid);
+
+    /**
+     * 向官方文章表中插入一条数据
+     * @param forumOfficalarticle
+     * @return
+     */
+    public boolean insertArticle(ForumOfficalarticle forumOfficalarticle) ;
+
+    /**
+     * 根据id删除文章
+     * @param oaid
+     * @return
+     */
+    public boolean deleteArticle(int oaid);
 }

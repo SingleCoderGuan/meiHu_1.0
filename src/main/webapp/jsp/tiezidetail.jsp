@@ -95,7 +95,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="<%=basePath%>jsp/zhuye.jsp""> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+               <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -202,7 +202,7 @@
                     </c:if>
                     <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
-                        <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
+                        <a href="<%=basePath %>jsp/loginregister.jsp?url=luntan/tiezidetail.action?pid=<%=request.getParameter("pid")%>">登录</a>
                     </c:if>
 
 						</span>
@@ -363,11 +363,18 @@
                                     </div>
 
                                     <script>
-                                        function shoucang( pidd) {
-                                            <c:if test="${empty sessionScope.user}">
-                                                alert("亲，请先登录");
-                                            </c:if>
-                                            <c:if test="${not empty sessionScope.user}">
+                                        function shoucang(pidd) {
+                                            <c:choose>
+                                            <c:when test="${empty sessionScope.user}">
+                                            alert("亲，请先登录");
+
+                                            </c:when>
+                                            <c:otherwise>
+                                            <c:choose>
+                                            <c:when test="${sessionScope.user.uid==forumPost.user.uid}">
+                                            alert("亲，不能关注自己帖子呦！！");
+                                            </c:when>
+                                            <c:otherwise>
                                             if ($("#shoucang").attr("src") == ("../images/shoucang.png")) {
 
                                                 $.ajax(
@@ -403,13 +410,19 @@
                                                 );
 
                                             }
-                                            </c:if>
+                                            </c:otherwise>
+                                            </c:choose>
+                                            </c:otherwise>
+
+                                            </c:choose>
+
 
                                         }
 
                                         function dianzan( pidd) {
                                             <c:if test="${empty sessionScope.user}">
                                                 alert("亲，请先登录");
+
                                             </c:if>
                                             <c:if test="${not empty sessionScope.user}">
                                             if ($("#dianzan").attr("src") == ("../images/dianzan.png")) {
@@ -492,7 +505,8 @@
                                                     function pinglun( pidd, text) {
                                                     <c:if test="${empty sessionScope.user}">
                                                         alert("亲，请先登录");
-                                                    </c:if>
+
+                                                        </c:if>
                                                     <c:if test="${not empty sessionScope.user}">
                                                         $.ajax({
                                                             type: "post",
@@ -530,6 +544,7 @@
                                                     function jubao( pidd, reason) {
                                                         <c:if test="${empty sessionScope.user}">
                                                             alert("亲，请先登录");
+
                                                         </c:if>
                                                         <c:if test="${not empty sessionScope.user}">
                                                         $.ajax({
@@ -568,7 +583,7 @@
                                 </div>
                                 <div class="aw-mod-body aw-dynamic-topic">
                                     <c:forEach items="${forumCommentList}" var="forumCommentList">
-                                    <div class="aw-item" uninterested_count="0" force_fold="0" id="answer_list_63059">
+                                    <div class="aw-item" uninterested_count="0" force_fold="0" >
                                         <a class="anchor" name="answer_63059"></a>
                                         <!-- 用户头像 -->
                                         <a class="aw-user-img aw-border-radius-5 pull-right" href="#" data-id="46">
@@ -645,6 +660,7 @@
                                                                     function pinglunjubao( cidd, commentreportreason) {
                                                                         <c:if test="${empty sessionScope.user}">
                                                                         alert("亲，请先登录");
+
                                                                         </c:if>
                                                                         <c:if test="${not empty sessionScope.user}">
                                                                         $.ajax({
@@ -696,6 +712,7 @@
                                                                     function pinglunpinglun( cidd, text,pidd) {
                                                                         <c:if test="${empty sessionScope.user}">
                                                                         alert("亲，请先登录");
+
                                                                         </c:if>
                                                                         <c:if test="${not empty sessionScope.user}">
                                                                         $.ajax({
@@ -745,7 +762,14 @@
                                 <div class="aw-mod-body">
                                     <dl style="padding-top: 5px;">
                                         <dt class="pull-left aw-border-radius-5">
-                                            <a href="<%=basePath%>luntan/userdetail.action?uid=${forumPost.user.uid}">
+                                            <c:choose>
+                                                <c:when test="${sessionScope.user.uid==forumPost.user.uid}">
+                                                <a href="<%=basePath%>userCenter.action">
+                                                </c:when>
+                                                    <c:otherwise>
+                                                <a href="<%=basePath%>luntan/userdetail.action?uid=${forumPost.user.uid}">
+                                                </c:otherwise>
+                                            </c:choose>
                                                 <img src="<%=basePath%>${forumPost.user.headpic}"/>
                                             </a>
                                         </dt>
@@ -763,10 +787,17 @@
                                             </button>
                                             <script>
                                                 function guanzhu(postuid) {
-                                                    <c:if test="${empty sessionScope.user}">
+                                                    <c:choose>
+                                                    <c:when test="${empty sessionScope.user}">
                                                     alert("亲，请先登录");
-                                                    </c:if>
-                                                    <c:if test="${not empty sessionScope.user}">
+
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <c:choose>
+                                                    <c:when test="${sessionScope.user.uid==forumPost.user.uid}">
+                                                    alert("您不能自己关注自己哦");
+                                                    </c:when>
+                                                    <c:otherwise>
                                                     $.ajax({
                                                         type:"post",
                                                         url: "${pageContext.request.contextPath}/luntan/focus.action",
@@ -784,7 +815,11 @@
                                                             }
                                                         }
                                                     });
-                                                    </c:if>
+                                                    </c:otherwise>
+                                                    </c:choose>
+                                                    </c:otherwise>
+
+                                                    </c:choose>
                                                 }
                                             </script>
                                         </dd>
@@ -832,17 +867,52 @@
                                     margin-right: 1px;
                                 }
                             </style>
-                            <div class="aw-side-bar-mod">
+                            <div class="aw-side-bar-mod question_related_list">
+                                <div class="aw-mod-head">
+                                    <h3>签到</h3>
+                                </div>
+                                <div class="aw-mod-body">
+                                    <ul>
+                                        <li>
+                                            <a  class="btn btn-danger" href="#" onclick="sign()" style="width: 200px;">
+                                                <span style="font-size:13px;">点我签到</span>
+                                            </a>
+                                        </li>
 
-                                <a class="sponsor_btn btn top-btn" href="#">
-                                    <img src="../images/zhichi.png"/>
-                                    <span style="font-size:13px;">逛逛商城</span>
-                                </a>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="aw-side-bar-mod">
                                 <a class="sponsor_btn btn top-btn" href="<%=basePath%>luntan/luntanshouye.action?tid=7">
                                     <img src="../images/daigou.png"/>
                                     <span style="font-size:13px;">看看代购</span>
                                 </a>
                             </div>
+
+                            <script>
+                                function sign(){
+                                    <c:if test="${empty sessionScope.user.uid}">
+                                    alert("亲，请先登录");
+
+                                    </c:if>
+                                    <c:if test="${not empty sessionScope.user.uid}">
+                                    $.ajax({
+                                        type:"post",
+                                        url: "${pageContext.request.contextPath}/article/sign.action",
+                                        data: "uid=" + ${ sessionScope.user.uid},
+                                        success: function (result) {
+                                            if (result == 1) {
+                                                alert("签到成功！！");
+                                                window.load();
+                                            }
+                                            else if (result == 0) {
+                                                alert("您今日已经签到了亲！！");
+                                            }
+                                        }
+                                    });
+                                    </c:if>
+                                }
+                            </script>
 
                             <!--公告文章-->
                             <div class="aw-side-bar-mod aw-text-align-justify question_related_list">

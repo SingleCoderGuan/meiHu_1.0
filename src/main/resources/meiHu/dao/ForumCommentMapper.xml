@@ -67,7 +67,7 @@
 
     <!--public List<ForumComment> selectAllCommentForComment(int ccid);-->
     <select id="selectAllCommentForComment" resultMap="commentforcomment" parameterType="int">
-       SELECT c.*,u.uname FROM  forum_comment c ,forum_user u
+       SELECT c.*,u.* FROM  forum_comment c ,forum_user u
            WHERE c.user_uid = u.uid and  c.commentid=#{parameter}
     </select>
 

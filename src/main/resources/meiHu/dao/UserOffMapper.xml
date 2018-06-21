@@ -38,7 +38,7 @@
 
     <select id="selectAllOffByUid" resultMap="useroffmap" parameterType="int">
         SELECT uol.*,ol.offname FROM user_off_level uol,off_level ol
-        WHERE uol.uid = #{parameter}
+        WHERE uol.uid = #{parameter} AND uol.offid=ol.offid
     </select>
     <resultMap id="useroffmap" type="UserOff">
         <id column="requireid" property="requireid"/>

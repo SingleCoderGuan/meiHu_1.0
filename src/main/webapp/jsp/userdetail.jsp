@@ -200,8 +200,15 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-							<a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                    <c:if test="${not empty sessionScope.user}">
+                        <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                    </c:if>
+                    <c:if test="${empty sessionScope.user}">
+                        <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
+                        <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
+                    </c:if>
+
 						</span>
 
                 <!-- end 登陆&注册栏 -->
@@ -348,6 +355,7 @@
                                 function guanzhu() {
                                     <c:if test="${empty sessionScope.user}">
                                     alert("亲，请先登录");
+
                                     </c:if>
                                     <c:if test="${not empty sessionScope.user}">
                                     $.ajax({
@@ -382,12 +390,12 @@
 </div>
 </div>
 
-<div class="aw-footer aw-wecenter">
-    <p>© 2018 美乎. All rights reserved | Design by
-        <a href="#">第六组</a>
-    </p>
-    </span>
 
+<div style="position:fixed; left:0px;
+bottom:0px; width:100%; height:30px;font-weight: bold;
+background-color: #ce8483; z-index:9999;text-align: center">
+    © 2018 美乎. All rights reserved | Design by
+    <a href="#">第六组</a>
 </div>
 </div>
 

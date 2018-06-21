@@ -66,6 +66,11 @@ margin-left: 530px;margin-top: 50px"/>
         <p>2018-06-23</p>
     </dd>
 </dl>
+    <c:if test="${info==1}">
+        <script>
+            alert("用户名或密码输入错误！！");
+        </script>
+    </c:if>
 </form>
 </body>
 </html>

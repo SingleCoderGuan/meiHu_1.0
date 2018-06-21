@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumPostreportMapper">
+    <resultMap id="postreportmap" type="ForumPostreport">
+        <id column="reportid" property="reportid"/>
+        <result column="reportreason"  property="reportreason"/>
+        <result column="reporttime"  property="reporttime"/>
+        <association property="user" javaType="ForumUser">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
+        </association>
+        <association property="post" javaType="ForumPost">
+            <id column="pid" property="pid"/>
+            <result column="createtime" property="createtime"/>
+            <result column="ptitle" property="ptitle"/>
+            <result column="pcontent" property="pcontent"/>
+        </association>
+
+
+    </resultMap>
     <!--public boolean addPostReport(ForumPostreport forumPostreport);-->
     <insert id="addPostReport" parameterType="ForumPostreport">
         INSERT  INTO forum_postreport (post_pid,user_uid,reportreason)
          VALUES (#{pid},#{uid},#{reportreason});
     </insert>
+
+    <!--public List<ForumPostreport> getAll() ;-->
+<select id="getAll" resultMap="postreportmap">
+    SELECT pr.*,u.*,p.*FROM forum_postreport pr,forum_user u,forum_post p
+    WHERE pr.user_uid = u.uid AND pr.post_pid=p.pid
+</select>
+
+    <!--public void deletePostByPid(int pid);-->
+<delete id="deletePostByPid" parameterType="int">
+    DELETE FROM forum_post WHERE pid=#{parameter}
+</delete>
 
 </mapper>

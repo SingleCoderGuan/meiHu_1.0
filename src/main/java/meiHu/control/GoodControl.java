@@ -100,11 +100,11 @@ public class GoodControl {
     }
     //生成订单并浏览出用户个人地址
     @RequestMapping(value = "/order.action",method={RequestMethod.POST, RequestMethod.GET})
-    public String save (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void save (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ForumUser user=(ForumUser)request.getSession().getAttribute("user");
         if(user==null){
-            return "/jsp/loginregister.jsp";
-        }
+            response.sendRedirect(request.getContextPath()+"/jsp/loginregister.jsp");
+        }else{
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         Order order=new Order();
         int orderid=Math.abs(UUID.randomUUID().toString().hashCode());
@@ -127,8 +127,9 @@ public class GoodControl {
         int uid=user.getUid();
         List<Address> addressList=addressService.selectAddressById(uid);
         request.getSession().setAttribute("addressList",addressList);
-        request.getRequestDispatcher("/jsp/order_address.jsp").forward(request,response);
-        return null;
+        request.setAttribute("userofflist",exchangeService.selectAllOffByUid(uid));
+        request.getRequestDispatcher("/jsp/order_address.jsp").forward(request,response);}
+
     }
     //取消订单
     @RequestMapping(value = "/deleteOrder.action",method={RequestMethod.POST, RequestMethod.GET})

@@ -10,26 +10,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LoginInterceptor implements HandlerInterceptor{
+public class LoginInterceptor implements HandlerInterceptor {
     //身份检测
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //安全认证
-        String url = request.getRequestURI();
-        if(url.endsWith("login.jsp")||url.endsWith("loginadmin.jsp")||url.endsWith("/")){
-            return true;
-        }
-        //如果是已经登录过的
-        HttpSession session = request.getSession();
-        ForumUser user = (ForumUser) session.getAttribute("user");
-        if(user!=null){
-            return true;
-        }
+//        String url = request.getRequestURI();
+//        if (url.endsWith("loginregister.jsp") || url.endsWith("loginadmin.jsp") || url.endsWith("/") || url.endsWith("adminlogin.jsp")) {
+//            return true;
+//        }
 
-//        其他情况下，转发到登录页面
-        request.getRequestDispatcher("/jsp/login.jsp").forward(request,response);
-        return false;
+        //如果是已经登录过的
+//        HttpSession session = request.getSession();
+//        if(session.getAttribute("admin")!=null){
+//            return true;
+//        }
+//        response.sendRedirect(request.getContextPath()+"/admin/adminlogin.jsp");
+////        request.getRequestDispatcher("/jsp/adminlogin.jsp").forward(request, response);
+       return false;
+
+
     }
 
     @Override

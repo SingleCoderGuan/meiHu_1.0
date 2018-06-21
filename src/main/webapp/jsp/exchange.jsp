@@ -17,7 +17,7 @@
     <title>兑换专区</title>
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
-    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>/images/defaultheadpic.png" />
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/font-awesome.css"/>
@@ -30,6 +30,11 @@
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="<%=basePath%>css/project.css"/>
+    <link rel="stylesheet" href="<%=basePath%>css/hb.css"/>
+    <script src="<%=basePath%>js/hb.js" type="text/javascript"></script>
+    <script src="<%=basePath%>js/jquery.js" type="text/javascript"></script>
+
+
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108"
@@ -93,7 +98,8 @@
     }
 </style>
 
-<body>
+<body onload="hongbao()">
+<div id="petalbox"></div>
 <div class="aw-top-menu-wrap">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
@@ -181,7 +187,7 @@
                         </li>
 
                         <li>
-                            <a href="#">美淘</a>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
                         </li>
                         <li>
                             <a href="<%=basePath%>article/article.action">美文</a>
@@ -285,10 +291,15 @@
                                         </button>
                                     </div>
                                     <script>
+
+
                                         function duihuan(offidd) {
 
                                             <c:if test="${empty sessionScope.user.uid}">
                                             alert("亲，请先登录");
+                                            window.location.href="<%=basePath%>jsp/loginregister.jsp?url=/meiHu_1.0/exchange.action";
+
+
                                             </c:if>
                                             <c:if test="${not empty sessionScope.user.uid}">
 

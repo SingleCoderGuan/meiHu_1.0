@@ -151,7 +151,7 @@
             data:{"tel":tel},
             success:function(result){
                 sms=result;
-                alert(sms)
+
             }
         });
     });

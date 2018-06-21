@@ -17,7 +17,7 @@
 <meta  http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>美乎登录&注册</title>
 <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<%=basePath%>css/stylelogin.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>css/style_inner.css" type="text/css">
     <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -92,7 +92,7 @@
                         </ul>
 
                         <div id="content">
-                            <form id="accountlogin" action="${pageContext.request.contextPath}/loginWithAccount.action" method="post">
+                            <form id="accountlogin" action="${pageContext.request.contextPath}/loginWithAccount.action?url=<%=request.getParameter("url")%>" method="post">
                             <p id="one">
 
                                 <input style="position:relative;top: 20px;"  type="text" name="uname" value="${userArr[0] }" placeholder="请输入用户名"/>

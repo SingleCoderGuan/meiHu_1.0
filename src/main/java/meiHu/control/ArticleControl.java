@@ -1,6 +1,7 @@
 package meiHu.control;
 
 
+import com.github.pagehelper.PageInfo;
 import meiHu.entity.ForumOfficalarticle;
 import meiHu.entity.ForumSign;
 import meiHu.service.ArticleService;
@@ -16,7 +17,9 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/article")
@@ -53,8 +56,20 @@ public class ArticleControl {
     }
     @RequestMapping("/article.action")
     public void showallarticle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<ForumOfficalarticle> forumOfficalarticleList =articleService.getAllOfficalArticles();
-        request.setAttribute("forumOfficalarticleList",forumOfficalarticleList);
+        Map<String ,Object> cmap=new HashMap<>();
+        //每页显示的条数
+        int pageSize=5;
+        //当前的页面默认是首页
+        int curPage=1;
+        String scurPage=request.getParameter("curPage");
+        if (scurPage!=null&&!scurPage.trim().equals("")){
+
+            curPage=Integer.parseInt(scurPage);
+        }
+        cmap.put("curPage",curPage);
+        cmap.put("pageSize",pageSize);
+        PageInfo<ForumOfficalarticle> pageInfo = articleService.selectAllArticle(cmap);
+        request.setAttribute("pageInfo",pageInfo);
         request.getRequestDispatcher("/jsp/article.jsp").forward(request,response);
     }
 
