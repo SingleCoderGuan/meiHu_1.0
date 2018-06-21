@@ -14,4 +14,9 @@ public interface ForumCommentreportMapper {
 
     //用户对评论进行举报
     public int addCommentReport(ForumCommentreport forumCommentreport);
+
+
+    //删除该条评论
+    public void deleteCommentByCid(int cid);
+
 }

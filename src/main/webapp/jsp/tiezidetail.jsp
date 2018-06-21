@@ -18,17 +18,17 @@
 
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
-    <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>images/defaultheadpic.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
-    <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="<%=basePath%>css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="<%=basePath%>css/aw-font.css"/>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/aw-font.css"/>
 
-    <link href="<%=basePath%>css/common.css" rel="stylesheet" type="text/css"/>
-    <link href="<%=basePath%>css/link.css" rel="stylesheet" type="text/css"/>
-    <link href="<%=basePath%>css/stylebankuai.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/link.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/stylebankuai.css" rel="stylesheet" type="text/css"/>
 
-    <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/classblack.css" rel="stylesheet" type="text/css"/>
 
 
     <script type="text/javascript" src="<%=basePath%>js/jquery-3.2.1.min.js"></script>
@@ -88,19 +88,6 @@
         display: block;
     }
 </style>
-<script>
-    function getUrlParms(name){
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if(r!=null)
-            return unescape(r[2]);
-        return null;
-    }
-    var cid = getUrlParms("cid");
-    if(cid!=null){
-        document.getElementById(cid).scrollIntoView();
-    }
-</script>
 
 <body>
 <div class="aw-top-menu-wrap">
@@ -108,7 +95,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+               <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -197,7 +184,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>fatie.action">发帖</a>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -206,14 +193,17 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav" style="width: 259px;">
+            <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <c:if test="${not empty sessionScope.user}">
-                        <a style="position: relative;left: -40px;" href="<%=basePath%>user/userCenter.action"><img style="position: relative;top: -0.5px;width: 55px;height: 54px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                        <img id="message" hidden style="position: absolute;left: 28px;top: -7px;width: 30px" src="<%=basePath%>images/comment.png"/>
-                        <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 250px;">注销</a>
-                    </c:if>
+                     <c:if test="${not empty sessionScope.user}">
+                          <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
+                        <img style="width: 50px;height: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}
+                    </a>
+                         <img id="message" hidden style="position: absolute;left: 30px;top: 40px;width: 30px" src="<%=basePath%>images/comment.png"/>
+
+                         <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 250px;">注销</a>
+                     </c:if>
                     <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
                         <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
@@ -237,7 +227,7 @@
                 <div class="col-sm-12">
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">
                         <dl>
-                            <dt><img src="<%=basePath%>images/bankuai1.png"/></dt>
+                            <dt><img src="../images/bankuai1.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">口红</a>
@@ -248,7 +238,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=2">
                         <dl>
-                            <dt><img src="<%=basePath%>images/bankuai6.png"/></dt>
+                            <dt><img src="../images/bankuai6.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">眼霜</a>
@@ -259,7 +249,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=3">
                         <dl>
-                            <dt><img src="<%=basePath%>images/bankuai3.png"/></dt>
+                            <dt><img src="../images/bankuai3.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">香水</a>
@@ -270,7 +260,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=4">
                         <dl>
-                            <dt><img src="<%=basePath%>images/bankuai4.png"/></dt>
+                            <dt><img src="../images/bankuai4.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">水乳</a>
@@ -281,7 +271,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=5">
                         <dl>
-                            <dt><img src="<%=basePath%>images/bankuai2.png"/></dt>
+                            <dt><img src="../images/bankuai2.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">防晒</a>
@@ -292,7 +282,7 @@
                     </a>
                     <a href="<%=basePath%>luntan/luntanshouye.action?tid=6">
                         <dl>
-                            <dt><img src="<%=basePath%>images/bankuai5.png"/></dt>
+                            <dt><img src="../images/bankuai5.png"/></dt>
                             <dd>
                                 <p class="title">
                                     <a href="#">洗面奶</a>
@@ -358,6 +348,7 @@
                                 <div class="aw-mod-head">
                                     <h1>
                                         ${forumPost.ptitle}</h1>
+
                                     <div class="aw-topic-editor" id="question_topic_editor" data-type="question"
                                          data-id="55229">
 
@@ -380,6 +371,7 @@
                                             <c:choose>
                                             <c:when test="${empty sessionScope.user}">
                                             alert("亲，请先登录");
+
                                             </c:when>
                                             <c:otherwise>
                                             <c:choose>
@@ -387,7 +379,7 @@
                                             alert("亲，不能关注自己帖子呦！！");
                                             </c:when>
                                             <c:otherwise>
-                                            if ($("#shoucang").attr("src") == ("<%=basePath%>images/shoucang.png")) {
+                                            if ($("#shoucang").attr("src") == ("../images/shoucang.png")) {
 
                                                 $.ajax(
                                                     {
@@ -397,7 +389,7 @@
                                                         success:function (data) {
                                                             if(data==1){
                                                                 alert("收藏成功");
-                                                                $("#shoucang").attr("src", "<%=basePath%>images/shoucanghou.png");
+                                                                $("#shoucang").attr("src", "../images/shoucanghou.png");
                                                             }else if(data==2){
                                                                 alert("您已收藏过该帖子");
                                                             }
@@ -407,7 +399,7 @@
 
 
                                             } else {
-                                                $("#shoucang").attr("src", "<%=basePath%>images/shoucang.png");
+                                                $("#shoucang").attr("src", "../images/shoucang.png");
                                                 $.ajax(
                                                     {
                                                         type: "post",
@@ -434,10 +426,11 @@
                                         function dianzan( pidd) {
                                             <c:if test="${empty sessionScope.user}">
                                                 alert("亲，请先登录");
+
                                             </c:if>
                                             <c:if test="${not empty sessionScope.user}">
-                                            if ($("#dianzan").attr("src") == ("<%=basePath%>images/dianzan.png")) {
-                                                $("#dianzan").attr("src", "<%=basePath%>images/dianzanhou.png");
+                                            if ($("#dianzan").attr("src") == ("../images/dianzan.png")) {
+                                                $("#dianzan").attr("src", "../images/dianzanhou.png");
                                                 $.ajax(
                                                     {
                                                         type: "post",
@@ -449,7 +442,7 @@
 
 
                                             } else {
-                                                $("#dianzan").attr("src", "<%=basePath%>images/dianzan.png");
+                                                $("#dianzan").attr("src", "../images/dianzan.png");
                                                 $.ajax(
                                                     {
                                                         type: "post",
@@ -492,10 +485,10 @@
                                         </div>
                                         <span class="aw-text-color-999">点赞
                                             <a href="#" onclick="dianzan(${forumPost.pid})"><img id="dianzan"
-                                                                                                        src="<%=basePath%>images/dianzan.png"/></a></span>
+                                                                                                        src="../images/dianzan.png"/></a></span>
                                         <span class="aw-text-color-999">收藏
                                             <a href="#" onclick="shoucang(${forumPost.pid})"><img id="shoucang"
-                                                                                                         src="<%=basePath%>images/shoucang.png"/></a></span>
+                                                                                                         src="../images/shoucang.png"/></a></span>
 
                                         <a class="aw-text-color-999" data-toggle="collapse" href="#jubao"
                                            aria-expanded="false" aria-controls="collapseExample">
@@ -511,12 +504,13 @@
                                                 <br/>
                                                 <input type="button" class="btn btn-info"
                                                        style="width: 300px" value="发表评论"
-                                                       onclick="pinglun(${forumPost.pid},$('#postcomment').val());doSend(${forumPost.user.uid})"></input>
+                                                       onclick="pinglun(${forumPost.pid},$('#postcomment').val())"></input>
                                                 <script>
                                                     function pinglun( pidd, text) {
                                                     <c:if test="${empty sessionScope.user}">
                                                         alert("亲，请先登录");
-                                                    </c:if>
+
+                                                        </c:if>
                                                     <c:if test="${not empty sessionScope.user}">
                                                         $.ajax({
                                                             type: "post",
@@ -554,6 +548,7 @@
                                                     function jubao( pidd, reason) {
                                                         <c:if test="${empty sessionScope.user}">
                                                             alert("亲，请先登录");
+
                                                         </c:if>
                                                         <c:if test="${not empty sessionScope.user}">
                                                         $.ajax({
@@ -593,7 +588,7 @@
                                 <div class="aw-mod-body aw-dynamic-topic">
                                     <c:forEach items="${forumCommentList}" var="forumCommentList">
                                         <a id="${forumCommentList.cid}"></a>
-                                    <div class="aw-item" uninterested_count="0" force_fold="0" id="answer_list_63059">
+                                    <div class="aw-item" uninterested_count="0" force_fold="0" >
                                         <a class="anchor" name="answer_63059"></a>
                                         <!-- 用户头像 -->
                                         <a class="aw-user-img aw-border-radius-5 pull-right" href="#" data-id="46">
@@ -670,6 +665,7 @@
                                                                     function pinglunjubao( cidd, commentreportreason) {
                                                                         <c:if test="${empty sessionScope.user}">
                                                                         alert("亲，请先登录");
+
                                                                         </c:if>
                                                                         <c:if test="${not empty sessionScope.user}">
                                                                         $.ajax({
@@ -721,6 +717,7 @@
                                                                     function pinglunpinglun( cidd, text,pidd) {
                                                                         <c:if test="${empty sessionScope.user}">
                                                                         alert("亲，请先登录");
+
                                                                         </c:if>
                                                                         <c:if test="${not empty sessionScope.user}">
                                                                         $.ajax({
@@ -772,7 +769,7 @@
                                         <dt class="pull-left aw-border-radius-5">
                                             <c:choose>
                                                 <c:when test="${sessionScope.user.uid==forumPost.user.uid}">
-                                                <a href="<%=basePath%>userCenter.action">
+                                                <a href="<%=basePath%>user/userCenter.action">
                                                 </c:when>
                                                     <c:otherwise>
                                                 <a href="<%=basePath%>luntan/userdetail.action?uid=${forumPost.user.uid}">
@@ -798,6 +795,7 @@
                                                     <c:choose>
                                                     <c:when test="${empty sessionScope.user}">
                                                     alert("亲，请先登录");
+
                                                     </c:when>
                                                     <c:otherwise>
                                                     <c:choose>
@@ -874,17 +872,52 @@
                                     margin-right: 1px;
                                 }
                             </style>
-                            <div class="aw-side-bar-mod">
+                            <div class="aw-side-bar-mod question_related_list">
+                                <div class="aw-mod-head">
+                                    <h3>签到</h3>
+                                </div>
+                                <div class="aw-mod-body">
+                                    <ul>
+                                        <li>
+                                            <a  class="btn btn-danger" href="#" onclick="sign()" style="width: 200px;">
+                                                <span style="font-size:13px;">点我签到</span>
+                                            </a>
+                                        </li>
 
-                                <a class="sponsor_btn btn top-btn" href="#">
-                                    <img src="<%=basePath%>images/zhichi.png"/>
-                                    <span style="font-size:13px;">逛逛商城</span>
-                                </a>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="aw-side-bar-mod">
                                 <a class="sponsor_btn btn top-btn" href="<%=basePath%>luntan/luntanshouye.action?tid=7">
-                                    <img src="<%=basePath%>images/daigou.png"/>
+                                    <img src="../images/daigou.png"/>
                                     <span style="font-size:13px;">看看代购</span>
                                 </a>
                             </div>
+
+                            <script>
+                                function sign(){
+                                    <c:if test="${empty sessionScope.user.uid}">
+                                    alert("亲，请先登录");
+
+                                    </c:if>
+                                    <c:if test="${not empty sessionScope.user.uid}">
+                                    $.ajax({
+                                        type:"post",
+                                        url: "${pageContext.request.contextPath}/article/sign.action",
+                                        data: "uid=" + ${ sessionScope.user.uid},
+                                        success: function (result) {
+                                            if (result == 1) {
+                                                alert("签到成功！！");
+                                                window.load();
+                                            }
+                                            else if (result == 0) {
+                                                alert("您今日已经签到了亲！！");
+                                            }
+                                        }
+                                    });
+                                    </c:if>
+                                }
+                            </script>
 
                             <!--公告文章-->
                             <div class="aw-side-bar-mod aw-text-align-justify question_related_list">
@@ -933,14 +966,7 @@
             </div>
         </div>
     </div>
-</div>
 
-
-<div style="position:fixed; left:0px;
-bottom:0px; width:100%; height:30px;font-weight: bold;
-background-color: #ce8483; z-index:9999;text-align: center">
-    © 2018 美乎. All rights reserved | Design by
-    <a href="#">第六组</a>
 </div>
 <script>
     var uid = ${user.uid}
@@ -960,14 +986,26 @@ background-color: #ce8483; z-index:9999;text-align: center">
             success:function (data) {
                 if(data!="0"){
                     $("#message").removeAttr("hidden")
+                    $("#messageNum").html(data)
                 }else {
                     $("#message").attr("hidden","true")
+                    $("#messageNum").html(0)
                 }
             }
         })
     }
 
 </script>
+
+
+<div style="position:fixed; left:0px;
+bottom:0px; width:100%; height:30px;font-weight: bold;
+background-color: #ce8483; z-index:9999;text-align: center">
+    © 2018 美乎. All rights reserved | Design by
+    <a href="#">第六组</a>
+</div>
+
+
 </body>
 
 </html>

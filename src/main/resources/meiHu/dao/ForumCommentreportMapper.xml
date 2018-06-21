@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.ForumCommentreportMapper">
+    <resultMap id="cpmap" type="ForumCommentreport">
+        <id column="reportid" property="reportid"/>
+        <result column="reportreason"  property="reportreason"/>
+        <result column="reporttime"  property="reporttime"/>
+        <association property="user" javaType="ForumUser">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
+        </association>
+        <association property="comment" javaType="ForumComment">
+            <id column="cid" property="cid"/>
+            <result column="commenttext" property="commenttext"/>
+            <result column="commenttime" property="commenttime"/>
+        </association>
+
+    </resultMap>
     <!--public int addCommentReport(ForumCommentreport forumCommentreport);-->
     <insert id="addCommentReport" parameterType="ForumCommentreport">
         INSERT  INTO forum_commentreport (comment_cid,user_uid,reportreason)
         VALUES (#{cid},#{uid},#{reportreason});
     </insert>
+
+    <!--public List<ForumCommentreport> getAllCommentReports() ;-->
+    <select id="getAllCommentReports" resultMap="cpmap">
+      SELECT cr.*,u.*,c.* FROM forum_commentreport cr,forum_user u,forum_comment c
+    WHERE cr.user_uid = u.uid AND cr.comment_cid=c.cid
+    </select>
+
+    <!--public void deleteCommentByCid(int cid);-->
+<delete id="deleteCommentByCid" parameterType="int">
+    DELETE FROM forum_comment WHERE cid = #{parameter}
+</delete>
 </mapper>

@@ -14,4 +14,7 @@ public interface ForumPostreportMapper {
 //    用户举报帖子
     public int addPostReport(ForumPostreport forumPostreport);
 
+    //管理员删除帖子
+    public void deletePostByPid(int pid);
+
 }

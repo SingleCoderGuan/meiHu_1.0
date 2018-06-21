@@ -6,8 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -18,44 +17,18 @@
     <title>后台管理系统</title>
     <meta name="author" content="DeathGhost" />
     <link rel="stylesheet" type="text/css" href="../css/styleadmin.css">
-    <%--<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">--%>
-    <!--[if lt IE 9]>
-    <script src="../js/html5.js"></script>
-    <![endif]-->
-    <script src="../js/jquery.js"></script>
-    <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script>
-
-        (function($){
-            $(window).load(function(){
-
-                $("a[rel='load-content']").click(function(e){
-                    e.preventDefault();
-                    var url=$(this).attr("href");
-                    $.get(url,function(data){
-                        $(".content .mCSB_container").append(data); //load new content inside .mCSB_container
-                        //scroll-to appended content
-                        $(".content").mCustomScrollbar("scrollTo","h2:last");
-                    });
-                });
-
-                $(".content").delegate("a[href='top']","click",function(e){
-                    e.preventDefault();
-                    $(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
-                });
-
-            });
-        })(jQuery);
-    </script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
 </head>
+
 <body>
+
 <!--header-->
-<header>
+<header style="height: 71px">
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
         <li><a href="#" class="website_icon">站点首页</a></li>
-
-
         <li><a href="adminlogin.jsp" class="quit_icon">安全退出</a></li>
     </ul>
 </header>
@@ -85,14 +58,14 @@
         <li>
             <dl>
                 <dt>论坛信息</dt>
-                <dd><a href="">举报信息</a></dd>
+                <dd><a href="<%=basePath%>admin/showallpostreport.action">举报信息</a></dd>
             </dl>
         </li>
         <li>
             <dl>
                 <dt>文章管理</dt>
-                <dd><a href="">文章发表</a></dd>
-                <dd><a href="">文章查看</a></dd>
+                <dd><a href="<%=basePath%>admin/wenzhangfabiao.jsp">文章发表</a></dd>
+                <dd><a href="<%=basePath%>admin/articleList.action">文章查看</a></dd>
             </dl>
         </li>
 

@@ -1,13 +1,42 @@
 package meiHu.entity;
 
+import java.util.Date;
+
 public class ForumPostreport {
     private Integer reportid;
-
     private Integer uid ;
-
+    private ForumUser user;
+    private ForumPost post;
     private Integer pid ;
-
     private String reportreason;
+    private Date reporttime;
+
+    public ForumPostreport() {
+    }
+
+    public ForumUser getUser() {
+        return user;
+    }
+
+    public void setUser(ForumUser user) {
+        this.user = user;
+    }
+
+    public ForumPost getPost() {
+        return post;
+    }
+
+    public void setPost(ForumPost post) {
+        this.post = post;
+    }
+
+    public Date getReporttime() {
+        return reporttime;
+    }
+
+    public void setReporttime(Date reporttime) {
+        this.reporttime = reporttime;
+    }
 
     public Integer getReportid() {
         return reportid;

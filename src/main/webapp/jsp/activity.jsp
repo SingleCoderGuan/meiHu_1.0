@@ -78,9 +78,9 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         <li class="nav-current" role="presentation"><a href="<%=basePath%>article/article.action">美文首页</a></li>
-                        <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美乎</a></li>
+                        <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论</a></li>
 
-                        <li  role="presentation"><a href="#">美淘</a></li>
+                        <li  role="presentation"><a href="<%=basePath%>jsp/index.jsp">美淘</a></li>
                         <li  role="presentation"><a href="<%=basePath%>exchange.action">兑换</a></li>
 
                         <li  role="presentation"><a href="#">关于</a></li>
@@ -199,14 +199,14 @@
                 <div class="widget">
                     <h4 class="title">每日签到</h4>
                     <div class="content download">
-                        <a href="#" class="btn btn-default btn-block" onclick="sign()">点我签到</a>
+                        <a href="javascript:void(0)" class="btn btn-default btn-block" onclick="sign()">点我签到</a>
                     </div>
                 </div>
                 <script>
                     function sign(){
                         <c:if test="${empty sessionScope.user.uid}">
                         alert("亲，请先登录");
-                        window.location.href="<%=basePath%>jsp/loginregister.jsp";
+                        window.location.href="<%=basePath%>jsp/loginregister.jsp?url=<%=request.getRequestURL()%>";
                         </c:if>
                         <c:if test="${not empty sessionScope.user.uid}">
                         $.ajax({

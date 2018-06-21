@@ -3,10 +3,7 @@ package meiHu.control;
 
 import com.github.pagehelper.PageInfo;
 import meiHu.entity.*;
-import meiHu.service.FocusService;
-import meiHu.service.LuntanService;
-import meiHu.service.PostService;
-import meiHu.service.UserService;
+import meiHu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.SocketUtils;
@@ -33,6 +30,8 @@ public class LuntanControl {
     private FocusService focusService;
     @Autowired
     private PostService postService ;
+    @Autowired
+    private ArticleService articleService;
     @RequestMapping(value = "/luntanshouye.action")
     public void luntanshouye(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<ForumTopic> topicList=luntanService.getAllTopics();
@@ -46,7 +45,7 @@ public class LuntanControl {
         Map<String ,Object> cmap=new HashMap<>();
 
         //每页显示的条数
-        int pageSize=8;
+        int pageSize=7;
         //当前的页面默认是首页
         int curPage=1;
         String scurPage=request.getParameter("curPage");
@@ -61,6 +60,7 @@ public class LuntanControl {
         request.setAttribute("pageInfo",pageInfo);
         String tname = luntanService.selectTnameBuTid(tid1);
         request.setAttribute("tname",tname);
+        request.setAttribute("userlist",userService.selectUsersByTitleId());
         request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
 
 
@@ -71,6 +71,8 @@ public class LuntanControl {
     public void tiezidetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
         int pid1 = Integer.parseInt(pid);
+        luntanService.updatePostVisitNum(pid1);
+
         int collection = luntanService.selectCollectedCountByPid(pid1);
         request.setAttribute("collectionnum",collection);
         ForumPost forumPost = luntanService.selectPostByPid(pid1);
@@ -126,7 +128,7 @@ public class LuntanControl {
             Map<String ,Object> cmap=new HashMap<>();
 
             //每页显示的条数
-            int pageSize=2;
+            int pageSize=7;
             //当前的页面默认是首页
             int curPage=1;
             String scurPage=request.getParameter("curPage");
@@ -141,7 +143,9 @@ public class LuntanControl {
             request.setAttribute("pageInfo",pageInfo);
             String tname = luntanService.selectTnameBuTid(tid1);
             request.setAttribute("tname",tname);
-           request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
+            request.setAttribute("userlist",userService.selectUsersByTitleId());
+
+            request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
        }else if("zuixin".equals(tiaojian)){
             List<ForumTopic> topicList=luntanService.getAllTopics();
             List<ForumTopic> topicList1 = new ArrayList<>();
@@ -152,7 +156,7 @@ public class LuntanControl {
             Map<String ,Object> cmap=new HashMap<>();
 
             //每页显示的条数
-            int pageSize=2;
+            int pageSize=7;
             //当前的页面默认是首页
             int curPage=1;
             String scurPage=request.getParameter("curPage");
@@ -167,7 +171,9 @@ public class LuntanControl {
             request.setAttribute("pageInfo",pageInfo);
             String tname = luntanService.selectTnameBuTid(tid1);
             request.setAttribute("tname",tname);
-           request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
+            request.setAttribute("userlist",userService.selectUsersByTitleId());
+
+            request.getRequestDispatcher("/jsp/luntan.jsp").forward(request,response);
        }
    }
 
@@ -178,15 +184,19 @@ public class LuntanControl {
 
        int uidd = Integer.parseInt(uid);
        int pidd = Integer.parseInt(pid);
-       luntanService.updatePostVisitNum(pidd);
-       //System.out.println(luntanService.addCollectionByUidAndPid(uidd,pidd));
        PrintWriter out = response.getWriter();
-       if(luntanService.addCollectionByUidAndPid(uidd,pidd)){
-           out.print(1);
-       }else {
-           out.print(0);
 
+       if(luntanService.selectIfCollection(uidd,pidd)==null){
+           if(luntanService.addCollectionByUidAndPid(uidd,pidd)){
+               out.print(1);
+           }else {
+               out.print(0);
+
+           }
+       }else{
+           out.print(2);
        }
+
    }
     @RequestMapping("/quxiaoshoucang.action")
     public  void quxiaoshoucang(HttpServletRequest request,HttpServletResponse response) throws IOException {
@@ -265,6 +275,7 @@ public class LuntanControl {
         ForumComment forumComment = new ForumComment(uidd,pidd,postcomment);
         PrintWriter out = response.getWriter();
         if(luntanService.addForumComment(forumComment)){
+            articleService.fapinglunjialiangfen(uidd);
             out.print(1);
         }else{
             out.print(0);
@@ -302,6 +313,8 @@ public class LuntanControl {
         PrintWriter out = response.getWriter();
 
        if(luntanService.addCommentForComment(forumComment)){
+           articleService.fapinglunjialiangfen(uidd);
+           System.out.println("发评论加五分"+uidd);
             out.print(1);
         }else{
             out.print(0);

@@ -20,6 +20,7 @@
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
 
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/font-awesome.css"/>
@@ -31,8 +32,8 @@
 
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="<%=basePath%>js/zzsc.js"></script>
-    <script type="text/javascript" src="<%=basePath%>js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/zzsc.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/jquery-3.2.1.min.js"></script>
 
 
     <script type="text/javascript" src="//img-cdn-qiniu.dcloud.net.cn/static/js/respond.js"></script>
@@ -112,12 +113,13 @@
         display: block;
     }
 </style>
-<body style="background: #aac4bc; /* Old browsers */
+<body  style="background: #aac4bc; /* Old browsers */
 	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
-<div class="aw-top-menu-wrap" style="height: 55px"
->
+
+
+<div class="aw-top-menu-wrap" style="height: 55px">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
             <!-- logo -->
@@ -223,14 +225,16 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav" style="position: relative;left: 20px;width: 259px">
+            <div class="aw-user-nav" style="width: 250px">
                 <!-- 登陆&注册栏 -->
                 <span>
                      <c:if test="${not empty sessionScope.user}">
-                         <a href="<%=basePath%>user/userCenter.action" style="position: relative;left: -60px;top: -0.5px;"><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                         <img id="message" hidden style="position: absolute;left: 10px;top: -7px;width: 30px" src="<%=basePath%>images/comment.png"/>
-                         <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 200px;">注销</a>
+                          <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
+                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}
+                    </a>
+                         <img id="message" hidden style="position: absolute;left: 30px;top: 40px;width: 30px" src="<%=basePath%>images/comment.png"/>
 
+                         <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 250px;">注销</a>
                      </c:if>
                     <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
@@ -480,19 +484,50 @@
 
                     </style>
                     <div class="aw-side-bar-mod top-articles">
-                        <!--<div class="aw-mod-head">-->
-                        <!--<h3>置顶</h3>-->
-                        <!--</div>-->
+                        <div class="aw-mod-head">
+                        <h3>置顶</h3>
+                        </div>
                         <div class="aw-mod-body">
-
-                            <a class="sponsor_btn btn top-btn" href="#">
-                                <img src="<%=basePath%>images/zhichi.png"/>
-                                <span style="font-size:13px;">逛逛商城</span>
-                            </a>
                             <a class="sponsor_btn btn top-btn" href="<%=basePath%>luntan/luntanshouye.action?tid=7">
                                 <img src="<%=basePath%>images/daigou.png"/>
                                 <span style="font-size:13px;">看看代购</span>
                             </a>
+                        </div>
+                    </div>
+
+                    <div class="aw-side-bar-mod top-articles">
+                        <div class="aw-mod-head">
+                            <h3>签到</h3>
+                        </div>
+                        <div class="aw-mod-body">
+                            <a class="sponsor_btn btn top-btn" href="#" onclick="sign()">
+                                <span style="font-size:13px;">点我签到</span>
+                            </a>
+                            <script>
+                                function sign(){
+                                    <c:if test="${empty sessionScope.user.uid}">
+                                    alert("亲，请先登录");
+
+
+                                    </c:if>
+                                    <c:if test="${not empty sessionScope.user.uid}">
+                                    $.ajax({
+                                        type:"post",
+                                        url: "${pageContext.request.contextPath}/article/sign.action",
+                                        data: "uid=" + ${ sessionScope.user.uid},
+                                        success: function (result) {
+                                            if (result == 1) {
+                                                alert("签到成功！！");
+                                                window.load();
+                                            }
+                                            else if (result == 0) {
+                                                alert("您今日已经签到了亲！！");
+                                            }
+                                        }
+                                    });
+                                    </c:if>
+                                }
+                            </script>
                         </div>
                     </div>
 
@@ -534,61 +569,16 @@
                         </div>
                     </div>
 
-                    <div class="aw-side-bar-mod">
-                        <div class="ad-item">
 
-
-                            <!--<script type="text/javascript">-->
-                            <!--/*右侧矩形*/-->
-                            <!--var cpro_id = "u3178381";-->
-                            <!--</script>-->
-                            <!--<script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js"></script>-->
-
-                            <script>
-                                (function () {
-                                    var s = "_" + Math.random().toString(36).slice(2);
-                                    document.write('<div id="' + s + '"></div>');
-                                    (window.slotbydup = window.slotbydup || []).push({
-                                        id: '5551298',
-                                        container: s,
-                                        size: '200,200',
-                                        display: 'inlay-fix'
-                                    });
-                                })();
-                            </script>
-                            <script src="http://dup.baidustatic.com/js/os.js"></script>
-                        </div>
-                    </div>
                     <div class="aw-side-bar-mod aw-text-align-justify aw-no-border-bottom">
                         <div class="aw-mod-head">
                             <h3>明星用户</h3>
                         </div>
                         <div class="aw-mod-body">
-
-                            <dl>
-                                <dt class="pull-left aw-border-radius-5">
-                                    <a href=""><img alt="" src="<%=basePath%>images/touxiang1.png"/></a>
-                                </dt>
-                                <dd class="pull-left">
-                                    <a href="" data-id="15" class="aw-user-name">小姐姐<i class="aw-icon i-v i-ve"></i>
-                                    </a>
-                                    <p>回复了 <b>754</b> 次, 获得 <b>763</b> 次赞同</p>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt class="pull-left aw-border-radius-5">
-                                    <a href=""><img alt="" src="<%=basePath%>images/touxiang2.png"/></a>
-                                </dt>
-                                <dd class="pull-left">
-                                    <a href="" data-id="15" class="aw-user-name">小姐姐<i class="aw-icon i-v i-ve"></i>
-                                    </a>
-                                    <p>回复了 <b>754</b>次, 获得 <b>763</b> 次赞同</p>
-                                </dd>
-                            </dl>
                             <c:forEach items="${userlist}" var="userlist" begin="0" end="4" step="1">
                                 <dl>
                                     <dt class="pull-left aw-border-radius-5">
-                                        <a href=""><img alt="" src="<%=basePath%>images/touxiang1.png"/></a>
+                                        <a href="<%=basePath%>luntan/userdetail.action?uid=${userlist.uid}"><img  src="<%=basePath%>${userlist.headpic}"/></a>
                                     </dt>
                                     <dd class="pull-left">
                                         <a href="" data-id="15" class="aw-user-name">${userlist.uname}<i
@@ -609,54 +599,15 @@
         </div>
     </div>
 </div>
-
-<div style="position:fixed; left:0px;
-bottom:0px; width:100%; height:30px;font-weight: bold;
-background-color: #ce8483; z-index:9999;text-align: center">
-    © 2018 美乎. All rights reserved | Design by
-    <a href="#">第六组</a>
-</div>
-
-
-<a class="aw-back-top hidden-xs" href="javascript:;" onclick="$.scrollTo(1, 600, {queue:true});"><i
-        class="fa fa-arrow-up"></i></a>
-
-
-<!-- DO NOT REMOVE -->
-<div id="aw-ajax-box" class="aw-ajax-box"></div>
-
-<div style="display:none;" id="__crond">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#__crond').html(unescape('%3Cimg%20src%3D%22' + G_BASE_URL + '/crond/run/1527305624%22%20width%3D%221%22%20height%3D%221%22%20/%3E'));
-        });
-
-    </script>
-</div>
-
-<!-- Escape time: 0.19415783882141 -->
-<script type="text/javascript" id="bdshare_js" data="type=tools"></script>
-<!-- / DO NOT REMOVE -->
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?1aa4e79e9d9a938cfe5605a1d0269239";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-</div>
-
 <script>
     var uid = ${user.uid}
 
-    $(function () {
-        if(uid!=null){
-            getMessage(uid);
-            setInterval("getMessage(uid)",10000);
-        }
-    })
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
 
     function getMessage(uid) {
         $.ajax({
@@ -666,14 +617,43 @@ background-color: #ce8483; z-index:9999;text-align: center">
             success:function (data) {
                 if(data!="0"){
                     $("#message").removeAttr("hidden")
+                    $("#messageNum").html(data)
                 }else {
                     $("#message").attr("hidden","true")
+                    $("#messageNum").html(0)
                 }
             }
         })
     }
-    
+
 </script>
+
+        <script src="https://qiyukf.com/script/8461da5aef2206ef029adb41eea97bfb.js"></script>
+
+
+
+<div class="aw-footer-wrap" style="background: #aac4bc; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
+
+
+    <div class="aw-footer aw-wecenter">
+
+        <p>© 2018 美乎. All rights reserved | Design by
+            <a href="#">第六组</a>
+        </p>
+
+        <!--<span class="hidden-xs"><a href="//ask.dcloud.net.cn/feed/" target="blank"><i class="fa fa-rss-square"></i> RSS Feed</a></span>-->
+
+
+    </div>
+</div>
+
+
+
+<!-- Escape time: 0.19415783882141 -->
+<script type="text/javascript" id="bdshare_js" data="type=tools"></script>
 </body>
 </html>
 

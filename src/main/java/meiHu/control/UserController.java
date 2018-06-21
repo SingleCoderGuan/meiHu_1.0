@@ -120,7 +120,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userCenter.action")
-    public void gotoUserCenter(HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public void gotoUserCenter(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession() ;
         ForumUser user = (ForumUser) session.getAttribute("user");
         int uid = user.getUid() ;
@@ -139,7 +139,9 @@ public class UserController {
         session.setAttribute("postsNum",postList.size());
         session.setAttribute("focusUsers",focusUsers);
         session.setAttribute("followers",followers);
-        response.sendRedirect(request.getContextPath()+"/jsp/userPersonalCenter.jsp");
+        request.setAttribute("personalpoint",userService.selectPointByUid(uid));
+//        response.sendRedirect(request.getContextPath()+"/jsp/userPersonalCenter.jsp");
+        request.getRequestDispatcher("/jsp/userPersonalCenter.jsp").forward(request,response);
     }
 
     @RequestMapping(value = "/signOut.action")

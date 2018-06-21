@@ -573,8 +573,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul>
 
                             <li>
-                                <a href="#">
-                                    <span class="fa fa-send"></span>
+                                <a href="tencent://message/?uin=920758051&Site=&Menu=yes">
+                                <span class="fa fa-send"></span>
                                 </a>
                             </li>
                         </ul>
@@ -588,8 +588,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="media-social-agile">
                         <ul>
                             <li>
-                                <a href="#">
-                                    <span class="fa fa-send"></span>
+                                <a href="tencent://message/?uin=1771918868&Site=&Menu=yes">
+                                <span class="fa fa-send"></span>
                                 </a>
                             </li>
 
@@ -604,8 +604,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="media-social-agile">
                         <ul>
                             <li>
-                                <a href="#">
-                                    <span class="fa fa-send"></span>
+                                <a href="tencent://message/?uin=3229167069&Site=&Menu=yes">
+
+                                <span class="fa fa-send"></span>
                                 </a>
                             </li>
 
@@ -620,8 +621,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="media-social-agile">
                         <ul>
                             <li>
-                                <a href="#">
-                                    <span class="fa fa-send"></span>
+                                <a href="tencent://message/?uin=252784342&Site=&Menu=yes">
+                                <span class="fa fa-send"></span>
                                 </a>
                             </li>
 
@@ -797,7 +798,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#">
                                 <i class="fa fa-send"></i>认准官方网站.
-                                <i>http//www.meihuwang.com</i>
+                                <i>http://www.meihuwang.com</i>
                             </a>
 
                             <span>
