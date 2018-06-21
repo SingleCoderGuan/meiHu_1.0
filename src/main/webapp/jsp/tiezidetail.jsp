@@ -210,8 +210,8 @@
                 <!-- 登陆&注册栏 -->
                 <span>
                     <c:if test="${not empty sessionScope.user}">
-                        <a href="<%=basePath%>user/userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                        <img id="message" hidden style="position: absolute;left: 75px;width: 20px" src="<%=basePath%>images/comment.png"/>
+                        <a style="position: relative;left: -40px;" href="<%=basePath%>user/userCenter.action"><img style="position: relative;top: -0.5px;width: 55px;height: 54px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
+                        <img id="message" hidden style="position: absolute;left: 28px;top: -7px;width: 30px" src="<%=basePath%>images/comment.png"/>
                         <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 250px;">注销</a>
                     </c:if>
                     <c:if test="${empty sessionScope.user}">

@@ -228,7 +228,7 @@
                 <span>
                      <c:if test="${not empty sessionScope.user}">
                          <a href="<%=basePath%>user/userCenter.action" style="position: relative;left: -60px;top: -0.5px;"><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                         <img id="message" hidden style="position: absolute;left: 60px;width: 20px" src="<%=basePath%>images/comment.png"/>
+                         <img id="message" hidden style="position: absolute;left: 10px;top: -7px;width: 30px" src="<%=basePath%>images/comment.png"/>
                          <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 200px;">注销</a>
 
                      </c:if>
@@ -610,22 +610,11 @@
     </div>
 </div>
 
-<div class="aw-footer-wrap" style="background: #aac4bc; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
-
-
-    <div class="aw-footer aw-wecenter">
-
-        <p>© 2018 美乎. All rights reserved | Design by
-            <a href="#">第六组</a>
-        </p>
-
-        <!--<span class="hidden-xs"><a href="//ask.dcloud.net.cn/feed/" target="blank"><i class="fa fa-rss-square"></i> RSS Feed</a></span>-->
-
-
-    </div>
+<div style="position:fixed; left:0px;
+bottom:0px; width:100%; height:30px;font-weight: bold;
+background-color: #ce8483; z-index:9999;text-align: center">
+    © 2018 美乎. All rights reserved | Design by
+    <a href="#">第六组</a>
 </div>
 
 
@@ -657,10 +646,6 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
-<div>
-    <input type="button" id="btnConnection" value="连接" />
-    <input type="button" id="btnClose" value="关闭" />
-    <input type="button" id="btnSend" value="发送" />
 </div>
 
 <script>

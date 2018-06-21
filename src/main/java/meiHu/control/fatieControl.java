@@ -60,9 +60,9 @@ public class fatieControl {
     }
 
     @RequestMapping(value = "/admin/newoa.action",method = RequestMethod.POST)
-    public void newOa(ForumOfficalarticle forumOfficalarticle,HttpServletRequest request, HttpServletResponse response){
+    public void newOa(ForumOfficalarticle forumOfficalarticle,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(officalArticleService.insertArticle(forumOfficalarticle)){
-            System.out.println("插入成功");
+            request.getRequestDispatcher("/admin/articleList.action").forward(request,response);
         }
     }
 
@@ -124,6 +124,11 @@ public class fatieControl {
         map.put("url",request.getContextPath()+"/image/oaupload"+"/"+newFileName);
         return map;
 
+    }
+
+    @RequestMapping(value = "/admin/newArticle.action")
+    public void newArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/jsp/wenzhangfabiao.jsp").forward(request,response);
     }
 
     @RequestMapping(value = "/admin/articleList.action")

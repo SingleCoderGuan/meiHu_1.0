@@ -29,7 +29,6 @@
     <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%= basePath%>/release/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="<%= basePath%>/release/wangEditor.min.js"></script>
     <style type="text/css">
         .toolbar {
@@ -44,6 +43,7 @@
     <script>
         function subm(){
             document.getElementById('oacontent').value=editor.txt.html();
+            alert(editor.txt.html());
             document.getElementById('newoa').submit();
         }
     </script>
@@ -113,8 +113,8 @@
         <li>
             <dl>
                 <dt>文章管理</dt>
-                <dd><a href="">文章发表</a></dd>
-                <dd><a href="">文章查看</a></dd>
+                <dd><a href="<%=basePath%>admin/newArticle.action">文章发表</a></dd>
+                <dd><a href="<%=basePath%>admin/articleList.action">文章查看</a></dd>
             </dl>
         </li>
 
@@ -126,7 +126,7 @@
             <h2 class="fl">官方文章发表</h2>
         </div>
         <section>
-            <form id="newoa" method="post" action="<%=application.getContextPath()%>/admin/newoa.action" enctype="multipart/form-data">
+            <form id="newoa" method="post" action="<%=basePath%>admin/newoa.action" enctype="multipart/form-data">
 
                 <span style="position: relative;left:5px;top: 5px;font-size: 20px">标题：</span>
                 <input type="text" style="width: 590px;position: relative;top: 10px; " class="form-control"
@@ -544,6 +544,14 @@
                         var url = result.url;
                         insertImg(url);
                     }
+
+                }
+
+                editor.customConfig.linkCheck = function (text, link) {
+                    console.log(text) // 插入的文字
+                    console.log(link) // 插入的链接
+
+                    return true; // 返回 true 表示校验成功
 
                 }
 

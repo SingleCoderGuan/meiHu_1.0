@@ -154,7 +154,7 @@ strict.dtd">
                 <!-- 登陆&注册栏 -->
                 <span>
                     <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" ><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                    <img id="message" hidden style="position: absolute;left: 70px;width: 20px" src="<%=basePath%>images/comment.png"/>
+                    <img id="message" hidden style="position: absolute;left: 30px;top: -7px;width: 30px" src="<%=basePath%>images/comment.png"/>
                     <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 214px;">注销</a>
                 </span>
 
@@ -197,18 +197,15 @@ strict.dtd">
                         </div>
                         <div class="mod-footer">
                             <ul class="nav nav-tabs aw-nav-tabs">
-                                <li style="width: 175px;text-align: center">
+                                <li style="width: 233px;text-align: center">
                                     <a href="#questions" id="page_questions" data-toggle="tab" style="font-size: 20px">我的帖子<span class="badge" style="font-size: 18px">${postsNum}</span></a>
                                 </li>
-                                <li style="width: 175px;text-align: center">
+                                <li style="width: 233px;text-align: center">
                                     <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">我的提醒<span id="messageNum" class="badge" style="font-size: 18px">${commentsNum}</span></a>
                                 </li>
 
-                                <li style="width: 175px;text-align: center">
+                                <li style="width: 233px;text-align: center">
                                     <a href="#focus" id="page_focus" data-toggle="tab" style="font-size: 20px">我的收藏</a>
-                                </li>
-                                <li style="width: 175px;text-align: center">
-                                    <a href="#integral" id="page_integral" data-toggle="tab" style="font-size: 20px">我的积分</a>
                                 </li>
                             </ul>
                         </div>
@@ -221,7 +218,7 @@ strict.dtd">
                                 <div class="aw-mod">
                                     <div class="mod-body">
                                         <div class="aw-profile-publish-list" id="contents_user_actions_questions">
-                                            <div style="background-color: #CC99CC;height: 30px ;width: 100%"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">操作</span></div>
+                                            <div style="background-color: #FFCCCC;height: 30px ;width: 100%"><span style="position: relative;left: 30px;top: 5px;">标题</span><span style="position: relative;left: 380px;top: 5px">板块</span><span style="position: relative;left: 500px;top: 5px;">操作</span></div>
                                             <c:forEach items="${postList}" var="post">
                                                 <div style="position:relative ;left: 20px;margin-top: 15px">
                                                     <a href="<%=basePath%>luntan/tiezidetail.action?pid=${post.pid}"><span>${post.ptitle}</span></a>
@@ -237,7 +234,8 @@ strict.dtd">
                                 <div class="aw-mod">
                                     <div class="mod-body">
                                         <div class="aw-profile-publish-list" id="contents_user_actions_reply">
-                                            <div><span style="position: relative;left: 313px;top: 15px;">新消息</span><hr />
+                                            <div>
+                                                <div style="background-color: #FFCCCC;;height: 30px ;width: 100%"><span style="position: relative;left: 313px;top: 3px;">新消息</span></div>
                                                 <c:if test="${empty newComments}">
                                                     <div style="position: relative;top: 40px;text-align: center">
                                                         <span style="font-size: 25px;">还没有新消息</span>
@@ -245,7 +243,7 @@ strict.dtd">
                                                 </c:if>
                                             <c:forEach items="${newComments}" var="newComment">
                                                 <div style="position: relative;left: 20px;margin-top: 20px;">
-                                                    <div>回复人：<span><a href="#">${newComment.user.uname}</a></span><span style="position: absolute;left: 150px;">内容：<a href="<%=basePath%>user/readReply.action?pid=${newComment.post.pid}&cid=${newComment.cid}#${newComment.cid}">${newComment.commenttext}</a></span></div>
+                                                    <div>回复人：<span>${newComment.user.uname}</span><span style="position: absolute;left: 150px;">内容：<a href="<%=basePath%>user/readReply.action?pid=${newComment.post.pid}&cid=${newComment.cid}#${newComment.cid}">${newComment.commenttext}</a></span></div>
                                                     <div style="margin-top: 20px"><span>回复我的帖子：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${newComment.post.pid}">${newComment.post.ptitle}</a></span><span style="position: absolute;left: 500px;"><fmt:formatDate value='${newComment.commenttime}'
                                                                                                                                                                                                                                                                                 pattern='yyyy-MM-dd hh:mm:ss'/></span></div>
                                                     <hr />
@@ -253,7 +251,8 @@ strict.dtd">
                                             </c:forEach>
                                             </div>
                                             <div style="position: relative;top: 90px;">
-                                                <span style="position: relative;left: 313px;top: 15px;">已查看</span><hr />
+                                                <div style="background-color: #FFCCCC;height: 30px ;width: 100%">
+                                                    <span style="position: relative;left: 313px;top: 3px;">已查看</span></div>
                                             <c:if test="${empty oldComments}">
                                                 <div style="position: relative;top: 40px;text-align: center">
                                                     <span style="font-size: 25px;">还没有新消息</span>
@@ -261,7 +260,7 @@ strict.dtd">
                                             </c:if>
                                             <c:forEach items="${oldComments}" var="oldComment">
                                                 <div style="position: relative;left: 20px;margin-top: 20px;">
-                                                    <div >回复人：<span><a href="#">${oldComment.user.uname}</a></span><span style="position: absolute;left: 150px;">内容：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${oldComment.post.pid}">${oldComment.commenttext}</a></span></div>
+                                                    <div >回复人：<span>${oldComment.user.uname}</span><span style="position: absolute;left: 150px;">内容：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${oldComment.post.pid}">${oldComment.commenttext}</a></span></div>
                                                     <div style="margin-top: 20px"><span>回复我的帖子：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${oldComment.post.pid}">${oldComment.post.ptitle}</a></span><span style="position: absolute;left: 500px;"><fmt:formatDate value='${oldComment.commenttime}'
                                                                                                                                                                                                                                                                              pattern='yyyy-MM-dd hh:mm:ss'/></span></div>
                                                     <hr />
@@ -377,12 +376,11 @@ strict.dtd">
 </div>
 </div>
 
-<div class="aw-footer aw-wecenter">
-    <p>© 2018 美乎. All rights reserved | Design by
-        <a href="#">第六组</a>
-    </p>
-    </span>
-
+<div style="position:fixed; left:0px;
+bottom:0px; width:100%; height:30px;font-weight: bold;
+background-color: #ce8483; z-index:9999;text-align: center">
+    © 2018 美乎. All rights reserved | Design by
+    <a href="#">第六组</a>
 </div>
 </div>
 <script type="text/javascript">

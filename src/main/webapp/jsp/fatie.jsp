@@ -216,7 +216,7 @@
                 <!-- 登陆&注册栏 -->
                 <span>
                     <a href="<%=basePath%>user/userCenter.action" style="position: relative;left: -40px;top: -0.5px;"><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                         <img id="message" hidden style="position: absolute;left: 60px;width: 20px" src="<%=basePath%>images/comment.png"/>
+                         <img id="message" hidden style="position: absolute;left: 30px;top: -7px;width: 30px" src="<%=basePath%>images/comment.png"/>
                          <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 200px;">注销</a>
                 </span>
 
