@@ -3,10 +3,7 @@ package meiHu.control;
 
 import com.github.pagehelper.PageInfo;
 import meiHu.entity.*;
-import meiHu.service.FocusService;
-import meiHu.service.LuntanService;
-import meiHu.service.PostService;
-import meiHu.service.UserService;
+import meiHu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.SocketUtils;
@@ -33,6 +30,8 @@ public class LuntanControl {
     private FocusService focusService;
     @Autowired
     private PostService postService ;
+    @Autowired
+    private ArticleService articleService;
     @RequestMapping(value = "/luntanshouye.action")
     public void luntanshouye(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<ForumTopic> topicList=luntanService.getAllTopics();
@@ -276,6 +275,7 @@ public class LuntanControl {
         ForumComment forumComment = new ForumComment(uidd,pidd,postcomment);
         PrintWriter out = response.getWriter();
         if(luntanService.addForumComment(forumComment)){
+            articleService.fapinglunjialiangfen(uidd);
             out.print(1);
         }else{
             out.print(0);
@@ -313,6 +313,8 @@ public class LuntanControl {
         PrintWriter out = response.getWriter();
 
        if(luntanService.addCommentForComment(forumComment)){
+           articleService.fapinglunjialiangfen(uidd);
+           System.out.println("发评论加五分"+uidd);
             out.print(1);
         }else{
             out.print(0);

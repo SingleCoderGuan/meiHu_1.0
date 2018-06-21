@@ -44,7 +44,7 @@ public class ArticleControl {
                 flag = false;
             }else {
                 flag = articleService.addSignForUser(uidd);
-                articleService.fapinglunjialiangfen(uidd);
+                articleService.qiandaojiasanfen(uidd);
             }
         }
         PrintWriter out =  response.getWriter();

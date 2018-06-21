@@ -105,7 +105,7 @@
                 <form class="navbar-search pull-right" action="<%=basePath%>search/searchReasult.action" id="global_search_form" method="post">
                     <div class="input-group">
                         <input value="" class="form-control" type="text"
-                               placeholder="搜索问题、话题" autocomplete="off" name="q" id="aw-search-query"
+                               placeholder="搜索问题、话题" autocomplete="off" name="searchcontent" id="aw-search-query"
                                class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
                               onClick="$('#global_search_form').submit();">搜索</span>
@@ -188,7 +188,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>fatie.action">发帖</a>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
 
@@ -200,10 +200,14 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <c:if test="${not empty sessionScope.user}">
-                        <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
-                    </c:if>
+                     <c:if test="${not empty sessionScope.user}">
+                          <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
+                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}
+                    </a>
+                         <img id="message" hidden style="position: absolute;left: 30px;top: 40px;width: 30px" src="<%=basePath%>images/comment.png"/>
+
+                         <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 250px;">注销</a>
+                     </c:if>
                     <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
                         <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
@@ -389,6 +393,34 @@
     </div>
 </div>
 </div>
+<script>
+    var uid = ${user.uid}
+
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
+
+    function getMessage(uid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/user/getMessage.action",
+            data:"uid="+uid,
+            success:function (data) {
+                if(data!="0"){
+                    $("#message").removeAttr("hidden")
+                    $("#messageNum").html(data)
+                }else {
+                    $("#message").attr("hidden","true")
+                    $("#messageNum").html(0)
+                }
+            }
+        })
+    }
+
+</script>
 
 
 <div style="position:fixed; left:0px;

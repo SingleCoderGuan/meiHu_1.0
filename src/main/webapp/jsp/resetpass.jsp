@@ -31,7 +31,7 @@
         <img id="logo" src="<%=basePath%>images/LOGO.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
         <div style="width: 480px;height: 520px;">
-        <form class="resetform" action="<%=basePath%>resetpass.action" method="post">
+        <form class="resetform" action="<%=basePath%>user/resetpass.action" method="post">
             <li style="position: relative;top: 110px;left:-65px;list-style-type:none; ">
 
                 <label class="label" style="position: relative;top: 15px;left: 8px;color:#996666;font-size: 18px" >新  密  码：</label>
@@ -51,9 +51,9 @@
 </div>
 
 <script src="<%=basePath%>js/index.js"></script>
+<script src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
 <script src="<%=basePath%>js/index_inner.js"></script>
 <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
-<script src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
 <script src="<%=basePath%>js/Validform_v5.3.2.js"></script>
 <script type="text/javascript">
 

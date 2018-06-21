@@ -1,5 +1,6 @@
 package meiHu.service;
 
+import meiHu.entity.ForumComment;
 import meiHu.entity.ForumUser;
 
 import java.util.Date;
@@ -75,4 +76,18 @@ public List<ForumUser> selectUsersByTitleId();
     public int selectCollectionNumByUid(int uid);
 
 
+    /**
+     * 根据用户查询该用户收到的所有评论
+     * @param uid
+     * @return
+     */
+    public List<ForumComment> getOldComments(int uid) ;
+    public List<ForumComment> getNewComments(int uid) ;
+
+    /**
+     * 改变评论状态为已读
+     * @param cid
+     * @return
+     */
+    public boolean readComment(int cid);
 }
