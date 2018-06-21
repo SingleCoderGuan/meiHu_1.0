@@ -153,8 +153,12 @@ strict.dtd">
             <div class="aw-user-nav" style="width: 259px">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" ><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                    <img id="message" hidden style="position: absolute;left: 30px;top: -7px;width: 30px" src="<%=basePath%>images/comment.png"/>
+                    <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
+                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}
+                    </a>
+
+                    <img id="message" hidden style="position: absolute;left: 75px;top: 40px;width: 30px" src="<%=basePath%>images/comment.png"/>
+
                     <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 214px;">注销</a>
                 </span>
 
@@ -260,7 +264,7 @@ strict.dtd">
                                             </c:if>
                                             <c:forEach items="${oldComments}" var="oldComment">
                                                 <div style="position: relative;left: 20px;margin-top: 20px;">
-                                                    <div >回复人：<span>${oldComment.user.uname}</span><span style="position: absolute;left: 150px;">内容：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${oldComment.post.pid}">${oldComment.commenttext}</a></span></div>
+                                                    <div >回复人：<span>${oldComment.user.uname}</span><span style="position: absolute;left: 150px;">内容：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${oldComment.post.pid}#${oldComment.cid}">${oldComment.commenttext}</a></span></div>
                                                     <div style="margin-top: 20px"><span>回复我的帖子：<a href="<%=basePath%>luntan/tiezidetail.action?pid=${oldComment.post.pid}">${oldComment.post.ptitle}</a></span><span style="position: absolute;left: 500px;"><fmt:formatDate value='${oldComment.commenttime}'
                                                                                                                                                                                                                                                                              pattern='yyyy-MM-dd hh:mm:ss'/></span></div>
                                                     <hr />

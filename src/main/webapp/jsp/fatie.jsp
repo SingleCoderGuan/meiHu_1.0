@@ -118,7 +118,8 @@
                       id="global_search_form" method="post">
                     <div class="input-group">
                         <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off"
-                               name="q" id="aw-search-query" class="search-query"/>
+                               name="searchcontent
+" id="aw-search-query" class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
                               onClick="$('#global_search_form').submit();">搜索</span>
                         <div id="context1" style="background-color:white; border: 1px solid deepskyblue;width:167px;
