@@ -195,12 +195,16 @@ public class UserController {
 //        d://java_workplace//demo//images//菊花.pig
         String img=imgFile+"/"+filename;
         File file=new File(img);
+
+        System.out.println(img);
 //        创建
         if (!file.exists()){//不存在直接创建
             file.mkdirs();
+            System.out.println("1");
         }else{
             file.delete();//删除再创建
             file.mkdirs();
+            System.out.println("2");
         }
         //通过IO技术将自己电脑上的文件内容一个个读取到服务器上新创建的图片上
         imgFileUp.transferTo(file);    //图片的复制

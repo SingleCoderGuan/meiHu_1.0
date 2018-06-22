@@ -137,21 +137,20 @@
                         <li class="nav-current" role="presentation">
                             <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
+
                         <li>
-                            <a href="index.html">美乎</a>
-                        </li>
-                        <li>
-                            <a href="#">美购</a>
-                        </li>
-                        <li>
-                            <a href="#">美商城</a>
-                        </li>
-                        <li>
-                            <a href="#">活动</a>
+                            <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
 
                         <li>
-                            <a href="#">关于</a>
+                            <a href="#">美淘</a>
+                        </li>
+                        <li>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
+                        </li>
+
+                        <li>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -163,8 +162,13 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname} </a>
-                    <a href="<%=basePath%>signOut.action" style="position: absolute;left: 180px;width: 50px">注销</a>
+                    <a style="position: relative;left: -100px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
+                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>${user.uname}
+                    </a>
+
+                    <img id="message" hidden style="position: absolute;left: -50px;top: -3px;width: 30px" src="<%=basePath%>images/comment.png"/>
+
+                    <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 80px;">注销</a>
                 </span>
 
                 <!-- end 登陆&注册栏 -->
@@ -631,6 +635,34 @@
 
     editor.create();
     editor.txt.html('${post.pcontent}')
+</script>
+<script>
+    var uid = ${user.uid}
+
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
+
+    function getMessage(uid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/user/getMessage.action",
+            data:"uid="+uid,
+            success:function (data) {
+                if(data!="0"){
+                    $("#message").removeAttr("hidden")
+                    $("#messageNum").html(data)
+                }else {
+                    $("#message").attr("hidden","true")
+                    $("#messageNum").html(0)
+                }
+            }
+        })
+    }
+
 </script>
 </body>
 

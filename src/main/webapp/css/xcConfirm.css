@@ -2,7 +2,7 @@
 .verticalAlign{ vertical-align:middle; display:inline-block; height:100%; margin-left:-1px;}
 
 .xcConfirm .xc_layer{position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #666666; opacity: 0.5; z-index: 2147000000;}
-.xcConfirm .popBox{position: fixed; left: 50%; top: 50%; background-color: #CCCCCC; z-index: 2147000001; width: 600px; height: 300px; margin-left: -285px; margin-top: -150px; border-radius: 5px; font-weight: bold; color: #535e66;}
+.xcConfirm .popBox{position: fixed; left: 50%; top: 50%; background-color: #fff; z-index: 2147000001; width: 600px; height: 300px; margin-left: -285px; margin-top: -150px; border-radius: 5px; font-weight: bold; color: #535e66;}
 .xcConfirm .popBox .ttBox{height: 60px; line-height: 30px; padding: 14px 30px; }
 .xcConfirm .popBox .ttBox .tt{font-size: 25px; display: block; float: left; height: 30px; position: relative;}
 .xcConfirm .popBox .ttBox .clsBtn{display: block; cursor: pointer; width: 12px; height: 12px; position: absolute; top: 22px; right: 30px; background: url(../images/icons.png) -48px -96px no-repeat;}
