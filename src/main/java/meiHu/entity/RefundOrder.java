@@ -5,12 +5,21 @@ import java.util.Date;
 public class RefundOrder {
     private Integer drawbackid;
     private Order order;
+    private Integer itemid;
     private ForumUser user;
     private String drawbackreason;
     private Date drawbacktime;
     private String detail;
-    private String processstate;
+    private int processstate;//0表示管理员未审核退款订单信息，1表示管理员已接受用户的退款,2表示管理员拒绝接受用户提交的退款信息
     public RefundOrder() {
+    }
+
+    public Integer getItemid() {
+        return itemid;
+    }
+
+    public void setItemid(Integer itemid) {
+        this.itemid = itemid;
     }
 
     public String getDetail() {
@@ -61,11 +70,11 @@ public class RefundOrder {
         this.drawbacktime = drawbacktime;
     }
 
-    public String getProcessstate() {
+    public int getProcessstate() {
         return processstate;
     }
 
-    public void setProcessstate(String processstate) {
+    public void setProcessstate(int processstate) {
         this.processstate = processstate;
     }
 }

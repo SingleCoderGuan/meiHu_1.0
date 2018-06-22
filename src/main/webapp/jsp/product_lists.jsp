@@ -9,7 +9,7 @@
 <html lang="zxx">
 <head>
     <meta charset="UTF-8">
-    <title>商品详情页面</title>
+    <title>商品分类页面</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>

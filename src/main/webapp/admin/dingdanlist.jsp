@@ -40,51 +40,52 @@
         <li>
             <dl>
                 <dt>商品信息</dt>
-                <!--当前链接则添加class:active-->
-                <dd><a href="" >查看商品</a></dd>
-                <dd><a href="">商品详情</a></dd>
+                <dd><a href="<%=basePath%>shopAdmin/getAllProducts.action" >查看商品</a></dd>
+                <dd><a href="<%=basePath%>shopAdmin/showCategoryLists.action">商品上架</a></dd>
             </dl>
         </li>
         <li>
             <dl>
                 <dt>订单信息</dt>
-                <dd><a href="">订单列表</a></dd>
-                <dd><a href="">订单详情</a></dd>
-                <dd><a href="">退货信息</a></dd>
+                <dd><a href="<%=basePath%>shopAdminManage/selectYiFuKuanOrder.action">订单管理</a></dd>
+                <dd><a href="<%=basePath%>shopAdminManage/selectDrawbackInfo.action">退货信息</a></dd>
             </dl>
         </li>
 
         <li>
             <dl>
                 <dt>论坛信息</dt>
-                <dd><a href="">举报信息</a></dd>
+                <dd><a href="<%=basePath%>admin/showallpostreport.action">举报信息</a></dd>
+
             </dl>
         </li>
         <li>
             <dl>
                 <dt>文章管理</dt>
-                <dd><a href="">文章发表</a></dd>
-                <dd><a href="">文章查看</a></dd>
+                <dd><a href="<%=basePath%>admin/wenzhangfabiao.jsp">文章发表</a></dd>
+                <dd><a href="<%=basePath%>admin/articleList.action">文章查看</a></dd>
             </dl>
         </li>
 
     </ul>
 </aside>
-<section style="overflow: scroll">
+<section class="rt_wrap content mCustomScrollbar">
     <div class="rt_content">
         <div class="page_title">
             <h2 class="fl">订单列表</h2>
 
         </div>
         <section class="mtb">
-            <select class="select">
-                <option>订单状态</option>
-                <option>待付款</option>
-                <option>待发货</option>
-
-            </select>
-            <input type="text" class="textbox textbox_225" style="height:30px;" placeholder="输入订单编号或收件人姓名/电话..."/>
-            <input type="button" value="查询" class="group_btn"/>
+            <form action="<%=basePath%>shopAdminManage/selectOrderByState.action" method="post">
+                <select class="select" name="orderstate">
+                    <option value="">请选择订单状态进行查询</option>
+                    <option value="0">待付款</option>
+                    <option value="1">待发货</option>
+                    <option value="2">待收货</option>
+                    <option value="3">已完成</option>
+                </select>
+                <input type="submit" value="进行查询" class="group_btn"/>
+            </form>
         </section>
         <table class="table">
             <tr>
@@ -93,33 +94,68 @@
                 <th>联系电话</th>
                 <th>收件人地址</th>
                 <th>订单金额</th>
+                <th>状态</th>
                 <th>操作</th>
             </tr>
-            <tr>
-                <td class="center">201602011207</td>
-                <td>DeathGhost</td>
-                <td>18300000000</td>
-                <td>
-                    <address>陕西省西安市未央区幸福路222号</address>
-                </td>
-                <td class="center"><strong class="rmb_icon">59.00</strong></td>
+            <c:forEach items="${pageInfo.list}" var="YiFuKuanOrderLists">
+                <tr>
+                    <td class="center">${YiFuKuanOrderLists.orderid}</td>
+                    <td>${YiFuKuanOrderLists.user.uname}</td>
+                    <td>${YiFuKuanOrderLists.receivetel}</td>
+                    <td>
+                        <address>${YiFuKuanOrderLists.addressdetail}</address>
+                    </td>
+                    <td class="center"><strong class="rmb_icon">${YiFuKuanOrderLists.total}</strong></td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${YiFuKuanOrderLists.state== 0}">待付款</c:when>
+                            <c:when test="${YiFuKuanOrderLists.state== 1}">待发货</c:when>
+                            <c:when test="${YiFuKuanOrderLists.state== 2}">待收货</c:when>
+                            <c:when test="${YiFuKuanOrderLists.state== 3}">已完成</c:when>
+                        </c:choose>
+                    </td>
+                    <td class="center">
+                        <a href="<%=basePath%>shopAdminManage/selectYiFuKuanOrderItem.action?orderid=${YiFuKuanOrderLists.orderid}" >查看订单详情</a>
 
-                <td class="center">
-                    <a href="#" >查看订单</a>
-
-                </td>
-            </tr>
-
+                    </td>
+                </tr>
+            </c:forEach>
         </table>
+        <form id="mainForm"
+              action="<%=basePath%>shopAdminManage/selectYiFuKuanOrder.action"
+              method="post">
+            <input hidden name="curPage" id="curPage"/>
+        </form>
         <aside class="paging">
-            <a>第一页</a>
-            <a>1</a>
-            <a>2</a>
-            <a>3</a>
-            <a>…</a>
-            <a>1004</a>
-            <a>最后一页</a>
+            <c:if test="${!pageInfo.isFirstPage}">
+
+                <a href="javascript:getPage(${pageInfo.firstPage})">首页</a>
+            </c:if>
+
+            <c:if test="${!pageInfo.isFirstPage}">
+                <a href="javascript:getPage(${pageInfo.prePage})">上一页</a>
+            </c:if>
+            <a> 共 ${pageInfo.total}条
+                当前第<span>${pageInfo.pageNum}</span>页</a>
+            <c:if test="${!pageInfo.isLastPage}">
+                <a href="javascript:getPage(${pageInfo.nextPage})">下一页</a>
+            </c:if>
+            <c:if test="${!pageInfo.isLastPage}">
+                <a href="javascript:getPage(${pageInfo.lastPage})">末页</a>
+            </c:if>
+
         </aside>
+
+
+    </div>
+    <script>
+        function getPage(curPage) {
+            //将隐藏域的值变成curPage
+            document.getElementById("curPage").value = curPage;
+            //触发表单的提交事件
+            document.getElementById("mainForm").submit();
+        }
+    </script>
     </div>
 </section>
 

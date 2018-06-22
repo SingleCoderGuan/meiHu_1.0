@@ -16,9 +16,6 @@
     <title>我的已收货</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <base href="<%=basePath%>" >
-    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
-
     <link href="<%=basePath%>css/iconfont.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/common1.css" rel="stylesheet"/>
     <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
@@ -59,7 +56,7 @@
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车</a></div>
             <div class="order"><em></em><a href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></div>
-            <div class="fav"><em></em><a href="#">我的收藏</a></div>
+            <div class="fav"><em></em><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a></div>
             <div class="help"><em></em><a href="#">帮助中心</a></div>
         </div>
     </div>
@@ -102,7 +99,11 @@
 
                     <li><a href="<%=basePath%>goods/doneOrder.action">退款/退货</a></li>
                 </ul>
-
+                <div class="tit">账户中心</div>
+                <ul class="sublist">
+                    <li><a href="<%=basePath%>goods/showAddress.action">收货地址</a></li>
+                    <li><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a><li>
+                </ul>
 
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
@@ -125,8 +126,8 @@
                             <a class="item" href="<%=basePath%>goods/myOrder.action">所有订单</a>
                             <a class="item " href="<%=basePath%>goods/noPayOrder.action">待付款</a>
                             <a class="item" href="<%=basePath%>goods/waitOrder.action">待发货</a>
-                            <a class="item" href="<%=basePath%>goods/runOrder.action">已发货</a>
-                            <a class="item active" href="<%=basePath%>goods/doneOrder.action">已收货</a></div>
+                            <a class="item" href="<%=basePath%>goods/runOrder.action">待收货</a>
+                            <a class="item active" href="<%=basePath%>goods/doneOrder.action">已完成</a></div>
                         </div>
 
                     </div>
@@ -143,7 +144,7 @@
                         <c:forEach items="${doneOrderList}" var="doneorder">
                             <tr>
                                 <td>
-                                    <div class="left"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${doneorder.ordertime}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单号: ${doneorder.orderid}</div>
+                                    <div class="left"><fmt:formatDate pattern="yyyy-MM-dd" value="${doneorder.ordertime}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单号: ${doneorder.orderid}</div>
 
                                 </td>
                             </tr>
@@ -165,13 +166,22 @@
                                     </td>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${doneorder.state== 0}"> 未付款</c:when>
+                                        <c:when test="${doneorder.state== 0}">待付款</c:when>
                                         <c:when test="${doneorder.state== 1}">待发货</c:when>
-                                        <c:when test="${doneorder.state== 2}">已发货</c:when>
-                                        <c:when test="${doneorder.state== 3}">已收货</c:when>
+                                        <c:when test="${doneorder.state== 2}">待收货</c:when>
+                                        <c:when test="${doneorder.state== 3}">已完成</c:when>
                                     </c:choose>
                                 </td>
-                                <td><a href="<%=basePath%>goods/drawback.action?itemid=${eachdetail.itemid}&orderid=${doneorder.orderid}">退款</a></td>
+                                <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><a href="<%=basePath%>goods/drawback.action?itemid=${eachdetail.itemid}&orderid=${doneorder.orderid}">退款</a></td>
                                 </tr>
                             </c:forEach>
                         </c:forEach>

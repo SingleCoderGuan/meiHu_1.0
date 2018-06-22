@@ -254,6 +254,10 @@
 </div>
 
 
+<DIV id=img1 style="Z-INDEX: 100; LEFT: 2px; WIDTH: 59px; POSITION: absolute; TOP: 43px; HEIGHT: 61px;
+ visibility: visible;"><a href="<%=basePath%>quchoujiang.action" target="_blank"><img src="<%=basePath%>images/huodong.png" width="140" height="160" border="0"></a></DIV>
+<SCRIPT src="<%=basePath%>js/guanggaopiaofu.js"></SCRIPT>
+
 <div class="aw-container-wrap " style="background: #aac4bc; /* Old browsers */
 	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
@@ -611,13 +615,14 @@
     </div>
 </div>
 <script>
-    var uid = ${user.uid}
+    var uid = ${sessionScope.user.uid}
 
         $(function () {
-            if(uid!=null){
-                getMessage(uid);
-                setInterval("getMessage(uid)",10000);
-            }
+            <c:if test="${not empty sessionScope.user.uid}">
+            getMessage(uid);
+            setInterval("getMessage(uid)",10000);
+            </c:if>
+
         })
 
     function getMessage(uid) {

@@ -8,7 +8,7 @@ public class Order {
     private Integer orderid;
     private Date ordertime;
     private Double total;
-    private Integer state;
+    private Integer state;//订单状态，0表示待付款，1表示待发货，2表示待收货，3表示已完成
     private String addressdetail;
     private String receivename;
     private String receivetel;

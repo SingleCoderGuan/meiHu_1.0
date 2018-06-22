@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="meiHu.dao.RefundOrderMapper">
-<!--//在退款表中插入退款信息
+
+    <resultMap id="DrawbackInfo" type="RefundOrder">
+        <id column="drawbackid" property="drawbackid"/>
+        <result column="drawbackreason" property="drawbackreason"/>
+        <result column="drawbacktime" property="drawbacktime"/>
+        <result column="detail" property="detail"/>
+        <result column="processstate" property="processstate"/>
+            <association property="user" javaType="ForumUser">
+                <id column="uid" property="uid" />
+                <result column="uname" property="uname" />
+            </association>
+            <association property="order" javaType="Order">
+                <id column="orderid" property="orderid"/>
+                <result column="ordertime" property="ordertime"/>
+                <result column="total" property="total"/>
+                <result column="state" property="state"/>
+                <result column="addressdetail" property="addressdetail"/>
+                <result column="receivename" property="receivename"/>
+                <result column="receivetel" property="receivetel"/>
+                <collection property="items" ofType="OrderItem">
+                    <id column="itemid" property="itemid"/>
+                    <result column="num" property="count"/>
+                    <result column="subtotal" property="subtotal"/>
+                    <association property="good" javaType="Goods">
+                        <id column="goodid" property="goodid"/>
+                        <result column="goodname" property="goodname"/>
+                        <result column="goodpic" property="goodpic"/>
+                        <result column="goodprice" property="goodprice"/>
+                        <result column="goodstore" property="goodstore"/>
+                        <result column="goodaddress" property="goodaddress"/>
+                        <result column="gooddetail" property="gooddetail"/>
+                        <result column="goodsales" property="goodsales"/>
+                    </association>
+                </collection>
+            </association>
+    </resultMap>
+    <!--//在退款表中插入退款信息
     public String addDrawbackInfo(RefundOrder ro);-->
     <insert id="addDrawbackInfo" parameterType="RefundOrder">
-        insert into shop_drawback values(#{drawbackid},#{order.orderid},#{user.uid},#{drawbackreason},#{drawbacktime},#{detail},#{processstate})
+        insert into shop_drawback values(#{drawbackid},#{order.orderid},#{itemid},#{user.uid},#{drawbackreason},#{drawbacktime},#{detail},#{processstate})
     </insert>
+
+    <!--//后台管理员查询用户退款信息
+    public List<RefundOrder> showAllDrawbackInfo();-->
+    <select id="showAllDrawbackInfo" resultMap="DrawbackInfo">
+        select * from shop_drawback sd,shop_order so,shop_item si,shop_goods sg,forum_user fu
+        where sd.orderid=so.orderid and so.orderid=si.orderid and si.goodid=sg.goodid and sd.uid=fu.uid
+    </select>
+
+    <!--//管理员同意接受退款，修改退款信息的状态
+    public int updateDrawbackState(int drawbackid);-->
+    <update id="updateDrawbackState" parameterType="int">
+        update shop_drawback set processstate=1 where drawbackid=#{_parameter}
+    </update>
+
 </mapper>

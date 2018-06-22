@@ -265,10 +265,10 @@
     var uid = ${user.uid}
 
         $(function () {
-            if(uid!=null){
-                getMessage(uid);
-                setInterval("getMessage(uid)",10000);
-            }
+            <c:if test="${not empty sessionScope.user.uid}">
+            getMessage(uid);
+            setInterval("getMessage(uid)",10000);
+            </c:if>
         })
 
     function getMessage(uid) {
