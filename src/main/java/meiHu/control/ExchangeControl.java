@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.ref.ReferenceQueue;
 import java.util.List;
 
 @Controller
@@ -67,5 +68,30 @@ public class ExchangeControl {
             }
         }
 
+    }
+    @RequestMapping("quchoujiang.action")
+    public void jinruchoujiang(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        if(request.getSession().getAttribute("user")!=null){
+            ForumUser user= (ForumUser) request.getSession().getAttribute("user");
+            int uid = user.getUid();
+            int point = userService.selectPointByUid(uid);
+            request.setAttribute("point",point);
+            request.getRequestDispatcher("/jsp/choujiang.jsp").forward(request,response);
+        }else{
+            response.sendRedirect("jsp/choujiang.jsp");
+        }
+    }
+
+    @RequestMapping("/choujiang.action")
+    public void choujiang(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        int uid = Integer.parseInt(request.getParameter("uidd"));
+        int point = userService.selectPointByUid(uid);
+        PrintWriter out = response.getWriter();
+
+        if(point<50){
+            out.print(1);
+        }else{
+            out.print(2);
+        }
     }
 }

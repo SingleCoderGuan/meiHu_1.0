@@ -223,6 +223,12 @@
                     </ul>
                 </nav>
             </div>
+
+
+            <DIV id=img1 style="Z-INDEX: 100; LEFT: 2px; WIDTH: 59px; POSITION: absolute; TOP: 43px; HEIGHT: 61px;
+ visibility: visible;"><a href="<%=basePath%>quchoujiang.action" target="_blank"><img src="../images/huodong.png" width="150" height="200" border="0"></a></DIV>
+            <SCRIPT src="<%=basePath%>js/guanggaopiaofu.js"></SCRIPT>
+
             <!-- end 导航 -->
             <!-- 用户栏 -->
             <div class="aw-user-nav" style="width: 250px">
@@ -230,7 +236,7 @@
                 <span>
                      <c:if test="${not empty sessionScope.user}">
                           <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
-                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}
+                              <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎<em>${user.uname}</em>
                     </a>
                          <img id="message" hidden style="position: absolute;left: 30px;top: 40px;width: 30px" src="<%=basePath%>images/comment.png"/>
 
@@ -393,7 +399,6 @@
                             </div>
                         </div>
                     </div>
-
                     <form id="mainForm"
                           action="<%=basePath%>luntan/luntanshouye.action?tid=<%=request.getParameter("tid")%>"
                           method="post">
