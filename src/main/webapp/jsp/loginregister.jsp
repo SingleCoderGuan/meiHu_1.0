@@ -28,7 +28,7 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
     <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
     <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
-<script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
+    <script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
     <style>
         .registerform li{padding-bottom:20px;}
         .Validform_checktip{margin-left:10px;}

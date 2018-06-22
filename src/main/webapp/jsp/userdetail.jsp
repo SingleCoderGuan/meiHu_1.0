@@ -94,6 +94,8 @@
 </style>
 
 <body>
+<img src="<%=basePath%>images/bg-halfmei.png" style="position: absolute;top: 150px;left: 30px"/>
+<img src="<%=basePath%>images/bg-hu.png" style="position: absolute;top: 450px;left:1004px"/>
 <div class="aw-top-menu-wrap">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">

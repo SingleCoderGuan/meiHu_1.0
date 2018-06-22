@@ -115,12 +115,10 @@
         display: block;
     }
 </style>
-<body  style="background: #aac4bc; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
+<body>
 
-
+<img src="<%=basePath%>images/bg-halfmei.png" style="position: absolute;top: 150px;left: 52px"/>
+<img src="<%=basePath%>images/bg-halfhu.png" style="position: absolute;top: 450px;left:1004px"/>
 <div class="aw-top-menu-wrap" style="height: 55px">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
@@ -254,19 +252,13 @@
 </div>
 
 
-<div class="aw-container-wrap " style="background: #aac4bc; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
-    <div class="aw-container aw-wecenter" style="background: #aac4bc; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
+<div class="aw-container-wrap " >
+    <div class="aw-container aw-wecenter" >
         <div class="container">
             <div class="row category">
                 <div class="col-sm-12">
                     <c:forEach items="${topicList1}" var="topicList1">
-                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList1.tid}">
+                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList1.tid}" >
                             <dl style="text-align: center">
                                 <dt><img src="<%=basePath%>images/${topicList1.tpicname}"
                                          style="position: relative;left: 30px;"/></dt>
@@ -364,29 +356,26 @@
                                 <c:forEach var="postList" items="${pageInfo.list}" varStatus="status">
 
                                     <div class="aw-item ">
-                                        <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
-                                                <%-- <img src="<%=basePath%>images/touxiang1.png" alt="" />--%>
-                                                <%--<span style="font-size: 40px "><strong>${status.index+1}</strong></span>--%>
-                                            <img style="width: 50px" src="<%=basePath%>${postList.user.headpic}"/>
+                                        <a class="aw-user-name hidden-xs" data-id="804712" href="<%=basePath%>luntan/userdetail.action?uid=${postList.user.uid}" rel="nofollow">
+                                            <img style="width: 50px"  src="<%=basePath%>${postList.user.headpic}"/>
                                         </a>
 
                                         <div class="aw-question-content">
                                             <h4>
-                                                <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
+                                                <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}" style="position: relative;left: 20px;">${postList.ptitle}</a>
                                             </h4>
                                             <p>
-							<span class="aw-question-tags">
-					<i class="fa fa-caret-left"></i>
-					<a href="#">${postList.topic.tname}</a><%--标签--%>
-                                <input name="curTid" id="curTid" value="${postList.topic.tid}" hidden/>
-				</span> •
-                                                <a href="#" class="aw-user-name">${postList.user.uname}</a>
-                                                <span class="aw-text-color-999">${postList.likecount}次点赞  •
+                                        <span class="aw-question-tags">
+                                            <i class="fa fa-caret-left"></i>
+                                            <a href="#">${postList.topic.tname}</a><%--标签--%>
+                                            <input name="curTid" id="curTid" value="${postList.topic.tid}" hidden/>
+                                        </span> •
+                                                <a href="<%=basePath%>luntan/userdetail.action?uid=${postList.user.uid}" class="aw-user-name">${postList.user.uname}</a>
+                                                <span class="aw-text-color-999" >${postList.likecount}次点赞  •
                                                     ${postList.visitcount} 次浏览 •<fmt:formatDate
                                                             value='${postList.createtime}'
                                                             pattern='yyyy-MM-dd hh:mm:ss'/>   </span>
                                             </p>
-
                                         </div>
                                     </div>
 
@@ -611,14 +600,10 @@
     </div>
 </div>
 <script>
-    var uid = ${user.uid}
-
-        $(function () {
-            if(uid!=null){
-                getMessage(uid);
-                setInterval("getMessage(uid)",10000);
-            }
-        })
+    <c:if test="${not empty user}" >
+        getMessage(${user.uid});
+        setInterval("getMessage(${user.uid})",10000);
+    </c:if>
 
     function getMessage(uid) {
         $.ajax({
@@ -643,10 +628,7 @@
 
 
 
-<div class="aw-footer-wrap" style="background: #aac4bc; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
+<div class="aw-footer-wrap" >
 
 
     <div class="aw-footer aw-wecenter">
