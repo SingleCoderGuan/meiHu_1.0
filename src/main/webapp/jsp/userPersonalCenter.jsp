@@ -31,6 +31,9 @@ strict.dtd">
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="<%=basePath%>css/user.css" />
 
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
+    <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108" type="text/javascript"></script>
@@ -153,13 +156,13 @@ strict.dtd">
             <div class="aw-user-nav" style="width: 259px">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
-                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}
+                    <a style="position: relative;left: -100px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
+                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>${user.uname}
                     </a>
 
-                    <img id="message" hidden style="position: absolute;left: 30px;top: -7px;width: 30px" src="<%=basePath%>images/comment.png"/>
+                    <img id="message" hidden style="position: absolute;left: 60px;top: -3px;width: 30px" src="<%=basePath%>images/comment.png"/>
 
-                    <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 214px;">注销</a>
+                    <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 200px;">注销</a>
                 </span>
 
                 <!-- end 登陆&注册栏 -->
@@ -398,10 +401,16 @@ background-color: #ce8483; z-index:9999;text-align: center">
                 url:"${pageContext.request.contextPath}/user/deletePost.action",
                 success:function (message) {
                     if(message=="1"){
-                        alert("删除成功")
+                        $(function () {
+                            var txt=  "删除成功！！";
+                            window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                        })
                         window.location.href = "${pageContext.request.contextPath}/user/userCenter.action" ;
                     }else{
-                        alert("删除失败")
+                        $(function () {
+                            var txt=  "删除失败！！";
+                            window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+                        })
                     }
                 }
             })

@@ -29,7 +29,9 @@
     <link href="<%=basePath%>css/common.css" rel="stylesheet" type="text/css"/>
     <link href="<%=basePath%>css/link.css" rel="stylesheet" type="text/css"/>
     <link href="<%=basePath%>css/stylebankuai.css" rel="stylesheet" type="text/css"/>
-
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
+    <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
 
     <script type="text/javascript" src="<%=basePath%>/js/zzsc.js"></script>
@@ -223,24 +225,18 @@
                     </ul>
                 </nav>
             </div>
-
-
-            <DIV id=img1 style="Z-INDEX: 100; LEFT: 2px; WIDTH: 59px; POSITION: absolute; TOP: 43px; HEIGHT: 61px;
- visibility: visible;"><a href="<%=basePath%>quchoujiang.action" target="_blank"><img src="../images/huodong.png" width="150" height="200" border="0"></a></DIV>
-            <SCRIPT src="<%=basePath%>js/guanggaopiaofu.js"></SCRIPT>
-
             <!-- end 导航 -->
             <!-- 用户栏 -->
             <div class="aw-user-nav" style="width: 250px">
                 <!-- 登陆&注册栏 -->
                 <span>
                      <c:if test="${not empty sessionScope.user}">
-                          <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
-                              <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎<em>${user.uname}</em>
+                          <a style="position: relative;left: -100px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
+                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>${user.uname}
                     </a>
-                         <img id="message" hidden style="position: absolute;left: 30px;top: 40px;width: 30px" src="<%=basePath%>images/comment.png"/>
+                         <img id="message" hidden style="position: absolute;left: 50px;top: -3px;width: 30px" src="<%=basePath%>images/comment.png"/>
 
-                         <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 250px;">注销</a>
+                         <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 190px;">注销</a>
                      </c:if>
                     <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
@@ -399,6 +395,7 @@
                             </div>
                         </div>
                     </div>
+
                     <form id="mainForm"
                           action="<%=basePath%>luntan/luntanshouye.action?tid=<%=request.getParameter("tid")%>"
                           method="post">
@@ -511,7 +508,10 @@
                             <script>
                                 function sign(){
                                     <c:if test="${empty sessionScope.user.uid}">
-                                    alert("亲，请先登录");
+                                    $(function () {
+                                        var txt=  "亲，请先登录";
+                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                    })
 
 
                                     </c:if>
@@ -522,11 +522,17 @@
                                         data: "uid=" + ${ sessionScope.user.uid},
                                         success: function (result) {
                                             if (result == 1) {
-                                                alert("签到成功！！");
+                                                $(function () {
+                                                    var txt=  "签到成功！！";
+                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                })
                                                 window.load();
                                             }
                                             else if (result == 0) {
-                                                alert("您今日已经签到了亲！！");
+                                                $(function () {
+                                                    var txt=  "您今日已经签到了亲！！";
+                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                })
                                             }
                                         }
                                     });

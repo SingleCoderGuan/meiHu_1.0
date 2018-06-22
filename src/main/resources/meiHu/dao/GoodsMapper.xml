@@ -48,4 +48,8 @@
          ORDER BY g.goodsales DESC
     </select>
 
+    <!--public List<Goods> selectRecommendList() ;-->
+    <select id="selectRecommendList" resultType="Goods">
+        SELECT goodid,goodname,goodpic,goodprice from shop_goods ORDER BY goodsales DESC  limit 0,10
+    </select>
 </mapper>

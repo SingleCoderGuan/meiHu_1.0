@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.FavorGoodMapper">
+
+    <resultMap id="favorMap" type="Favor">
+        <id column="favoriteid" property="favoriteid"/>
+        <result column="ordertime" property="ordertime"/>
+           <association property="goods" javaType="Goods">
+                <id column="goodid" property="goodid"/>
+                <result column="goodname" property="goodname"/>
+                <result column="goodpic" property="goodpic"/>
+                <result column="goodprice" property="goodprice"/>
+                <result column="goodstore" property="goodstore"/>
+                <result column="goodaddress" property="goodaddress"/>
+                <result column="gooddetail" property="gooddetail"/>
+                <result column="goodsales" property="goodsales"/>
+            </association>
+
+    </resultMap>
+
+   <!-- //用户对某种商品的收藏
+    public int addCollectionByUidAndGoodid(int uid,int goodid);-->
+
+    <insert id="addCollectionByUidAndGoodid" parameterType="int">
+        insert into shop_favor (uid,goodid) VALUE (#{param1},#{param2})
+    </insert>
+
+
+    <!--&lt;!&ndash;//查询某个用户的收藏
+    public int selectCollectedCountByUid(int uid);&ndash;&gt;
+    <select id="selectCollectedCountByUid" parameterType="int">
+        select * from shop_favor where uid=#{parameter}
+    </select>-->
+
+
+    <!--//根据用户id查询我的收藏信息
+    public List<Favor> findMyFavor(int uid);-->
+    <select id="findMyFavor" parameterType="int" resultMap="favorMap">
+        select * from shop_favor f,shop_goods g where f.uid=#{_parameter}
+        and f.goodid=g.goodid
+    </select>
+
+
+    <!--//查询该帖子是否已经被该用户收藏过
+    public Favor selectIfCollection(int uid, int goodid);-->
+    <select id="selectIfCollection" resultType="Favor" parameterType="int">
+        select * from shop_favor where uid=#{param1} and goodid=#{param2}
+    </select>
+
+   <!-- //用户对商品取消收藏
+    public int deleteCollectionByUidAndGoodid(int uid,int goodid);-->
+    <delete id="deleteCollectionByUidAndGoodid" parameterType="int">
+        DELETE  from shop_favor where uid=#{param1} and goodid=#{param2}
+    </delete>
+
+
+</mapper>

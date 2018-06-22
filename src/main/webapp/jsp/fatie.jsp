@@ -118,7 +118,8 @@
                       id="global_search_form" method="post">
                     <div class="input-group">
                         <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off"
-                               name="q" id="aw-search-query" class="search-query"/>
+                               name="searchcontent
+" id="aw-search-query" class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
                               onClick="$('#global_search_form').submit();">搜索</span>
                         <div id="context1" style="background-color:white; border: 1px solid deepskyblue;width:167px;
@@ -215,8 +216,8 @@
             <div class="aw-user-nav" style="width: 259px">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="<%=basePath%>user/userCenter.action" style="position: relative;left: -40px;top: -0.5px;"><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                         <img id="message" hidden style="position: absolute;left: 30px;top: -7px;width: 30px" src="<%=basePath%>images/comment.png"/>
+                    <a href="<%=basePath%>user/userCenter.action" style="position: relative;left: -100px;top: -0.5px;"><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>${user.uname}</a>
+                         <img id="message" hidden style="position: absolute;left: 60px;top: -3px;width: 30px" src="<%=basePath%>images/comment.png"/>
                          <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 200px;">注销</a>
                 </span>
 

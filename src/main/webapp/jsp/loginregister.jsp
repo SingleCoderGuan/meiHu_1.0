@@ -21,9 +21,14 @@
     <link rel="stylesheet" href="<%=basePath%>css/stylelogin.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>css/style_inner.css" type="text/css">
     <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link href="<%=basePath%>css/demo.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
+    <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
     <style>
         .registerform li{padding-bottom:20px;}
         .Validform_checktip{margin-left:10px;}
@@ -41,16 +46,28 @@
         }
         var id = getUrlParms("rslt");
         if(id=="1"){
-            alert("用户名或密码错误")
+            $(function () {
+                var txt=  "用户名或密码错误";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+            })
         }
         if(id=="2"){
-            alert("用户名或密码错误")
+            $(function () {
+                var txt=  "用户名或密码错误";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+            })
         }
         if(id=="3"){
-            alert("注册成功")
+            $(function () {
+                var txt=  "注册成功，请登录";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+            })
         }
         if(id=="4"){
-            alert("密码重置成功")
+            $(function () {
+                var txt=  "重置密码成功，请重新登录";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+            })
         }
     </script>
 </head>
@@ -129,8 +146,7 @@
                     </div>
                 </div>
                 <div class="cont_form_sign_up">
-                    <h2>注册</h2>
-                    <form class="registerform" action="<%=basePath%>user/register.action" method="post" >
+                    <form style="position: relative;top:-15px;" class="registerform" id="register" action="<%=basePath%>user/register.action" method="post" >
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
                             <label class="label" style="position: relative;font-size: 14px;top: 10px;color:#996666;">用户名：</label>
                             <input style="position: relative;padding: 15px 5px;
@@ -142,7 +158,7 @@ text-align: left;
   color: #757575;background-color: #fff" type="text" id="reguname"  name="username" class="inputxt"/>
                             <span style="position: absolute;left: 200px;top: 80px;" id="unametip"></span>
                         </li>
-                        <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
+                        <li style="position: relative;top: 15px;left:-65px;list-style-type:none; ">
                             <label class="label" style="position: relative;left: 7px;top: 10px;font-size: 14px;color:#996666;">密  码：</label>
                             <input style="position: relative;padding: 15px 5px;
 margin-left: 10px;
@@ -152,7 +168,7 @@ border: none;
 text-align: left;
   color: #757575;background-color: #fff" type="password"  value="" name="password" class="inputxt" />
                         </li>
-                        <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
+                        <li style="position: relative;top: 12px;left:-65px;list-style-type:none; ">
                             <label class="label" style="position: relative;left: -6px;top: 10px;font-size: 14px;color:#996666;width: 80px;">确认密码：</label>
                             <input style="position: relative;left: -5px;padding: 15px 5px;
 margin-left: 10px;
@@ -162,7 +178,7 @@ border: none;
 text-align: left;
   color: #757575;background-color: #fff" type="password" value="" name="verificationpsw" class="inputxt"/>
                         </li>
-                        <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
+                        <li style="position: relative;top: 13px;left:-65px;list-style-type:none; ">
                             <label class="label" style="position: relative;left: -6px;top: 10px;color:#996666;font-size: 14px;width: 80px;">手机号码：</label>
                             <input style="position: relative;left: -5px;padding: 15px 5px;
 margin-left: 10px;
@@ -174,10 +190,10 @@ text-align: left;
                             <span id="teltip" style="position: absolute;top: 75px;left: 212px;"></span>
                         </li>
 
-                        <li style="position: relative;top: 20px;left:-45px;list-style-type:none; ">
+                        <li style="position: relative;top: 15px;left:-45px;list-style-type:none; ">
                             <input class="btn_my_login" id="btn" style="position: relative;top: -7px;" type="button" onclick="sendMessage()" value="发送手机短信验证码"/>
                         </li>
-                        <li style="position: relative;top: -5px;left:-65px;list-style-type:none; ">
+                        <li style="position: relative;top: -10px;left:-65px;list-style-type:none; ">
                             <label class="label" style="font-size: 14px;position: relative;top: 10px;color:#996666;">验证码：</label>
                             <input style="position: relative;padding: 15px 5px;
                                 margin-left: 10px;
@@ -188,7 +204,7 @@ text-align: left;
                                   color: #757575;background-color: #fff" id="code" type="text" value="" name="text" class="inputxt"/>
                         </li>
                         <div class="action" style="position: relative;top: 20px;left:-90px ">
-                            <input type="submit" style="position: relative;top: -28px;" id="lo" disabled class="btn_my_login" value="提 交" />
+                            <input type="button" style="position: relative;top: -38px;" id="lo" disabled class="btn_my_login" value="提 交" />
                         </div>
                     </form>
                 </div>
@@ -253,7 +269,7 @@ text-align: left;
 <script type="text/javascript" src="<%=basePath%>js/index_inner.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/Validform_v5.3.2.js"></script>
-<script src="<%=basePath%>bootstrap/js/bootstrap.min.js"></script>
+
 
 <script type="text/javascript">
 
@@ -384,13 +400,22 @@ text-align: left;
     $("#lo").click(function(){
         var code=$("#code").val();
         if(code==""){
-            alert("请输入验证码");
+            $(function () {
+                var txt=  "请输入验证码";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+            })
         }else{
             if(sms==code){
-                alert("验证码正确")
-
+                $(function () {
+                    var txt=  "验证码正确";
+                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                })
+                $("#register").submit()
             }else{
-                alert("验证码错误");
+                $(function () {
+                    var txt=  "验证码错误";
+                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+                })
 
             };
         };
@@ -476,10 +501,16 @@ text-align: left;
         var tel=$("#tel").val() ;
         var code=$("#userCode").val();
         if(code==""){
-            alert("请输入验证码");
+            $(function () {
+                var txt=  "请输入验证码";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+            })
         }else{
             if(sms==code){
-                alert("验证码正确")
+                $(function () {
+                    var txt=  "验证码正确";
+                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                })
                 $.ajax({
                     type:"get",
                     url:"${pageContext.request.contextPath}/user/loginWithTel.action",
@@ -496,7 +527,10 @@ text-align: left;
                     }
                 })
             }else{
-                alert("验证码错误");
+                $(function () {
+                    var txt=  "验证码错误";
+                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+                })
 
             };
         };
