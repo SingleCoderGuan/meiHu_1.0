@@ -22,7 +22,8 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
+
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -30,12 +31,13 @@
     <link href="../css/magnific-popup.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/screen.css" />
     <script type="text/javascript" src="<%=basePath%>/js/zzsc.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/jquery-3.2.1.min.js"></script>
 
 
 
 
 
-    <script type="text/javascript" src="js/main.js"></script>
+
 
 
     <link rel="alternate" type="application/rss+xml" title="美乎" href="#" />
@@ -76,9 +78,9 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         <li class="nav-current" role="presentation"><a href="<%=basePath%>article/article.action">美文首页</a></li>
-                        <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美乎</a></li>
+                        <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论</a></li>
 
-                        <li  role="presentation"><a href="">美淘</a></li>
+                        <li  role="presentation"><a href="<%=basePath%>jsp/index.jsp">美淘</a></li>
                         <li  role="presentation"><a href="<%=basePath%>jsp/activity.jsp">活动</a></li>
 
                         <li  role="presentation"><a href="#">关于</a></li>
@@ -182,7 +184,8 @@
                     function sign(){
                         <c:if test="${empty sessionScope.user.uid}">
                         alert("亲，请先登录");
-                        window.location.href="<%=basePath%>jsp/loginregister.jsp";
+                        window.location.href="<%=basePath%>jsp/loginregister.jsp?url=/meiHu_1.0/article/articledetail.action?oaid=${forumOfficalarticle.oaid}";
+
                         </c:if>
                         <c:if test="${not empty sessionScope.user.uid}">
                         $.ajax({

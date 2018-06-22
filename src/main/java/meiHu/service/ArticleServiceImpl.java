@@ -1,14 +1,18 @@
 package meiHu.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import meiHu.dao.ForumOfficalarticleMapper;
 import meiHu.dao.ForumSignMapper;
 import meiHu.entity.ForumOfficalarticle;
+import meiHu.entity.ForumPost;
 import meiHu.entity.ForumSign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -66,5 +70,18 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void qiandaojiasanfen(int uid) {
         forumSignMapper.qiandaojiasanfen(uid);
+    }
+
+    @Override
+    public PageInfo<ForumOfficalarticle> selectAllArticle(Map<String, Object> map) {
+        int curPage= (int) map.get("curPage");
+        //查询的条数
+        int pageSize=(int)map.get("pageSize");
+
+        PageHelper.startPage(curPage,pageSize);
+
+        List<ForumOfficalarticle> postList =forumOfficalarticleMapper.getAllOfficalArticles() ;
+        PageInfo<ForumOfficalarticle> pageInfo=new PageInfo<>(postList);
+        return  pageInfo ;
     }
 }

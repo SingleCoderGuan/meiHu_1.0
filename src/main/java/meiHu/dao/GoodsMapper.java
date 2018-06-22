@@ -11,22 +11,14 @@ public interface GoodsMapper {
     public List<Goods> getGoods(int categoryid);
     //根据商品id，查询商品详情
     public Goods getGood(int id);
-    //根据商品id,查询商品所属商品分类编号
-    public int getCategoryByGid(int gid);
-    //根据商品编号按照销量排序显示热卖商品信息
-    public List<Goods> getHotSaleGood(int categoryId);
-    //根据商品编号按照库存量排序显示推荐商品信息
-    public List<Goods> getRecommendGood(int categoryId);
-    //根据goodid判断该商品属于哪类商品
-    public int selectCategoryByGoodid(int goodid);
 
+    //查询该类商品，并按商品销量的降序排列
+    public List<Goods> selectGoodsBySales(int categoryid);
 
-    //管理员查看所有商品
-    public List<Goods> getAllProducts();
-    //管理员添加商品，商品上架
-    public boolean insertGoods(Goods goods);
-    //管理员更新商品信息
-    public boolean updateGood(Goods goods);
-    //管理员通过商品id对商品下架处理
-    public boolean deleteGood(int goodid);
+    /**
+     * 按销量查询推荐商品列表
+     * @return
+     */
+    public List<Goods> selectRecommendList() ;
+
 }

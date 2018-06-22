@@ -1,4 +1,4 @@
-﻿$(function(){
+﻿﻿$(function(){
 	var beforeDate = new Date();
 	//页面加载
 	var $window = $(window),

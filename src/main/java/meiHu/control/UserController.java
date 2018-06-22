@@ -1,8 +1,10 @@
 package meiHu.control;
 
+import meiHu.entity.ForumComment;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumUser;
 import meiHu.service.FocusService;
+import meiHu.service.LuntanService;
 import meiHu.service.PostService;
 import meiHu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+@RequestMapping("/user")
 @Controller
 public class UserController {
     @Autowired
@@ -30,7 +34,8 @@ public class UserController {
     private UserService userService ;
     @Autowired
     private PostService postService ;
-
+    @Autowired
+    private LuntanService luntanService ;
     @RequestMapping(value = "/loginWithAccount.action",method = RequestMethod.POST)
     public void findUserByUname(String uname,String password,String flag, HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         ForumUser user = userService.findUserByUname(uname);
@@ -98,7 +103,6 @@ public class UserController {
     @RequestMapping(value = "/namecheck.action",method = RequestMethod.GET)
     public @ResponseBody String checkUname(String uname,HttpServletRequest request,HttpServletResponse response) throws IOException {
         ForumUser user = userService.findUserByUname(uname);
-        System.out.println(user);
         if(user!=null){
             return "0" ;
         }else{
@@ -116,20 +120,28 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userCenter.action")
-    public void gotoUserCenter(HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public void gotoUserCenter(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession() ;
         ForumUser user = (ForumUser) session.getAttribute("user");
-        System.out.println(user);
         int uid = user.getUid() ;
         List<ForumPost> collectionList = postService.selectCollectionByUserUid(uid) ;
         List<ForumPost> postList = postService.selectPostsByUid(uid) ;
         List<ForumUser> focusUsers = userService.findFocusUsersByUid(uid) ;
         List<ForumUser> followers = userService.findFollowersByUid(uid) ;
+        List<ForumComment> oldComments = userService.getOldComments(uid) ;
+        List<ForumComment> newComments = userService.getNewComments(uid) ;
+        session.setAttribute("oldComments",oldComments);
+        session.setAttribute("newComments",newComments);
+        session.setAttribute("commentsNum",oldComments.size()+newComments.size());
+        session.setAttribute("userlikenum",userService.selectLikeNumByUid(uid));
         session.setAttribute("collectionList",collectionList);
         session.setAttribute("postList",postList);
+        session.setAttribute("postsNum",postList.size());
         session.setAttribute("focusUsers",focusUsers);
         session.setAttribute("followers",followers);
-        response.sendRedirect(request.getContextPath()+"/jsp/userPersonalCenter.jsp");
+        request.setAttribute("personalpoint",userService.selectPointByUid(uid));
+//        response.sendRedirect(request.getContextPath()+"/jsp/userPersonalCenter.jsp");
+        request.getRequestDispatcher("/jsp/userPersonalCenter.jsp").forward(request,response);
     }
 
     @RequestMapping(value = "/signOut.action")
@@ -139,8 +151,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/preresetpass.action",method = RequestMethod.POST)
-    public void preresetpass(String tel,HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setAttribute("tel",tel);
+    public void preresetpass(String phone,HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.setAttribute("tel",phone);
         request.getRequestDispatcher("/jsp/resetpass.jsp").forward(request,response);
     }
 
@@ -158,7 +170,6 @@ public class UserController {
 
         ForumPost post = postService.selectPostByPid(pid) ;
         post.setPcontent(post.getPcontent().replace("(\r\n|\r|\n|\n\r)", ""));
-        System.out.println("-----------------"+post);
         request.setAttribute("post",post);
         request.getRequestDispatcher("/jsp/modifyPost.jsp").forward(request,response);
     }
@@ -184,12 +195,16 @@ public class UserController {
 //        d://java_workplace//demo//images//菊花.pig
         String img=imgFile+"/"+filename;
         File file=new File(img);
+
+        System.out.println(img);
 //        创建
         if (!file.exists()){//不存在直接创建
             file.mkdirs();
+            System.out.println("1");
         }else{
             file.delete();//删除再创建
             file.mkdirs();
+            System.out.println("2");
         }
         //通过IO技术将自己电脑上的文件内容一个个读取到服务器上新创建的图片上
         imgFileUp.transferTo(file);    //图片的复制
@@ -199,11 +214,46 @@ public class UserController {
 //                调用service层的修改方法
         if (userService.updateUser(newUser)){
             request.getSession().setAttribute("user",userService.selectUserByUid(newUser.getUid()));
-            request.getRequestDispatcher("/userCenter.action") .forward(request,response);
+            request.getRequestDispatcher("/user/userCenter.action") .forward(request,response);
         }else{
         }
     }
 
+    @RequestMapping(value = "/readReply.action",method = RequestMethod.GET)
+    public void readReply(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pid = request.getParameter("pid");
+        String cid = request.getParameter("cid") ;
+        userService.readComment(Integer.parseInt(cid)) ;
+        int pid1 = Integer.parseInt(pid);
+        int collection = luntanService.selectCollectedCountByPid(pid1);
+        request.setAttribute("collectionnum",collection);
+        ForumPost forumPost = luntanService.selectPostByPid(pid1);
+
+        int uid = luntanService.SelectUidByPid(pid1);
+        request.setAttribute("focusnum",focusService.selectUserFocusNum(uid));
+        request.setAttribute("focusednum",focusService.selectUserFocusedNum(uid));
+
+        request.setAttribute("forumPost",forumPost);
+        int postCommentNum = luntanService.selectPostCommentNum(pid1);
+        request.setAttribute("postCommentNum",postCommentNum);
+        List<ForumComment> forumCommentList = luntanService.selectAllPostCommentByPid(pid1);
+        request.setAttribute("forumCommentList",forumCommentList);
+        //根据pid查找出所有评论帖子的评论标号
+        int[] cidshuzu = luntanService.selectAllCidByPid(pid1);
+        Map<String,List<ForumComment>> map = new HashMap<>();
+        for(int i =0;i<cidshuzu.length;i++){
+            List<ForumComment> commentforcommentList = luntanService.selectAllCommentForComment(cidshuzu[i]);
+            map.put(cidshuzu[i]+"",commentforcommentList);
+        }
+        Map<String,String> mapnum = new HashMap<>();
+        for(int i =0;i<cidshuzu.length;i++){
+            int num = luntanService.selectCommentCommentNum(cidshuzu[i]);
+            mapnum.put(cidshuzu[i]+"",num+"");
+        }
+        request.setAttribute("map",map);
+        request.setAttribute("mapnum",mapnum);
+        request.getRequestDispatcher("/jsp/tiezidetail.jsp").forward(request,response);
+    }
 
 
 }

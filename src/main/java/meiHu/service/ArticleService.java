@@ -1,10 +1,13 @@
 package meiHu.service;
 
+import com.github.pagehelper.PageInfo;
 import meiHu.entity.ForumOfficalarticle;
+
 import meiHu.entity.ForumSign;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface ArticleService {
     public boolean addSignForNewUser(int uid);
@@ -25,4 +28,6 @@ public interface ArticleService {
     public void fapinglunjialiangfen(int uid);
     //                        <p>4、每日签到 +3 分</p>
     public void qiandaojiasanfen(int uid);
+
+    public PageInfo<ForumOfficalarticle> selectAllArticle(Map<String ,Object> map) ;
 }

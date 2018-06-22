@@ -15,37 +15,9 @@
             <result column="categoryname" property="categoryname"/>
         </association>
     </resultMap>
-    <resultMap id="showHotSalesMap" type="Goods">
-        <id column="goodid" property="goodid"/>
-        <result column="goodname" property="goodname"/>
-        <result column="goodpic" property="goodpic"/>
-        <result column="goodprice" property="goodprice"/>
-        <result column="goodstore" property="goodstore"/>
-        <result column="goodaddress" property="goodaddress"/>
-        <result column="gooddetail" property="gooddetail"/>
-        <result column="goodsales" property="goodsales"/>
-        <association property="category" javaType="GoodsCategory">
-            <id column="categoryid" property="categoryid"/>
-            <result column="categoryname" property="categoryname"/>
-        </association>
-    </resultMap>
-    <resultMap id="showRecommendMap" type="Goods">
-        <id column="goodid" property="goodid"/>
-        <result column="goodname" property="goodname"/>
-        <result column="goodpic" property="goodpic"/>
-        <result column="goodprice" property="goodprice"/>
-        <result column="goodstore" property="goodstore"/>
-        <result column="goodaddress" property="goodaddress"/>
-        <result column="gooddetail" property="gooddetail"/>
-        <result column="goodsales" property="goodsales"/>
-        <association property="category" javaType="GoodsCategory">
-            <id column="categoryid" property="categoryid"/>
-            <result column="categoryname" property="categoryname"/>
-        </association>
-    </resultMap>
 
 
-    <resultMap id="getAllProductsMap" type="Goods">
+    <resultMap id="selectGoodsMap" type="Goods">
         <id column="goodid" property="goodid"/>
         <result column="goodname" property="goodname"/>
         <result column="goodpic" property="goodpic"/>
@@ -58,8 +30,6 @@
             <result column="categoryname" property="categoryname"/>
         </association>
     </resultMap>
-
-
     <!--public List<Goods> getGoods(int categoryid);-->
     <select id="getGoods" parameterType="int" resultMap="getGoodsMap">
         select g.*,c.categoryname from shop_goods g,shop_category c where g.categoryid=#{_parameter} and c.categoryid=#{_parameter}
@@ -67,65 +37,19 @@
 
    <!--public Goods getGood(int id);-->
     <select id="getGood" parameterType="int" resultType="Goods">
-        select * from shop_goods where goodid=#{_parameter}
+        select * from shop_goods where goodid=#{_paramter}
     </select>
 
-    <!--//根据商品id,查询商品所属商品分类编号
-    public int getCategoryByGid(int gid);-->
-    <select id="getCategoryByGid" parameterType="int" resultType="int">
-        select categoryid from shop_goods where goodid=#{_parameter}
-    </select>
-
-    <!-- //根据商品编号按照销量排序显示热卖商品信息
-    public List<Goods> getHotSaleGood(int categoryId);-->
-    <select id="getHotSaleGood" parameterType="int" resultMap="showHotSalesMap">
-        select g.* from shop_goods g,shop_category c
-        where g.categoryid=#{_parameter} and c.categoryid=#{_parameter}
-        order by g.goodsales desc
-        limit 4
-    </select>
-
-    <!-- //根据商品编号按照库存量排序显示推荐商品信息
-    public List<Goods> getRecommendGood(int categoryId);-->
-    <select id="getRecommendGood" parameterType="int" resultMap="showRecommendMap">
-        select g.* from shop_goods g,shop_category c
-        where g.categoryid=#{_parameter} and c.categoryid=#{_parameter}
-        order by g.goodstore desc
-        limit 4
-    </select>
-
-    <!--//根据goodid判断该商品属于n哪类商品
-    public int selectCategoryByGoodid(int goodid);-->
-    <select id="selectCategoryByGoodid" parameterType="int" resultType="int">
-        select g.categoryid from shop_goods g
-        where  g.goodid=#{_parameter}
-    </select>
-
-    <!--//管理员查看所有商品
-    public List<Goods> getAllProducts();-->
-    <select id="getAllProducts" resultMap="getAllProductsMap">
+    <!--//查询该类商品，并按商品销量的降序排列
+    public List<Goods> selectGoodsBySales(int categoryid);-->
+    <select id="selectGoodsBySales" parameterType="int" resultMap="selectGoodsMap">
         select g.*,c.categoryname from shop_goods g,shop_category c
-        where g.categoryid=c.categoryid
+        where g.categoryid=#{_parameter} and c.categoryid=#{_parameter}
+         ORDER BY g.goodsales DESC
     </select>
 
-    <!--//管理员添加商品，商品上架
-    public boolean insertGoods(Goods goods);-->
-    <insert id="insertGoods" parameterType="Goods">
-        insert into shop_goods(goodname,goodpic,goodprice,goodstore,goodaddress,gooddetail,goodsales,categoryid)
-        values(#{goodname},#{goodpic},#{goodprice},#{goodstore},#{goodaddress},#{gooddetail},#{goodsales},#{category.categoryid})
-    </insert>
-
-    <!-- //管理员更新商品信息
-     public boolean updateGood(Goods goods);-->
-    <update id="updateGood" parameterType="Goods">
-        UPDATE  shop_goods set goodname=#{goodname},goodpic=#{goodpic},goodprice=#{goodprice},
-        goodstore=#{goodstore},goodaddress=#{goodaddress},gooddetail=#{gooddetail},goodsales=#{goodsales}
-        where goodid=#{goodid}
-    </update>
-
-    <!--/管理员通过商品id对商品下架处理
-    public boolean deleteGood(int goodid);-->
-    <delete id="deleteGood" parameterType="int">
-        delete from shop_goods where goodid=#{_parameter}
-    </delete>
+    <!--public List<Goods> selectRecommendList() ;-->
+    <select id="selectRecommendList" resultType="Goods">
+        SELECT goodid,goodname,goodpic,goodprice from shop_goods ORDER BY goodsales DESC  limit 0,10
+    </select>
 </mapper>

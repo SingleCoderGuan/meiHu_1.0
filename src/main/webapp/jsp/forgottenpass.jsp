@@ -18,11 +18,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>美乎忘记密码</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
+
     <link href="<%=basePath%>bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=basePath%>css/stylelogin.css">
     <link rel="stylesheet" href="<%=basePath%>css/style_inner.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel='stlesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
+    <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 
@@ -30,11 +35,12 @@
     <div class="cont_centrar">
         <img id="logo" src="<%=basePath%>images/LOGO.png" >
         <span class="slogan">中国最专业化妆品交流平台</span>
-        <form class="form-horizontal forgottenform"  >
+        <form id="resetForm" method="post" class="form-horizontal forgottenform" action="<%=basePath%>user/preresetpass.action"  >
+            <input type="text" hidden name="phone" id="phone" />
             <div class="form-group" style="position: relative;left: 53px;">
                 <label class="col-sm-2 control-label" style="position: relative;top: 23px;left: 100px;color:#996666;font-size: 18px">手机号码</label>
                 <div class="col-sm-4">
-                    <input type="text" class="forgotteninput"  id="tel" placeholder="请输入手机号码">
+                    <input type="text" class="forgotteninput"  id="tel" name="tel" placeholder="请输入手机号码">
                     <span style="position: absolute;left: 200px;top: 80px;" id="teltip"></span>
                 </div>
             </div>
@@ -53,7 +59,7 @@
 
             <div class="form-group"style="position: relative;left: 53px;">
                 <div class="col-sm-offset-2 col-sm-1">
-                    <button class="btn_my_login"  id="lo" style="width: 200px;position:relative;top: 4px;left:130px;background-color: #f44336;color: #fff;" disabled>确定</button>
+                    <input type="button" value="确定" class="btn_my_login"  id="lo" style="width: 200px;position:relative;top: 4px;left:130px;background-color: #f44336;color: #fff;" />
                 </div>
             </div>
         </form>
@@ -74,12 +80,10 @@
             $("#codetip").removeClass()
             $("#codetip").addClass("wrong")
             $("#codetip").html("请输入正确格式")
-            $("#lo").attr("disabled","true")
         }else{
             $("#codetip").removeClass()
             $("#codetip").addClass("right")
             $("#codetip").html("ok")
-            $("#lo").attr("disabled",false) ;
         }
     })
 </script>
@@ -96,7 +100,7 @@
         }else{
             $.ajax({
                 type:"get",
-                url:"${pageContext.request.contextPath}/checktel.action",
+                url:"${pageContext.request.contextPath}/user/checktel.action",
                 data:"tel="+telnum,
                 success:function (message) {
                     if(message=="0"){
@@ -144,30 +148,30 @@
     $("#btn").click(function(){
         var tel=$("#tel").val();
         $.ajax({
-            url:"${pageContext.request.contextPath}/resetSend.action",
+            url:"${pageContext.request.contextPath}/user/resetSend.action",
             type:"get",
             data:{"tel":tel},
             success:function(result){
                 sms=result;
-                alert(sms)
             }
         });
     });
 
     $("#lo").click(function(){
         var code=$("#code").val();
-        $.ajax({
-            url:"${pageContext.request.contextPath}/sendCodes.action",
-            type:"get",
-            data:{"trueCode":sms,"userCode":code},
-            success:function(result){
-                if(result=="wrong"){
-                    alert("验证码错误");
-                }else {
-                    $(location).attr("href","localhost:8080"+result);
-                }
-            }
-        })
+        if(code==sms){
+            $(function () {
+                var txt=  "验证码正确";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+            })
+            $("#phone").val($("#tel").val())
+            $("#resetForm").submit()
+        }else {
+            $(function () {
+                var txt=  "验证码错误";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+            })
+        }
     });
 
 </script>

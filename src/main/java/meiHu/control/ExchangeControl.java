@@ -1,5 +1,6 @@
 package meiHu.control;
 
+import meiHu.entity.ForumUser;
 import meiHu.entity.OffLevel;
 import meiHu.service.ExchangeService;
 import meiHu.service.UserService;
@@ -22,15 +23,16 @@ public class ExchangeControl {
     private UserService userService;
     @RequestMapping("/exchange.action")
     public void exchange(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("uid")==null){
+        if( request.getSession().getAttribute("user")==null){
             List<OffLevel> levelList = exchangeService.selectAllOffLevel();
             request.setAttribute("levelList",levelList);
             request.getRequestDispatcher("jsp/exchange.jsp").forward(request,response);
         }else {
-            String uidd = request.getParameter("uid");
-            int uid = Integer.parseInt(uidd);
+            ForumUser user= (ForumUser) request.getSession().getAttribute("user");
+            int uid = user.getUid();
            int point = userService.selectPointByUid(uid);
            request.setAttribute("point", point);
+
             List<OffLevel> levelList = exchangeService.selectAllOffLevel();
             request.setAttribute("levelList", levelList);
             request.getRequestDispatcher("jsp/exchange.jsp").forward(request, response);

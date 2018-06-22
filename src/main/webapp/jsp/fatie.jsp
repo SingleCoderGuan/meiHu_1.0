@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/aw-font.css"/>
 
     <link href="<%=basePath%>css/common.css" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
 
@@ -103,6 +104,8 @@
 </style>
 
 <body>
+<img src="<%=basePath%>images/bg-halfmei.png" style="position: absolute;top: 150px;left: 33px"/>
+<img src="<%=basePath%>images/bg-hu.png" style="position: absolute;top: 450px;left:1004px"/>
 <div class="aw-top-menu-wrap" style="height: 55px">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
@@ -117,7 +120,8 @@
                       id="global_search_form" method="post">
                     <div class="input-group">
                         <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off"
-                               name="q" id="aw-search-query" class="search-query"/>
+                               name="searchcontent
+" id="aw-search-query" class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
                               onClick="$('#global_search_form').submit();">搜索</span>
                         <div id="context1" style="background-color:white; border: 1px solid deepskyblue;width:167px;
@@ -202,7 +206,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>fatie.action">发帖</a>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -211,11 +215,12 @@
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
-            <div class="aw-user-nav">
+            <div class="aw-user-nav" style="width: 259px">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                    <a href="<%=basePath%>user/userCenter.action" style="position: relative;left: -100px;top: -0.5px;"><img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>${user.uname}</a>
+                         <img id="message" hidden style="position: absolute;left: 60px;top: -3px;width: 30px" src="<%=basePath%>images/comment.png"/>
+                         <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 200px;">注销</a>
                 </span>
 
                 <!-- end 登陆&注册栏 -->
@@ -240,7 +245,7 @@
 
                     </ul>
                     <!-- end tab 切换 -->
-                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/newpost.action"
+                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/user/newpost.action"
                           enctype="multipart/form-data">
 
                         <span style="position: relative;left:5px;top: 5px;font-size: 20px">标题：</span>
@@ -284,7 +289,7 @@
                             <br/>
                             <p><b>• 问题补充:</b> 详细补充您的帖子内容, 并提供一些相关的素材以供参与者更多的了解您所要问题的主题思想</p>
                             <br/>
-                            <p><b>• 关于积分：</b> 发起一个帖子会曾总您 10 个积分, 每多一个回复你将获得 5 个积分的奖励 ,积分在商城可兑换商品,
+                            <p><b>• 关于积分：</b> 发起一个帖子会增加您 5 个积分, 每多一个回复你将获得 3 个积分的奖励 ,积分在商城可兑换商品,
                                 在发起问题的时候希望能够更好的描述您的问题以及多使用站内搜索功能.</p>
                         </div>
                     </div>
@@ -2274,7 +2279,7 @@
     // 限制一次最多上传 10 张图片
     editor.customConfig.uploadImgMaxLength = 10;
     editor.customConfig.uploadImgParamsWithUrl = true;//如果还需要将参数拼接到 url 中，可再加上如下配置
-    editor.customConfig.uploadImgServer = '<%=basePath%>/picload.action';//官方文档上写的是服务器地址，也就是上传图片的方法名
+    editor.customConfig.uploadImgServer = '<%=basePath%>user/picload.action';//官方文档上写的是服务器地址，也就是上传图片的方法名
     editor.customConfig.uploadFileName = 'uploadImage';     //给上传的本地图片文件命名的统一名称
 
     editor.customConfig.uploadImgHooks = {
@@ -2307,5 +2312,30 @@
 
 </script>
 </body>
+<script>
+    var uid = ${user.uid}
 
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
+
+    function getMessage(uid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/user/getMessage.action",
+            data:"uid="+uid,
+            success:function (data) {
+                if(data!="0"){
+                    $("#message").removeAttr("hidden")
+                }else {
+                    $("#message").attr("hidden","true")
+                }
+            }
+        })
+    }
+
+</script>
 </html>

@@ -22,7 +22,7 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="/favicon.ico">
+
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <%--<link rel="stylesheet" href="../css/font-awesome.min.css">--%>
@@ -30,8 +30,10 @@
     <link rel="stylesheet" href="../css/monokai_sublime.min.css">
     <link href="../css/magnific-popup.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/screen.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <script type="text/javascript" src="<%=basePath%>/js/zzsc.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/jquery-3.2.1.min.js"></script>
 
 
 
@@ -73,9 +75,9 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         <li class="nav-current" role="presentation"><a href="#">美文首页</a></li>
-                        <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美乎</a></li>
+                        <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论</a></li>
 
-                        <li  role="presentation"><a href="#">美淘</a></li>
+                        <li  role="presentation"><a href="<%=basePath%>jsp/index.jsp">美淘</a></li>
                         <li  role="presentation"><a href="<%=basePath%>jsp/activity.jsp">活动</a></li>
 
                         <li  role="presentation"><a href="#">关于我们</a></li>
@@ -96,7 +98,7 @@
             <main class="col-md-8 main-content">
 
 
-         <c:forEach var="forumOfficalarticleList" items="${forumOfficalarticleList}">
+         <c:forEach var="forumOfficalarticleList" items="${pageInfo.list}">
 
 
                 <article id=111 class="post">
@@ -119,6 +121,28 @@
 
                 </article>
          </c:forEach>
+                <form id="mainForm"
+                      action="<%=basePath%>article/article.action"
+                      method="post">
+                    <input hidden name="curPage" id="curPage"/>
+                </form>
+                <nav class="pagination" role="navigation">
+                    <a class="newer-posts"href="javascript:getPage(${pageInfo.prePage})"><i class="fa fa-angle-left"></i></a>
+                    <span class="page-number">当前第<span>${pageInfo.pageNum}</span>页 &frasl; 共 ${pageInfo.total}条</span>
+                    <a class="older-posts" href="javascript:getPage(${pageInfo.nextPage})"><i class="fa fa-angle-right"></i></a>
+
+                </nav>
+
+
+
+                <script>
+                    function getPage(curPage) {
+                        //将隐藏域的值变成curPage
+                        document.getElementById("curPage").value = curPage;
+                        //触发表单的提交事件
+                        document.getElementById("mainForm").submit();
+                    }
+                </script>
 
 
             </main>
@@ -151,7 +175,8 @@
                     function sign(){
                         <c:if test="${empty sessionScope.user.uid}">
                         alert("亲，请先登录");
-                        window.location.href="<%=basePath%>jsp/loginregister.jsp";
+                        window.location.href="<%=basePath%>jsp/loginregister.jsp?url=/meiHu_1.0/article/article.action";
+
                         </c:if>
                         <c:if test="${not empty sessionScope.user.uid}">
                         $.ajax({

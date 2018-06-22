@@ -44,7 +44,7 @@ public class SearchControl {
     }
 
 
-    @RequestMapping("/searchReasult")
+    @RequestMapping("/searchReasult.action")
     public void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String searchcontent = request.getParameter("searchcontent");
         List<ForumPost> postList=postService.selectPostsByPtitle(searchcontent);

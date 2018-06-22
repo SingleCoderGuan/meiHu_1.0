@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 
@@ -20,15 +21,14 @@ public class SendSmsControl {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "resetSend.action",method = RequestMethod.GET)
+	@RequestMapping(value = "/user/resetSend.action",method = RequestMethod.GET)
 	public void resetSend(String tel,HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		System.out.println("daodaduanxin");
-		System.out.println(tel);
+
 		//根据获取到的手机号发送验证码
 		String code = GetMessageCode.getCode(tel);
-		System.out.println(code);
 		response.getWriter().print(code);
 
 	}
+
 }

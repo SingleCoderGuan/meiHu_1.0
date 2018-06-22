@@ -21,12 +21,15 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/font-awesome.css"/>
     <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/aw-font.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <link href="<%=basePath%>css/common.css" rel="stylesheet" type="text/css"/>
     <link href="<%=basePath%>css/stylebankuai.css" rel="stylesheet" type="text/css"/>
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="<%=basePath%>css/user.css"/>
-
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
+    <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108"
@@ -91,6 +94,8 @@
 </style>
 
 <body>
+<img src="<%=basePath%>images/bg-halfmei.png" style="position: absolute;top: 150px;left: 30px"/>
+<img src="<%=basePath%>images/bg-hu.png" style="position: absolute;top: 450px;left:1004px"/>
 <div class="aw-top-menu-wrap">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
@@ -101,13 +106,59 @@
             <!-- end logo -->
             <!-- 搜索框 -->
             <div class="aw-search-box  hidden-xs hidden-sm">
-                <form class="navbar-search pull-right" action="#" id="global_search_form" method="post">
+                <form class="navbar-search pull-right" action="<%=basePath%>search/searchReasult.action" id="global_search_form" method="post">
                     <div class="input-group">
-                        <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off"
-                               name="q" id="aw-search-query" class="search-query"/>
+                        <input value="" class="form-control" type="text"
+                               placeholder="搜索问题、话题" autocomplete="off" name="searchcontent" id="aw-search-query"
+                               class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
-                              onClick="$('#global_search_form').submit();"><i class="fa fa-search"></i></span>
-                        <div class="clearfix"></div>
+                              onClick="$('#global_search_form').submit();">搜索</span>
+                        <div id="context1" style="background-color:white; border: 1px solid deepskyblue;width:167px;
+                                position: absolute;top: 36px;left:0px;display:none" ></div>
+                        <script>
+                            $("#aw-search-query").keyup(function(){
+                                var content=$(this).val();
+                                //如果当前搜索内容为空，无须进行查询
+                                if(content==""){
+                                    $("#context1").css("display","none");
+                                    return ;
+                                }
+                                //由于浏览器的缓存机制 所以我们每次传入一个时间
+                                var time=new Date().getTime();
+                                $.ajax({
+                                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                    type:"post",
+                                    url:"${pageContext.request.contextPath}/search/automatch.action",
+                                    data:{name:content,time:time},
+                                    success:function(data){
+                                        //拼接html
+                                        var res=data.split(",");
+                                        var html="";
+                                        for(var i=0;i<res.length;i++){
+                                            //每一个div还有鼠标移出、移入点击事件
+                                            html+="<div onclick='setSearch_onclick(this)' onmouseout='changeBackColor_out(this)' onmouseover='changeBackColor_over(this)'>"+res[i]+"</div>";
+                                        }
+                                        $("#context1").html(html);
+                                        //显示为块级元素
+                                        $("#context1").css("display","block");
+                                    }
+                                });
+                            });
+
+                            //鼠标移动到内容上
+                            function changeBackColor_over(div){
+                                $(div).css("background-color","#CCCCCC");
+                            }
+                            //鼠标离开内容
+                            function changeBackColor_out(div){
+                                $(div).css("background-color","");
+                            }
+                            //将点击的内容放到搜索框
+                            function setSearch_onclick(div){
+                                $("#aw-search-query").val(div.innerText);
+                                $("#context1").css("display","none");
+                            }
+                        </script>
 
                     </div>
                 </form>
@@ -126,33 +177,46 @@
                     <ul class="nav navbar-nav">
 
                         <li class="nav-current" role="presentation">
-                            <a href="luntanshouyetest.html">美论首页</a>
-                        </li>
-                        <li>
-                            <a href="index.html">美乎</a>
-                        </li>
-                        <li>
-                            <a href="#">美淘</a>
-                        </li>
-                        <li>
-                            <a href="#">活动</a>
+                            <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论首页</a>
                         </li>
 
                         <li>
-                            <a href="#">关于</a>
+                            <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
+
+                        <li>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
+                        </li>
+                        <li>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
+                        </li>
+
+                        <li>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
+                        </li>
+
 
                     </ul>
                 </nav>
-
             </div>
             <!-- end 导航 -->
             <!-- 用户栏 -->
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-							<a href="<%=basePath%>userCenter.action" ><img style="width: 50px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                    <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
+                     <c:if test="${not empty sessionScope.user}">
+                        <a style="position: relative;left: -100px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
+                            <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>${user.uname}
+                        </a>
+                        <img id="message" hidden style="position: absolute;left: -50px;top: -3px;width: 30px" src="<%=basePath%>images/comment.png"/>
+
+                        <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 80px;">注销</a>
+                     </c:if>
+                    <c:if test="${empty sessionScope.user}">
+                        <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
+                        <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
+                    </c:if>
+
 						</span>
 
                 <!-- end 登陆&注册栏 -->
@@ -298,7 +362,11 @@
                             <script>
                                 function guanzhu() {
                                     <c:if test="${empty sessionScope.user}">
-                                    alert("亲，请先登录");
+                                    $(function () {
+                                        var txt=  "亲，请先登录";
+                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                    })
+
                                     </c:if>
                                     <c:if test="${not empty sessionScope.user}">
                                     $.ajax({
@@ -307,13 +375,22 @@
                                         data: "focusuid=" + ${user.uid} + "&focusduid=" + <%=request.getParameter("uid")%>,
                                         success: function (result) {
                                             if (result == 1) {
-                                                alert("关注成功");
+                                                $(function () {
+                                                    var txt=  "关注成功";
+                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                })
                                                 window.location.reload();
                                             } else if (result == 0) {
-                                                alert("关注失败");
+                                                $(function () {
+                                                    var txt=  "关注失败";
+                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+                                                })
                                                 window.location.reload();
                                             } else if (result == 2) {
-                                                alert("亲，您已经关注过此用户");
+                                                $(function () {
+                                                    var txt=  "亲，您已经关注过此用户";
+                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                                })
 
                                             }
                                         }
@@ -332,13 +409,41 @@
     </div>
 </div>
 </div>
+<script>
+    var uid = ${user.uid}
 
-<div class="aw-footer aw-wecenter">
-    <p>© 2018 美乎. All rights reserved | Design by
-        <a href="#">第六组</a>
-    </p>
-    </span>
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
 
+    function getMessage(uid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/user/getMessage.action",
+            data:"uid="+uid,
+            success:function (data) {
+                if(data!="0"){
+                    $("#message").removeAttr("hidden")
+                    $("#messageNum").html(data)
+                }else {
+                    $("#message").attr("hidden","true")
+                    $("#messageNum").html(0)
+                }
+            }
+        })
+    }
+
+</script>
+
+
+<div style="position:fixed; left:0px;
+bottom:0px; width:100%; height:30px;font-weight: bold;
+background-color: #ce8483; z-index:9999;text-align: center">
+    © 2018 美乎. All rights reserved | Design by
+    <a href="#">第六组</a>
 </div>
 </div>
 

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -30,6 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 window.scrollTo(0, 1);
             }
         </script>
+    <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>/images/defaultheadpic.png" />
 
         <link rel="stylesheet" type="text/css" href="css/slicebox.css" />
         <!-- for banner-->
@@ -57,13 +59,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <nav class="navbar navbar-inverse">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+
                 <a class="navbar-brand" href="#">
-                    <h1 style="width: 140px;">
+                    <h1 style="width: 150px;padding-top: -10px">
                         <img src="images/LOGO.png" height="70px" width="10px"/>
                     </h1>
                 </a>
@@ -279,36 +277,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</span>
         </h3>
         <div class="pricing-agile-grids">
-            <div class="col-xs-4 grid-info">
-                <h3 style="font-family: '本墨剪字';">兰蔻口红</h3>
-                <h4>￥29.99
-                    <sup>*</sup>
-                </h4>
-                <div class="pricing-agile-text">
-                    <img src="images/1.png" />
+
+            <c:forEach items="${recommendList}" var="goods">
+                <div class="col-xs-4 grid-info">
+                    <h3 style="font-family: '本墨剪字';">${goods.goodname}</h3>
+                    <h4>￥${goods.goodprice}
+                        <sup>*</sup>
+                    </h4>
+                    <div class="pricing-agile-text">
+                        <img src="${goods.goodpic}" />
+                    </div>
+                    <a href="<%=basePath%>goods/list.action?goodid=${goods.goodid}" >去看看</a>
                 </div>
-                <a href="#register" class="scroll">去看看</a>
-            </div>
-            <div class="col-xs-4 grid-info grid-two">
-                <h3 style="font-family: '本墨剪字';">香奈儿口红</h3>
-                <h4>￥48.99
-                    <sup>*</sup>
-                </h4>
-                <div class="pricing-agile-text">
-                    <img src="images/2.png" />
-                </div>
-                <a href="#register" class="scroll">去看看</a>
-            </div>
-            <div class="col-xs-4 grid-info grid-three">
-                <h3 style="font-family: '本墨剪字';">百雀羚美肌水</h3>
-                <h4>￥76.99
-                    <sup>*</sup>
-                </h4>
-                <div class="pricing-agile-text">
-                    <img src="images/3.png" />
-                </div>
-                <a href="#register" class="scroll">去看看</a>
-            </div>
+            </c:forEach>
+
             <div class="clearfix"> </div>
         </div>
     </div>
@@ -576,8 +558,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul>
 
                             <li>
-                                <a href="#">
-                                    <span class="fa fa-send"></span>
+                                <a href="tencent://message/?uin=920758051&Site=&Menu=yes">
+                                <span class="fa fa-send"></span>
                                 </a>
                             </li>
                         </ul>
@@ -591,8 +573,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="media-social-agile">
                         <ul>
                             <li>
-                                <a href="#">
-                                    <span class="fa fa-send"></span>
+                                <a href="tencent://message/?uin=1771918868&Site=&Menu=yes">
+                                <span class="fa fa-send"></span>
                                 </a>
                             </li>
 
@@ -607,8 +589,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="media-social-agile">
                         <ul>
                             <li>
-                                <a href="#">
-                                    <span class="fa fa-send"></span>
+                                <a href="tencent://message/?uin=3229167069&Site=&Menu=yes">
+
+                                <span class="fa fa-send"></span>
                                 </a>
                             </li>
 
@@ -623,8 +606,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="media-social-agile">
                         <ul>
                             <li>
-                                <a href="#">
-                                    <span class="fa fa-send"></span>
+                                <a href="tencent://message/?uin=252784342&Site=&Menu=yes">
+                                <span class="fa fa-send"></span>
                                 </a>
                             </li>
 
@@ -800,7 +783,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#">
                                 <i class="fa fa-send"></i>认准官方网站.
-                                <i>http//www.meihuwang.com</i>
+                                <i>http://www.meihuwang.com</i>
                             </a>
 
                             <span>

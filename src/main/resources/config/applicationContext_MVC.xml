@@ -15,7 +15,7 @@
     <mvc:annotation-driven ></mvc:annotation-driven>
     <!--处理器注解，扫描注解的处理器-->
     <context:component-scan base-package="meiHu.control"/>
-
+    <context:component-scan base-package="meiHu.util"/>
 
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
@@ -28,11 +28,12 @@
             <value>10000000</value>
         </property>
     </bean>
-<!--    <mvc:interceptors>
+
+    <!--<mvc:interceptors>
         <mvc:interceptor>
-            &lt;!&ndash;两个星号&ndash;&gt;
-            <mvc:mapping path="/**"/>
-            &lt;!&ndash; 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求，此为自定义拦截器的路径 &ndash;&gt;
+            <mvc:mapping path="/admin/*"/> &lt;!&ndash; 管理员登录拦截 &ndash;&gt;
+            <mvc:exclude-mapping path="/admin/adminlogin.index"/>
+
             <bean class="meiHu.util.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>-->

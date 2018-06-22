@@ -17,6 +17,7 @@
     <title>兑换专区</title>
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
+    <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>/images/defaultheadpic.png" />
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="//img-cdn-qiniu.dcloud.net.cn/static/css/font-awesome.css"/>
@@ -29,6 +30,11 @@
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="<%=basePath%>css/project.css"/>
+    <link rel="stylesheet" href="<%=basePath%>css/hb.css"/>
+    <script src="<%=basePath%>js/hb.js" type="text/javascript"></script>
+    <script src="<%=basePath%>js/jquery.js" type="text/javascript"></script>
+
+
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108"
@@ -92,7 +98,8 @@
     }
 </style>
 
-<body>
+<body onload="hongbao()">
+<div id="petalbox"></div>
 <div class="aw-top-menu-wrap">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
@@ -106,7 +113,7 @@
                 <form class="navbar-search pull-right" action="<%=basePath%>search/searchReasult.action" id="global_search_form" method="post">
                     <div class="input-group">
                         <input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off"
-                               name="q" id="aw-search-query" class="search-query"/>
+                               name="searchcontent" id="aw-search-query" class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
                               onClick="$('#global_search_form').submit();">搜索</span>
                         <div id="context1" style="background-color:white; border: 1px solid deepskyblue;width:167px;
@@ -172,22 +179,23 @@
                 <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
                     <ul class="nav navbar-nav">
 
-                        <li class="nav-current" role="presentation">
-                            <a href="<%=basePath%>jsp/zhuye.jsp">美乎</a>
-                        </li>
+
                         <li>
                             <a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论</a>
                         </li>
 
                         <li>
-                            <a href="#">美淘</a>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
                         </li>
                         <li>
                             <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
+                        <li>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
+                        </li>
 
                         <li>
-                            <a href="#">关于</a>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -199,15 +207,18 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <c:if test="${not empty sessionScope.user}">
-                        <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
-                    </c:if>
+                     <c:if test="${not empty sessionScope.user}">
+                          <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
+                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}
+                    </a>
+                         <img id="message" hidden style="position: absolute;left: 30px;top: 40px;width: 30px" src="<%=basePath%>images/comment.png"/>
+
+                         <a href="<%=basePath%>user/signOut.action" style="position: relative;left: 250px;">注销</a>
+                     </c:if>
                     <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
                         <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
                     </c:if>
-
 
 						</span>
 
@@ -284,10 +295,15 @@
                                         </button>
                                     </div>
                                     <script>
+
+
                                         function duihuan(offidd) {
 
                                             <c:if test="${empty sessionScope.user.uid}">
                                             alert("亲，请先登录");
+                                            window.location.href="<%=basePath%>jsp/loginregister.jsp?url=/meiHu_1.0/exchange.action";
+
+
                                             </c:if>
                                             <c:if test="${not empty sessionScope.user.uid}">
 
@@ -324,6 +340,34 @@
         </div>
     </div>
 </div>
+<script>
+    var uid = ${user.uid}
+
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
+
+    function getMessage(uid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/user/getMessage.action",
+            data:"uid="+uid,
+            success:function (data) {
+                if(data!="0"){
+                    $("#message").removeAttr("hidden")
+                    $("#messageNum").html(data)
+                }else {
+                    $("#message").attr("hidden","true")
+                    $("#messageNum").html(0)
+                }
+            }
+        })
+    }
+
+</script>
 
 <div class="aw-footer aw-wecenter">
     <p>© 2018 美乎. All rights reserved | Design by

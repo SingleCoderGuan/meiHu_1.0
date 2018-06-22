@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="<%= basePath%>plugins/bootstrap/bootstrap.min.css" />
     <script src="<%= basePath%>js/jquery.min.js"> </script>
 
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
+
     <style>
         .uc-header-bg{
             background-color: #cdc6d7;

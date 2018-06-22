@@ -18,6 +18,7 @@
 
     <meta name="keywords" content="美论"/>
     <meta name="description" content="美论"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../css/font-awesome.min.css"/>
@@ -28,7 +29,9 @@
     <link href="../css/stylebankuai.css" rel="stylesheet" type="text/css"/>
 
     <link href="../css/classblack.css" rel="stylesheet" type="text/css"/>
-
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
+    <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript" src="<%=basePath%>js/jquery-3.2.1.min.js"></script>
 
@@ -94,7 +97,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="<%=basePath%>jsp/zhuye.jsp""> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+               <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -176,14 +179,14 @@
                         </li>
 
                         <li>
-                            <a href="#">美淘</a>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
                         </li>
                         <li>
                             <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>fatie.action">发帖</a>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -195,10 +198,14 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <span>
-                    <c:if test="${not empty sessionScope.user}">
-                        <a href="<%=basePath%>userCenter.action"><img style="width: 50px" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}</a>
-                        <a href="<%=basePath%>signOut.action" style="position: relative;left: 250px;">注销</a>
-                    </c:if>
+                     <c:if test="${not empty sessionScope.user}">
+                          <a style="position: relative;left: -100px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
+                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>${user.uname}
+                    </a>
+                         <img id="message" hidden style="position: absolute;left: -50px;top: -3px;width: 30px" src="<%=basePath%>images/comment.png"/>
+
+                         <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 80px;">注销</a>
+                     </c:if>
                     <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
                         <a href="<%=basePath %>jsp/loginregister.jsp">登录</a>
@@ -362,11 +369,25 @@
                                     </div>
 
                                     <script>
-                                        function shoucang( pidd) {
-                                            <c:if test="${empty sessionScope.user}">
-                                                alert("亲，请先登录");
-                                            </c:if>
-                                            <c:if test="${not empty sessionScope.user}">
+                                        function shoucang(pidd) {
+                                            <c:choose>
+                                            <c:when test="${empty sessionScope.user}">
+
+                                            $(function () {
+                                                var txt=  "亲，请先登录";
+                                                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                            })
+                                            </c:when>
+                                            <c:otherwise>
+                                            <c:choose>
+                                            <c:when test="${sessionScope.user.uid==forumPost.user.uid}">
+
+                                            $(function () {
+                                                var txt=  "亲，不能关注自己帖子呦！！";
+                                                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                            })
+                                            </c:when>
+                                            <c:otherwise>
                                             if ($("#shoucang").attr("src") == ("../images/shoucang.png")) {
 
                                                 $.ajax(
@@ -377,9 +398,17 @@
                                                         success:function (data) {
                                                             if(data==1){
                                                                 alert("收藏成功");
+                                                                $(function () {
+                                                                    var txt=  "收藏成功";
+                                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                                })
                                                                 $("#shoucang").attr("src", "../images/shoucanghou.png");
                                                             }else if(data==2){
-                                                                alert("您已收藏过该帖子");
+                                                                $(function () {
+                                                                    var txt=  "您已收藏过该帖子";
+                                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                                                })
+
                                                             }
                                                         }
                                                     }
@@ -395,20 +424,33 @@
                                                         data: "uid=" + ${sessionScope.user.uid} + "&pid=" + pidd,
                                                         success:function (data) {
                                                             if(data==1){
-                                                                alert("取消收藏成功");
+                                                                $(function () {
+                                                                    var txt=  "取消收藏成功";
+                                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                                })
+
                                                             }
                                                         }
                                                     }
                                                 );
 
                                             }
-                                            </c:if>
+                                            </c:otherwise>
+                                            </c:choose>
+                                            </c:otherwise>
+
+                                            </c:choose>
+
 
                                         }
 
                                         function dianzan( pidd) {
                                             <c:if test="${empty sessionScope.user}">
-                                                alert("亲，请先登录");
+                                                $(function () {
+                                                    var txt=  "亲，请先登录";
+                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                                })
+
                                             </c:if>
                                             <c:if test="${not empty sessionScope.user}">
                                             if ($("#dianzan").attr("src") == ("../images/dianzan.png")) {
@@ -490,8 +532,11 @@
                                                 <script>
                                                     function pinglun( pidd, text) {
                                                     <c:if test="${empty sessionScope.user}">
-                                                        alert("亲，请先登录");
-                                                    </c:if>
+                                                        $(function () {
+                                                            var txt=  "亲，请先登录";
+                                                            window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                                        })
+                                                        </c:if>
                                                     <c:if test="${not empty sessionScope.user}">
                                                         $.ajax({
                                                             type: "post",
@@ -499,7 +544,10 @@
                                                             data: "uid=" + ${sessionScope.user.uid} + "&pid=" + pidd + "&postcomment=" + text,
                                                             success: function (result) {
                                                                 if (result == 1) {
-                                                                    alert("评论成功！！");
+                                                                    $(function () {
+                                                                        var txt=  "评论成功！！";
+                                                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                                    })
                                                                     window.location.reload();
                                                                 }
                                                             }
@@ -528,7 +576,12 @@
                                                 <script>
                                                     function jubao( pidd, reason) {
                                                         <c:if test="${empty sessionScope.user}">
-                                                            alert("亲，请先登录");
+                                                            $(function () {
+                                                                var txt=  "亲，请先登录";
+                                                                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                                            })
+
+
                                                         </c:if>
                                                         <c:if test="${not empty sessionScope.user}">
                                                         $.ajax({
@@ -537,7 +590,10 @@
                                                             data: "uid=" + ${sessionScope.user.uid} + "&pid=" + pidd + "&reportreason=" + reason,
                                                             success: function (result) {
                                                                 if (result == 1) {
-                                                                    alert("举报成功,我们会尽快处理。净化网络感谢有你");
+                                                                    $(function () {
+                                                                        var txt=  "举报成功,我们会尽快处理。净化网络感谢有你";
+                                                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                                    })
                                                                 }
                                                             }
                                                         });
@@ -567,7 +623,8 @@
                                 </div>
                                 <div class="aw-mod-body aw-dynamic-topic">
                                     <c:forEach items="${forumCommentList}" var="forumCommentList">
-                                    <div class="aw-item" uninterested_count="0" force_fold="0" id="answer_list_63059">
+                                        <a id="${forumCommentList.cid}"></a>
+                                    <div class="aw-item" uninterested_count="0" force_fold="0" >
                                         <a class="anchor" name="answer_63059"></a>
                                         <!-- 用户头像 -->
                                         <a class="aw-user-img aw-border-radius-5 pull-right" href="#" data-id="46">
@@ -617,7 +674,8 @@
                                                            <c:if test="${map.key==forumCommentList.cid}">
                                                         <c:forEach items="${map.value}" var="cclist">
                                                         <div class="well">
-                                                            <a href="#">${cclist.user.uname} </a>:${cclist.commenttext}
+                                                            <a href="<%=basePath%>luntan/userdetail.action?uid=${cclist.user.uid}">${cclist.user.uname} </a>:${cclist.commenttext}&nbsp;&nbsp;&nbsp;
+                                                            <a data-toggle="modal" data-target="#exampleModal${forumCommentList.cid}">评论</a>
                                                         </div>
                                                         </c:forEach>
                                                            </c:if>
@@ -642,7 +700,11 @@
 
                                                                     function pinglunjubao( cidd, commentreportreason) {
                                                                         <c:if test="${empty sessionScope.user}">
-                                                                        alert("亲，请先登录");
+                                                                        $(function () {
+                                                                            var txt=  "亲，请先登录";
+                                                                            window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                                                        })
+
                                                                         </c:if>
                                                                         <c:if test="${not empty sessionScope.user}">
                                                                         $.ajax({
@@ -651,7 +713,10 @@
                                                                             data: "uid=" + ${sessionScope.user.uid} + "&cid=" + cidd + "&reason=" + commentreportreason,
                                                                             success: function (result) {
                                                                                 if (result == 1) {
-                                                                                    alert("举报成功！！");
+                                                                                    $(function () {
+                                                                                        var txt=  "举报成功！！";
+                                                                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                                                    })
                                                                                     window.load();
                                                                                 }
                                                                             }
@@ -694,6 +759,7 @@
                                                                     function pinglunpinglun( cidd, text,pidd) {
                                                                         <c:if test="${empty sessionScope.user}">
                                                                         alert("亲，请先登录");
+
                                                                         </c:if>
                                                                         <c:if test="${not empty sessionScope.user}">
                                                                         $.ajax({
@@ -702,7 +768,10 @@
                                                                             data: "uid=" + ${sessionScope.user.uid} + "&ciddd=" + cidd + "&commentcomment=" + text +"&pid=" + pidd,
                                                                             success: function (result) {
                                                                                 if (result == 1) {
-                                                                                    alert("评论成功！！");
+                                                                                    $(function () {
+                                                                                        var txt=  "评论成功！！";
+                                                                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                                                    })
 
                                                                                     $("#guanbi").click();
                                                                                     window.location.reload();
@@ -743,12 +812,19 @@
                                 <div class="aw-mod-body">
                                     <dl style="padding-top: 5px;">
                                         <dt class="pull-left aw-border-radius-5">
-                                            <a href="<%=basePath%>luntan/userdetail.action?uid=${forumPost.user.uid}">
+                                            <c:choose>
+                                                <c:when test="${sessionScope.user.uid==forumPost.user.uid}">
+                                                <a href="<%=basePath%>user/userCenter.action">
+                                                </c:when>
+                                                    <c:otherwise>
+                                                <a href="<%=basePath%>luntan/userdetail.action?uid=${forumPost.user.uid}">
+                                                </c:otherwise>
+                                            </c:choose>
                                                 <img src="<%=basePath%>${forumPost.user.headpic}"/>
                                             </a>
                                         </dt>
                                         <dd class="pull-left">
-                                            <a class="aw-user-name" href="#" data-id="523760">
+                                            <a class="aw-user-name" >
                                                 用户名:${forumPost.user.uname} </a>
                                             <p>
                                                 关注：${focusnum}人
@@ -761,28 +837,54 @@
                                             </button>
                                             <script>
                                                 function guanzhu(postuid) {
-                                                    <c:if test="${empty sessionScope.user}">
-                                                    alert("亲，请先登录");
-                                                    </c:if>
-                                                    <c:if test="${not empty sessionScope.user}">
+                                                    <c:choose>
+                                                    <c:when test="${empty sessionScope.user}">
+                                                    $(function () {
+                                                        var txt=  "亲，请先登录";
+                                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                                    })
+
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <c:choose>
+                                                    <c:when test="${sessionScope.user.uid==forumPost.user.uid}">
+                                                    $(function () {
+                                                        var txt=  "您不能自己关注自己哦";
+                                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                                    })
+                                                    </c:when>
+                                                    <c:otherwise>
                                                     $.ajax({
                                                         type:"post",
                                                         url: "${pageContext.request.contextPath}/luntan/focus.action",
                                                         data: "focusuid=" + ${sessionScope.user.uid}+"&focusduid="+postuid,
                                                         success:function (result) {
                                                             if(result==1){
-                                                                alert("关注成功");
+                                                                $(function () {
+                                                                    var txt=  "关注成功";
+                                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                                })
                                                                 window.location.reload();
                                                             }else if (result==0){
-                                                                alert("关注失败");
+                                                                $(function () {
+                                                                    var txt=  "关注失败";
+                                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+                                                                })
                                                                 window.location.reload();
                                                             }else if (result==2){
-                                                                alert("亲，您已经关注过此用户");
+                                                                $(function () {
+                                                                    var txt=  "亲，您已经关注过此用户";
+                                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                                                })
 
                                                             }
                                                         }
                                                     });
-                                                    </c:if>
+                                                    </c:otherwise>
+                                                    </c:choose>
+                                                    </c:otherwise>
+
+                                                    </c:choose>
                                                 }
                                             </script>
                                         </dd>
@@ -830,17 +932,61 @@
                                     margin-right: 1px;
                                 }
                             </style>
-                            <div class="aw-side-bar-mod">
+                            <div class="aw-side-bar-mod question_related_list">
+                                <div class="aw-mod-head">
+                                    <h3>签到</h3>
+                                </div>
+                                <div class="aw-mod-body">
+                                    <ul>
+                                        <li>
+                                            <a  class="btn btn-danger" href="#" onclick="sign()" style="width: 200px;">
+                                                <span style="font-size:13px;">点我签到</span>
+                                            </a>
+                                        </li>
 
-                                <a class="sponsor_btn btn top-btn" href="#">
-                                    <img src="../images/zhichi.png"/>
-                                    <span style="font-size:13px;">逛逛商城</span>
-                                </a>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="aw-side-bar-mod">
                                 <a class="sponsor_btn btn top-btn" href="<%=basePath%>luntan/luntanshouye.action?tid=7">
                                     <img src="../images/daigou.png"/>
                                     <span style="font-size:13px;">看看代购</span>
                                 </a>
                             </div>
+
+                            <script>
+                                function sign(){
+                                    <c:if test="${empty sessionScope.user.uid}">
+                                    $(function () {
+                                        var txt=  "亲，请先登录";
+                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+                                    })
+
+                                    </c:if>
+                                    <c:if test="${not empty sessionScope.user.uid}">
+                                    $.ajax({
+                                        type:"post",
+                                        url: "${pageContext.request.contextPath}/article/sign.action",
+                                        data: "uid=" + ${ sessionScope.user.uid},
+                                        success: function (result) {
+                                            if (result == 1) {
+                                                $(function () {
+                                                    var txt=  "签到成功！！";
+                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                })
+                                                window.load();
+                                            }
+                                            else if (result == 0) {
+                                                $(function () {
+                                                    var txt=  "您今日已经签到了亲！！";
+                                                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.info);
+                                                })
+                                            }
+                                        }
+                                    });
+                                    </c:if>
+                                }
+                            </script>
 
                             <!--公告文章-->
                             <div class="aw-side-bar-mod aw-text-align-justify question_related_list">
@@ -860,7 +1006,7 @@
                                     </style>
                                     <ul class="notice-list">
                                         <li>
-                                            <a target="_blank" href="#">美论美换活动开始了</a>
+                                            <a target="_blank" href="<%=basePath%>jsp/activity.jsp">美论美换活动开始了</a>
                                         </li>
                                     </ul>
 
@@ -889,7 +1035,36 @@
             </div>
         </div>
     </div>
+
 </div>
+<script>
+    var uid = ${user.uid}
+
+        $(function () {
+            if(uid!=null){
+                getMessage(uid);
+                setInterval("getMessage(uid)",10000);
+            }
+        })
+
+    function getMessage(uid) {
+        $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath}/user/getMessage.action",
+            data:"uid="+uid,
+            success:function (data) {
+                if(data!="0"){
+                    $("#message").removeAttr("hidden")
+                    $("#messageNum").html(data)
+                }else {
+                    $("#message").attr("hidden","true")
+                    $("#messageNum").html(0)
+                }
+            }
+        })
+    }
+
+</script>
 
 
 <div style="position:fixed; left:0px;

@@ -1,6 +1,8 @@
 package meiHu.service;
 
+import meiHu.dao.ForumCommentMapper;
 import meiHu.dao.ForumUserMapper;
+import meiHu.entity.ForumComment;
 import meiHu.entity.ForumUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private ForumUserMapper forumUserMapper ;
+    @Autowired
+    private ForumCommentMapper forumCommentMapper ;
     @Override
     public ForumUser findUserByUname(String uname) {
         return forumUserMapper.selectUsersByUname(uname);
@@ -71,5 +75,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public int selectCollectionNumByUid(int uid){
         return forumUserMapper.selectCollectionNumByUid(uid);
+    }
+
+    @Override
+    public List<ForumComment> getNewComments(int uid) {
+        return forumCommentMapper.selectNewComments(uid);
+    }
+
+    @Override
+    public boolean readComment(int cid) {
+        return forumCommentMapper.updateCommentState(cid);
+    }
+
+    @Override
+    public List<ForumComment> getOldComments(int uid) {
+        return forumCommentMapper.selectOldComments(uid);
     }
 }

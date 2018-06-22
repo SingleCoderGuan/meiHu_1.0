@@ -10,4 +10,14 @@
     <select id="selectOfficalArticleByOaid" resultType="ForumOfficalarticle" parameterType="int">
         SELECT * FROM forum_officalarticle WHERE oaid=#{parameter}
     </select>
+
+    <!--public boolean insertArticle(ForumOfficalarticle forumOfficalarticle) ;-->
+    <insert id="insertArticle" parameterType="ForumOfficalarticle">
+        INSERT INTO forum_officalarticle (oatitle,oaprecontent,oacontent) VALUES (#{oatitle},#{oaprecontent},#{oacontent})
+    </insert>
+
+    <!--public boolean deleteArticle(int oaid);-->
+    <delete id="deleteArticle" parameterType="int">
+        DELETE FROM forum_officalarticle WHERE oaid=#{_parameter}
+    </delete>
 </mapper>
