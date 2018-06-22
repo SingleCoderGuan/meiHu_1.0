@@ -15,4 +15,10 @@ public interface GoodsMapper {
     //查询该类商品，并按商品销量的降序排列
     public List<Goods> selectGoodsBySales(int categoryid);
 
+    /**
+     * 按销量查询推荐商品列表
+     * @return
+     */
+    public List<Goods> selectRecommendList() ;
+
 }

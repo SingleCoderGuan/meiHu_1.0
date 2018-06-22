@@ -189,7 +189,7 @@
 
                     </ul>
                     <!-- end tab 切换 -->
-                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/updatePost.action" enctype="multipart/form-data">
+                    <form id="newspost" method="post" action="<%=application.getContextPath()%>/user/updatePost.action" enctype="multipart/form-data">
 
                         <span style="position: relative;left:5px;top: 5px;font-size: 20px">标题：</span>
                         <input type="text" style="width: 590px;position: relative;top: 10px; " class="form-control" id="title" name="ptitle" value="${post.ptitle}"/><br/><br/>
@@ -600,7 +600,7 @@
     // 限制一次最多上传 10 张图片
     editor.customConfig.uploadImgMaxLength = 10;
     editor.customConfig.uploadImgParamsWithUrl = true;//如果还需要将参数拼接到 url 中，可再加上如下配置
-    editor.customConfig.uploadImgServer = '<%=basePath%>/picload.action';//官方文档上写的是服务器地址，也就是上传图片的方法名
+    editor.customConfig.uploadImgServer = '<%=basePath%>user/picload.action';//官方文档上写的是服务器地址，也就是上传图片的方法名
     editor.customConfig.uploadFileName = 'uploadImage' ;     //给上传的本地图片文件命名的统一名称
 
     editor.customConfig.uploadImgHooks = {

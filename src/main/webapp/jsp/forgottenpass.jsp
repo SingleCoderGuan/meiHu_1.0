@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="<%=basePath%>css/style_inner.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel='stlesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
+    <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 
@@ -150,7 +153,6 @@
             data:{"tel":tel},
             success:function(result){
                 sms=result;
-                alert(sms)
             }
         });
     });
@@ -158,11 +160,17 @@
     $("#lo").click(function(){
         var code=$("#code").val();
         if(code==sms){
-            alert("验证码正确")
+            $(function () {
+                var txt=  "验证码正确";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+            })
             $("#phone").val($("#tel").val())
             $("#resetForm").submit()
         }else {
-            alert("验证码错误")
+            $(function () {
+                var txt=  "验证码错误";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+            })
         }
     });
 

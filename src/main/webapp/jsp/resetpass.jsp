@@ -23,6 +23,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel='stlesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link href="<%=basePath%>css/demo.css" type="text/css" rel="stylesheet" />
+
 </head>
 <body>
 

@@ -24,6 +24,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link href="<%=basePath%>css/demo.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
+    <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
     <style>
         .registerform li{padding-bottom:20px;}
         .Validform_checktip{margin-left:10px;}
@@ -41,16 +44,28 @@
         }
         var id = getUrlParms("rslt");
         if(id=="1"){
-            alert("用户名或密码错误")
+            $(function () {
+                var txt=  "用户名或密码错误";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+            })
         }
         if(id=="2"){
-            alert("用户名或密码错误")
+            $(function () {
+                var txt=  "用户名或密码错误";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+            })
         }
         if(id=="3"){
-            alert("注册成功")
+            $(function () {
+                var txt=  "注册成功，请登录";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+            })
         }
         if(id=="4"){
-            alert("密码重置成功")
+            $(function () {
+                var txt=  "重置密码成功，请重新登录";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+            })
         }
     </script>
 </head>
@@ -130,7 +145,7 @@
                 </div>
                 <div class="cont_form_sign_up">
                     <h2>注册</h2>
-                    <form class="registerform" action="<%=basePath%>user/register.action" method="post" >
+                    <form class="registerform" id="register" action="<%=basePath%>user/register.action" method="post" >
                         <li style="position: relative;top: 20px;left:-65px;list-style-type:none; ">
                             <label class="label" style="position: relative;font-size: 14px;top: 10px;color:#996666;">用户名：</label>
                             <input style="position: relative;padding: 15px 5px;
@@ -188,7 +203,7 @@ text-align: left;
                                   color: #757575;background-color: #fff" id="code" type="text" value="" name="text" class="inputxt"/>
                         </li>
                         <div class="action" style="position: relative;top: 20px;left:-90px ">
-                            <input type="submit" style="position: relative;top: -28px;" id="lo" disabled class="btn_my_login" value="提 交" />
+                            <input type="button" style="position: relative;top: -28px;" id="lo" disabled class="btn_my_login" value="提 交" />
                         </div>
                     </form>
                 </div>
@@ -384,13 +399,22 @@ text-align: left;
     $("#lo").click(function(){
         var code=$("#code").val();
         if(code==""){
-            alert("请输入验证码");
+            $(function () {
+                var txt=  "请输入验证码";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+            })
         }else{
             if(sms==code){
-                alert("验证码正确")
-
+                $(function () {
+                    var txt=  "验证码正确";
+                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                })
+                $("#register").submit()
             }else{
-                alert("验证码错误");
+                $(function () {
+                    var txt=  "验证码错误";
+                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+                })
 
             };
         };
@@ -476,10 +500,16 @@ text-align: left;
         var tel=$("#tel").val() ;
         var code=$("#userCode").val();
         if(code==""){
-            alert("请输入验证码");
+            $(function () {
+                var txt=  "请输入验证码";
+                window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+            })
         }else{
             if(sms==code){
-                alert("验证码正确")
+                $(function () {
+                    var txt=  "验证码正确";
+                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                })
                 $.ajax({
                     type:"get",
                     url:"${pageContext.request.contextPath}/user/loginWithTel.action",
@@ -496,7 +526,10 @@ text-align: left;
                     }
                 })
             }else{
-                alert("验证码错误");
+                $(function () {
+                    var txt=  "验证码错误";
+                    window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+                })
 
             };
         };

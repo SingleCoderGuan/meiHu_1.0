@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -276,36 +277,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</span>
         </h3>
         <div class="pricing-agile-grids">
-            <div class="col-xs-4 grid-info">
-                <h3 style="font-family: '本墨剪字';">兰蔻口红</h3>
-                <h4>￥29.99
-                    <sup>*</sup>
-                </h4>
-                <div class="pricing-agile-text">
-                    <img src="images/1.png" />
+
+            <c:forEach items="${recommendList}" var="goods">
+                <div class="col-xs-4 grid-info">
+                    <h3 style="font-family: '本墨剪字';">${goods.goodname}</h3>
+                    <h4>￥${goods.goodprice}
+                        <sup>*</sup>
+                    </h4>
+                    <div class="pricing-agile-text">
+                        <img src="${goods.goodpic}" />
+                    </div>
+                    <a href="<%=basePath%>goods/list.action?goodid=${goods.goodid}" >去看看</a>
                 </div>
-                <a href="#register" class="scroll">去看看</a>
-            </div>
-            <div class="col-xs-4 grid-info grid-two">
-                <h3 style="font-family: '本墨剪字';">香奈儿口红</h3>
-                <h4>￥48.99
-                    <sup>*</sup>
-                </h4>
-                <div class="pricing-agile-text">
-                    <img src="images/2.png" />
-                </div>
-                <a href="#register" class="scroll">去看看</a>
-            </div>
-            <div class="col-xs-4 grid-info grid-three">
-                <h3 style="font-family: '本墨剪字';">百雀羚美肌水</h3>
-                <h4>￥76.99
-                    <sup>*</sup>
-                </h4>
-                <div class="pricing-agile-text">
-                    <img src="images/3.png" />
-                </div>
-                <a href="#register" class="scroll">去看看</a>
-            </div>
+            </c:forEach>
+
             <div class="clearfix"> </div>
         </div>
     </div>
