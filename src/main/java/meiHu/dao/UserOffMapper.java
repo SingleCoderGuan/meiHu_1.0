@@ -24,6 +24,6 @@ public interface UserOffMapper {
     //显示某用户所有优惠券
     public List<UserOff> selectAllOffByUid(int uid);
 
-    public void addOffIntoUser(int uid,int offid,int firstnum);
+    public void addOffIntoUser(int uid, int offid, int firstnum);
 
 }

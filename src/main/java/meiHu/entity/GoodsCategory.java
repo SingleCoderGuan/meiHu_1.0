@@ -7,6 +7,11 @@ public class GoodsCategory {
     public GoodsCategory() {
     }
 
+    public GoodsCategory(Integer categoryid, String categoryname) {
+        this.categoryid = categoryid;
+        this.categoryname = categoryname;
+    }
+
     public Integer getCategoryid() {
         return categoryid;
     }

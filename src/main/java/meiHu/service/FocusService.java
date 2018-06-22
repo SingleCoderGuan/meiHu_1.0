@@ -3,7 +3,7 @@ package meiHu.service;
 import meiHu.entity.ForumFocus;
 
 public interface FocusService {
-    public boolean addFocusUser(int uid,int focusuid);
+    public boolean addFocusUser(int uid, int focusuid);
 
     public int selectUserFocusNum(int uid);
 

@@ -4,7 +4,7 @@ import meiHu.entity.ForumFocus;
 
 public interface ForumFocusMapper {
     //关注某人
-    public int addFocusUser(int uid,int focusuid);
+    public int addFocusUser(int uid, int focusuid);
 
     //查询某个人的关注数量
     public int selectUserFocusNum(int uid);

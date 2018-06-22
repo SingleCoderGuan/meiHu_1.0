@@ -65,18 +65,15 @@
         <li>
             <dl>
                 <dt>商品信息</dt>
-                <!--当前链接则添加class:active-->
-                <dd><a href="" >查看商品</a></dd>
-                <dd><a href="">商品上架</a></dd>
+                <dd><a href="<%=basePath%>shopAdmin/getAllProducts.action" >查看商品</a></dd>
+                <dd><a href="<%=basePath%>shopAdmin/showCategoryLists.action">商品上架</a></dd>
             </dl>
         </li>
         <li>
             <dl>
                 <dt>订单信息</dt>
-                <dd><a href="">订单列表</a></dd>
-                <dd><a href="">订单详情</a></dd>
-                <dd><a href="">退货信息</a></dd>
-
+                <dd><a href="<%=basePath%>shopAdminManage/selectYiFuKuanOrder.action">订单管理</a></dd>
+                <dd><a href="<%=basePath%>shopAdminManage/selectDrawbackInfo.action">退货信息</a></dd>
             </dl>
         </li>
 

@@ -74,7 +74,7 @@ public class fatieControl {
         String path=request.getServletContext().getRealPath("image/upload");
 
         //上传图片
-        File uploadPic = new java.io.File(path+"/"+newFileName);
+        File uploadPic = new File(path+"/"+newFileName);
 
         if(!uploadPic.exists()){
             uploadPic.mkdirs();

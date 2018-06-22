@@ -15,17 +15,17 @@ public interface ExchangeService {
     public OffLevel selectOffLevelByOffid(int offid);
 
     //判断改种优惠券是否拥有
-    public UserOff selectOffIntoUser(int uid,int offid);
+    public UserOff selectOffIntoUser(int uid, int offid);
     //用户首次兑换积分券
-    public void addOffIntoUser(int uid,int offid,int firstnum);
+    public void addOffIntoUser(int uid, int offid, int firstnum);
     //用户兑换券数量+1
-    public void addUserOffNum(int uid,int offid);
+    public void addUserOffNum(int uid, int offid);
 
     //用户使用积分券-1
-    public void deleteOffFromUser(int uid,int offid);
+    public void deleteOffFromUser(int uid, int offid);
 
     //用户兑换积分更变
-    public void updateUserPoint(int uid,int consumpoint);
+    public void updateUserPoint(int uid, int consumpoint);
 
 
 

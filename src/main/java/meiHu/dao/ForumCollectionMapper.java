@@ -14,10 +14,10 @@ public interface ForumCollectionMapper {
     public int selectCollectedCountByPid(int pid);
 
     //用户对一条帖子进行收藏
-    public int addCollectionByUidAndPid(int uid,int pid);
+    public int addCollectionByUidAndPid(int uid, int pid);
 
     //用户对一条帖子进行取消收藏
-    public int deleteCollectionByUidAndPid(int uid,int pid);
+    public int deleteCollectionByUidAndPid(int uid, int pid);
 
     /**
      * 根据帖子pid删除收藏该帖子的信息，为删除该帖子做准备
@@ -26,6 +26,6 @@ public interface ForumCollectionMapper {
      */
     public boolean deleteCollectionByPid(int pid);
     //查询该帖子有没有被收藏过
-    public ForumCollection selectIfCollection(int uid,int pid);
+    public ForumCollection selectIfCollection(int uid, int pid);
 
 }

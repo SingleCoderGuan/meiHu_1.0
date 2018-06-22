@@ -16,13 +16,13 @@ public interface LuntanService {
 
     public List<ForumPost> selectAllPostsOrderByCreatetime(int tid) ;
 
-    public boolean addLikeByUidAndPid(int uid,int pid);
+    public boolean addLikeByUidAndPid(int uid, int pid);
 
-    public boolean addCollectionByUidAndPid(int uid,int pid);
+    public boolean addCollectionByUidAndPid(int uid, int pid);
 
-    public boolean deleteLikeByUidAndPid(int uid,int pid);
+    public boolean deleteLikeByUidAndPid(int uid, int pid);
 
-    public boolean deleteCollectionByUidAndPid(int uid,int pid);
+    public boolean deleteCollectionByUidAndPid(int uid, int pid);
 
     public boolean addPostReport(ForumPostreport forumPostreport);
 
@@ -64,7 +64,7 @@ public interface LuntanService {
 
 //    public List<ForumUser> selectUsersByTitleId();
 
-  public ForumCollection selectIfCollection(int uid,int pid);
+  public ForumCollection selectIfCollection(int uid, int pid);
 
 
 

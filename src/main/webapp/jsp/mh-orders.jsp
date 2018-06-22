@@ -20,8 +20,6 @@
     <link href="<%=basePath%>css/iconfont.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/common1.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
-    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
-
     <style>
         .uc-header-bg{
             background-color: #cdc6d7;
@@ -43,20 +41,20 @@
 
         </div>
         <div class="right-bar">
-           <c:if test="${not empty user}">
+        <c:if test="${not empty user}">
 
-                    <div class="item" href="">欢迎您:${user.uname}</div>
-                    <div class="logout divider"> <a href="<%=basePath%>signOut.action">注销</a></div>
+            <div class="item" href="">欢迎您:${user.uname}</div>
+            <div class="logout divider"> <a href="<%=basePath%>signOut.action">注销</a></div>
 
-            </c:if>
-            <c:if test="${empty user}">
-                <div class="item"><a href="<%=basePath %>jsp/loginregister.jsp">登录</a></div>
-                <div class="logout divider"><a href="<%=basePath%>jsp/loginregister.jsp">注册</a></div>
-            </c:if>
+        </c:if>
+        <c:if test="${empty user}">
+            <div class="item"><a href="<%=basePath %>jsp/loginregister.jsp">登录</a></div>
+            <div class="logout divider"><a href="<%=basePath%>jsp/loginregister.jsp">注册</a></div>
+        </c:if>
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车</a></div>
             <div class="order"><em></em><a href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></div>
-            <div class="fav"><em></em><a href="#">我的收藏</a></div>
+            <div class="fav"><em></em><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a></div>
             <div class="help"><em></em><a href="#">帮助中心</a></div>
         </div>
     </div>
@@ -98,7 +96,11 @@
 
                     <li><a href="<%=basePath%>goods/doneOrder.action">退款/退货</a></li>
                 </ul>
-
+                <div class="tit">账户中心</div>
+                <ul class="sublist">
+                    <li><a href="<%=basePath%>goods/showAddress.action">收货地址</a></li>
+                    <li><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a><li>
+                </ul>
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
                     <li><a href="<%=basePath%>goods/selectDiscount.action">我的优惠券</a></li>
@@ -118,8 +120,8 @@
                             <a class="item" href="<%=basePath%>goods/myOrder.action">所有订单</a>
                             <a class="item" href="<%=basePath%>goods/noPayOrder.action">待付款</a>
                             <a class="item" href="<%=basePath%>goods/waitOrder.action">待发货</a>
-                            <a class="item" href="<%=basePath%>goods/runOrder.action">已发货</a>
-                            <a class="item" href="<%=basePath%>goods/doneOrder.action">已收货</a></div>
+                            <a class="item" href="<%=basePath%>goods/runOrder.action">待收货</a>
+                            <a class="item" href="<%=basePath%>goods/doneOrder.action">已完成</a></div>
                         </div>
 
                     </div>

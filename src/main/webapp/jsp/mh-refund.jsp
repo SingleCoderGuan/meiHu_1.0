@@ -53,7 +53,7 @@
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车</a></div>
             <div class="order"><em></em><a href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></div>
-            <div class="fav"><em></em><a href="#">我的收藏</a></div>
+            <div class="fav"><em></em><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a></div>
             <div class="help"><em></em><a href="#">帮助中心</a></div>
         </div>
     </div>
@@ -94,7 +94,11 @@
 
                     <li><a href="<%=basePath%>goods/doneOrder.action">退款/退货</a></li>
                 </ul>
-
+                <div class="tit">账户中心</div>
+                <ul class="sublist">
+                    <li><a href="<%=basePath%>goods/showAddress.action">收货地址</a></li>
+                    <li><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a><li>
+                </ul>
 
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
@@ -121,7 +125,7 @@
                                 <div class="fl">
                                     订单编号：${order.orderid}
                                 </div>
-                                <div class="fr">申请时间:<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="<%=new Date()%>"/>   </div>
+                                <div class="fr">申请时间:<fmt:formatDate pattern="yyyy-MM-dd" value="<%=new Date()%>"/>   </div>
                             </td>
                         </tr>
                         <tr class="item">
@@ -168,24 +172,24 @@
                                 <div class="bd"><textarea name="detail" id="detail"  class="ui-txtin" style="width:560px;height:90px;"></textarea></div>
                             </div>
                             <div class="submit-group">
-                                <input class="ui-btn-theme uc-btn-lg" onclick="tiaojiao(${order.orderid})" value="提交申请" />
+                                <input class="ui-btn-theme uc-btn-lg" onclick="tijiao(${order.orderid})" value="提交申请" />
                             </div>
 
                             <script>
-                                function tiaojiao(orderid){
+                                function tijiao(orderid){
                                     var drawbackreason=document.getElementById("drawbackreason").value;
                                     var detail=document.getElementById("detail").value;
                                     $.ajax({
                                         type:"post",
                                         dataType:"json",
-                                        url:"<%=basePath%>goods/refundOrder.action?orderid="+orderid,
+                                        url:"<%=basePath%>goods/refundOrder.action?orderid="+orderid+"&itemid=${orderItem.itemid}",
                                         data:"drawbackreason="+drawbackreason+"&detail="+detail,
                                         success:function(result){
                                             if(result==1){
-                                                alert("提交成功！");
-                                               window.location.reload();
+                                                alert("提交退款成功！");
+                                                window.location.reload();
                                             }else{
-                                                alert("提交失败！");
+                                                alert("提交退款失败！");
                                             }
                                         }
                                     })

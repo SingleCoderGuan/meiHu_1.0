@@ -54,7 +54,7 @@
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车</a></div>
             <div class="order"><em></em><a href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></div>
-            <div class="fav"><em></em><a href="#">我的收藏</a></div>
+            <div class="fav"><em></em><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a></div>
             <div class="help"><em></em><a href="#">帮助中心</a></div>
         </div>
     </div>
@@ -96,7 +96,11 @@
 
                     <li><a href="<%=basePath%>goods/doneOrder.action">退款/退货</a></li>
                 </ul>
-
+                <div class="tit">账户中心</div>
+                <ul class="sublist">
+                    <li><a href="<%=basePath%>goods/showAddress.action">收货地址</a></li>
+                    <li><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a><li>
+                </ul>
 
                 <div class="tit">消息中心</div>
                 <ul class="sublist">

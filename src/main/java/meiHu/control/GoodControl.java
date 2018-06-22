@@ -1,6 +1,9 @@
-
 package meiHu.control;
 
+import com.alipay.config.*;
+/*import com.alipay.api.*;
+import com.alipay.api.request.*;*/
+import com.github.pagehelper.PageInfo;
 import meiHu.entity.*;
 import meiHu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,18 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import java.text.DecimalFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-
+//商城前台control层:商品，购物车，订单（订单状态，订单详情退款状态），地址，支付，优惠券，退款
 @RequestMapping("/goods")
 @Controller
 public class GoodControl {
@@ -50,15 +49,18 @@ public class GoodControl {
         request.setAttribute("glists",goodService.getGoods(category));
         request.getRequestDispatcher("/jsp/product_lists.jsp").forward(request,response);
     }
-    //查看商品详情
+    //查看商品详情，并显示相关推荐商品
     @RequestMapping(value = "/list.action",method={RequestMethod.POST, RequestMethod.GET})
     public void product(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String goodId=request.getParameter("goodid");
         int goodid=Integer.parseInt(goodId);
+        int categoryId=goodService.getCategoryByGid(goodid);
+        List<Goods> recommendGoods=goodService.showRecommend(categoryId);
+        request.setAttribute("recommendGoodsList",recommendGoods);
         request.setAttribute("product",goodService.getGood(goodid));
         request.getRequestDispatcher("/jsp/product.jsp").forward(request,response);
     }
-    //商品加入购物车
+    //商品加入购物车,并显示热卖产品
     @RequestMapping(value="/cart.action",method={RequestMethod.POST, RequestMethod.GET})
     public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int gid = Integer.parseInt(request.getParameter("gid"));
@@ -67,13 +69,10 @@ public class GoodControl {
         CartItem cartItem = new CartItem(good, count);
         Cart cart = getCart(request);
         cart.addCart(cartItem);
-        try {
-            request.getRequestDispatcher("/jsp/cart.jsp").forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("加入购物车失败");
-        }
-
+        int categoryId=goodService.getCategoryByGid(gid);
+        List<Goods> hotSaleGoods=goodService.showHotSale(categoryId);
+        request.setAttribute("hotSaleGoodsList",hotSaleGoods);
+        request.getRequestDispatcher("/jsp/cart.jsp").forward(request, response);
     }
     //在购物车中移除商品
     @RequestMapping(value = "/removecart.action",method={RequestMethod.POST, RequestMethod.GET})
@@ -118,6 +117,7 @@ public class GoodControl {
             oi.setItemid(Math.abs(UUID.randomUUID().toString().hashCode()));
             oi.setCount(ci.getCount());
             oi.setSubtotal(ci.getSubtotal());
+            oi.setItem_state(0);
             oi.setGood(ci.getGood());
             oi.setOrder(order);
             order.getItems().add(oi);
@@ -127,6 +127,7 @@ public class GoodControl {
         int uid=user.getUid();
         List<Address> addressList=addressService.selectAddressById(uid);
         request.getSession().setAttribute("addressList",addressList);
+        request.setAttribute("userofflist",exchangeService.selectAllOffByUid(uid));
         request.getRequestDispatcher("/jsp/order_address.jsp").forward(request,response);
         return null;
     }
@@ -134,6 +135,7 @@ public class GoodControl {
     @RequestMapping(value = "/deleteOrder.action",method={RequestMethod.POST, RequestMethod.GET})
     public @ResponseBody int deleteOrderByOrderId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int orderid = Integer.parseInt(request.getParameter("orderid"));
+        System.out.println(orderid);
         int result = orderService.deleteOrderByOrderId(orderid);
         if (result == 1) {
             System.out.println("取消订单成功");
@@ -150,13 +152,25 @@ public class GoodControl {
         if(user==null){
             return "/jsp/loginregister.jsp";
         }
-        int  uid = user.getUid() ;
-        List<Order> orderList =orderService.getOrderByUid(uid);
-        request.getSession().setAttribute("orderList",orderList);
+        int uid = user.getUid() ;
+        Map<String ,Object> cmap=new HashMap<>();
+        //每页显示的条数
+        int pageSize=5;
+        //当前的页面默认是首页
+        int curPage=1;
+        String scurPage=request.getParameter("curPage");
+        if (scurPage!=null&&!scurPage.trim().equals("")){
+            curPage=Integer.parseInt(scurPage);
+        }
+        cmap.put("curPage",curPage);
+        cmap.put("pageSize",pageSize);
+        PageInfo<Order> pageInfo=orderService.getAllOrderByPage(uid,cmap);
+        request.getSession().setAttribute("pageInfo",pageInfo);
         request.getRequestDispatcher("/jsp/mh-order.jsp").forward(request,response);
         return null;
     }
-    //查询未付款的订单
+
+    //查询待付款的订单
     @RequestMapping(value ="/noPayOrder.action",method = {RequestMethod.GET, RequestMethod.POST})
     public String selectNoPayOrderByUid (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ForumUser user=(ForumUser)request.getSession().getAttribute("user");
@@ -168,7 +182,7 @@ public class GoodControl {
         request.getRequestDispatcher("/jsp/mh-nopay-money.jsp").forward(request,response);
         return null;
     }
-    //查询等待发货的订单
+    //查询待发货的订单
     @RequestMapping(value ="/waitOrder.action",method = {RequestMethod.GET, RequestMethod.POST})
     public String waitOrderByUid (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ForumUser user=(ForumUser)request.getSession().getAttribute("user");
@@ -180,7 +194,7 @@ public class GoodControl {
         request.getRequestDispatcher("/jsp/mh-waitsent.jsp").forward(request,response);
         return null;
     }
-    //查询已经发货的订单
+    //查询待收货的订单
     @RequestMapping(value ="/runOrder.action",method = {RequestMethod.GET, RequestMethod.POST})
     public String selectRunOrderByUid (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ForumUser user=(ForumUser)request.getSession().getAttribute("user");
@@ -204,6 +218,22 @@ public class GoodControl {
         request.getRequestDispatcher("/jsp/mh-doneorder.jsp").forward(request,response);
         return null;
     }
+    //用户确认收货
+    @RequestMapping(value = "/querenshouhuo.action",method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody int querenshouhuo(HttpServletRequest request, HttpServletResponse response){
+        int orderid=Integer.parseInt(request.getParameter("orderid"));
+        int msg=orderService.updateOrderStateWeiWanCheng(orderid);
+        return msg;
+    }
+    //显示用户个人地址
+    @RequestMapping(value = "/showAddress.action",method = {RequestMethod.GET, RequestMethod.POST} )
+    public void showAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ForumUser user=(ForumUser)request.getSession().getAttribute("user");
+        int uid=user.getUid();
+        List<Address> addressList=addressService.selectAddressById(uid);
+        request.getSession().setAttribute("addressList",addressList);
+        request.getRequestDispatcher("/jsp/uc-address.jsp").forward(request,response);
+    }
     //用户新增地址
     @RequestMapping(value = "/insertAddress.action",method={RequestMethod.POST, RequestMethod.GET})
     public @ResponseBody Address insertAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -215,7 +245,6 @@ public class GoodControl {
         int uid=user.getUid();
         Address address1=new Address(address,addressdetail,receivename,receivetel,uid);
         int row=addressService.insertAddress(address1);
-        System.out.println("12345");
         return address1;
     }
     //删除用户个人地址
@@ -253,22 +282,74 @@ public class GoodControl {
     public @ResponseBody int insertDrawback(HttpServletRequest request,HttpServletResponse response){
         ForumUser user=(ForumUser)request.getSession().getAttribute("user");
         int uid=user.getUid();
+        int itemid=Integer.parseInt(request.getParameter("itemid"));
         int orderid=Integer.parseInt(request.getParameter("orderid"));
         Order order=orderService.selectOrderById(orderid);
         RefundOrder ro=new RefundOrder();
         int drawbackid=Math.abs(UUID.randomUUID().toString().hashCode());
         ro.setDrawbackid(drawbackid);
         ro.setOrder(order);
+        ro.setItemid(itemid);
         ro.setUser(new ForumUser(uid,null,null));
         String drawbackreason=request.getParameter("drawbackreason");
         ro.setDrawbackreason(drawbackreason);
         ro.setDrawbacktime(new Date());
         String detail=request.getParameter("detail");
         ro.setDetail(detail);
-        ro.setProcessstate("0");
-        int result=refundOrderService.insertDrawbackInfo(ro);
+        ro.setProcessstate(0);
+        int result=refundOrderService.insertDrawbackInfo(ro,itemid);
         return result;
     }
-    //查看该类商品的销量，并按销量降序排列
+    //订单结算页，用户选择地址，完善订单信息
+    @RequestMapping(value = "/addAddressIntoOrder.action",method = {RequestMethod.POST,RequestMethod.GET})
+    public @ResponseBody int addAddressIntoOrder(HttpServletRequest request,HttpServletResponse response){
+        int orderid=Integer.parseInt(request.getParameter("orderId"));
+        String addressdetail=request.getParameter("addressdetail");
+        String receivename=request.getParameter("receivename");
+        String receivetel=request.getParameter("receivetel");
+        int result=orderService.addAddrIntoOrderById(orderid,addressdetail,receivename,receivetel);
+        return result;
+    }
+   /* //用户去付款
+    @RequestMapping(value = "/alipay.action",method = {RequestMethod.POST,RequestMethod.GET})
+    public @ResponseBody String alipay(HttpServletRequest request,HttpServletResponse response) throws IOException, AlipayApiException {
+        //获得初始化的AlipayClient
+           AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+          //设置请求参数
+           AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
+           alipayRequest.setReturnUrl(AlipayConfig.return_url);
+           alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
+          //商户订单号，商户网站订单系统中唯一订单号，必填
+           String out_trade_no = new String(request.getParameter("WIDout_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+           //付款金额，必填
+            double f=Double.parseDouble(request.getParameter("WIDtotal_amount"));
+            DecimalFormat df = new DecimalFormat("#.00");
+            String total_amount = new String(df.format(f));
+           //订单名称，必填
+           String subject = new String(request.getParameter("WIDsubject").getBytes("ISO-8859-1"),"UTF-8");
+           alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
+                   + "\"total_amount\":\""+ total_amount +"\","
+                   + "\"subject\":\""+ subject +"\","
+                   + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+            //付款之后修改订单状态待付款为待发货
+            int orderid=Integer.parseInt(request.getParameter("orderId"));
+            orderService.updateOrderState(orderid);
+           //请求
+           String result = alipayClient.pageExecute(alipayRequest).getBody();
+           //输出
+           return result;
+    }*/
+    //未付款订单去付款
+    @RequestMapping(value = "/daifukuan.action",method = {RequestMethod.POST,RequestMethod.GET})
+    public void fukuan(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        ForumUser user=(ForumUser)request.getSession().getAttribute("user");
+        int uid=user.getUid();
+        List<Address> addressList=addressService.selectAddressById(uid);
+        request.getSession().setAttribute("addressList",addressList);
+        int orderid=Integer.parseInt(request.getParameter("orderid"));
+        Order OrderItemLists=orderService.selectYiFuKuanOrderItemLists(orderid);
+        request.setAttribute("OrderItemLists",OrderItemLists);
+        request.setAttribute("userofflist",exchangeService.selectAllOffByUid(uid));
+        request.getRequestDispatcher("/jsp/qufukuan.jsp").forward(request,response);
+    }
 }
-

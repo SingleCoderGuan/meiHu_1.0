@@ -6,7 +6,7 @@ email:232650413@qq.com
 */
 @charset "UTF-8";
 @import url(jquery.mCustomScrollbar.css);
-html{overflow-y:hidden;}
+
 body{margin:0;height:100%;}
 a:active,a:hover{outline:0}
 button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}

@@ -14,6 +14,7 @@
             <id column="itemid" property="itemid"/>
             <result column="num" property="count"/>
             <result column="subtotal" property="subtotal"/>
+            <result column="item_state" property="item_state"/>
             <association property="good" javaType="Goods">
                 <id column="goodid" property="goodid"/>
                 <result column="goodname" property="goodname"/>
@@ -39,6 +40,7 @@
             <id column="itemid" property="itemid"/>
             <result column="num" property="count"/>
             <result column="subtotal" property="subtotal"/>
+            <result column="item_state" property="item_state"/>
             <association property="good" javaType="Goods">
                 <id column="goodid" property="goodid"/>
                 <result column="goodname" property="goodname"/>
@@ -64,6 +66,7 @@
             <id column="itemid" property="itemid"/>
             <result column="num" property="count"/>
             <result column="subtotal" property="subtotal"/>
+            <result column="item_state" property="item_state"/>
             <association property="good" javaType="Goods">
                 <id column="goodid" property="goodid"/>
                 <result column="goodname" property="goodname"/>
@@ -89,6 +92,7 @@
             <id column="itemid" property="itemid"/>
             <result column="num" property="count"/>
             <result column="subtotal" property="subtotal"/>
+            <result column="item_state" property="item_state"/>
             <association property="good" javaType="Goods">
                 <id column="goodid" property="goodid"/>
                 <result column="goodname" property="goodname"/>
@@ -114,6 +118,7 @@
             <id column="itemid" property="itemid"/>
             <result column="num" property="count"/>
             <result column="subtotal" property="subtotal"/>
+            <result column="item_state" property="item_state"/>
             <association property="good" javaType="Goods">
                 <id column="goodid" property="goodid"/>
                 <result column="goodname" property="goodname"/>
@@ -126,10 +131,12 @@
             </association>
         </collection>
     </resultMap>
+
     <resultMap id="OrderItemMap" type="OrderItem">
         <id column="itemid" property="itemid"/>
         <result column="num" property="count"/>
         <result column="subtotal" property="subtotal"/>
+        <result column="item_state" property="item_state"/>
         <association property="good" javaType="Goods">
             <id column="goodid" property="goodid"/>
             <result column="goodname" property="goodname"/>
@@ -139,6 +146,60 @@
             <result column="goodaddress" property="goodaddress"/>
             <result column="gooddetail" property="gooddetail"/>
             <result column="goodsales" property="goodsales"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="selectYiFuKuanOrderListsMap" type="Order">
+        <id column="orderid" property="orderid"/>
+        <result column="ordertime" property="ordertime"/>
+        <result column="total" property="total"/>
+        <result column="state" property="state"/>
+        <result column="addressdetail" property="addressdetail"/>
+        <result column="receivename" property="receivename"/>
+        <result column="receivetel" property="receivetel"/>
+        <association property="user" javaType="ForumUser">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="selectYiFuKuanOrderItemMap" type="Order">
+        <id column="orderid" property="orderid"/>
+        <result column="ordertime" property="ordertime"/>
+        <result column="total" property="total"/>
+        <result column="state" property="state"/>
+        <result column="addressdetail" property="addressdetail"/>
+        <result column="receivename" property="receivename"/>
+        <result column="receivetel" property="receivetel"/>
+        <collection property="items" ofType="OrderItem">
+            <id column="itemid" property="itemid"/>
+            <result column="num" property="count"/>
+            <result column="subtotal" property="subtotal"/>
+            <result column="item_state" property="item_state"/>
+            <association property="good" javaType="Goods">
+                <id column="goodid" property="goodid"/>
+                <result column="goodname" property="goodname"/>
+                <result column="goodpic" property="goodpic"/>
+                <result column="goodprice" property="goodprice"/>
+                <result column="goodstore" property="goodstore"/>
+                <result column="goodaddress" property="goodaddress"/>
+                <result column="gooddetail" property="gooddetail"/>
+                <result column="goodsales" property="goodsales"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <resultMap id="showOrderByStateMap" type="Order">
+        <id column="orderid" property="orderid"/>
+        <result column="ordertime" property="ordertime"/>
+        <result column="total" property="total"/>
+        <result column="state" property="state"/>
+        <result column="addressdetail" property="addressdetail"/>
+        <result column="receivename" property="receivename"/>
+        <result column="receivetel" property="receivetel"/>
+        <association property="user" javaType="ForumUser">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
         </association>
     </resultMap>
     <!--//根据用户id查询我的订单信息-->
@@ -160,7 +221,7 @@
 
    <!-- public void saveItem(OrderItem oi);-->
     <insert id="saveItem" parameterType="OrderItem" >
-        insert into shop_item values(#{itemid},#{order.orderid},#{good.goodid},#{count},#{subtotal})
+        insert into shop_item values(#{itemid},#{order.orderid},#{good.goodid},#{count},#{subtotal},#{item_state})
     </insert>
 
     <!--public void deleteOrderItem(int orderid);-->
@@ -183,7 +244,6 @@
         and state=0
     </select>
 
-
    <!-- //用户查询待发货的订单
     public List<Order> waitOrder(int uid);-->
     <select id="waitOrder" parameterType="int" resultMap="waitOrderMap">
@@ -194,8 +254,7 @@
         and state=1
     </select>
 
-
-   <!-- //用户查询已发货的订单
+   <!-- //用户查询待收货的订单
     public List<Order> getRunOrder(int uid);-->
     <select id="getRunOrder" parameterType="int" resultMap="RunOrderMap">
            select *  from shop_order so,shop_item si,shop_goods sg
@@ -205,7 +264,7 @@
           and state=2
     </select>
 
-    <!--//用户查询已收货的订单
+    <!--//用户查询已完成的订单
     public List<Order> getDoneOrder(int uid);-->
     <select id="getDoneOrder" parameterType="int" resultMap="doneOrderMap">
         select *  from shop_order so,shop_item si,shop_goods sg
@@ -227,4 +286,69 @@
         select * from shop_item,shop_goods where itemid=#{_parameter} and shop_item.goodid=shop_goods.goodid
     </select>
 
+   <!--  //根据商品编号查询该商品所属的订单详情编号
+    public int selectItemIdByGid(int goodid);
+    <select id="selectItemIdByGid" parameterType="int" resultType="int">
+        select itemid from shop_item
+        where goodid=#{_parameter}
+    </select>-->
+
+    <!--//用户提交退款信息，更改相应订单详情的退款的状态
+    public int updateOrderItemState(int itemid);-->
+    <update id="updateOrderItemState" parameterType="int">
+        update shop_item set item_state=1 where itemid=#{_parameter}
+    </update>
+
+    <!--//管理员同意退款，更改相应订单详情的退款的状态
+    public int updateAfterOrderItemState(int itemid);-->
+    <update id="updateAfterOrderItemState" parameterType="int">
+        update shop_item set item_state=2 where itemid=#{_parameter}
+    </update>
+
+    <!-- //用户结算时，根据订单编号插入地址信息，完善订单信息
+    public int addAddrInfoIntoOrderById(int orderid, String addressdetail, String receivename, String receivetel);-->
+    <update id="addAddrInfoIntoOrderById">
+        update shop_order set addressdetail=#{param2},receivename=#{param3},receivetel=#{param4} where orderid=#{param1}
+    </update>
+
+    <!--//修改订单状态待付款为待发货
+    public void updateOrderState(int orderid);-->
+    <update id="updateOrderState" parameterType="int">
+        update shop_order set state=1 where orderid=#{_parameter}
+    </update>
+
+    <!--//管理员查询所有订单
+    public List<Order> selectYiFuKuanOrderLists();-->
+    <select id="selectYiFuKuanOrderLists" resultMap="selectYiFuKuanOrderListsMap">
+        select * from shop_order so,Forum_user fu where so.uid=fu.uid
+    </select>
+
+    <!--//管理员查询订单详情信息
+    public Order selectYiFuKuanOrderItem(int orderid);-->
+    <select id="selectYiFuKuanOrderItem" parameterType="int" resultMap="selectYiFuKuanOrderItemMap">
+        select * from shop_order so,shop_item si,shop_goods sg
+        where so.orderid=#{_parameter}
+        and si.orderid=#{_parameter}
+        and si.goodid=sg.goodid
+    </select>
+
+    <!-- //为订单安排发货，修改订单状态待发货为待收货
+    public int updateOrderStateWeiFaHuo(int orderid);-->
+    <update id="updateOrderStateWeiFaHuo" parameterType="int">
+        update shop_order set state=2 where orderid=#{_parameter}
+    </update>
+
+    <!--//修改订单状态待收货为已完成
+    public int updateOrderStateWeiWanCheng(int orderid);-->
+    <update id="updateOrderStateWeiWanCheng" parameterType="int">
+        update shop_order set state=3 where orderid=#{_parameter}
+    </update>
+
+    <!--//查询各种状态的订单
+    public List<Order> showOrderByState(String state);-->
+    <select id="showOrderByState" parameterType="String" resultMap="showOrderByStateMap">
+       select * from shop_order so,Forum_user fu
+       where so.uid=fu.uid
+       and so.state=#{_parameter}
+    </select>
 </mapper>

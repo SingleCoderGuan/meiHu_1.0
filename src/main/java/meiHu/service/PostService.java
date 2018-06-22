@@ -12,11 +12,11 @@ public interface PostService {
      * @param map
      * @return
      */
-    public PageInfo<ForumPost> selectPosts(Map<String ,Object> map) ;
+    public PageInfo<ForumPost> selectPosts(Map<String, Object> map) ;
 
-    public PageInfo<ForumPost> selectPostsByCreatetime(Map<String ,Object> map) ;
+    public PageInfo<ForumPost> selectPostsByCreatetime(Map<String, Object> map) ;
 
-    public PageInfo<ForumPost> selectPostsByVisit(Map<String ,Object> map) ;
+    public PageInfo<ForumPost> selectPostsByVisit(Map<String, Object> map) ;
     /**
      * 通过用户uid查询该用户收藏的所有帖子
      * @param uid 需要查询的uid

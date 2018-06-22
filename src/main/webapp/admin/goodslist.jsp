@@ -19,35 +19,24 @@
     <meta name="author" content="DeathGhost" />
     <link rel="stylesheet" type="text/css" href="../css/styleadmin.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-    <!--[if lt IE 9]>
-    <script src="../js/html5.js"></script>
-    <![endif]-->
-    <script src="../js/jquery.js"></script>
-    <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script>
+    <script src="<%= basePath%>js/jquery.min.js"> </script>
+    <script src="<%= basePath%>js/respond.js"></script>
 
-        (function($){
-            $(window).load(function(){
+    <style>
+        .bt1{
+            position: relative;
+            left:205px;
+            top:-33px;
+        }
+        #addgood{
+            position: relative;
+            margin-left:-20px;
+            margin-top:-28px;
+        }
 
-                $("a[rel='load-content']").click(function(e){
-                    e.preventDefault();
-                    var url=$(this).attr("href");
-                    $.get(url,function(data){
-                        $(".content .mCSB_container").append(data); //load new content inside .mCSB_container
-                        //scroll-to appended content
-                        $(".content").mCustomScrollbar("scrollTo","h2:last");
-                    });
-                });
-
-                $(".content").delegate("a[href='top']","click",function(e){
-                    e.preventDefault();
-                    $(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
-                });
-
-            });
-        })(jQuery);
-    </script>
+    </style>
 </head>
+
 <body>
 <!--header-->
 <header style="height: 71px">
@@ -68,25 +57,24 @@
             <dl>
                 <dt>商品信息</dt>
                 <!--当前链接则添加class:active-->
-                <dd><a href="" >查看商品</a></dd>
-                <dd><a href="">商品详情</a></dd>
+                <dd><a href="<%=basePath%>shopAdmin/getAllProducts.action" >查看商品</a></dd>
+                <dd><a href="<%=basePath%>shopAdmin/showCategoryLists.action">商品上架</a></dd>
             </dl>
         </li>
         <li>
             <dl>
                 <dt>订单信息</dt>
-                <dd><a href="">订单列表</a></dd>
-                <dd><a href="">订单详情</a></dd>
-                <dd><a href="">退货信息</a></dd>
+                <dd><a href="<%=basePath%>shopAdminManage/selectYiFuKuanOrder.action">订单管理</a></dd>
+                <dd><a href="<%=basePath%>shopAdminManage/selectDrawbackInfo.action">退货信息</a></dd>
             </dl>
         </li>
 
         <li>
             <dl>
                 <dt>论坛信息</dt>
-                <dd><a href="">帖子信息</a></dd>
+
                 <dd><a href="">举报信息</a></dd>
-                <dd><a href="">评论信息</a></dd>
+
             </dl>
         </li>
         <li>
@@ -103,75 +91,211 @@
 <section class="rt_wrap content mCustomScrollbar">
     <div class="rt_content">
         <div class="page_title">
-            <h2 class="fl">商品列表：当前香水区</h2>
-            <a href="#" class="fr top_rt_btn "><strong>+   </strong>添加商品</a>
+            <c:if test="${not empty categoryList}">
+                <p  style="color: rgba(136,142,252,0.99);font-size:20px;font-weight: bold">商品列表：
+                <c:choose>
+                    <c:when test="${categoryId==1}">口红专区</c:when>
+                    <c:when test="${categoryId==2}">香水专区</c:when>
+                    <c:when test="${categoryId==3}">洗面奶专区</c:when>
+                    <c:when test="${categoryId==4}">防晒霜专区</c:when>
+                    <c:when test="${categoryId==5}">眼霜专区</c:when>
+                    <c:when test="${categoryId==6}">水乳专区</c:when>
+
+                </c:choose>
+                </p>
+            </c:if>
+            <c:if test="${empty categoryList}">
+                <p  style="color: rgba(136,142,252,0.99);font-size:20px;font-weight: bold">商品列表：</p>
+            </c:if>
+
+            <div id="addgood"><a href="<%=basePath%>shopAdmin/showCategoryLists.action"  class="fr top_rt_btn "><strong>+   </strong>添加商品</a></div>
         </div>
         <section class="mtb">
-            <select class="form-control" style="width: 200px;">
-                <option>下拉菜单</option>
-                <option>菜单1</option>
-            </select>
-        </br>
-          <input type="text" class="form-control-static" style="width: 200px;"placeholder="输入商品名关键词查询"/>
 
-            <input type="button" value="查询" class="group_btn"/>
+            <form id="myform" action="<%=basePath%>shopAdmin/goodCategory.action" method="post">
+
+               <select id = "see"name="categoryId" class="form-control"  style="width: 200px;">
+                    <option value="1">请选择</option>
+
+                  <c:forEach items="${categoryList}" var="category">
+                        <option  value="${category.categoryid}" <c:if test="${category.categoryid==categoryId}">selected</c:if> >${category.categoryname}</option>
+                  </c:forEach>
+
+               </select>
+                <div class="bt1">
+                    <input type="submit" value="查询" class="group_btn"/>
+                </div>
+            </form>
+
+            </br>
+
         </section>
+        <div id="allProducts">
         <table class="table">
             <tr>
                 <th>缩略图</th>
                 <th>产品名称</th>
-                <th>货号</th>
+                <th>产品号</th>
+                <th>产品类别</th>
                 <th>单价</th>
-                <th>单位</th>
-                <th>精品</th>
-                <th>新品</th>
-                <th>热销</th>
                 <th>库存</th>
                 <th>操作</th>
             </tr>
-            <tr>
-                <td class="center"><img src="upload/goods01.jpg" width="50" height="50"/></td>
-                <td>这里是产品名称</td>
-                <td class="center">A15902</td>
-                <td class="center"><strong class="rmb_icon">59.00</strong></td>
-                <td class="center">包</td>
-                <td class="center"><a title="是" class="link_icon">&#89;</a></td>
-                <td class="center"><a title="否" class="link_icon">&#88;</a></td>
-                <td class="center"><a title="是" class="link_icon">&#89;</td>
-                <td class="center">5559</td>
+            <c:if test="${not empty pageInfo}">
+            <c:forEach items="${pageInfo.list}" var="allp">
+            <tr id="${allp.goodid}">
+
+                <td class="center"><img src="<%=basePath%>${allp.goodpic}" width="50" height="50"/></td>
+                <td>${allp.goodname}</td>
+                <td class="center">${allp.goodid}</td>
+                <td class="center">${allp.category.categoryname}</td>
+                <td class="center"><strong class="rmb_icon">${allp.goodprice}</strong></td>
+                <td class="center">${allp.goodstore}</td>
                 <td class="center">
-                    <a href="http://www.mycodes.net" title="预览" class="link_icon" target="_blank">&#118;</a>
-                    <a href="product_detail.html" title="编辑" class="link_icon">&#101;</a>
-                    <a href="#" title="删除" class="link_icon">&#100;</a>
+                    <a href="<%=basePath%>shopAdmin/updateGoods.action?id=${allp.goodid}" title="编辑" >编辑</a>
+                    <a href="javascript:void(0)" onclick="deleteGood('${allp.goodid}')" title="删除" >删除</a>
                 </td>
+
             </tr>
-            <tr>
-                <td class="center"><img src="upload/goods02.jpg" width="50" height="50"/></td>
-                <td>这里是产品名称</td>
-                <td class="center">A15902</td>
-                <td class="center"><strong class="rmb_icon">59.00</strong></td>
-                <td class="center">包</td>
-                <td class="center"><a title="是" class="link_icon">&#89;</a></td>
-                <td class="center"><a title="否" class="link_icon">&#88;</a></td>
-                <td class="center"><a title="是" class="link_icon">&#89;</a></td>
-                <td class="center">5559</td>
-                <td class="center">
-                    <a href="http://www.mycodes.net" title="预览" class="link_icon" target="_blank">&#118;</a>
-                    <a href="product_detail.html" title="编辑" class="link_icon">&#101;</a>
-                    <a href="#" title="删除" class="link_icon">&#100;</a>
-                </td>
-            </tr>
+            </c:forEach>
+
         </table>
+        </div>
+        <script type="text/javascript">
+            //根据id删除一条数据
+            function deleteGood(id){
+                if(confirm("你确定要删除本条数据吗?")){
+                    var url="<%=basePath%>/shopAdmin/deleteGood.action";
+
+                    $.get(url,"goodid="+id,function (data) {
+
+                        if(data==1){
+
+                            var tr=$("#"+id);
+                            tr.remove();
+                            alert("删除成功！！！");
+                        }else {
+
+                            alert("删除失败！！！");
+                        }
+                    });
+                }
+            }
+
+        </script>
+        <form id="mainForm"
+              action="<%=basePath%>shopAdmin/getAllProducts.action"
+              method="post">
+            <input hidden name="curPage" id="curPage"/>
+        </form>
         <aside class="paging">
-            <a>第一页</a>
-            <a>1</a>
-            <a>2</a>
-            <a>3</a>
-            <a>…</a>
-            <a>1004</a>
-            <a>最后一页</a>
+            <c:if test="${!pageInfo.isFirstPage}">
+
+                <a href="javascript:getPage(${pageInfo.firstPage})">首页</a>
+            </c:if>
+
+            <c:if test="${!pageInfo.isFirstPage}">
+                <a href="javascript:getPage(${pageInfo.prePage})">上一页</a>
+            </c:if>
+            <a> 共 ${pageInfo.total}条
+                当前第<span>${pageInfo.pageNum}</span>页</a>
+            <c:if test="${!pageInfo.isLastPage}">
+                <a href="javascript:getPage(${pageInfo.nextPage})">下一页</a>
+            </c:if>
+            <c:if test="${!pageInfo.isLastPage}">
+                <a href="javascript:getPage(${pageInfo.lastPage})">末页</a>
+            </c:if>
+
         </aside>
+
+
     </div>
+    <script>
+        function getPage(curPage) {
+            //将隐藏域的值变成curPage
+            document.getElementById("curPage").value = curPage;
+            //触发表单的提交事件
+            document.getElementById("mainForm").submit();
+        }
+    </script>
+    </c:if>
+    <c:if test="${empty pageInfo}">
+        <c:forEach items="${pageInfoCategory.list}" var="allp">
+
+            <tr id="${allp.goodid}">
+
+                <td class="center"><img src="<%=basePath%>${allp.goodpic}" width="50" height="50"/></td>
+                <td>${allp.goodname}</td>
+                <td class="center">${allp.goodid}</td>
+                <td class="center">${allp.category.categoryname}</td>
+                <td class="center"><strong class="rmb_icon">${allp.goodprice}</strong></td>
+                <td class="center">${allp.goodstore}</td>
+                <td class="center">
+                    <a href="<%=basePath%>shopAdmin/updateGoods.action?id=${allp.goodid}" title="编辑" >编辑</a>
+                    <a href="javascript:void(0)" onclick="deleteGood('${allp.goodid}')" title="删除" >删除</a>
+                </td>
+
+            </tr>
+        </c:forEach>
+
+        </table>
+        </div>
+        <script>
+            function getPage1(curPage1) {
+                //将隐藏域的值变成curPage1
+                document.getElementById("curPage1").value = curPage1;
+                //触发表单的提交事件
+                document.getElementById("mainForm1").submit();
+            }
+        </script>
+        <script type="text/javascript">
+            //根据id删除一条数据
+            function deleteGood(id){
+                if(confirm("你确定要删除本条数据吗?")){
+                    var url="<%=basePath%>/shopAdmin/deleteGood.action";
+
+                    $.get(url,"goodid="+id,function (data) {
+
+                        if(data==1){
+
+                            var tr=$("#"+id);
+                            tr.remove();
+                            alert("删除成功！！！");
+                        }else {
+
+                            alert("删除失败！！！");
+                        }
+                    });
+                }
+            }
+
+        </script>
+        <form id="mainForm1"
+              action="<%=basePath%>shopAdmin/goodCategory.action?categoryId=${categoryId}"
+              method="post">
+            <input hidden name="curPage1" id="curPage1"/>
+        </form>
+        <aside class="paging">
+            <c:if test="${!pageInfoCategory.isFirstPage}">
+
+                <a href="javascript:getPage1(${pageInfoCategory.firstPage})">首页</a>
+            </c:if>
+
+            <c:if test="${!pageInfoCategory.isFirstPage}">
+                <a href="javascript:getPage1(${pageInfoCategory.prePage})">上一页</a>
+            </c:if>
+            <a> 共 ${pageInfoCategory.total}条
+                当前第<span>${pageInfoCategory.pageNum}</span>页</a>
+            <c:if test="${!pageInfoCategory.isLastPage}">
+                <a href="javascript:getPage1(${pageInfoCategory.nextPage})">下一页</a>
+            </c:if>
+            <c:if test="${!pageInfoCategory.isLastPage}">
+                <a href="javascript:getPage1(${pageInfoCategory.lastPage})">末页</a>
+            </c:if>
+
+        </aside>
+    </c:if>
+
 </section>
 
 </body>

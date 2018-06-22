@@ -47,7 +47,8 @@
             color: #ffffff;
         }
         .uc-header-bg{
-            background-color: #c0c0bf;
+            background-color: rgba(192,192,191,0.81);
+            height: 120px;
         }
         .logo1{
             position: relative;
@@ -56,8 +57,8 @@
         }
         nav{
             display: inline-block;
-            margin-top:-40px;
-            left:340px;
+            top:-60px;
+            left:330px;
             font-family: 华文楷体;
             font-size: 20px;
             font-weight: bolder;
@@ -96,17 +97,8 @@
         nav a:hover span{
             transform:rotateX(90deg) translateY(-20px);
         }
-        #jia {
-            position: absolute;
-            float: left;
-            margin-left: 100px;
-            width: 50px;
-            height: 50px;
-        }
-        #jian{
-            width:50px;
-            height:50px;
-        }
+
+
         #gouwu1{
             position: relative;
             height:300px;
@@ -128,7 +120,7 @@
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
-            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 180px;height:120px;" alt="" /></a></div>
+            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 140px;height:90px;" alt="" /></a></div>
 
     </div>
     <nav>
@@ -242,93 +234,28 @@
                 <hr class="break-small break-center">
             </div>
 
-            <!-- product 1 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/1.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看更多</a>
+            <c:forEach items="${hotSaleGoodsList}" var="hotsalegoods">
+                <div class="s-12 m-4 l-3 margin-bottom-30">
+                    <div class="margin">
+                        <div class="fullwidth">
+                            <figure class="imghvr-reveal-down">
+                                <img src="<%= basePath%>${hotsalegoods.goodpic}">
+                                <figcaption>
+                                    <div class="product-hover-content">
+                                        <div class="btn-box">
+                                            <a href="<%= basePath%>goods/list.action?goodid=${hotsalegoods.goodid}" class="btn">查看更多</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="fullwidth">
+                            <h5>${hotsalegoods.goodname}</h5>
+                            <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">现价：${hotsalegoods.goodprice}元</span></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- product 2 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/2.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看更多</a>
-                                    </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- product 3 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/3.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看更多</a>
-                                    </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- product 4 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/4.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看更多</a>
-                                    </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
 
         </div>
     </div>
