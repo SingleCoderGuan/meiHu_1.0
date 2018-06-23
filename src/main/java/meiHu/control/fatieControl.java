@@ -1,5 +1,6 @@
 package meiHu.control;
 
+import meiHu.entity.ForumOfficalarticle;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumTopic;
 import meiHu.entity.ForumUser;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -28,6 +30,8 @@ public class fatieControl {
     TopicService topicService ;
     @Autowired
     PostService postService;
+    @Autowired
+    private OfficalArticleService officalArticleService ;
     @RequestMapping(value = "user/fatie.action")
     public void fatie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if(request.getSession().getAttribute("user")==null){
@@ -85,6 +89,27 @@ public class fatieControl {
         Map<String,String> map=new HashMap();
         map.put("url",request.getContextPath()+"/image/upload"+"/"+newFileName);
         return map;
+
+    }
+    @RequestMapping(value = "/admin/articleList.action")
+    public void articleList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("articleList",articleService.getAllOfficalArticles());
+        request.getRequestDispatcher("/jsp/wenzhangxiangqing.jsp").forward(request,response);
+    }
+
+    @RequestMapping(value = "/admin/getArticle.action",method = RequestMethod.POST)
+    public @ResponseBody
+    ForumOfficalarticle findArticleByOaid(String oaid, HttpServletRequest request, HttpServletResponse response){
+        Integer id = Integer.parseInt(oaid) ;
+        return articleService.selectOfficalArticleByOaid(id);
+    }
+    @RequestMapping(value = "/admin/deleteArticle.action",method = RequestMethod.POST)
+    public @ResponseBody String deleteArticle(String oaid,HttpServletRequest request, HttpServletResponse response){
+        if(officalArticleService.deleteArticle(Integer.parseInt(oaid))){
+            return "1" ;
+        }else {
+            return "0" ;
+        }
 
     }
 }
