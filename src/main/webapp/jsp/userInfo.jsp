@@ -95,6 +95,8 @@
 </style>
 
 <body>
+<img src="<%=basePath%>images/bg-halfmei.png" style="position: absolute;top: 150px;left: 23px"/>
+<img src="<%=basePath%>images/bg-hu.png" style="position: absolute;top: 450px;left:1004px"/>
     <div class="aw-top-menu-wrap">
         <div class="aw-wecenter aw-top-menu clearfix">
             <div class="container">
@@ -209,7 +211,7 @@
 
                                                     </dd>
                                                 </dl>
-                                                <dl>
+                                                <dl style="position: relative;top: 10px;">
                                                     <dt>电话:</dt>
                                                     <dd><input type="text" name="tel" value="${user.tel}"/></dd>
                                                 </dl>
@@ -224,7 +226,7 @@
                                                         <dt class="pull-left"><img class="aw-border-radius-5" style="width: 100px;height: 100px;" src="<%=basePath%>${user.headpic}" id="img-show"/></dt>
                                                         <dd class="pull-left">
                                                             <h5>头像设置</h5>
-                                                            <p>支持 jpg、gif、png 等格式的图片</p>
+                                                            <p>支持 jpg、png 等格式的图片</p>
                                                             <input name="imgFileUp" id="img-upload"  type="file" multiple="multiple" accept="image/*"/>
                                                         </dd>
                                                     </dl>
