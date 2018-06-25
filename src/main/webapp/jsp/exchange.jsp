@@ -198,7 +198,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>user/fatie.action">发帖</a>
+                            <a href="<%=basePath%>fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -248,7 +248,7 @@
 
                             </c:if>
                             <c:if test="${not empty sessionScope.user.uid}">
-                                <h1 class="pull-right">您当前剩余积分<strong id="point">${point}</strong>分</h1>
+                                <h1 class="pull-right">您当前剩余积分<strong>${point}</strong>分</h1>
                                 <%--<input type="hidden" id="point" value="${point}">--%>
 
                             </c:if>
@@ -281,7 +281,7 @@
                                         <div class="status clearfix">
 
                                              <span>
-                                                 <b id="shengyu${levelList.offid}">${levelList.offnum}</b>
+                                                 <b>${levelList.offnum}</b>
                                                             剩余数量
                                              </span>
                                             <span class="pull-right">
@@ -294,15 +294,14 @@
                                         </div>
 
                                         <button id="button${levelList.offid}" class="btn btn-danger" style="width: 310px;"
-                                                onclick="duihuan(${levelList.offid},document.getElementById('point').innerHTML
-                                                        ,${levelList.offnum})">
+                                                onclick="duihuan(${levelList.offid})">
                                             ${levelList.needpoint}积分兑换
                                         </button>
                                     </div>
                                     <script>
 
 
-                                        function duihuan(offidd,point,num) {
+                                        function duihuan(offidd) {
                                             <c:choose>
                                             <c:when test="${empty sessionScope.user.uid}">
 
@@ -313,14 +312,12 @@
                                             $.ajax({
                                                 type: "post",
                                                 url: "${pageContext.request.contextPath}/duihuan.action",
-                                                data: "uidd=" + ${sessionScope.user.uid} + "&offidd=" + offidd+"&pointt="+point,
+                                                data: "uidd=" + ${sessionScope.user.uid} + "&offidd=" + offidd+"&pointt="+${point},
                                                 success: function (result) {
-                                                    if (result !=0) {
-
-                                                        var txt=  "兑换成功！！";
-                                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
-                                                        var a = document.getElementById('point').innerHTML;
-                                                        $('#point').html(a-result);
+                                                    if (result ==1) {
+                                                        alert("兑换成功，赶快去美淘逛逛吧");
+//                                                        var txt=  "兑换成功！！";
+//                                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
                                                         <%--var b = document.getElementById('shengyu${levelList.offid}').innerHTML;--%>
                                                         <%--alert(b);--%>
                                                         <%--$('#shengyu${levelList.offid}').html(num-1);--%>
@@ -360,12 +357,11 @@
     </div>
 </div>
 <script>
-    var uid = ${user.uid}
 
         $(function () {
             <c:if test="${not empty sessionScope.user.uid}">
-            getMessage(uid);
-            setInterval("getMessage(uid)",10000);
+            getMessage(${sessionScope.user.uid});
+            setInterval("getMessage(${sessionScope.user.uid})",10000);
             </c:if>
         })
 

@@ -29,13 +29,13 @@
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
         <li><a href="#" class="website_icon">站点首页</a></li>
-        <li><a href="adminlogin.jsp" class="quit_icon">安全退出</a></li>
+        <li><a href="<%=basePath%>admin/adminlogin.jsp" class="quit_icon">安全退出</a></li>
     </ul>
 </header>
 <!--aside nav-->
 <!--aside nav-->
 <aside class="lt_aside_nav content mCustomScrollbar">
-    <h2><a href="index.html">起始页</a></h2>
+    <h2><a href="#">起始页</a></h2>
     <ul>
         <li>
             <dl>

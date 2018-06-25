@@ -115,18 +115,16 @@
         display: block;
     }
 </style>
-<body  style="background: #aac4bc; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
-
+<body >
+<img src="<%=basePath%>images/bg-halfmei.png" style="position: absolute;top: 150px;left: -50px"/>
+<img src="<%=basePath%>images/bg-hu.png" style="position: absolute;top: 360px;left:1004px"/>
 
 <div class="aw-top-menu-wrap" style="height: 55px">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-                <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>images/LOGO.png"
+                <a href="<%=basePath%>main.action"> <img src="<%=basePath%>images/LOGO.png"
                                                              style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
@@ -258,14 +256,8 @@
  visibility: visible;"><a href="<%=basePath%>quchoujiang.action" target="_blank"><img src="<%=basePath%>images/huodong.png" width="140" height="160" border="0"></a></DIV>
 <SCRIPT src="<%=basePath%>js/guanggaopiaofu.js"></SCRIPT>
 
-<div class="aw-container-wrap " style="background: #aac4bc; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
-    <div class="aw-container aw-wecenter" style="background: #aac4bc; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
+<div class="aw-container-wrap ">
+    <div class="aw-container aw-wecenter" style="">
         <div class="container">
             <div class="row category">
                 <div class="col-sm-12">
@@ -380,7 +372,6 @@
                                             </h4>
                                             <p>
 							<span class="aw-question-tags">
-					<i class="fa fa-caret-left"></i>
 					<a href="#">${postList.topic.tname}</a><%--标签--%>
                                 <input name="curTid" id="curTid" value="${postList.topic.tid}" hidden/>
 				</span> •
@@ -615,15 +606,12 @@
     </div>
 </div>
 <script>
-    var uid = ${sessionScope.user.uid}
-
-        $(function () {
-            <c:if test="${not empty sessionScope.user.uid}">
-            getMessage(uid);
-            setInterval("getMessage(uid)",10000);
-            </c:if>
-
-        })
+    $(function () {
+        <c:if test="${not empty sessionScope.user.uid}">
+        getMessage(${sessionScope.user.uid});
+        setInterval("getMessage(${sessionScope.user.uid})",10000);
+        </c:if>
+    })
 
     function getMessage(uid) {
         $.ajax({
@@ -648,10 +636,7 @@
 
 
 
-<div class="aw-footer-wrap" style="background: #aac4bc; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #aac4bc 0%, #eca8a8 100%, #eed5a9 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg,  #aac4bc 0%,#eca8a8 100%,#eed5a9 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg, #aac4bc 0%,#eca8a8 100%,#eed5a9 100%);">
+<div class="aw-footer-wrap" style="">
 
 
     <div class="aw-footer aw-wecenter">

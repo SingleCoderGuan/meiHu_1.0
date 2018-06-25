@@ -206,7 +206,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>user/fatie.action">发帖</a>
+                            <a href="<%=basePath%>fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -2313,14 +2313,12 @@
 </script>
 </body>
 <script>
-    var uid = ${user.uid}
-
-        $(function () {
-            <c:if test="${not empty sessionScope.user.uid}">
-            getMessage(uid);
-            setInterval("getMessage(uid)",10000);
-            </c:if>
-        })
+    $(function () {
+        <c:if test="${not empty sessionScope.user.uid}">
+        getMessage(${sessionScope.user.uid});
+        setInterval("getMessage(${sessionScope.user.uid})",10000);
+        </c:if>
+    })
 
     function getMessage(uid) {
         $.ajax({

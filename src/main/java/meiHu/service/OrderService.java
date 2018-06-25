@@ -45,4 +45,8 @@ public interface OrderService {
     public List<Order> selectOrderByState(String state);
     //分页
     public PageInfo<Order> getAllOrderByPage(int uid, Map<String, Object> map);
+
+    //根据商品名称查询订单
+    public List<Order> selectOrderByName(String goodname);
+
 }

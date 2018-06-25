@@ -63,7 +63,7 @@
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
         <li><a href="#" class="website_icon">站点首页</a></li>
-        <li><a href="adminlogin.jsp" class="quit_icon">安全退出</a></li>
+        <li><a href="<%=basePath%>admin/adminlogin.jsp" class="quit_icon">安全退出</a></li>
     </ul>
 </header>
 <!--aside nav-->
@@ -106,7 +106,7 @@
 <section class="rt_wrap content mCustomScrollbar">
     <div class="rt_content">
         <div class="page_title">
-            <p  style="font-size: 30px;font-weight: bold;color: rgba(136,142,252,0.99)">商品添加</p>
+            <p  style="font-size: 25px;font-weight: bold;color: lightpink">商品添加</p>
 
         </div>
         <section>

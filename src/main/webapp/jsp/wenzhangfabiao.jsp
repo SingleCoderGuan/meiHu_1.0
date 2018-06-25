@@ -517,7 +517,7 @@
                 // 限制一次最多上传 10 张图片
                 editor.customConfig.uploadImgMaxLength = 10;
                 editor.customConfig.uploadImgParamsWithUrl = true;//如果还需要将参数拼接到 url 中，可再加上如下配置
-                editor.customConfig.uploadImgServer = '<%=basePath%>/oapicload.action';//官方文档上写的是服务器地址，也就是上传图片的方法名
+                editor.customConfig.uploadImgServer = '<%=basePath%>admin/oapicload.action';//官方文档上写的是服务器地址，也就是上传图片的方法名
                 editor.customConfig.uploadFileName = 'oauploadImage' ;     //给上传的本地图片文件命名的统一名称
 
                 editor.customConfig.uploadImgHooks = {

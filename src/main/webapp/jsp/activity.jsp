@@ -54,7 +54,7 @@
             <div class="col-sm-12">
 
                 <!-- start logo -->
-                <a class="branding" href="<%=basePath%>jsp/zhuye.jsp"" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
+                <a class="branding" href="<%=basePath%>main.action"" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
                 <!-- end logo -->
                 <h2 style="color: black; font-family: '本墨锵黑';">姐妹们，争做时尚最前沿</h2>
 
@@ -140,7 +140,7 @@
                         <h2 id="iosghost">积分兑换</h2>
                         <p>获取相应的积分之后，可以在活动页面进行美妆的兑换，还有更多精彩等你来玩</p>
 
-                        <p>我们的平台上已经有了<a href="#">最新美妆</a>了。因此，目前最明显的问题是：<strong>姐妹们</strong> 什么时候来论坛里聊聊天，<a href="<%=basePath%>jsp/exchange.jsp">也许你能帮忙？</a></p>
+                        <p>我们的平台上已经有了<a href="#">最新美妆</a>了。因此，目前最明显的问题是：<strong>姐妹们</strong> 什么时候来论坛里聊聊天，<a >也许你能帮忙？</a></p>
 
                         <hr />
 
@@ -206,7 +206,7 @@
                     function sign(){
                         <c:if test="${empty sessionScope.user.uid}">
                         alert("亲，请先登录");
-                        window.location.href="<%=basePath%>jsp/loginregister.jsp?url=<%=request.getRequestURL()%>";
+                        window.location.href="<%=basePath%>jsp/loginregister.jsp";
                         </c:if>
                         <c:if test="${not empty sessionScope.user.uid}">
                         $.ajax({

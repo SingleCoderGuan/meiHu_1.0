@@ -27,6 +27,7 @@
     <link href="<%= basePath%>css/responsive.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
     <script src="<%= basePath%>js/respond.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -34,11 +35,15 @@
     <link href="<%=basePath%>css/common1.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
     <style>
+        #gouwu1{
+            position: relative;
+            height:300px;
+            width:570px;
+            top:-50px;
+            left:350px;
 
-        #tu{
-            width:360px;
-            hight:400px;
         }
+
         .icon-text{
             font-family: 华文楷体;
 
@@ -46,22 +51,21 @@
         .icon-text li a{
             color: #ffffff;
         }
-        .uc-header-bg{
-            background-color: rgba(192,192,191,0.81);
-            height: 120px;
-        }
+
         .logo1{
             position: relative;
-            margin-top:-220px;
+            margin-top:-230px;
             left:-450px;
+
         }
         nav{
             display: inline-block;
             top:-60px;
-            left:330px;
-            font-family: 华文楷体;
-            font-size: 20px;
-            font-weight: bolder;
+            left:460px;
+            font-family: 本墨锵黑;
+            font-size: 16px;
+
+
         }
         nav a{
             display: inline-block;
@@ -70,8 +74,8 @@
             perspective:200px;
         }
         nav a span{
-            line-height: 50px;
-            background-color: #f8fff9;
+            line-height: 40px;
+            background-color: #fdf0ef;
             display: inline-block;
             padding: 0 30px;
             position: relative;
@@ -85,7 +89,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: #1f2d3d;
+            background-color: #000000;
             text-align: center;
             color: #ffffff;
             width: 100%;
@@ -98,15 +102,40 @@
             transform:rotateX(90deg) translateY(-20px);
         }
 
-
-        #gouwu1{
+        #jia {
             position: relative;
-            height:300px;
-            width:570px;
-            top:-50px;
-            left:350px;
-
+            margin-top: -30px;
+            margin-left: 200px;
+            width: 30px;
+            height: 30px;
+            cursor:pointer;
         }
+        #jian{
+            position: relative;
+            margin-top: -30px;
+            margin-left: 60px;
+            width: 30px;
+            height: 30px;
+            cursor:pointer;
+        }
+        .uc-header-bg{
+            /*background-color: #f39894;*/
+            background-color: #ffded9;
+
+            height:90px;
+        }
+        #shoucang{
+            position: relative;
+            top:-23px;
+            left: 80px;
+            height:20px;
+            width:20px;
+        }
+        .section{
+            background-color: #fdf0ef;
+        }
+
+
 
     </style>
 
@@ -120,7 +149,7 @@
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
-            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 140px;height:90px;" alt="" /></a></div>
+            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 100px;height:70px;" alt="" /></a></div>
 
     </div>
     <nav>
@@ -142,7 +171,7 @@
         <a href="<%= basePath %>goods/glist.action?categoryid=6">
             <span data-hover="水乳">水乳</span>
         </a>
-        <a href="<%=basePath%>jsp/mh-orders.jsp">
+        <a href="<%=basePath%>goods/myOrder.action">
             <span data-hover="个人中心">个人中心</span>
         </a>
         <a href="<%=basePath%>jsp/cart.jsp">

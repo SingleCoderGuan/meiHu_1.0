@@ -27,7 +27,7 @@
             <h1>404 嘿嘿嘿</h1>
         </div>
         <div class="agileits_main_grid_right">
-            <a href="<%=basePath%>jsp/zhuye.jsp">返回主页</a>
+            <a href="<%=basePath%>main.action">返回主页</a>
         </div>
         <div class="clear"> </div>
     </div>

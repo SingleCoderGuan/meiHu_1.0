@@ -12,8 +12,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Stict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang = "zh-CN">
 
 <head>
@@ -98,8 +97,8 @@ strict.dtd">
 </style>
 
 <body >
-<img src="<%=basePath%>images/bg-halfmei.png" style="position: absolute;top: 150px;left: 28px"/>
-<img src="<%=basePath%>images/bg-hu.png" style="position: absolute;top: 450px;left:1004px"/>
+<img src="<%=basePath%>images/bg-halfmei.png" style="position: absolute;top: 150px;left: -50px"/>
+<img src="<%=basePath%>images/bg-hu.png" style="position: absolute;top: 360px;left:1004px"/>
 <div class="aw-top-menu-wrap" style="height: 55px">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
@@ -139,7 +138,7 @@ strict.dtd">
                         </li>
 
                         <li>
-                            <a href="#">美淘</a>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
                         </li>
                         <li>
                             <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
@@ -420,14 +419,12 @@ background-color: #ce8483; z-index:9999;text-align: center">
     }
 </script>
 <script>
-    var uid = ${sessionScope.user.uid}
-
-        $(function () {
-            if(uid!=null){
-                getMessage(uid);
-                setInterval("getMessage(uid)",10000);
-            }
-        })
+    $(function () {
+        <c:if test="${not empty sessionScope.user.uid}">
+        getMessage(${sessionScope.user.uid});
+        setInterval("getMessage(${sessionScope.user.uid})",10000);
+        </c:if>
+    })
 
     function getMessage(uid) {
         $.ajax({

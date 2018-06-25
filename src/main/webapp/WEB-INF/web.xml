@@ -53,9 +53,9 @@
     </welcome-file-list>
 
     <error-page>
-        <error-code>404</error-code>
-        <location>/jsp/404.jsp</location>
-    </error-page>
+    <error-code>404</error-code>
+    <location>/jsp/404.jsp</location>
+</error-page>
 
 
 </web-app>

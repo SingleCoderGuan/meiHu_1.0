@@ -44,6 +44,7 @@ public class ExchangeControl {
 
     @RequestMapping("/duihuan.action")
     public void duihuan(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("到达兑换");
         String uidd = request.getParameter("uidd");
         int uid = Integer.parseInt(uidd);
         String pointt = request.getParameter("pointt");
@@ -60,12 +61,12 @@ public class ExchangeControl {
                 exchangeService.addOffIntoUser(uid, offid, 1);
                 exchangeService.deleteOffByOffid(offid);//兑换券总数数量更新
                 exchangeService.updateUserPoint(uid, needpoint);
-                out.print(needpoint);
+                out.print(1);
             } else {
                 exchangeService.addUserOffNum(uid, offid);
                 exchangeService.deleteOffByOffid(offid);
                 exchangeService.updateUserPoint(uid, needpoint);
-                out.print(needpoint);
+                out.print(1);
             }
         }
 

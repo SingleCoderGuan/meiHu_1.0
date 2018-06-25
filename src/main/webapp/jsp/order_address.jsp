@@ -120,6 +120,112 @@
             position: relative;
             margin-top: -70px;
         }
+        .xuanzhong{
+            background-color: pink;
+        }
+    </style>
+    <style>
+
+
+        #p{
+            text-align: center;
+        }
+
+        .layui-form{
+            position: relative;
+            left:150px;
+            width:1119px;
+        }
+        .uc-content{
+            position: relative;
+            left:-80px;
+        }
+
+
+        .pay{
+            position: relative;
+            margin-left:1050px;
+        }
+        .footer-section{
+            position: relative;
+            margin-top: -70px;
+        }
+    </style>
+    <style>
+
+        .icon-text{
+            font-family: 华文楷体;
+
+        }
+        .icon-text li a{
+            color: #ffffff;
+        }
+
+        .logo1{
+            position: relative;
+            margin-top:-230px;
+            left:-450px;
+
+        }
+        nav{
+            display: inline-block;
+            top:-60px;
+            left:460px;
+            font-family: 本墨锵黑;
+            font-size: 16px;
+
+
+        }
+        nav a{
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            perspective:200px;
+        }
+        nav a span{
+            line-height: 40px;
+            background-color: #fdf0ef;
+            display: inline-block;
+            padding: 0 30px;
+            position: relative;
+            transform-origin:top;
+            transition:all 1s;
+            transform-style:preserve-3d;
+
+        }
+        nav a span::after{
+            content: attr(data-hover);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #000000;
+            text-align: center;
+            color: #ffffff;
+            width: 100%;
+            height: 100%;
+            transform:rotateX(-90deg);
+            transform-origin:top;
+        }
+
+        nav a:hover span{
+            transform:rotateX(90deg) translateY(-20px);
+        }
+        .uc-header-bg{
+            /*background-color: #f39894;*/
+            background-color: #ffded9;
+
+            height:90px;
+        }
+        .section{
+            background-color: #fdf0ef;
+        }
+        .jiesuan{
+            position: relative;
+            top: 0px;
+            background-color: #fdf0ef;
+        }
+
+
     </style>
 </head>
 
@@ -128,7 +234,7 @@
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
-            <img src="<%=basePath%>images/LOGOMeiTao.png"style="height: 90px;width: 140px;" alt="" /></a></div>
+            <img src="<%=basePath%>images/LOGOMeiTao.png"style="height: 70px;width: 100px;" alt="" /></a></div>
 
     </div>
     <nav>
@@ -150,7 +256,7 @@
         <a href="<%= basePath %>goods/glist.action?categoryid=6">
             <span data-hover="水乳">水乳</span>
         </a>
-        <a href="<%=basePath%>jsp/mh-orders.jsp">
+        <a href="<%=basePath%>goods/myOrder.action">
             <span data-hover="个人中心">个人中心</span>
         </a>
         <a href="<%=basePath%>jsp/cart.jsp">
@@ -158,8 +264,9 @@
         </a>
     </nav>
 </div>
-<h1 class="text-center">结算页</h1>
-<p id="p">愉快购物每一天！</p>
+<div class="jiesuan">
+    <h1 class="text-center">结算页</h1>
+    <p id="p">愉快购物每一天！</p></div>
 
     <div class="section">
     <div class="uc-content" >
@@ -237,14 +344,14 @@
 
                     <div class="address-list"id="parent">
                         <c:forEach items="${addressList}" var="address">
-                            <div class="col col-4" id="${address.addressid}" >
+                            <div class="col col-4" id="${address.addressid}"  name="dizhi">
                                 <div class="item">
                                     <div class="action">
                                         <div class="fl">
                                             <a class="del" onclick="deleteAddress(${address.addressid})">删除</a></div>
-                                            <div class="fr"><a class="setdft" href="javascript:void(0)" onclick="addAddrIntoOrderInfo('${order.orderid}','${address.addressdetail}','${address.receivename}','${address.receivetel}')">选我为付款地址</a></div>
+                                            <div class="fr"><a class="setdft" href="javascript:void(0)" onclick="addAddrIntoOrderInfo('${order.orderid}','${address.addressdetail}','${address.receivename}','${address.receivetel}','${address.addressid}')">选我为付款地址</a></div>
                                         <script type="text/javascript">
-                                            function addAddrIntoOrderInfo(orderid,addressdetail,receivename,receivetel) {
+                                            function addAddrIntoOrderInfo(orderid,addressdetail,receivename,receivetel,addressId) {
                                                 if(confirm("您确定选此地址作为付款地址吗？")){
                                                     var orderid=orderid;
                                                     var addressdetail=addressdetail;
@@ -256,6 +363,9 @@
                                                         data:"orderId="+orderid+"&addressdetail="+addressdetail+"&receivename="+receivename+"&receivetel="+receivetel,
                                                         success:function(result){
                                                             alert("选取付款地址成功！");
+                                                            $("#fukuananliu").attr("disabled",false);
+                                                            $("[name='dizhi']").removeClass("xuanzhong");
+                                                            document.getElementById(addressId).classList.add("xuanzhong");
                                                         }
                                                     });
                                                 }
@@ -379,9 +489,25 @@
            <input type="hidden" name="WIDout_trade_no" value="${order.orderid}"/>
            <input type="hidden" name="WIDsubject" value="myorder"/>
            <input type="hidden" name="WIDtotal_amount" id="money"/>
-           <button class="btn submitForm" type="submit">确定提交</button>
+           <button id="fukuananliu" class="btn submitForm" disabled>确定提交</button><br/>
+           <span id="info">亲您先去选择付款地址吧！！！</span>
        </div>
 
+        <%--<script>
+            $("#fukuananliu").click( function(){
+                $.ajax({
+                    type:"get",
+                    url:"<%=basePath%>goods/selectAddressByOid.action",
+                    data:"orderid="+${order.orderid},
+                    success:function(msg){
+                        if(msg==1){
+                            $("#fukuananliu").disabled();
+                            alert("请先选择地址哦！");
+                        }
+                    }
+                });
+            })
+        </script>--%>
           </form>
 
 </div>

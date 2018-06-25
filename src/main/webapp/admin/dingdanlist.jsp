@@ -18,7 +18,7 @@
     <title>后台管理系统</title>
     <meta name="author" content="DeathGhost" />
     <link rel="stylesheet" type="text/css" href="../css/styleadmin.css">
-    <%--<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">--%>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 </head>
 
 <body>
@@ -27,15 +27,13 @@
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
         <li><a href="#" class="website_icon">站点首页</a></li>
-        <li><a href="adminlogin.jsp" class="quit_icon">安全退出</a></li>
+        <li><a href="<%=basePath%>admin/adminlogin.jsp" class="quit_icon">安全退出</a></li>
     </ul>
 </header>
 <!--aside nav-->
 <!--aside nav-->
-
 <aside class="lt_aside_nav content mCustomScrollbar">
-
-    <h2><a >管理区</a></h2>
+    <h2><a href="#">管理区 </a></h2>
     <ul>
         <li>
             <dl>
