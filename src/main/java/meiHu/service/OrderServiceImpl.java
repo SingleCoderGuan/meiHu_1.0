@@ -152,4 +152,13 @@ public class OrderServiceImpl implements OrderService {
         PageInfo<Order> pageInfo=new PageInfo<>(postList);
         return  pageInfo ;
     }
+
+    @Override
+    public int selectAddressByOid(int orderid) {
+        if(orderMapper.selectAddressByOid(orderid)==null){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }

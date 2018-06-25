@@ -45,4 +45,6 @@ public interface OrderService {
     public List<Order> selectOrderByState(String state);
     //分页
     public PageInfo<Order> getAllOrderByPage(int uid, Map<String, Object> map);
+    //在去付款之前先检查是否选择地址
+    public int selectAddressByOid(int orderid);
 }

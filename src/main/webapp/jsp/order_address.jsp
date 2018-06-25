@@ -120,6 +120,9 @@
             position: relative;
             margin-top: -70px;
         }
+        .xuanzhong{
+            background-color: yellow;
+        }
     </style>
 </head>
 
@@ -237,14 +240,14 @@
 
                     <div class="address-list"id="parent">
                         <c:forEach items="${addressList}" var="address">
-                            <div class="col col-4" id="${address.addressid}" >
+                            <div class="col col-4" id="${address.addressid}"  name="dizhi">
                                 <div class="item">
                                     <div class="action">
                                         <div class="fl">
                                             <a class="del" onclick="deleteAddress(${address.addressid})">删除</a></div>
-                                            <div class="fr"><a class="setdft" href="javascript:void(0)" onclick="addAddrIntoOrderInfo('${order.orderid}','${address.addressdetail}','${address.receivename}','${address.receivetel}')">选我为付款地址</a></div>
+                                            <div class="fr"><a class="setdft" href="javascript:void(0)" onclick="addAddrIntoOrderInfo('${order.orderid}','${address.addressdetail}','${address.receivename}','${address.receivetel}','${address.addressid}')">选我为付款地址</a></div>
                                         <script type="text/javascript">
-                                            function addAddrIntoOrderInfo(orderid,addressdetail,receivename,receivetel) {
+                                            function addAddrIntoOrderInfo(orderid,addressdetail,receivename,receivetel,addressId) {
                                                 if(confirm("您确定选此地址作为付款地址吗？")){
                                                     var orderid=orderid;
                                                     var addressdetail=addressdetail;
@@ -256,6 +259,9 @@
                                                         data:"orderId="+orderid+"&addressdetail="+addressdetail+"&receivename="+receivename+"&receivetel="+receivetel,
                                                         success:function(result){
                                                             alert("选取付款地址成功！");
+                                                            $("#fukuananliu").attr("disabled",false);
+                                                            $("[name='dizhi']").removeClass("xuanzhong");
+                                                            document.getElementById(addressId).classList.add("xuanzhong");
                                                         }
                                                     });
                                                 }
@@ -366,7 +372,7 @@
                     <p>运费：<span class="footerPrice">￥0.00</span></p>
                 </div>
            <div class="row footerRow">
-               <span class="footerRowprice">&nbsp;&nbsp;&nbsp;&nbsp;应付金额：<span id="yingfu">${order.total*1}元</span></span>
+               <span class="footerRowprice">&nbsp;&nbsp;&nbsp;&nbsp;应付金额：<span id="yingfu">${order.tota}元</span></span>
            </div>
            <script>
                function queding() {
@@ -379,9 +385,25 @@
            <input type="hidden" name="WIDout_trade_no" value="${order.orderid}"/>
            <input type="hidden" name="WIDsubject" value="myorder"/>
            <input type="hidden" name="WIDtotal_amount" id="money"/>
-           <button class="btn submitForm" type="submit">确定提交</button>
+           <button id="fukuananliu" class="btn submitForm" disabled>确定提交</button><br/>
+           <span id="info">亲您先去选择付款地址吧！！！</span>
        </div>
 
+        <%--<script>
+            $("#fukuananliu").click( function(){
+                $.ajax({
+                    type:"get",
+                    url:"<%=basePath%>goods/selectAddressByOid.action",
+                    data:"orderid="+${order.orderid},
+                    success:function(msg){
+                        if(msg==1){
+                            $("#fukuananliu").disabled();
+                            alert("请先选择地址哦！");
+                        }
+                    }
+                });
+            })
+        </script>--%>
           </form>
 
 </div>

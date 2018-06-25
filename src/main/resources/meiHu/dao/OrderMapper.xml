@@ -351,4 +351,10 @@
        where so.uid=fu.uid
        and so.state=#{_parameter}
     </select>
+
+    <!--// 根据订单编号查询地址信息为空
+    public String selectAddressByOid(int orderid);-->
+    <select id="selectAddressByOid" parameterType="int" resultType="String">
+        select addressdetail from shop_order where orderid=#{_parameter}
+    </select>
 </mapper>

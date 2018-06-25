@@ -1,8 +1,8 @@
 package meiHu.control;
 
-//import com.alipay.config.*;
-/*import com.alipay.api.*;
-import com.alipay.api.request.*;*/
+import com.alipay.config.*;
+import com.alipay.api.*;
+import com.alipay.api.request.*;
 import com.github.pagehelper.PageInfo;
 import meiHu.entity.*;
 import meiHu.service.*;
@@ -310,7 +310,7 @@ public class GoodControl {
         int result=orderService.addAddrIntoOrderById(orderid,addressdetail,receivename,receivetel);
         return result;
     }
-   /* //用户去付款
+    //用户去付款
     @RequestMapping(value = "/alipay.action",method = {RequestMethod.POST,RequestMethod.GET})
     public @ResponseBody String alipay(HttpServletRequest request,HttpServletResponse response) throws IOException, AlipayApiException {
         //获得初始化的AlipayClient
@@ -338,7 +338,7 @@ public class GoodControl {
            String result = alipayClient.pageExecute(alipayRequest).getBody();
            //输出
            return result;
-    }*/
+    }
     //未付款订单去付款
     @RequestMapping(value = "/daifukuan.action",method = {RequestMethod.POST,RequestMethod.GET})
     public void fukuan(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
@@ -351,5 +351,12 @@ public class GoodControl {
         request.setAttribute("OrderItemLists",OrderItemLists);
         request.setAttribute("userofflist",exchangeService.selectAllOffByUid(uid));
         request.getRequestDispatcher("/jsp/qufukuan.jsp").forward(request,response);
+    }
+    //付款检查是否完善地址信息
+    @RequestMapping(value = "/selectAddressByOid.action",method = {RequestMethod.POST,RequestMethod.GET})
+    public @ResponseBody int selectAddressByOid(HttpServletRequest request,HttpServletResponse response){
+       int orderid=Integer.parseInt(request.getParameter("orderid"));
+       int msg=orderService.selectAddressByOid(orderid);
+       return msg;
     }
 }
