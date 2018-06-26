@@ -3,10 +3,8 @@ package meiHu.control;
 import meiHu.entity.ForumComment;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumUser;
-import meiHu.service.FocusService;
-import meiHu.service.LuntanService;
-import meiHu.service.PostService;
-import meiHu.service.UserService;
+import meiHu.entity.ShopGoodsComment;
+import meiHu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
@@ -28,6 +26,12 @@ import java.util.Map;
 @RequestMapping("/user")
 @Controller
 public class UserController {
+    @Autowired
+    private GoodService goodService;
+    @Autowired
+    private GoodsCommentService goodsCommentService;
+    @Autowired
+    private ExchangeService exchangeService;
     @Autowired
     private FocusService focusService;
     @Autowired
@@ -139,6 +143,8 @@ public class UserController {
         session.setAttribute("postsNum",postList.size());
         session.setAttribute("focusUsers",focusUsers);
         session.setAttribute("followers",followers);
+        request.setAttribute("userofflist", exchangeService.selectAllOffByUid(uid));
+
         request.setAttribute("personalpoint",userService.selectPointByUid(uid));
 //        response.sendRedirect(request.getContextPath()+"/jsp/userPersonalCenter.jsp");
         request.getRequestDispatcher("/jsp/userPersonalCenter.jsp").forward(request,response);
@@ -253,6 +259,18 @@ public class UserController {
         request.setAttribute("map",map);
         request.setAttribute("mapnum",mapnum);
         request.getRequestDispatcher("/jsp/tiezidetail.jsp").forward(request,response);
+    }
+
+    @RequestMapping(value = "/goodsComment.action",method = RequestMethod.POST)
+    public @ResponseBody String insertComment(ShopGoodsComment comment, String goodid, String uid, String orderid, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        comment.setGoods(goodService.getGood(Integer.parseInt(goodid)));
+        comment.setForumUser(userService.selectUserByUid(Integer.parseInt(uid)));
+        if(goodsCommentService.insert(comment)){
+            goodsCommentService.updateItemState(Integer.parseInt(goodid),Integer.parseInt(orderid));
+            return "1";
+        }else {
+            return "0" ;
+        }
     }
 
 

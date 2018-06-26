@@ -100,4 +100,9 @@ public class PostServiceImpl implements PostService {
         return forumPostMapper.deletePostByPid(pid);
     }
 
+
+    @Override
+    public ForumPost selectPostsByPtitleHot(String keyword) {
+        return forumPostMapper.selectKeywordHot(keyword);
+    }
 }

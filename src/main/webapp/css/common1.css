@@ -890,7 +890,7 @@ textarea.ui-txtin { height: auto; resize: none; }
 .side-category-ft.on .label.toshow { display: block; }
 
 /*主题*/
-.graybg-theme { background-color: #f4f4f4; }
+.graybg-theme { background-color: #FDF0EF; }
 .graybg-theme .topper { background-color: #fff; border-bottom: 1px solid #e4e4e4; }
 .graybg-theme .bd-t { border-top: 1px solid #e4e4e4; }
 .graybg-theme .bd-b { border-bottom: 1px solid #e4e4e4; }

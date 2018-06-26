@@ -25,9 +25,8 @@
         .uc-header-bg{
             background-color: #ffded9;
         }
-        .uc-search{
-            position: relative;
-            margin-top:-50px;
+        body{
+            background-color: #fdf0ef;
         }
     </style>
 
@@ -67,14 +66,7 @@
         <a class="logo" href="<%=basePath%>main.action"><img src="<%=basePath%>images/u8.png" alt="" /></a>
 
 
-        <div class="schbox">
-            <form action="" method="post">
-                <input class="search-txt" type="text" placeholder="请输入搜索内容"
-                       style="border: solid 2px;border-right: none"/>
-                <button class="search-btn">搜索</button>
 
-            </form>
-        </div>
     </div>
 </div>
 
@@ -123,7 +115,7 @@
                             <a class="item" href="<%=basePath%>goods/myOrder.action">所有订单</a>
                             <a class="item" href="<%=basePath%>goods/noPayOrder.action">待付款</a>
                             <a class="item" href="<%=basePath%>goods/waitOrder.action">待发货</a>
-                            <a class="item  active" href="<%=basePath%>goods/runOrder.action">待收款</a>
+                            <a class="item  active" href="<%=basePath%>goods/runOrder.action">待收货</a>
                             <a class="item" href="<%=basePath%>goods/doneOrder.action">已完成</a></div>
                         </div>
 

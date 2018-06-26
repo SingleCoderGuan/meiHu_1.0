@@ -205,15 +205,18 @@
                         </div>
                         <div class="mod-footer">
                             <ul class="nav nav-tabs aw-nav-tabs">
-                                <li style="width: 233px;text-align: center">
+                                <li style="width: 150px;text-align: center">
                                     <a href="#questions" id="page_questions" data-toggle="tab" style="font-size: 20px">我的帖子<span class="badge" style="font-size: 18px">${postsNum}</span></a>
                                 </li>
-                                <li style="width: 233px;text-align: center">
+                                <li style="width: 150px;text-align: center">
                                     <a href="#answers" id="page_answers" data-toggle="tab" style="font-size: 20px">我的提醒<span id="messageNum" class="badge" style="font-size: 18px">${commentsNum}</span></a>
                                 </li>
 
-                                <li style="width: 233px;text-align: center">
+                                <li style="width: 150px;text-align: center">
                                     <a href="#focus" id="page_focus" data-toggle="tab" style="font-size: 20px">我的收藏</a>
+                                </li>
+                                <li style="width: 140px;text-align: center">
+                                    <a href="#quan" id="page_quan" data-toggle="tab" style="font-size: 20px">我的优惠券</a>
                                 </li>
                             </ul>
                         </div>
@@ -279,13 +282,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="articles">
+                            <div class="tab-pane" id="quan">
                                 <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3>文章</h3>
-                                    </div>
+
                                     <div class="mod-body">
-                                        <div class="aw-profile-publish-list" id="contents_user_actions_articles"></div>
+                                        <div class="aw-profile-publish-list" id="contents_user_actions_articles">
+                                            <div style="background-color: #FFCCCC;height: 30px ;width: 100%"><span style="position: relative;left: 30px;top: 5px;">类型</span><span style="position: relative;left: 380px;top: 5px">数量</span></div>
+                                            <c:forEach items="${userofflist}" var="userofflist">
+                                                <div style="position:relative ;left: 20px;margin-top: 15px">
+                                                    <a><span>${10-userofflist.offLevel.offid}折优惠券</span></a>
+                                                    <div style="position: absolute;left: 369px;top: -1px;width: 70px;height:20px ;text-align:center;"><span>${userofflist.remainnum}张</span></div>
+                                                </div>
+                                            </c:forEach>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>

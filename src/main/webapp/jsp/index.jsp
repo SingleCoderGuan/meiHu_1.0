@@ -41,10 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <span class="active"><span class="valign"><span class="vertical">美乎</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">美乎</span></span></span>
         </a>
-        <a class="link abt" href="<%= basePath %>goods/glists.action?categoryid=6">
-            <span class="active"><span class="valign"><span class="vertical">商品浏览</span></span></span>
-            <span class="hover"><span class="valign"><span class="vertical">商品浏览</span></span></span>
-        </a>
+
         <a class="link abt" href="<%=basePath %>jsp/cart.jsp">
             <span class="active"><span class="valign"><span class="vertical">购物车</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">购物车</span></span></span>
@@ -56,6 +53,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <a class="link abt" href="<%=basePath%>goods/myOrder.action">
             <span class="active"><span class="valign"><span class="vertical">个人中心</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">个人中心</span></span></span>
+        </a>
+        <a class="link abt" href="<%=basePath%>quchoujiang.action">
+            <span class="active"><span class="valign"><span class="vertical">去抽奖</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">去抽奖</span></span></span>
         </a>
     </div>
     <!-- script for menu -->

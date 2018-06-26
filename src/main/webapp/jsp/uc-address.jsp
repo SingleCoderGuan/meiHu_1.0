@@ -25,6 +25,9 @@
         .uc-header-bg{
             background-color: #ffded9;
         }
+        body{
+            background-color: #fdf0ef;
+        }
     </style>
 </head>
 <body>
@@ -62,14 +65,7 @@
         <a class="logo" href="<%=basePath%>main.action"><img src="<%=basePath%>images/u8.png" alt="" /></a>
 
 
-        <div class="schbox">
-            <form action="" method="post">
-                <input class="search-txt" type="text" placeholder="请输入搜索内容"
-                       style="border: solid 2px;border-right: none"/>
-                <button class="search-btn">搜索</button>
 
-            </form>
-        </div>
 
     </div>
 </div>

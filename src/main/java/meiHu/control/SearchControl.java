@@ -4,6 +4,7 @@ package meiHu.control;
 import com.github.pagehelper.PageInfo;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumTopic;
+import meiHu.service.GoodService;
 import meiHu.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/search")
 public class SearchControl {
+    @Autowired
+    private GoodService goodService;
     @Autowired
     private PostService postService;
 
@@ -50,6 +53,15 @@ public class SearchControl {
         List<ForumPost> postList=postService.selectPostsByPtitle(searchcontent);
         request.setAttribute("postList",postList);
         request.setAttribute("search",searchcontent);
+        request.getRequestDispatcher("/jsp/searchresult.jsp").forward(request,response);
+    }
+
+    @RequestMapping(value = "/goodsPosts.action" )
+    public void searchByGoodsName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int goodid = Integer.parseInt(request.getParameter("goodid")) ;
+        String goodsName = goodService.getGood(goodid).getGoodname() ;
+        List<ForumPost> postList=postService.selectPostsByPtitle(goodsName);
+        request.setAttribute("postList",postList);
         request.getRequestDispatcher("/jsp/searchresult.jsp").forward(request,response);
     }
 }

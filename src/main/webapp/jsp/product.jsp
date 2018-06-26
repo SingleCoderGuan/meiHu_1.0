@@ -358,6 +358,51 @@
                         <p>现阶段购买，优惠多多</p>
                     </div>
                 </div>
+                <div class="tab-item">
+                    <a class="tab-label">商品评论</a>
+                    <div class="tab-content padding-left-10" style="width: 1075px">
+                        <h3>评论详情</h3>
+                        <c:if test="${empty comments}">
+                            <h2 style="position: relative;left: 250px;">该商品暂时还没有评论</h2>
+                        </c:if>
+                        <c:forEach items="${comments}" var="comment">
+                            <div>
+                                <img style="position: relative;width: 50px;height: 50px;"
+                                     src="<%=basePath%>${comment.forumUser.headpic}">
+                                <span>${comment.forumUser.uname}</span>
+                                <span style="position: relative; top: -30px;left: 50px;">${comment.content}</span>
+                                <span style="position: relative;left: 500px;text-align: right"><fmt:formatDate
+                                        value='${comment.createtime}'
+                                        pattern='yyyy-MM-dd hh:mm:ss'/></span>
+                            </div>
+                        </c:forEach>
+
+                    </div>
+                    <br>
+
+                    <hr />
+                    <br>
+                    <c:if test="${not empty post}">
+                        <div style="position: relative;left: 250px;top: -50px;">
+
+                            <div style="position: relative;top: 20px;">
+                                美论热帖： <a href="<%=basePath%>luntan/tiezidetail.action?pid=${post.pid}">${post.ptitle}</a>
+                                <span style="position: relative;left: 200px;">${post.user.uname}</span>&nbsp;
+                                 <span style="position: relative;left: 200px"><fmt:formatDate value='${post.createtime}'
+                                                                                             pattern='yyyy-MM-dd hh:mm:ss'/></span>
+                            </div>
+                            <a style="position: relative;top: 50px;color: deeppink"
+                               href="<%=basePath%>search/goodsPosts.action?goodid=${product.goodid}">去美论查看更多关于${product.goodname}的热帖</a>
+                        </div>
+                    </c:if>
+                    <c:if test="${empty post}">
+                        <div style="position: relative;left: 250px;top: 10px;">
+                            <h2 style="position: relative;color: grey;font-size: 20px">美论还没有该商品相关帖子</h2>
+                        </div>
+                        <a style="position: relative;left: 250px;top: 0px;color: hotpink"
+                           href="<%=basePath%>luntan/luntanshouye.action?tid=1">去美论查看更多热帖>></a>
+                    </c:if>
+                </div>
             </div>
         </div>
     </div>

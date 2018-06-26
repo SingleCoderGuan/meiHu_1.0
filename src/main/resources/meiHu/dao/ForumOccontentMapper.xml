@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.ForumOccontentMapper">
+   <resultMap id="insertocc" type="ForumOfficalComment">
+       <id column="occid" property="occid"/>
+
+        <result column="occontent" property="occontent"/>
+       <result column="createtime" property="createtime"/>
+       <association property="user" javaType="ForumUser">
+           <id column="uid" property="uid"/>
+           <result column="uname" property="uname"/>
+           <result column="headpic" property="headpic"/>
+       </association>
+   </resultMap>
+    <!--public void insertOccontent(int uid,int ocid,String content);-->
+    <insert id="insertOccontent" parameterType="ForumOfficalComment">
+        insert into forum_occomment(uid,ocid,occontent) VALUES (#{param1},#{param2},#{param3})
+    </insert>
+
+    <!--public List<ForumOfficalComment> selectAllOccontent(int occid);-->
+    <select id="selectAllOccontent" resultMap="insertocc" parameterType="int">
+            SELECT u.*,cc.* FROM forum_user u,forum_occomment cc WHERE  cc.ocid=#{parameter} AND u.uid = cc.uid
+    </select>
+
+
+
+</mapper>

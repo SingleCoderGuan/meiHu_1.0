@@ -252,9 +252,10 @@
 </div>
 
 
-<DIV id=img1 style="Z-INDEX: 100; LEFT: 2px; WIDTH: 59px; POSITION: absolute; TOP: 43px; HEIGHT: 61px;
- visibility: visible;"><a href="<%=basePath%>quchoujiang.action" target="_blank"><img src="<%=basePath%>images/huodong.png" width="140" height="160" border="0"></a></DIV>
-<SCRIPT src="<%=basePath%>js/guanggaopiaofu.js"></SCRIPT>
+<%--<DIV id=img1 style="Z-INDEX: 100; LEFT: 2px; WIDTH: 59px; POSITION: absolute; TOP: 43px; HEIGHT: 61px;--%>
+ <%--visibility: visible;"><a href="<%=basePath%>quchoujiang.action" target="_blank"><img src="<%=basePath%>images/huodong.png" width="140" height="160" border="0"></a></DIV>--%>
+<%--<SCRIPT src="<%=basePath%>js/guanggaopiaofu.js"></SCRIPT>--%>
+<script language=JavaScript src="<%=basePath%>js/ad.js"></script>
 
 <div class="aw-container-wrap ">
     <div class="aw-container aw-wecenter" style="">
@@ -632,7 +633,6 @@
 
 </script>
 
-        <script src="https://qiyukf.com/script/8461da5aef2206ef029adb41eea97bfb.js"></script>
 
 
 

@@ -44,7 +44,7 @@
 <body class="home-template">
 
 <!-- start header -->
-<header class="main-header"  style="background:url(../images/pinkbg.jpg)   ;height: 300px;">
+<header class="main-header"  style="background:url(../images/pinkbg.jpg)    ;height: 300px;">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -54,7 +54,6 @@
                 <!-- end logo -->
                 <h2 style="color: black; font-family: '本墨锵黑';">姐妹们，争做时尚最前沿</h2>
 
-                <img src="http://static.ghostchina.com/image/6/d1/fcb3879e14429d75833a461572e64.jpg" alt="Ghost 博客系统" class="hide">
             </div>
         </div>
     </div>
@@ -74,11 +73,10 @@
                 </div>
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
-                        <li class="nav-current" role="presentation"><a href="#">美文首页</a></li>
+                        <li class="nav-current" role="presentation"><a href="#">美文</a></li>
                         <li  role="presentation"><a href="<%=basePath%>luntan/luntanshouye.action?tid=1">美论</a></li>
 
                         <li  role="presentation"><a href="<%=basePath%>jsp/index.jsp">美淘</a></li>
-                        <li  role="presentation"><a href="<%=basePath%>jsp/activity.jsp">活动</a></li>
 
                         <li  role="presentation"><a href="#">关于我们</a></li>
                     </ul>

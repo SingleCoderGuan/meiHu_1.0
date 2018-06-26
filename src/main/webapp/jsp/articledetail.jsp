@@ -141,18 +141,69 @@
                 </article>
 
                 <div class="about-author clearfix">
-                    <a href="#"><img src="../images/img4.jpg" alt="美乎小编" class="avatar pull-left"></a>
 
+                    <c:if test="${empty commentlist}">
+                        暂无评论，快抢沙发
+                    </c:if>
+                    <c:if test="${not empty commentlist}">
+                        <span>评论区</span>
+                        <br>
+                        <c:forEach var="commentlist" items="${commentlist}">
+                            <a href="<%=basePath%>luntan/userdetail.action?uid=${commentlist.user.uid}"><img src="<%=basePath%>${commentlist.user.headpic}" class="avatar pull-left" style="width: 40px; height: 40px;"></a>
+
+                            <div class="details">
+                                <div class="meta-info">
+                                        ${commentlist.user.uname}   发表于 <fmt:formatDate value="${commentlist.createtime}"  pattern="yyyy年MM月dd日" />
+
+                                </div>
+                                <div c-ass="meta-info" >
+                                    <span class="loaction">${commentlist.occontent}</span>
+                                </div>
+                            </div>
+                            <br>
+                        </c:forEach>
+                    </c:if>
+
+                </div>
+
+                <div class="about-author clearfix">
+                    留下你的评论
+                    <input type="text" style="width:660px;height: 50px;" id="comment"/>
                     <div class="details">
-                        <div class="author">
-                            作者 ：<a href="#">美乎小编</a>
-                        </div>
+
                         <div class="meta-info">
-                            <span class="loaction"><i class="fa fa-home"></i>苏州</span>
-                            <span class="website"><i class="fa fa-globe"></i><a href="index.html" targer="_blank">公司首页</a></span>
+                            <br>
+                            <div class="content download">
+                                <a href="javascript:void(0)" class="btn btn-default btn-block" style="width:340px" onclick="comment(${forumOfficalarticle.oaid},$('#comment').val())">发表评论</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <script>
+                    function comment(occid,occontent){
+                        <c:if test="${empty sessionScope.user.uid}">
+                        alert("亲，请先登录");
+                        window.location.href="<%=basePath%>jsp/loginregister.jsp";
+
+                        </c:if>
+                        <c:if test="${not empty sessionScope.user.uid}">
+                            $.ajax({
+                                type:"post",
+                                url: "${pageContext.request.contextPath}/article/articlecomment.action",
+                                data: "uid=" + ${sessionScope.user.uid}+"&occid="+occid+"&content="+occontent,
+                                success: function (result) {
+                                    if (result == 1) {
+                                        alert("发表成功！！");
+                                        $('#comment').val("");
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+
+
+                        </c:if>
+                    }
+                </script>
 
 
             </main>
@@ -184,7 +235,7 @@
                     function sign(){
                         <c:if test="${empty sessionScope.user.uid}">
                         alert("亲，请先登录");
-                        window.location.href="<%=basePath%>jsp/loginregister.jsp?url=/meiHu_1.0/article/articledetail.action?oaid=${forumOfficalarticle.oaid}";
+                        window.location.href="<%=basePath%>jsp/loginregister.jsp";
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user.uid}">

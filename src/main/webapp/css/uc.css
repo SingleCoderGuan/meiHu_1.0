@@ -1,7 +1,7 @@
 ﻿@charset "UTF-8";
 .btn-get-wl .wl-toggle .arrow { content: ""; height: 0; width: 0; overflow: hidden; }
 
-body { background-color: #f4f4f4; }
+body { background-color: #FDF0EF; }
 
 table .align-left { text-align: left !important; }
 table .align-right { text-align: right !important; }

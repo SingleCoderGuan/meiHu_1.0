@@ -2,9 +2,11 @@ package meiHu.control;
 
 
 import com.github.pagehelper.PageInfo;
+import meiHu.entity.ForumOfficalComment;
 import meiHu.entity.ForumOfficalarticle;
 import meiHu.entity.ForumSign;
 import meiHu.service.ArticleService;
+import meiHu.service.ForumOfficalCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,8 @@ import java.util.Map;
 public class ArticleControl {
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private ForumOfficalCommentService forumOfficalCommentService;
 
     @RequestMapping("/sign.action")
     public void sign(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
@@ -78,8 +82,21 @@ public class ArticleControl {
         String oaid = request.getParameter("oaid");
         int oid = Integer.parseInt(oaid);
         ForumOfficalarticle forumOfficalarticle = articleService.selectOfficalArticleByOaid(oid);
+        List<ForumOfficalComment> list = forumOfficalCommentService.selectAllOccontent(oid);
         request.setAttribute("forumOfficalarticle",forumOfficalarticle);
+        request.setAttribute("commentlist",list);
         request.getRequestDispatcher("/jsp/articledetail.jsp").forward(request,response);
+
+    }
+    @RequestMapping("/articlecomment.action")
+    public void insertcomment(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        data: "uid=" + ${sessionScope.user.uid}+"occid="+occid+"content="+occontent,
+        int uid=Integer.parseInt(request.getParameter("uid"));
+        int occid = Integer.parseInt(request.getParameter("occid"));
+        String content = request.getParameter("content");
+        if( forumOfficalCommentService.insertOccontent(uid,occid,content)){
+            response.getWriter().print(1);
+        }
 
     }
 }

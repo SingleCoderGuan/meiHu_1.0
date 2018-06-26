@@ -34,7 +34,6 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
     <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
     <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
-    <script src="<%=basePath%>js/hb.js" type="text/javascript"></script>
     <script src="<%=basePath%>js/jquery.js" type="text/javascript"></script>
 
 
@@ -101,15 +100,16 @@
     }
 </style>
 
-<body onload="hongbao()">
+<body>
 <div id="petalbox"></div>
 <div class="aw-top-menu-wrap">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
             <!-- logo -->
+            <a href="<%=basePath%>main.action">
             <div class="aw-logo hidden-xs">
                 <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/>
-            </div>
+            </div></a>
             <!-- end logo -->
             <!-- 搜索框 -->
             <div class="aw-search-box  hidden-xs hidden-sm">
@@ -198,7 +198,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>fatie.action">发帖</a>
+                            <a href="<%=basePath%>user/fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -248,7 +248,7 @@
 
                             </c:if>
                             <c:if test="${not empty sessionScope.user.uid}">
-                                <h1 class="pull-right">您当前剩余积分<strong>${point}</strong>分</h1>
+                                <h1 class="pull-right">可在个人中心查看已获得的优惠券，您当前剩余积分<strong>${point}</strong>分</h1>
                                 <%--<input type="hidden" id="point" value="${point}">--%>
 
                             </c:if>

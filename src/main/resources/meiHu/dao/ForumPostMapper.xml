@@ -134,4 +134,12 @@
     <delete id="deletePostByPid" parameterType="int">
         DELETE  FROM forum_post WHERE pid=#{_parameter}
     </delete>
+
+
+    <!--public ForumPost selectKeywordHot(String keyword) ;-->
+    <select id="selectKeywordHot" resultMap="getForumPost" parameterType="String">
+    SELECT p.*,u.uname,t.tname FROM forum_post p,forum_user u,forum_topic t
+    WHERE  p.ptitle like CONCAT('%',#{parameter},'%')   AND p.user_uid = u.uid AND t.tid = p.topic_tid
+    ORDER BY  likecount DESC limit 0,1
+    </select>
 </mapper>

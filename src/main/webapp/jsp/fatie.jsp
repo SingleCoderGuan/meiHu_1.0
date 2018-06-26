@@ -47,6 +47,7 @@
     <script>
         function subm() {
             document.getElementById('content').value = editor.txt.html();
+
             document.getElementById('newspost').submit();
         }
     </script>
@@ -251,7 +252,7 @@
                         <span style="position: relative;left:5px;top: 5px;font-size: 20px">标题：</span>
                         <input type="text" style="width: 590px;position: relative;top: 10px; " class="form-control"
                                id="title" name="ptitle"/><br/><br/>
-
+<input type="hidden">
                         <span style="position: relative;left:5px;top: -11px;font-size: 20px">板块：</span>
                         <select style="position: relative;top: -10px;width: 130px" class="form-control" id="topicList"
                                 name="topicid">
@@ -263,7 +264,16 @@
                             <option value="6">眼霜</option>
                             <option value="7">代购</option>
                         </select>
-
+                        <span  hidden id="oyhshowInfo" style="position: absolute;top: 166px;left: 130px;color: red">代购区所有交易均由用户自己负责</span>
+                        <script>
+                            $("#topicList").on("change",function(){
+                                if($("option:selected",this).val()==7){
+                                    $("#oyhshowInfo").show();
+                                }else{
+                                    $("#oyhshowInfo").hide();
+                                }
+                            });
+                        </script>
                         <input type="hidden" id="content" name="pcontent"/>
 
                         <div id="div1" class="toolbar">
@@ -291,6 +301,9 @@
                             <br/>
                             <p><b>• 关于积分：</b> 发起一个帖子会增加您 5 个积分, 每多一个回复你将获得 3 个积分的奖励 ,积分在商城可兑换商品,
                                 在发起问题的时候希望能够更好的描述您的问题以及多使用站内搜索功能.</p>
+                            <br/>
+                            <p><b>• 关于代购区交易：</b> 美乎给各位用户创造一个代购交流的平台，美乎平台不参与交易，用户的交易皆与本平台无关
+                                产生不良后果由用户自行承担.</p>
                         </div>
                     </div>
                     <!-- end 问题发起指南 -->

@@ -26,6 +26,16 @@
         .uc-header-bg{
             background-color: #ffded9;
         }
+        .sorry{
+            position: relative;
+            top: 150px;
+            left: 100px;
+            color: #f34e4e;
+
+        }
+        body{
+            background-color: #fdf0ef;
+        }
     </style>
 
 </head>
@@ -133,6 +143,9 @@
                         <th>操作</th>
                         </thead>
 
+                        <c:if test="${not empty orderList}">
+
+
                         <c:forEach items="${orderList}" var="waitorder">
                             <tr>
                                 <td >
@@ -185,6 +198,12 @@
                             </tr>
                             </c:forEach>
                         </c:forEach>
+                        </c:if>
+
+
+                        <c:if test="${empty orderList}">
+                            <h1 class="sorry">对不起，没有你所查询的订单信息</h1>
+                        </c:if>
 
 
                     </table>

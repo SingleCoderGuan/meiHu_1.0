@@ -27,9 +27,8 @@
         .uc-header-bg{
             background-color: #ffded9;
         }
-        .uc-search{
-            position: relative;
-            margin-top:-50px;
+        body{
+            background-color: #fdf0ef;
         }
     </style>
 
@@ -69,14 +68,7 @@
         <a class="logo" href="<%=basePath%>main.action"><img src="<%=basePath%>images/u8.png" alt="" /></a>
 
 
-        <div class="schbox">
-            <form action="" method="post">
-                <input class="search-txt" type="text" placeholder="请输入搜索内容"
-                       style="border: solid 2px;border-right: none"/>
-                <button class="search-btn">搜索</button>
 
-            </form>
-        </div>
 
     </div>
 </div>
@@ -139,18 +131,18 @@
                         <c:forEach items="${favorList}" var="favor">
 
 
-                                <td class="order-goods">
+                                <td width="100px" class="order-goods">
                                     <a href="<%=basePath%>goods/list.action?goodid=${favor.goods.goodid}"> <img src="${pageContext.request.contextPath }/${favor.goods.goodpic}" width="100px" height="100px"></a>
                                 </td>
-                                <td>
+                                <td width="100px">
                                     <div class="goods-info">
                                         <div>
                                                 ${favor.goods.goodname}
                                         </div>
                                     </div>
                                 </td>
-                                <td>${favor.goods.goodprice}</td>
-                                <td>${favor.goods.gooddetail}</td>
+                                <td width="100px">${favor.goods.goodprice}</td>
+                                <td width="200px">${favor.goods.gooddetail}</td>
                                 <td><a href="javascript:void(0)" onclick="quxiaoFavor(${favor.goods.goodid})">取消收藏</a> </td>
 
                                 </tr>

@@ -55,5 +55,7 @@ public interface PostService {
      */
     public boolean deletePost(int pid) ;
 
+    public ForumPost selectPostsByPtitleHot(String keyword);
+
 
 }

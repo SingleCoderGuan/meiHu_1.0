@@ -34,6 +34,9 @@
             top:-1px;
             left: 0px;
         }
+        body{
+            background-color: #fdf0ef;
+        }
     </style>
 </head>
 <body>
@@ -68,13 +71,13 @@
 </div>
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
-        <a class="logo" href="<%=basePath%>main/action"><img src="<%=basePath%>images/u8.png" alt="" /></a>
+        <a class="logo" href="<%=basePath%>main.action"><img src="<%=basePath%>images/u8.png" alt="" /></a>
 
 
         <div class="schbox">
             <form action="<%=basePath%>goods/selectOrderByName.action" method="post">
                 <input class="search-txt" type="text" placeholder="请输入搜索内容" name="goodname"
-                       style="border: solid 2px;border-right: none"/>
+                       style="border: solid 2px;border-right: none;font-color:black;"/>
                 <button class="search-btn">搜索</button>
 
             </form>

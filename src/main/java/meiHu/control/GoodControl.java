@@ -23,6 +23,10 @@ import java.util.*;
 @Controller
 public class GoodControl {
     @Autowired
+    private GoodsCommentService  goodsCommentService;
+    @Autowired
+    private PostService postService;
+    @Autowired
     private GoodService goodService;
     @Autowired
     private OrderService orderService;
@@ -52,16 +56,25 @@ public class GoodControl {
     }
 
     //查看商品详情，并显示相关推荐商品
-    @RequestMapping(value = "/list.action", method = {RequestMethod.POST, RequestMethod.GET})
+    //查看商品详情，并显示相关推荐商品
+    @RequestMapping(value = "/list.action",method={RequestMethod.POST, RequestMethod.GET})
     public void product(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String goodId = request.getParameter("goodid");
-        int goodid = Integer.parseInt(goodId);
-        int categoryId = goodService.getCategoryByGid(goodid);
-        List<Goods> recommendGoods = goodService.showRecommend(categoryId);
-        request.setAttribute("recommendGoodsList", recommendGoods);
-        request.setAttribute("product", goodService.getGood(goodid));
-        request.getRequestDispatcher("/jsp/product.jsp").forward(request, response);
+        String goodId=request.getParameter("goodid");
+        int goodid=Integer.parseInt(goodId);
+        int categoryId=goodService.getCategoryByGid(goodid);
+        List<Goods> recommendGoods=goodService.showRecommend(categoryId);
+        List<ShopGoodsComment> comments = goodsCommentService.getCommentsByGid(goodid);
+        Goods product = goodService.getGood(goodid) ;
+
+        ForumPost post = postService.selectPostsByPtitleHot(product.getGoodname());
+
+        request.setAttribute("post",post);
+        request.setAttribute("comments",comments);
+        request.setAttribute("recommendGoodsList",recommendGoods);
+        request.setAttribute("product",product);
+        request.getRequestDispatcher("/jsp/product.jsp").forward(request,response);
     }
+
 
     //商品加入购物车,并显示热卖产品
     @RequestMapping(value = "/cart.action", method = {RequestMethod.POST, RequestMethod.GET})
@@ -106,14 +119,16 @@ public class GoodControl {
 
     //生成订单并浏览出用户个人地址
     @RequestMapping(value = "/order.action", method = {RequestMethod.POST, RequestMethod.GET})
-    public String save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ForumUser user = (ForumUser) request.getSession().getAttribute("user");
-        if (user == null) {
-            return "/jsp/loginregister.jsp";
-        }
+        int uid = user.getUid();
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         Order order = new Order();
         int orderid = Math.abs(UUID.randomUUID().toString().hashCode());
+
+
+
+
         order.setOrderid(orderid);
         order.setOrdertime(new Date());
         order.setTotal(cart.getTotalprice());
@@ -131,12 +146,24 @@ public class GoodControl {
         }
         orderService.save(order);
         request.getSession().setAttribute("order", order);
-        int uid = user.getUid();
         List<Address> addressList = addressService.selectAddressById(uid);
         request.getSession().setAttribute("addressList", addressList);
         request.setAttribute("userofflist", exchangeService.selectAllOffByUid(uid));
         request.getRequestDispatcher("/jsp/order_address.jsp").forward(request, response);
-        return null;
+        response.getWriter().print(1);
+    }
+    @RequestMapping(value = "/orderorder.action", method = {RequestMethod.POST, RequestMethod.GET})
+    public void savee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ForumUser user = (ForumUser) request.getSession().getAttribute("user");
+        int uid = user.getUid();
+        String address = request.getParameter("address");
+        String addressdetail = request.getParameter("addressdetail");
+        String receivename = request.getParameter("receivename");
+        String receivetel = request.getParameter("receivetel");
+        Address address1 = new Address(address, addressdetail, receivename, receivetel, uid);
+        int row = addressService.insertAddress(address1);
+        response.getWriter().print(1);
+
     }
 
     //取消订单

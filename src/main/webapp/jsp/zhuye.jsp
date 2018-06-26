@@ -60,7 +60,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <nav class="navbar navbar-inverse">
             <div class="navbar-header">
 
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="">
                     <h1 style="width: 150px;padding-top: -10px">
                         <img src="images/LOGO.png" height="70px" width="10px"/>
                     </h1>
@@ -102,12 +102,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="wrapper">
     <ul id="sb-slider" class="sb-slider">
         <li>
-            <a href="#">
+            <a href="<%=basePath%>exchange.action">
                 <img src="images/1.jpg" alt="image1" />
             </a>
             <div class="sb-description">
-                <h3>Be<span>au</span>ty St<span>yl</span>e</h3>
-                <p style="font-size: 20px;">生命中有许多你不想做却不能不做的事，这就是责任;生命中有许多你想做却不能做的事，这就是命运.</p>
                 <i></i>
             </div>
         </li>
@@ -166,21 +164,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <img src="images/a3.jpg" class="img-responsive" alt="" />
             <div class="popular-wthree-text">
               <a href="<%=basePath%>luntan/luntanshouye.action?tid=1"><h5 style="font-family: '本墨锵黑';" onmouseover="display('box')" onmouseout="disappear('box')">美论</h5></a>
-                <div id="box"class="box" style="display: none;">美乎在这里等你！</div>
+                <div id="box"class="box" style="display: none;">和大家一起分享你的美妆经验，你的购物经验，分享你的心得，美论给你一个这样的平台！</div>
             </div>
         </div>
         <div class="col-xs-4 popular-wthree-grid">
             <img src="images/a2.jpg" class="img-responsive" alt="" />
             <div class="popular-wthree-text">
                <a href="<%=basePath%>jsp/index.jsp"> <h5 style="font-family: '本墨锵黑';" onmouseover="display('box1')" onmouseout="disappear('box1')">美淘</h5></a>
-                <div id="box1"class="box1" style="display: none;">来美乎看看吧！</div>
+                <div id="box1"class="box1" style="display: none;">美乎旗下商城，大批购物优惠券向你袭来！</div>
             </div>
         </div>
         <div class="col-xs-4 popular-wthree-grid">
             <img src="images/a1.jpg" class="img-responsive" alt="" />
             <div class="popular-wthree-text">
                <a href="<%=basePath%>article/article.action"><h5 style="font-family: '本墨锵黑';" onmouseover="display('box2')" onmouseout="disappear('box2')">美文</h5></a>
-                <div id="box2"class="box2" style="display: none;">买点东西奖励一下自己吧！</div>
+                <div id="box2"class="box2" style="display: none;">官方每日推文，给你带来美妆前线最新消息，把最好的东西带给你！</div>
             </div>
         </div>
         <div class="clearfix"></div>

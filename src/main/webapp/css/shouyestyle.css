@@ -90,6 +90,7 @@ p{
     margin-left: 0;
 }
 .nav-links {
+    /*background-color: #aab8a3;*/
     background-color: rgba(0, 0, 0, 0.28);
 }
 .nav-links .navbar {

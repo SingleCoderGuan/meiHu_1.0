@@ -42,8 +42,7 @@ public class fatieControl {
             response.sendRedirect(request.getContextPath()+"/jsp/fatie.jsp");
         }
     }
-
-    @RequestMapping(value = "/user/newpost.action", method = RequestMethod.POST)
+    @RequestMapping(value = "user/newpost.action", method = RequestMethod.POST)
     public void newPost(int topicid, ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ForumTopic topic = topicService.selectTopicByTid(topicid);
         ForumPost forumPost = post;
@@ -51,6 +50,9 @@ public class fatieControl {
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         forumPost.setTopic(topic);
+        if(forumPost.getTopic().getTid()==7){
+            forumPost.setPcontent(forumPost.getPcontent()+"<span style=\'position: relative;top: 0px;left:100px ;font-size: 30px;z-index: -1;color:#c0c0c0\'>代购区所有交易均由用户自己负责</span>");
+        }
         if (postService.postNewPost(forumPost)) {
             articleService.fatiezijiawufen(post.getUser().getUid());
             response.sendRedirect(request.getContextPath() + "/luntan/luntanshouye.action?tid=1");
@@ -58,6 +60,7 @@ public class fatieControl {
             System.out.println("发帖失败");
         }
     }
+
 
     @RequestMapping(value = "/admin/newoa.action",method = RequestMethod.POST)
     public void newOa(ForumOfficalarticle forumOfficalarticle,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
