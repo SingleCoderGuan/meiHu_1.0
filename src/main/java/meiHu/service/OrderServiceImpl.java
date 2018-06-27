@@ -1,12 +1,16 @@
 package meiHu.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import meiHu.dao.OrderMapper;
+import meiHu.entity.Goods;
 import meiHu.entity.Order;
 import meiHu.entity.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -26,7 +30,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getOrderByUid(int uid) {
-
         return orderMapper.findMyOrders(uid);
     }
 
@@ -60,7 +63,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getDoneOrder(int uid) {
-
         return orderMapper.getDoneOrder(uid);
     }
 
@@ -74,5 +76,80 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.showOrderItemById(itemid);
     }
 
+    @Override
+    public int addAddrIntoOrderById(int orderid,String addressdetail,String receivename,String receivetel) {
+        if(orderMapper.addAddrInfoIntoOrderById(orderid,addressdetail,receivename,receivetel)==1){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 
+    @Override
+    public void updateOrderState(int orderid) {
+        orderMapper.updateOrderState(orderid);
+    }
+
+    @Override
+    public List<Order> selectYiFuKuanOrderLists() {
+        return orderMapper.selectYiFuKuanOrderLists();
+    }
+
+    @Override
+    public PageInfo<Order> selectYiFuKuanOrderListsByPage(Map<String, Object> map) {
+        int curPage= (int) map.get("curPage");
+        //查询的条数
+        int pageSize=(int)map.get("pageSize");
+
+        PageHelper.startPage(curPage,pageSize);
+
+
+        List<Order> postList =orderMapper.selectYiFuKuanOrderLists();
+        PageInfo<Order> pageInfo=new PageInfo<>(postList);
+        return  pageInfo ;
+
+    }
+
+    @Override
+    public Order selectYiFuKuanOrderItemLists(int orderid) {
+        return orderMapper.selectYiFuKuanOrderItem(orderid);
+    }
+
+    @Override
+    public int updateOrderStateWeiFaHuo(int orderid) {
+        if(orderMapper.updateOrderStateWeiFaHuo(orderid)==1){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    @Override
+    public int updateOrderStateWeiWanCheng(int orderid) {
+        if(orderMapper.updateOrderStateWeiWanCheng(orderid)==1){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    @Override
+    public List<Order> selectOrderByState(String state) {
+        return orderMapper.showOrderByState(state);
+    }
+
+
+    @Override
+    public PageInfo<Order> getAllOrderByPage(int uid, Map<String, Object> map) {
+        int curPage= (int) map.get("curPage");
+        //查询的条数
+        int pageSize=(int)map.get("pageSize");
+
+        PageHelper.startPage(curPage,pageSize);
+
+
+        List<Order> postList =orderMapper.findMyOrders(uid);
+        PageInfo<Order> pageInfo=new PageInfo<>(postList);
+        return  pageInfo ;
+    }
 }

@@ -17,6 +17,8 @@
     <title>我的订单</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="../css/styleadmin.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link href="<%=basePath%>css/iconfont.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/common1.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
@@ -57,7 +59,7 @@
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车</a></div>
             <div class="order"><em></em><a href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></div>
-            <div class="fav"><em></em><a href="#">我的收藏</a></div>
+            <div class="fav"><em></em><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a></div>
             <div class="help"><em></em><a href="#">帮助中心</a></div>
         </div>
     </div>
@@ -99,6 +101,11 @@
 
                     <li><a href="<%=basePath%>goods/doneOrder.action">退款/退货</a></li>
                 </ul>
+                <div class="tit">账户中心</div>
+                <ul class="sublist">
+                    <li><a href="<%=basePath%>goods/showAddress.action">收货地址</a></li>
+                    <li><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a><li>
+                </ul>
 
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
@@ -110,6 +117,12 @@
                 </ul>
             </div>
         </div>
+        <form id="mainForm"
+              action="<%=basePath%>goods/myOrder.action?uid=${user.uid}"
+              method="post">
+            <input hidden name="curPage" id="curPage"/>
+        </form>
+
         <div class="uc-content">
             <div class="uc-panel">
                 <div class="uc-bigtit">我的订单</div>
@@ -119,25 +132,38 @@
                             <a class="item active" href="<%=basePath%>goods/myOrder.action">所有订单</a>
                             <a class="item " href="<%=basePath%>goods/noPayOrder.action">待付款</a>
                             <a class="item" href="<%=basePath%>goods/waitOrder.action">待发货</a>
-                            <a class="item" href="<%=basePath%>goods/runOrder.action">已发货</a>
-                            <a class="item" href="<%=basePath%>goods/doneOrder.action">已收货</a></div>
+                            <a class="item" href="<%=basePath%>goods/runOrder.action">待收货</a>
+                            <a class="item" href="<%=basePath%>goods/doneOrder.action">已完成</a></div>
                         </div>
 
                     </div>
                     <table class="uc-table">
                         <thead>
-                        <th>商品详情</th>
-                        <th>名称</th>
-                        <th>单价</th>
-                        <th>数量</th>
-                        <th>小计</th>
-                        <th width="120">状态</th>
+                        <th class="center">商品详情</th>
+                        <th class="center">名称</th>
+                        <th class="center">单价</th>
+                        <th class="center">数量</th>
+                        <th class="center">小计</th>
+                        <th class="center">状态</th>
                         </thead>
-                        <c:forEach items="${orderList}" var="myorder">
+                        <c:forEach items="${pageInfo.list}" var="myorder">
                             <tr>
                                 <td>
-                                    <div class="left"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${myorder.ordertime}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单号: ${myorder.orderid}</div>
-
+                                    <div class="left"><fmt:formatDate pattern="yyyy-MM-dd" value="${myorder.ordertime}" />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单号: ${myorder.orderid}
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <c:choose>
+                                    <c:when test="${myorder.state== 0}">待付款</c:when>
+                                    <c:when test="${myorder.state== 1 }">待发货</c:when>
+                                    <c:when test="${myorder.state == 2}">待收货</c:when>
+                                    <c:when test="${myorder.state== 3}">已完成</c:when>
+                </c:choose></div>
                                 </td>
                             </tr>
                             <c:forEach items="${myorder.items}" var="eachdetail">
@@ -156,31 +182,50 @@
                                     <td>
                                         <span class="text-theme fwb">${eachdetail.subtotal}</span>
                                     </td>
-                                    <td>
-                                    <c:choose>
-                                    <c:when test="${myorder.state== 0}"> 未付款</c:when>
-                                    <c:when test="${myorder.state== 1 }">待发货</c:when>
-                                    <c:when test="${myorder.state == 2}">已发货</c:when>
-                                    <c:when test="${myorder.state== 3}">已收货</c:when>
-                                    </c:choose>
-                                </td>
+                                    <td></td>
                                 </tr>
                             </c:forEach>
                         </c:forEach>
                     </table>
+                <aside class="paging">
+                    <c:if test="${!pageInfo.isFirstPage}">
+
+                        <a href="javascript:getPage(${pageInfo.firstPage})">首页</a>
+                    </c:if>
+
+                    <c:if test="${!pageInfo.isFirstPage}">
+                        <a href="javascript:getPage(${pageInfo.prePage})">上一页</a>
+                    </c:if>
+                    <a> 共 ${pageInfo.total}条
+                        当前第<span>${pageInfo.pageNum}</span>页</a>
+                    <c:if test="${!pageInfo.isLastPage}">
+                        <a href="javascript:getPage(${pageInfo.nextPage})">下一页</a>
+                    </c:if>
+                    <c:if test="${!pageInfo.isLastPage}">
+                        <a href="javascript:getPage(${pageInfo.lastPage})">末页</a>
+                    </c:if>
+
+                </aside>
 
 
 
-                </div>
+
+            </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function getPage(curPage) {
+        //将隐藏域的值变成curPage
+        document.getElementById("curPage").value = curPage;
+        //触发表单的提交事件
+        document.getElementById("mainForm").submit();
+    }
+</script>
 
-<!--脚部-->
-<div class="fatfooter">
 
-</div>
+
 <!--脚部-->
 </body>
 <script src="<%=basePath%>js/jquery.js"></script>

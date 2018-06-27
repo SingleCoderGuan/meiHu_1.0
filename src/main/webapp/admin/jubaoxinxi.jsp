@@ -43,31 +43,30 @@
         <li>
             <dl>
                 <dt>商品信息</dt>
-                <!--当前链接则添加class:active-->
-                <dd><a href="" >查看商品</a></dd>
-                <dd><a href="">商品详情</a></dd>
+                <dd><a href="<%=basePath%>shopAdmin/getAllProducts.action" >查看商品</a></dd>
+                <dd><a href="<%=basePath%>shopAdmin/showCategoryLists.action">商品上架</a></dd>
             </dl>
         </li>
         <li>
             <dl>
                 <dt>订单信息</dt>
-                <dd><a href="">订单列表</a></dd>
-                <dd><a href="">订单详情</a></dd>
-                <dd><a href="">退货信息</a></dd>
+                <dd><a href="<%=basePath%>shopAdminManage/selectYiFuKuanOrder.action">订单管理</a></dd>
+                <dd><a href="<%=basePath%>shopAdminManage/selectDrawbackInfo.action">退货信息</a></dd>
             </dl>
         </li>
 
         <li>
             <dl>
                 <dt>论坛信息</dt>
-                <dd><a href="">举报信息</a></dd>
+                <dd><a href="<%=basePath%>admin/showallpostreport.action">举报信息</a></dd>
+
             </dl>
         </li>
         <li>
             <dl>
                 <dt>文章管理</dt>
-                <dd><a href="">文章发表</a></dd>
-                <dd><a href="">文章查看</a></dd>
+                <dd><a href="<%=basePath%>admin/wenzhangfabiao.jsp">文章发表</a></dd>
+                <dd><a href="<%=basePath%>admin/articleList.action">文章查看</a></dd>
             </dl>
         </li>
 

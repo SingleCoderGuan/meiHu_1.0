@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.GoodsCategoryMapper">
+
+   <!-- //查询商品的所有类别
+    public List<GoodsCategory> getAllGoodsCategory();-->
+    <select id="getAllGoodsCategory" resultType="GoodsCategory">
+        select * from shop_category
+
+    </select>
+
+
+</mapper>

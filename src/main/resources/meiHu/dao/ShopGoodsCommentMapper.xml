@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meiHu.dao.ShopGoodsCommentMapper">
+
+    <resultMap id="selectCommentsByGidMap" type="ShopGoodsComment">
+        <result column="content" property="content" />
+        <result column="createtime" property="createtime" />
+        <association property="forumUser" javaType="ForumUser">
+            <result column="uname" property="uname" />
+            <result column="headpic" property="headpic" />
+        </association>
+    </resultMap>
+    <!--public List<ShopGoodsComment> selectCommentsByGid(int gid) ;-->
+    <select id="selectCommentsByGid" resultMap="selectCommentsByGidMap" parameterType="int">
+        select u.uname,u.headpic,c.content,c.createtime from shop_goodscomment c ,forum_user u ,shop_goods g
+        WHERE c.goods_gid = #{parameter} and u.uid = c.user_uid and g.goodid = c.goods_gid
+        ORDER BY c.createtime DESC
+    </select>
+
+    <!--public boolean insertComment(ShopGoodsComment shopGoodsComment);-->
+    <insert id="insertComment" parameterType="ShopGoodsComment">
+        INSERT INTO shop_goodscomment (goods_gid,user_uid,content)
+        VALUES (#{goods.goodid},#{forumUser.uid},#{content})
+    </insert>
+    <!--public boolean updateItem(int cid);-->
+    <update id="updateItem" parameterType="int">
+        UPDATE shop_item set item_state = 3 WHERE goodid=#{param1} and orderid=#{param2}
+    </update>
+</mapper>

@@ -40,6 +40,8 @@ public interface PostService {
 
     public List<ForumPost> selectPostsByPtitle(String keyword);
 
+    public ForumPost selectPostsByPtitleHot(String keyword);
+
     public ForumPost selectPostByPid(int pid) ;
 
     public boolean updatePost(ForumPost post) ;

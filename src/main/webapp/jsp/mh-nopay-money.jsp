@@ -20,8 +20,9 @@
     <link href="<%=basePath%>css/common1.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
     <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
-
-    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
+    <link href="<%= basePath%>css/bootstrap1.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="<%= basePath%>plugins/bootstrap/bootstrap.min.css" />
+    <script src="<%= basePath%>js/jquery.min.js"> </script>
 
     <style>
         .uc-header-bg{
@@ -54,7 +55,7 @@
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车</a></div>
             <div class="order"><em></em><a href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></div>
-            <div class="fav"><em></em><a href="#">我的收藏</a></div>
+            <div class="fav"><em></em><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a></div>
             <div class="help"><em></em><a href="#">帮助中心</a></div>
         </div>
     </div>
@@ -62,7 +63,7 @@
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <a class="logo" href="<%=basePath%>jsp/index.jsp"><img src="<%=basePath%>images/u8.png" alt="" /></a>
-        <div class="back-home"><a href="<%=basePath%>jsp/zhuye.jsp">返回商城首页</a></div>
+        <div class="back-home"><a href="<%=basePath%>jsp/zhuye.jsp">返回美乎首页</a></div>
 
         <div class="schbox">
             <form action="" method="post">
@@ -93,10 +94,13 @@
                 </ul>
                 <div class="tit">客户服务</div>
                 <ul class="sublist">
-
                     <li><a href="<%=basePath%>goods/doneOrder.action">退款/退货</a></li>
                 </ul>
-
+                <div class="tit">账户中心</div>
+                <ul class="sublist">
+                    <li><a href="<%=basePath%>goods/showAddress.action">收货地址</a></li>
+                    <li><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a><li>
+                </ul>
 
                 <div class="tit">消息中心</div>
                 <ul class="sublist">
@@ -117,25 +121,31 @@
                             <a class="item" href="<%=basePath%>goods/myOrder.action">所有订单</a>
                             <a class="item active" href="<%=basePath%>goods/noPayOrder.action">待付款</a>
                             <a class="item" href="<%=basePath%>goods/waitOrder.action">待发货</a>
-                            <a class="item" href="<%=basePath%>goods/runOrder.action">已发货</a>
-                            <a class="item" href="<%=basePath%>goods/doneOrder.action">已收货</a></div>
+                            <a class="item" href="<%=basePath%>goods/runOrder.action">待收货</a>
+                            <a class="item" href="<%=basePath%>goods/doneOrder.action">已完成</a></div>
 
                     </div>
                     <table class="uc-table">
                         <thead>
-                        <th>商品详情</th>
-                        <th>名称</th>
-                        <th>单价</th>
-                        <th>数量</th>
-                        <th>小计</th>
-                        <th width="120">状态</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品详情</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名称</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单价</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数量</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小计</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;状态</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作</th>
                         </thead>
                         <c:forEach items="${noPayOrderList}" var="noPayorder">
                             <tr>
                                 <td>
-                                    <div class="left"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${noPayorder.ordertime}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单号: ${noPayorder.orderid}</div>
-
+                                    <div class="left"><fmt:formatDate pattern="yyyy-MM-dd" value="${noPayorder.ordertime}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单号: ${noPayorder.orderid}</div>
                                 </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href="<%=basePath%>goods/daifukuan.action?orderid=${noPayorder.orderid}">去付款</a><a href="javascript:void(0)" onclick="deleteWeifukuan('${noPayorder.orderid}')">|删除</a></td>
                             </tr>
                             <c:forEach items="${noPayorder.items}" var="eachdetail">
                                 <td class="order-goods">
@@ -155,15 +165,31 @@
                                     </td>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${noPayorder.state== 0}"> 未付款</c:when>
-                                        <c:when test="${noPayorder.state== 1 }">待发货</c:when>
-                                        <c:when test="${noPayorder.state == 2}">待已发货</c:when>
-                                        <c:when test="${noPayorder.state== 3}">已收货</c:when>
+                                        <c:when test="${noPayorder.state== 0}">待付款</c:when>
+                                        <c:when test="${noPayorder.state== 1}">待发货</c:when>
+                                        <c:when test="${noPayorder.state== 2}">待收货</c:when>
+                                        <c:when test="${noPayorder.state== 3}">已完成</c:when>
                                     </c:choose>
                                 </td>
+                                <td></td>
                                 </tr>
                             </c:forEach>
                         </c:forEach>
+                        <script>
+                            function deleteWeifukuan(orderid){
+                                var orderid=orderid;
+                                if(confirm("您确定要删除订单吗？")){
+                                    $.ajax({
+                                        type:"get",
+                                        url:"<%=basePath %>goods/deleteOrder.action",
+                                        data:"orderid="+orderid,
+                                        success:function(result){
+                                          window.location.reload();
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
 
                     </table>
 

@@ -6,6 +6,7 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE html>
+
 <html lang="zxx">
 <head>
     <meta charset="UTF-8">
@@ -31,6 +32,7 @@
     <link href="<%=basePath%>css/iconfont.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/common1.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
+
     <style>
 
         #tu{
@@ -44,9 +46,7 @@
         .icon-text li a{
             color: #ffffff;
         }
-        .uc-header-bg{
-            background-color: #dbd2db;
-        }
+
         .logo1{
             position: relative;
             margin-top:-220px;
@@ -55,8 +55,8 @@
         }
         nav{
             display: inline-block;
-            margin-top:-40px;
-            left:340px;
+            top:-60px;
+            left:330px;
             font-family: 华文楷体;
             font-size: 20px;
             font-weight: bolder;
@@ -98,8 +98,8 @@
 
         #jia {
             position: relative;
-            margin-top: -32px;
-            margin-left: 195px;
+            margin-top: -30px;
+            margin-left: 200px;
             width: 30px;
             height: 30px;
             cursor:pointer;
@@ -114,8 +114,20 @@
         }
         .uc-header-bg{
             background-color: rgba(192,192,191,0.81);
+            height: 120px;
         }
+        #shoucang{
+            position: relative;
+            top:-23px;
+            left: 80px;
+            height:20px;
+            width:20px;
+        }
+
+
+
     </style>
+
 
 
 </head>
@@ -127,7 +139,7 @@
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
-            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 180px;height:120px;" alt="" /></a></div>
+            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 140px;height:90px;" alt="" /></a></div>
 
     </div>
     <nav>
@@ -194,31 +206,67 @@
                             <div id="jian"><img  id="jiancount"src="<%=basePath%>images/-.png"/></div>
                         </form>
 
-                   </div>
+                    </div>
                 </div>
                 <script>
-                        $("#jiacount").click(function(){
-                            var count=parseInt($("#countvalue").val());
-                            $("#countvalue").val(count+1);
-                        });
-                        $("#jiancount").click(function(){
-                            var count=parseInt($("#countvalue").val());
-                            var newcount=count-1;
-                            if(newcount<=1) {
-                                $("#countvalue").val(1);
-                            }else{
-                                $("#countvalue").val(newcount);
-                            }
-                        });
+                    $("#jiacount").click(function(){
+                        var count=parseInt($("#countvalue").val());
+                        $("#countvalue").val(count+1);
+                    });
+                    $("#jiancount").click(function(){
+                        var count=parseInt($("#countvalue").val());
+                        var newcount=count-1;
+                        if(newcount<=1) {
+                            $("#countvalue").val(1);
+                        }else{
+                            $("#countvalue").val(newcount);
+                        }
+                    });
                 </script>
                 <div class="s-12 m-6 l-4">
                     <a href="javascript:void(0)" class="button" onclick="subForm()">加入购物车</a>
+                </div>
+                <div class="s-12 m-6 l-4">
+                    <a href="javascript:void(0)" class="button" onclick="favorGood(${product.goodid})">
+                        添加收藏 &nbsp;&nbsp;&nbsp;</a><img id="shoucang"
+                                     src="../images/shoucang.png"/>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- PRODUCT DETAIL END -->
+<script type="text/javascript">
+    function favorGood(goodid1) {
+        <c:choose>
+        <c:when test="${empty sessionScope.user}">
+        alert("亲，请先登录")
+        </c:when>
+        <c:otherwise>
+        if($("#shoucang").attr("src")==("../images/shoucang.png")){
+            $.ajax(
+                {
+                    type: "post",
+                    url: "${pageContext.request.contextPath}/favor/favorGood.action",
+                    data: "uid=" + ${sessionScope.user.uid} + "&goodid="+goodid1,
+                    success:function (data) {
+                        if(data==1){
+                            alert("收藏成功，可以到我的收藏中查看！");
+                            $("#shoucang").attr("src","../images/shoucanghou.png");
+                        }else if(data==2){
+                            alert("您已经收藏过该商品了");
+                        }
+
+                    }
+
+                }
+            );
+        }
+        </c:otherwise>
+        </c:choose>
+
+    }
+</script>
 <script type="text/javascript">
     function subForm(){
         document.getElementById("form1").submit();
@@ -240,7 +288,7 @@
                         <ul class="speciality padding padding-top-0">
                             <li>此款化妆品让你体会不一样的疗养特效</li>
                             <li>睡前请让自己精致美美哒</li>
-                            <li>遇见更美丽的  </ul>
+                            <li>遇见更美丽的自己</ul>
                     </div>
                 </div>
                 <div class="tab-item tab-active">
@@ -262,12 +310,48 @@
                         <p>现阶段购买，优惠多多</p>
                     </div>
                 </div>
+                <div class="tab-item">
+                    <a class="tab-label">商品评论</a>
+                    <div class="tab-content padding-left-10" style="width: 1075px">
+                        <h3>评论详情</h3>
+                        <c:if test="${empty comments}" >
+                            <h2 style="position: relative;left: 250px;">还没有相关评论</h2>
+                        </c:if>
+                        <c:forEach items="${comments}" var="comment">
+                            <div>
+                                <img style="position: relative;width: 50px;height: 50px;" src="<%=basePath%>${comment.forumUser.headpic}" >
+                                <span>${comment.forumUser.uname}</span>
+                                <span style="position: relative; top: -30px;left: 50px;">${comment.content}</span>
+                                <span style="position: relative;left: 800px;text-align: right"><fmt:formatDate value='${comment.createtime}'
+                                                      pattern='yyyy-MM-dd hh:mm:ss'/></span>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 <!-- PRODUCT TAB END -->
-
+<c:if test="${not empty post}">
+    <div style="position: relative;left: 250px;top: -50px;">
+        <h2 style="position: relative;color: red;left: 400px;">论坛最热！！！！！</h2>
+        <div style="position: relative;top: 20px;">
+            <a href="<%=basePath%>luntan/tiezidetail.action?pid=${post.pid}">${post.ptitle}</a>
+            <span style="position: relative;left: 450px;">${post.user.uname}</span>
+            <span style="position: relative;left: 500px"><fmt:formatDate value='${post.createtime}'
+                                  pattern='yyyy-MM-dd hh:mm:ss'/></span>
+        </div>
+        <a style="position: relative;top: 50px;color: deeppink" href="<%=basePath%>search/goodsPosts.action?goodid=${product.goodid}">去美论查看更多热帖</a>
+    </div>
+</c:if>
+<c:if test="${empty post}">
+    <div style="position: relative;left: 250px;top: -50px;">
+        <h2 style="position: relative;color: red;left: 400px;">还没有该商品相关帖子</h2>
+    </div>
+    <a style="position: relative;left: 250px;top: 0px;color: deeppink" href="<%=basePath%>luntan/luntanshouye.action?tid=1">去美论查看更多热帖</a>
+</c:if>
 
 
 
@@ -280,100 +364,32 @@
                 <hr class="break-small break-center">
             </div>
 
-            <!-- product 1 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/1.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看详情</a>
+            <c:forEach items="${recommendGoodsList}" var="recommendGood">
+                <div class="s-12 m-4 l-3 margin-bottom-30">
+                    <div class="margin">
+                        <div class="fullwidth">
+                            <figure class="imghvr-reveal-down">
+                                <img src="<%= basePath%>${recommendGood.goodpic}">
+                                <figcaption>
+                                    <div class="product-hover-content">
+                                        <div class="btn-box">
+                                            <a href="<%=basePath%>goods/list.action?goodid=${recommendGood.goodid}" class="btn">查看详情</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="fullwidth">
+                            <h5>${recommendGood.goodname}</h5>
+                            <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">${recommendGood.goodprice}</span></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- product 2 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/2.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看详情</a>
-                                    </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- product 3 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/3.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看详情</a>
-                                    </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- product 4 -->
-            <div class="s-12 m-4 l-3 margin-bottom-30">
-                <div class="margin">
-                    <div class="fullwidth">
-                        <figure class="imghvr-reveal-down">
-                            <img src="<%= basePath%>img/products/4.png">
-                            <figcaption>
-                                <div class="product-hover-content">
-                                    <div class="btn-box">
-                                        <a href="" class="btn">查看详情</a>
-                                    </div>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="fullwidth">
-                        <h5>Lorem Ipsum Elit Dolor</h5>
-                        <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
-                    </div>
-                </div>
-            </div>
-
+            </c:forEach>
         </div>
     </div>
 </div>
 <!-- RELATED PRODUCTS END -->
-
-
 
 <!--/start-footer-section-->
 <div class="footer-section">

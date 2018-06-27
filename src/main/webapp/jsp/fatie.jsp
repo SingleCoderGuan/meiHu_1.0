@@ -263,7 +263,16 @@
                             <option value="6">眼霜</option>
                             <option value="7">代购</option>
                         </select>
-
+                        <span hidden id="oyhshowInfo" style="position: absolute;top: 166px;left: 130px;color: red">代购区所有交易均由用户自己负责</span>
+                        <script>
+                            $("#topicList").on("change",function(){
+                                if($("option:selected",this).val()==7){
+                                    $("#oyhshowInfo").show();
+                                }else{
+                                    $("#oyhshowInfo").hide();
+                                }
+                            });
+                        </script>
                         <input type="hidden" id="content" name="pcontent"/>
 
                         <div id="div1" class="toolbar">
@@ -2279,7 +2288,7 @@
     // 限制一次最多上传 10 张图片
     editor.customConfig.uploadImgMaxLength = 10;
     editor.customConfig.uploadImgParamsWithUrl = true;//如果还需要将参数拼接到 url 中，可再加上如下配置
-    editor.customConfig.uploadImgServer = '<%=basePath%>user/picload.action';//官方文档上写的是服务器地址，也就是上传图片的方法名
+    editor.customConfig.uploadImgServer = '<%=basePath%>/picload.action';//官方文档上写的是服务器地址，也就是上传图片的方法名
     editor.customConfig.uploadFileName = 'uploadImage';     //给上传的本地图片文件命名的统一名称
 
     editor.customConfig.uploadImgHooks = {
@@ -2316,10 +2325,10 @@
     var uid = ${user.uid}
 
         $(function () {
-            if(uid!=null){
-                getMessage(uid);
-                setInterval("getMessage(uid)",10000);
-            }
+            <c:if test="${not empty sessionScope.user.uid}">
+            getMessage(uid);
+            setInterval("getMessage(uid)",10000);
+            </c:if>
         })
 
     function getMessage(uid) {

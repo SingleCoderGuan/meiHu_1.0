@@ -86,6 +86,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public ForumPost selectPostsByPtitleHot(String keyword) {
+        return forumPostMapper.selectKeywordHot(keyword);
+    }
+
+    @Override
     public ForumPost selectPostByPid(int pid) {
         return forumPostMapper.selectPostByPid(pid);
     }

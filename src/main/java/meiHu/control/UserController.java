@@ -3,10 +3,8 @@ package meiHu.control;
 import meiHu.entity.ForumComment;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumUser;
-import meiHu.service.FocusService;
-import meiHu.service.LuntanService;
-import meiHu.service.PostService;
-import meiHu.service.UserService;
+import meiHu.entity.ShopGoodsComment;
+import meiHu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
@@ -36,6 +34,11 @@ public class UserController {
     private PostService postService ;
     @Autowired
     private LuntanService luntanService ;
+    @Autowired
+    private GoodsCommentService goodsCommentService ;
+    @Autowired
+    private GoodService goodService ;
+
     @RequestMapping(value = "/loginWithAccount.action",method = RequestMethod.POST)
     public void findUserByUname(String uname,String password,String flag, HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         ForumUser user = userService.findUserByUname(uname);
@@ -254,6 +257,16 @@ public class UserController {
         request.setAttribute("mapnum",mapnum);
         request.getRequestDispatcher("/jsp/tiezidetail.jsp").forward(request,response);
     }
-
+    @RequestMapping(value = "/goodsComment.action",method = RequestMethod.POST)
+    public @ResponseBody String insertComment(ShopGoodsComment comment,String goodid,String uid,String orderid,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        comment.setGoods(goodService.getGood(Integer.parseInt(goodid)));
+        comment.setForumUser(userService.selectUserByUid(Integer.parseInt(uid)));
+        if(goodsCommentService.insert(comment)){
+            goodsCommentService.updateItemState(Integer.parseInt(goodid),Integer.parseInt(orderid));
+            return "1";
+        }else {
+            return "0" ;
+        }
+    }
 
 }

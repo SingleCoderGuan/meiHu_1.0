@@ -18,7 +18,7 @@ import java.util.List;
 public class HomepageControl {
     @Autowired
     private HomepageService homepageService ;
-    @RequestMapping(value = "main.action")
+    @RequestMapping(value = "/main.action")
     public void homePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Goods> recommend = homepageService.getRecommendList() ;
         Collections.shuffle(recommend);
@@ -28,6 +28,6 @@ public class HomepageControl {
         }
 
         request.setAttribute("recommendList",recommendList);
-        request.getRequestDispatcher("jsp/zhuye.jsp").forward(request,response);
+        request.getRequestDispatcher("/jsp/zhuye.jsp").forward(request,response);
     }
 }

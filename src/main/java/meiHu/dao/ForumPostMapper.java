@@ -100,4 +100,6 @@ public interface ForumPostMapper {
 
     //根据帖子号查询uid
     public int SelectUidByPid(int pid);
+
+    public ForumPost selectKeywordHot(String keyword) ;
 }

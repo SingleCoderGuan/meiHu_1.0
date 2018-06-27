@@ -193,6 +193,7 @@
                 </nav>
 
             </div>
+
             <!-- end 导航 -->
             <!-- 用户栏 -->
             <div class="aw-user-nav">
@@ -359,6 +360,7 @@
                                 </div>
                                 <div class="aw-mod-body">
                                     <div class="aw-question-detail-txt markitup-box" id="markdownbody">
+
                                         ${forumPost.pcontent}
                                         <br/><br/>
 
@@ -397,7 +399,7 @@
                                                         data: "uid=" + ${sessionScope.user.uid} + "&pid=" + pidd,
                                                         success:function (data) {
                                                             if(data==1){
-                                                                alert("收藏成功");
+
                                                                 $(function () {
                                                                     var txt=  "收藏成功";
                                                                     window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
@@ -1041,10 +1043,10 @@
     var uid = ${user.uid}
 
         $(function () {
-            if(uid!=null){
-                getMessage(uid);
-                setInterval("getMessage(uid)",10000);
-            }
+            <c:if test="${not empty sessionScope.user.uid}">
+            getMessage(uid);
+            setInterval("getMessage(uid)",10000);
+            </c:if>
         })
 
     function getMessage(uid) {

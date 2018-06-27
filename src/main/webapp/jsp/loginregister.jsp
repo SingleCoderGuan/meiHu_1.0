@@ -445,7 +445,6 @@ text-align: left;
                         $("#teltip").removeClass()
                         $("#teltip").addClass("right")
                         $("#btn").attr("disabled",false) ;
-                        $("#tel").attr("disabled",true);
 
                     }else {
 

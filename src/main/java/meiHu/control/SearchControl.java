@@ -4,10 +4,12 @@ package meiHu.control;
 import com.github.pagehelper.PageInfo;
 import meiHu.entity.ForumPost;
 import meiHu.entity.ForumTopic;
+import meiHu.service.GoodService;
 import meiHu.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,8 @@ import java.util.Map;
 public class SearchControl {
     @Autowired
     private PostService postService;
-
+    @Autowired
+    private GoodService goodService ;
     @RequestMapping("/automatch.action")// produces = "application/json; charset=utf-8"
     public void automatch(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8"); //当然如果是json数据,需要设置为("text/javascript;charset=utf-8");
@@ -48,6 +51,15 @@ public class SearchControl {
     public void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String searchcontent = request.getParameter("searchcontent");
         List<ForumPost> postList=postService.selectPostsByPtitle(searchcontent);
+        request.setAttribute("postList",postList);
+        request.getRequestDispatcher("/jsp/searchresult.jsp").forward(request,response);
+    }
+
+    @RequestMapping(value = "/goodsPosts.action" ,method = RequestMethod.GET)
+    public void searchByGoodsName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int goodid = Integer.parseInt(request.getParameter("goodid")) ;
+        String goodsName = goodService.getGood(goodid).getGoodname() ;
+        List<ForumPost> postList=postService.selectPostsByPtitle(goodsName);
         request.setAttribute("postList",postList);
         request.getRequestDispatcher("/jsp/searchresult.jsp").forward(request,response);
     }

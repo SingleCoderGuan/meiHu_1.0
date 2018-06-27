@@ -17,14 +17,15 @@
 <head>
     <title>后台管理系统</title>
     <meta name="author" content="DeathGhost"/>
-    <link rel="stylesheet" type="text/css" href="../css/styleadmin.css">
-    <%--<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">--%>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/styleadmin.css">
+    <script src="<%= basePath%>js/jquery.min.js"> </script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 
 
 </head>
 <body>
 <!--header-->
-<header>
+<header style="height: 71px">
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
         <li><a href="#" class="website_icon">站点首页</a></li>
@@ -39,32 +40,30 @@
         <li>
             <dl>
                 <dt>商品信息</dt>
-                <!--当前链接则添加class:active-->
-                <dd><a href="">查看商品</a></dd>
-                <dd><a href="">商品上架</a></dd>
+                <dd><a href="<%=basePath%>shopAdmin/getAllProducts.action" >查看商品</a></dd>
+                <dd><a href="<%=basePath%>shopAdmin/showCategoryLists.action">商品上架</a></dd>
             </dl>
         </li>
         <li>
             <dl>
                 <dt>订单信息</dt>
-                <dd><a href="">订单列表</a></dd>
-                <dd><a href="">订单详情</a></dd>
-                <dd><a href="">退货信息</a></dd>
-
+                <dd><a href="<%=basePath%>shopAdminManage/selectYiFuKuanOrder.action">订单管理</a></dd>
+                <dd><a href="<%=basePath%>shopAdminManage/selectDrawbackInfo.action">退货信息</a></dd>
             </dl>
         </li>
 
         <li>
             <dl>
                 <dt>论坛信息</dt>
-                <dd><a href="">举报处理</a></dd>
+                <dd><a href="<%=basePath%>admin/showallpostreport.action">举报信息</a></dd>
+
             </dl>
         </li>
         <li>
             <dl>
                 <dt>文章管理</dt>
-                <dd><a href="">文章发表</a></dd>
-                <dd><a href="">文章查看</a></dd>
+                <dd><a href="<%=basePath%>admin/wenzhangfabiao.jsp">文章发表</a></dd>
+                <dd><a href="<%=basePath%>admin/articleList.action">文章查看</a></dd>
             </dl>
         </li>
 
@@ -78,30 +77,60 @@
         <section class="mtb">
 
         <table class="table">
-            <tr>
-                <th>订单号</th>
-                <th>商品名</th>
-                <th>数量</th>
-                <th>单价</th>
-                <th>操作</th>
-            </tr>
-            <tr>
-                <td class="center">订单号77777</td>
-                <td>这里是产品名称</td>
-                <td class="center">2</td>
-                <td class="center"><strong class="rmb_icon">59.00</strong></td>
-
-
-                <td class="center">
-                    <a href="#" >接收退款</a>
-                    <a href="#" >拒绝退款</a>
-
-                </td>
-            </tr>
-
+            <c:forEach items="${refundLists}" var="refundLists">
+                <tr>
+                <th>退款编号：${refundLists.drawbackid}</th>
+                <th>订单编号：${refundLists.order.orderid}</th>
+                    <th>用户名称：${refundLists.user.uname}</th>
+                <th colspan="3">提交退款日期：<fmt:formatDate value="${refundLists.drawbacktime}" pattern="yyyy-MM-dd"/></th>
+                </tr>
+                <tr>
+                    <th>商品</th>
+                    <th>商品名</th>
+                    <th>数量</th>
+                    <th>单价</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <c:forEach items="${refundLists.order.items}" var="refundInfo">
+                    <tr>
+                        <td class="center"><img src="<%=basePath%>${refundInfo.good.goodpic}" width="80px" height="80px"/></td>
+                        <td>${refundInfo.good.goodname}</td>
+                        <td class="center">${refundInfo.count}</td>
+                        <td class="center"><strong class="rmb_icon">${refundInfo.good.goodprice}</strong></td>
+                        <td class="center">
+                            <c:choose>
+                                <c:when test="${refundLists.processstate== 0}">未处理退款</c:when>
+                                <c:when test="${refundLists.processstate== 1}">已处理退款</c:when>
+                            </c:choose>
+                        </td>
+                        <td class="center">
+                            <a href="javascript:void(0)" onclick="acceptDrawback(${refundLists.drawbackid},${refundInfo.itemid})" >接受退款</a>
+                           <%-- <a href="javascript:void(0)" onclick="reject()" >拒绝退款</a>--%>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:forEach>
         </table>
         </section>
 
+        <script>
+            function acceptDrawback(drawbackid,itemid){
+                var drawbackid=drawbackid;
+                var itemid=itemid;
+                $.ajax({
+                    type:"get",
+                    url:" <%=basePath%>shopAdminManage/updateDrawbackState.action",
+                    data:"drawbackid="+drawbackid+"&itemid="+itemid,
+                    success:function(result){
+                        if(result==1){
+                            alert("接受退款成功！");
+                            window.location.reload();
+                        }
+                    }
+                })
+            }
+        </script>
     </div>
 </section>
 

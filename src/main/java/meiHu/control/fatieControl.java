@@ -5,6 +5,7 @@ import meiHu.entity.ForumPost;
 import meiHu.entity.ForumTopic;
 import meiHu.entity.ForumUser;
 import meiHu.service.ArticleService;
+import meiHu.service.OfficalArticleService;
 import meiHu.service.PostService;
 import meiHu.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,12 @@ public class fatieControl {
     @Autowired
     private ArticleService articleService;
     @Autowired
-    TopicService topicService ;
+    private TopicService topicService ;
     @Autowired
-    PostService postService;
+    private PostService postService;
     @Autowired
     private OfficalArticleService officalArticleService ;
+
     @RequestMapping(value = "user/fatie.action")
     public void fatie(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if(request.getSession().getAttribute("user")==null){
@@ -49,25 +51,40 @@ public class fatieControl {
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         forumPost.setTopic(topic);
+        if(forumPost.getTopic().getTid()==7){
+            forumPost.setPcontent(forumPost.getPcontent()+"<span style=\'position: relative;top: 0px;left:100px ;font-size: 30px;z-index: -1;color:#c0c0c0\'>代购区所有交易均由用户自己负责</span>");
+        }
         if (postService.postNewPost(forumPost)) {
             articleService.fatiezijiawufen(post.getUser().getUid());
             response.sendRedirect(request.getContextPath() + "/luntan/luntanshouye.action?tid=1");
         } else {
             System.out.println("发帖失败");
         }
-
     }
+
+    @RequestMapping(value = "/admin/newoa.action",method = RequestMethod.POST)
+    public void newOa(ForumOfficalarticle forumOfficalarticle,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(officalArticleService.insertArticle(forumOfficalarticle)){
+            request.getRequestDispatcher("/admin/articleList.action").forward(request,response);
+        }
+    }
+
     @RequestMapping(value = "user/updatePost.action",method = RequestMethod.POST)
     public void updatePost(ForumPost post, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ForumPost forumPost = post ;
         forumPost.setUser((ForumUser) request.getSession().getAttribute("user"));
         forumPost.setCreatetime(new Date());
         if(postService.updatePost(forumPost) ){
-            response.sendRedirect(request.getContextPath() + "/user/userCenter.action");
+            response.sendRedirect(request.getContextPath() + "/userCenter.action");
         }
     }
 
-    @RequestMapping(value = "user/picload.action",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/newArticle.action")
+    public void newArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/jsp/wenzhangfabiao.jsp").forward(request,response);
+    }
+
+    @RequestMapping(value = "/picload.action",method = RequestMethod.POST)
     public @ResponseBody Map<String, String> upload(MultipartFile uploadImage, HttpServletRequest request) throws IOException {
         //原始文件名称
         String pictureFile_name =  uploadImage.getOriginalFilename();
@@ -91,6 +108,32 @@ public class fatieControl {
         return map;
 
     }
+
+    @RequestMapping(value = "/oapicload.action",method = RequestMethod.POST)
+    public @ResponseBody Map<String, String> oaupload(MultipartFile oauploadImage, HttpServletRequest request) throws IOException {
+        //原始文件名称
+        String pictureFile_name =  oauploadImage.getOriginalFilename();
+        //新文件名称
+        String newFileName = UUID.randomUUID().toString()+pictureFile_name.substring(pictureFile_name.lastIndexOf("."));
+
+        //获得图片上传的路径
+        String path=request.getServletContext().getRealPath("image/oaupload");
+
+        //上传图片
+        File uploadPic = new java.io.File(path+"/"+newFileName);
+
+        if(!uploadPic.exists()){
+            uploadPic.mkdirs();
+        }
+        //向磁盘写文件
+        oauploadImage.transferTo(uploadPic);
+        System.out.println(request.getServletContext().getContextPath()+"image/oaupload"+"/"+newFileName);
+        Map<String,String> map=new HashMap();
+        map.put("url",request.getContextPath()+"/image/oaupload"+"/"+newFileName);
+        return map;
+
+    }
+
     @RequestMapping(value = "/admin/articleList.action")
     public void articleList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("articleList",articleService.getAllOfficalArticles());
@@ -98,8 +141,7 @@ public class fatieControl {
     }
 
     @RequestMapping(value = "/admin/getArticle.action",method = RequestMethod.POST)
-    public @ResponseBody
-    ForumOfficalarticle findArticleByOaid(String oaid, HttpServletRequest request, HttpServletResponse response){
+    public @ResponseBody ForumOfficalarticle findArticleByOaid(String oaid,HttpServletRequest request, HttpServletResponse response){
         Integer id = Integer.parseInt(oaid) ;
         return articleService.selectOfficalArticleByOaid(id);
     }
