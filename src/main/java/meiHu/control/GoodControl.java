@@ -125,10 +125,6 @@ public class GoodControl {
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         Order order = new Order();
         int orderid = Math.abs(UUID.randomUUID().toString().hashCode());
-
-
-
-
         order.setOrderid(orderid);
         order.setOrdertime(new Date());
         order.setTotal(cart.getTotalprice());

@@ -184,7 +184,7 @@
                                         success:function(result){
                                             if(result==1){
                                                 alert("提交退款成功！");
-                                                window.location.reload();
+                                                window.location.href="<%=basePath%>jsp/mh-order.jsp";
                                             }else{
                                                 alert("提交退款失败！");
                                             }

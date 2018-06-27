@@ -421,8 +421,7 @@
                                         var val=oTxt.value;
                                         var fen=oCont.split(val);
                                         oBox.innerHTML = fen.join('<span style="background-color:pink; font-size:15px;">' + val + '</span> ');
-                              /*          var ser = $('#aw-search-query').val();
-                                        var content = $('#${postList.pid}').val();
+                              /*
                                         alert(content);
                                         var fen=content.split(ser);
                                         alert("ddddddd"+fen);

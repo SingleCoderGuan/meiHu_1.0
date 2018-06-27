@@ -291,11 +291,11 @@
                     <div class="margin">
                         <div class="fullwidth">
                             <figure class="imghvr-reveal-down">
-                                <img src="<%= basePath%>img/products/1.png">
+                                <img src="<%= basePath%>images/1_02.jpg">
                                 <figcaption>
                                     <div class="product-hover-content">
                                         <div class="btn-box">
-                                            <a href="" class="btn">查看更多</a>
+                                            <a href="<%= basePath%>goods/list.action?goodid=10002" class="btn">查看更多</a>
                                         </div>
                                     </div>
                                 </figcaption>
@@ -313,11 +313,11 @@
                     <div class="margin">
                         <div class="fullwidth">
                             <figure class="imghvr-reveal-down">
-                                <img src="<%= basePath%>img/products/2.png">
+                                <img src="<%= basePath%>images/2_02.jpg">
                                 <figcaption>
                                     <div class="product-hover-content">
                                         <div class="btn-box">
-                                            <a href="" class="btn">查看更多</a>
+                                            <a href="<%= basePath%>goods/list.action?goodid=10052" class="btn">查看更多</a>
                                         </div>
                                     </div>
                                 </figcaption>
@@ -335,11 +335,11 @@
                     <div class="margin">
                         <div class="fullwidth">
                             <figure class="imghvr-reveal-down">
-                                <img src="<%= basePath%>img/products/3.png">
+                                <img src="<%= basePath%>images/3_03.jpg">
                                 <figcaption>
                                     <div class="product-hover-content">
                                         <div class="btn-box">
-                                            <a href="" class="btn">查看更多</a>
+                                            <a href="<%= basePath%>goods/list.action?goodid=10043" class="btn">查看更多</a>
                                         </div>
                                     </div>
                                 </figcaption>
@@ -357,11 +357,11 @@
                     <div class="margin">
                         <div class="fullwidth">
                             <figure class="imghvr-reveal-down">
-                                <img src="<%= basePath%>img/products/4.png">
+                                <img src="<%= basePath%>images/4_03.jpg">
                                 <figcaption>
                                     <div class="product-hover-content">
                                         <div class="btn-box">
-                                            <a href="" class="btn">查看更多</a>
+                                            <a href="<%= basePath%>goods/list.action?goodid=10033" class="btn">查看更多</a>
                                         </div>
                                     </div>
                                 </figcaption>
