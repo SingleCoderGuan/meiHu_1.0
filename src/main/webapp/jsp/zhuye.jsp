@@ -165,21 +165,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="col-xs-4 popular-wthree-grid">
             <img src="images/a3.jpg" class="img-responsive" alt="" />
             <div class="popular-wthree-text">
-                <h5 style="font-family: '本墨锵黑';" onmouseover="display('box')" onmouseout="disappear('box')">代购</h5>
+              <a href="<%=basePath%>luntan/luntanshouye.action?tid=1"><h5 style="font-family: '本墨锵黑';" onmouseover="display('box')" onmouseout="disappear('box')">美论</h5></a>
                 <div id="box"class="box" style="display: none;">美乎在这里等你！</div>
             </div>
         </div>
         <div class="col-xs-4 popular-wthree-grid">
             <img src="images/a2.jpg" class="img-responsive" alt="" />
             <div class="popular-wthree-text">
-                <h5 style="font-family: '本墨锵黑';" onmouseover="display('box1')" onmouseout="disappear('box1')">分享</h5>
+               <a href="<%=basePath%>jsp/index.jsp"> <h5 style="font-family: '本墨锵黑';" onmouseover="display('box1')" onmouseout="disappear('box1')">美淘</h5></a>
                 <div id="box1"class="box1" style="display: none;">来美乎看看吧！</div>
             </div>
         </div>
         <div class="col-xs-4 popular-wthree-grid">
             <img src="images/a1.jpg" class="img-responsive" alt="" />
             <div class="popular-wthree-text">
-                <h5 style="font-family: '本墨锵黑';" onmouseover="display('box2')" onmouseout="disappear('box2')">乐购</h5>
+               <a href="<%=basePath%>article/article.action"><h5 style="font-family: '本墨锵黑';" onmouseover="display('box2')" onmouseout="disappear('box2')">美文</h5></a>
                 <div id="box2"class="box2" style="display: none;">买点东西奖励一下自己吧！</div>
             </div>
         </div>
@@ -622,70 +622,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //trainers -->
 
 <!-- contact -->
-<div class="contact" id="contact">
-    <div class="container">
-        <div class="contact-grid-agiles-w3l">
-            <div class="col-md-7 contact-grid-agile">
-                <h3 class="tittle-w3l" style="font-family: '本墨锵黑';">联系美乎
-                    <span class="heading-style">
-							<i></i>
-							<i></i>
-							<i></i>
-						</span>
-                </h3>
-                <form action="#" method="post">
-                    <input type="text" placeholder="姓名" name="name" required="">
-                    <input type="email" placeholder="电子邮箱" name="email" required="">
-                    <textarea placeholder="您的意见" name="message" required=""></textarea>
-                    <input type="submit" value="留下意见">
-                </form>
-            </div>
-            <div class="col-md-5 contact-grid-agile">
-                <div class="contact-right1">
-                    <img src="images/con-img.jpg" alt="" />
-                </div>
-                <div class="contact-right2">
-                    <div class="call ">
-                        <div class="col-xs-4 contact-grdr-w3l">
-                            <h3>Tel :</h3>
-                        </div>
-                        <div class="col-xs-8 contact-grdr-w3l">
-                            <ul>
-                                <li>+18551226751</li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="call">
-                        <div class="col-xs-4 contact-grdr-w3l">
-                            <h3>Adress :</h3>
-                        </div>
-                        <div class="col-xs-8 contact-grdr-w3l">
-                            <ul>
-                                <li style="font-family: '本墨锵黑';">苏州高博</li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="call">
-                        <div class="col-xs-4 contact-grdr-w3l">
-                            <h3>Email :</h3>
-                        </div>
-                        <div class="col-xs-8 contact-grdr-w3l">
-                            <ul>
-                                <li>
-                                    <a href="mailto:info@example.com">123456789@qq.com</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-</div>
+
 <!-- //contact -->
 
 <!-- flicker -->

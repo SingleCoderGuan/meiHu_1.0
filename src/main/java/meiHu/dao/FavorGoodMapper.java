@@ -14,7 +14,7 @@ public interface FavorGoodMapper {
     //根据用户id查询我的收藏信息
     public List<Favor> findMyFavor(int uid);
 
-    //查询该帖子是否已经被该用户收藏过
+    //查询该商品是否已经被该用户收藏过
     public Favor selectIfCollection(int uid, int goodid);
 
     //用户对商品取消收藏

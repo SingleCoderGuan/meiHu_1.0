@@ -20,8 +20,8 @@ public interface AdminService {
 
     public void deleteCommentByCid(int cid);
 
-    public PageInfo<ForumPostreport> selectAllForumPostreport(Map<String ,Object> map) ;
+    public PageInfo<ForumPostreport> selectAllForumPostreport(Map<String, Object> map) ;
 
-    public PageInfo<ForumCommentreport> selectAllForumCommentreport(Map<String ,Object> map) ;
+    public PageInfo<ForumCommentreport> selectAllForumCommentreport(Map<String, Object> map) ;
 
 }

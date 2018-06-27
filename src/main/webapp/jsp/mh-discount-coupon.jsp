@@ -24,7 +24,18 @@
 
     <style>
         .uc-header-bg{
-            background-color: #cdc6d7;
+            background-color: #ffded9;
+        }
+        #bb1{
+            position: relative;
+            top:-30px;
+            left: 730px;
+        }
+        body a{
+            color: #000000;
+        }
+        body{
+            background-color: #fdf0ef;
         }
 
     </style>
@@ -43,7 +54,7 @@
             <c:if test="${not empty user}">
 
                 <div class="item" href="">欢迎您:${user.uname}</div>
-                <div class="logout divider"> <a href="<%=basePath%>signOut.action">注销</a></div>
+                <div class="logout divider"> <a href="<%=basePath%>user/signOut.action">注销</a></div>
 
             </c:if>
             <c:if test="${empty user}">
@@ -53,7 +64,7 @@
 
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车</a></div>
-            <div class="order"><em></em><a href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></div>
+            <div class="order"><em></em><a href="<%=basePath%>goods/myOrder.action">我的订单</a></div>
             <div class="fav"><em></em><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a></div>
             <div class="help"><em></em><a href="#">帮助中心</a></div>
         </div>
@@ -61,16 +72,10 @@
 </div>
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
-        <a class="logo" href="<%=basePath%>jsp/index.jsp"><img src="<%=basePath%>images/u8.png" alt="" /></a>
-        <div class="back-home"><a href="<%=basePath%>jsp/zhuye.jsp">返回美乎首页</a></div>
+        <a class="logo" href="<%=basePath%>main.action"><img src="<%=basePath%>images/u8.png" alt="" />
+        </a>
 
-        <div class="schbox">
-            <form action="" method="post">
-                <input class="search-txt" type="text" placeholder="请输入搜索内容"/>
-                <button class="search-btn">搜索</button>
 
-            </form>
-        </div>
     </div>
 </div>
 
@@ -88,7 +93,7 @@
             <div class="uc-menu">
                 <div class="tit">订单中心</div>
                 <ul class="sublist">
-                    <li><a  href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></li>
+                    <li><a  href="<%=basePath%>goods/myOrder.action">我的订单</a></li>
 
                 </ul>
                 <div class="tit">客户服务</div>
@@ -124,16 +129,19 @@
                     <table class="uc-table table table-hover">
                         <thead>
 
-                        <th width="120px"style="text-align: center;font-size: 20px;color: rgba(240,62,62,0.81)">优惠券id</th>
-                        <th width="200px"style="text-align: center;font-size: 20px;color: rgba(240,62,62,0.81)">优惠券类别</th>
-                        <th width="120px"style="text-align: center;font-size: 20px;color: rgba(240,62,62,0.81)">数量</th>
+
+                        <th width="110px"style="text-align: center;font-size: 15px;color: rgba(240,62,62,0.81)">优惠券类型</th>
+                        <th width="110px"style="text-align: center;font-size: 15px;color: rgba(240,62,62,0.81)">优惠券信息</th>
+                        <th width="120px"style="text-align: center;font-size: 15px;color: rgba(240,62,62,0.81)">优惠券数量</th>
+                        <th width="110px"style="text-align: center;font-size: 15px;color: rgba(240,62,62,0.81)">兑换积分</th>
+
 
 
                         </thead>
                         <c:forEach items="${userOffList}" var="useroff">
 
                             <tr >
-                                <td>${useroff.offLevel.offid}</td>
+                                <%--<td>${useroff.offLevel.offid}</td>--%>
 
                                 <td>
 
@@ -147,13 +155,16 @@
 
                                 </td>
 
-
+                                <td><img src='<%=basePath %>images/${useroff.offLevel.picname}'style="width:40px;height: 40px;"/></td>
                                 <td>${useroff.remainnum}张</td>
+                                <td>${useroff.offLevel.needpoint}</td>
+
+
 
                             </tr>
 
                         </c:forEach>
-
+                        <a id="bb1" class="btn btn-danger" href="<%=basePath%>exchange.action"> 去兑换</a></input>
                     </table>
 
 

@@ -49,6 +49,7 @@ public class SearchControl {
         String searchcontent = request.getParameter("searchcontent");
         List<ForumPost> postList=postService.selectPostsByPtitle(searchcontent);
         request.setAttribute("postList",postList);
+        request.setAttribute("search",searchcontent);
         request.getRequestDispatcher("/jsp/searchresult.jsp").forward(request,response);
     }
 }

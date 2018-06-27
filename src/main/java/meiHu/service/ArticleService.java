@@ -29,5 +29,5 @@ public interface ArticleService {
     //                        <p>4、每日签到 +3 分</p>
     public void qiandaojiasanfen(int uid);
 
-    public PageInfo<ForumOfficalarticle> selectAllArticle(Map<String ,Object> map) ;
+    public PageInfo<ForumOfficalarticle> selectAllArticle(Map<String, Object> map) ;
 }

@@ -63,7 +63,7 @@
 <!--aside nav-->
 <!--aside nav-->
 <aside class="lt_aside_nav content mCustomScrollbar">
-    <h2><a href="index.html">起始页</a></h2>
+    <h2><a href="#">管理区 </a></h2>
     <ul>
         <li>
             <dl>
@@ -83,7 +83,8 @@
         <li>
             <dl>
                 <dt>论坛信息</dt>
-                <dd><a href="">举报处理</a></dd>
+                <dd><a href="<%=basePath%>admin/showallpostreport.action">举报信息</a></dd>
+
             </dl>
         </li>
         <li>
@@ -110,6 +111,10 @@
                 alert("发表成功！！");
             </script>
         </c:if>
+
+
+
+
         <section>
             <form id="newoa" method="post" action="<%=application.getContextPath()%>/admin/newoa.action"
                   enctype="multipart/form-data">

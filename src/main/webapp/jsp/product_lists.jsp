@@ -33,10 +33,13 @@
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
     <style>
 
-        #imgs{
-            width:220px;
-            hight:220px;
+        #imgs {
+            width: 220px;
+            hight: 220px;
         }
+    </style>
+    <style>
+
         .icon-text{
             font-family: 华文楷体;
 
@@ -44,21 +47,21 @@
         .icon-text li a{
             color: #ffffff;
         }
-        .uc-header-bg{
-            background-color: #c0c0bf;
-        }
+
         .logo1{
             position: relative;
-            margin-top:-220px;
+            margin-top:-230px;
             left:-450px;
+
         }
         nav{
             display: inline-block;
-            margin-top:-40px;
-            left:340px;
-            font-family: 华文楷体;
-            font-size: 20px;
-            font-weight: bolder;
+            top:-60px;
+            left:460px;
+            font-family: 本墨锵黑;
+            font-size: 16px;
+
+
         }
         nav a{
             display: inline-block;
@@ -67,8 +70,8 @@
             perspective:200px;
         }
         nav a span{
-            line-height: 50px;
-            background-color: #f8fff9;
+            line-height: 40px;
+            background-color: #fdf0ef;
             display: inline-block;
             padding: 0 30px;
             position: relative;
@@ -82,7 +85,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: #1f2d3d;
+            background-color: #000000;
             text-align: center;
             color: #ffffff;
             width: 100%;
@@ -94,19 +97,24 @@
         nav a:hover span{
             transform:rotateX(90deg) translateY(-20px);
         }
-        #jia {
-            position: absolute;
-            float: left;
-            margin-left: 100px;
-            width: 50px;
-            height: 50px;
-        }
-        #jian{
-            width:50px;
-            height:50px;
+
+
+        .uc-header-bg{
+            /*background-color: #f39894;*/
+            background-color: #ffded9;
+
+            height:90px;
         }
 
+        .section{
+            background-color: #fdf0ef;
+        }
+
+
+
     </style>
+
+
 
 
 </head>
@@ -118,7 +126,7 @@
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
-            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 180px;height:120px;" alt="" /></a></div>
+            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 100px;height:70px;" alt="" /></a></div>
 
     </div>
     <nav>
@@ -140,7 +148,7 @@
         <a href="<%= basePath %>goods/glist.action?categoryid=6">
             <span data-hover="水乳">水乳</span>
         </a>
-        <a href="<%=basePath%>jsp/mh-orders.jsp">
+        <a href="<%=basePath%>goods/myOrder.action">
             <span data-hover="个人中心">个人中心</span>
         </a>
         <a href="<%=basePath%>jsp/cart.jsp">

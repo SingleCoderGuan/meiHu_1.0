@@ -59,12 +59,11 @@
 </head>
 <body>
 <!--header-->
-<header>
-
+<header style="height: 71px">
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
-        <li><a href="#" class="#">站点首页</a></li>
-        <li><a href="adminlogin.jsp" class="quit_icon">安全退出</a></li>
+        <li><a href="#" class="website_icon">站点首页</a></li>
+        <li><a href="<%=basePath%>admin/adminlogin.jsp" class="quit_icon">安全退出</a></li>
     </ul>
 </header>
 <!--aside nav-->
@@ -81,6 +80,7 @@
         </li>
         <li>
             <dl>
+                <dt>订单信息</dt>
                 <dd><a href="<%=basePath%>shopAdminManage/selectYiFuKuanOrder.action">订单管理</a></dd>
                 <dd><a href="<%=basePath%>shopAdminManage/selectDrawbackInfo.action">退货信息</a></dd>
             </dl>
@@ -89,14 +89,15 @@
         <li>
             <dl>
                 <dt>论坛信息</dt>
-                <dd><a href="">举报信息</a></dd>
+                <dd><a href="<%=basePath%>admin/showallpostreport.action">举报信息</a></dd>
+
             </dl>
         </li>
         <li>
             <dl>
                 <dt>文章管理</dt>
-                <dd><a href="">文章发表</a></dd>
-                <dd><a href="">文章查看</a></dd>
+                <dd><a href="<%=basePath%>admin/wenzhangfabiao.jsp">文章发表</a></dd>
+                <dd><a href="<%=basePath%>admin/articleList.action">文章查看</a></dd>
             </dl>
         </li>
 
@@ -105,7 +106,7 @@
 <section class="rt_wrap content mCustomScrollbar">
     <div class="rt_content">
         <div class="page_title">
-            <p  style="font-size: 30px;font-weight: bold;color: rgba(136,142,252,0.99)">商品添加</p>
+            <p  style="font-size: 25px;font-weight: bold;color: lightpink">商品添加</p>
 
         </div>
         <section>

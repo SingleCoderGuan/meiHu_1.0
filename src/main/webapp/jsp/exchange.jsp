@@ -31,6 +31,9 @@
 
     <link rel="stylesheet" href="<%=basePath%>css/project.css"/>
     <link rel="stylesheet" href="<%=basePath%>css/hb.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/xcConfirm.css"/>
+    <script src="<%=basePath%>js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=basePath%>js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
     <script src="<%=basePath%>js/hb.js" type="text/javascript"></script>
     <script src="<%=basePath%>js/jquery.js" type="text/javascript"></script>
 
@@ -195,7 +198,7 @@
                         </li>
 
                         <li>
-                            <a href="<%=basePath%>user/fatie.action">发帖</a>
+                            <a href="<%=basePath%>fatie.action">发帖</a>
                         </li>
 
                     </ul>
@@ -246,6 +249,7 @@
                             </c:if>
                             <c:if test="${not empty sessionScope.user.uid}">
                                 <h1 class="pull-right">您当前剩余积分<strong>${point}</strong>分</h1>
+                                <%--<input type="hidden" id="point" value="${point}">--%>
 
                             </c:if>
 
@@ -257,7 +261,7 @@
                     <div class="aw-project-list clearfix">
                         <ul>
 
-                            <c:forEach items="${levelList}" var="levelList">
+                            <c:forEach items="${levelList}" var="levelList" varStatus="status">
                                 <li class="col-sm-4 col-md-4">
                                     <div class="mod-head">
                                         <a href="#" class="img"><img src="<%=basePath%>images/${levelList.picname}" alt=""
@@ -298,31 +302,43 @@
 
 
                                         function duihuan(offidd) {
+                                            <c:choose>
+                                            <c:when test="${empty sessionScope.user.uid}">
 
-                                            <c:if test="${empty sessionScope.user.uid}">
-                                            alert("亲，请先登录");
-                                            window.location.href="<%=basePath%>jsp/loginregister.jsp?url=/meiHu_1.0/exchange.action";
-
-
-                                            </c:if>
-                                            <c:if test="${not empty sessionScope.user.uid}">
-
+                                            var txt=  "亲，请先登录！！";
+                                            window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+                                            </c:when>
+                                            <c:otherwise>
                                             $.ajax({
                                                 type: "post",
                                                 url: "${pageContext.request.contextPath}/duihuan.action",
                                                 data: "uidd=" + ${sessionScope.user.uid} + "&offidd=" + offidd+"&pointt="+${point},
                                                 success: function (result) {
-                                                    if (result == 1) {
-                                                        alert("兑换成功");
+                                                    if (result ==1) {
+                                                        alert("兑换成功，赶快去美淘逛逛吧");
+//                                                        var txt=  "兑换成功！！";
+//                                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+                                                        <%--var b = document.getElementById('shengyu${levelList.offid}').innerHTML;--%>
+                                                        <%--alert(b);--%>
+                                                        <%--$('#shengyu${levelList.offid}').html(num-1);--%>
                                                         window.location.reload();
+
                                                     }else if(result==0) {
-                                                        alert("亲，您的积分不够，快快去活跃吧！！");
+                                                        var txt=  "您的积分不足，快去活跃吧！！";
+                                                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+
                                                     }
+
                                                 }
+
                                             });
 
+                                            </c:otherwise>
+                                            </c:choose>
 
-                                            </c:if>
+
+
+
                                         }
 
 
@@ -341,13 +357,12 @@
     </div>
 </div>
 <script>
-    var uid = ${user.uid}
 
         $(function () {
-            if(uid!=null){
-                getMessage(uid);
-                setInterval("getMessage(uid)",10000);
-            }
+            <c:if test="${not empty sessionScope.user.uid}">
+            getMessage(${sessionScope.user.uid});
+            setInterval("getMessage(${sessionScope.user.uid})",10000);
+            </c:if>
         })
 
     function getMessage(uid) {

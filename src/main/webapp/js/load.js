@@ -1,4 +1,4 @@
-﻿﻿$(function(){
+﻿$(function(){
 	var beforeDate = new Date();
 	//页面加载
 	var $window = $(window),
@@ -26,7 +26,7 @@
 				setTimeout(function(){
 					$("#pageLoad").fadeOut(400,function(){
 						$(this).remove();
-						location.href="jsp/zhuye.jsp";
+						location.href="main.action";
 					});		
 			
 				},200);

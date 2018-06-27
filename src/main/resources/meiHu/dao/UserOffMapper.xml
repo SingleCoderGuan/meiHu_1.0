@@ -37,9 +37,8 @@
     <!--public List<UserOff> selectAllOffByUid(int uid);-->
 
     <select id="selectAllOffByUid" resultMap="useroffmap" parameterType="int">
-        SELECT uol.*,ol.offname FROM user_off_level uol,off_level ol
-        WHERE uol.uid = #{parameter}
-        and ol.offid=uol.offid
+        SELECT uol.*,ol.* FROM user_off_level uol,off_level ol
+        WHERE uol.uid = #{parameter} AND uol.offid=ol.offid
     </select>
     <resultMap id="useroffmap" type="UserOff">
         <id column="requireid" property="requireid"/>
@@ -51,6 +50,8 @@
         <association property="offLevel" javaType="OffLevel">
             <id column="offid" property="offid"/>
             <result column="offname" property="offname"/>
+            <result column="picname" property="picname"/>
+            <result column="needpoint" property="needpoint"/>
         </association>
     </resultMap>
 </mapper>

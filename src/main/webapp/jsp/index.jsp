@@ -38,10 +38,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="navbar">
         <a class="menu" href="#"><i class="icon-align-justify"></i></a>
         <a class="link hme" href="<%=basePath%>jsp/zhuye.jsp">
-            <span class="active"><span class="valign"><span class="vertical">首页</span></span></span>
-            <span class="hover"><span class="valign"><span class="vertical">首页</span></span></span>
+            <span class="active"><span class="valign"><span class="vertical">美乎</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">美乎</span></span></span>
         </a>
-        <a class="link abt" href="<%= basePath %>goods/glists.action?categoryid=1">
+        <a class="link abt" href="<%= basePath %>goods/glists.action?categoryid=6">
             <span class="active"><span class="valign"><span class="vertical">商品浏览</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">商品浏览</span></span></span>
         </a>
@@ -49,13 +49,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <span class="active"><span class="valign"><span class="vertical">购物车</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">购物车</span></span></span>
         </a>
-        <a class="link abt" href="<%=basePath %>jsp/mh-orders.jsp">
+        <a class="link abt" href="<%=basePath %>goods/myOrder.action">
             <span class="active"><span class="valign"><span class="vertical">我的订单</span></span></span>
             <span class="hover"><span class="valign"><span class="vertical">我的订单</span></span></span>
         </a>
-        <a class="link abt" href="#">
-            <span class="active"><span class="valign"><span class="vertical">关于我们</span></span></span>
-            <span class="hover"><span class="valign"><span class="vertical">关于我们</span></span></span>
+        <a class="link abt" href="<%=basePath%>goods/myOrder.action">
+            <span class="active"><span class="valign"><span class="vertical">个人中心</span></span></span>
+            <span class="hover"><span class="valign"><span class="vertical">个人中心</span></span></span>
         </a>
     </div>
     <!-- script for menu -->
@@ -72,7 +72,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="header-top">
                 <div class="container">
                     <div class="logo">
-                        <a href="<%=basePath%>jsp/zhuye.jsp" ><h1 style="font-family: '本墨锵黑'">美 <br>
+                        <a href="" ><h1 style="font-family: '本墨锵黑'">美 <br>
                             <span style="font-family: '本墨锵黑'">淘</span></h1></a>
                     </div>
                 </div>
@@ -89,7 +89,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="grid">
                 <figure class="effect-terry">
-                    <img src="<%= basePath%>images/p5.jpg" alt="img16"/>
+                    <a href="<%= basePath %>goods/glist.action?categoryid=5"><img src="<%= basePath%>images/p5.jpg" alt="img16"/></a>
                     <figcaption>
                         <h2 style="font-family:Tahoma, Geneva, sans-serif"><a href="<%= basePath %>goods/glist.action?categoryid=5">奢华&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span> 眼霜</span></a></h2>
                         <p>
@@ -101,7 +101,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </figcaption>
                 </figure>
                 <figure class="effect-terry">
-                    <img src="<%= basePath%>images/p1.jpg" alt="img26"/>
+                    <a href="<%= basePath %>goods/glist.action?categoryid=1"><img src="<%= basePath%>images/p1.jpg" alt="img26"/>
 
                     <figcaption>
                         <h2><a href="<%= basePath %>goods/glist.action?categoryid=1">烈焰&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>蓝金</span></a></h2>

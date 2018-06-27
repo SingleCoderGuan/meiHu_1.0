@@ -52,27 +52,75 @@
             color: #ffffff;
         }
 
-        .layui-form{
-            position: relative;
-            left:150px;
-            width:1119px;
-        }
-        .uc-content{
-            position: relative;
-            left:-80px;
-        }
+
+
         .logo1{
             position: relative;
             margin-top:-220px;
             left:-450px;
         }
+
+
+        .pay{
+            position: relative;
+            margin-left:1050px;
+        }
+
+        .footer-section{
+            position: relative;
+            margin-top: -70px;
+        }
+        .xuanzhong{
+            background-color: pink;
+        }
+    </style>
+    <style>
+
+
+        #p{
+            text-align: center;
+        }
+
+
+        .uc-content{
+            position: relative;
+            left:-80px;
+        }
+
+
+        .pay{
+            position: relative;
+            margin-left:1050px;
+        }
+        .footer-section{
+            position: relative;
+            margin-top: -70px;
+        }
+    </style>
+    <style>
+
+        .icon-text{
+            font-family: 华文楷体;
+
+        }
+        .icon-text li a{
+            color: #ffffff;
+        }
+
+        .logo1{
+            position: relative;
+            margin-top:-230px;
+            left:-450px;
+
+        }
         nav{
             display: inline-block;
             top:-60px;
-            left:330px;
-            font-family: 华文楷体;
-            font-size: 20px;
-            font-weight: bolder;
+            left:460px;
+            font-family: 本墨锵黑;
+            font-size: 16px;
+
+
         }
         nav a{
             display: inline-block;
@@ -81,8 +129,8 @@
             perspective:200px;
         }
         nav a span{
-            line-height: 50px;
-            background-color: #f8fff9;
+            line-height: 40px;
+            background-color: #fdf0ef;
             display: inline-block;
             padding: 0 30px;
             position: relative;
@@ -96,7 +144,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: #1f2d3d;
+            background-color: #000000;
             text-align: center;
             color: #ffffff;
             width: 100%;
@@ -104,22 +152,100 @@
             transform:rotateX(-90deg);
             transform-origin:top;
         }
+
+        nav a:hover span{
+            transform:rotateX(90deg) translateY(-20px);
+        }
+        .uc-header-bg{
+            /*background-color: #f39894;*/
+            background-color: #ffded9;
+
+            height:90px;
+        }
+        .section{
+            background-color: #fdf0ef;
+        }
+        .jiesuan{
+            position: relative;
+            top: 0px;
+            background-color: #fdf0ef;
+        }
+        .myorder{
+            position: relative;
+            margin-left: 150px;
+        }
+
+
+
+
+    </style>
+    <style>
+
+        .logo1{
+            position: relative;
+            margin-top:-230px;
+            left:-450px;
+
+        }
+        nav{
+            display: inline-block;
+            top:-60px;
+            left:460px;
+            font-family: 本墨锵黑;
+            font-size: 16px;
+
+
+        }
+        nav a{
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            perspective:200px;
+        }
+        nav a span{
+            line-height: 40px;
+            background-color: #fdf0ef;
+            display: inline-block;
+            padding: 0 30px;
+            position: relative;
+            transform-origin:top;
+            transition:all 1s;
+            transform-style:preserve-3d;
+
+        }
+        nav a span::after{
+            content: attr(data-hover);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #000000;
+            text-align: center;
+            color: #ffffff;
+            width: 100%;
+            height: 100%;
+            transform:rotateX(-90deg);
+            transform-origin:top;
+        }
+
         nav a:hover span{
             transform:rotateX(90deg) translateY(-20px);
         }
 
-        .pay{
-            position: relative;
-            margin-left:1050px;
-        }
         .uc-header-bg{
-            background-color: rgba(192,192,191,0.81);
-            height:120px;
+            /*background-color: #f39894;*/
+            background-color: #ffded9;
+
+            height:90px;
         }
-        .footer-section{
-            position: relative;
-            margin-top: -70px;
+        .section{
+            background-color: #fdf0ef;
         }
+        .layui-table{
+            width: 1093px;
+        }
+
+
+
     </style>
 </head>
 
@@ -128,7 +254,7 @@
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
-            <img src="<%=basePath%>images/LOGOMeiTao.png"style="height: 90px;width: 140px;" alt="" /></a></div>
+            <img src="<%=basePath%>images/LOGOMeiTao.png"style="height: 70px;width: 100px;" alt="" /></a></div>
 
     </div>
     <nav>
@@ -150,7 +276,7 @@
         <a href="<%= basePath %>goods/glist.action?categoryid=6">
             <span data-hover="水乳">水乳</span>
         </a>
-        <a href="<%=basePath%>jsp/mh-orders.jsp">
+        <a href="<%=basePath%>goods/myOrder.action">
             <span data-hover="个人中心">个人中心</span>
         </a>
         <a href="<%=basePath%>jsp/cart.jsp">
@@ -158,8 +284,9 @@
         </a>
     </nav>
 </div>
-<h1 class="text-center">结算页</h1>
-<p id="p">愉快购物每一天！</p>
+<div class="jiesuan">
+    <h1 class="text-center" >结算页</h1>
+    <p id="p">愉快购物每一天！</p></div>
 
     <div class="section">
     <div class="uc-content" >
@@ -237,14 +364,14 @@
 
                     <div class="address-list"id="parent">
                         <c:forEach items="${addressList}" var="address">
-                            <div class="col col-4" id="${address.addressid}" >
+                            <div class="col col-4" id="${address.addressid}"  name="dizhi">
                                 <div class="item">
                                     <div class="action">
                                         <div class="fl">
                                             <a class="del" onclick="deleteAddress(${address.addressid})">删除</a></div>
-                                            <div class="fr"><a class="setdft" href="javascript:void(0)" onclick="addAddrIntoOrderInfo('${order.orderid}','${address.addressdetail}','${address.receivename}','${address.receivetel}')">选我为付款地址</a></div>
+                                            <div class="fr"><a class="setdft" href="javascript:void(0)" onclick="addAddrIntoOrderInfo('${order.orderid}','${address.addressdetail}','${address.receivename}','${address.receivetel}','${address.addressid}')">选我为付款地址</a></div>
                                         <script type="text/javascript">
-                                            function addAddrIntoOrderInfo(orderid,addressdetail,receivename,receivetel) {
+                                            function addAddrIntoOrderInfo(orderid,addressdetail,receivename,receivetel,addressId) {
                                                 if(confirm("您确定选此地址作为付款地址吗？")){
                                                     var orderid=orderid;
                                                     var addressdetail=addressdetail;
@@ -256,6 +383,10 @@
                                                         data:"orderId="+orderid+"&addressdetail="+addressdetail+"&receivename="+receivename+"&receivetel="+receivetel,
                                                         success:function(result){
                                                             alert("选取付款地址成功！");
+                                                            $("#fukuananliu").attr("disabled",false);
+                                                            $("[name='dizhi']").removeClass("xuanzhong");
+                                                            document.getElementById(addressId).classList.add("xuanzhong");
+                                                            document.getElementById("info").style = "display:none";
                                                         }
                                                     });
                                                 }
@@ -296,17 +427,24 @@
         </div>
 
 
-        <div  class="row deliverymode">
 
-            <div id="orders" class="col-lg-9 deliverymodeRight" >
+        <%--<div  class="row deliverymode">--%>
 
-                <div class="layui-form">
+            <%--<div id="orders" class="col-lg-9 deliverymodeRight" >--%>
+
+                <%--<div class="layui-form">--%>
+                <div class="myorder">
                     <div class="uc-bigtit">&nbsp;&nbsp;&nbsp;&nbsp;我的订单</div>
+
+
+
                     <table class="layui-table">
                         <tr>
                             <th colspan="2">订单编号：${order.orderid}</th>
                             <th colspan="1">未付款</th>
                             <th colspan="2">时间：<fmt:formatDate value="${order.ordertime}" pattern="yyyy-MM-dd"/> </th>
+
+                            </th>
                         </tr>
                         <tr>
                             <th>商品图片</th>
@@ -314,6 +452,7 @@
                             <th>商品价格</th>
                             <th>数量</th>
                             <th>小计</th>
+
                         </tr>
                         <c:forEach items="${order.items}" var="order">
                             <tr>
@@ -322,8 +461,30 @@
                                 <td>${order.good.goodprice}</td>
                                 <td>${order.count}</td>
                                 <td>${order.subtotal}</td>
+
                             </tr>
+
                         </c:forEach>
+                        <tr>
+                            <td colspan="2">
+                                <span>
+                                    <select id="youhuiquan">
+                                        <option value="1">请选择优惠券</option>
+                                        <c:if test="${ empty userofflist}">
+                                            <option value="1">您暂无优惠券</option>
+                                        </c:if>
+                                        <c:forEach items="${userofflist}" var="userofflist">
+                                            <option value="${userofflist.offLevel.offname}">${10-userofflist.offLevel.offid}折优惠券（${userofflist.remainnum}）张</option>
+                                        </c:forEach>
+                                    </select>
+                                    <input type="button" value="确定" onclick="queding()"><br>(选中优惠券自动识别使用一张)
+                                </span>
+                            </td>
+
+                            <td>总金额:￥${order.total}</td>
+                            <td>运费:￥0.00</td>
+                            <td>应付金额:￥${order.total}</td>
+                        </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td><a href="javascript:void(0)" onclick='remove()'>取消订单</a></td>
@@ -331,8 +492,9 @@
                         </tr>
                     </table>
                 </div>
-            </div>
-        </div>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
         <script type="text/javascript">
             function remove() {
@@ -353,7 +515,7 @@
        <div class="pay">
 
                 <div class="contenterFooter">
-                    <span><select id="youhuiquan">
+                    <span><select id="youhuiquanaa">
                     <option value="1">请选择优惠券</option>
                     <c:if test="${ empty userofflist}">
                         <option value="1">您暂无优惠券</option>
@@ -378,10 +540,26 @@
            <input type="hidden" name="orderId" value="${order.orderid}"/>
            <input type="hidden" name="WIDout_trade_no" value="${order.orderid}"/>
            <input type="hidden" name="WIDsubject" value="myorder"/>
-           <input type="hidden" name="WIDtotal_amount" id="money"/>
-           <button class="btn submitForm" type="submit">确定提交</button>
+           <input type="hidden" name="WIDtotal_amount" id="money" value="${order.total}"/>
+           <button id="fukuananliu" class="btn submitForm" disabled>确定提交</button><br/>
+           <span id="info" >亲您先去选择付款地址吧！！！</span>
        </div>
 
+        <%--<script>
+            $("#fukuananliu").click( function(){
+                $.ajax({
+                    type:"get",
+                    url:"<%=basePath%>goods/selectAddressByOid.action",
+                    data:"orderid="+${order.orderid},
+                    success:function(msg){
+                        if(msg==1){
+                            $("#fukuananliu").disabled();
+                            alert("请先选择地址哦！");
+                        }
+                    }
+                });
+            })
+        </script>--%>
           </form>
 
 </div>

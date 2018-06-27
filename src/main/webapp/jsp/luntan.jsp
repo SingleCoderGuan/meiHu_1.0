@@ -115,16 +115,16 @@
         display: block;
     }
 </style>
-<body>
+<body >
+<img src="<%=basePath%>images/bg-halfmei.png" style="position: absolute;top: 150px;left: -50px"/>
+<img src="<%=basePath%>images/bg-hu.png" style="position: absolute;top: 360px;left:1004px"/>
 
-<img src="<%=basePath%>images/bg-halfmei.png" style="position: absolute;top: 150px;left: 52px"/>
-<img src="<%=basePath%>images/bg-halfhu.png" style="position: absolute;top: 450px;left:1004px"/>
 <div class="aw-top-menu-wrap" style="height: 55px">
     <div class="aw-wecenter aw-top-menu clearfix">
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-                <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>images/LOGO.png"
+                <a href="<%=basePath%>main.action"> <img src="<%=basePath%>images/LOGO.png"
                                                              style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
@@ -252,13 +252,17 @@
 </div>
 
 
-<div class="aw-container-wrap " >
-    <div class="aw-container aw-wecenter" >
+<DIV id=img1 style="Z-INDEX: 100; LEFT: 2px; WIDTH: 59px; POSITION: absolute; TOP: 43px; HEIGHT: 61px;
+ visibility: visible;"><a href="<%=basePath%>quchoujiang.action" target="_blank"><img src="<%=basePath%>images/huodong.png" width="140" height="160" border="0"></a></DIV>
+<SCRIPT src="<%=basePath%>js/guanggaopiaofu.js"></SCRIPT>
+
+<div class="aw-container-wrap ">
+    <div class="aw-container aw-wecenter" style="">
         <div class="container">
             <div class="row category">
                 <div class="col-sm-12">
                     <c:forEach items="${topicList1}" var="topicList1">
-                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList1.tid}" >
+                        <a href="<%=basePath%>luntan/luntanshouye.action?tid=${topicList1.tid}">
                             <dl style="text-align: center">
                                 <dt><img src="<%=basePath%>images/${topicList1.tpicname}"
                                          style="position: relative;left: 30px;"/></dt>
@@ -356,26 +360,28 @@
                                 <c:forEach var="postList" items="${pageInfo.list}" varStatus="status">
 
                                     <div class="aw-item ">
-                                        <a class="aw-user-name hidden-xs" data-id="804712" href="<%=basePath%>luntan/userdetail.action?uid=${postList.user.uid}" rel="nofollow">
-                                            <img style="width: 50px"  src="<%=basePath%>${postList.user.headpic}"/>
+                                        <a class="aw-user-name hidden-xs" data-id="804712" href="#" rel="nofollow">
+                                                <%-- <img src="<%=basePath%>images/touxiang1.png" alt="" />--%>
+                                                <%--<span style="font-size: 40px "><strong>${status.index+1}</strong></span>--%>
+                                            <img style="width: 50px" src="<%=basePath%>${postList.user.headpic}"/>
                                         </a>
 
                                         <div class="aw-question-content">
                                             <h4>
-                                                <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}" style="position: relative;left: 20px;">${postList.ptitle}</a>
+                                                <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
                                             </h4>
                                             <p>
-                                        <span class="aw-question-tags">
-                                            <i class="fa fa-caret-left"></i>
-                                            <a href="#">${postList.topic.tname}</a><%--标签--%>
-                                            <input name="curTid" id="curTid" value="${postList.topic.tid}" hidden/>
-                                        </span> •
-                                                <a href="<%=basePath%>luntan/userdetail.action?uid=${postList.user.uid}" class="aw-user-name">${postList.user.uname}</a>
-                                                <span class="aw-text-color-999" >${postList.likecount}次点赞  •
+							<span class="aw-question-tags">
+					<a href="#">${postList.topic.tname}</a><%--标签--%>
+                                <input name="curTid" id="curTid" value="${postList.topic.tid}" hidden/>
+				</span> •
+                                                <a href="#" class="aw-user-name">${postList.user.uname}</a>
+                                                <span class="aw-text-color-999">${postList.likecount}次点赞  •
                                                     ${postList.visitcount} 次浏览 •<fmt:formatDate
                                                             value='${postList.createtime}'
                                                             pattern='yyyy-MM-dd hh:mm:ss'/>   </span>
                                             </p>
+
                                         </div>
                                     </div>
 
@@ -600,10 +606,12 @@
     </div>
 </div>
 <script>
-    <c:if test="${not empty user}" >
-        getMessage(${user.uid});
-        setInterval("getMessage(${user.uid})",10000);
-    </c:if>
+    $(function () {
+        <c:if test="${not empty sessionScope.user.uid}">
+        getMessage(${sessionScope.user.uid});
+        setInterval("getMessage(${sessionScope.user.uid})",10000);
+        </c:if>
+    })
 
     function getMessage(uid) {
         $.ajax({
@@ -628,7 +636,7 @@
 
 
 
-<div class="aw-footer-wrap" >
+<div class="aw-footer-wrap" style="">
 
 
     <div class="aw-footer aw-wecenter">

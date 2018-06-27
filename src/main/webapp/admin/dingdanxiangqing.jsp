@@ -18,7 +18,7 @@
     <title>后台管理系统</title>
     <meta name="author" content="DeathGhost"/>
     <link rel="stylesheet" type="text/css" href="../css/styleadmin.css">
-    <%--<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">--%>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <!--[if lt IE 9]>
     <script src="../js/html5.js"></script>
     <![endif]-->
@@ -51,16 +51,17 @@
 </head>
 <body>
 <!--header-->
-<header>
+<header style="height: 71px">
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
         <li><a href="#" class="website_icon">站点首页</a></li>
-        <li><a href="adminlogin.jsp" class="quit_icon">安全退出</a></li>
+        <li><a href="<%=basePath%>admin/adminlogin.jsp" class="quit_icon">安全退出</a></li>
     </ul>
 </header>
-
+<!--aside nav-->
+<!--aside nav-->
 <aside class="lt_aside_nav content mCustomScrollbar">
-    <h2><a href="index.html">起始页</a></h2>
+    <h2><a href="#">管理区 </a></h2>
     <ul>
         <li>
             <dl>
@@ -80,14 +81,15 @@
         <li>
             <dl>
                 <dt>论坛信息</dt>
-                <dd><a href="">举报信息</a></dd>
+                <dd><a href="<%=basePath%>admin/showallpostreport.action">举报信息</a></dd>
+
             </dl>
         </li>
         <li>
             <dl>
                 <dt>文章管理</dt>
-                <dd><a href="">文章发表</a></dd>
-                <dd><a href="">文章查看</a></dd>
+                <dd><a href="<%=basePath%>admin/wenzhangfabiao.jsp">文章发表</a></dd>
+                <dd><a href="<%=basePath%>admin/articleList.action">文章查看</a></dd>
             </dl>
         </li>
 
@@ -201,7 +203,7 @@
             <label>操作：</label>
             <c:choose>
 
-                <c:when test="${YiFuKuanOrderItemLists.state== 0}"><a href="javascript:void(0)" onclick="shanChu('${YiFuKuanOrderItemLists.orderid}')">删除</a></c:when>
+                <%--<c:when test="${YiFuKuanOrderItemLists.state== 0}"><a href="javascript:void(0)" onclick="shanChu('${YiFuKuanOrderItemLists.orderid}')">删除</a></c:when>--%>
                 <c:when test="${YiFuKuanOrderItemLists.state== 1}"><a href="javascript:void(0)" onclick="faHuo('${YiFuKuanOrderItemLists.orderid}')">发货</a></c:when>
                 <c:when test="${YiFuKuanOrderItemLists.state== 2}"><a href="javascript:void(0)" onclick="wanCheng('${YiFuKuanOrderItemLists.orderid}')">已完成</a></c:when>
 

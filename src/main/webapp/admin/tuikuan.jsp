@@ -19,23 +19,23 @@
     <meta name="author" content="DeathGhost"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/styleadmin.css">
     <script src="<%= basePath%>js/jquery.min.js"> </script>
-    <%--<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">--%>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 
 
 </head>
 <body>
 <!--header-->
-<header>
+<header style="height: 71px">
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
         <li><a href="#" class="website_icon">站点首页</a></li>
-        <li><a href="adminlogin.jsp" class="quit_icon">安全退出</a></li>
+        <li><a href="<%=basePath%>admin/adminlogin.jsp" class="quit_icon">安全退出</a></li>
     </ul>
 </header>
 <!--aside nav-->
 <!--aside nav-->
 <aside class="lt_aside_nav content mCustomScrollbar">
-    <h2><a href="index.html">起始页</a></h2>
+    <h2><a href="#">起始页</a></h2>
     <ul>
         <li>
             <dl>
@@ -55,14 +55,15 @@
         <li>
             <dl>
                 <dt>论坛信息</dt>
-                <dd><a href="">举报处理</a></dd>
+                <dd><a href="<%=basePath%>admin/showallpostreport.action">举报信息</a></dd>
+
             </dl>
         </li>
         <li>
             <dl>
                 <dt>文章管理</dt>
-                <dd><a href="">文章发表</a></dd>
-                <dd><a href="">文章查看</a></dd>
+                <dd><a href="<%=basePath%>admin/wenzhangfabiao.jsp">文章发表</a></dd>
+                <dd><a href="<%=basePath%>admin/articleList.action">文章查看</a></dd>
             </dl>
         </li>
 

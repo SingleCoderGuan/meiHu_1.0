@@ -152,4 +152,9 @@ public class OrderServiceImpl implements OrderService {
         PageInfo<Order> pageInfo=new PageInfo<>(postList);
         return  pageInfo ;
     }
+
+    @Override
+    public List<Order> selectOrderByName(String goodname) {
+        return orderMapper.selectOrderByName(goodname);
+    }
 }

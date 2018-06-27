@@ -264,14 +264,12 @@
     </div>
 </body>
 <script>
-    var uid = ${user.uid}
-
-        $(function () {
-            if(uid!=null){
-                getMessage(uid);
-                setInterval("getMessage(uid)",10000);
-            }
-        })
+    $(function () {
+        <c:if test="${not empty sessionScope.user.uid}">
+        getMessage(${sessionScope.user.uid});
+        setInterval("getMessage(${sessionScope.user.uid})",10000);
+        </c:if>
+    })
 
     function getMessage(uid) {
         $.ajax({
