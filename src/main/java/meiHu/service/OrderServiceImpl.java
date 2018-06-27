@@ -154,11 +154,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int selectAddressByOid(int orderid) {
-        if(orderMapper.selectAddressByOid(orderid)==null){
-            return 1;
-        }else{
-            return 0;
-        }
+    public List<Order> selectOrderByName(String goodname) {
+        return orderMapper.selectOrderByName(goodname);
     }
 }

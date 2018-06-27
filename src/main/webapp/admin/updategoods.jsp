@@ -18,8 +18,7 @@
     <title>后台管理系统</title>
     <meta name="author" content="DeathGhost"/>
     <link rel="stylesheet" type="text/css" href="../css/styleadmin.css">
-    <link rel="stylesheet" href="<%= basePath%>plugins/bootstrap/bootstrap.min.css" />
-    <link href="<%= basePath%>css/bootstrap1.css" rel='stylesheet' type='text/css' />
+    <link href="<%= basePath%>css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!--[if lt IE 9]>
     <script src="../js/html5.js"></script>
     <![endif]-->
@@ -58,18 +57,17 @@
 </head>
 <body>
 <!--header-->
-<header>
-
+<header style="height: 71px">
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
-        <li><a href="#" class="#">站点首页</a></li>
-        <li><a href="adminlogin.jsp" class="quit_icon">安全退出</a></li>
+        <li><a href="#" class="website_icon">站点首页</a></li>
+        <li><a href="<%=basePath%>admin/adminlogin.jsp" class="quit_icon">安全退出</a></li>
     </ul>
 </header>
 <!--aside nav-->
 <!--aside nav-->
 <aside class="lt_aside_nav content mCustomScrollbar">
-    <h2><a href="#">管理区</a></h2>
+    <h2><a href="#">管理区 </a></h2>
     <ul>
         <li>
             <dl>
@@ -106,7 +104,7 @@
 <section class="rt_wrap content mCustomScrollbar">
     <div class="rt_content">
         <div class="page_title">
-            <p  style="font-size: 30px;font-weight: bold;color: rgba(136,142,252,0.99)">商品修改</p>
+            <p  style="font-size: 20px;font-weight: bold;color: lightpink">商品修改</p>
 
         </div>
         <section>

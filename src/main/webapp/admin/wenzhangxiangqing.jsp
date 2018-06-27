@@ -34,13 +34,13 @@
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
         <li><a href="#" class="website_icon">站点首页</a></li>
-        <li><a href="adminlogin.jsp" class="quit_icon">安全退出</a></li>
+        <li><a href="<%=basePath%>admin/adminlogin.jsp" class="quit_icon">安全退出</a></li>
     </ul>
 </header>
 <!--aside nav-->
 <!--aside nav-->
 <aside class="lt_aside_nav content mCustomScrollbar">
-    <h2><a href="index.html">起始页</a></h2>
+    <h2><a href="#">管理区 </a></h2>
     <ul>
         <li>
             <dl>
@@ -104,7 +104,7 @@
                                     pattern='yyyy-MM-dd hh:mm:ss'/></span></a>
                             </td>
                             <td><a href="javascript:void(0);"
-                                   onclick="deleteArticle(${article.oaid},${status.index})"><span
+                                   onclick="deleteArticle(${article.oaid})"><span
                             >删除</span></a>
                             </td>
                         </tr>
@@ -143,7 +143,7 @@
 
     }
 
-    function deleteArticle(oaid, index) {
+    function deleteArticle(oaid) {
         if (confirm("确定要删除吗？")==true){
             $.ajax({
                 type: "post",

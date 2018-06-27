@@ -38,6 +38,9 @@
         #tu{
             width:300px;
             hight:300px;
+            /*border-image: solid 2px ;*/
+
+
         }
         .icon-text{
             font-family: 华文楷体;
@@ -49,17 +52,18 @@
 
         .logo1{
             position: relative;
-            margin-top:-220px;
+            margin-top:-230px;
             left:-450px;
 
         }
         nav{
             display: inline-block;
             top:-60px;
-            left:330px;
-            font-family: 华文楷体;
-            font-size: 20px;
-            font-weight: bolder;
+            left:460px;
+            font-family: 本墨锵黑;
+            font-size: 16px;
+
+
         }
         nav a{
             display: inline-block;
@@ -68,8 +72,8 @@
             perspective:200px;
         }
         nav a span{
-            line-height: 50px;
-            background-color: #f8fff9;
+            line-height: 40px;
+            background-color: #fdf0ef;
             display: inline-block;
             padding: 0 30px;
             position: relative;
@@ -83,7 +87,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: #1f2d3d;
+            background-color: #000000;
             text-align: center;
             color: #ffffff;
             width: 100%;
@@ -113,8 +117,10 @@
             cursor:pointer;
         }
         .uc-header-bg{
-            background-color: rgba(192,192,191,0.81);
-            height: 120px;
+            /*background-color: #f39894;*/
+            background-color: #ffded9;
+
+            height:90px;
         }
         #shoucang{
             position: relative;
@@ -122,6 +128,9 @@
             left: 80px;
             height:20px;
             width:20px;
+        }
+        .section{
+            background-color: #fdf0ef;
         }
 
 
@@ -139,7 +148,7 @@
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
         <div class="logo1"> <a class="logo" href="<%=basePath%>jsp/index.jsp">
-            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width: 140px;height:90px;" alt="" /></a></div>
+            <img src="<%=basePath%>images/LOGOMeiTao.png" style="width:100px;height:70px;" alt="" /></a></div>
 
     </div>
     <nav>
@@ -161,7 +170,7 @@
         <a href="<%= basePath %>goods/glist.action?categoryid=6">
             <span data-hover="水乳">水乳</span>
         </a>
-        <a href="<%=basePath%>jsp/mh-orders.jsp">
+        <a href="<%=basePath%>goods/myOrder.action">
             <span data-hover="个人中心">个人中心</span>
         </a>
         <a href="<%=basePath%>jsp/cart.jsp">
@@ -176,7 +185,7 @@
         <div class="margin">
             <!-- product image -->
             <div class="s-12 m-4 l-5 margin-bottom">
-                <div id="tu"><img src='<%=basePath %>${product.goodpic}'/></div>
+                <div id="tu"><img src='<%=basePath %>${product.goodpic}'style="border-radius:90%"/></div>
             </div>
             <!-- product detail -->
             <div class="s-12 m-8 l-7 padding-l-left">
@@ -231,16 +240,41 @@
                         添加收藏 &nbsp;&nbsp;&nbsp;</a><img id="shoucang"
                                      src="../images/shoucang.png"/>
                 </div>
+                <div class="bdsharebuttonbox share-icons">
+                    <a href="#" class="bds_more" data-cmd="more"></a>
+
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
+<script>
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        }, "share": {}
+    };
+    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
 <!-- PRODUCT DETAIL END -->
 <script type="text/javascript">
     function favorGood(goodid1) {
         <c:choose>
         <c:when test="${empty sessionScope.user}">
-        alert("亲，请先登录")
+        alert("亲，请先登录");
+
+        window.location.href="<%=basePath%>jsp/loginregister.jsp";
         </c:when>
         <c:otherwise>
         if($("#shoucang").attr("src")==("../images/shoucang.png")){
@@ -433,24 +467,24 @@
             <div class="border2"></div>
             <div class="flickr-grids">
                 <div class="flickr-grid">
-                    <a href="#"><img src="<%= basePath%>images/1_06.jpg" alt=""/></a>
+                    <a href=""><img src="<%= basePath%>images/1_06.jpg" alt=""/></a>
                 </div>
                 <div class="flickr-grid">
-                    <a href="#"><img src="<%= basePath%>images/4_15.jpg" alt=""/></a>
+                    <a href=""><img src="<%= basePath%>images/4_15.jpg" alt=""/></a>
                 </div>
                 <div class="flickr-grid">
-                    <a href="#"><img src="<%= basePath%>images/6_03.jpg" alt=""/></a>
+                    <a href=""><img src="<%= basePath%>images/6_03.jpg" alt=""/></a>
                 </div>
                 <div class="clearfix"> </div>
 
                 <div class="flickr-grid">
-                    <a href="#"><img src="<%= basePath%>images/3_05.jpg" alt=""/></a>
+                    <a href=""><img src="<%= basePath%>images/3_05.jpg" alt=""/></a>
                 </div>
                 <div class="flickr-grid">
-                    <a href="#"><img src="<%= basePath%>images/2_04.jpg" alt=""/></a>
+                    <a href=""><img src="<%= basePath%>images/2_04.jpg" alt=""/></a>
                 </div>
                 <div class="flickr-grid">
-                    <a href="#"><img src="<%= basePath%>images/5_09.jpg" alt=""/></a>
+                    <a href=""><img src="<%= basePath%>images/5_09.jpg" alt=""/></a>
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -458,6 +492,8 @@
         <div class="clearfix"></div>
     </div>
 </div>
+<script src="https://qiyukf.com/script/8461da5aef2206ef029adb41eea97bfb.js"></script>
+
 <!--//end-footer-section-->
 <!--/start-copyright-section-->
 <div class="copyright">

@@ -202,6 +202,32 @@
             <result column="uname" property="uname"/>
         </association>
     </resultMap>
+
+    <resultMap id="getOrderByNameMap" type="Order">
+        <id column="orderid" property="orderid"/>
+        <result column="ordertime" property="ordertime"/>
+        <result column="total" property="total"/>
+        <result column="state" property="state"/>
+        <result column="addressdetail" property="addressdetail"/>
+        <result column="receivename" property="receivename"/>
+        <result column="receivetel" property="receivetel"/>
+        <collection property="items" ofType="OrderItem">
+            <id column="itemid" property="itemid"/>
+            <result column="num" property="count"/>
+            <result column="subtotal" property="subtotal"/>
+            <result column="item_state" property="item_state"/>
+            <association property="good" javaType="Goods">
+                <id column="goodid" property="goodid"/>
+                <result column="goodname" property="goodname"/>
+                <result column="goodpic" property="goodpic"/>
+                <result column="goodprice" property="goodprice"/>
+                <result column="goodstore" property="goodstore"/>
+                <result column="goodaddress" property="goodaddress"/>
+                <result column="gooddetail" property="gooddetail"/>
+                <result column="goodsales" property="goodsales"/>
+            </association>
+        </collection>
+    </resultMap>
     <!--//根据用户id查询我的订单信息-->
     <!--public List<Order> findMyOrders(int uid);-->
     <select id="findMyOrders" parameterType="int" resultMap="orderMap">
@@ -352,9 +378,9 @@
        and so.state=#{_parameter}
     </select>
 
-    <!--// 根据订单编号查询地址信息为空
-    public String selectAddressByOid(int orderid);-->
-    <select id="selectAddressByOid" parameterType="int" resultType="String">
-        select addressdetail from shop_order where orderid=#{_parameter}
+    <select id="selectOrderByName" resultMap="getOrderByNameMap" parameterType="String">
+    select * from shop_order so,shop_item si,shop_goods sg
+    where sg.goodname LIKE CONCAT ('%',#{parameter},'%') and
+    so.orderid=si.orderid and  si.goodid=sg.goodid
     </select>
 </mapper>

@@ -165,11 +165,11 @@
             <artifactId>json</artifactId>
             <version>20160810</version>
         </dependency>
-        <!--支付宝配置-->
+
         <dependency>
             <groupId>com.alipay</groupId>
             <artifactId>sdk-java</artifactId>
-            <version>20170324180803</version>
+            <version>20161213173952</version>
         </dependency>
     </dependencies>
 

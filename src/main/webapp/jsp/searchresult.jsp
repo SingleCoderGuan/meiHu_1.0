@@ -29,22 +29,8 @@
     <link href="<%=basePath%>css/stylebankuai.css" rel="stylesheet" type="text/css"/>
 
     <link href="<%=basePath%>css/classblack.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript">
-        var _F873F04AAB426252F46A5A8E6352AA6A = '';
-        var G_POST_HASH = _F873F04AAB426252F46A5A8E6352AA6A;
-        var G_INDEX_SCRIPT = '';
-        var G_SITE_NAME = '美论';
-        var G_BASE_URL = '//ask.dcloud.net.cn';
-        var G_STATIC_URL = '//img-cdn-qiniu.dcloud.net.cn/static';
-        var G_UPLOAD_URL = '//img-cdn-qiniu.dcloud.net.cn/uploads';
-        var G_USER_ID = 0;
-        var G_USER_NAME = '';
-        var G_UPLOAD_ENABLE = 'N';
-        var G_UNREAD_NOTIFICATION = 0;
-        var G_NOTIFICATION_INTERVAL = 300000;
-        var G_CAN_CREATE_TOPIC = '';
+    <script type="text/javascript" src="<%=basePath%>/js/jquery-3.2.1.min.js"></script>
 
-    </script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.2.js?v=20171108" type="text/javascript"></script>
     <%--<script src="//img-cdn-qiniu.dcloud.net.cn/static/js/jquery.form.js?v=20171108" type="text/javascript"></script>
     <script src="//img-cdn-qiniu.dcloud.net.cn/static/js/plug_module/plug-in_module.js?v=20171108"
@@ -116,14 +102,14 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-                <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+                <a href="<%=basePath%>main.action"> <img src="<%=basePath%>images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
             <div class="aw-search-box  hidden-xs hidden-sm">
                 <form class="navbar-search pull-right" action="<%=basePath%>search/searchReasult.action" id="global_search_form" method="post">
                     <div class="input-group">
-                        <input value="" class="form-control" type="text"
+                        <input value="${search}" class="form-control" type="text"
                                placeholder="搜索问题、话题" autocomplete="off" name="searchcontent" id="aw-search-query"
                                class="search-query"/>
                         <span class="input-group-addon" title="搜索" id="global_search_btns"
@@ -177,6 +163,7 @@
                     </div>
                 </form>
             </div>
+
             <!-- end 搜索框 -->
             <!-- 导航 -->
             <div class="aw-top-nav navbar">
@@ -197,12 +184,11 @@
                         <li>
                             <a href="<%=basePath%>article/article.action">美文</a>
                         </li>
-
                         <li>
-                            <a href="#">美淘</a>
+                            <a href="<%=basePath%>jsp/index.jsp">美淘</a>
                         </li>
                         <li>
-                            <a href="<%=basePath%>jsp.activity.jsp">精彩活动</a>
+                            <a href="<%=basePath%>jsp/activity.jsp">精彩活动</a>
                         </li>
 
                         <li>
@@ -221,7 +207,7 @@
                 <span>
                      <c:if test="${not empty sessionScope.user}">
                           <a style="position: relative;left: -40px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
-                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>欢迎您：${user.uname}
+                        <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>${user.uname}
                     </a>
                          <img id="message" hidden style="position: absolute;left: 30px;top: 40px;width: 30px" src="<%=basePath%>images/comment.png"/>
 
@@ -408,14 +394,15 @@
 
                                         <div class="aw-question-content">
                                             <h4>
-                                                <a href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
+                                                <a id="${postList.pid}" href="<%=basePath%>luntan/tiezidetail.action?pid=${postList.pid}">${postList.ptitle}</a>
+                                                <%--<input type="hidden" value="${postList.ptitle}" id="${postList.pid}"/>--%>
+                                                <%--<p id="${postList.pid}">${postList.ptitle}</p>--%>
                                             </h4>
 
 
 
                                             <p>
 							<span class="aw-question-tags">
-					<i class="fa fa-caret-left"></i>
 					<a href="#">${postList.topic.tname}</a><%--标签--%>
 				</span> •
                                                 <a href="#" class="aw-user-name" >${postList.user.uname}</a>
@@ -426,6 +413,22 @@
 
                                         </div>
                                     </div>
+                                    <script>
+                                        var oBox= document.getElementById("${postList.pid}");
+                                        var oCont=oBox.innerHTML;//整段内容
+                                        var oTxt=document.getElementById("aw-search-query");
+                                        var val=oTxt.value;
+                                        var fen=oCont.split(val);
+                                        oBox.innerHTML = fen.join('<span style="background-color:pink; font-size:15px;">' + val + '</span> ');
+                              /*          var ser = $('#aw-search-query').val();
+                                        var content = $('#${postList.pid}').val();
+                                        alert(content);
+                                        var fen=content.split(ser);
+                                        alert("ddddddd"+fen);
+                                        $('#content').innerHTML=fen.join('<span style="background:#cfc;">' + ser + '</span> ');*/
+
+                                    </script>
+
                                 </c:forEach>
                                 </c:if>
 
@@ -577,14 +580,12 @@
     </div>
 </div>
 <script>
-    var uid = ${user.uid}
-
-        $(function () {
-            if(uid!=null){
-                getMessage(uid);
-                setInterval("getMessage(uid)",10000);
-            }
-        })
+    $(function () {
+        <c:if test="${not empty sessionScope.user.uid}">
+        getMessage(${sessionScope.user.uid});
+        setInterval("getMessage(${sessionScope.user.uid})",10000);
+        </c:if>
+    })
 
     function getMessage(uid) {
         $.ajax({

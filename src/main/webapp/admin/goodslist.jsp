@@ -43,7 +43,7 @@
     <h1><img src="<%=basePath%>images/LOGO.png"/></h1>
     <ul class="rt_nav">
         <li><a href="#" class="website_icon">站点首页</a></li>
-        <li><a href="adminlogin.jsp" class="quit_icon">安全退出</a></li>
+        <li><a href="<%=basePath%>admin/adminlogin.jsp" class="quit_icon">安全退出</a></li>
     </ul>
 </header>
 <!--aside nav-->
@@ -51,7 +51,7 @@
 
 <aside class="lt_aside_nav content mCustomScrollbar">
 
-    <h2><a href="index.html">管理区</a></h2>
+    <h2><a href="#">管理区</a></h2>
     <ul>
         <li>
             <dl>
@@ -90,7 +90,7 @@
     <div class="rt_content">
         <div class="page_title">
             <c:if test="${not empty categoryList}">
-                <p  style="color: rgba(136,142,252,0.99);font-size:20px;font-weight: bold">商品列表：
+                <p  style="color: lightpink;font-size:20px;font-weight: bold">商品列表：
                 <c:choose>
                     <c:when test="${categoryId==1}">口红专区</c:when>
                     <c:when test="${categoryId==2}">香水专区</c:when>

@@ -53,7 +53,7 @@
             <div class="col-sm-12">
 
                 <!-- start logo -->
-                <a class="branding" href="<%=basePath%>jsp/zhuye.jsp"" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
+                <a class="branding" href="<%=basePath%>main.action" title="美乎"><img src="../images/LOGO.png" style="height: 90px;width: 230px;"/></a>
                 <!-- end logo -->
                 <h2 style="color: black; font-family: '本墨锵黑';">姐妹们，争做时尚最前沿</h2>
 

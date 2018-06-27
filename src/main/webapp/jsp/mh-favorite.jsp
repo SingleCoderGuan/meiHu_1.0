@@ -25,7 +25,7 @@
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
     <style>
         .uc-header-bg{
-            background-color: #cdc6d7;
+            background-color: #ffded9;
         }
         .uc-search{
             position: relative;
@@ -48,7 +48,7 @@
             <c:if test="${not empty user}">
 
                 <div class="item" href="">欢迎您:${user.uname}</div>
-                <div class="logout divider"> <a href="<%=basePath%>signOut.action">注销</a></div>
+                <div class="logout divider"> <a href="<%=basePath%>user/signOut.action">注销</a></div>
 
             </c:if>
             <c:if test="${empty user}">
@@ -58,7 +58,7 @@
 
             <span class=""></span>
             <div class="cart"><em></em><a href="<%=basePath%>jsp/cart.jsp">购物车</a></div>
-            <div class="order"><em></em><a href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></div>
+            <div class="order"><em></em><a href="<%=basePath%>goods/myOrder.action">我的订单</a></div>
             <div class="fav"><em></em><a href="<%=basePath%>favor/selectMyFavor.action">我的收藏</a></div>
             <div class="help"><em></em><a href="#">帮助中心</a></div>
         </div>
@@ -66,12 +66,13 @@
 </div>
 <div class="uc-header-bg">
     <div class="uc-header wrapper">
-        <a class="logo" href="<%=basePath%>jsp/index.jsp"><img src="<%=basePath%>images/u8.png" alt="" /></a>
-        <div class="back-home"><a href="<%=basePath%>jsp/zhuye.jsp">返回美乎首页</a></div>
+        <a class="logo" href="<%=basePath%>main.action"><img src="<%=basePath%>images/u8.png" alt="" /></a>
+
 
         <div class="schbox">
             <form action="" method="post">
-                <input class="search-txt" type="text" placeholder="请输入搜索内容"/>
+                <input class="search-txt" type="text" placeholder="请输入搜索内容"
+                       style="border: solid 2px;border-right: none"/>
                 <button class="search-btn">搜索</button>
 
             </form>
@@ -94,7 +95,7 @@
             <div class="uc-menu">
                 <div class="tit">订单中心</div>
                 <ul class="sublist">
-                    <li><a  href="<%=basePath%>jsp/mh-orders.jsp">我的订单</a></li>
+                    <li><a  href="<%=basePath%>goods/myOrder.action">我的订单</a></li>
 
                 </ul>
                 <div class="tit">客户服务</div>

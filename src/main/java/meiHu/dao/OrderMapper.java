@@ -53,6 +53,6 @@ public interface OrderMapper {
     public int updateOrderStateWeiWanCheng(int orderid);
     //查询各种状态的订单
     public List<Order> showOrderByState(String state);
-    // 根据订单编号查询地址信息为空
-    public String selectAddressByOid(int orderid);
+    //根据商品名称查询订单
+    public List<Order> selectOrderByName(String goodname);
 }

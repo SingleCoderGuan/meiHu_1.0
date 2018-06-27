@@ -97,7 +97,7 @@
         <div class="container">
             <!-- logo -->
             <div class="aw-logo hidden-xs">
-               <a href="<%=basePath%>jsp/zhuye.jsp"> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
+               <a href="<%=basePath%>main.action"> <img src="<%=basePath%>/images/LOGO.png" style="width: 72px; height: 41px;"/></a>
             </div>
             <!-- end logo -->
             <!-- 搜索框 -->
@@ -202,9 +202,9 @@
                           <a style="position: relative;left: -100px;top: -0.5px;" href="<%=basePath%>user/userCenter.action" >
                         <img style="width: 55px;height: 55px;" src="<%=basePath%>${user.headpic}"/>${user.uname}
                     </a>
-                         <img id="message" hidden style="position: absolute;left: -50px;top: -3px;width: 30px" src="<%=basePath%>images/comment.png"/>
+                         <img id="message" hidden style="position: absolute;left: 50px;top: -3px;width: 30px" src="<%=basePath%>images/comment.png"/>
 
-                         <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 80px;">注销</a>
+                         <a href="<%=basePath%>user/signOut.action" style="position: absolute;left: 70px;">注销</a>
                      </c:if>
                     <c:if test="${empty sessionScope.user}">
                         <a href="<%=basePath %>jsp/loginregister.jsp">注册</a>
@@ -1038,15 +1038,12 @@
 
 </div>
 <script>
-    var uid = ${user.uid}
-
-        $(function () {
-            <c:if test="${not empty sessionScope.user.uid}">
-            getMessage(uid);
-            setInterval("getMessage(uid)",10000);
-            </c:if>
-        })
-
+    $(function () {
+        <c:if test="${not empty sessionScope.user.uid}">
+        getMessage(${sessionScope.user.uid});
+        setInterval("getMessage(${sessionScope.user.uid})",10000);
+        </c:if>
+    })
     function getMessage(uid) {
         $.ajax({
             type:"post",
