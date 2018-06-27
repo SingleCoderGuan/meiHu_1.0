@@ -11,7 +11,7 @@ public interface ForumFocusMapper {
     //查询某个人被关注数量
     public int selectUserFocusedNum(int uid);
 
-    //查询给用户是否被关注过
+    //查询该用户是否被关注过
     public ForumFocus selectFocusIfExist(int uid, int focusuid);
 
 

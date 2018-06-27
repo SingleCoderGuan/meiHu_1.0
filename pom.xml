@@ -166,10 +166,16 @@
             <version>20160810</version>
         </dependency>
 
-        <dependency>
+      <!--  <dependency>
             <groupId>com.alipay</groupId>
             <artifactId>sdk-java</artifactId>
             <version>20161213173952</version>
+        </dependency>-->
+        <!--支付宝配置-->
+        <dependency>
+            <groupId>com.alipay</groupId>
+            <artifactId>sdk-java</artifactId>
+            <version>20170324180803</version>
         </dependency>
     </dependencies>
 

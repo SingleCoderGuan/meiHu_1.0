@@ -34,7 +34,6 @@ public interface OrderService {
     public List<Order> selectYiFuKuanOrderLists();
     //分页查看所有信息
     public PageInfo<Order> selectYiFuKuanOrderListsByPage(Map<String, Object> map);
-
     //查看订单详情
     public Order selectYiFuKuanOrderItemLists(int orderid);
     //为订单安排发货
@@ -45,8 +44,8 @@ public interface OrderService {
     public List<Order> selectOrderByState(String state);
     //分页
     public PageInfo<Order> getAllOrderByPage(int uid, Map<String, Object> map);
-
     //根据商品名称查询订单
     public List<Order> selectOrderByName(String goodname);
-
+    /*//提交退款信息，
+    public void  deleteItemById(int itemid);*/
 }

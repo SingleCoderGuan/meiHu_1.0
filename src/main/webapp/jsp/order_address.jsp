@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="<%= basePath%>plugins/layui/css/layui.css" />
     <link rel="stylesheet" href="<%= basePath%>plugins/awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="<%= basePath%>plugins/eleme-ui/index.css" />
-    <link rel="stylesheet" href="<%= basePath%>css/CivilMilitaryIntegration/public.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -123,10 +122,6 @@
         .xuanzhong{
             background-color: pink;
         }
-    </style>
-    <style>
-
-
         #p{
             text-align: center;
         }
@@ -150,9 +145,6 @@
             position: relative;
             margin-top: -70px;
         }
-    </style>
-    <style>
-
         .icon-text{
             font-family: 华文楷体;
 
@@ -224,8 +216,15 @@
             top: 0px;
             background-color: #fdf0ef;
         }
-
-
+        .xuanzhong{
+            background-color: peachpuff;
+        }
+        .xinzengdizhi{
+            position: absolute;
+            right:100px;
+            top:30px;
+            font-size: 20px;
+        }
     </style>
 </head>
 
@@ -272,9 +271,11 @@
     <div class="uc-content" >
         <div class="uc-panel">
             <div class="uc-bigtit">收货地址</div>
-           <%-- <div class="button"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新增地址</button></div>--%>
+            <%--<c:if test="${empty addressList}">--%>
+                <div class="xinzengdizhi"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">添加收货地址</button></div>
+            <%--</c:if>--%>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -307,6 +308,7 @@
 
                         </div>
 
+
                     </div>
                 </div>
             </div>
@@ -318,16 +320,57 @@
                     var receivename=document.getElementById("receivename1").value;
                     var receivetel=document.getElementById("receivetel1").value;
                     $.ajax({
-                        type:"post",
-                        url:"<%=basePath %>goods/insertAddress.action",
-                        data:"address="+address+"&addressdetail="+addressdetail+"&receivename="+receivename+"&receivetel="+receivetel,
-                        success:function (address1) {
-                            $("#exampleModal").modal('hide');
-                            $("#parent").append("<div class='item' style='width: 100px;margin-right: 50px;'><ul><li>"+address+"</li><li>"+addressdetail+"</li><li>"+receivename+"</li><li>"+receivetel+"</li></ul></div>");
+                        type:"get",
+                        url:"<%=basePath %>goods/order.action",
+                        data:"address="+address+"&addressdetail="+addressdetail+"&receivename="+receivename+"&receivetel="+receivetel+"&orderid="+${order.orderid},
+                        success:function (msg) {
+                                if(msg=="111") {
+                                    $("#exampleModal").modal('hide');
+                                    window.location.reload();
+                                }
                         }
+
+//                          success:function (address1) {
+//                            $("#exampleModal").modal('hide');
+//                            $("#parent").append("<div style='border: 1px red solid; width:200px;height:150px;' id='xuanzhi'  name='dizhi'  onclick='DiZhi()'><ul id='myul'></ul></div>");
+//                            var arr=new Array(address,addressdetail,receivename,receivetel);
+//                            var list="";
+//                            for (var i=0;i<arr.length;i++)
+//                            {
+//                                list +="<li>"+arr[i]+"</li>";
+//                            }
+//                            document.getElementById('myul').innerHTML = list;
+//                            //$("#parent").append("<div class='item' id='xuanzhi'  name='xuandizhi' style='width: 300px;margin-right: 50px;'><ul><li>"+address+"</li><li>"+addressdetail+"</li><li>"+receivename+"</li><li>"+receivetel+"</li></ul></div>");
+//                        }
                     });
+
+
                 }
-            </script>
+                   function DiZhi(){
+                       if(confirm("您确定选此地址作为付款地址吗？")){
+                           var div=document.getElementById("xuanzhi");
+                           var ul=div.childNodes.item(0);
+                           var lis=ul.childNodes;
+                           var addressdetail=lis.item(1).innerHTML;
+                           var receivename=lis.item(2).innerHTML;
+                           var receivetel=lis.item(3).innerHTML;
+                           var orderid=${order.orderid};
+                           $.ajax({
+                               type:"get",
+                               url:"<%=basePath %>goods/addAddressIntoOrder.action",
+                               data:"orderId="+orderid+"&addressdetail="+addressdetail+"&receivename="+receivename+"&receivetel="+receivetel,
+                               success:function(result){
+                                   alert("选取付款地址成功！");
+                                   $("#fukuananliu").attr("disabled",false);
+                                   $("[name='xuandizhi']").removeClass("xuanzhong");
+                                   document.getElementById('xuanzhi').classList.add("xuanzhong");
+                               }
+                           });
+                       }
+                   }
+
+
+            </script>--%>
             <script>
                 $('#exampleModal').on('show.bs.modal', function (event) {
                     var button = $(event.relatedTarget) // Button that triggered the modal
@@ -366,7 +409,7 @@
                                                             $("#fukuananliu").attr("disabled",false);
                                                             $("[name='dizhi']").removeClass("xuanzhong");
                                                             document.getElementById(addressId).classList.add("xuanzhong");
-                                                        }
+                                                            }
                                                     });
                                                 }
                                             }
@@ -476,7 +519,7 @@
                     <p>运费：<span class="footerPrice">￥0.00</span></p>
                 </div>
            <div class="row footerRow">
-               <span class="footerRowprice">&nbsp;&nbsp;&nbsp;&nbsp;应付金额：<span id="yingfu">${order.total*1}元</span></span>
+               <span class="footerRowprice">&nbsp;&nbsp;&nbsp;&nbsp;应付金额：<span id="yingfu">${order.total}元</span></span>
            </div>
            <script>
                function queding() {
@@ -487,7 +530,7 @@
            </script>
            <input type="hidden" name="orderId" value="${order.orderid}"/>
            <input type="hidden" name="WIDout_trade_no" value="${order.orderid}"/>
-           <input type="hidden" name="WIDsubject" value="myorder"/>
+           <input type="hidden" name="WIDsubject" value="${order.orderid}"/>
            <input type="hidden" name="WIDtotal_amount" id="money"/>
            <button id="fukuananliu" class="btn submitForm" disabled>确定提交</button><br/>
            <span id="info">亲您先去选择付款地址吧！！！</span>

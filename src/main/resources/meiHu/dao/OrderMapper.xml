@@ -378,6 +378,7 @@
        and so.state=#{_parameter}
     </select>
 
+
     <select id="selectOrderByName" resultMap="getOrderByNameMap" parameterType="String">
     select * from shop_order so,shop_item si,shop_goods sg
     where sg.goodname LIKE CONCAT ('%',#{parameter},'%') and

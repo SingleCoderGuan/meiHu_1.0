@@ -123,7 +123,7 @@
                             <a class="item" href="<%=basePath%>goods/myOrder.action">所有订单</a>
                             <a class="item" href="<%=basePath%>goods/noPayOrder.action">待付款</a>
                             <a class="item" href="<%=basePath%>goods/waitOrder.action">待发货</a>
-                            <a class="item  active" href="<%=basePath%>goods/runOrder.action">待收款</a>
+                            <a class="item  active" href="<%=basePath%>goods/runOrder.action">待收货</a>
                             <a class="item" href="<%=basePath%>goods/doneOrder.action">已完成</a></div>
                         </div>
 

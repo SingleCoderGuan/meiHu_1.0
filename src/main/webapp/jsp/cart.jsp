@@ -285,11 +285,100 @@
                     </div>
                 </div>
             </c:forEach>
+            <c:if test="${empty hotSaleGoodsList}">
+                <!-- product 1 -->
+                <div class="s-12 m-4 l-3 margin-bottom-30">
+                    <div class="margin">
+                        <div class="fullwidth">
+                            <figure class="imghvr-reveal-down">
+                                <img src="<%= basePath%>img/products/1.png">
+                                <figcaption>
+                                    <div class="product-hover-content">
+                                        <div class="btn-box">
+                                            <a href="" class="btn">查看更多</a>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="fullwidth">
+                            <h5>Lorem Ipsum Elit Dolor</h5>
+                            <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- product 2 -->
+                <div class="s-12 m-4 l-3 margin-bottom-30">
+                    <div class="margin">
+                        <div class="fullwidth">
+                            <figure class="imghvr-reveal-down">
+                                <img src="<%= basePath%>img/products/2.png">
+                                <figcaption>
+                                    <div class="product-hover-content">
+                                        <div class="btn-box">
+                                            <a href="" class="btn">查看更多</a>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="fullwidth">
+                            <h5>Lorem Ipsum Elit Dolor</h5>
+                            <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- product 3 -->
+                <div class="s-12 m-4 l-3 margin-bottom-30">
+                    <div class="margin">
+                        <div class="fullwidth">
+                            <figure class="imghvr-reveal-down">
+                                <img src="<%= basePath%>img/products/3.png">
+                                <figcaption>
+                                    <div class="product-hover-content">
+                                        <div class="btn-box">
+                                            <a href="" class="btn">查看更多</a>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="fullwidth">
+                            <h5>Lorem Ipsum Elit Dolor</h5>
+                            <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- product 4 -->
+                <div class="s-12 m-4 l-3 margin-bottom-30">
+                    <div class="margin">
+                        <div class="fullwidth">
+                            <figure class="imghvr-reveal-down">
+                                <img src="<%= basePath%>img/products/4.png">
+                                <figcaption>
+                                    <div class="product-hover-content">
+                                        <div class="btn-box">
+                                            <a href="" class="btn">查看更多</a>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="fullwidth">
+                            <h5>Lorem Ipsum Elit Dolor</h5>
+                            <p class="text-center"><span class="strike">$149.00</span> &nbsp;&nbsp; <span class="text-primary">$130.00</span></p>
+                        </div>
+                    </div>
+                </div>
+
+            </c:if>
 
         </div>
     </div>
 </div>
-
 
 
 
