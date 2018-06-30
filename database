@@ -1,0 +1,740 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : shangguan
+Source Server Version : 50716
+Source Host           : localhost:3306
+Source Database       : meihu
+
+Target Server Type    : MYSQL
+Target Server Version : 50716
+File Encoding         : 65001
+
+Date: 2018-06-27 16:32:38
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `forum_collection`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_collection`;
+CREATE TABLE `forum_collection` (
+  `collectionid` int(20) NOT NULL AUTO_INCREMENT,
+  `user_uid` int(20) NOT NULL,
+  `post_pid` int(20) NOT NULL,
+  PRIMARY KEY (`collectionid`),
+  KEY `COLLECTION_USER_FK` (`user_uid`),
+  KEY `COLLETION_POST_FK` (`post_pid`),
+  CONSTRAINT `COLLECTION_USER_FK` FOREIGN KEY (`user_uid`) REFERENCES `forum_user` (`uid`) ON DELETE CASCADE,
+  CONSTRAINT `COLLETION_POST_FK` FOREIGN KEY (`post_pid`) REFERENCES `forum_post` (`pid`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_collection
+-- ----------------------------
+INSERT INTO `forum_collection` VALUES ('12', '105', '67');
+INSERT INTO `forum_collection` VALUES ('20', '104', '68');
+INSERT INTO `forum_collection` VALUES ('21', '143', '95');
+
+-- ----------------------------
+-- Table structure for `forum_comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_comment`;
+CREATE TABLE `forum_comment` (
+  `cid` int(20) NOT NULL AUTO_INCREMENT,
+  `user_uid` int(20) NOT NULL,
+  `post_pid` int(20) NOT NULL,
+  `commenttext` text NOT NULL,
+  `commenttime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `commentid` int(11) DEFAULT NULL,
+  `isread` int(11) DEFAULT '0',
+  PRIMARY KEY (`cid`),
+  KEY `COMMENT_USER_FK` (`user_uid`),
+  KEY `COMMENT_POST_FK` (`post_pid`),
+  CONSTRAINT `COMMENT_POST_FK` FOREIGN KEY (`post_pid`) REFERENCES `forum_post` (`pid`) ON DELETE CASCADE,
+  CONSTRAINT `COMMENT_USER_FK` FOREIGN KEY (`user_uid`) REFERENCES `forum_user` (`uid`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_comment
+-- ----------------------------
+INSERT INTO `forum_comment` VALUES ('20', '106', '68', '个', '2018-06-20 11:03:48', null, null);
+INSERT INTO `forum_comment` VALUES ('21', '106', '68', '少时诵诗书', '2018-06-20 11:03:58', '20', null);
+INSERT INTO `forum_comment` VALUES ('22', '106', '67', '兄弟 牛逼', '2018-06-21 14:45:09', null, null);
+INSERT INTO `forum_comment` VALUES ('23', '106', '67', '你想买多贵的东西', '2018-06-21 14:45:22', '22', null);
+INSERT INTO `forum_comment` VALUES ('25', '143', '79', 'chishi ', '2018-06-21 16:16:09', null, '1');
+INSERT INTO `forum_comment` VALUES ('27', '143', '79', '听说发评论 可以加五分', '2018-06-21 18:38:13', null, '1');
+INSERT INTO `forum_comment` VALUES ('28', '143', '79', '拉拉阿拉', '2018-06-21 18:44:38', '24', '0');
+INSERT INTO `forum_comment` VALUES ('33', '106', '83', 'enen ', '2018-06-22 15:52:02', null, '1');
+INSERT INTO `forum_comment` VALUES ('40', '106', '61', '6666666666老铁', '2018-06-23 09:27:07', null, '1');
+INSERT INTO `forum_comment` VALUES ('41', '106', '83', '急急急', '2018-06-23 11:41:23', null, '1');
+INSERT INTO `forum_comment` VALUES ('42', '104', '89', '毛线', '2018-06-23 15:44:53', null, '1');
+INSERT INTO `forum_comment` VALUES ('43', '104', '68', '5555555555555', '2018-06-25 10:39:56', null, '0');
+INSERT INTO `forum_comment` VALUES ('44', '104', '68', '大大大滴滴答答', '2018-06-25 10:40:04', '43', '0');
+INSERT INTO `forum_comment` VALUES ('45', '104', '90', '444444444444444', '2018-06-25 10:41:01', null, '1');
+INSERT INTO `forum_comment` VALUES ('46', '101', '96', 'shangguan ', '2018-06-26 21:12:50', null, '1');
+INSERT INTO `forum_comment` VALUES ('47', '101', '96', '王欢姣在吗', '2018-06-26 21:13:20', null, '0');
+INSERT INTO `forum_comment` VALUES ('48', '143', '95', '你好', '2018-06-26 21:14:44', null, '1');
+
+-- ----------------------------
+-- Table structure for `forum_commentreport`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_commentreport`;
+CREATE TABLE `forum_commentreport` (
+  `reportid` int(20) NOT NULL AUTO_INCREMENT,
+  `comment_cid` int(20) NOT NULL,
+  `user_uid` int(20) NOT NULL,
+  `reportreason` text NOT NULL,
+  `reporttime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`reportid`),
+  KEY `COMMENTREPORT_COMMENT_FK` (`comment_cid`),
+  KEY `COMMENTREPORT_USER_FK` (`user_uid`),
+  CONSTRAINT `COMMENTREPORT_COMMENT_FK` FOREIGN KEY (`comment_cid`) REFERENCES `forum_comment` (`cid`) ON DELETE CASCADE,
+  CONSTRAINT `COMMENTREPORT_USER_FK` FOREIGN KEY (`user_uid`) REFERENCES `forum_user` (`uid`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_commentreport
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `forum_focus`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_focus`;
+CREATE TABLE `forum_focus` (
+  `focusid` int(20) NOT NULL AUTO_INCREMENT,
+  `user_uid` int(20) NOT NULL,
+  `focused_user_id` int(20) NOT NULL,
+  PRIMARY KEY (`focusid`),
+  KEY `FOCUS_USER_FK` (`user_uid`),
+  KEY `FOCUSED_USER_FK` (`focused_user_id`),
+  CONSTRAINT `FOCUSED_USER_FK` FOREIGN KEY (`focused_user_id`) REFERENCES `forum_user` (`uid`),
+  CONSTRAINT `FOCUS_USER_FK` FOREIGN KEY (`user_uid`) REFERENCES `forum_user` (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_focus
+-- ----------------------------
+INSERT INTO `forum_focus` VALUES ('17', '101', '106');
+INSERT INTO `forum_focus` VALUES ('18', '102', '106');
+INSERT INTO `forum_focus` VALUES ('19', '102', '101');
+INSERT INTO `forum_focus` VALUES ('20', '106', '101');
+INSERT INTO `forum_focus` VALUES ('21', '106', '106');
+INSERT INTO `forum_focus` VALUES ('22', '105', '104');
+INSERT INTO `forum_focus` VALUES ('23', '105', '103');
+INSERT INTO `forum_focus` VALUES ('24', '105', '101');
+INSERT INTO `forum_focus` VALUES ('25', '143', '105');
+INSERT INTO `forum_focus` VALUES ('26', '143', '106');
+INSERT INTO `forum_focus` VALUES ('28', '104', '106');
+INSERT INTO `forum_focus` VALUES ('29', '104', '105');
+INSERT INTO `forum_focus` VALUES ('30', '146', '104');
+INSERT INTO `forum_focus` VALUES ('31', '101', '105');
+INSERT INTO `forum_focus` VALUES ('32', '101', '102');
+INSERT INTO `forum_focus` VALUES ('33', '101', '143');
+INSERT INTO `forum_focus` VALUES ('34', '143', '101');
+
+-- ----------------------------
+-- Table structure for `forum_like`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_like`;
+CREATE TABLE `forum_like` (
+  `likeid` int(20) NOT NULL AUTO_INCREMENT,
+  `post_pid` int(20) NOT NULL,
+  `user_uid` int(20) NOT NULL,
+  PRIMARY KEY (`likeid`),
+  KEY `LIKE_COMMENT_FK` (`post_pid`),
+  KEY `LIKE_USER_FK` (`user_uid`),
+  CONSTRAINT `LIKE_POST_FK` FOREIGN KEY (`post_pid`) REFERENCES `forum_post` (`pid`) ON DELETE CASCADE,
+  CONSTRAINT `LIKE_USER_FK` FOREIGN KEY (`user_uid`) REFERENCES `forum_user` (`uid`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_like
+-- ----------------------------
+INSERT INTO `forum_like` VALUES ('29', '62', '105');
+INSERT INTO `forum_like` VALUES ('30', '67', '105');
+INSERT INTO `forum_like` VALUES ('38', '81', '106');
+INSERT INTO `forum_like` VALUES ('45', '89', '104');
+INSERT INTO `forum_like` VALUES ('46', '90', '104');
+INSERT INTO `forum_like` VALUES ('47', '90', '146');
+INSERT INTO `forum_like` VALUES ('48', '95', '143');
+
+-- ----------------------------
+-- Table structure for `forum_occomment`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_occomment`;
+CREATE TABLE `forum_occomment` (
+  `occid` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `ocid` int(11) DEFAULT NULL,
+  `occontent` varchar(255) DEFAULT NULL,
+  `createtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`occid`),
+  KEY `uid_fk` (`uid`),
+  KEY `off_fk` (`ocid`),
+  CONSTRAINT `off_fk` FOREIGN KEY (`ocid`) REFERENCES `forum_officalarticle` (`oaid`),
+  CONSTRAINT `uid_fk` FOREIGN KEY (`uid`) REFERENCES `forum_user` (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of forum_occomment
+-- ----------------------------
+INSERT INTO `forum_occomment` VALUES ('1', '102', '7', 'haohaohao', '2018-06-25 19:14:11');
+INSERT INTO `forum_occomment` VALUES ('2', '102', '7', '222', '2018-06-25 19:25:44');
+INSERT INTO `forum_occomment` VALUES ('7', '101', '11', '哈哈哈', '2018-06-27 14:51:39');
+
+-- ----------------------------
+-- Table structure for `forum_officalarticle`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_officalarticle`;
+CREATE TABLE `forum_officalarticle` (
+  `oaid` int(20) NOT NULL AUTO_INCREMENT,
+  `oatitle` text NOT NULL,
+  `oaprecontent` text,
+  `oacontent` text NOT NULL,
+  `publishtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`oaid`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_officalarticle
+-- ----------------------------
+INSERT INTO `forum_officalarticle` VALUES ('7', '这是测试广告', '这里的一切都关于韩妆AND护肤，从关注韩国开始爱上韩妆吧', '<p>\r\n</p><p><span>▼</span></p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/ae57c53fc5cd42cabe6a3d6275e9ba31_th.jpg\" alt=\"\"></p> \r\n<p>小可爱们</p> \r\n<p>话说你们平时都是怎么用什么上妆的呢</p> \r\n<p>是葫芦，粉扑，还是化妆刷，或者是你的手指？</p> \r\n<p>除了你的手指以外，其他化妆品工具你都经常清洗吗？</p> \r\n<p>你说每天都在用，有什么好清洗的？</p> \r\n<p>如果你觉得他们很干净的话，你就错了</p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/cffc19d40bbb410db3ec32a03d17b774_th.jpg\" alt=\"\"></p> \r\n<p>化妆品很容易滋生细菌，绿脓杆菌、金黄葡萄球菌、霉菌、大肠杆菌等，是化妆品中易滋生的细菌。其中对人危险性较大的是绿脓杆菌，容易引起人体的眼、皮肤等处感染</p> \r\n<p>看了这些，就问你怕不怕？？？</p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/f2e747d5bf8242198b6305b46422e30a.jpg\" alt=\"\"></p> \r\n<p><strong>清洗化妆工具</strong></p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/b5808b9d075c4cff848872d68eef2a43.jpg\" alt=\"\"></p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/c9ccc3c0e1234a789de9dd138bea605f.jpg\" alt=\"\"></p> \r\n<p><strong>刷类化妆工具</strong></p> \r\n<p>化妆刷算是化妆工具中最常见的一种，从粉底刷到各种眼影刷，大大小小的刷子帮我们完成了不少妆容。但是这些细密的刷毛，不管是纤维毛还是动物毛都是细菌藏身的温床</p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/e5d7dc684f174452a6146835ac915b90_th.jpg\" alt=\"\"></p> \r\n<p>先用清洁液浸湿刷头，然后用水冲，用手将颜色往外挤，切记一定使用专业的化妆刷清洁液，不能使用任何香皂或者洁面产品来清洗，因为会将毛变得坚硬，之后影响使用</p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/dc670a32d4914c5991fb7adeab154249.jpg\" alt=\"\"></p> \r\n<p><strong>海绵类化妆工具</strong></p> \r\n<p><span>对于习惯化妆的朋友来说，化妆海绵是一个不可或缺的好帮手。它最大的功用是把粉底均匀地在肌肤上推开、吸取更多的粉底和修正细节，从而打造一个清爽透薄的底妆</span></p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/49bd7dee545347b1804edc6f9c9027b1_th.jpg\" alt=\"\"></p> \r\n<p>首先把清洁产品直接倒适量于已经沾水的海绵上，让海绵产生泡沫。手法上要注意以手掌重复捏放，为的是将海绵内的脏东西和渗进去的粉底统统洗干净。然后用大量清水冲洗掉清洁产品，一定不要留下残留。用多张纸巾或干净、容易吸水的毛巾，以按压的方式榨干海绵中的水分，最后要注意放置于阴凉的通风处，自然风干</p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/863a3283bdd0475ba8d3470a109b9852.jpg\" alt=\"\"></p> \r\n<p><strong>睫毛夹</strong></p> \r\n<p><span>因为睫毛膏会凝结在睫毛夹上，很难擦下来，即使用酒精棉都不好擦洗，所以先用打火机给睫毛夹加热，然后用纸巾擦干净就可以了</span></p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/6aaf03fe248a4dd6aa54b4f11d927e13_th.jpg\" alt=\"\"></p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/25ecba2d506a4190b1f96ee2c7832388.jpg\" alt=\"\"></p> \r\n<p><strong>容易滋生细菌的化妆品逾期不再用</strong></p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/ae49efa2bcd44c319e9bbb64adf1e665.jpg\" alt=\"\"></p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/4d793c602c5f41dcb3588b9126856f24.jpg\" alt=\"\"></p> \r\n<p>水分含量比较高的产品，营养成分比较丰富的化妆品最容易滋生细菌。哪怕你再土豪，也不需要囤太多的化妆品，不然用不完浪费，用过期的毁脸啊</p> \r\n<p><img src=\"http://img.mp.itc.cn/upload/20170615/41c1968ae7314b869e27bb58eca11bd5_th.jpg\" alt=\"\"></p> \r\n<p>好啦，今天的分享就到这里</p>', '2018-06-19 15:14:17');
+INSERT INTO `forum_officalarticle` VALUES ('11', '8步彩妆教学 打造雾面底妆', '8步彩妆教学 打造雾面底妆 ', '<p>\r\n\r\n<span>　随着年龄的慢慢增加我们的肌肤难免会有一些淡斑等瑕疵。那么上妆之前我们首要做得就使用妆前修饰产品，做好基础的底妆，今天小编为你带来雾面底妆的化妆技巧和化妆步骤女生们赶快学起来吧!</span><br></p><p align=\"center\"><img file=\"http://www.360xh.com/file/upload/201411/13/14-11-31-13-26628.jpg\" alt=\"\" src=\"http://www.360xh.com/file/upload/201411/13/14-11-31-13-26628.jpg\" width=\"450\" height=\"524\" border=\"0\"></p><br><span>　　8步彩妆教学 打造雾面底妆</span><br><span>　　化妆技巧</span><br><span>　　1. 在填补凹陷瑕疵的产品时，手法很重要，用于修饰毛孔要将产品画圆“揉”进去，而补细纹的产品涂抹后也要稍微地轻拍，等干了以后再上底妆，如果都只是轻轻涂过，很容易在上妆的时候被推开而减低效果。</span><br><span>　　2. 针对脸色黯沉的问题，千万不要想以一瓶粉底液越涂越厚来遮掩，正确的方式是运用妆前润色饰底乳，蓝色可以让肌肤有透明感;绿色可以修饰泛红;粉色可以让肌肤有红润血色;紫色修饰泛黄;肤色可以让肤色均匀，珠光能让肌肤有光泽。聪明搭配妆前产品，才是打造轻透底妆的关键。</span><br><span>　　底妆步骤</span><br><p align=\"center\"><img file=\"http://www.360xh.com/file/upload/201411/13/14-11-57-97-26628.jpg\" alt=\"\" src=\"http://www.360xh.com/file/upload/201411/13/14-11-57-97-26628.jpg\" lazyloaded=\"true\" width=\"450\" height=\"288\" border=\"0\"></p><br><span>　　1. 创造润泽肌底</span><br><span>　　使用具有透明水润感的保湿型饰底乳，以拍弹方式涂抹全脸，让肌肤在妆前先吃进水分。</span><br><span>　　2. 填平肌肤凹凸</span><br><span>　　利用质地较厚实的毛孔修饰霜，以画圆方式将修饰霜揉进粗大毛孔，就像“补土”道理般让肌肤平滑。</span><br><p align=\"center\"><img file=\"http://www.360xh.com/file/upload/201411/13/14-13-13-57-26628.jpg\" alt=\"\" src=\"http://www.360xh.com/file/upload/201411/13/14-13-13-57-26628.jpg\" lazyloaded=\"true\" width=\"450\" height=\"288\" border=\"0\"></p><br><span>　　3. 修饰眼下细纹</span><br><span>　　手指轻拉开眼下细纹处，拿专用的修饰笔涂抹在眼下和鱼尾细纹部位。</span><br><span>　　4. 隐藏法令纹</span><br><span>　　同样以手指撑开会让轻熟女显老的法令纹处，修饰笔涂抹该处填平细纹。</span><br><span>　　5. 提亮显疲惫的暗沉处</span><br><span>　　使用明采笔涂抹在肌肤较暗沉的泪沟、嘴角等部位，先改善肤色不均和提升明亮度。</span><br><p align=\"center\"><img file=\"http://www.360xh.com/file/upload/201411/13/14-13-44-22-26628.jpg\" alt=\"\" src=\"http://www.360xh.com/file/upload/201411/13/14-13-44-22-26628.jpg\" lazyloaded=\"true\" width=\"450\" height=\"288\" border=\"0\"></p><br><span>　　6. 拉提手法上底妆</span><br><span>　　指腹由下往上拉提脸部线条的方式来上粉底，接着再用指腹轻拍让底妆更服贴。</span><br><span>　　7. 微湿海绵更贴妆</span><br><span>　　保湿化妆水喷在干净海绵上，以微湿海绵轻轻弹拍全脸，使粉底更融入肌肤且更保湿。</span><br><span>　　8. 蜜粉定妆</span><br><span>　　蜜粉扑沾取蜜粉后，务必搓揉粉扑使粉末均匀分布，先上在易出油的T字，接着是较干燥两颊。</span>', '2018-06-21 14:53:02');
+INSERT INTO `forum_officalarticle` VALUES ('12', '韩国品牌粉扑比较', '韩国品牌粉扑比较', '<p>\r\n</p><p>\r\n\r\n<font face=\"黑体\"><font size=\"3\">韩国彩妆市场上出现了越来越多样式的粉扑。</font></font><font face=\"黑体\"><font size=\"3\">韩国的一档彩妆节目比较了其中的五种。</font></font><br><font face=\"黑体\"><font size=\"3\">分别是韩国大型日用品超市daiso的坨坨化妆粉扑，clio的Hydrosponge，skin food的wedge粉扑，<span>&nbsp;</span></font></font><br><font face=\"黑体\"><font size=\"3\">espoir的skinny fix blender和aritaum的气垫粉扑。</font></font><br><font face=\"黑体\"><font size=\"3\">对这五种粉扑分别测试了密度，吸收力和吸附程度。</font></font><br><font face=\"黑体\"><font size=\"3\">结果显示，密度最好的是clio，最柔软的是skin food，吸收力最小的是clio，吸附力最好的espoir。</font></font><br><font face=\"黑体\"><font size=\"3\"><br></font></font><br><font face=\"黑体\"><font size=\"3\">由于好奇，小编对粉扑的材质做了一个小调查。</font></font><br><font face=\"黑体\"><font size=\"3\">发现现在使用的粉扑材质大部分为NBR，SBR和聚氨酯（polyurethane）。</font></font><br><font face=\"黑体\"><font size=\"3\"><br></font></font><br></p><p align=\"left\"><font face=\"黑体\"><font size=\"3\">NBR（丁腈橡胶）适用于粉饼和干湿粉。</font></font></p><p align=\"left\"><font face=\"黑体\"><font size=\"3\">它的耐油性很强，可以长期使用，适合油性化妆。</font></font></p><p align=\"left\"><font face=\"黑体\"><font size=\"3\">清洗过之后还可以再次使用应该是这一材质的一大优点之一。</font></font></p><p align=\"left\"><font face=\"黑体\"><font size=\"3\">海绵密度均匀，富有弹性，可以从整体上调整肌肤色泽，</font></font></p><font face=\"黑体\"><font size=\"3\">还可以做出一定的遮瑕效果，令妆容更加美丽。</font></font><br><font face=\"黑体\"><font size=\"3\">这种材质的粉扑占据了大部分的市场。</font></font><br><font face=\"黑体\"><font size=\"3\"><br></font></font><br><font face=\"黑体\"><font size=\"3\"><p align=\"left\">SBR（丁苯橡胶）因为含有的天然橡胶比NBR多，</p><p align=\"left\">所以比NBR柔和，表面光滑、柔软，耐油性较强，皮肤触感相当好。</p>服帖性也不错，可以表现出细腻光滑的皮肤。</font></font><br><font face=\"黑体\"><font size=\"3\"><br></font></font><br><p align=\"left\"><font face=\"黑体\"><font size=\"3\">聚氨酯粉扑又叫做湿粉扑，</font></font></p><p align=\"left\"><font face=\"黑体\"><font size=\"3\">最大的特点就是利用吸水性质给皮肤一种水水的水分感，</font></font></p><p align=\"left\"><font face=\"黑体\"><font size=\"3\">来表现出有光泽又细腻的皮肤。</font></font></p><p align=\"left\"><font face=\"黑体\"><font size=\"3\">和NBR一样，聚氨酯粉扑也可以进行清洗再利用。</font></font></p><p align=\"left\"><font face=\"黑体\"><font size=\"3\">不过区别是，聚氨酯粉扑用时间过长会变硬。</font></font></p><font face=\"黑体\"><font size=\"3\">像beautypromotions和谜尚，还有clio家的粉扑就是使用这种材料做的。</font></font><br><br><font face=\"黑体\"><font size=\"3\"><p align=\"left\">也有把NBR和SBR掺合一起做的粉扑，</p><p align=\"left\">最具代表的就是大家所熟知的too cool for school家的葫芦，</p><p align=\"left\">还有skin food家的粉扑也是用这两种材质做的。</p><p align=\"left\">结合了这两种材质的特点，更加服帖。</p><p align=\"left\">比起完全是水水类型的化妆品，更加适合像粉底液这种打底型的化妆品。</p>涂抹的时候可以表现出洁净细腻又服帖的妆容，甚至可以表现出很薄的妆容。</font></font><br><font face=\"黑体\"><font size=\"3\"><br></font></font><br><font face=\"黑体\"><font size=\"3\">这个是小编亲身经验，用too cool for school家的葫芦擦BB或者粉底包括气垫，</font></font><br><font face=\"黑体\"><font size=\"3\">会比产品本身自带的工具表现出更好的服帖度，而且不会很厚。</font></font><br><font face=\"黑体\"><font size=\"3\"><br></font></font><br><font face=\"黑体\"><font size=\"3\">希望小编的这篇文可以给大家以后买粉扑提供一些参考依据。</font></font>', '2018-06-21 14:53:49');
+INSERT INTO `forum_officalarticle` VALUES ('54', '震惊！最新消息！美乎商城发布紧急活动！', '开局一句话，后面全靠...\r\n', '<h3 style=\" text-align: center;\"><span style=\"color: rgb(238, 0, 0);\">出现了，美乎第一期美淘活动出现了！！！</span></h3>\r\n<div style=\"text-align: center;\"><br></div>\r\n\r\n<p style=\"text-align: center;\"><img src=\"/meiHu_1.0/image/oaupload/eef8b280-2e03-4faa-859c-4cc81c679fc5.jpg\" style=\"max-width:100%;\"></p><h4 style=\"  text-align: center;\">为答谢广大美乎用户对于我司的支持</h4><p style=\"text-align: center;\">公司高层<font size=\"5\"><span style=\"color: rgb(238, 0, 0);\">紧急</span></font>会议决定</p><p style=\"text-align: center;\">自<span style=\"color: rgb(238, 0, 0);\"><font size=\"5\">即日</font></span>起至<span style=\"color: rgb(238, 0, 0);\"><font size=\"5\">明年的今天</font></span></p><p style=\"text-align: center;\"><font size=\"5\"><span style=\"color: rgb(238, 0, 0);\">美淘</span></font>商城部分商品开启夏日<font size=\"5\"><span style=\"color: rgb(238, 0, 0);\">折扣</span></font>活动，</p><p style=\"text-align: center;\">原价<font size=\"5\"><span style=\"color: rgb(238, 0, 0);\">1000</span></font>多，<font size=\"5\"><span style=\"color: rgb(238, 0, 0);\">2000</span></font>多的商品</p><h1 style=\" text-align: center;\"><span style=\"color: rgb(238, 0, 0);\">统统下架</span></h1><h1 style=\" text-align: center;\"><span style=\"color: rgb(238, 0, 0);\">统统下架</span></h1><div style=\"text-align: center;\">&nbsp;&nbsp; 并且</div><div style=\"text-align: center;\"><font size=\"4\">活动期间</font></div><div style=\"text-align: center;\"><font size=\"4\">多款<span style=\"color: rgb(237, 237, 237);\"><font size=\"5\"><span style=\"background-color: rgb(238, 0, 0);\">国内外热卖</span></font></span>商品</font></div><div style=\"text-align: center;\"><span style=\"color: rgb(238, 0, 0);\"><span style=\"background-color: rgb(237, 237, 237);\"><font size=\"5\">统统上架</font></span></span></div><div style=\"text-align: center;\"><span style=\"color: rgb(238, 0, 0);\"><span style=\"background-color: rgb(237, 237, 237);\"><font size=\"5\">统统上架</font></span></span></div><div style=\"text-align: left;\"><span style=\"color: rgb(238, 0, 0);\"><span style=\"background-color: rgb(237, 237, 237);\"><font size=\"5\"><span style=\"color: rgb(10, 10, 10);\"><a href=\"http://localhost:8080/meiHu_1.0/goods/list.action?goodid=10002\">1.tf黑管唇膏</a><br></span></font></span></span><font size=\"5\"><span style=\"color: rgb(51, 122, 183);\"></span><span style=\"color: rgb(71, 71, 71);\"><span style=\"color: rgb(51, 122, 183);\"></span></span></font><span style=\"color: rgb(238, 0, 0);\"><span style=\"background-color: rgb(237, 237, 237);\"><font size=\"5\"><span style=\"color: rgb(10, 10, 10);\"></span></font></span></span>\r\n\r\n</div><p style=\"text-align: center;\"><a href=\"http://localhost:8080/meiHu_1.0/goods/list.action?goodid=10002\"><img src=\"/meiHu_1.0/image/oaupload/b7ee6946-38c4-4834-97f2-34781984a07f.jpg\" style=\"max-width:100%;\"></a></p><p><br></p><p>\r\n<span><span><font size=\"5\"><span><a href=\"http://localhost:8080/meiHu_1.0/goods/list.action?goodid=10007\">2.ysl圆管口红</a>\r\n</span></font></span></span></p><h3 style=\"text-align: center;\"><a href=\"http://localhost:8080/meiHu_1.0/goods/list.action?goodid=10007\"><img src=\"/meiHu_1.0/image/oaupload/4a7a0d97-3c2c-489d-a999-4d1804216781.jpg\" style=\"max-width:100%;\"></a></h3>\r\n\r\n<p><span><span><font size=\"5\"><span>\r\n<span><span><font size=\"5\"><span><a href=\"http://localhost:8080/meiHu_1.0/goods/list.action?goodid=10053\">3.tf黑管唇膏</a></span></font></span></span></span></font></span></span></p><p style=\"text-align: center;\"><a href=\"http://localhost:8080/meiHu_1.0/goods/list.action?goodid=10053\"><img src=\"/meiHu_1.0/image/oaupload/f26478c6-f463-40a2-9daa-bf7239a517a1.png\" style=\"max-width:100%;\"></a></p><p style=\"text-align: center;\"><span style=\"color: rgb(238, 0, 0);\"><span style=\"background-color: rgb(237, 237, 237);\"><font size=\"6\">还在犹豫什么？？？</font></span></span></p><p style=\"text-align: center;\"><font size=\"1\"><span style=\"color: rgb(238, 0, 0);\"><span style=\"background-color: rgb(237, 237, 237);\"><font size=\"6\">买就完事了！！！</font></span></span><br></font></p><p style=\"text-align: center;\"><font size=\"1\"><br></font></p><p style=\"text-align: center;\"><font size=\"1\"><br></font></p><p style=\"text-align: center;\"><font size=\"1\"><br></font></p><p style=\"text-align: center;\"><font size=\"1\">以上物品均以商城实物为准</font></p><p style=\"text-align: center;\"><font size=\"1\">本活动最终解释权归美乎所有</font><br></p><p><span><span><font size=\"5\"><span><span><span><font size=\"5\"><span></span></font></span></span> </span></font></span></span></p><br><p><br></p>\r\n', '2018-06-25 09:23:14');
+INSERT INTO `forum_officalarticle` VALUES ('55', '44', '44', '<p><img src=\"/meiHu_1.0/image/oaupload/b1071d79-f645-40bb-9a40-8bcd624b4c48.jpg\" style=\"max-width:100%;\"></p>', '2018-06-25 11:03:32');
+
+-- ----------------------------
+-- Table structure for `forum_post`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_post`;
+CREATE TABLE `forum_post` (
+  `pid` int(20) NOT NULL AUTO_INCREMENT,
+  `user_uid` int(20) NOT NULL,
+  `createtime` datetime NOT NULL,
+  `hot` int(1) DEFAULT '1',
+  `ptitle` varchar(300) NOT NULL,
+  `pcontent` varchar(20000) NOT NULL,
+  `topic_tid` int(20) DEFAULT NULL,
+  `likecount` int(11) DEFAULT '0',
+  `visitcount` int(11) DEFAULT '0',
+  PRIMARY KEY (`pid`),
+  KEY `POST_USER_FK` (`user_uid`),
+  KEY `POST_TOPIC_FK` (`topic_tid`),
+  CONSTRAINT `POST_TOPIC_FK` FOREIGN KEY (`topic_tid`) REFERENCES `forum_topic` (`tid`),
+  CONSTRAINT `POST_USER_FK` FOREIGN KEY (`user_uid`) REFERENCES `forum_user` (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_post
+-- ----------------------------
+INSERT INTO `forum_post` VALUES ('28', '106', '2018-06-07 21:45:18', '1', '水乳区测试', '<p>难受了</p><p>编码错误</p><p>极其难受</p><p><img src=\"/meiHu_1.0/image/upload/57cf4075-7d1a-403c-9d18-a421681367ee.jpg\" style=\"max-width:100%;\"></p>', '2', '0', '3');
+INSERT INTO `forum_post` VALUES ('35', '106', '2018-06-11 16:20:38', '1', '这是香水测试', '<p>这里是香水</p><p>各种品牌</p><img src=\"/meiHu_1.0/image/upload/7d9d1806-1651-4c62-91f9-0fe2f078c8c1.jpg\" style=\"max-width:100%;\">', '1', '0', '3');
+INSERT INTO `forum_post` VALUES ('40', '133', '2018-06-11 21:36:14', '1', '为其翁群翁', '<p>其味无穷<br></p>', '1', '0', '1');
+INSERT INTO `forum_post` VALUES ('54', '106', '2018-06-12 16:03:53', '1', '我又来代购了', '<p>这个是哪个区的啊？<br></p>', '7', '0', '3');
+INSERT INTO `forum_post` VALUES ('55', '106', '2018-06-12 19:07:13', '1', '葡萄籽水活性喷雾抗氧化补水，温和不刺激控油平衡', '<p><br>葡萄籽水活性喷雾<br>抗氧化补水，温和不刺激<br>控油平衡，你值得一喷<br><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=26dcf2625b2c11dfded1bf2b53266255/ed1b86025aafa40f0ffefb5ca764034f79f01965.jpg\" size=\"81073\" changedsize=\"true\" width=\"560\" height=\"372\"><br><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=b42a4b4af7edab6474724dc8c737af81/396dcd177f3e6709d918707e37c79f3df9dc5505.jpg\" size=\"75262\" changedsize=\"true\" width=\"560\" height=\"372\"><br><br></p>', '4', '0', '0');
+INSERT INTO `forum_post` VALUES ('56', '106', '2018-06-12 19:08:35', '1', '超级能出汗求推荐防晒', '<p><br>如题，本人超级能出汗，只要夏天一动就跟洗了脸没擦一样，求各位大神推荐一款好用的防晒<br><br></p>', '4', '0', '0');
+INSERT INTO `forum_post` VALUES ('57', '101', '2018-06-12 19:09:46', '1', '百分百实拍图几味喷雾不油不闷很清爽', '<p><br>百分百实拍图<br>几味喷雾不油不闷很清爽<br><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=571779df59fbb2fb342b581a7f482043/752fb34543a98226c1055aa58682b9014890eb53.jpg\" size=\"149789\" changedsize=\"true\" width=\"560\" height=\"560\"><br><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=86e333bb4736acaf59e096f44cd88d03/971c94529822720e41ff927877cb0a46f31fab6e.jpg\" size=\"129818\" changedsize=\"true\" width=\"560\" height=\"560\"><br><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=80f97e413687e9504217f364203a531b/943a66d9f2d3572c2726ed5e8613632760d0c353.jpg\" size=\"145952\" changedsize=\"true\" width=\"560\" height=\"560\"><br><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=296c711a52df8db1bc2e7c6c3922dddb/2cfa9713b07eca80103449659d2397dda044836e.jpg\" size=\"146363\" changedsize=\"true\" width=\"560\" height=\"560\"><br><br></p>', '4', '0', '1');
+INSERT INTO `forum_post` VALUES ('58', '101', '2018-06-12 19:10:25', '1', '一大老爷们的手!! ', '<p><br><cc></cc></p><div id=\"post_content_120177061996\">            一大老爷们的手!! 手上毛孔一点都不细致但是涂抹上去一点不卡粉!! 一点不油腻!! 清清凉凉的一点不油腻♥️<br><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=a1872707dca20cf44690fed746084b0c/ddfd69224f4a20a4be269c479c529822730ed066.jpg\" size=\"251239\" changedsize=\"true\" width=\"560\" height=\"560\"></div><br><br><br><p></p>', '4', '0', '1');
+INSERT INTO `forum_post` VALUES ('59', '101', '2018-06-12 19:11:01', '1', '盲撸了几瓶评价都不错的香', '<p><br>被系统吞贴，申请也不给还原……<br>再试一次<br><br>赶在618前撸了八瓶香，现货的四瓶都是盲撸，加上618囤了点燕窝，导致血槽空了，给主子买罐头的钱都快没有了 o(╥﹏╥)o <br><br><br>夏天就是喜欢小清新，本来看有人说木兰之水香柠檬会很凸出，是不太想买的，但是因为天热，觉得适合夏天就带上了，比较惊喜，小清新的香水，我每次都是七八下起喷，扩香方面没有问身边的人，只是晚上回家，微风徐徐，我还能闻到阵阵花香，一开始还以为是附近哪来的花香，后来才发现是自己身上的，哈哈，虽然是白花，但是是攻击性很低的白花，不臭不粉不腻。<br><br><br>我妹妹对冬之水评价不错，粉感是挺重的，但是不腻，她说是漂亮女老师身上的味道，很暖，很舒服，秋冬用正好。<br><br>娇兰沙龙线的皇家零陵香豆，这个很惊喜，还没有开喷，就着喷头的味道能明显感觉到甜味和杏仁味，非常饱满圆润的味道，我觉得这只香四季皆宜，我不喜欢甜香，不喜欢甜食，但是这只的甜，恰如其分，勾得我闻不腻。<br><br>Tf的乌木之花，大热天，就没喷了，怕呛，就瓶口的气味来说，有点像贵妇肖像，只是比贵妇甜，力道没有那么强，这个味道，我冬天应该会喜欢。<br><br>两个月前把贵妇肖像也收了，不得不感慨一下她的扩香和留香，收到那天是周五，就在桌洞喷了一下试试味道，结果周一上班，整个办公室都是她的味道，后来桌洞那边的味道凑近还是能闻到，十天后才消失……<img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=ddf925f7a14bd11304cdb73a6aaea488/7a8dc3fdfc039245c3e4208b8b94a4c27c1e25a0.jpg\" size=\"230116\" changedsize=\"true\" width=\"560\" height=\"420\"><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=d16fa0533ad12f2ece05ae687fc3d5ff/8c69c65c10385343517146a59f13b07ecb8088b8.jpg\" size=\"145811\" changedsize=\"true\" width=\"560\" height=\"746\"><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=4f5d403b805494ee87220f111df4e0e1/b5b731adcbef7609f7b5581b22dda3cc7dd99eb8.jpg\" size=\"101578\" changedsize=\"true\" width=\"560\" height=\"420\"><br><br></p>', '1', '0', '2');
+INSERT INTO `forum_post` VALUES ('61', '101', '2018-06-12 19:11:46', '1', '大家发现和他人撞香了以后都是怎么做的', '<p><br></p><div id=\"post_content_120245823879\">            大家发现和他人撞香了以后都是怎么做的，刚才在楼道发现和一个人撞了银色山泉<img src=\"http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/9d/sada_org.gif\" alt=\"[泪]\" data-w-e=\"1\">难过</div><br><br>', '1', '0', '3');
+INSERT INTO `forum_post` VALUES ('62', '101', '2018-06-12 19:12:12', '1', '那些年我们用过的雅芳', '<p><br>香水小白的我现在才开始入坑学香，可用香史一点都不算短搜罗了下现存的那些年用的雅芳香当然也用过其他的香包括好多贝里师的现在回想起来，当初怎么就眼睁睁看着罗莎的冰块女子、K的丛林系列什么的没入呢，要不到现在好歹也是稀罕货色<br><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=f82fd0134efbfbeddc59367748f1f78e/3ed7a4c27d1ed21bac746fc9a86eddc451da3f24.jpg\" pic_ext=\"jpeg\" changedsize=\"true\" width=\"560\" height=\"314\"><br><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=73f30f959b510fb37819779fe933c893/6843baa1cd11728bd22ecd0ecdfcc3cec3fd2c5a.jpg\" pic_ext=\"jpeg\" changedsize=\"true\" width=\"560\" height=\"314\"><br><br></p>', '1', '1', '2');
+INSERT INTO `forum_post` VALUES ('63', '103', '2018-06-12 19:13:23', '1', '新买的miumiu刚打开喷一下就发现从瓶口咬合处漏液', '<p><br>新买的miumiu刚打开喷一下就发现从瓶口咬合处漏液，前面买的那瓶Si也是同样情况，我要说一下香水确认是正品，都是专柜简装，难道简装的质量都这样，还是我运气差，各位大神遇到这种情况过没有？怎么保存呀？吧里有个亲也是这样，不过他说过几天就不漏了<img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=1d98664fbefb43161a1f7a7210a64642/18c887d6277f9e2f27fd1b8c1330e924b999f329.jpg\" size=\"4427687\" changedsize=\"true\" width=\"560\" height=\"746\"><br><br></p>', '1', '0', '2');
+INSERT INTO `forum_post` VALUES ('64', '103', '2018-06-12 19:13:41', '1', '有大神用过银色山泉和冥府之路吗', '<p><br></p><div id=\"post_content_110185730990\">            有大神用过银色山泉和冥府之路吗？想入坑。哪个比较好？都是什么感觉</div><br><br>', '1', '0', '0');
+INSERT INTO `forum_post` VALUES ('65', '103', '2018-06-12 19:14:04', '1', '暖暖入坑一年记', '<p><br>2017年2月底，在考拉买了人生的第一瓶正装蓝风铃，揭开了踏入香坑的序幕。一晃快一年了，开个帖子，做个记录。<br>        <br>我入坑的时间很晚。跟自身性格，周围环境有很大关系。我周围有用香习惯的人寥寥无几，我自身也是比较偏男生的性格，我不会告诉你们我从小到大的愿望是去少林寺学功夫。所以在穿着打扮上面，基本不讲究。对自身的容貌也不太折腾，属于一年做一两次面膜，剪头只修刘海的人。什么口红，粉底，眼影对我来说都是谜一般的存在。我老公也是一个土爆了的直男，我如果某天画了眉毛，他一定会耐心帮我擦掉，然后教育我素面朝天最棒了。<br> <br>         <br>所以当我接触香水的时候，我本意也只是买一瓶随便玩玩，但谁让我买的第一瓶是蓝风铃。我知道有很多香水造诣深厚的人不待见祖马龙。但无法否认它对一个新人来说，入门是起正面作用。因为它接受度高，百搭，十分的好穿。不要指望一个新人从原料性价比来买香水，新人买香水永远是为了好闻。当时我就是觉得：咦<br> <br>，好闻，和想象中的妖艳**不一样。以前在我的想象里，我觉得香水都是熏人八丈远的东西，买了以后发现和想的不一样，热情便开始呼呼的高涨。陆续又盯着祖马龙买了一波，发现没有踩雷，便开始正经泡香吧，看理论知识，慢慢入坑。<br><br>        <br>很多人不信我只是入坑不满一年的人。因为我这人十分刻苦好学，而且我的记性非常好，谈不上过目不忘，但接受新事物的能力很强。我入坑大概也就发过两三个求鉴定的帖子，然后，在以后的日子里，都是我帮别人鉴定了。到处看他人经验是一方面，下死手去买去囤，到手多看多学习也是一方面。<br><br>         <br>在一大把年纪入坑，唯一的好处就是有自己的收入，力所能及的范畴，想买什么就买。有时候买多了肾疼，但发几个月工资便也能缓回来了。买得多有压力不怕，有压力才有动力，况且在我买多了以后，我发现可以去闲鱼出分装，出分装不亏，而且出了旧的买新的，一直循环，基本玩香也不需要后期在额外花钱了。因为不是土豪，真的土豪买了就是看的，堆积如山也看不见她出香的。<br><br>         <br>入坑很久我都没有买到过假货。因为我不贪便宜，渠道也比较固定，而且喜欢全新。所以一直没上过当，以至于在后面的日子里，放松警惕。直到遇见了唯一坑我一次的真瓶假香。这算是我入坑以来唯一上过当的。因为这波真瓶假香，是蒂普提克。如果是祖马龙，或者五花园，我可能警惕性会高一点。但蒂普提克，是根本没听说过DIP能有真瓶假香啊，这怎么灌的啊？<br><br>        <br>但是虽然遇见了，还是被我发现了。如果是收的吧里妹子的，看瓶真我就收起来了，囤着以后用。但是我是收的陌生人的，所以多了一个心眼，没有确认收货。分两天试了两种。在手头有真品的基础上，我知道不对，但这批真瓶假香留香时间格外的长，所以造成了我的错觉。我当时没有以为是假货，我以为是变质。但是其中有一瓶寄来就是漏的，而且晃晃还能动。<br><br>        <br>上文说了，我爱好武术，小时候也练过，劲可能比一般女生，要大那么一点。所以，那瓶晃晃能动的蒂普提克，被我徒手拽开了。拽开以后，瓶口一坨一坨的胶证明这是一瓶被灌装以后没有粘好的次品，我想起了之前一瓶被我徒手拔开的蓝彩也是这个情况，去问了那个妹子，一家的货。<br><br>         <br>至此：我确定。这是一个卖真瓶假香的窝点。全部被骗的金额差不多十几万，在外流通的少说几百瓶。目前，这个窝点还在继续出货。品种涵盖：祖马龙/祖马龙黑瓶/蒂普提克/五花园/花漾甜心/黑鸦片/反转巴黎/miumiu透明蓝瓶、不透明蓝瓶/橘彩星光系列包括蓝彩/邂逅/阿玛尼Si等。<br>        特征如下：大概率漏，接口松动，大力的话可以试试拔一下。对光里面多少有沉淀物。部分液体颜色和正品不一致。留香久，没有三调。从头到尾一个味道。部分品种用力过猛，做得比正品浓。价格比普通的低100左右。真瓶，真盒。<br><br>        <br>没有建议。很多真瓶假香在以后的日子里，会变成大半瓶，半瓶，小半瓶的白菜，更加富有欺骗性。没什么好说的，源源不断的出货，闲鱼迟早没办法玩下去。空瓶哪里来？上文我说了我出分装，每天至少两三个人问我买瓶子。没有你们想象的那么难找空瓶，对我来说，以后不是全新塑封的，我不会买。<br>         为什么大篇幅的说这个？是因为很多人还停留在瓶真瓶假的辨认上面，但现在真瓶假香越发常见，在瓶真的基础上，一定要多一个心眼。<br><br>         <br>目前这人还在继续卖，已经有妹子报警了，但警察会如此处理，是否可以立案不得而知。如有警察或者律师香友，方便的话请伸出援手指点一二。其实我们也是缩头乌龟，没有办法。因为买了假香，唯一的想法就是退货，就算知道退了以后他还会卖给别人，但我们无能为力！我们自己不卖假，这是底线。外面的世界，我们真的管不了！<br><br>        <br>这波假香很神奇的，很多瓶都过了我的手，而且很奇特的都被我识破了。我拽开那瓶蓝彩的时候，他才刚卖假，但因为是辗转到我手上的，所以我退货了也没在意。第二次在本尊那买的，又被我拽开了，然后群里一个妹子又拽开李先生，既然上天让我几次参与，那我不得不认真的说一下：请重视真瓶假香！请提防真瓶假香！<br>          总的来说香坑经历是愉悦的。爱好本就让人愉悦。就算真瓶假香事件，也不是我一个人孤军奋战。其实我所有的都退干净了，以致骗子知道我在主事的时候都是懵逼的：这又关你什么事了，你不是退完了吗？你可真是大德之人。<br><br>          <br>其实我也没时间来管他的破事，但想到有这种人的存在，不能让我愉快的玩耍，我就不开心。人为什么要有爱好，就是在这尘世间，寻得一种幸福感。人生不如意之事，十之八九。每个人都有不能言说的苦痛。爱好就是我们温暖自己的东西。看着就开心，看着就满足。然后还有很多目标，等着去一一实现，过程也幸福，结局也幸福。就是求一个开心，别无其他。<br><br>          <br>一大把年纪跌入香坑，认识了很多倍儿年轻的妹子，活力朝气，敢说，敢爱，敢恨。带的我也跟着年轻了，每日看看群里，说说笑笑，没有任何利益冲突，不时的开开车（群里的你们知道我在说什么），很单纯的高兴。而且我认识的妹子大部分都很美好，仗义。希望这种日子再继续快活下去，希望等着自己慢慢老去的时候，筛选出自己真正心爱的香水陪伴左右。现在我还处于升级进阶的时候，乱买一气是有的，真正去理解去懂香水还是没有的，在以后的日子里继续学习，继续开心。<img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=19b879dcd654564ee565e43183dc9cde/eda436d12f2eb938cbbc3f3dde628535e7dd6feb.jpg\" pic_ext=\"jpeg\" size=\"70199\" changedsize=\"true\" width=\"560\" height=\"747\"><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=542a33e966224f4a5799731b39f59044/9e3c9e2f07082838f9e199dbb399a9014e08f1d1.jpg\" pic_ext=\"jpeg\" size=\"60671\" changedsize=\"true\" width=\"560\" height=\"747\"><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=e78245d5cd5c1038247ececa8213931c/2161720e0cf3d7ca75197ab9f91fbe096963a9d1.jpg\" pic_ext=\"jpeg\" size=\"66035\" changedsize=\"true\" width=\"560\" height=\"747\"><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=ef838321bf8f8c54e3d3c5270a2b2dee/69e10cf431adcbef36db3bc9a7af2edda1cc9fd1.jpg\" pic_ext=\"jpeg\" size=\"62750\" changedsize=\"true\" width=\"560\" height=\"747\"><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=a85aa4c08c94a4c20a23e7233ef61bac/087633fa828ba61ed6018de04a34970a324e59d1.jpg\" pic_ext=\"jpeg\" size=\"56824\" changedsize=\"true\" width=\"560\" height=\"747\"><br><br></p>', '1', '0', '1');
+INSERT INTO `forum_post` VALUES ('66', '103', '2018-06-12 19:14:33', '1', '吃土少女的香水王国', '<p><br><cc><div id=\"post_content_119758253433\">            今年是我收香的第四个年头。即将步入二十岁，特开一贴，记录我在香坑品香的点点滴滴。<br><br>由于本人吃土&amp;学生党，这些年来大瓶只有寥寥数款，幸好有万能的淘宝分装，这些年收了许许多多长成一片草原的优秀之作的小样和q，用事实证明，吃土少女，也是可以玩香的~~在这里，真的特别特别感谢我娘。感谢她对我经济上的限制，让我无法随便盲撸大瓶，从而有时间和精力，去认真细细品味，从而觉察出，究竟什么样的香，才是真正值得我，还有大家花大价钱也要收的。<br><br><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=eef25984733e6709be0045f70bc69fb8/05725c6034a85edfc4c55b8045540923dc54758f.jpg\" size=\"191059\" changedsize=\"true\" width=\"560\" height=\"363\"><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=bca75e889116fdfad86cc6e6848e8cea/1807ad345982b2b7cbea9c673dadcbef77099bdb.jpg\" size=\"226554\" changedsize=\"true\" width=\"560\" height=\"346\"><img src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=ae662388bc51f819f1250342eab54a76/fbe4d933c895d1433a3f41807ff082025baf078f.jpg\" size=\"142493\" changedsize=\"true\" width=\"560\" height=\"420\"></div><br></cc><br><br></p>', '1', '0', '2');
+INSERT INTO `forum_post` VALUES ('67', '104', '2018-06-12 19:15:46', '1', '给女朋友买香水，不会选，求指点', '<p>rt<br></p>', '1', '1', '4');
+INSERT INTO `forum_post` VALUES ('68', '105', '2018-06-12 19:16:31', '1', '给别人女朋友选香水，求大神推荐', '<p><img src=\"http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/af/kl_org.gif\" alt=\"[可怜]\" data-w-e=\"1\"></p>', '1', '0', '17');
+INSERT INTO `forum_post` VALUES ('69', '106', '2018-06-12 21:25:22', '1', 'ads ', '<p>asdasd<br></p>', '1', '0', '1');
+INSERT INTO `forum_post` VALUES ('79', '143', '2018-06-21 14:22:46', '1', '我在代购区的第一个帖子', '<p>我这半个月都在香港，</p><p>所以大家有什么想要的都来找我吧！！</p><p><img src=\"http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c3/zy_org.gif\" alt=\"[挤眼]\" data-w-e=\"1\"></p><p><br></p><p>哈哈哈 微信：110<br></p>', '7', '0', '17');
+INSERT INTO `forum_post` VALUES ('81', '106', '2018-06-21 14:38:35', '1', '发文章', '<p>dddddd<br></p>', '7', '1', '2');
+INSERT INTO `forum_post` VALUES ('82', '106', '2018-06-21 14:42:25', '1', 'daigou', '<p>s <br></p>', '7', '0', '1');
+INSERT INTO `forum_post` VALUES ('83', '106', '2018-06-21 14:51:10', '1', '专业提供日韩化妆品进口清关物流/护肤品香港包税进口', '<p><br><br><span>企业简介　我司专业经营国外--香港--深圳(内地)进口清关运输，提供香港收货、运输、报检(商检)、报关、清关、派送(外地代办托运)一条龙服务。我司主要以中港快件，海运，空运进口为主,分别在深圳快件中心,深圳快件监管中心.东莞快件监管中心清关。公司报关人员熟知海关法律法规，与海关、检验检疫局等政府部门关系良好，能灵活处理货物，使货物能顺利、快速、安全通关！</span><br><span>香港进口快件进口优势</span><br><span>　　手续简----无须提供报关单证，只需提供准确的货物品名及香港提货地址，我们将为你代办各种手续。</span><br><span>　　安全高----正规快件报关，中港车运输。</span><br><span>　　费用优----包税包费，公斤或按货值计价。（每公斤的计价中，包括运费、税费及手续费）</span><br><span>　　速度快----当天收货，1-2天货物可到深圳。(大货、柜货一样可以快速清关，价格优惠低廉)。</span><br><span>香港进口最适合采用快件报关进口的货物：</span><br><span>　　1.小件散货、少量货样和广告品等；</span><br><span>　　2、缺乏某些单证(如没有3C认证)的各种产品；</span><br><span>　　3、来不及办理贸易报关通关手续的货物；</span><br><span>　　4、想节省成本、而又不需要增值税票的各种产品；</span><br><span>　　5、个人自用物品（无须提供报关资料）；</span><br><span>　　6、国际快递的特殊物品；</span><br><span>　　7、加工贸易合同中指标不足，或合同未及时批下来，而又急需要进口的货物；</span><br><span>　　8、货物进出口代理（代办进出口一切手续）。</span><br><span>香港进口操作流程</span><br><br><span>　　贵司只要交货到我香港公司，或者通知我司上门收货，也可以直接发货到香港（发货到香港机场、码头或我香港公司，收货人写我香港公司名，由我香港公司负责办理进口手续与提货等），我香港公司收到货以后，以快件形式向海关报关，免除了贸易报关的复杂手续，货到深圳再支付运费，整个过程手续简单、安全快捷、总体成本低(一般公斤计价)。</span><br><br><span>香港进口公司优势</span><br><span>　　1）专业中港快件进口,拥有良好的海关关系.</span><br><span>　　2）价格和服务在同行业中尤为显著.</span><br><span>　　3）拥有高素质的管理人员和经验丰富的操作队伍。</span><br><span>4）设计一条龙的解决方案：本公司还拥有一批高素质的专业操作人员，从事报关、物流方面的工作有十多年,能为客户设计一条龙的解决方案。例如：何种情况用中港香港进口，何种情况用一般贸易进口，没有任何单证的又该如何进出口、没有进出口权的企业又如何处理进出口等等。为客户设计合理的进出口方案。</span><br><span>QQ-微信-电话：132-3497-8765 小齐</span><br><br></p>', '7', '0', '15');
+INSERT INTO `forum_post` VALUES ('89', '104', '2018-06-23 12:56:09', '1', '姐姐斤斤计较军军军', '<p>一月又一月晕晕晕晕晕晕晕<br></p>', '6', '1', '5');
+INSERT INTO `forum_post` VALUES ('90', '104', '2018-06-25 10:33:22', '1', '测试', '<p>还是写实<br></p>', '1', '2', '14');
+INSERT INTO `forum_post` VALUES ('91', '104', '2018-06-25 11:22:11', '1', '阿萨德', '<p><br><img src=\"/meiHu_1.0/image/upload/8bc87ca9-e67a-4fd6-bc8d-cdea7712a31f.jpg\" style=\"max-width:100%;\"></p>', '1', '0', '2');
+INSERT INTO `forum_post` VALUES ('94', '101', '2018-06-25 15:28:23', '1', '专业进出口化妆品', '<p><br><br><span>企业简介　我司专业经营国外--香港--深圳(内地)进口清关运输，提供香港收货、运输、报检(商检)、报关、清关、派送(外地代办托运)一条龙服务。我司主要以中港快件，海运，空运进口为主,分别在深圳快件中心,深圳快件监管中心.东莞快件监管中心清关。公司报关人员熟知海关法律法规，与海关、检验检疫局等政府部门关系良好，能灵活处理货物，使货物能顺利、快速、安全通关！</span><br><span>香港进口快件进口优势</span><br><span>　　手续简----无须提供报关单证，只需提供准确的货物品名及香港提货地址，我们将为你代办各种手续。</span><br><span>　　安全高----正规快件报关，中港车运输。</span><br><span>　　费用优----包税包费，公斤或按货值计价。（每公斤的计价中，包括运费、税费及手续费）</span><br><span>　　速度快----当天收货，1-2天货物可到深圳。(大货、柜货一样可以快速清关，价格优惠低廉)。</span><br><span>香港进口最适合采用快件报关进口的货物：</span><br><span>　　1.小件散货、少量货样和广告品等；</span><br><span>　　2、缺乏某些单证(如没有3C认证)的各种产品；</span><br><span>　　3、来不及办理贸易报关通关手续的货物；</span><br><span>　　4、想节省成本、而又不需要增值税票的各种产品；</span><br><span>　　5、个人自用物品（无须提供报关资料）；</span><br><span>　　6、国际快递的特殊物品；</span><br><span>　　7、加工贸易合同中指标不足，或合同未及时批下来，而又急需要进口的货物；</span><br><span>　　8、货物进出口代理（代办进出口一切手续）。</span><br><span>香港进口操作流程</span><br><br><span>　　贵司只要交货到我香港公司，或者通知我司上门收货，也可以直接发货到香港（发货到香港机场、码头或我香港公司，收货人写我香港公司名，由我香港公司负责办理进口手续与提货等），我香港公司收到货以后，以快件形式向海关报关，免除了贸易报关的复杂手续，货到深圳再支付运费，整个过程手续简单、安全快捷、总体成本低(一般公斤计价)。</span><br><br><span>香港进口公司优势</span><br><span>　　1）专业中港快件进口,拥有良好的海关关系.</span><br><span>　　2）价格和服务在同行业中尤为显著.</span><br><span>　　3）拥有高素质的管理人员和经验丰富的操作队伍。</span><br><span>4）设计一条龙的解决方案：本公司还拥有一批高素质的专业操作人员，从事报关、物流方面的工作有十多年,能为客户设计一条龙的解决方案。例如：何种情况用中港香港进口，何种情况用一般贸易进口，没有任何单证的又该如何进出口、没有进出口权的企业又如何处理进出口等等。为客户设计合理的进出口方案。</span><br><span>QQ-微信-电话：132-3497-8765 小齐</span><br><br></p><span style=\'position: relative;top: 0px;left:100px ;font-size: 30px;z-index: -1;color:#c0c0c0\'>代购区所有交易均由用户自己负责</span>', '7', '0', '4');
+INSERT INTO `forum_post` VALUES ('95', '101', '2018-06-26 11:13:52', '1', '卢卡斯', '<p>嘿嘿嘿，小黑来一发<br></p>', '3', '1', '5');
+INSERT INTO `forum_post` VALUES ('96', '143', '2018-06-26 21:00:16', '1', '美乎最棒', '<p>这款香水非常实惠哦<br></p>', '1', '0', '5');
+INSERT INTO `forum_post` VALUES ('97', '143', '2018-06-26 21:15:58', '1', '代购', '<p>代购棒棒棒<br></p><span style=\'position: relative;top: 0px;left:100px ;font-size: 30px;z-index: -1;color:#c0c0c0\'>代购区所有交易均由用户自己负责</span>', '7', '0', '2');
+
+-- ----------------------------
+-- Table structure for `forum_postreport`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_postreport`;
+CREATE TABLE `forum_postreport` (
+  `reportid` int(20) NOT NULL AUTO_INCREMENT,
+  `post_pid` int(20) NOT NULL,
+  `user_uid` int(20) NOT NULL,
+  `reportreason` text NOT NULL,
+  `reporttime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`reportid`),
+  KEY `POSTREPORT_POST_FK` (`post_pid`),
+  KEY `POSTREPORT_USER_FK` (`user_uid`),
+  CONSTRAINT `POSTREPORT_POST_FK` FOREIGN KEY (`post_pid`) REFERENCES `forum_post` (`pid`) ON DELETE CASCADE,
+  CONSTRAINT `POSTREPORT_USER_FK` FOREIGN KEY (`user_uid`) REFERENCES `forum_user` (`uid`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_postreport
+-- ----------------------------
+INSERT INTO `forum_postreport` VALUES ('15', '68', '104', '色情', '2018-06-25 10:40:12');
+
+-- ----------------------------
+-- Table structure for `forum_sign`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_sign`;
+CREATE TABLE `forum_sign` (
+  `signid` int(20) NOT NULL AUTO_INCREMENT,
+  `user_uid` int(20) NOT NULL,
+  `signnumber` int(5) NOT NULL,
+  `currentsigntime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`signid`),
+  KEY `SIGN_USER_FK` (`user_uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_sign
+-- ----------------------------
+INSERT INTO `forum_sign` VALUES ('1', '1', '15', null);
+INSERT INTO `forum_sign` VALUES ('2', '2', '35', null);
+INSERT INTO `forum_sign` VALUES ('3', '4', '24', null);
+INSERT INTO `forum_sign` VALUES ('4', '3', '23', null);
+INSERT INTO `forum_sign` VALUES ('5', '5', '6', null);
+INSERT INTO `forum_sign` VALUES ('6', '6', '54', null);
+INSERT INTO `forum_sign` VALUES ('7', '7', '26', null);
+INSERT INTO `forum_sign` VALUES ('8', '8', '36', null);
+INSERT INTO `forum_sign` VALUES ('9', '9', '14', null);
+INSERT INTO `forum_sign` VALUES ('10', '10', '15', null);
+INSERT INTO `forum_sign` VALUES ('11', '143', '7', '2018-06-26 21:14:01');
+INSERT INTO `forum_sign` VALUES ('12', '106', '4', '2018-06-23 11:36:51');
+INSERT INTO `forum_sign` VALUES ('13', '104', '4', '2018-06-25 10:40:17');
+INSERT INTO `forum_sign` VALUES ('14', '101', '2', '2018-06-26 21:13:55');
+INSERT INTO `forum_sign` VALUES ('15', '146', '1', '2018-06-25 11:17:23');
+
+-- ----------------------------
+-- Table structure for `forum_title`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_title`;
+CREATE TABLE `forum_title` (
+  `titleid` int(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  PRIMARY KEY (`titleid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_title
+-- ----------------------------
+INSERT INTO `forum_title` VALUES ('1', '美乎小白');
+INSERT INTO `forum_title` VALUES ('2', '美乎中级');
+INSERT INTO `forum_title` VALUES ('3', '美乎高级');
+INSERT INTO `forum_title` VALUES ('4', '美乎大神');
+INSERT INTO `forum_title` VALUES ('5', '美乎鼻祖');
+INSERT INTO `forum_title` VALUES ('6', '骨灰选手');
+
+-- ----------------------------
+-- Table structure for `forum_topic`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_topic`;
+CREATE TABLE `forum_topic` (
+  `tid` int(20) NOT NULL AUTO_INCREMENT,
+  `tname` varchar(20) NOT NULL,
+  `pnumber` int(6) DEFAULT NULL,
+  `tpicname` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`tid`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_topic
+-- ----------------------------
+INSERT INTO `forum_topic` VALUES ('1', '香水', '10', 'bankuai3.png');
+INSERT INTO `forum_topic` VALUES ('2', '水乳', '10', 'bankuai2.png');
+INSERT INTO `forum_topic` VALUES ('3', '口红', '10', 'bankuai1.png');
+INSERT INTO `forum_topic` VALUES ('4', '防晒霜', '10', 'bankuai4.png');
+INSERT INTO `forum_topic` VALUES ('5', '洗面奶', '10', 'bankuai5.png');
+INSERT INTO `forum_topic` VALUES ('6', '眼霜', '10', 'bankuai6.png');
+INSERT INTO `forum_topic` VALUES ('7', '代购', null, null);
+
+-- ----------------------------
+-- Table structure for `forum_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_user`;
+CREATE TABLE `forum_user` (
+  `uid` int(20) NOT NULL AUTO_INCREMENT,
+  `uname` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `tel` varchar(11) DEFAULT NULL,
+  `email` varchar(20) DEFAULT NULL,
+  `sex` varchar(4) DEFAULT NULL,
+  `point` int(6) DEFAULT '0',
+  `title_id` int(20) DEFAULT '1',
+  `headpic` varchar(255) DEFAULT 'images/userHeadpic/defaultheadpic.png',
+  `registertime` date DEFAULT NULL,
+  PRIMARY KEY (`uid`),
+  KEY `U_TITLE_FK` (`title_id`),
+  CONSTRAINT `U_TITLE_FK` FOREIGN KEY (`title_id`) REFERENCES `forum_title` (`titleid`)
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_user
+-- ----------------------------
+INSERT INTO `forum_user` VALUES ('101', 'Lucymax', '123456', '18236987912', '1615009823@qq.com', '女', '1979', '1', 'images/userHeadpic/headpic101.png', '2018-06-05');
+INSERT INTO `forum_user` VALUES ('102', 'Lilymin', '456789', '13689564578', '89562345@qq.com', '女', '159', '2', 'images/userHeadpic/headpic102.png', '2018-06-04');
+INSERT INTO `forum_user` VALUES ('103', 'XiaoHong', '123789', '123', '123546897@qq.com', '女', '167', '3', 'images/userHeadpic/headpic103.png', '2018-06-03');
+INSERT INTO `forum_user` VALUES ('104', 'Jimmy123', '1234567', '15789623456', '56234589@qq.com', '男', '4205', '5', 'images/userHeadpic/defaultheadpic.png', '2018-06-06');
+INSERT INTO `forum_user` VALUES ('105', 'Tommy777', '12345678', '15689234564', '789456523@qq.com', '男', '128', '6', 'images/userHeadpic/headpic105.png', '2018-06-04');
+INSERT INTO `forum_user` VALUES ('106', 'mamama', '111111', '13012345688', '2528888@qq.com', '女', '508', '5', 'images/userHeadpic/defaultheadpic.png', '2018-06-05');
+INSERT INTO `forum_user` VALUES ('133', 'mapleader', '123456789', '13312345674', '123456@qq.com', '男', '0', '1', 'images/userHeadpic/defaultheadpic.png', '2018-06-09');
+INSERT INTO `forum_user` VALUES ('138', 'Daming123', '123123', '18912345678', null, null, '0', '1', 'images/userHeadpic/defaultheadpic.png', '2018-06-12');
+INSERT INTO `forum_user` VALUES ('139', 'HanMeimei', '123123', '13112345678', '123123@qq.com', '女', '0', '1', 'images/userHeadpic/用户头像女1.jpg', '2018-06-12');
+INSERT INTO `forum_user` VALUES ('142', 'Xiaoxiao', '123123', '13218133580', '789789@qq.com', null, '0', '1', 'images/userHeadpic/头像.jpeg', '2018-06-12');
+INSERT INTO `forum_user` VALUES ('143', 'sssggg', '123123', '123', '', null, '98329', '1', 'images/userHeadpic/LOGOMeiTao.png', '2018-06-12');
+INSERT INTO `forum_user` VALUES ('144', 'wanghuanjiao', 'wanghuanjiao', '18838125265', null, null, '0', '1', 'images/userHeadpic/defaultheadpic.png', '2018-06-20');
+INSERT INTO `forum_user` VALUES ('145', 'admin', 'adminadmin', '13525516040', '', null, '0', '1', 'images/userHeadpic/LOGOMeiTao.png', '2018-06-20');
+INSERT INTO `forum_user` VALUES ('146', '444444', '444444', '18551226751', null, null, '0', '1', 'images/userHeadpic/defaultheadpic.png', '2018-06-25');
+
+-- ----------------------------
+-- Table structure for `off_level`
+-- ----------------------------
+DROP TABLE IF EXISTS `off_level`;
+CREATE TABLE `off_level` (
+  `offid` int(11) NOT NULL,
+  `offname` float NOT NULL,
+  `offnum` int(11) NOT NULL,
+  `endtime` date DEFAULT NULL,
+  `picname` varchar(255) DEFAULT NULL,
+  `needpoint` int(11) DEFAULT NULL,
+  PRIMARY KEY (`offid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of off_level
+-- ----------------------------
+INSERT INTO `off_level` VALUES ('1', '0.9', '134', '2018-06-30', 'jiuzhequan.jpg', '200');
+INSERT INTO `off_level` VALUES ('2', '0.8', '126', '2018-06-30', 'bazhequan.jpg', '300');
+INSERT INTO `off_level` VALUES ('3', '0.7', '84', '2018-06-30', 'qizhequan.jpg', '500');
+INSERT INTO `off_level` VALUES ('4', '0.6', '79', '2018-06-30', 'liuzhequan.jpg', '800');
+INSERT INTO `off_level` VALUES ('5', '0.5', '33', '2018-06-30', 'wuzhequan.jpg', '1000');
+
+-- ----------------------------
+-- Table structure for `shop_address`
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_address`;
+CREATE TABLE `shop_address` (
+  `addressid` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `addressdetail` varchar(200) DEFAULT NULL,
+  `receivename` varchar(30) DEFAULT NULL,
+  `receivetel` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`addressid`),
+  KEY `fkc` (`uid`),
+  CONSTRAINT `fkc` FOREIGN KEY (`uid`) REFERENCES `forum_user` (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_address
+-- ----------------------------
+INSERT INTO `shop_address` VALUES ('24', '102', '河南', '河南省信阳市', 'zll', '18236987913');
+INSERT INTO `shop_address` VALUES ('26', '102', '河南', '河南省三门峡市', 'shangguan', '12345678978');
+INSERT INTO `shop_address` VALUES ('27', '102', '黑龙江', '黑龙江省大庆市', 'mdl', '12345678998');
+INSERT INTO `shop_address` VALUES ('82', '102', '河南', '河南省信阳市', 'whj', '12345678900');
+INSERT INTO `shop_address` VALUES ('83', '102', '河南', '河南省信阳市', '唐兰兰', '12309862345');
+INSERT INTO `shop_address` VALUES ('84', '102', '河南', '河南省信阳市', '刘钰', '19824355765');
+INSERT INTO `shop_address` VALUES ('104', '101', '77', '777', '555', '5555');
+
+-- ----------------------------
+-- Table structure for `shop_category`
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_category`;
+CREATE TABLE `shop_category` (
+  `categoryid` int(11) NOT NULL,
+  `categoryname` varchar(20) NOT NULL,
+  PRIMARY KEY (`categoryid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_category
+-- ----------------------------
+INSERT INTO `shop_category` VALUES ('1', '口红');
+INSERT INTO `shop_category` VALUES ('2', '香水');
+INSERT INTO `shop_category` VALUES ('3', '洗面奶');
+INSERT INTO `shop_category` VALUES ('4', '防晒霜');
+INSERT INTO `shop_category` VALUES ('5', '眼霜');
+INSERT INTO `shop_category` VALUES ('6', '水乳');
+
+-- ----------------------------
+-- Table structure for `shop_drawback`
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_drawback`;
+CREATE TABLE `shop_drawback` (
+  `drawbackid` int(11) NOT NULL,
+  `orderid` int(11) DEFAULT NULL,
+  `itemid` int(11) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `drawbackreason` varchar(200) DEFAULT NULL,
+  `drawbacktime` date DEFAULT NULL,
+  `detail` varchar(200) DEFAULT NULL,
+  `processstate` varchar(4) DEFAULT NULL,
+  PRIMARY KEY (`drawbackid`),
+  KEY `fg1` (`orderid`),
+  KEY `fg2` (`uid`),
+  KEY `fg3` (`itemid`),
+  CONSTRAINT `fg1` FOREIGN KEY (`orderid`) REFERENCES `shop_order` (`orderid`) ON DELETE CASCADE,
+  CONSTRAINT `fg2` FOREIGN KEY (`uid`) REFERENCES `forum_user` (`uid`) ON DELETE CASCADE,
+  CONSTRAINT `fg3` FOREIGN KEY (`itemid`) REFERENCES `shop_item` (`itemid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_drawback
+-- ----------------------------
+INSERT INTO `shop_drawback` VALUES ('1831541821', '531786140', '505291312', '101', '商品发错了', '2018-06-27', '大声道', '1');
+
+-- ----------------------------
+-- Table structure for `shop_favor`
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_favor`;
+CREATE TABLE `shop_favor` (
+  `favoriteid` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `goodid` int(11) NOT NULL,
+  PRIMARY KEY (`favoriteid`),
+  KEY `fauid` (`uid`),
+  KEY `fagid` (`goodid`),
+  CONSTRAINT `fagid` FOREIGN KEY (`goodid`) REFERENCES `shop_goods` (`goodid`),
+  CONSTRAINT `fauid` FOREIGN KEY (`uid`) REFERENCES `forum_user` (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_favor
+-- ----------------------------
+INSERT INTO `shop_favor` VALUES ('10', '101', '10033');
+INSERT INTO `shop_favor` VALUES ('11', '101', '10046');
+INSERT INTO `shop_favor` VALUES ('15', '101', '10042');
+INSERT INTO `shop_favor` VALUES ('16', '101', '10054');
+INSERT INTO `shop_favor` VALUES ('17', '101', '10007');
+INSERT INTO `shop_favor` VALUES ('18', '101', '10002');
+INSERT INTO `shop_favor` VALUES ('19', '106', '10007');
+INSERT INTO `shop_favor` VALUES ('21', '106', '10032');
+INSERT INTO `shop_favor` VALUES ('24', '104', '10042');
+
+-- ----------------------------
+-- Table structure for `shop_goods`
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_goods`;
+CREATE TABLE `shop_goods` (
+  `goodid` int(11) NOT NULL AUTO_INCREMENT,
+  `goodname` varchar(20) DEFAULT NULL,
+  `goodpic` varchar(200) DEFAULT NULL,
+  `goodprice` double DEFAULT NULL,
+  `goodstore` int(11) DEFAULT NULL,
+  `goodaddress` varchar(100) DEFAULT NULL,
+  `gooddetail` varchar(200) DEFAULT NULL,
+  `goodsales` int(11) DEFAULT NULL,
+  `categoryid` int(11) NOT NULL,
+  PRIMARY KEY (`goodid`),
+  KEY `fk_1` (`categoryid`),
+  CONSTRAINT `fk_1` FOREIGN KEY (`categoryid`) REFERENCES `shop_category` (`categoryid`)
+) ENGINE=InnoDB AUTO_INCREMENT=10081 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_goods
+-- ----------------------------
+INSERT INTO `shop_goods` VALUES ('10002', '迪奥粉漾', 'images/1_02.jpg', '129', '400', '法国', '迪奥粉漾魅惑变色', '30', '1');
+INSERT INTO `shop_goods` VALUES ('10003', '卢卡斯', 'images/1_03.jpg', '159', '500', '法国', '澳大利亚卢卡斯（Lucas)番木', '300', '1');
+INSERT INTO `shop_goods` VALUES ('10004', '蝶翠诗（DHC）', 'images/1_04.jpg', '169', '300', '日本', '蝶翠诗（DHC）纯榄润唇膏 进口护唇', '170', '1');
+INSERT INTO `shop_goods` VALUES ('10005', '曼秀雷敦', 'images/1_05.jpg', '189', '200', '美国', '曼秀雷敦丰盈修护润唇膏', '88', '1');
+INSERT INTO `shop_goods` VALUES ('10006', '资生堂', 'images/1_06.jpg', '299', '300', '日本', '资生堂（SHISEDO)润唇膏', '20', '1');
+INSERT INTO `shop_goods` VALUES ('10007', '韩国LG', 'images/1_07.jpg', '169', '200', '韩国', '韩国LG后拱辰享美宫廷', '180', '1');
+INSERT INTO `shop_goods` VALUES ('10008', '妮维雅（NIVEA）', 'images/1_08.jpg', '129', '100', '德国', '妮维雅（NIVEA）漾彩芯护唇膏活力绯红', '88', '1');
+INSERT INTO `shop_goods` VALUES ('10010', 'Mistine蜜丝婷', 'images/1_10.jpg', '199', '200', '泰国', 'Mistine蜜丝婷小草莓变色', '100', '1');
+INSERT INTO `shop_goods` VALUES ('10011', '范思哲（VERSACE）', 'images/6_01.jpg', '499', '500', '意大利', '范思哲（VERSACE)晶钻女专用', '100', '2');
+INSERT INTO `shop_goods` VALUES ('10012', '古驰（GUCCI）', 'images/6_02.jpg', '129', '200', '意大利', '古驰（GUCCI）罪爱女用淡香水', '100', '2');
+INSERT INTO `shop_goods` VALUES ('10013', '亚菲儿女士香水', 'images/6_03.jpg', '299', '500', '中国上海', '精美礼盒亚菲儿女士香水持久淡香清新', '100', '2');
+INSERT INTO `shop_goods` VALUES ('10014', '菲格拉慕（Ferragamo)', 'images/6_04.jpg', '429', '300', '意大利', '菲格拉慕（Ferragamo)蓝色经典男士淡香水', '100', '2');
+INSERT INTO `shop_goods` VALUES ('10015', '香奈儿（Chanel）女士', 'images/6_05.jpg', '199', '500', '意大利', '香奈儿（Chanel）女士持久香氛 粉色柔情发香雾', '400', '2');
+INSERT INTO `shop_goods` VALUES ('10016', '迪奥（Dior）', 'images/6_06.jpg', '299', '300', '法国', '迪奥（Dior）淡香水花漾甜心', '100', '2');
+INSERT INTO `shop_goods` VALUES ('10017', '卡尔文克雷恩（Calvin Klein）', 'images/6_07.jpg', '299', '300', '美国', '卡尔文克雷恩（Calvin Klein）卡莱优淡香水', '288', '2');
+INSERT INTO `shop_goods` VALUES ('10018', '伊丽莎白雅顿', 'images/6_08.jpg', '399', '100', '法国', '伊丽莎白雅顿 第五大道淡香水', '80', '2');
+INSERT INTO `shop_goods` VALUES ('10019', '菲格拉慕（Ferragamo）', 'images/6_09.jpg', '189', '300', '意大利', '菲格拉慕（Ferragamo）梦中彩虹淡香水', '100', '2');
+INSERT INTO `shop_goods` VALUES ('10020', '香奈儿（Chanel)', 'images/6_10.jpg', '249', '100', '意大利', '香奈儿（Chanel)香水持久邂逅', '98', '2');
+INSERT INTO `shop_goods` VALUES ('10021', '资生堂珊珂', 'images/5_01.jpg', '59', '100', '日本', '资生堂珊珂（SENKA）面润泡沫洁面乳', '55', '3');
+INSERT INTO `shop_goods` VALUES ('10022', '欧莱雅', 'images/5_02.jpg', '79', '200', '法国巴黎', '欧莱雅（LOREAL）控油炭爽抗黑头洁面膏', '100', '3');
+INSERT INTO `shop_goods` VALUES ('10023', '斯塔夫', 'images/5_03.jpg', '59', '100', '加拿大', '加拿大 斯塔夫（Cetaphil)温和洗面奶', '20', '3');
+INSERT INTO `shop_goods` VALUES ('10024', '玉兰油OLAY', 'images/5_04.jpg', '69', '100', '美国', '玉兰油OLAY新生塑颜焕活深彻洗面奶', '30', '3');
+INSERT INTO `shop_goods` VALUES ('10025', '欧莱雅', 'images/5_05.jpg', '68', '200', '法国巴黎', '欧莱雅（LOREAL)清润葡萄籽水嫩净透光采洁面乳', '100', '3');
+INSERT INTO `shop_goods` VALUES ('10026', '泰国牛奶洗面奶', 'images/5_06.jpg', '89', '200', '泰国', '泰国牛奶洗面奶 护肤品嫩白补水保湿', '100', '3');
+INSERT INTO `shop_goods` VALUES ('10027', '大宝（DaBao）', 'images/5_07.jpg', '99', '200', '北京', '大宝（DaBao)美容洗面奶 低泡温和清洁', '100', '3');
+INSERT INTO `shop_goods` VALUES ('10028', '花印（HANAJIRUSHI）', 'images/5_08.jpg', '189', '200', '日本', '花印（HANAJIRUSHI）水漾洁净洗面乳 保湿', '100', '3');
+INSERT INTO `shop_goods` VALUES ('10029', '御泥坊', 'images/5_09.jpg', '199', '300', '湖南', '御泥坊 玫瑰滋养矿物洁面乳 不紧绷 保湿', '100', '3');
+INSERT INTO `shop_goods` VALUES ('10030', '妮维雅（NIVEA）', 'images/5_10.jpg', '169', '100', '德国', '妮维雅（NIVEA）云柔盈泡洁面慕斯 保湿型', '98', '3');
+INSERT INTO `shop_goods` VALUES ('10031', '自然堂（CHANDO）', 'images/4_01.jpg', '209', '500', '中国上海', '自然堂（CHANDO）雪润洗白防晒精华霜', '200', '4');
+INSERT INTO `shop_goods` VALUES ('10032', '安热沙（Anessa)', 'images/4_02.jpg', '189', '200', '日本', '安热沙（Anessa)谁能户外防晒乳', '100', '4');
+INSERT INTO `shop_goods` VALUES ('10033', '确美同（Coppertone)', 'images/4_03.jpg', '169', '300', '美国', '确美同（Coppertone)水宝宝纯净防晒霜 温和', '150', '4');
+INSERT INTO `shop_goods` VALUES ('10034', '曼秀雷敦（Mentholatum)', 'images/4_04.jpg', '169', '200', '美国', '曼秀雷敦（Mentholatum)新碧水薄清爽防晒', '130', '4');
+INSERT INTO `shop_goods` VALUES ('10035', '玉兰油OLAY', 'images/4_05.jpg', '189', '400', '美国', '玉兰油OLAY防晒霜轻透倍护防晒液', '200', '4');
+INSERT INTO `shop_goods` VALUES ('10036', '妮维雅（NIVEA)', 'images/4_06.jpg', '159', '200', '德国', '妮维雅（NIVEA)冰爽透明防晒气雾  德国进口', '100', '4');
+INSERT INTO `shop_goods` VALUES ('10037', '莱斯璧', 'images/4_11.jpg', '169', '200', '韩国', '莱斯璧RE:CIPE韩国水晶防晒', '20', '4');
+INSERT INTO `shop_goods` VALUES ('10038', '自然堂（CHANDO）', 'images/4_08.jpg', '179', '123', '中国上海', '自然堂（CHANDO）多重隔离防晒乳', '100', '4');
+INSERT INTO `shop_goods` VALUES ('10039', '碧柔(Biore）', 'images/4_09.jpg', '289', '100', '日本', '碧柔(Biore）轻柔透倍护防晒乳', '50', '4');
+INSERT INTO `shop_goods` VALUES ('10040', '曼秀雷敦', 'images/4_10.jpg', '139', '200', '美国', '曼秀雷敦 新碧冰凉清透 酷感清爽', '180', '4');
+INSERT INTO `shop_goods` VALUES ('10041', '丸美眼霜', 'images/3_01.jpg', '229', '200', '中国', '丸美（MARUBI）眼霜女 去细纹黑眼圈眼袋提拉紧致淡纹眼部精华（紧致修护）凝时紧致眼精华', '100', '5');
+INSERT INTO `shop_goods` VALUES ('10042', '雅诗兰黛', 'images/3_02.jpg', '259', '300', '美国', '雅诗兰黛（Estee Lauder）新肌透修护眼部密集精华（眼霜 眼部精华）', '100', '5');
+INSERT INTO `shop_goods` VALUES ('10043', '兰蔻眼霜', 'images/3_03.jpg', '349', '200', '法国', '兰蔻（LANCOME）新立体塑颜紧致眼霜 眼部护理 去黑眼圈补水保湿', '100', '5');
+INSERT INTO `shop_goods` VALUES ('10044', '丸美眼乳霜', 'images/3_04.jpg', '269', '200', '中国', '丸美（MARUBI）巧克力丝滑眼乳霜 淡化鱼尾纹 丝滑美容', '100', '5');
+INSERT INTO `shop_goods` VALUES ('10045', '马应龙眼霜', 'images/3_05.jpg', '289', '200', '深圳', '马应龙眼霜（淡化黑眼圈）女士淡化细纹走珠去黑眼圈眼袋瞳话眼霜精华', '100', '5');
+INSERT INTO `shop_goods` VALUES ('10046', '后Whoo天气丹华', 'images/3_06.jpg', '199', '300', '韩国', '后Whoo天气丹华献光彩紧颜礼盒七件套（水乳+滋养霜+眼霜+精华液）补水保湿字样 韩国进口', '100', '5');
+INSERT INTO `shop_goods` VALUES ('10047', '片仔癀', 'images/3_07.jpg', '199', '200', '漳州', '片仔癀  灵芝多效修护眼霜（淡化黑眼圈 改善细纹 保湿补水）', '100', '5');
+INSERT INTO `shop_goods` VALUES ('10048', '碧素堂红石榴', 'images/3_08.jpg', '189', '300', '美国', '碧素堂红石榴润透眼霜 补水保湿 滋润眼周肌肤淡化眼纹提拉紧致', '200', '5');
+INSERT INTO `shop_goods` VALUES ('10049', '雅莱贝斯', 'images/3_09.jpg', '239', '100', '德国', '雅莱贝斯 黄金全能眼霜女士 去细纹鱼尾纹去黑眼圈眼袋淡化脂肪粒祛皱纹 抗皱 补水保湿紧致眼部护理精华液', '40', '5');
+INSERT INTO `shop_goods` VALUES ('10050', '韩束', 'images/3_10.jpg', '279', '100', '韩国', '韩束 红石榴鲜活悦享礼盒六件套（洗面奶+爽肤水+乳液+眼霜+面霜+BB霜 补水保湿）', '20', '5');
+INSERT INTO `shop_goods` VALUES ('10051', '蔚蓝之美', 'images/2_01.jpg', '289', '300', '法国', '蔚蓝之美金钗石斛水漾平衡乳惠选套装，水润保湿，调节肌底平衡状态，促进后续吸收', '200', '6');
+INSERT INTO `shop_goods` VALUES ('10052', '娇韵诗', 'images/2_02.jpg', '399', '100', '俄罗斯', '娇韵诗清透润白淡斑亮肤水乳套装，净白肤色', '100', '6');
+INSERT INTO `shop_goods` VALUES ('10053', '迪奥（Dior）', 'images/1_30.jpg', '999', '200', '法国', '女神最爱 女士唇膏', '100', '1');
+INSERT INTO `shop_goods` VALUES ('10054', '纪樊希（Givenchy）', 'images/1_31.jpg', '699', '200', '香港', '你值得拥有的一款口红！！', '176', '1');
+INSERT INTO `shop_goods` VALUES ('10055', '菲拉格慕', 'images/6_30.jpg', '699', '500', '法国', '梦中情人淡香水 不要错过哦！', '400', '2');
+INSERT INTO `shop_goods` VALUES ('10056', '膜法世家', 'images/3_31.jpg', '288', '200', '广东', '樱桃补水，补水亮白', '99', '5');
+INSERT INTO `shop_goods` VALUES ('10057', '悦诗风吟（Innisfree）', 'images/5_30.jpg', '299', '1000', '韩国', '绿茶精粹保湿洁面乳，不错的选择', '800', '3');
+INSERT INTO `shop_goods` VALUES ('10058', '菲拉格慕（Ferragamo）', 'images/6_31.jpg', '139', '200', '法国', '蓝色经典款，快快抢购吧！', '100', '2');
+INSERT INTO `shop_goods` VALUES ('10059', '旁氏（POND S）', 'images/5_31.jpg', '159', '1000', '江苏', '任何皮肤 深层洁面 想不到的惊喜', '800', '3');
+INSERT INTO `shop_goods` VALUES ('10060', '露底晴', 'images/4_30.jpg', '299', '200', '北京', '骄阳似火  再也不惧怕', '200', '4');
+INSERT INTO `shop_goods` VALUES ('10061', '大宝', 'images/3_30.jpg', '289', '200', '武汉', '大宝天天见，又出新款啦！', '100', '5');
+INSERT INTO `shop_goods` VALUES ('10062', '曼秀伦敦', 'images/4_31.jpg', '149', '200', '浙江', '新碧户外骄阳最佳选择', '19', '4');
+INSERT INTO `shop_goods` VALUES ('10063', '御泥坊', 'images/2_03.jpg', '289', '300', '湖南', '美白水润嫩肤套装 补水保湿淡斑化妆品护肤套装女', '25', '6');
+INSERT INTO `shop_goods` VALUES ('10064', '自然堂', 'images/2_04.jpg', '199', '200', '中国上海', '自然堂（CHANDO)亮透水光素颜霜50g', '69', '6');
+INSERT INTO `shop_goods` VALUES ('10065', '日本雪肌精', 'images/2_05.jpg', '259', '300', '日本', '化妆水450ml+乳液130ml 保湿 修护 滋养 高丝集团 原装进口', '70', '6');
+INSERT INTO `shop_goods` VALUES ('10066', '玉兰油', 'images/2_06.jpg', '199', '400', '美国', '玉兰油OLAY水感透白亮肤凝乳75ml(淡化色斑 提亮肤色）', '100', '6');
+INSERT INTO `shop_goods` VALUES ('10067', '珀莱雅', 'images/2_07.jpg', '349', '600', '中国杭州', '珀莱雅（PROYA）靓白肌密美白亮肤三件套洗面奶化妆品护肤品套装', '180', '6');
+INSERT INTO `shop_goods` VALUES ('10068', '玉兰油OLAY', 'images/2_08.jpg', '266', '500', '美国', '玉兰油OLAY面霜多效修护（补水保湿 素颜霜）', '220', '6');
+INSERT INTO `shop_goods` VALUES ('10069', '旁氏', 'images/2_10.jpg', '199', '300', '英国', '旁氏（POND\'S）无暇透白系列 精致透白轻盈', '120', '6');
+INSERT INTO `shop_goods` VALUES ('10070', '薇姿', 'images/2_11.jpg', '156', '180', '法国', '薇姿（VICHY）水光焕白乳霜（补水保湿提亮肤色乳液面霜 法国原装进口）', '50', '6');
+INSERT INTO `shop_goods` VALUES ('10071', '薇姿(VICHY)', 'images/2_12.jpg', '269', '200', '法国', '薇姿（VICHY）科研焕白焕白活采乳液（补水 保湿 提亮肤色）', '30', '6');
+INSERT INTO `shop_goods` VALUES ('10072', '兰蔻', 'images/2_14.jpg', '239', '500', '法国', '兰蔻（LANCOME)清滢柔肤水（保湿 补水）', '300', '6');
+INSERT INTO `shop_goods` VALUES ('10073', '欧诗漫', 'images/2_15.jpg', '248', '200', '浙江', '欧诗漫OSM珍珠白净透丰润赋采凝乳', '80', '6');
+INSERT INTO `shop_goods` VALUES ('10074', '同仁堂美白', 'images/2_16.jpg', '159', '400', '中国', '美白祛斑霜女士祛斑淡化雀斑色斑（保湿面霜 精华霜 修护组合）', '220', '6');
+INSERT INTO `shop_goods` VALUES ('10075', '丸美', 'images/2_17.jpg', '129', '260', '中国', '丸美(MARUBI）白色之恋纯白乳液（保湿 滋润）', '100', '6');
+INSERT INTO `shop_goods` VALUES ('10076', '百雀羚', 'images/2_18.jpg', '199', '300', '江苏', '百雀羚 至臻皙白晶亮焕肤乳液（补水保湿 美白焕肤）\r\n', '100', '6');
+
+-- ----------------------------
+-- Table structure for `shop_goodscomment`
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_goodscomment`;
+CREATE TABLE `shop_goodscomment` (
+  `goods_gid` int(11) NOT NULL,
+  `user_uid` int(11) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `gcommentid` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`gcommentid`),
+  KEY `goods_gc_fk` (`goods_gid`),
+  KEY `user_gc_fk` (`user_uid`),
+  CONSTRAINT `goods_gc_fk` FOREIGN KEY (`goods_gid`) REFERENCES `shop_goods` (`goodid`) ON DELETE CASCADE,
+  CONSTRAINT `user_gc_fk` FOREIGN KEY (`user_uid`) REFERENCES `forum_user` (`uid`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_goodscomment
+-- ----------------------------
+INSERT INTO `shop_goodscomment` VALUES ('10001', '106', '还凑合', '2018-06-25 20:58:19', '11');
+INSERT INTO `shop_goodscomment` VALUES ('10054', '101', '顶顶顶顶', '2018-06-26 11:10:34', '12');
+INSERT INTO `shop_goodscomment` VALUES ('10003', '101', '大大大滴滴答答', '2018-06-26 11:10:40', '13');
+INSERT INTO `shop_goodscomment` VALUES ('10043', '101', '2222', '2018-06-26 14:40:38', '14');
+INSERT INTO `shop_goodscomment` VALUES ('10032', '143', 'afdasf', '2018-06-26 21:10:45', '15');
+INSERT INTO `shop_goodscomment` VALUES ('10047', '143', 'safas', '2018-06-26 21:11:02', '16');
+INSERT INTO `shop_goodscomment` VALUES ('10042', '101', '', '2018-06-27 10:30:41', '17');
+INSERT INTO `shop_goodscomment` VALUES ('10012', '101', '这个不错 东西', '2018-06-27 10:30:52', '18');
+
+-- ----------------------------
+-- Table structure for `shop_item`
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_item`;
+CREATE TABLE `shop_item` (
+  `itemid` int(11) NOT NULL AUTO_INCREMENT,
+  `orderid` int(11) NOT NULL,
+  `goodid` int(11) NOT NULL,
+  `num` int(11) DEFAULT NULL,
+  `subtotal` double DEFAULT NULL,
+  `item_state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`itemid`),
+  KEY `fka` (`orderid`),
+  KEY `fkb` (`goodid`),
+  CONSTRAINT `fka` FOREIGN KEY (`orderid`) REFERENCES `shop_order` (`orderid`) ON DELETE CASCADE,
+  CONSTRAINT `fkb` FOREIGN KEY (`goodid`) REFERENCES `shop_goods` (`goodid`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2140548498 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_item
+-- ----------------------------
+INSERT INTO `shop_item` VALUES ('505291312', '531786140', '10042', '2', '518', '3');
+INSERT INTO `shop_item` VALUES ('505956585', '44767202', '10012', '1', '129', '3');
+INSERT INTO `shop_item` VALUES ('572108769', '1691121789', '10042', '11', '2849', '0');
+INSERT INTO `shop_item` VALUES ('894359535', '1031120609', '10023', '4', '236', '0');
+INSERT INTO `shop_item` VALUES ('1795777300', '1031120609', '10042', '1', '259', '0');
+INSERT INTO `shop_item` VALUES ('1971764515', '1110075403', '10033', '1', '169', '0');
+
+-- ----------------------------
+-- Table structure for `shop_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_order`;
+CREATE TABLE `shop_order` (
+  `orderid` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `ordertime` date DEFAULT NULL,
+  `offid` int(11) DEFAULT NULL,
+  `total` double DEFAULT NULL,
+  `state` varchar(4) DEFAULT NULL,
+  `addressdetail` varchar(200) DEFAULT NULL,
+  `receivename` varchar(60) DEFAULT NULL,
+  `receivetel` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`orderid`),
+  KEY `fko` (`uid`),
+  KEY `fkr` (`offid`),
+  CONSTRAINT `fko` FOREIGN KEY (`uid`) REFERENCES `forum_user` (`uid`),
+  CONSTRAINT `fkr` FOREIGN KEY (`offid`) REFERENCES `off_level` (`offid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2129327095 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_order
+-- ----------------------------
+INSERT INTO `shop_order` VALUES ('44767202', '101', '2018-06-27', '2', '129', '3', '阿萨德阿萨德', 'ad', '阿萨德');
+INSERT INTO `shop_order` VALUES ('531786140', '101', '2018-06-26', '2', '518', '3', '为', '阿萨德', ' 阿萨德');
+INSERT INTO `shop_order` VALUES ('1031120609', '101', '2018-06-27', '2', '495', '3', '777', '555', '5555');
+INSERT INTO `shop_order` VALUES ('1110075403', '101', '2018-06-27', '2', '169', '0', null, null, null);
+INSERT INTO `shop_order` VALUES ('1691121789', '101', '2018-06-27', '2', '2849', '1', '777', '555', '5555');
+
+-- ----------------------------
+-- Table structure for `user_off_level`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_off_level`;
+CREATE TABLE `user_off_level` (
+  `requireid` int(11) NOT NULL AUTO_INCREMENT,
+  `offid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `remainnum` int(11) DEFAULT NULL,
+  PRIMARY KEY (`requireid`),
+  KEY `fku` (`offid`),
+  KEY `fkd` (`uid`),
+  CONSTRAINT `fkd` FOREIGN KEY (`uid`) REFERENCES `forum_user` (`uid`),
+  CONSTRAINT `fku` FOREIGN KEY (`offid`) REFERENCES `off_level` (`offid`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_off_level
+-- ----------------------------
+INSERT INTO `user_off_level` VALUES ('1', '2', '101', '11');
+INSERT INTO `user_off_level` VALUES ('2', '2', '102', '2');
+INSERT INTO `user_off_level` VALUES ('3', '4', '101', '2');
+INSERT INTO `user_off_level` VALUES ('4', '3', '102', '2');
+INSERT INTO `user_off_level` VALUES ('5', '4', '102', '1');
+INSERT INTO `user_off_level` VALUES ('6', '1', '143', '4');
+INSERT INTO `user_off_level` VALUES ('7', '5', '104', '6');
+INSERT INTO `user_off_level` VALUES ('8', '2', '106', '5');
+INSERT INTO `user_off_level` VALUES ('9', '1', '106', '1');
+INSERT INTO `user_off_level` VALUES ('10', '5', '143', '2');
+INSERT INTO `user_off_level` VALUES ('11', '3', '104', '1');
+INSERT INTO `user_off_level` VALUES ('12', '1', '101', '1');
+INSERT INTO `user_off_level` VALUES ('13', '1', '104', '1');
+INSERT INTO `user_off_level` VALUES ('14', '5', '101', '3');
+INSERT INTO `user_off_level` VALUES ('15', '2', '143', '1');
