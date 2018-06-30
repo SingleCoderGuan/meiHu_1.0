@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
         if(orderid==0){
             result=-1;
         }else {
-            orderMapper.deleteOrderItem(orderid);
+            //orderMapper.deleteOrderItem(orderid);
             orderMapper.deleteOrder(orderid);
             result=1;
         }
@@ -156,5 +156,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> selectOrderByName(String goodname) {
         return orderMapper.selectOrderByName(goodname);
+    }
+
+    @Override
+    public void deleteOrderItemByOrderitemId(int itemid) {
+        orderMapper.deleteOrderItem(itemid);
     }
 }

@@ -118,8 +118,8 @@
                             <a class="item" href="<%=basePath%>goods/noPayOrder.action">待付款</a>
                             <a class="item active" href="<%=basePath%>goods/waitOrder.action">待发货</a>
                             <a class="item" href="<%=basePath%>goods/runOrder.action">待收货</a>
-                            <a class="item" href="<%=basePath%>goods/doneOrder.action">已完成</a></div>
-
+                            <a class="item" href="<%=basePath%>goods/doneOrder.action">已完成</a>
+                            <a class="item" href="<%=basePath%>goods/selectDrawbackInfo.action">退款商品</a></div></div>
                     </div>
                     <table class="uc-table">
                         <thead>

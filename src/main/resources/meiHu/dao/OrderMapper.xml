@@ -228,6 +228,35 @@
             </association>
         </collection>
     </resultMap>
+
+    <resultMap id="DrawbackInfo" type="RefundOrder">
+        <id column="drawbackid" property="drawbackid"/>
+        <result column="drawbackreason" property="drawbackreason"/>
+        <result column="drawbacktime" property="drawbacktime"/>
+        <result column="detail" property="detail"/>
+        <result column="processstate" property="processstate"/>
+        <association property="user" javaType="ForumUser">
+            <id column="uid" property="uid" />
+            <result column="uname" property="uname" />
+        </association>
+        <association property="order" javaType="Order">
+            <id column="orderid" property="orderid"/>
+            <result column="ordertime" property="ordertime"/>
+            <result column="total" property="total"/>
+            <result column="state" property="state"/>
+            <collection property="items" ofType="OrderItem">
+                <id column="itemid" property="itemid"/>
+                <result column="num" property="count"/>
+                <result column="subtotal" property="subtotal"/>
+                <association property="good" javaType="Goods">
+                    <id column="goodid" property="goodid"/>
+                    <result column="goodname" property="goodname"/>
+                    <result column="goodpic" property="goodpic"/>
+                    <result column="goodprice" property="goodprice"/>
+                </association>
+            </collection>
+        </association>
+    </resultMap>
     <!--//根据用户id查询我的订单信息-->
     <!--public List<Order> findMyOrders(int uid);-->
     <select id="findMyOrders" parameterType="int" resultMap="orderMap">
@@ -250,9 +279,9 @@
         insert into shop_item values(#{itemid},#{order.orderid},#{good.goodid},#{count},#{subtotal},#{item_state})
     </insert>
 
-    <!--public void deleteOrderItem(int orderid);-->
+    <!--public void deleteOrderItem(int itemid);-->
     <delete id="deleteOrderItem" parameterType="int">
-        delete from shop_item where orderid=#{_parameter}
+        delete from shop_item where itemid=#{_parameter}
     </delete>
 
     <!--public void deleteOrder(int orderid);-->
@@ -268,6 +297,7 @@
         and so.orderid=si.orderid
         and si.goodid=sg.goodid
         and state=0
+        and si.itemid not in(select sd.itemid from shop_drawback sd)
     </select>
 
    <!-- //用户查询待发货的订单
@@ -278,6 +308,7 @@
         and so.orderid=si.orderid
         and si.goodid=sg.goodid
         and state=1
+        and si.itemid not in(select sd.itemid from shop_drawback sd)
     </select>
 
    <!-- //用户查询待收货的订单
@@ -288,6 +319,7 @@
           and so.orderid=si.orderid
           and si.goodid=sg.goodid
           and state=2
+          and si.itemid not in(select sd.itemid from shop_drawback sd)
     </select>
 
     <!--//用户查询已完成的订单
@@ -298,6 +330,7 @@
         and so.orderid=si.orderid
         and si.goodid=sg.goodid
         and state=3
+        and si.itemid not in(select sd.itemid from shop_drawback sd)
     </select>
 
     <!--//根据订单编号查询订单信息
@@ -311,6 +344,8 @@
     <select id="showOrderItemById" parameterType="int" resultMap="OrderItemMap">
         select * from shop_item,shop_goods where itemid=#{_parameter} and shop_item.goodid=shop_goods.goodid
     </select>
+
+
 
    <!--  //根据商品编号查询该商品所属的订单详情编号
     public int selectItemIdByGid(int goodid);
@@ -382,5 +417,13 @@
     select * from shop_order so,shop_item si,shop_goods sg
     where sg.goodname LIKE CONCAT ('%',#{parameter},'%') and
     so.orderid=si.orderid and  si.goodid=sg.goodid
+    </select>
+
+
+    <!--//用户查询自己退款的订单
+    public List<RefundOrder> selectDrawbackInfoById(int uid);-->
+    <select id="selectDrawbackInfoById" resultMap="DrawbackInfo">
+        select * from shop_drawback sd,shop_order so,shop_item si,shop_goods sg,forum_user fu
+        where sd.orderid=so.orderid and so.orderid=si.orderid and si.goodid=sg.goodid and sd.uid=fu.uid and si.itemid=sd.itemid
     </select>
 </mapper>

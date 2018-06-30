@@ -56,7 +56,6 @@ public class GoodControl {
     }
 
     //查看商品详情，并显示相关推荐商品
-    //查看商品详情，并显示相关推荐商品
     @RequestMapping(value = "/list.action",method={RequestMethod.POST, RequestMethod.GET})
     public void product(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String goodId=request.getParameter("goodid");
@@ -65,16 +64,13 @@ public class GoodControl {
         List<Goods> recommendGoods=goodService.showRecommend(categoryId);
         List<ShopGoodsComment> comments = goodsCommentService.getCommentsByGid(goodid);
         Goods product = goodService.getGood(goodid) ;
-
         ForumPost post = postService.selectPostsByPtitleHot(product.getGoodname());
-
         request.setAttribute("post",post);
         request.setAttribute("comments",comments);
         request.setAttribute("recommendGoodsList",recommendGoods);
         request.setAttribute("product",product);
         request.getRequestDispatcher("/jsp/product.jsp").forward(request,response);
     }
-
 
     //商品加入购物车,并显示热卖产品
     @RequestMapping(value = "/cart.action", method = {RequestMethod.POST, RequestMethod.GET})
@@ -148,6 +144,8 @@ public class GoodControl {
         request.getRequestDispatcher("/jsp/order_address.jsp").forward(request, response);
         response.getWriter().print(1);
     }
+
+    //添加地址
     @RequestMapping(value = "/orderorder.action", method = {RequestMethod.POST, RequestMethod.GET})
     public void savee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ForumUser user = (ForumUser) request.getSession().getAttribute("user");
@@ -164,8 +162,7 @@ public class GoodControl {
 
     //取消订单
     @RequestMapping(value = "/deleteOrder.action", method = {RequestMethod.POST, RequestMethod.GET})
-    public @ResponseBody
-    int deleteOrderByOrderId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public @ResponseBody int deleteOrderByOrderId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int orderid = Integer.parseInt(request.getParameter("orderid"));
         System.out.println(orderid);
         int result = orderService.deleteOrderByOrderId(orderid);
@@ -257,8 +254,7 @@ public class GoodControl {
 
     //用户确认收货
     @RequestMapping(value = "/querenshouhuo.action", method = {RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody
-    int querenshouhuo(HttpServletRequest request, HttpServletResponse response) {
+    public @ResponseBody int querenshouhuo(HttpServletRequest request, HttpServletResponse response) {
         int orderid = Integer.parseInt(request.getParameter("orderid"));
         int msg = orderService.updateOrderStateWeiWanCheng(orderid);
         return msg;
@@ -276,8 +272,7 @@ public class GoodControl {
 
     //用户新增地址
     @RequestMapping(value = "/insertAddress.action", method = {RequestMethod.POST, RequestMethod.GET})
-    public @ResponseBody
-    Address insertAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public @ResponseBody Address insertAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ForumUser user = (ForumUser) request.getSession().getAttribute("user");
         String address = request.getParameter("address");
         String addressdetail = request.getParameter("addressdetail");
@@ -325,8 +320,7 @@ public class GoodControl {
 
     //用户提交退款订单信息
     @RequestMapping(value = "/refundOrder.action", method = {RequestMethod.POST, RequestMethod.GET})
-    public @ResponseBody
-    int insertDrawback(HttpServletRequest request, HttpServletResponse response) {
+    public @ResponseBody int insertDrawback(HttpServletRequest request, HttpServletResponse response) {
         ForumUser user = (ForumUser) request.getSession().getAttribute("user");
         int uid = user.getUid();
         int itemid = Integer.parseInt(request.getParameter("itemid"));
@@ -416,5 +410,14 @@ public class GoodControl {
         request.setAttribute("orderList", orderList);
         System.out.println(orderList.size());
         request.getRequestDispatcher("/jsp/mh-search.jsp").forward(request, response);
+    }
+    //查看所有退款订单
+    @RequestMapping(value = "/selectDrawbackInfo.action", method = {RequestMethod.POST, RequestMethod.GET})
+    public void showDrawbackInfos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ForumUser user = (ForumUser) request.getSession().getAttribute("user");
+        int uid = user.getUid();
+        List<RefundOrder> refundOrders = refundOrderService.selectDrawbackInfoById(uid);
+        request.setAttribute("refundLists", refundOrders);
+        request.getRequestDispatcher("/jsp/mh-tuikuan.jsp").forward(request, response);
     }
 }

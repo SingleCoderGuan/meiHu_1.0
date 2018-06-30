@@ -133,18 +133,19 @@
                             <a class="item" href="<%=basePath%>goods/waitOrder.action">待发货</a>
                             <a class="item" href="<%=basePath%>goods/runOrder.action">待收货</a>
                             <a class="item active" href="<%=basePath%>goods/doneOrder.action">已完成</a>
-                        </div>
-                    </div>
+                            <a class="item" href="<%=basePath%>goods/selectDrawbackInfo.action">退款商品</a></div></div>
+
+
                 </div>
                 <table class="uc-table">
                     <thead>
-                    <th>商品详情</th>
-                    <th>名称</th>
-                    <th>单价</th>
-                    <th>数量</th>
-                    <th>小计</th>
-                    <th width="120">状态</th>
-                    <th>操作</th>
+                    <th class="center">商品详情</th>
+                    <th class="center">名称</th>
+                    <th class="center">单价</th>
+                    <th class="center">数量</th>
+                    <th class="center">小计</th>
+                    <th class="center">状态</th>
+                    <th class="center">操作</th>
                     </thead>
                     <c:forEach items="${doneOrderList}" var="doneorder">
                         <tr>

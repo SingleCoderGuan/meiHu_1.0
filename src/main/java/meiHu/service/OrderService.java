@@ -48,5 +48,6 @@ public interface OrderService {
 
     //根据商品名称查询订单
     public List<Order> selectOrderByName(String goodname);
-
+    //删除提交退款的商品
+    public void deleteOrderItemByOrderitemId(int itemid);
 }

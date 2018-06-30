@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -13,22 +14,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8">
     <meta http-equiv="Cache-Control" content="no-siteapp">
-    <title>我的未付款订单</title>
+    <title>我的退款</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="../css/styleadmin.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link href="<%=basePath%>css/iconfont.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/common1.css" rel="stylesheet"/>
     <link href="<%=basePath%>css/uc.css" rel="stylesheet"/>
-    <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
-    <link href="<%= basePath%>css/bootstrap1.css" rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="<%= basePath%>plugins/bootstrap/bootstrap.min.css" />
-    <script src="<%= basePath%>js/jquery.min.js"> </script>
-
     <link rel="shortcut icon" type="image/x-icon" href="../images/defaultheadpic.png" />
 
     <style>
         .uc-header-bg{
             background-color: #ffded9;
+        }
+
+        .search-btn{
+            position: relative;
+            top:-1px;
+            left: 0px;
         }
         body{
             background-color: #fdf0ef;
@@ -70,7 +74,14 @@
         <a class="logo" href="<%=basePath%>main.action"><img src="<%=basePath%>images/u8.png" alt="" /></a>
 
 
+        <div class="schbox">
+            <form action="<%=basePath%>goods/selectOrderByName.action" method="post">
+                <input class="search-txt" type="text" placeholder="请输入搜索内容" name="goodname"
+                       style="border: solid 2px;border-right: none;font-color:black;"/>
+                <button class="search-btn">搜索</button>
 
+            </form>
+        </div>
     </div>
 </div>
 
@@ -93,6 +104,7 @@
                 </ul>
                 <div class="tit">客户服务</div>
                 <ul class="sublist">
+
                     <li><a href="<%=basePath%>goods/doneOrder.action">退款/退货</a></li>
                 </ul>
                 <div class="tit">账户中心</div>
@@ -111,6 +123,12 @@
                 </ul>
             </div>
         </div>
+        <form id="mainForm"
+              action="<%=basePath%>goods/myOrder.action?uid=${user.uid}"
+              method="post">
+            <input hidden name="curPage" id="curPage"/>
+        </form>
+
         <div class="uc-content">
             <div class="uc-panel">
                 <div class="uc-bigtit">我的订单</div>
@@ -118,86 +136,60 @@
                     <div class="uc-sort">
                         <div class="uc-tabs">
                             <a class="item" href="<%=basePath%>goods/myOrder.action">所有订单</a>
-                            <a class="item active" href="<%=basePath%>goods/noPayOrder.action">待付款</a>
+                            <a class="item " href="<%=basePath%>goods/noPayOrder.action">待付款</a>
                             <a class="item" href="<%=basePath%>goods/waitOrder.action">待发货</a>
                             <a class="item" href="<%=basePath%>goods/runOrder.action">待收货</a>
                             <a class="item" href="<%=basePath%>goods/doneOrder.action">已完成</a>
                             <a class="item" href="<%=basePath%>goods/selectDrawbackInfo.action">退款商品</a></div></div>
+
                     </div>
                     <table class="uc-table">
                         <thead>
-                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品详情</th>
-                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名称</th>
-                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单价</th>
-                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数量</th>
-                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小计</th>
-                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;状态</th>
-                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作</th>
+                        <tr>
+                            <th class="center">商品</th>
+                            <th class="center">商品名</th>
+                            <th class="center">数量</th>
+                            <th class="center">单价</th>
+                            <th class="center">退款原因</th>
+                        </tr>
                         </thead>
-                        <c:forEach items="${noPayOrderList}" var="noPayorder">
-                            <tr>
-                                <td>
-                                    <div class="left"><fmt:formatDate pattern="yyyy-MM-dd" value="${noPayorder.ordertime}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单号: ${noPayorder.orderid}</div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><a href="<%=basePath%>goods/daifukuan.action?orderid=${noPayorder.orderid}">去付款</a><a href="javascript:void(0)" onclick="deleteWeifukuan('${noPayorder.orderid}')">|删除订单</a></td>
-                            </tr>
-                            <c:forEach items="${noPayorder.items}" var="eachdetail">
-                                <td class="order-goods">
-                                    <img src="${pageContext.request.contextPath }/${eachdetail.good.goodpic}" width="100px" height="100px">
-                                </td>
-                                <td>
-                                    <div class="goods-info">
-                                        <div>
-                                                ${eachdetail.good.goodname}
-                                        </div>
-                                    </div>
-                                </td>
-                                    <td>${eachdetail.good.goodprice}</td>
-                                    <td>${eachdetail.count}</td>
-                                    <td>
-                                        <span class="text-theme fwb">${eachdetail.subtotal}</span>
-                                    </td>
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${noPayorder.state== 0}">待付款</c:when>
-                                        <c:when test="${noPayorder.state== 1}">待发货</c:when>
-                                        <c:when test="${noPayorder.state== 2}">待收货</c:when>
-                                        <c:when test="${noPayorder.state== 3}">已完成</c:when>
-                                    </c:choose>
-                                </td>
-                                <td></td>
+                        <c:forEach items="${refundLists}" var="refundLists">
+
+                            <c:forEach items="${refundLists.order.items}" var="refundInfo">
+                                <tr>
+                                    <td class="center"><img src="<%=basePath%>${refundInfo.good.goodpic}" width="80px" height="80px"/></td>
+                                    <td>${refundInfo.good.goodname}</td>
+                                    <td class="center">${refundInfo.count}</td>
+                                    <td class="center"><strong class="rmb_icon">${refundInfo.good.goodprice}</strong></td>
+                                    <td>${refundLists.drawbackreason}</td>
                                 </tr>
                             </c:forEach>
                         </c:forEach>
-                        <script>
-                            function deleteWeifukuan(orderid){
-                                var orderid=orderid;
-                                if(confirm("您确定要删除订单吗？")){
-                                    $.ajax({
-                                        type:"get",
-                                        url:"<%=basePath %>goods/deleteOrder.action",
-                                        data:"orderid="+orderid,
-                                        success:function(result){
-                                          window.location.reload();
-                                        }
-                                    });
-                                }
-                            }
-                        </script>
-
                     </table>
+                <aside class="paging" >
+
+                </aside>
 
 
- <!--脚部-->
-                    <div class="fatfooter">
 
-                    </div>
-                    <!--脚部-->
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function getPage(curPage) {
+        //将隐藏域的值变成curPage
+        document.getElementById("curPage").value = curPage;
+        //触发表单的提交事件
+        document.getElementById("mainForm").submit();
+    }
+</script>
+
+
+
+<!--脚部-->
 </body>
 <script src="<%=basePath%>js/jquery.js"></script>
 <link rel="stylesheet" href="<%=basePath%>css/style2.css"/>

@@ -65,8 +65,6 @@ public class ShopAdminControl {
     public void  getGoodsByCategory(String categoryId,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         int category=Integer.parseInt(categoryId);
-
-
         //List<Goods> goodsCategory=goodService.getGoods(category);
         Map<String ,Object> cmap=new HashMap<>();
         //每页显示的条数
@@ -90,9 +88,9 @@ public class ShopAdminControl {
         List<GoodsCategory> categoryList=goodsCategoryService.getAllGoodsCategory();
         request.setAttribute("categoryList",categoryList);
        // request.setAttribute("allProducts",goodsCategory);
-        request.setAttribute("categoryId",categoryId);
+        request.setAttribute("categoryId",category);
 
-        request.getRequestDispatcher("/admin/goodslist.jsp").forward(request,response);
+        request.getRequestDispatcher("/admin/goodsCategory.jsp").forward(request,response);
 
     }
     @RequestMapping("/showCategoryLists.action")

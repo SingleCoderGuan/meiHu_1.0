@@ -3,6 +3,7 @@ package meiHu.dao;
 
 import meiHu.entity.Order;
 import meiHu.entity.OrderItem;
+import meiHu.entity.RefundOrder;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface OrderMapper {
     public List<Order> findMyOrders(int uid);
     //用户取消订单
     //先删除item表中的数据
-    public void deleteOrderItem(int orderid);
+    public void deleteOrderItem(int itemid);
     //删除order中对应的订单
     public void deleteOrder(int orderid);
     //用户查询待付款的订单
@@ -55,4 +56,6 @@ public interface OrderMapper {
     public List<Order> showOrderByState(String state);
     //根据商品名称查询订单
     public List<Order> selectOrderByName(String goodname);
+    //用户查询自己退款的订单
+    public List<RefundOrder> selectDrawbackInfoById(int uid);
 }

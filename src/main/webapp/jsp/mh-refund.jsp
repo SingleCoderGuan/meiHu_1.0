@@ -169,18 +169,19 @@
                                 <div class="bd"><textarea name="detail" id="detail"  class="ui-txtin" style="width:560px;height:90px;"></textarea></div>
                             </div>
                             <div class="submit-group">
-                                <input class="ui-btn-theme uc-btn-lg" onclick="tijiao(${order.orderid})" value="提交申请" />
+                                <input class="ui-btn-theme uc-btn-lg" onclick="tijiao()" value="提交申请" />
                             </div>
 
                             <script>
-                                function tijiao(orderid){
+                                function tijiao(){
+                                    var orderid=${order.orderid};
+                                    var itemid=${orderItem.itemid}
                                     var drawbackreason=document.getElementById("drawbackreason").value;
                                     var detail=document.getElementById("detail").value;
                                     $.ajax({
                                         type:"post",
-                                        dataType:"json",
-                                        url:"<%=basePath%>goods/refundOrder.action?orderid="+orderid+"&itemid=${orderItem.itemid}",
-                                        data:"drawbackreason="+drawbackreason+"&detail="+detail,
+                                        url:"<%=basePath%>goods/refundOrder.action",
+                                        data:"drawbackreason="+drawbackreason+"&detail="+detail+"&orderid="+orderid+"&itemid="+itemid,
                                         success:function(result){
                                             if(result==1){
                                                 alert("提交退款成功！");

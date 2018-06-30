@@ -11,4 +11,6 @@ public interface RefundOrderService {
     public List<RefundOrder> selectDrawbackInfo();
     //管理员接受退款
     public int updateDrawbackInfo(int drawbackid, int itemid);
+    //用户查询自己提交的退款订单
+    public List<RefundOrder> selectDrawbackInfoById(int uid);
 }

@@ -199,7 +199,7 @@
                         <input type="text" style="width: 590px;position: relative;top: 10px; " class="form-control" id="title" name="ptitle" value="${post.ptitle}"/><br/><br/>
                         <input type="text" name="pid" value="${post.pid}" hidden>
 
-                        <span style="position: relative;left:5px;top: -11px;font-size: 20px">板块：</span><span style="position: relative;left: 20px;top: -12px;font-size: 15px">${post.topic.tname}</span>
+
                         <input type="hidden" id="content" name="pcontent"/>
 
                         <div id="div1" class="toolbar">

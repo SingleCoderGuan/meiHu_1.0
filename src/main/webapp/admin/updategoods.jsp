@@ -116,7 +116,7 @@
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">商品序号:</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="empid" value="${good.goodid}" id="inputEmail3" placeholder="商品号">
+                            <input type="text" class="form-control" name="empid" value="${good.goodid}" id="inputEmail3" placeholder="商品号" disabled>
                         </div>
                     </div>
 
@@ -180,7 +180,7 @@
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label">商品销量:</label>
                         <div class="col-sm-3">
-                            <input type="text" name="goodsales" class="form-control" value='${good.goodsales}'   placeholder="商品销量">
+                            <input type="text" name="goodsales" class="form-control" value='${good.goodsales}'   placeholder="商品销量" disabled>
                         </div>
                     </div>
                     <div class="form-group">

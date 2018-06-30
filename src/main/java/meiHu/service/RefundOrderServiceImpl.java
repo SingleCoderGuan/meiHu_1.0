@@ -37,4 +37,9 @@ public class RefundOrderServiceImpl implements RefundOrderService{
             return 0;
         }
     }
+
+    @Override
+    public List<RefundOrder> selectDrawbackInfoById(int uid) {
+        return orderMapper.selectDrawbackInfoById(uid);
+    }
 }
